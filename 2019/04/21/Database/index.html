@@ -266,7 +266,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">2.4k</span>阅读时长: <span class="post-count reading-time">9 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">3.1k</span>阅读时长: <span class="post-count reading-time">11 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -502,13 +502,22 @@ height:50vh;
 </tbody>
 </table>
 </div>
-<h3 id="数据的定义-后续语句实现基于MySQL"><a href="#数据的定义-后续语句实现基于MySQL" class="headerlink" title="数据的定义(后续语句实现基于MySQL)"></a>数据的定义(<em>后续语句实现基于MySQL</em>)</h3><h4 id="数据库的定义与删除"><a href="#数据库的定义与删除" class="headerlink" title="数据库的定义与删除"></a>数据库的定义与删除</h4><p>定义数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;数据库名&gt;</span><br></pre></td></tr></table></figure>
-<p>删除数据库  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE &lt;数据库名&gt;</span><br><span class="line">DROP DATABASE IF EXIST &lt;数据库名&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="基本表的定义、删除与修改"><a href="#基本表的定义、删除与修改" class="headerlink" title="基本表的定义、删除与修改"></a>基本表的定义、删除与修改</h4><p>定义基本表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;表名&gt; （</span><br><span class="line">  &lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">  &lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">  ...</span><br><span class="line">  [表级完整性约束],</span><br><span class="line">  [表级完整性约束],</span><br><span class="line">  ...</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
-<p>数据类型</p>
+<p><strong><em>———后续语句实现基于MySQL———</em></strong></p>
+<h3 id="数据库的定义与删除"><a href="#数据库的定义与删除" class="headerlink" title="数据库的定义与删除"></a>数据库的定义与删除</h3><ol>
+<li><p>定义数据库</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除数据库  </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE [IF EXIST] &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="基本表的定义、删除与修改"><a href="#基本表的定义、删除与修改" class="headerlink" title="基本表的定义、删除与修改"></a>基本表的定义、删除与修改</h3><ul>
+<li><p>1.定义基本表</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;表名&gt; (</span><br><span class="line">&lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">&lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">...</span><br><span class="line">[表级完整性约束],</span><br><span class="line">[表级完整性约束],</span><br><span class="line">...</span><br><span class="line">)[CHARSET=utf8];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.数据类型</p>
+</li>
+</ul>
 <div class="table-container">
 <table>
 <thead>
@@ -565,16 +574,69 @@ height:50vh;
 </tbody>
 </table>
 </div>
-<p>修改基本表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#增加列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD &lt;新属性名&gt; &lt;数据类型&gt; [列级完整性约束]</span><br><span class="line"></span><br><span class="line">#删除列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP &lt;选择的属性名&gt;</span><br><span class="line"></span><br><span class="line">#添加表级完整性约束条件</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD [列级完整性约束]</span><br><span class="line"></span><br><span class="line">#删除键约束</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP [FOREIGN KEY / PRIMARY] &lt;键名&gt;</span><br><span class="line"></span><br><span class="line">#修改属性的数据类型</span><br><span class="line">ALTER TABLE &lt;表名&gt; MODIFY &lt;选择的属性名&gt; &lt;新数据类型&gt;</span><br></pre></td></tr></table></figure>
-<p>删除基本表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE &lt;表名&gt;</span><br><span class="line">DROP TABLE IF EXIST &lt;表名&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="索引的建立与删除"><a href="#索引的建立与删除" class="headerlink" title="索引的建立与删除"></a>索引的建立与删除</h4><h3 id="数据的查询"><a href="#数据的查询" class="headerlink" title="数据的查询"></a>数据的查询</h3><h3 id="数据的更新"><a href="#数据的更新" class="headerlink" title="数据的更新"></a>数据的更新</h3><h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><h2 id="第四章：数据库安全性"><a href="#第四章：数据库安全性" class="headerlink" title="第四章：数据库安全性"></a>第四章：数据库安全性</h2><p>  <em>用户权限由两个要素组成：<strong>数据库对象</strong>、<strong>操作类型</strong></em></p>
-<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &lt;用户名&gt;@&lt;用户登陆主机&gt; ( IDENTIFIED BY &lt;密码&gt; )</span><br><span class="line">CREATE USER &lt;用户名&gt;  /*可以在本地无密码登录的账户*/</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>3.修改基本表</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#增加列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD &lt;新属性名&gt; &lt;数据类型&gt; [列级完整性约束];</span><br><span class="line"></span><br><span class="line">#删除列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP &lt;选择的属性名&gt;;</span><br><span class="line"></span><br><span class="line">#添加表级完整性约束条件</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD [列级完整性约束];</span><br><span class="line"></span><br><span class="line">#删除键约束</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP [FOREIGN KEY / PRIMARY] &lt;键名&gt;;</span><br><span class="line"></span><br><span class="line">#修改属性的数据类型</span><br><span class="line">ALTER TABLE &lt;表名&gt; MODIFY &lt;选择的属性名&gt; &lt;新数据类型&gt;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4.删除基本表</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE [IF EXIST] &lt;表名&gt;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="索引的建立与删除"><a href="#索引的建立与删除" class="headerlink" title="索引的建立与删除"></a>索引的建立与删除</h3><ul>
+<li><p>1.建立索引</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*若属性为字符串等类型，可以加上length表示根据前多个字符作为索引，从而节省建立索引的开销*/</span><br><span class="line">CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX &lt;索引名&gt; ON &lt;表名&gt;(属性名[(length)],...);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.删除索引</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;表名&gt; DROP INDEX &lt;索引名&gt;;</span><br><span class="line">DROP INDEX &lt;索引名&gt; ON &lt;表名&gt;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.查看索引</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW INDEX FROM [&lt;数据库名&gt;.]&lt;表名&gt;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="数据的查询"><a href="#数据的查询" class="headerlink" title="数据的查询"></a>数据的查询</h3><h3 id="数据的更新"><a href="#数据的更新" class="headerlink" title="数据的更新"></a>数据的更新</h3><ul>
+<li><p>1.插入数据</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.修改数据</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.删除数据</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><ul>
+<li><p>1.建立视图</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW &lt;视图名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">AS &lt;子查询&gt;</span><br><span class="line">[WITH [CASCADED|LOCAL] CHECK OPTION];</span><br></pre></td></tr></table></figure>
+<p>  &lt;子查询&gt;可以是任意的<code>SELECT</code>语句。<br>  <code>WITH [CASCADED|LOCAL] CHECK OPTION</code>表示对视图进行<code>UPDATE</code>、<code>INSERT</code>和<code>DELETE</code>操作时要保证更新、插入或删除的行满足视图定义中的谓词条件（即子查询中的条件表达式）。<br>  组成视图的属性列名或者<em>全部省略</em>或者<em>全部指定</em>，没有第三种选择。但在下列三种情况下必须明确指明：</p>
+<p>  &emsp;1.某个目标列不是单纯的属性名，而是聚集函数或列表达式<br>  &emsp;2.多表连接时选出了几个同名列作为视图的字段<br>  &emsp;3.需要在视图中为某个列启用新的更合适的名字</p>
+<p>  关系数据库管理系统执行<code>CREATE VIEW</code>语句的结果，只是<strong>把视图的定义存入数据字典</strong>，并不执行其中的<code>SELECT</code>语句。<br>  定义：若一个视图是从单个基本表导出的，并且只是去掉了基本表的某些行和某些列，但是保留了主码，则称这类视图为<strong>行列子视图</strong>。</p>
+</li>
+<li><p>2.删除视图</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP VIEW &lt;视图名&gt; [CASCADE];</span><br></pre></td></tr></table></figure>
+<p>  视图删除后视图的定义将从数据字典中删除。如果该视图上还导出了其他视图，则使用<code>CASCADE</code>级联删除语句一起删除。</p>
+</li>
+<li><p>3.查询视图</p>
+<p>  从数据字典中取出视图的定义，将其转换成等价的对基本表的操作后再执行，这一转换过程称为<strong>视图消解</strong>。</p>
+</li>
+<li><p>4.更新视图</p>
+<p>  对试图的更新最终要转换为对基本表的更新，但不是所有的视图都是可更新的，一般的，<strong>行列子集视图</strong>是可更新的。</p>
+</li>
+<li><p>5.视图的作用</p>
+<ol>
+<li>视图能够简化用户的操作</li>
+<li>视图使用户能以多种角度看待同一数据</li>
+<li>视图对重构数据库提供了一定程度的逻辑独立性</li>
+<li>视图能够对机密数据提供安全保护</li>
+<li>适当利用视图可以更清晰地表达查询</li>
+</ol>
+</li>
+</ul>
+<h2 id="第四章：数据库安全性"><a href="#第四章：数据库安全性" class="headerlink" title="第四章：数据库安全性"></a>第四章：数据库安全性</h2><p>  <em>用户权限由两个要素组成：<strong>数据库对象</strong>、<strong>操作类型</strong></em></p>
+<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &lt;用户名&gt;@&lt;用户登陆主机&gt; [IDENTIFIED BY &lt;密码&gt;];</span><br><span class="line">CREATE USER &lt;用户名&gt;;  /*可以在本地无密码登录的账户*/</span><br></pre></td></tr></table></figure>
 <p>  用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接替换为：%（表示任何一台主机都可以远程登陆）。<br>  新用户的密码可以选择不创建。</p>
 <h3 id="修改用户密码"><a href="#修改用户密码" class="headerlink" title="修改用户密码"></a>修改用户密码</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &lt;用户名&gt;@&lt;用户登陆主机&gt; IDENTIFIED BY &lt;新密码&gt;</span><br><span class="line">SET PASSWORD FOR &lt;用户名&gt;@&lt;用户登陆主机&gt; = PASSWORD(&apos;新密码&apos;) /*创建新密码*/</span><br></pre></td></tr></table></figure>
-<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP USER &lt;用户名&gt;@&lt;用户登陆主机&gt;</span><br><span class="line">DROP USER IF EXIST &lt;用户名&gt;@&lt;用户登陆主机&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="给用户授权"><a href="#给用户授权" class="headerlink" title="给用户授权"></a>给用户授权</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限&gt;(属性名),... ON &lt;数据库名&gt;.&lt;数据库表名&gt;,... TO &lt;用户名&gt;@&lt;用户登陆主机&gt;,... ( WITH GRANT OPTION )</span><br></pre></td></tr></table></figure>
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP USER [IF EXIST] &lt;用户名&gt;@&lt;用户登陆主机&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="给用户授权"><a href="#给用户授权" class="headerlink" title="给用户授权"></a>给用户授权</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限&gt;(属性名),... ON &lt;数据库名&gt;.&lt;数据库表名&gt;,... TO &lt;用户名&gt;@&lt;用户登陆主机&gt;,... [WITH GRANT OPTION]</span><br></pre></td></tr></table></figure>
 <p>  如果指定了<code>WITH GRANT OPTION</code>子句，则获得某种权限的用户还可以把这种权限再授予其他用户（传播权限）<br>  对于&lt;权限&gt;(属性名)，如UPDATE(Sno)表示对于Sno这个属性具有更新的权限，若不填则默认为所有属性</p>
 <h3 id="收回授权"><a href="#收回授权" class="headerlink" title="收回授权"></a>收回授权</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REVOKE &lt;权限&gt;(属性名),... ON &lt;数据库名&gt;.&lt;数据库表名&gt;,... FROM &lt;用户名&gt;@&lt;用户登陆主机&gt;,...</span><br></pre></td></tr></table></figure>
 <h2 id="第五章：数据库完整性"><a href="#第五章：数据库完整性" class="headerlink" title="第五章：数据库完整性"></a>第五章：数据库完整性</h2><p>  <em>数据库的完整性是指数据的<strong>正确性</strong>和<strong>相容性</strong></em></p>
@@ -586,7 +648,7 @@ height:50vh;
 <p>  在<code>CREATE TABLE</code>中定义属性的同时，可以根据应用的要求定义<em>属性上</em>的约束条件，即<strong>属性值的限制</strong>，包括：</p>
 <ul>
 <li>列值非空（<code>NOT NULL</code>）</li>
-<li>列值唯一（<code>UNIQUE</code>）</li>
+<li>值唯一（<code>UNIQUE</code>）</li>
 <li>检查列值是否满足一个条件表达式（<code>CHECK</code>短语）</li>
 </ul>
 <p>与属性上约束条件的定义类似，在<code>CREATE TABLE</code>语句中可以用<code>CHECK</code>短语定义<em>元组上</em>的约束条件，即<strong>元组级的限制</strong>。</p>
@@ -605,7 +667,7 @@ height:50vh;
             <p>原文作者：<a href="https://godway999.github.io">Godway</a>
             </p><p>原文链接：<a href="https://godway999.github.io/2019/04/21/Database/">https://godway999.github.io/2019/04/21/Database/</a>
             </p><p>发表日期：<a href="https://godway999.github.io/2019/04/21/Database/">April 21st 2019, 11:14:24 am</a>
-            </p><p>更新日期：<a href="https://godway999.github.io/2019/04/21/Database/">April 21st 2019, 11:14:24 am</a>
+            </p><p>更新日期：<a href="https://godway999.github.io/2019/04/21/Database/">April 21st 2019, 4:36:45 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -732,7 +794,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章：绪论"><span class="toc-number">1.</span> <span class="toc-text">第一章：绪论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#术语对比"><span class="toc-number">1.1.</span> <span class="toc-text">术语对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系的完整性约束条件"><span class="toc-number">1.2.</span> <span class="toc-text">关系的完整性约束条件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章：关系数据库"><span class="toc-number">2.</span> <span class="toc-text">第二章：关系数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系"><span class="toc-number">2.1.</span> <span class="toc-text">关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系模式"><span class="toc-number">2.2.</span> <span class="toc-text">关系模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系的完整性"><span class="toc-number">2.3.</span> <span class="toc-text">关系的完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系操作"><span class="toc-number">2.4.</span> <span class="toc-text">关系操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专门的关系运算"><span class="toc-number">2.5.</span> <span class="toc-text">专门的关系运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三章：关系数据库标准语言SQL"><span class="toc-number">3.</span> <span class="toc-text">第三章：关系数据库标准语言SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL概述"><span class="toc-number">3.1.</span> <span class="toc-text">SQL概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据的定义-后续语句实现基于MySQL"><span class="toc-number">3.2.</span> <span class="toc-text">数据的定义(后续语句实现基于MySQL)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据库的定义与删除"><span class="toc-number">3.2.1.</span> <span class="toc-text">数据库的定义与删除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本表的定义、删除与修改"><span class="toc-number">3.2.2.</span> <span class="toc-text">基本表的定义、删除与修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#索引的建立与删除"><span class="toc-number">3.2.3.</span> <span class="toc-text">索引的建立与删除</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据的查询"><span class="toc-number">3.3.</span> <span class="toc-text">数据的查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据的更新"><span class="toc-number">3.4.</span> <span class="toc-text">数据的更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#视图"><span class="toc-number">3.5.</span> <span class="toc-text">视图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四章：数据库安全性"><span class="toc-number">4.</span> <span class="toc-text">第四章：数据库安全性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建用户"><span class="toc-number">4.1.</span> <span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改用户密码"><span class="toc-number">4.2.</span> <span class="toc-text">修改用户密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除用户"><span class="toc-number">4.3.</span> <span class="toc-text">删除用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#给用户授权"><span class="toc-number">4.4.</span> <span class="toc-text">给用户授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#收回授权"><span class="toc-number">4.5.</span> <span class="toc-text">收回授权</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章：数据库完整性"><span class="toc-number">5.</span> <span class="toc-text">第五章：数据库完整性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实体完整性"><span class="toc-number">5.1.</span> <span class="toc-text">实体完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参照完整性"><span class="toc-number">5.2.</span> <span class="toc-text">参照完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户定义的完整性"><span class="toc-number">5.3.</span> <span class="toc-text">用户定义的完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完整性约束命名子句"><span class="toc-number">5.4.</span> <span class="toc-text">完整性约束命名子句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#触发器"><span class="toc-number">5.5.</span> <span class="toc-text">触发器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六章：关系数据库理论"><span class="toc-number">6.</span> <span class="toc-text">第六章：关系数据库理论</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章：绪论"><span class="toc-number">1.</span> <span class="toc-text">第一章：绪论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#术语对比"><span class="toc-number">1.1.</span> <span class="toc-text">术语对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系的完整性约束条件"><span class="toc-number">1.2.</span> <span class="toc-text">关系的完整性约束条件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章：关系数据库"><span class="toc-number">2.</span> <span class="toc-text">第二章：关系数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系"><span class="toc-number">2.1.</span> <span class="toc-text">关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系模式"><span class="toc-number">2.2.</span> <span class="toc-text">关系模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系的完整性"><span class="toc-number">2.3.</span> <span class="toc-text">关系的完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系操作"><span class="toc-number">2.4.</span> <span class="toc-text">关系操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专门的关系运算"><span class="toc-number">2.5.</span> <span class="toc-text">专门的关系运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三章：关系数据库标准语言SQL"><span class="toc-number">3.</span> <span class="toc-text">第三章：关系数据库标准语言SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL概述"><span class="toc-number">3.1.</span> <span class="toc-text">SQL概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库的定义与删除"><span class="toc-number">3.2.</span> <span class="toc-text">数据库的定义与删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本表的定义、删除与修改"><span class="toc-number">3.3.</span> <span class="toc-text">基本表的定义、删除与修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#索引的建立与删除"><span class="toc-number">3.4.</span> <span class="toc-text">索引的建立与删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据的查询"><span class="toc-number">3.5.</span> <span class="toc-text">数据的查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据的更新"><span class="toc-number">3.6.</span> <span class="toc-text">数据的更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#视图"><span class="toc-number">3.7.</span> <span class="toc-text">视图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四章：数据库安全性"><span class="toc-number">4.</span> <span class="toc-text">第四章：数据库安全性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建用户"><span class="toc-number">4.1.</span> <span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改用户密码"><span class="toc-number">4.2.</span> <span class="toc-text">修改用户密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除用户"><span class="toc-number">4.3.</span> <span class="toc-text">删除用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#给用户授权"><span class="toc-number">4.4.</span> <span class="toc-text">给用户授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#收回授权"><span class="toc-number">4.5.</span> <span class="toc-text">收回授权</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章：数据库完整性"><span class="toc-number">5.</span> <span class="toc-text">第五章：数据库完整性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实体完整性"><span class="toc-number">5.1.</span> <span class="toc-text">实体完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参照完整性"><span class="toc-number">5.2.</span> <span class="toc-text">参照完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户定义的完整性"><span class="toc-number">5.3.</span> <span class="toc-text">用户定义的完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完整性约束命名子句"><span class="toc-number">5.4.</span> <span class="toc-text">完整性约束命名子句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#触发器"><span class="toc-number">5.5.</span> <span class="toc-text">触发器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六章：关系数据库理论"><span class="toc-number">6.</span> <span class="toc-text">第六章：关系数据库理论</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
