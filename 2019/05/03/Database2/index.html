@@ -22,7 +22,7 @@
     <meta name="description" content="Godway's Studio">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Godway&#39;s Studio</title>
+    <title>数据库原理——第二章：关系数据库 · Godway&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">Godway&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">数据库原理——第二章：关系数据库</a>
+            </div>
+    </div>
     
     <a class="home-link" href="/">Godway's Studio.</a>
 </header>
@@ -220,24 +231,68 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpeg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            数据库原理——第二章：关系数据库
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">788</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/05/03</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,274 +393,78 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/03/Database7/">
-            
-                <span>Database7</span>
-        </a>
-        <div class="abstract-content">
-            
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <h3 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h3><ul>
+<li><strong>域</strong>是一组具有相同数据类型的值的集合。属性的取值范围来自某个域  </li>
+<li>一个域允许的不同取值个数称为这个域的<strong>基数</strong>  </li>
+<li>某一<em>属性组</em>的值能唯一的标识一个元组，而<strong>其子集不能</strong>，则称该属性组为<strong>候选码</strong></li>
+<li>若一个关系中有多个候选码，则选定其中一个为<strong>主码</strong>  </li>
+<li>关系模式的所有属性是这个关系模式的候选码，称为<strong>全码</strong><br>元组：表中的一行<br>码：表中的某个属性组，它可以唯一确定一个元组  </li>
+</ul>
+<h3 id="关系模式"><a href="#关系模式" class="headerlink" title="关系模式"></a>关系模式</h3><p>定义： 关系的描述称为<strong>关系模式</strong>。它可以形式化的表示为R（U，D，DOM，F）<br>其中<strong>R</strong>为关系名，<strong>U</strong>为组成该关系的属性名集合，<strong>D</strong>为U中属性所来自的域，<strong>DOM</strong>为属性向域的映像集合，<strong>F</strong>为属性间数据的依赖关系集合  </p>
+<h3 id="关系的完整性"><a href="#关系的完整性" class="headerlink" title="关系的完整性"></a>关系的完整性</h3><ul>
+<li>实体完整性<br><strong>若属性A是基本关系R的主属性，则A不能取空值</strong></li>
+<li>参照完整性<br><em>设F是基本关系R的一个或一组属性，但不是关系R的码，Ks是基本关系S的主码。如果F与Ks相对应，则称F是R的<strong>外码</strong></em><br>若属性（或属性组）F是基本关系R的外码，它与基本关系S的主码Ks相对应（基本关系R和S不一定是不同的关系），则对于R中的每个元组在F上的值必须：<ul>
+<li><strong>或者取空值（F的每个属性值均为空值）</strong></li>
+<li><strong>或者等于S中某个元组的主码值</strong></li>
+</ul>
+</li>
+<li>用户定义的完整性<br><strong>用户定义的完整性就是针对某一具体的关系数据库的约束条件，它反映某一具体应用所涉及的数据必须满足的语义条件</strong></li>
+</ul>
+<h3 id="关系操作"><a href="#关系操作" class="headerlink" title="关系操作"></a>关系操作</h3><p>常用的关系操作：<strong>查询和插入、删除和修改</strong><br>传统的集合运算：<strong>并、差、交、笛卡尔积</strong><br>专门的关系运算：<strong>选择、投影、连接、除运算</strong>  </p>
+<h3 id="专门的关系运算"><a href="#专门的关系运算" class="headerlink" title="专门的关系运算"></a>专门的关系运算</h3><ol>
+<li><strong>选择</strong>（取行）<br>选择又称为限制。它是在关系R中选择满足给定条件的诸元组</li>
+<li><strong>投影</strong>（取列）<br>从R中选择出若干属性列组成新的关系<br><em>投影后可能会取消某些元组，因为取消了某些属性列之后可能会出现重复行，应取消相同行</em></li>
+<li><strong>连接</strong><br>它从两个关系的笛卡尔积中选取属性间满足一定条件的元组<br><strong>*自然连接</strong>是一种特殊的等值连接。它要求两个关系中进行比较的分量必须是同名的属性组，并且在结果中把重复的属性列去掉<em>  
+</em>在做<strong>自然连接</strong>时，可能会舍弃某些元组，这些元组被称为<strong>悬浮元组*</strong></li>
+<li><strong>除运算</strong>（还是去看书吧。。。）<br>设关系R处以关系S的结果为关系T，则T包含所有在R但不在S中的属性及其值，且T的元组与S的元组的所有的组合都在R中</li>
+</ol>
+
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/03/Database6/">
-            
-                <span>数据库原理——第六章：关系数据库理论</span>
-        </a>
-        <div class="abstract-content">
-            问题的提出
-针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。
-数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。
-一个好的关系模式不会发生插入异常、删除异常和更新异常，数据冗余尽可能的少。
-
-规...
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://godway999.github.io">Godway</a>
+            </p><p>原文链接：<a href="https://godway999.github.io/2019/05/03/Database2/">https://godway999.github.io/2019/05/03/Database2/</a>
+            </p><p>发表日期：<a href="https://godway999.github.io/2019/05/03/Database2/">May 3rd 2019, 7:40:06 pm</a>
+            </p><p>更新日期：<a href="https://godway999.github.io/2019/05/03/Database2/">May 3rd 2019, 7:43:10 pm</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/03/Database5/">
-            
-                <span>数据库原理——第五章：数据库完整性</span>
-        </a>
-        <div class="abstract-content">
-            数据库的完整性是指数据的正确性和相容性
-实体完整性  关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义。  单属性构成的码有两种说明方式：列级约束条件、表级约束条件。  多属性构成的码只有一种说明方式：表级约束
-  12345例：CREATE TABLE XXX(  Sno CHAR(20) PRIMARY KEY,  /*单属性可以在列级定义主码*/  PRIM...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/03/Database4/">
-            
-                <span>数据库原理——第四章：数据库安全性</span>
-        </a>
-        <div class="abstract-content">
-            用户权限由两个要素组成：数据库对象、操作类型
-创建用户12CREATE USER &lt;用户名&gt;@&lt;用户登陆主机&gt; [IDENTIFIED BY &lt;密码&gt;];CREATE USER &lt;用户名&gt;;  /*可以在本地无密码登录的账户*/
-
-用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/03/Database3/">
-            
-                <span>数据库原理——第三章：关系数据库标准语言SQL</span>
-        </a>
-        <div class="abstract-content">
-            SQL概述SQL 结构化查询语言（Structured Query Language)  
-
-
-
-
-SQL功能
-动词  
-
-
-
-
-数据查询
-SELECT
-
-
-数据定义
-CREATE，DROP，ALTER
-
-
-数据操作
-INSERT，UPDATE，DELETE
-
-
-数据控制
-GRANT，REVOKE
-
-
-
-
-———后续语句实现基于MySQL———
-数据库的定义与删除
-1.定义数据库
-
-1CRE...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/03/Database2/">
-            
-                <span>数据库原理——第二章：关系数据库</span>
-        </a>
-        <div class="abstract-content">
-            关系
-域是一组具有相同数据类型的值的集合。属性的取值范围来自某个域  
-一个域允许的不同取值个数称为这个域的基数  
-某一属性组的值能唯一的标识一个元组，而其子集不能，则称该属性组为候选码
-若一个关系中有多个候选码，则选定其中一个为主码  
-关系模式的所有属性是这个关系模式的候选码，称为全码元组：表中的一行码：表中的某个属性组，它可以唯一确定一个元组  
-
-关系模式定义： 关系的描述称为关系...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/21/Database1/">
-            
-                <span>数据库原理——第一章：绪论</span>
-        </a>
-        <div class="abstract-content">
-            术语对比
-
-
-
-关系术语
-一般表格的术语  
-
-
-
-
-关系名
-表名
-
-
-关系模式
-表头（表格的描述）
-
-
-关系
-（一张）二维表
-
-
-元组
-记录或行
-
-
-属性
-列
-
-
-属性名
-列名
-
-
-属性值
-列值
-
-
-分量
-一条记录中的一个列值
-
-
-非规范关系
-表中有表（大表中嵌有小表）
-
-
-
-
-关系的完整性约束条件
-实体完整性
-参照完整性
-用户定义的完整性
-
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/21</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2019/05/03/Database3/" title="数据库原理——第三章：关系数据库标准语言SQL">
+                    <div class="nextTitle">数据库原理——第三章：关系数据库标准语言SQL</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/04/21/Database1/" title="数据库原理——第一章：绪论">
+                    <div class="prevTitle">数据库原理——第一章：绪论</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -690,6 +549,24 @@ GRANT，REVOKE
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系"><span class="toc-number">1.</span> <span class="toc-text">关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系模式"><span class="toc-number">2.</span> <span class="toc-text">关系模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系的完整性"><span class="toc-number">3.</span> <span class="toc-text">关系的完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系操作"><span class="toc-number">4.</span> <span class="toc-text">关系操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专门的关系运算"><span class="toc-number">5.</span> <span class="toc-text">专门的关系运算</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -891,6 +768,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({

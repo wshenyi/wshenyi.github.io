@@ -359,12 +359,200 @@ height:50vh;
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/04/21/Database/">
+        <a class="abstract-title" href="/2019/05/03/Database7/">
             
-                <span>数据库原理</span>
+                <span>Database7</span>
         </a>
         <div class="abstract-content">
-            第一章：绪论术语对比
+            
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/05/03/Database6/">
+            
+                <span>数据库原理——第六章：关系数据库理论</span>
+        </a>
+        <div class="abstract-content">
+            问题的提出
+针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。
+数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。
+一个好的关系模式不会发生插入异常、删除异常和更新异常，数据冗余尽可能的少。
+
+规...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/05/03/Database5/">
+            
+                <span>数据库原理——第五章：数据库完整性</span>
+        </a>
+        <div class="abstract-content">
+            数据库的完整性是指数据的正确性和相容性
+实体完整性  关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义。  单属性构成的码有两种说明方式：列级约束条件、表级约束条件。  多属性构成的码只有一种说明方式：表级约束
+  12345例：CREATE TABLE XXX(  Sno CHAR(20) PRIMARY KEY,  /*单属性可以在列级定义主码*/  PRIM...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/05/03/Database4/">
+            
+                <span>数据库原理——第四章：数据库安全性</span>
+        </a>
+        <div class="abstract-content">
+            用户权限由两个要素组成：数据库对象、操作类型
+创建用户12CREATE USER &lt;用户名&gt;@&lt;用户登陆主机&gt; [IDENTIFIED BY &lt;密码&gt;];CREATE USER &lt;用户名&gt;;  /*可以在本地无密码登录的账户*/
+
+用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/05/03/Database3/">
+            
+                <span>数据库原理——第三章：关系数据库标准语言SQL</span>
+        </a>
+        <div class="abstract-content">
+            SQL概述SQL 结构化查询语言（Structured Query Language)  
+
+
+
+
+SQL功能
+动词  
+
+
+
+
+数据查询
+SELECT
+
+
+数据定义
+CREATE，DROP，ALTER
+
+
+数据操作
+INSERT，UPDATE，DELETE
+
+
+数据控制
+GRANT，REVOKE
+
+
+
+
+———后续语句实现基于MySQL———
+数据库的定义与删除
+1.定义数据库
+
+1CRE...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/05/03/Database2/">
+            
+                <span>数据库原理——第二章：关系数据库</span>
+        </a>
+        <div class="abstract-content">
+            关系
+域是一组具有相同数据类型的值的集合。属性的取值范围来自某个域  
+一个域允许的不同取值个数称为这个域的基数  
+某一属性组的值能唯一的标识一个元组，而其子集不能，则称该属性组为候选码
+若一个关系中有多个候选码，则选定其中一个为主码  
+关系模式的所有属性是这个关系模式的候选码，称为全码元组：表中的一行码：表中的某个属性组，它可以唯一确定一个元组  
+
+关系模式定义： 关系的描述称为关系...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/04/21/Database1/">
+            
+                <span>数据库原理——第一章：绪论</span>
+        </a>
+        <div class="abstract-content">
+            术语对比
 
 
 
@@ -417,8 +605,7 @@ height:50vh;
 参照完整性
 用户定义的完整性
 
-第二章：关系数据库关系
-域是一组具...
+
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -635,9 +822,67 @@ height:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 1
+        Total : 7
         </div>
         <!-- search  -->
         
@@ -653,7 +898,37 @@ height:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/21</span><a class="archive-post-title" href="/2019/04/21/Database/">数据库原理</a>
+            <span class="archive-post-date">05/03</span><a class="archive-post-title" href="/2019/05/03/Database2/">数据库原理——第二章：关系数据库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span><a class="archive-post-title" href="/2019/05/03/Database4/">数据库原理——第四章：数据库安全性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span><a class="archive-post-title" href="/2019/05/03/Database3/">数据库原理——第三章：关系数据库标准语言SQL</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span><a class="archive-post-title" href="/2019/05/03/Database6/">数据库原理——第六章：关系数据库理论</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span><a class="archive-post-title" href="/2019/05/03/Database5/">数据库原理——第五章：数据库完整性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span><a class="archive-post-title" href="/2019/05/03/Database7/">Database7</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/21</span><a class="archive-post-title" href="/2019/04/21/Database1/">数据库原理——第一章：绪论</a>
         </li>
     
     </ul></div>
@@ -727,7 +1002,22 @@ jsonContent:
     </div>
     <!-- async load share.js -->
      
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>
 
 
