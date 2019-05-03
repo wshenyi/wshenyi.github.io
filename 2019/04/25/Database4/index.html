@@ -96,14 +96,17 @@
 
 
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="数据库原理——第七章：数据库设计">
-<meta property="og:url" content="https://godway999.github.io/2019/05/03/Database7/index.html">
+  <meta name="description" content="用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库原理——第四章：数据库安全性">
+<meta property="og:url" content="https://godway999.github.io/2019/04/25/Database4/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
+<meta property="og:description" content="用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-03T13:54:29.563Z">
+<meta property="og:updated_time" content="2019-05-03T14:05:54.565Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库原理——第七章：数据库设计">
+<meta name="twitter:title" content="数据库原理——第四章：数据库安全性">
+<meta name="twitter:description" content="用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接">
 
 
 
@@ -111,7 +114,7 @@
 
   
   
-  <link rel="canonical" href="https://godway999.github.io/2019/05/03/Database7/">
+  <link rel="canonical" href="https://godway999.github.io/2019/04/25/Database4/">
 
 
 
@@ -121,7 +124,7 @@
   };
 </script>
 
-  <title>数据库原理——第七章：数据库设计 | Godway's Studio</title>
+  <title>数据库原理——第四章：数据库安全性 | Godway's Studio</title>
   
 
 
@@ -341,7 +344,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/05/03/Database7/">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/04/25/Database4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Godway">
@@ -358,7 +361,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据库原理——第七章：数据库设计
+          <h1 class="post-title" itemprop="name headline">数据库原理——第四章：数据库安全性
 
               
             
@@ -384,12 +387,24 @@
                 
               
 
-              <time title="Created: 2019-05-03 19:42:57 / Modified: 21:54:29" itemprop="dateCreated datePublished" datetime="2019-05-03T19:42:57+08:00">2019-05-03</time>
+              <time title="Created: 2019-04-25 19:42:48" itemprop="dateCreated datePublished" datetime="2019-04-25T19:42:48+08:00">2019-04-25</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-03 22:05:54" itemprop="dateModified" datetime="2019-05-03T22:05:54+08:00">2019-05-03</time>
               
             
           </span>
@@ -441,7 +456,21 @@
       
 
       
-        
+        <p><em>用户权限由两个要素组成：<strong>数据库对象</strong>、<strong>操作类型</strong></em></p>
+<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &lt;用户名&gt;@&lt;用户登陆主机&gt; [IDENTIFIED BY &lt;密码&gt;];</span><br><span class="line">CREATE USER &lt;用户名&gt;;  /*可以在本地无密码登录的账户*/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接替换为：%（表示任何一台主机都可以远程登陆）。</li>
+<li>新用户的密码可以选择不创建。</li>
+</ul>
+<h3 id="修改用户密码"><a href="#修改用户密码" class="headerlink" title="修改用户密码"></a>修改用户密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &lt;用户名&gt;@&lt;用户登陆主机&gt; IDENTIFIED BY &lt;新密码&gt;</span><br><span class="line">SET PASSWORD FOR &lt;用户名&gt;@&lt;用户登陆主机&gt; = PASSWORD(&apos;新密码&apos;) /*创建新密码*/</span><br></pre></td></tr></table></figure>
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP USER [IF EXIST] &lt;用户名&gt;@&lt;用户登陆主机&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="给用户授权"><a href="#给用户授权" class="headerlink" title="给用户授权"></a>给用户授权</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限&gt;(属性名),... ON &lt;数据库名&gt;.&lt;数据库表名&gt;,... TO &lt;用户名&gt;@&lt;用户登陆主机&gt;,... [WITH GRANT OPTION]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果指定了<code>WITH GRANT OPTION</code>子句，则获得某种权限的用户还可以把这种权限再授予其他用户（传播权限）</li>
+<li>对于&lt;权限&gt;(属性名)，如UPDATE(Sno)表示对于Sno这个属性具有更新的权限，若不填则默认为所有属性</li>
+</ul>
+<h3 id="收回授权"><a href="#收回授权" class="headerlink" title="收回授权"></a>收回授权</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REVOKE &lt;权限&gt;(属性名),... ON &lt;数据库名&gt;.&lt;数据库表名&gt;,... FROM &lt;用户名&gt;@&lt;用户登陆主机&gt;,...</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -471,8 +500,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/27/Database6/" rel="next" title="数据库原理——第六章：关系数据库理论">
-                <i class="fa fa-chevron-left"></i> 数据库原理——第六章：关系数据库理论
+              <a href="/2019/04/24/Database3/" rel="next" title="数据库原理——第三章：关系数据库标准语言SQL">
+                <i class="fa fa-chevron-left"></i> 数据库原理——第三章：关系数据库标准语言SQL
               </a>
             
           </div>
@@ -481,8 +510,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/03/NS3_1/" rel="prev" title="Mac本地配置NS3开发环境">
-                Mac本地配置NS3开发环境 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/26/Database5/" rel="prev" title="数据库原理——第五章：数据库完整性">
+                数据库原理——第五章：数据库完整性 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -527,8 +556,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -593,6 +631,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户"><span class="nav-number">1.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改用户密码"><span class="nav-number">2.</span> <span class="nav-text">修改用户密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除用户"><span class="nav-number">3.</span> <span class="nav-text">删除用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给用户授权"><span class="nav-number">4.</span> <span class="nav-text">给用户授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#收回授权"><span class="nav-number">5.</span> <span class="nav-text">收回授权</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

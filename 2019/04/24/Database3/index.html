@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="SQL概述SQL 结构化查询语言（Structured Query Language)       SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库  1CREATE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库原理——第三章：关系数据库标准语言SQL">
+<meta property="og:url" content="https://godway999.github.io/2019/04/24/Database3/index.html">
+<meta property="og:site_name" content="Godway&#39;s Studio">
+<meta property="og:description" content="SQL概述SQL 结构化查询语言（Structured Query Language)       SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库  1CREATE">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-03T14:05:44.940Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库原理——第三章：关系数据库标准语言SQL">
+<meta name="twitter:description" content="SQL概述SQL 结构化查询语言（Structured Query Language)       SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库  1CREATE">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://godway999.github.io/2019/04/24/Database3/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>数据库原理——第三章：关系数据库标准语言SQL | Godway's Studio</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Godway's Studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">wsy</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/04/24/Database3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库原理——第三章：关系数据库标准语言SQL
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-24 19:42:45" itemprop="dateCreated datePublished" datetime="2019-04-24T19:42:45+08:00">2019-04-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-03 22:05:44" itemprop="dateModified" datetime="2019-05-03T22:05:44+08:00">2019-05-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库原理/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="SQL概述"><a href="#SQL概述" class="headerlink" title="SQL概述"></a>SQL概述</h2><p><strong>SQL</strong> 结构化查询语言（Structured Query Language)  </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>SQL功能</th>
+<th>动词  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据查询</td>
+<td>SELECT</td>
+</tr>
+<tr>
+<td>数据定义</td>
+<td>CREATE，DROP，ALTER</td>
+</tr>
+<tr>
+<td>数据操作</td>
+<td>INSERT，UPDATE，DELETE</td>
+</tr>
+<tr>
+<td>数据控制</td>
+<td>GRANT，REVOKE</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong><em>———后续语句实现基于MySQL———</em></strong></p>
+<h2 id="数据库的定义与删除"><a href="#数据库的定义与删除" class="headerlink" title="数据库的定义与删除"></a>数据库的定义与删除</h2><ul>
+<li>1.定义数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2.删除数据库  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE [IF EXIST] &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
+<h2 id="基本表的定义、删除与修改"><a href="#基本表的定义、删除与修改" class="headerlink" title="基本表的定义、删除与修改"></a>基本表的定义、删除与修改</h2><ul>
+<li>1.定义基本表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;表名&gt; (</span><br><span class="line">&lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">&lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">...</span><br><span class="line">[表级完整性约束],</span><br><span class="line">[表级完整性约束],</span><br><span class="line">...</span><br><span class="line">)[CHARSET=utf8];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2.数据类型</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CHAR(n)</td>
+<td>长度为n的定长字符串</td>
+</tr>
+<tr>
+<td>VARCHAR(n)</td>
+<td>最大长度为n的变长字符串</td>
+</tr>
+<tr>
+<td>TINYBLOB/BLOB/LONGBLOB</td>
+<td>不同大小的二进制形式的文本数据</td>
+</tr>
+<tr>
+<td>TINYTEXT/TEXT/LONGTEXT</td>
+<td>不同大小的文本数据</td>
+</tr>
+<tr>
+<td>TINTINT/SMALLINT/BIGINT</td>
+<td>不同字节大小的整数</td>
+</tr>
+<tr>
+<td>FLOAT/DOUBLE</td>
+<td>单/双精度浮点数</td>
+</tr>
+<tr>
+<td>DATE</td>
+<td>日期值（YYYY-MM-DD）</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>时间值（HH:MM:SS）</td>
+</tr>
+<tr>
+<td>YEAR</td>
+<td>年份值（YYYY）</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>混合日期和时间值</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>混合日期和时间值，时间戳</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>3.修改基本表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#增加列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD &lt;新属性名&gt; &lt;数据类型&gt; [列级完整性约束];</span><br><span class="line"></span><br><span class="line">#删除列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP &lt;选择的属性名&gt;;</span><br><span class="line"></span><br><span class="line">#添加表级完整性约束条件</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD [列级完整性约束];</span><br><span class="line"></span><br><span class="line">#删除键约束</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP [FOREIGN KEY / PRIMARY] &lt;键名&gt;;</span><br><span class="line"></span><br><span class="line">#修改属性的数据类型</span><br><span class="line">ALTER TABLE &lt;表名&gt; MODIFY &lt;选择的属性名&gt; &lt;新数据类型&gt;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>4.删除基本表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE [IF EXIST] &lt;表名&gt;;</span><br></pre></td></tr></table></figure>
+<h2 id="索引的建立与删除"><a href="#索引的建立与删除" class="headerlink" title="索引的建立与删除"></a>索引的建立与删除</h2><ul>
+<li>1.建立索引</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*若属性为字符串等类型，可以加上length表示根据前多个字符作为索引，从而节省建立索引的开销*/</span><br><span class="line">CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX &lt;索引名&gt; ON &lt;表名&gt;(属性名[(length)],...);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2.删除索引</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;表名&gt; DROP INDEX &lt;索引名&gt;;</span><br><span class="line">DROP INDEX &lt;索引名&gt; ON &lt;表名&gt;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3.查看索引</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW INDEX FROM [&lt;数据库名&gt;.]&lt;表名&gt;;</span><br></pre></td></tr></table></figure>
+<h2 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h2><ul>
+<li><strong>数据字典</strong>是关系数据库系统内部的一组<strong>系统表</strong>，它记录了数据库中所有的定义信息，包括关系模式定义、视图定义、索引定义、完整性约束定义、各类用户对数据库的操作权限、统计信息等。</li>
+<li>在进行<em>查询优化</em>和<em>查询处理</em>时，数据字典中的信息是其重要的依据。</li>
+</ul>
+<h2 id="数据的查询"><a href="#数据的查询" class="headerlink" title="数据的查询"></a>数据的查询</h2><ul>
+<li>一般格式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT [ALL|DISTINCT] &lt;目标属性表达式&gt; [别名],...</span><br><span class="line">FROM &lt;表名或视图名&gt;,... | (&lt;子查询&gt;) [AS] &lt;别名&gt;</span><br><span class="line">[WHERE &lt;&gt;]</span><br><span class="line">[GROUP BY &lt;属性名1&gt; [HAVING &lt;条件表达式&gt;]]</span><br><span class="line">[ORDER BY &lt;属性名2&gt; [ASC|DESC]];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>&lt;子查询&gt;由<code>SELECT</code>语句构成</li>
+<li>目标属性表达式的可选格式：<ol>
+<li>*</li>
+<li>&lt;表名&gt;.*</li>
+<li>COUNT([DISTINCT] *)</li>
+<li>[&lt;表名&gt;.]&lt;属性名表达式&gt;,…<br> 其中，属性名表达式可以是由属性名、作用于属性的聚集函数和常量的任意算数运算（+，-，*，/）组成的运算公式</li>
+</ol>
+</li>
+<li>聚集函数的一般格式<br>  COUNT|SUM|AVG|MAX|MIN( [DISTINCT|ALL] &lt;属性名&gt; )</li>
+<li>WHERE子句的条件表达式的可选格式<ol>
+<li>&lt;属性名&gt; $\theta$ &lt;属性名&gt;|&lt;常量&gt;|[ALL|ANY](子查询)</li>
+<li>&lt;属性名&gt; [NOT] BETWEEN &lt;属性名&gt;|&lt;常量&gt;|(&lt;子查询&gt;) AND &lt;属性名&gt;|&lt;常量&gt;|(&lt;子查询&gt;)</li>
+<li>&lt;属性名&gt; [NOT] IN (&lt;值1&gt;, &lt;值2&gt;, …)|(&lt;子查询&gt;)</li>
+<li>&lt;属性名&gt; NOT LIKE 匹配串</li>
+<li>&lt;属性名&gt; IS [NOT] NULL</li>
+<li>[NOT] EXISTS(&lt;子查询&gt;)</li>
+<li>&lt;条件表达式&gt; AND|OR &lt;条件表达式&gt; AND|OR …</li>
+</ol>
+</li>
+</ul>
+<h2 id="数据的更新"><a href="#数据的更新" class="headerlink" title="数据的更新"></a>数据的更新</h2><ul>
+<li>1.插入数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 插入元组</span><br><span class="line">INSERT INTO &lt;表名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">VALUES (&lt;对应属性的常量&gt;,...);</span><br><span class="line"></span><br><span class="line"># 插入子查询结果（建立一个新表）</span><br><span class="line">INSERT INTO &lt;新的表名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">&lt;子查询&gt;;</span><br><span class="line"># 例：对每一个系，求学生的平均年龄，并把结果存入新数据表</span><br><span class="line">INSERT INTO Dept_age(Sdept, Avg_age) (</span><br><span class="line">    SELECT Sdept,AVG(Sage)</span><br><span class="line">    FROM Student</span><br><span class="line">    GTOUP BY Sdept</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2.修改数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">UPDATE &lt;表名&gt;</span><br><span class="line">SET &lt;列名&gt;=&lt;表达式&gt;,..</span><br><span class="line">[WHERE &lt;条件&gt;|&lt;子查询&gt;];</span><br><span class="line"></span><br><span class="line"># 例：将计算机科学系全体学生的成绩置为零</span><br><span class="line">UPDATE SC</span><br><span class="line">SET Grade=0</span><br><span class="line">WHERE Sno IN (</span><br><span class="line">    SELECT Sno</span><br><span class="line">    FROM Student</span><br><span class="line">    WHERE Sdept=&apos;CS&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3.删除数据</li>
+</ul>
+<p><code>DELETE</code>语句删除的是表中的数据，而不是关于表的定义，表的定义仍在字典中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DELETE</span><br><span class="line">FROM &lt;表名&gt;</span><br><span class="line">[WHERE &lt;条件&gt;|&lt;子查询&gt;];</span><br><span class="line"></span><br><span class="line"># 例：删除计算机科学系全体学生的选课记录（SC表）</span><br><span class="line">DELETE</span><br><span class="line">FROM SC</span><br><span class="line">WHERE Sno IN (</span><br><span class="line">    SELECT Sno</span><br><span class="line">    FROM Student</span><br><span class="line">    WHERE Sdept=&apos;CS&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>  <em>视图是从一个或几个基本表（或视图）导出的表。它与基本表不同，是一个虚表</em></p>
+<ul>
+<li>1.建立视图</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW &lt;视图名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">AS &lt;子查询&gt;</span><br><span class="line">[WITH [CASCADED|LOCAL] CHECK OPTION];</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;&ensp;&lt;子查询&gt;可以是任意的<code>SELECT</code>语句。<br>&emsp;&emsp;&ensp;<code>WITH [CASCADED|LOCAL] CHECK OPTION</code>表示对视图进行<code>UPDATE</code>、<code>INSERT</code>和<code>DELETE</code>操作时要保证更新、插入或删除的行满足视图定义中的谓词条件（即子查询中的条件表达式）。<br>&emsp;&emsp;&ensp;组成视图的属性列名或者<em>全部省略</em>或者<em>全部指定</em>，没有第三种选择。但在下列三种情况下必须明确指明：<br>&emsp;&emsp;&ensp;&emsp;1. 某个目标列不是单纯的属性名，而是聚集函数或列表达式<br>&emsp;&emsp;&ensp;&emsp;2. 多表连接时选出了几个同名列作为视图的字段<br>&emsp;&emsp;&ensp;&emsp;3. 需要在视图中为某个列启用新的更合适的名字<br>&emsp;&emsp;&ensp;关系数据库管理系统执行<code>CREATE VIEW</code>语句的结果，只是<strong>把视图的定义存入数据字典</strong>，并不执行其中的<code>SELECT</code>语句。<br>&emsp;&emsp;&ensp;定义：若一个视图是从单个基本表导出的，并且只是去掉了基本表的某些行和某些列，但是保留了主码，则称这类视图为<strong>行列子视图</strong>。</p>
+<ul>
+<li>2.删除视图</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP VIEW &lt;视图名&gt; [CASCADE];</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;&ensp;视图删除后视图的定义将从数据字典中删除。如果该视图上还导出了其他视图，则使用<code>CASCADE</code>级联删除语句一起删除。</p>
+<ul>
+<li><p>3.查询视图</p>
+<p>  从数据字典中取出视图的定义，将其转换成等价的对基本表的操作后再执行，这一转换过程称为<strong>视图消解</strong>。</p>
+</li>
+<li><p>4.更新视图</p>
+<p>  对试图的更新最终要转换为对基本表的更新，但不是所有的视图都是可更新的，一般的，<strong>行列子集视图</strong>是可更新的。</p>
+</li>
+<li><p>5.视图的作用</p>
+<ol>
+<li>视图能够简化用户的操作</li>
+<li>视图使用户能以多种角度看待同一数据</li>
+<li>视图对重构数据库提供了一定程度的逻辑独立性</li>
+<li>视图能够对机密数据提供安全保护</li>
+<li>适当利用视图可以更清晰地表达查询</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/22/Database2/" rel="next" title="数据库原理——第二章：关系数据库">
+                <i class="fa fa-chevron-left"></i> 数据库原理——第二章：关系数据库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/25/Database4/" rel="prev" title="数据库原理——第四章：数据库安全性">
+                数据库原理——第四章：数据库安全性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Godway</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL概述"><span class="nav-number">1.</span> <span class="nav-text">SQL概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的定义与删除"><span class="nav-number">2.</span> <span class="nav-text">数据库的定义与删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本表的定义、删除与修改"><span class="nav-number">3.</span> <span class="nav-text">基本表的定义、删除与修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的建立与删除"><span class="nav-number">4.</span> <span class="nav-text">索引的建立与删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据字典"><span class="nav-number">5.</span> <span class="nav-text">数据字典</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据的查询"><span class="nav-number">6.</span> <span class="nav-text">数据的查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据的更新"><span class="nav-number">7.</span> <span class="nav-text">数据的更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图"><span class="nav-number">8.</span> <span class="nav-text">视图</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Godway</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

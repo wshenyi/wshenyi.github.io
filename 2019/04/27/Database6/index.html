@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="HelloWelcome to my studio!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://godway999.github.io/about/index.html">
+  <meta name="description" content="问题的提出 针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。 数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。 一个好的关系模式不会发生插入异常、删除异常和更新异常，数据冗余尽可能的少。  规范化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库原理——第六章：关系数据库理论">
+<meta property="og:url" content="https://godway999.github.io/2019/04/27/Database6/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="HelloWelcome to my studio!">
+<meta property="og:description" content="问题的提出 针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。 数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。 一个好的关系模式不会发生插入异常、删除异常和更新异常，数据冗余尽可能的少。  规范化">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-15T13:07:03.000Z">
+<meta property="og:updated_time" content="2019-05-03T14:06:13.531Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="HelloWelcome to my studio!">
+<meta name="twitter:title" content="数据库原理——第六章：关系数据库理论">
+<meta name="twitter:description" content="问题的提出 针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。 数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。 一个好的关系模式不会发生插入异常、删除异常和更新异常，数据冗余尽可能的少。  规范化">
 
 
 
@@ -114,7 +114,7 @@
 
   
   
-  <link rel="canonical" href="https://godway999.github.io/about/">
+  <link rel="canonical" href="https://godway999.github.io/2019/04/27/Database6/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>about | Godway's Studio</title>
+  <title>数据库原理——第六章：关系数据库理论 | Godway's Studio</title>
   
 
 
@@ -231,7 +231,7 @@
         
         
           
-          <li class="menu-item menu-item-about menu-item-active">
+          <li class="menu-item menu-item-about">
 
     
     
@@ -324,74 +324,207 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/04/27/Database6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Studio">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">about
-
-</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <h1 id="Hello"><a href="#Hello" class="headerlink" title="Hello"></a>Hello</h1><p>Welcome to my studio!</p>
+          <h1 class="post-title" itemprop="name headline">数据库原理——第六章：关系数据库理论
 
+              
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-27 19:42:54" itemprop="dateCreated datePublished" datetime="2019-04-27T19:42:54+08:00">2019-04-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-03 22:06:13" itemprop="dateModified" datetime="2019-05-03T22:06:13+08:00">2019-05-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库原理/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><ul>
+<li>针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即<em>应该构建几个关系模式，每个关系由哪些属性组成等</em>。这是数据库设计的问题，确切地讲是<strong>关系数据库逻辑设计问题（如何构造合适的数据模式）</strong>。</li>
+<li><strong>数据依赖</strong>是一个关系内部属性与属性之间的<em>约束关系</em>，这种约束关系是通过<strong>属性值</strong>的相等与否体现出来的数据间相关联系。</li>
+<li>一个好的关系模式不会发生<strong>插入异常</strong>、<strong>删除异常</strong>和<strong>更新异常</strong>，<strong>数据冗余</strong>尽可能的少。</li>
+</ul>
+<h2 id="规范化"><a href="#规范化" class="headerlink" title="规范化"></a>规范化</h2><ul>
+<li>若属性组X能唯一确定属性组Y，则称<strong>X函数确定Y</strong>或<strong>Y函数依赖X</strong>，记作$X \rightarrow Y$。</li>
+<li><p>$X \rightarrow Y$，但$Y \nsubseteq X$，则称$X \rightarrow Y$是<strong>非平凡的函数依赖</strong>。</p>
+<p> $\nsubseteq$<br> $\nrightarrow$</p>
+</li>
+</ul>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/26/Database5/" rel="next" title="数据库原理——第五章：数据库完整性">
+                <i class="fa fa-chevron-left"></i> 数据库原理——第五章：数据库完整性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/03/Database7/" rel="prev" title="数据库原理——第七章：数据库设计">
+                数据库原理——第七章：数据库设计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -506,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hello"><span class="nav-number">1.</span> <span class="nav-text">Hello</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题的提出"><span class="nav-number">1.</span> <span class="nav-text">问题的提出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#规范化"><span class="nav-number">2.</span> <span class="nav-text">规范化</span></a></li></ol></div>
             
 
           </div>
@@ -674,6 +807,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
