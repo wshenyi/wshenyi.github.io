@@ -98,17 +98,17 @@
 
 
 
-  <meta name="description" content="SQL概述SQL 结构化查询语言（Structured Query Language)       SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库  1CREATE">
+  <meta name="description" content="SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库   1CREATE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库原理——第三章：关系数据库标准语言SQL">
 <meta property="og:url" content="https://godway999.github.io/2019/04/24/Database3/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="SQL概述SQL 结构化查询语言（Structured Query Language)       SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库  1CREATE">
+<meta property="og:description" content="SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库   1CREATE">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-03T14:05:44.940Z">
+<meta property="og:updated_time" content="2019-05-04T08:52:26.202Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第三章：关系数据库标准语言SQL">
-<meta name="twitter:description" content="SQL概述SQL 结构化查询语言（Structured Query Language)       SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库  1CREATE">
+<meta name="twitter:description" content="SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库   1CREATE">
 
 
 
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-03 22:05:44" itemprop="dateModified" datetime="2019-05-03T22:05:44+08:00">2019-05-03</time>
+                <time title="Modified: 2019-05-04 16:52:26" itemprop="dateModified" datetime="2019-05-04T16:52:26+08:00">2019-05-04</time>
               
             
           </span>
@@ -465,7 +465,7 @@
       
 
       
-        <h2 id="SQL概述"><a href="#SQL概述" class="headerlink" title="SQL概述"></a>SQL概述</h2><p><strong>SQL</strong> 结构化查询语言（Structured Query Language)  </p>
+        <h2 id="SQL概述"><a href="#SQL概述" class="headerlink" title="SQL概述"></a>SQL概述</h2><p><strong>SQL</strong> 结构化查询语言（Structured Query Language)</p>
 <div class="table-container">
 <table>
 <thead>
@@ -496,19 +496,19 @@
 </div>
 <p><strong><em>———后续语句实现基于MySQL———</em></strong></p>
 <h2 id="数据库的定义与删除"><a href="#数据库的定义与删除" class="headerlink" title="数据库的定义与删除"></a>数据库的定义与删除</h2><ul>
-<li>1.定义数据库</li>
+<li><p>1.定义数据库</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.删除数据库  </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE [IF EXIST] &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>2.删除数据库  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE [IF EXIST] &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
 <h2 id="基本表的定义、删除与修改"><a href="#基本表的定义、删除与修改" class="headerlink" title="基本表的定义、删除与修改"></a>基本表的定义、删除与修改</h2><ul>
-<li>1.定义基本表</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;表名&gt; (</span><br><span class="line">&lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">&lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">...</span><br><span class="line">[表级完整性约束],</span><br><span class="line">[表级完整性约束],</span><br><span class="line">...</span><br><span class="line">)[CHARSET=utf8];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>2.数据类型</li>
+<li><p>1.定义基本表</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;表名&gt; (</span><br><span class="line">&lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">&lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">...</span><br><span class="line">[表级完整性约束],</span><br><span class="line">[表级完整性约束],</span><br><span class="line">...</span><br><span class="line">)[CHARSET=utf8];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.数据类型</p>
+</li>
 </ul>
 <div class="table-container">
 <table>
@@ -567,35 +567,34 @@
 </table>
 </div>
 <ul>
-<li>3.修改基本表</li>
+<li><p>3.修改基本表</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#增加列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD &lt;新属性名&gt; &lt;数据类型&gt; [列级完整性约束];</span><br><span class="line"></span><br><span class="line">#删除列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP &lt;选择的属性名&gt;;</span><br><span class="line"></span><br><span class="line">#添加表级完整性约束条件</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD [列级完整性约束];</span><br><span class="line"></span><br><span class="line">#删除键约束</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP [FOREIGN KEY / PRIMARY] &lt;键名&gt;;</span><br><span class="line"></span><br><span class="line">#修改属性的数据类型</span><br><span class="line">ALTER TABLE &lt;表名&gt; MODIFY &lt;选择的属性名&gt; &lt;新数据类型&gt;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4.删除基本表</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE [IF EXIST] &lt;表名&gt;;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#增加列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD &lt;新属性名&gt; &lt;数据类型&gt; [列级完整性约束];</span><br><span class="line"></span><br><span class="line">#删除列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP &lt;选择的属性名&gt;;</span><br><span class="line"></span><br><span class="line">#添加表级完整性约束条件</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD [列级完整性约束];</span><br><span class="line"></span><br><span class="line">#删除键约束</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP [FOREIGN KEY / PRIMARY] &lt;键名&gt;;</span><br><span class="line"></span><br><span class="line">#修改属性的数据类型</span><br><span class="line">ALTER TABLE &lt;表名&gt; MODIFY &lt;选择的属性名&gt; &lt;新数据类型&gt;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>4.删除基本表</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE [IF EXIST] &lt;表名&gt;;</span><br></pre></td></tr></table></figure>
 <h2 id="索引的建立与删除"><a href="#索引的建立与删除" class="headerlink" title="索引的建立与删除"></a>索引的建立与删除</h2><ul>
-<li>1.建立索引</li>
+<li><p>1.建立索引</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*若属性为字符串等类型，可以加上length表示根据前多个字符作为索引，从而节省建立索引的开销*/</span><br><span class="line">CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX &lt;索引名&gt; ON &lt;表名&gt;(属性名[(length)],...);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.删除索引</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;表名&gt; DROP INDEX &lt;索引名&gt;;</span><br><span class="line">DROP INDEX &lt;索引名&gt; ON &lt;表名&gt;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.查看索引</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW INDEX FROM [&lt;数据库名&gt;.]&lt;表名&gt;;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*若属性为字符串等类型，可以加上length表示根据前多个字符作为索引，从而节省建立索引的开销*/</span><br><span class="line">CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX &lt;索引名&gt; ON &lt;表名&gt;(属性名[(length)],...);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>2.删除索引</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;表名&gt; DROP INDEX &lt;索引名&gt;;</span><br><span class="line">DROP INDEX &lt;索引名&gt; ON &lt;表名&gt;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>3.查看索引</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW INDEX FROM [&lt;数据库名&gt;.]&lt;表名&gt;;</span><br></pre></td></tr></table></figure>
 <h2 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h2><ul>
 <li><strong>数据字典</strong>是关系数据库系统内部的一组<strong>系统表</strong>，它记录了数据库中所有的定义信息，包括关系模式定义、视图定义、索引定义、完整性约束定义、各类用户对数据库的操作权限、统计信息等。</li>
 <li>在进行<em>查询优化</em>和<em>查询处理</em>时，数据字典中的信息是其重要的依据。</li>
 </ul>
 <h2 id="数据的查询"><a href="#数据的查询" class="headerlink" title="数据的查询"></a>数据的查询</h2><ul>
-<li>一般格式</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT [ALL|DISTINCT] &lt;目标属性表达式&gt; [别名],...</span><br><span class="line">FROM &lt;表名或视图名&gt;,... | (&lt;子查询&gt;) [AS] &lt;别名&gt;</span><br><span class="line">[WHERE &lt;&gt;]</span><br><span class="line">[GROUP BY &lt;属性名1&gt; [HAVING &lt;条件表达式&gt;]]</span><br><span class="line">[ORDER BY &lt;属性名2&gt; [ASC|DESC]];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>&lt;子查询&gt;由<code>SELECT</code>语句构成</li>
+<li><p>一般格式</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT [ALL|DISTINCT] &lt;目标属性表达式&gt; [别名],...</span><br><span class="line">FROM &lt;表名或视图名&gt;,... | (&lt;子查询&gt;) [AS] &lt;别名&gt;</span><br><span class="line">[WHERE &lt;&gt;]</span><br><span class="line">[GROUP BY &lt;属性名1&gt; [HAVING &lt;条件表达式&gt;]]</span><br><span class="line">[ORDER BY &lt;属性名2&gt; [ASC|DESC]];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&lt;子查询&gt;由<code>SELECT</code>语句构成</p>
+</li>
 <li>目标属性表达式的可选格式：<ol>
 <li>*</li>
 <li>&lt;表名&gt;.*</li>
@@ -616,29 +615,32 @@
 </li>
 </ul>
 <h2 id="数据的更新"><a href="#数据的更新" class="headerlink" title="数据的更新"></a>数据的更新</h2><ul>
-<li>1.插入数据</li>
+<li><p>1.插入数据</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 插入元组</span><br><span class="line">INSERT INTO &lt;表名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">VALUES (&lt;对应属性的常量&gt;,...);</span><br><span class="line"></span><br><span class="line"># 插入子查询结果（建立一个新表）</span><br><span class="line">INSERT INTO &lt;新的表名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">&lt;子查询&gt;;</span><br><span class="line"># 例：对每一个系，求学生的平均年龄，并把结果存入新数据表</span><br><span class="line">INSERT INTO Dept_age(Sdept, Avg_age) (</span><br><span class="line">    SELECT Sdept,AVG(Sage)</span><br><span class="line">    FROM Student</span><br><span class="line">    GTOUP BY Sdept</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.修改数据</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">UPDATE &lt;表名&gt;</span><br><span class="line">SET &lt;列名&gt;=&lt;表达式&gt;,..</span><br><span class="line">[WHERE &lt;条件&gt;|&lt;子查询&gt;];</span><br><span class="line"></span><br><span class="line"># 例：将计算机科学系全体学生的成绩置为零</span><br><span class="line">UPDATE SC</span><br><span class="line">SET Grade=0</span><br><span class="line">WHERE Sno IN (</span><br><span class="line">    SELECT Sno</span><br><span class="line">    FROM Student</span><br><span class="line">    WHERE Sdept=&apos;CS&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.删除数据</p>
+<p>  <code>DELETE</code>语句删除的是表中的数据，而不是关于表的定义，表的定义仍在字典中。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DELETE</span><br><span class="line">FROM &lt;表名&gt;</span><br><span class="line">[WHERE &lt;条件&gt;|&lt;子查询&gt;];</span><br><span class="line"></span><br><span class="line"># 例：删除计算机科学系全体学生的选课记录（SC表）</span><br><span class="line">DELETE</span><br><span class="line">FROM SC</span><br><span class="line">WHERE Sno IN (</span><br><span class="line">    SELECT Sno</span><br><span class="line">    FROM Student</span><br><span class="line">    WHERE Sdept=&apos;CS&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 插入元组</span><br><span class="line">INSERT INTO &lt;表名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">VALUES (&lt;对应属性的常量&gt;,...);</span><br><span class="line"></span><br><span class="line"># 插入子查询结果（建立一个新表）</span><br><span class="line">INSERT INTO &lt;新的表名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">&lt;子查询&gt;;</span><br><span class="line"># 例：对每一个系，求学生的平均年龄，并把结果存入新数据表</span><br><span class="line">INSERT INTO Dept_age(Sdept, Avg_age) (</span><br><span class="line">    SELECT Sdept,AVG(Sage)</span><br><span class="line">    FROM Student</span><br><span class="line">    GTOUP BY Sdept</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>2.修改数据</li>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><pre><code>*视图是从一个或几个基本表（或视图）导出的表。它与基本表不同，是一个虚表*
+</code></pre><ul>
+<li><p>1.建立视图</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW &lt;视图名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">AS &lt;子查询&gt;</span><br><span class="line">[WITH [CASCADED|LOCAL] CHECK OPTION];</span><br></pre></td></tr></table></figure>
+<p>  &lt;子查询&gt;可以是任意的<code>SELECT</code>语句。<br>  <code>WITH [CASCADED|LOCAL] CHECK OPTION</code>表示对视图进行<code>UPDATE</code>、<code>INSERT</code>和<code>DELETE</code>操作时要保证更新、插入或删除的行满足视图定义中的谓词条件（即子查询中的条件表达式）。<br>  组成视图的属性列名或者<em>全部省略</em>或者<em>全部指定</em>，没有第三种选择。但在下列三种情况下必须明确指明：  </p>
+<pre><code>  1. 某个目标列不是单纯的属性名，而是聚集函数或列表达式  
+  2. 多表连接时选出了几个同名列作为视图的字段  
+  3. 需要在视图中为某个列启用新的更合适的名字  
+</code></pre><p>  关系数据库管理系统执行<code>CREATE VIEW</code>语句的结果，只是<strong>把视图的定义存入数据字典</strong>，并不执行其中的<code>SELECT</code>语句。<br>  定义：若一个视图是从单个基本表导出的，并且只是去掉了基本表的某些行和某些列，但是保留了主码，则称这类视图为<strong>行列子视图</strong>。</p>
+</li>
+<li><p>2.删除视图</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP VIEW &lt;视图名&gt; [CASCADE];</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">UPDATE &lt;表名&gt;</span><br><span class="line">SET &lt;列名&gt;=&lt;表达式&gt;,..</span><br><span class="line">[WHERE &lt;条件&gt;|&lt;子查询&gt;];</span><br><span class="line"></span><br><span class="line"># 例：将计算机科学系全体学生的成绩置为零</span><br><span class="line">UPDATE SC</span><br><span class="line">SET Grade=0</span><br><span class="line">WHERE Sno IN (</span><br><span class="line">    SELECT Sno</span><br><span class="line">    FROM Student</span><br><span class="line">    WHERE Sdept=&apos;CS&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>3.删除数据</li>
-</ul>
-<p><code>DELETE</code>语句删除的是表中的数据，而不是关于表的定义，表的定义仍在字典中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DELETE</span><br><span class="line">FROM &lt;表名&gt;</span><br><span class="line">[WHERE &lt;条件&gt;|&lt;子查询&gt;];</span><br><span class="line"></span><br><span class="line"># 例：删除计算机科学系全体学生的选课记录（SC表）</span><br><span class="line">DELETE</span><br><span class="line">FROM SC</span><br><span class="line">WHERE Sno IN (</span><br><span class="line">    SELECT Sno</span><br><span class="line">    FROM Student</span><br><span class="line">    WHERE Sdept=&apos;CS&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>  <em>视图是从一个或几个基本表（或视图）导出的表。它与基本表不同，是一个虚表</em></p>
-<ul>
-<li>1.建立视图</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW &lt;视图名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">AS &lt;子查询&gt;</span><br><span class="line">[WITH [CASCADED|LOCAL] CHECK OPTION];</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;&ensp;&lt;子查询&gt;可以是任意的<code>SELECT</code>语句。<br>&emsp;&emsp;&ensp;<code>WITH [CASCADED|LOCAL] CHECK OPTION</code>表示对视图进行<code>UPDATE</code>、<code>INSERT</code>和<code>DELETE</code>操作时要保证更新、插入或删除的行满足视图定义中的谓词条件（即子查询中的条件表达式）。<br>&emsp;&emsp;&ensp;组成视图的属性列名或者<em>全部省略</em>或者<em>全部指定</em>，没有第三种选择。但在下列三种情况下必须明确指明：<br>&emsp;&emsp;&ensp;&emsp;1. 某个目标列不是单纯的属性名，而是聚集函数或列表达式<br>&emsp;&emsp;&ensp;&emsp;2. 多表连接时选出了几个同名列作为视图的字段<br>&emsp;&emsp;&ensp;&emsp;3. 需要在视图中为某个列启用新的更合适的名字<br>&emsp;&emsp;&ensp;关系数据库管理系统执行<code>CREATE VIEW</code>语句的结果，只是<strong>把视图的定义存入数据字典</strong>，并不执行其中的<code>SELECT</code>语句。<br>&emsp;&emsp;&ensp;定义：若一个视图是从单个基本表导出的，并且只是去掉了基本表的某些行和某些列，但是保留了主码，则称这类视图为<strong>行列子视图</strong>。</p>
-<ul>
-<li>2.删除视图</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP VIEW &lt;视图名&gt; [CASCADE];</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;&ensp;视图删除后视图的定义将从数据字典中删除。如果该视图上还导出了其他视图，则使用<code>CASCADE</code>级联删除语句一起删除。</p>
+<p>视图删除后视图的定义将从数据字典中删除。如果该视图上还导出了其他视图，则使用<code>CASCADE</code>级联删除语句一起删除。</p>
 <ul>
 <li><p>3.查询视图</p>
 <p>  从数据字典中取出视图的定义，将其转换成等价的对基本表的操作后再执行，这一转换过程称为<strong>视图消解</strong>。</p>
@@ -767,7 +769,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -788,12 +790,31 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -883,7 +904,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">5.1k</span> 字
+      博客全站共： <span class="post-count">5.5k</span> 字
     </span>
 </div>
 <!-- 新增访客统计代码 END-->
