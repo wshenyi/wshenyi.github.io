@@ -98,12 +98,12 @@
 
 
 
-  <meta name="description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的">
+  <meta name="description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac本地用Eclipse配置NS3开发环境(完整教程)">
 <meta property="og:url" content="https://godway999.github.io/2019/05/03/NS3_1/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的">
+<meta property="og:description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic1.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic2.png">
@@ -118,10 +118,10 @@
 <meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic11.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic12.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic13.png">
-<meta property="og:updated_time" content="2019-05-04T04:28:04.454Z">
+<meta property="og:updated_time" content="2019-05-06T12:03:14.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac本地用Eclipse配置NS3开发环境(完整教程)">
-<meta name="twitter:description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的">
+<meta name="twitter:description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境">
 <meta name="twitter:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic1.png">
 
 
@@ -427,7 +427,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-04 12:28:04" itemprop="dateModified" datetime="2019-05-04T12:28:04+08:00">2019-05-04</time>
+                <time title="Modified: 2019-05-06 20:03:14" itemprop="dateModified" datetime="2019-05-06T20:03:14+08:00">2019-05-06</time>
               
             
           </span>
@@ -480,7 +480,7 @@
 
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。</p>
-<h2 id="在终端下编译和运行NS3程序"><a href="#在终端下编译和运行NS3程序" class="headerlink" title="在终端下编译和运行NS3程序"></a>在终端下编译和运行NS3程序</h2><p>  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:<code>build.py</code>,<code>bake</code>,<code>waf</code>个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的依赖，我觉得容易出问题。<br>  在我的Mac上由于使用clang++，一定要加上<code>--disable-werror</code>，如果需要搭建python3的开发环境，需要指明python3具体位置。</p>
+<h2 id="在终端下编译和运行NS3程序"><a href="#在终端下编译和运行NS3程序" class="headerlink" title="在终端下编译和运行NS3程序"></a>在终端下编译和运行NS3程序</h2><p>  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:<code>build.py</code>,<code>bake</code>,<code>waf</code>。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的依赖，我觉得容易出问题。<br>  在我的Mac上由于使用clang++，一定要加上<code>--disable-werror</code>，如果需要搭建python3的开发环境，需要指明python3具体位置。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> (本地存放位置)/ns-allinone-3.29/ns-3.29/</span><br><span class="line">./waf --<span class="built_in">enable</span>-test --build-profile=debug --python=/usr/<span class="built_in">local</span>/bin/python3 --with-python=python3 --<span class="built_in">disable</span>-werror configure</span><br><span class="line">./waf build</span><br></pre></td></tr></table></figure>
 <p>经过一段时间的编译之后，在当前目录下运行一个官方例程<code>scratch-simulator</code>，如果一切顺利可以看到程序输出一行<code>Scratch Simulator</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./waf --run scratch/scratch-simulator</span><br></pre></td></tr></table></figure>
@@ -723,26 +723,6 @@
 
 
 
-
-<!-- 新增访客统计代码 -->
-<div class="busuanzi-count">
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="site-uv">
-      <i class="fa fa-user"></i>
-      访问用户： <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
-    </span>
-    <div class="powered-by"></div>
-    <span class="site-uv">
-      <i class="fa fa-eye"></i>
-      访问次数： <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
-    </span>
-    <!-- 博客字数统计 -->
-    <span class="site-pv">
-      <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">5.5k</span> 字
-    </span>
-</div>
-<!-- 新增访客统计代码 END-->
         
 
 
@@ -791,11 +771,23 @@
 
 
 
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
 
 
 
+  
+  
+
+
+
+  
+  
 
 
 
@@ -811,6 +803,15 @@
 
   
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_lines.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_sphere.min.js"></script>
 
 
   
