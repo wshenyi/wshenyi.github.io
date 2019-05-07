@@ -98,31 +98,17 @@
 
 
 
-  <meta name="description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境">
+  <meta name="description" content="应用层协议原理 网络核心设备并不在应用层上起作用，而仅在较低层起作用，特别是在网络层及下面层次起作用  网络应用程序体系结构：*客户-服务器体系结构  P2P体系结构（优秀的特点自扩展性）   可供应用程序使用的传输服务    可靠数据传输 吞吐量 定时（能在给定时间内完成通信） 安全性   TCP服务：  面向连接的服务 可靠的数据传输服务 流量控制 拥塞控制 不提供：定时、最小吞吐量保证、安全">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac本地用Eclipse配置NS3开发环境(完整教程)">
-<meta property="og:url" content="https://godway999.github.io/2019/05/03/NS3_1/index.html">
+<meta property="og:title" content="计算机网络——第二章：应用层">
+<meta property="og:url" content="https://godway999.github.io/2019/05/07/Network2/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境">
+<meta property="og:description" content="应用层协议原理 网络核心设备并不在应用层上起作用，而仅在较低层起作用，特别是在网络层及下面层次起作用  网络应用程序体系结构：*客户-服务器体系结构  P2P体系结构（优秀的特点自扩展性）   可供应用程序使用的传输服务    可靠数据传输 吞吐量 定时（能在给定时间内完成通信） 安全性   TCP服务：  面向连接的服务 可靠的数据传输服务 流量控制 拥塞控制 不提供：定时、最小吞吐量保证、安全">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic1.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic2.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic3.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic4.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic5.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic6.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic7.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic8.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic9.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic10.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic11.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic12.png">
-<meta property="og:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic13.png">
-<meta property="og:updated_time" content="2019-05-06T12:03:14.119Z">
+<meta property="og:updated_time" content="2019-05-07T13:32:03.271Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac本地用Eclipse配置NS3开发环境(完整教程)">
-<meta name="twitter:description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境">
-<meta name="twitter:image" content="https://godway999.github.io/2019/05/03/NS3_1/pic1.png">
+<meta name="twitter:title" content="计算机网络——第二章：应用层">
+<meta name="twitter:description" content="应用层协议原理 网络核心设备并不在应用层上起作用，而仅在较低层起作用，特别是在网络层及下面层次起作用  网络应用程序体系结构：*客户-服务器体系结构  P2P体系结构（优秀的特点自扩展性）   可供应用程序使用的传输服务    可靠数据传输 吞吐量 定时（能在给定时间内完成通信） 安全性   TCP服务：  面向连接的服务 可靠的数据传输服务 流量控制 拥塞控制 不提供：定时、最小吞吐量保证、安全">
 
 
 
@@ -130,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="https://godway999.github.io/2019/05/03/NS3_1/">
+  <link rel="canonical" href="https://godway999.github.io/2019/05/07/Network2/">
 
 
 
@@ -140,7 +126,7 @@
   };
 </script>
 
-  <title>Mac本地用Eclipse配置NS3开发环境(完整教程) | Godway's Studio</title>
+  <title>计算机网络——第二章：应用层 | Godway's Studio</title>
   
 
 
@@ -367,7 +353,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/05/03/NS3_1/">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/05/07/Network2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Godway">
@@ -384,7 +370,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Mac本地用Eclipse配置NS3开发环境(完整教程)
+          <h2 class="post-title" itemprop="name headline">计算机网络——第二章：应用层
 
               
             
@@ -410,24 +396,12 @@
                 
               
 
-              <time title="Created: 2019-05-03 21:48:29" itemprop="dateCreated datePublished" datetime="2019-05-03T21:48:29+08:00">2019-05-03</time>
+              <time title="Created: 2019-05-07 20:41:41 / Modified: 21:32:03" itemprop="dateCreated datePublished" datetime="2019-05-07T20:41:41+08:00">2019-05-07</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-06 20:03:14" itemprop="dateModified" datetime="2019-05-06T20:03:14+08:00">2019-05-06</time>
               
             
           </span>
@@ -444,7 +418,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NS3/" itemprop="url" rel="index"><span itemprop="name">NS3</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机网络/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a></span>
 
                 
                 
@@ -479,19 +453,55 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。</p>
-<h2 id="在终端下编译和运行NS3程序"><a href="#在终端下编译和运行NS3程序" class="headerlink" title="在终端下编译和运行NS3程序"></a>在终端下编译和运行NS3程序</h2><p>  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:<code>build.py</code>,<code>bake</code>,<code>waf</code>。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的依赖，我觉得容易出问题。<br>  在我的Mac上由于使用clang++，一定要加上<code>--disable-werror</code>，如果需要搭建python3的开发环境，需要指明python3具体位置。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> (本地存放位置)/ns-allinone-3.29/ns-3.29/</span><br><span class="line">./waf --<span class="built_in">enable</span>-test --build-profile=debug --python=/usr/<span class="built_in">local</span>/bin/python3 --with-python=python3 --<span class="built_in">disable</span>-werror configure</span><br><span class="line">./waf build</span><br></pre></td></tr></table></figure>
-<p>经过一段时间的编译之后，在当前目录下运行一个官方例程<code>scratch-simulator</code>，如果一切顺利可以看到程序输出一行<code>Scratch Simulator</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./waf --run scratch/scratch-simulator</span><br></pre></td></tr></table></figure>
-<h2 id="在Eclipse上配置NS3开发环境"><a href="#在Eclipse上配置NS3开发环境" class="headerlink" title="在Eclipse上配置NS3开发环境"></a>在Eclipse上配置NS3开发环境</h2><p>  作为一个新手，如果没有一个友好的开发环境，很容易就进入从入门到放弃的阶段。NS3最让我不能接受的是必须用官方给的waf编译代码，我一开始尝试在Xcode搭建环境，然而Xcode好像对于使用外部编译器的支持不是很好，最终我还是转到在Eclipse上搭建开发环境。</p>
-<h3 id="在Eclipse上新建项目"><a href="#在Eclipse上新建项目" class="headerlink" title="在Eclipse上新建项目"></a>在Eclipse上新建项目</h3><p>按如下顺序<em>File -&gt; New -&gt; C/C++ Project</em>，创建C++项目<br><img src="/2019/05/03/NS3_1/pic1.png" title="Mac英文环境"><br><strong>着重强调！！！NS3的代码必须放到<em>(本地存放位置)/ns-allinone-3.29/ns-3.29/scratch/</em>文件夹下才能被正确编译执行</strong>所以工程位置放在<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/</code>,这里工程名字自己定，我这里取名为<code>NS3</code>，右侧的编译器随便选一个，之后点<code>finish</code>完成。<br><img src="/2019/05/03/NS3_1/pic2.png" title="Mac英文环境">  </p>
-<h3 id="编译NS3项目"><a href="#编译NS3项目" class="headerlink" title="编译NS3项目"></a>编译NS3项目</h3><p>如果前一步没遇到问题，现在左侧的工程目录应该基本长这样子，以后就直接在scratch目录下新创xxx.cc文件就好了。<br><img src="/2019/05/03/NS3_1/pic3.png" title="Mac英文环境"><br>之后这里右键NS3文件夹，进入工程属性面板。右侧点击<strong>C/C++ Build</strong>然后照我的样子配置两处。<br><strong>编译器类型记得选为外部编译器</strong>，编译器选为当前目录下的waf编译器，编译结果放在当前目录下的build文件夹中<br><img src="/2019/05/03/NS3_1/pic4.png" title="Mac英文环境"><br><img src="/2019/05/03/NS3_1/pic5.png" title="Mac英文环境"><br>之后进入到<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/</code>进行<code>configure</code>操作，如果之前已经<code>configure</code>过了可以跳过该步骤。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> (本地存放位置)/ns-allinone-3.29/ns-3.29/</span><br><span class="line">./waf --<span class="built_in">enable</span>-test --build-profile=debug --python=/usr/<span class="built_in">local</span>/bin/python3 --with-python=python3 --<span class="built_in">disable</span>-werror configure</span><br></pre></td></tr></table></figure>
-<p><code>configure</code>过了之后点击<em>Eclipse</em>左上角的<strong>Build</strong>按钮就可以编译整个NS3工程了</p>
-<h3 id="配置Eclipse使用外部编译器waf"><a href="#配置Eclipse使用外部编译器waf" class="headerlink" title="配置Eclipse使用外部编译器waf"></a>配置Eclipse使用外部编译器waf</h3><p>构建完了整个NS3工程之后，我们后续怎么运行我们自己写的代码呢？这时候需要配置使用外部编译器waf。<br>在<em>Eclipse</em>顶部按如下顺序<em>Run -&gt; Extern Tools -&gt; Extern Tools Configurations</em><br><img src="/2019/05/03/NS3_1/pic6.png" title="Mac英文环境"><br>左侧右键点击新建一个编译器。<br>我这里将这个外部编译器取名为<code>ns3-waf</code>，其余两个和之前一样，参数这里填写<code>--run &quot;${string_prompt}&quot;</code><br><img src="/2019/05/03/NS3_1/pic7.png" title="Mac英文环境"><br>这里点掉这个<code>Build before launch</code>选项<br><img src="/2019/05/03/NS3_1/pic8.png" title="Mac英文环境"><br>之后点击<em>Eclipse</em>上方红色方框内的按钮<br><img src="/2019/05/03/NS3_1/pic9.png" title="Mac英文环境"><br>然后会弹出一个选项框让填写<strong>你要编译的文件的名称</strong>，<strong>注意这里不用加.cc后缀</strong>,比如我要编译运行<code>scratch</code>文件夹下的<code>scratch-simulator.cc</code>，就直接填写<code>scratch-simulator</code>或<code>scratch/scratch-simulator</code>。如果你的自己写的文件之前已经build过了，就不需要再加文件目录<code>scratch/</code>，直接填写文件名就好。<br><img src="/2019/05/03/NS3_1/pic10.png" title="Mac英文环境"><br>下方显示运行结果<br><img src="/2019/05/03/NS3_1/pic11.png" title="Mac英文环境">  </p>
-<h3 id="配置NS工程路径"><a href="#配置NS工程路径" class="headerlink" title="配置NS工程路径"></a>配置NS工程路径</h3><p>此时虽然能够运行自己写的NS3代码了，但是代码中却还有一堆烦人的下波浪线〰️，并且头文件的引用等都是查询不到的，这里就需要配置一下NS3工程路径和环境。<br>和之前一样，首先进入属性面板。然后找到图中所示的配置目录<br>这一步将<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/build/ns3/</code>下所有工程头文件包含了进来。<br><img src="/2019/05/03/NS3_1/pic12.png" title="Mac英文环境"><br>然后构建会花费一小会时间，之后可以在左侧<code>NS3/includes/</code>下看到新生成了一个<code>NS3/build/ns3</code>文件，然后代码中的波浪线就全部消失了<br><img src="/2019/05/03/NS3_1/pic13.png" title="Mac英文环境">  </p>
-<h3 id="配置完成"><a href="#配置完成" class="headerlink" title="配置完成"></a>配置完成</h3>
+        <h2 id="应用层协议原理"><a href="#应用层协议原理" class="headerlink" title="应用层协议原理"></a>应用层协议原理</h2><ul>
+<li><p>网络核心设备并不在应用层上起作用，而仅在较低层起作用，特别是在网络层及下面层次起作用</p>
+</li>
+<li><p>网络应用程序体系结构：<br>*客户-服务器体系结构</p>
+<ul>
+<li>P2P体系结构（优秀的特点<strong>自扩展性</strong>）</li>
+</ul>
+</li>
+<li><p>可供应用程序使用的传输服务  </p>
+<ul>
+<li>可靠数据传输</li>
+<li>吞吐量</li>
+<li>定时（能在给定时间内完成通信）</li>
+<li>安全性</li>
+</ul>
+</li>
+<li><p>TCP服务：</p>
+<ul>
+<li>面向连接的服务</li>
+<li>可靠的数据传输服务</li>
+<li>流量控制</li>
+<li>拥塞控制</li>
+<li>不提供：定时、最小吞吐量保证、安全性</li>
+</ul>
+</li>
+<li><p>UDP服务</p>
+<ul>
+<li>仅提供最小服务</li>
+<li>不可靠数据传输服务</li>
+<li>到达接受进程的报文可能是乱序到达</li>
+</ul>
+</li>
+<li><p><strong>应用层协议</strong>定义了运行在不同端系统上的应用进程如何相互传递报文，特别是其定义了：</p>
+<ul>
+<li>交换的报文类型，例如请求报文和响应报文</li>
+<li>各种报文类型的语法，如报文中的各个字段及这些字段是如何描述的。</li>
+<li>字段的语义，即这些字段中的信息的含义</li>
+<li>确定一个进程何时以及如何发送报文，对报文进行响应的规则</li>
+</ul>
+</li>
+</ul>
+<h2 id="Web和HTTP"><a href="#Web和HTTP" class="headerlink" title="Web和HTTP"></a>Web和HTTP</h2><ul>
+<li>Web的应用层协议是<strong>超文本传输协议(HyperText Transfer Protocol, HTTP)</strong>，定义在[RFC 1945]和[RFC 2616]</li>
+<li>每个URL地址由两部分组成：存放对象的<strong>服务器主机名</strong>和对象的<strong>路径名</strong></li>
+<li>Web浏览器——&gt;HTTP的客户端，Web服务器———&gt;HTTP的服务器端。Web服务器用于存储Web对象，每个<em>对象</em>由URL寻址</li>
+<li><strong>HTTP定义了Web客户与Web服务器间间的Web页面的交互方式</strong></li>
+<li>因为HTTP服务器不保存关于客户的任何信息，所以HTTP是一个<strong>无状态协议</strong></li>
+</ul>
+<h2 id="因特网中的电子邮件"><a href="#因特网中的电子邮件" class="headerlink" title="因特网中的电子邮件"></a>因特网中的电子邮件</h2><h2 id="DNS：因特网的目录服务"><a href="#DNS：因特网的目录服务" class="headerlink" title="DNS：因特网的目录服务"></a>DNS：因特网的目录服务</h2><h2 id="P2P文件分发"><a href="#P2P文件分发" class="headerlink" title="P2P文件分发"></a>P2P文件分发</h2><h2 id="视频流和内容分发网"><a href="#视频流和内容分发网" class="headerlink" title="视频流和内容分发网"></a>视频流和内容分发网</h2>
       
     </div>
 
@@ -521,8 +531,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/03/Database7/" rel="next" title="数据库原理——第七章：数据库设计">
-                <i class="fa fa-chevron-left"></i> 数据库原理——第七章：数据库设计
+              <a href="/2019/05/07/Network1/" rel="next" title="Network">
+                <i class="fa fa-chevron-left"></i> Network
               </a>
             
           </div>
@@ -530,10 +540,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/04/Others1/" rel="prev" title="Markdown中Latex常用符号">
-                Markdown中Latex常用符号 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -686,7 +692,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在终端下编译和运行NS3程序"><span class="nav-number">2.</span> <span class="nav-text">在终端下编译和运行NS3程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在Eclipse上配置NS3开发环境"><span class="nav-number">3.</span> <span class="nav-text">在Eclipse上配置NS3开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在Eclipse上新建项目"><span class="nav-number">3.1.</span> <span class="nav-text">在Eclipse上新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译NS3项目"><span class="nav-number">3.2.</span> <span class="nav-text">编译NS3项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Eclipse使用外部编译器waf"><span class="nav-number">3.3.</span> <span class="nav-text">配置Eclipse使用外部编译器waf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置NS工程路径"><span class="nav-number">3.4.</span> <span class="nav-text">配置NS工程路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置完成"><span class="nav-number">3.5.</span> <span class="nav-text">配置完成</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层协议原理"><span class="nav-number">1.</span> <span class="nav-text">应用层协议原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web和HTTP"><span class="nav-number">2.</span> <span class="nav-text">Web和HTTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#因特网中的电子邮件"><span class="nav-number">3.</span> <span class="nav-text">因特网中的电子邮件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS：因特网的目录服务"><span class="nav-number">4.</span> <span class="nav-text">DNS：因特网的目录服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2P文件分发"><span class="nav-number">5.</span> <span class="nav-text">P2P文件分发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频流和内容分发网"><span class="nav-number">6.</span> <span class="nav-text">视频流和内容分发网</span></a></li></ol></div>
             
 
           </div>
