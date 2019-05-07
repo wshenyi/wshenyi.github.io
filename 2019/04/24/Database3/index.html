@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Godway&#39;s Studio">
 <meta property="og:description" content="SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库   1CREATE">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-06T17:37:52.053Z">
+<meta property="og:updated_time" content="2019-05-07T05:03:45.325Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第三章：关系数据库标准语言SQL">
 <meta name="twitter:description" content="SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库   1CREATE">
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-07 01:37:52" itemprop="dateModified" datetime="2019-05-07T01:37:52+08:00">2019-05-07</time>
+                <time title="Modified: 2019-05-07 13:03:45" itemprop="dateModified" datetime="2019-05-07T13:03:45+08:00">2019-05-07</time>
               
             
           </span>
@@ -653,8 +653,8 @@
 </div>
 <ul>
 <li><p>3.<code>ORDER BY</code>子句</p>
-<p>  可以用<code>ORDER BY</code>子句对查询结果按照一个或多个属性的升序（<code>ASC</code>）或降序（<code>DESC</code>）排列，默认值为升序</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#例</span><br><span class="line">SELECT Sno,Grade FROM SC WHERE Cno=&apos;3&apos; ORDER BY DESC;</span><br></pre></td></tr></table></figure>
+<p>  可以用<code>ORDER BY</code>子句对查询结果按照一个或多个属性的升序（<code>ASC</code>）或降序（<code>DESC</code>）排列，默认值为升序<br>  用法为<code>ORDER BY &lt;属性名&gt; ASC|DESC</code></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#例</span><br><span class="line">SELECT Sno,Grade FROM SC WHERE Cno=&apos;3&apos; ORDER BY Grade DESC;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>4.聚集函数</p>
 <p>  聚集函数遇到空值时，除了COUNT(<em>)外，都跳过空值而只处理非空值<br>  <code>WHERE</code>子句中是不能用聚集函数作为条件表达式的。<em>*聚集函数只能用于<code>SELECT子句</code>和<code>GROUP BY</code>中的<code>HAVING</code>子句</em></em></p>
@@ -936,7 +936,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
