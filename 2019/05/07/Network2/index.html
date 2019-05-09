@@ -98,17 +98,20 @@
 
 
 
-  <meta name="description" content="应用层协议原理 网络核心设备并不在应用层上起作用，而仅在较低层起作用，特别是在网络层及下面层次起作用  网络应用程序体系结构：*客户-服务器体系结构  P2P体系结构（优秀的特点自扩展性）   可供应用程序使用的传输服务    可靠数据传输 吞吐量 定时（能在给定时间内完成通信） 安全性   TCP服务：  面向连接的服务 可靠的数据传输服务 流量控制 拥塞控制 不提供：定时、最小吞吐量保证、安全">
+  <meta name="description" content="应用层协议原理 网络核心设备并不在应用层上起作用，而仅在较低层起作用，特别是在网络层及下面层次起作用  网络应用程序体系结构：  客户-服务器体系结构 P2P体系结构（优秀的特点自扩展性）   可供应用程序使用的传输服务    可靠数据传输 吞吐量 定时（能在给定时间内完成通信） 安全性   TCP服务：  面向连接的服务 可靠的数据传输服务 流量控制 拥塞控制 不提供：定时、最小吞吐量保证、安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络——第二章：应用层">
 <meta property="og:url" content="https://godway999.github.io/2019/05/07/Network2/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="应用层协议原理 网络核心设备并不在应用层上起作用，而仅在较低层起作用，特别是在网络层及下面层次起作用  网络应用程序体系结构：*客户-服务器体系结构  P2P体系结构（优秀的特点自扩展性）   可供应用程序使用的传输服务    可靠数据传输 吞吐量 定时（能在给定时间内完成通信） 安全性   TCP服务：  面向连接的服务 可靠的数据传输服务 流量控制 拥塞控制 不提供：定时、最小吞吐量保证、安全">
+<meta property="og:description" content="应用层协议原理 网络核心设备并不在应用层上起作用，而仅在较低层起作用，特别是在网络层及下面层次起作用  网络应用程序体系结构：  客户-服务器体系结构 P2P体系结构（优秀的特点自扩展性）   可供应用程序使用的传输服务    可靠数据传输 吞吐量 定时（能在给定时间内完成通信） 安全性   TCP服务：  面向连接的服务 可靠的数据传输服务 流量控制 拥塞控制 不提供：定时、最小吞吐量保证、安全">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-08T02:30:54.000Z">
+<meta property="og:image" content="https://godway999.github.io/2019/05/07/Network2/1.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/07/Network2/3.png">
+<meta property="og:updated_time" content="2019-05-09T17:35:40.734Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第二章：应用层">
-<meta name="twitter:description" content="应用层协议原理 网络核心设备并不在应用层上起作用，而仅在较低层起作用，特别是在网络层及下面层次起作用  网络应用程序体系结构：*客户-服务器体系结构  P2P体系结构（优秀的特点自扩展性）   可供应用程序使用的传输服务    可靠数据传输 吞吐量 定时（能在给定时间内完成通信） 安全性   TCP服务：  面向连接的服务 可靠的数据传输服务 流量控制 拥塞控制 不提供：定时、最小吞吐量保证、安全">
+<meta name="twitter:description" content="应用层协议原理 网络核心设备并不在应用层上起作用，而仅在较低层起作用，特别是在网络层及下面层次起作用  网络应用程序体系结构：  客户-服务器体系结构 P2P体系结构（优秀的特点自扩展性）   可供应用程序使用的传输服务    可靠数据传输 吞吐量 定时（能在给定时间内完成通信） 安全性   TCP服务：  面向连接的服务 可靠的数据传输服务 流量控制 拥塞控制 不提供：定时、最小吞吐量保证、安全">
+<meta name="twitter:image" content="https://godway999.github.io/2019/05/07/Network2/1.png">
 
 
 
@@ -413,7 +416,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-08 10:30:54" itemprop="dateModified" datetime="2019-05-08T10:30:54+08:00">2019-05-08</time>
+                <time title="Modified: 2019-05-10 01:35:40" itemprop="dateModified" datetime="2019-05-10T01:35:40+08:00">2019-05-10</time>
               
             
           </span>
@@ -475,8 +478,9 @@
         <h2 id="应用层协议原理"><a href="#应用层协议原理" class="headerlink" title="应用层协议原理"></a>应用层协议原理</h2><ul>
 <li><p>网络核心设备并不在应用层上起作用，而仅在较低层起作用，特别是在网络层及下面层次起作用</p>
 </li>
-<li><p>网络应用程序体系结构：<br>*客户-服务器体系结构</p>
+<li><p>网络应用程序体系结构：</p>
 <ul>
+<li>客户-服务器体系结构</li>
 <li>P2P体系结构（优秀的特点<strong>自扩展性</strong>）</li>
 </ul>
 </li>
@@ -518,10 +522,121 @@
 <li>每个URL地址由两部分组成：存放对象的<strong>服务器主机名</strong>和对象的<strong>路径名</strong></li>
 <li>Web浏览器——&gt;HTTP的客户端，Web服务器———&gt;HTTP的服务器端。Web服务器用于存储Web对象，每个<em>对象</em>由URL寻址</li>
 <li><strong>HTTP定义了Web客户与Web服务器间间的Web页面的交互方式</strong></li>
-<li>因为HTTP服务器不保存关于客户的任何信息，所以HTTP是一个<strong>无状态协议</strong></li>
-<li></li>
+<li><p>因为HTTP服务器不保存关于客户的任何信息，所以HTTP是一个<strong>无状态协议</strong></p>
+</li>
+<li><p>HTTP连接方式：持续连接和非持续连接</p>
+<ul>
+<li>对于持续连接：<ul>
+<li>每次总的响应时间为2个RTT加上服务器传输HTML文件的时间（三次握手+文件传输）<img src="/2019/05/07/Network2/1.png"></li>
+<li>缺点：<ol>
+<li>必须为每个请求的对象建立和维护一个全新的连接</li>
+<li>每个对象经受两倍RTT的交付时延</li>
+</ol>
+</li>
 </ul>
-<h2 id="因特网中的电子邮件"><a href="#因特网中的电子邮件" class="headerlink" title="因特网中的电子邮件"></a>因特网中的电子邮件</h2><h2 id="DNS：因特网的目录服务"><a href="#DNS：因特网的目录服务" class="headerlink" title="DNS：因特网的目录服务"></a>DNS：因特网的目录服务</h2><h2 id="P2P文件分发"><a href="#P2P文件分发" class="headerlink" title="P2P文件分发"></a>P2P文件分发</h2><h2 id="视频流和内容分发网"><a href="#视频流和内容分发网" class="headerlink" title="视频流和内容分发网"></a>视频流和内容分发网</h2>
+</li>
+<li>HTTP默认模式是使用带流水线的持续连接</li>
+</ul>
+</li>
+<li><p>HTTP报文有两种：请求报文和响应报文</p>
+<img src="/2019/05/07/Network2/3.png"></li>
+<li>请求报文结构：请求行、首部行、实体<ul>
+<li>请求行：方法(GET,POST,HEAD,PUT,DELETE)、URL、HTTP版本</li>
+</ul>
+</li>
+<li>响应报文结构：状态行、首部行、实体<ul>
+<li>协议（HTTP）版本、状态码、状态信息</li>
+<li>常见状态码和相关短语：<ul>
+<li>200 OK：请求成功，信息在返回的响应报文中</li>
+<li>301 Moved Permanently：请求的对象已被永久转移，新的URL定义在响应报文中</li>
+<li>400 Bad Request：该请求不能被服务器理解</li>
+<li>404 Not Found：被请求的文档不在服务器上</li>
+<li>505 HTTP Version Not Supported</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>由于HTTP服务器是无状态的，然而有些时候Web站点希望能够识别用户，为此HTTP使用了<strong>cookie</strong>，它允许站点对用户进行跟踪</p>
+</li>
+<li><p>Web缓存器也叫<strong>代理服务器</strong>，它是能够代表初始Web服务器来满足HTTP请求的网络实体</p>
+</li>
+<li><p>部署Web缓存器的两个理由：</p>
+<ol>
+<li>可以大大减少对客户请求的响应时间，特别是当客户与目标服务器之间的瓶颈带宽远低于客户与Web缓存器之间的瓶颈带宽时</li>
+<li>可以大大减少一个机构的接入链路到因特网的通信量，使其不必急于增加带宽，从而降低费用</li>
+</ol>
+</li>
+<li><p>条件GET方法：用于判断缓存在代理服务器上的内容是否是最新的</p>
+</li>
+</ul>
+<h2 id="因特网中的电子邮件"><a href="#因特网中的电子邮件" class="headerlink" title="因特网中的电子邮件"></a>因特网中的电子邮件</h2><ul>
+<li><p>因特网电子邮件系统有三个主要组成部分：</p>
+<ul>
+<li>用户代理(user agent)</li>
+<li>邮件服务器(mail server)</li>
+<li>简单邮件传输协议(Simple Mail Transfer Protocol, SMTP)</li>
+</ul>
+</li>
+<li><p><strong>SMTP用于从发送方的邮件服务器发送报文到接收方的邮件服务器</strong></p>
+</li>
+<li>SMTP限制所有邮件报文的体部分（不只是其首部）只能采用简单的7比特ASCII表示</li>
+<li><p>SMTP一般不使用中间邮件服务器发送邮件，即使这两个邮件服务器位于地球的两端</p>
+</li>
+<li><p>SMTP与HTTP的对比：</p>
+<ul>
+<li>HTTP主要是一个<strong>拉协议</strong>(pull protocol)，用户使用HTTP从服务器上拉取信息；SMTP基本上是一个<strong>推协议</strong>(push protocol)，发送邮件服务器把文件推到接收邮件服务器</li>
+<li>SMTP要求每个报文采用7比特ASCII码格式；HTTP则不受这种限制</li>
+<li>HTTP把<strong>每个对象</strong>封装到它自己的HTTP响应报文中；SMTP则把<strong>所有报文对象</strong>放在一个报文中</li>
+</ul>
+</li>
+</ul>
+<h2 id="DNS：因特网的目录服务"><a href="#DNS：因特网的目录服务" class="headerlink" title="DNS：因特网的目录服务"></a>DNS：因特网的目录服务</h2><ul>
+<li>主机可以用主机名(hostname)标识，如www.google.com；也可以通过IP地址进行标志</li>
+<li><p><strong>域名系统</strong>(Domain Name System, DNS)的主要任务是提供一种能进行主机名到IP地址转换的目录服务</p>
+</li>
+<li><p>DNS是：</p>
+<ol>
+<li>一个由分层的DNS服务器实现的<strong>分布式、层次数据库</strong></li>
+<li>一个使得主机能够查询分布式数据库的<strong>应用层协议</strong></li>
+</ol>
+</li>
+<li><p>DNS运行在UDP之上，使用53号端口</p>
+</li>
+<li><p>DNS还提供一些别的重要服务：</p>
+<ul>
+<li>主机别名</li>
+<li>邮件服务器别名（像google邮箱可以使用很多的别名）</li>
+<li>负载均衡（使用冗余服务器）</li>
+</ul>
+</li>
+<li><p>DNS层次结构</p>
+<ul>
+<li>根DNS服务器：提供TLD服务器的IP地址</li>
+<li>顶级域(Top-Level Domain, TLD)DNS服务器：提供权威服务器的IP地址</li>
+<li>权威DNS服务器：提供公共可访问主机的IP地址</li>
+</ul>
+</li>
+<li>DNS查询有<strong>迭代</strong>和<strong>递归</strong>两种方式</li>
+</ul>
+<div id="flowchart-0" class="flow-chart"></div>
+
+<ul>
+<li>由于DNS缓存，除少数DNS查询以外，根服务器都被绕过了</li>
+</ul>
+<h2 id="P2P文件分发"><a href="#P2P文件分发" class="headerlink" title="P2P文件分发"></a>P2P文件分发</h2><ul>
+<li>在P2P文件分发中，每个对等方能够向任何其他对等方重新分发他已经收到的文件的任何一部分</li>
+<li>优点：<strong>自扩展性</strong></li>
+</ul>
+<h2 id="视频流和内容分发网"><a href="#视频流和内容分发网" class="headerlink" title="视频流和内容分发网"></a>视频流和内容分发网</h2><p>CDN<br>&amp;&amp;&amp;<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 请求主机
+op1=>operation: 本地DNS服务器
+op2=>operation: 根DNS服务器
+op3=>operation: TLD DNS服务器
+op4=>operation: 权威DNS服务器
+op5=>operation: 本地DNS服务器
+e=>end: 请求主机
+
+st(right)->op1(right)->op2(right)->op3(right)->op4(right)->op5(right)->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></p>
+
       
     </div>
 
@@ -551,8 +666,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/07/Network1/" rel="next" title="计算机网络——第一章：应用层">
-                <i class="fa fa-chevron-left"></i> 计算机网络——第一章：应用层
+              <a href="/2019/05/07/Network1/" rel="next" title="计算机网络——第一章：计算机网络和因特网">
+                <i class="fa fa-chevron-left"></i> 计算机网络——第一章：计算机网络和因特网
               </a>
             
           </div>
@@ -560,6 +675,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/09/Network3/" rel="prev" title="计算机网络——第三章：运输层">
+                计算机网络——第三章：运输层 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -630,7 +749,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
