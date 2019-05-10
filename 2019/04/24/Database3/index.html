@@ -98,17 +98,17 @@
 
 
 
-  <meta name="description" content="SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库   1CREATE">
+  <meta name="description" content="参考书目《数据库系统概论（第5版）》  SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库原理——第三章：关系数据库标准语言SQL">
 <meta property="og:url" content="https://godway999.github.io/2019/04/24/Database3/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库   1CREATE">
+<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-07T05:03:45.325Z">
+<meta property="og:updated_time" content="2019-05-10T02:24:44.703Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第三章：关系数据库标准语言SQL">
-<meta name="twitter:description" content="SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与删除 1.定义数据库   1CREATE">
+<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与">
 
 
 
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-07 13:03:45" itemprop="dateModified" datetime="2019-05-07T13:03:45+08:00">2019-05-07</time>
+                <time title="Modified: 2019-05-10 10:24:44" itemprop="dateModified" datetime="2019-05-10T10:24:44+08:00">2019-05-10</time>
               
             
           </span>
@@ -472,7 +472,10 @@
       
 
       
-        <h2 id="SQL概述"><a href="#SQL概述" class="headerlink" title="SQL概述"></a>SQL概述</h2><p><strong>SQL</strong> 结构化查询语言（Structured Query Language)</p>
+        <blockquote>
+<p><em>参考书目《数据库系统概论（第5版）》</em></p>
+</blockquote>
+<h2 id="SQL概述"><a href="#SQL概述" class="headerlink" title="SQL概述"></a>SQL概述</h2><p><strong>SQL</strong> 结构化查询语言（Structured Query Language)</p>
 <div class="table-container">
 <table>
 <thead>
@@ -614,7 +617,7 @@
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">(1)比较大小</span><br><span class="line">SELECT Sname FROM Student WHERE Sdept=&apos;CS&apos;;</span><br><span class="line">SELECT DISTINCT Sno FROM SC WHERE Grade&lt;60;</span><br><span class="line"></span><br><span class="line">(2)确定范围</span><br><span class="line">SELECT Sname,Sage FROM Student WHERE Sage [NOT] BETWEEN 20 AND 23;</span><br><span class="line"></span><br><span class="line">(3)确定集合(谓词IN用来查找属性值属于指定集合的元组)</span><br><span class="line">SELECT Sname FROM Student WHERE Sdept IN (&apos;CS&apos;,&apos;MA&apos;,&apos;EE&apos;);</span><br><span class="line"></span><br><span class="line">(4)字符匹配</span><br><span class="line">SELECT * FROM Student WHERE Sname LIKE &apos;刘%&apos;;</span><br><span class="line"></span><br><span class="line">(5)涉及空值的查询</span><br><span class="line">SELECT Sno,Cno FROM SC WHERE Grade IS NULL; /*分数值为空的对应属性*/</span><br><span class="line"></span><br><span class="line">(6)多重条件查询</span><br><span class="line">SELECT Sname FROM Student WHERE Sdept=&apos;CS&apos; AND Sage&lt;20;</span><br></pre></td></tr></table></figure>
 <p>  谓词LIKE用来进行字符串的匹配,一般格式如下</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[NOT] LIKE &apos;&lt;匹配串&gt;&apos; [ESCAPE &apos;\&apos;]</span><br></pre></td></tr></table></figure>
-<p>  <code>ESCAPE &#39;\&#39;</code> 表示’\’为换码符，用于转义 % 和 _<br>  &lt;匹配串&gt;可以是一个完整的字符串，也可以含有通配符 % 和 _ ,其中：</p>
+<p>  <code>ESCAPE &#39;\&#39;</code> 表示’\’为换码符，用于转义 % 和 <em><br>  &lt;匹配串&gt;可以是一个完整的字符串，也可以含有通配符 % 和 </em> ,其中：</p>
 <ul>
 <li>%(百分号)代表任意长度的字符串。如a%b表示以a开头以b结尾的任意长度的字符串</li>
 <li>_(下划线)代表任意单个字符，类似于占位符。如a_b表示以a开头以b结尾长度为3的字符串</li>

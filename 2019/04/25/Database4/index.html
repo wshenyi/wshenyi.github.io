@@ -98,12 +98,12 @@
 
 
 
-  <meta name="description" content="用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接">
+  <meta name="description" content="参考书目《数据库系统概论（第5版）》  用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆，则local">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库原理——第四章：数据库安全性">
 <meta property="og:url" content="https://godway999.github.io/2019/04/25/Database4/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接">
+<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆，则local">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://godway999.github.io/2019/04/25/Database4/1.png">
 <meta property="og:image" content="https://godway999.github.io/2019/04/25/Database4/2.png">
@@ -123,10 +123,10 @@
 <meta property="og:image" content="https://godway999.github.io/2019/04/25/Database4/16.png">
 <meta property="og:image" content="https://godway999.github.io/2019/04/25/Database4/17.png">
 <meta property="og:image" content="https://godway999.github.io/2019/04/25/Database4/18.png">
-<meta property="og:updated_time" content="2019-05-07T16:50:10.897Z">
+<meta property="og:updated_time" content="2019-05-10T02:24:54.778Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第四章：数据库安全性">
-<meta name="twitter:description" content="用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接">
+<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆，则local">
 <meta name="twitter:image" content="https://godway999.github.io/2019/04/25/Database4/1.png">
 
 
@@ -432,7 +432,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-08 00:50:10" itemprop="dateModified" datetime="2019-05-08T00:50:10+08:00">2019-05-08</time>
+                <time title="Modified: 2019-05-10 10:24:54" itemprop="dateModified" datetime="2019-05-10T10:24:54+08:00">2019-05-10</time>
               
             
           </span>
@@ -491,7 +491,10 @@
       
 
       
-        <p><em>用户权限由两个要素组成：<strong>数据库对象</strong>、<strong>操作类型</strong></em></p>
+        <blockquote>
+<p><em>参考书目《数据库系统概论（第5版）》</em></p>
+</blockquote>
+<p><em>用户权限由两个要素组成：<strong>数据库对象</strong>、<strong>操作类型</strong></em></p>
 <h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &lt;用户名&gt;@&lt;用户登陆主机&gt; [IDENTIFIED BY &lt;密码&gt;];</span><br><span class="line">CREATE USER &lt;用户名&gt;;  /*可以在本地无密码登录的账户*/</span><br></pre></td></tr></table></figure>
 <ul>
 <li>用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接替换为：%（表示任何一台主机都可以远程登陆）。</li>
