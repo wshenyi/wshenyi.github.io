@@ -106,7 +106,7 @@
 <meta property="og:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  概述和运输层服务 网络层提供了主机之间的逻辑通信，而运输层为运行在不同主机上的进程之间提供了逻辑通信 运输协议能够提供的服务不一定受制于底层网络层协议的服务模型。例如，即使网络协议不可靠或不保证机密性，运输协议也能提供可靠的数据传输或加密服务  IP的服务模型是尽力而为(best-effort)交付服务，它不保证报文段的交付、按序到达或完整性。从">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/1.png">
-<meta property="og:updated_time" content="2019-05-11T03:01:12.843Z">
+<meta property="og:updated_time" content="2019-05-11T03:13:40.393Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第三章：运输层">
 <meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  概述和运输层服务 网络层提供了主机之间的逻辑通信，而运输层为运行在不同主机上的进程之间提供了逻辑通信 运输协议能够提供的服务不一定受制于底层网络层协议的服务模型。例如，即使网络协议不可靠或不保证机密性，运输协议也能提供可靠的数据传输或加密服务  IP的服务模型是尽力而为(best-effort)交付服务，它不保证报文段的交付、按序到达或完整性。从">
@@ -415,7 +415,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-11 11:01:12" itemprop="dateModified" datetime="2019-05-11T11:01:12+08:00">2019-05-11</time>
+                <time title="Modified: 2019-05-11 11:13:40" itemprop="dateModified" datetime="2019-05-11T11:13:40+08:00">2019-05-11</time>
               
             
           </span>
@@ -543,7 +543,7 @@
 <li>提供检验和的原因是：不能保证源和目的之间的所有链路都提供差错检测</li>
 <li><em>端到端原则</em>：某些功能(例如差错检测)必须基于端到端实现，因为“与在较高级别提供这些功能的代价相比，在较低级别上设置的功能可能是冗余的或几乎没有价值的”</li>
 </ul>
-<h2 id="可靠数据传输原理"><a href="#可靠数据传输原理" class="headerlink" title="可靠数据传输原理"></a>可靠数据传输原理</h2><p>可靠数据传为上层实体提供的服务抽象是：数据可以通过一条可靠的信道进行传输。实现这种抽象的是<strong>可靠数据传输协议</strong>(reliable data transfer, rdt)</p>
+<h2 id="可靠数据传输原理"><a href="#可靠数据传输原理" class="headerlink" title="可靠数据传输原理"></a>可靠数据传输原理</h2><p>可靠数据传输为上层实体提供的服务抽象是：数据可以通过一条可靠的信道进行传输。实现这种抽象的是<strong>可靠数据传输协议</strong>(reliable data transfer, rdt)</p>
 <h3 id="可靠数据传输机制及其用途的总结"><a href="#可靠数据传输机制及其用途的总结" class="headerlink" title="可靠数据传输机制及其用途的总结"></a>可靠数据传输机制及其用途的总结</h3><ul>
 <li>检验和：用于检测在一个传输分组中的比特错误</li>
 <li>确认(ACK)：接收方用于告诉发送方一个分组或一组分组已经被正确的接收到了<ul>
@@ -569,7 +569,7 @@
 </li>
 </ul>
 <h3 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h3><ul>
-<li>假定发送速率为$R$bps，所有分组长度为$L$比特，定义<strong>信道利用率</strong>为：发送方实际忙于将发送比特送进信道的那部分时间与发送时间之比</li>
+<li>假定发送速率为$R$bps，所有分组长度为$L$比特，定义<strong>信道利用率</strong>为：<strong>发送方实际忙于将发送比特送进信道的那部分时间与发送时间之比</strong></li>
 </ul>
 <script type="math/tex; mode=display">U_{sender} = \frac{\frac{L}{R}}{RTT + \frac{L}{R}}</script><ul>
 <li>使用<strong>流水线</strong>可以显著增加信道利用率，其中$W$表示窗口大小</li>
