@@ -111,7 +111,9 @@
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/5.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/4.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/6.png">
-<meta property="og:updated_time" content="2019-05-12T13:59:15.445Z">
+<meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/7.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/8.png">
+<meta property="og:updated_time" content="2019-05-12T15:00:08.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第三章：运输层">
 <meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  概述和运输层服务 网络层提供了主机之间的逻辑通信，而运输层为运行在不同主机上的进程之间提供了逻辑通信 运输协议能够提供的服务不一定受制于底层网络层协议的服务模型。例如，即使网络协议不可靠或不保证机密性，运输协议也能提供可靠的数据传输或加密服务  IP的服务模型是尽力而为(best-effort)交付服务，它不保证报文段的交付、按序到达或完整性。从">
@@ -420,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-12 21:59:15" itemprop="dateModified" datetime="2019-05-12T21:59:15+08:00">2019-05-12</time>
+                <time title="Modified: 2019-05-12 23:00:08" itemprop="dateModified" datetime="2019-05-12T23:00:08+08:00">2019-05-12</time>
               
             
           </span>
@@ -647,13 +649,42 @@
 <li><em>TimeoutInterval</em>定义为经验上的<strong>TCP超时重传间隔</strong>，推荐的初始值为1秒</li>
 </ul>
 <script type="math/tex; mode=display">TimeoutInterval = EstimatedRTT + 4 \times DevRTT</script><h3 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h3><p><strong>流量控制</strong>的目的是为了消除发送方使接收方缓存溢出的可能性</p>
-<h3 id="TCP连接管理"><a href="#TCP连接管理" class="headerlink" title="TCP连接管理"></a>TCP连接管理</h3><p>建立TCP连接的三次握手：</p>
+<h3 id="TCP连接管理"><a href="#TCP连接管理" class="headerlink" title="TCP连接管理"></a>TCP连接管理</h3><ul>
+<li><p>建立TCP连接的三次握手：</p>
 <ol>
 <li>第一步：客户端的TCP首先向服务端发送<strong>SYN报文段</strong>，其中SYN比特被置为1，同时客户会随机选择一个初始序号Seq（client_isn）并封装到该报文段中</li>
 <li>第二步：服务端回复<strong>SYNACK报文段</strong>，其中SYN比特被置为1，该报文段的ACK被置为client_isn + 1，最后服务端选择自己的初始序号Seq（server_isn）并封装到该报文段中</li>
-<li>客户端对收到SYNACK报文段进行回复。将该报文的ACK置为server_isn + 1，同时将SYN比特置为0</li>
+<li>客户端对收到SYNACK报文段进行回复。将该报文的ACK置为server_isn + 1，同时将SYN比特置为0。第三次握手可以在报文段负载中携带客户到服务器的数据</li>
 </ol>
-<h2 id="拥塞控制原理"><a href="#拥塞控制原理" class="headerlink" title="拥塞控制原理"></a>拥塞控制原理</h2><h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2>
+</li>
+<li><p>断开TCP连接的四次挥手：</p>
+<ol>
+<li>客户端发送FIN给服务端</li>
+<li>服务端收到FIN并回复ACK，并发送FIN，准备关闭连接</li>
+<li>客户端收到FIN并回复ACK，并发送FIN，然后关闭连接</li>
+<li>服务端收到ACK，关闭连接<img src="/2019/05/09/Network3/7.png">
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="拥塞控制原理"><a href="#拥塞控制原理" class="headerlink" title="拥塞控制原理"></a>拥塞控制原理</h2><ul>
+<li><p>网络拥塞的代价：</p>
+<ol>
+<li>分组的到达速率接近链路容量时，分组将经历巨大的<em>排队时延</em></li>
+<li>发送方必须执行重传以补偿因为缓存一出而丢弃（丢失）的分组</li>
+<li>发送方在遇到大时延时所进行的不必要重传会引起路由器利用其链路带宽来转发不必要的<em>分组副本</em></li>
+<li>当一个分组沿一条路径被丢弃时，每个上游路由器用于转发该分组到丢弃该分组而使用的传输容量最终被浪费掉了</li>
+</ol>
+</li>
+<li><p>拥塞控制方法：</p>
+<ol>
+<li>端到端拥塞控制。端系统需对网络行为的观察（如丢失与时延）来推断网络状况。如TCP</li>
+<li>网络辅助的拥塞控制。在网络辅助的拥塞控制中，路由器向发送方提供关于网络中拥塞状态的显式反馈信息。如显式拥塞控制ECN</li>
+</ol>
+</li>
+</ul>
+<h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><p>一图胜千言。。。<br><img src="/2019/05/09/Network3/8.png"></p>
+<script type="math/tex; mode=display">一条连接的平均吞吐量 = \frac{1.22 \times MSS}{RTT \sqrt{L}}</script>
       
     </div>
 
