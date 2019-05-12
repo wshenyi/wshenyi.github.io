@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/6.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/7.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/8.png">
-<meta property="og:updated_time" content="2019-05-12T15:00:08.866Z">
+<meta property="og:updated_time" content="2019-05-12T15:06:24.454Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第三章：运输层">
 <meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  概述和运输层服务 网络层提供了主机之间的逻辑通信，而运输层为运行在不同主机上的进程之间提供了逻辑通信 运输协议能够提供的服务不一定受制于底层网络层协议的服务模型。例如，即使网络协议不可靠或不保证机密性，运输协议也能提供可靠的数据传输或加密服务  IP的服务模型是尽力而为(best-effort)交付服务，它不保证报文段的交付、按序到达或完整性。从">
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-12 23:00:08" itemprop="dateModified" datetime="2019-05-12T23:00:08+08:00">2019-05-12</time>
+                <time title="Modified: 2019-05-12 23:06:24" itemprop="dateModified" datetime="2019-05-12T23:06:24+08:00">2019-05-12</time>
               
             
           </span>
@@ -630,8 +630,8 @@
 </ul>
 <h3 id="TCP报文结构"><a href="#TCP报文结构" class="headerlink" title="TCP报文结构"></a>TCP报文结构</h3><img src="/2019/05/09/Network3/4.png">
 <ul>
-<li>序号(Seq)：序号建立在传送的<em>字节流</em>之上，因此一个报文段的<strong>序号</strong>是该报文段首字节的字节流编号</li>
-<li>TCP连接的双方均可随机地选择初始序号<img src="/2019/05/09/Network3/6.png"></li>
+<li>序号(Seq)：序号建立在传送的<em>字节流</em>之上，因此一个报文段的<strong>序号</strong>是该报文段首字节的字节流编号<img src="/2019/05/09/Network3/6.png"></li>
+<li>TCP连接的双方均可随机地选择初始序号</li>
 <li><p>确认号(ACK)：主机A填充进报文段的确认号是主机A期待从主机B收到的下一字节的编号</p>
 </li>
 <li><p>TCP使用<strong>累计确认</strong></p>
@@ -654,7 +654,7 @@
 <ol>
 <li>第一步：客户端的TCP首先向服务端发送<strong>SYN报文段</strong>，其中SYN比特被置为1，同时客户会随机选择一个初始序号Seq（client_isn）并封装到该报文段中</li>
 <li>第二步：服务端回复<strong>SYNACK报文段</strong>，其中SYN比特被置为1，该报文段的ACK被置为client_isn + 1，最后服务端选择自己的初始序号Seq（server_isn）并封装到该报文段中</li>
-<li>客户端对收到SYNACK报文段进行回复。将该报文的ACK置为server_isn + 1，同时将SYN比特置为0。第三次握手可以在报文段负载中携带客户到服务器的数据</li>
+<li>客户端对收到SYNACK报文段进行回复。将该报文的ACK置为server_isn + 1，同时将SYN比特置为0。第三次握手可以在报文段负载客户端到服务端的数据</li>
 </ol>
 </li>
 <li><p>断开TCP连接的四次挥手：</p>
