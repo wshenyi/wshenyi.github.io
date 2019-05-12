@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Godway&#39;s Studio">
 <meta property="og:description" content="参考书目《数据库系统概论（第5版）》  SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-12T14:11:32.777Z">
+<meta property="og:updated_time" content="2019-05-12T15:03:53.583Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第三章：关系数据库标准语言SQL">
 <meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  SQL概述SQL 结构化查询语言（Structured Query Language)     SQL功能 动词       数据查询 SELECT   数据定义 CREATE，DROP，ALTER   数据操作 INSERT，UPDATE，DELETE   数据控制 GRANT，REVOKE     ———后续语句实现基于MySQL——— 数据库的定义与">
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-12 22:11:32" itemprop="dateModified" datetime="2019-05-12T22:11:32+08:00">2019-05-12</time>
+                <time title="Modified: 2019-05-12 23:03:53" itemprop="dateModified" datetime="2019-05-12T23:03:53+08:00">2019-05-12</time>
               
             
           </span>
@@ -1272,6 +1272,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
