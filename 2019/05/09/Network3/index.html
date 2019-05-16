@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/6.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/7.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/8.png">
-<meta property="og:updated_time" content="2019-05-12T15:06:24.454Z">
+<meta property="og:updated_time" content="2019-05-16T06:12:07.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第三章：运输层">
 <meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  概述和运输层服务 网络层提供了主机之间的逻辑通信，而运输层为运行在不同主机上的进程之间提供了逻辑通信 运输协议能够提供的服务不一定受制于底层网络层协议的服务模型。例如，即使网络协议不可靠或不保证机密性，运输协议也能提供可靠的数据传输或加密服务  IP的服务模型是尽力而为(best-effort)交付服务，它不保证报文段的交付、按序到达或完整性。从">
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-12 23:06:24" itemprop="dateModified" datetime="2019-05-12T23:06:24+08:00">2019-05-12</time>
+                <time title="Modified: 2019-05-16 14:12:07" itemprop="dateModified" datetime="2019-05-16T14:12:07+08:00">2019-05-16</time>
               
             
           </span>
@@ -615,7 +615,7 @@
 <li><strong>选择重传(SR)</strong>协议通过让<strong>发送方</strong>仅重传那些它怀疑在接收方丢失或受损的分组而避免了不必要的重传</li>
 <li>SR<strong>接收方</strong>确认一个正确接收的分组而不管其是否按序<img src="/2019/05/09/Network3/5.png"></li>
 <li>注意：<ul>
-<li>接收方于收到的序号<em>小于</em>当前窗口<em>基序号</em>的分组，需要重新回复一个ACK确认(而不是忽略他们)。因为对于SR协议，发送方和接收方的窗口并不总是一致的。</li>
+<li>接收方对于收到的序号<em>小于</em>当前窗口<em>基序号</em>的分组，需要重新回复一个ACK确认(而不是忽略他们)。因为对于SR协议，发送方和接收方的窗口并不总是一致的。</li>
 <li>由于发送方和接收方的窗口不一定是一致的，从而窗口长度必须小于或等于序号空间大小的一半</li>
 </ul>
 </li>
