@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Godway&#39;s Studio">
 <meta property="og:description" content="参考书目《数据库系统概论（第5版）》  问题的提出 针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。 数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。 一个好的关系模式不会发生插入异常、删除异常和">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-21T10:53:51.276Z">
+<meta property="og:updated_time" content="2019-05-21T11:00:37.046Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第六章：关系数据库理论">
 <meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  问题的提出 针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。 数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。 一个好的关系模式不会发生插入异常、删除异常和">
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-21 18:53:51" itemprop="dateModified" datetime="2019-05-21T18:53:51+08:00">2019-05-21</time>
+                <time title="Modified: 2019-05-21 19:00:37" itemprop="dateModified" datetime="2019-05-21T19:00:37+08:00">2019-05-21</time>
               
             
           </span>
@@ -502,9 +502,9 @@
 <h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><p>关系数据库中的关系是要满足一定要求的，满足不同程度要求的为不同范式<br>各种范式之间的关系有：  </p>
 <script type="math/tex; mode=display">5NF \subset 4NF \subset BCNF \subset 3NF \subset 2NF \subset 1NF</script><p>一个低一级范式的关系模式通过<strong>模式分解</strong>（schema decomposition）可以转化为若干高一级范式的关系模式的集合，这叫做<strong>规范化</strong>（normalization）</p>
 <h3 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h3><p>每个分量（属性）必须是不可分的数据项</p>
-<h3 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h3><p>相比于1NF，消除了<strong>非主属性对码的部分函数依赖</strong><br>定义：设关系模式$R<u,f>$，若$R \in 1NF$，且每个非主属性<strong>完全函数依赖</strong>于任何一个候选码，则$R \in 2NF$<br>一个关系模式R若不属于2NF，可能会产生：插入异常、删除异常、修改复杂</u,f></p>
-<h3 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h3><p>相比于2NF，消除了<strong>非主属性对码的传递函数依赖</strong><br>定义：设关系模式$R<u,f>$，若$R \in 3NF$，则每个非主属性既不传递依赖于码，也不部分依赖于码，也就是说，若R属于3NF则必有R属于2NF  </u,f></p>
-<h3 id="BCNF"><a href="#BCNF" class="headerlink" title="BCNF"></a>BCNF</h3><p>相比于3NF，消除了<strong>主属性对码的部分和传递函数依赖</strong><br>定义：设关系模式$R<u,f>$，若<strong>每个决定因素</strong>都包含码，则$R \in BCNF$<br>满足BCNF的关系模式的性值：  </u,f></p>
+<h3 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h3><p>相比于1NF，消除了<strong>非主属性对码的部分函数依赖</strong><br>定义：设关系模式$R&lt; U,F &gt;$, 若$R \in 1NF$，且每个非主属性<strong>完全函数依赖</strong>于任何一个候选码，则$R \in 2NF$<br>一个关系模式R若不属于2NF，可能会产生：插入异常、删除异常、修改复杂</p>
+<h3 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h3><p>相比于2NF，消除了<strong>非主属性对码的传递函数依赖</strong><br>定义：设关系模式$R&lt; U,F &gt;$，若$R \in 3NF$，则每个非主属性既不传递依赖于码，也不部分依赖于码，也就是说，若R属于3NF则必有R属于2NF  </p>
+<h3 id="BCNF"><a href="#BCNF" class="headerlink" title="BCNF"></a>BCNF</h3><p>相比于3NF，消除了<strong>主属性对码的部分和传递函数依赖</strong><br>定义：设关系模式$R&lt; U,F &gt;$，若<strong>每个决定因素</strong>都包含码，则$R \in BCNF$<br>满足BCNF的关系模式的性值：  </p>
 <ol>
 <li>所有非主属性对每一个码都是完全函数依赖</li>
 <li>所有主属性对每一个不包含它的码也是完全函数依赖</li>
