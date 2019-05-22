@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Godway&#39;s Studio">
 <meta property="og:description" content="参考书目《数据库系统概论（第5版）》  问题的提出 针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。 数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。 一个好的关系模式不会发生插入异常、删除异常和">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-21T11:00:37.046Z">
+<meta property="og:updated_time" content="2019-05-22T01:04:29.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第六章：关系数据库理论">
 <meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  问题的提出 针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。 数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。 一个好的关系模式不会发生插入异常、删除异常和">
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-21 19:00:37" itemprop="dateModified" datetime="2019-05-21T19:00:37+08:00">2019-05-21</time>
+                <time title="Modified: 2019-05-22 09:04:29" itemprop="dateModified" datetime="2019-05-22T09:04:29+08:00">2019-05-22</time>
               
             
           </span>
@@ -498,7 +498,7 @@
 <li><p>定义：在R(U)中，如果$X \rightarrow Y (Y \nsubseteq X)$，$Y \nrightarrow X$，$Y \rightarrow Z$，$Z \nsubseteq Y$，则称$Z$对$X$<strong>传递函数依赖</strong>，记作$X \stackrel{传递}{\rightarrow} Y$</p>
 </li>
 </ul>
-<h2 id="码"><a href="#码" class="headerlink" title="码"></a>码</h2><p>定义：设$K$为$R<u,f>$中的属性或属性组合，若$K \stackrel{F}{\rightarrow} U$，则$K$为$R$的<strong>候选码</strong><br>如果$K \stackrel{P}{\rightarrow} U$，则$K$称为<strong>超码</strong>。候选码是最小的超码，即$K$的任何一个真子集都不是候选码<br>包含在任何一个候选码中的属性称为<strong>主属性</strong>，不包含在任何候选码中的属性称为<strong>非主属性</strong>  </u,f></p>
+<h2 id="码"><a href="#码" class="headerlink" title="码"></a>码</h2><p>定义：设$K$为$R&lt; U,F &gt;$中的属性或属性组合，若$K \stackrel{F}{\rightarrow} U$，则$K$为$R$的<strong>候选码</strong><br>如果$K \stackrel{P}{\rightarrow} U$，则$K$称为<strong>超码</strong>。候选码是最小的超码，即$K$的任何一个真子集都不是候选码<br>包含在任何一个候选码中的属性称为<strong>主属性</strong>，不包含在任何候选码中的属性称为<strong>非主属性</strong>  </p>
 <h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><p>关系数据库中的关系是要满足一定要求的，满足不同程度要求的为不同范式<br>各种范式之间的关系有：  </p>
 <script type="math/tex; mode=display">5NF \subset 4NF \subset BCNF \subset 3NF \subset 2NF \subset 1NF</script><p>一个低一级范式的关系模式通过<strong>模式分解</strong>（schema decomposition）可以转化为若干高一级范式的关系模式的集合，这叫做<strong>规范化</strong>（normalization）</p>
 <h3 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h3><p>每个分量（属性）必须是不可分的数据项</p>
