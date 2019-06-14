@@ -98,17 +98,19 @@
 
 
 
-  <meta name="description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径">
+  <meta name="description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径如下为计算机网络经典图模型路由选择算法的一种分类方式是根据集中还是分散来划分：    集中式路由选择算法：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有全局状态信息的算法被称作链路状态算法（Link Stat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络——第五章：网络层(控制平面)">
 <meta property="og:url" content="https://godway999.github.io/2019/06/13/Network5/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径">
+<meta property="og:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径如下为计算机网络经典图模型路由选择算法的一种分类方式是根据集中还是分散来划分：    集中式路由选择算法：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有全局状态信息的算法被称作链路状态算法（Link Stat">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-13T12:20:24.518Z">
+<meta property="og:image" content="https://godway999.github.io/2019/06/13/Network5/1.png">
+<meta property="og:updated_time" content="2019-06-14T06:45:28.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第五章：网络层(控制平面)">
-<meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径">
+<meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径如下为计算机网络经典图模型路由选择算法的一种分类方式是根据集中还是分散来划分：    集中式路由选择算法：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有全局状态信息的算法被称作链路状态算法（Link Stat">
+<meta name="twitter:image" content="https://godway999.github.io/2019/06/13/Network5/1.png">
 
 
 
@@ -396,12 +398,24 @@
                 
               
 
-              <time title="Created: 2019-06-13 20:08:11 / Modified: 20:20:24" itemprop="dateCreated datePublished" datetime="2019-06-13T20:08:11+08:00">2019-06-13</time>
+              <time title="Created: 2019-06-13 20:08:11" itemprop="dateCreated datePublished" datetime="2019-06-13T20:08:11+08:00">2019-06-13</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-14 14:45:28" itemprop="dateModified" datetime="2019-06-14T14:45:28+08:00">2019-06-14</time>
               
             
           </span>
@@ -463,7 +477,40 @@
         <blockquote>
 <p><em>参考书目《计算机网络：自顶向下方法（第七版）》</em></p>
 </blockquote>
-<h2 id="路由选择算法"><a href="#路由选择算法" class="headerlink" title="路由选择算法"></a>路由选择算法</h2><p><strong>路由选择算法</strong>的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有<strong>最低开销</strong>的路径</p>
+<h2 id="路由选择算法"><a href="#路由选择算法" class="headerlink" title="路由选择算法"></a>路由选择算法</h2><p><strong>路由选择算法</strong>的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有<strong>最低开销</strong>的路径<br>如下为计算机网络经典图模型<br><img src="/2019/06/13/Network5/1.png"><br>路由选择算法的一种分类方式是根据集中还是分散来划分：  </p>
+<ul>
+<li><strong>集中式路由选择算法</strong>：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有<strong>全局状态信息</strong>的算法被称作<strong>链路状态算法</strong>（Link State, LS）</li>
+<li><strong>分散式路由选择算法</strong>：路由器以迭代、分布式的方式计算出最低开销路径。这种分散式路由选择算法称为<strong>距离向量算法DV</strong>（Distance Vector, DV）</li>
+</ul>
+<h3 id="LS路由选择算法"><a href="#LS路由选择算法" class="headerlink" title="LS路由选择算法"></a>LS路由选择算法</h3><p>在LS中，网络拓扑和所有的链路开销都是已知的，实践中这是通过让每个节点向网络中所有其他节点广播链路状态分组来完成的，其中每个链路状态分组包含它所连接的链路的标识和开销<br>节点广播的结果是所有节点都具有该网络的统一、完整的视图，于是每个节点都能够像其他节点一样，运行LS算法并计算出相同的最低开销路径集合<br>书上介绍了<strong>Dijkstra最短路径算法</strong>，此处不再赘述<br>LS算法存在的潜在问题————振荡。这是由于消息传播的时延导致的，它不仅存在于LS算法中，也存在于任何使用拥塞或基于时延的链路测度的算法  </p>
+<h3 id="DV路由选择算法"><a href="#DV路由选择算法" class="headerlink" title="DV路由选择算法"></a>DV路由选择算法</h3><p>距离向量算法是一种<strong>迭代的</strong>、<strong>异步的</strong>和<strong>分布式的</strong>算法</p>
+<ul>
+<li><strong>分布式的</strong>：因为每个节点都要从一个或多个直接相连的邻居接收某些信息，执行计算，然后将其结算结果分发给邻居</li>
+<li><strong>迭代的</strong>：因为此过程一直要持续到邻居之间无更多信息交互为止（有趣的是，此算法是自我终止的）</li>
+<li><strong>异步的</strong>：因为它不要求所有节点相互之间步伐一致地操作</li>
+</ul>
+<p>DV算法的核心思想基于贝尔曼-弗洛伊德方程</p>
+<script type="math/tex; mode=display">d_x(y) = min_v{c(x, v) + d_v(y)}</script><p>其中$d_x(y)$表示从节点x到节点y的最低开销路径的开销，$c(x, v)$表示从节点x到节点v的开销，该算法思想一句话总结就是：<strong>从x到y的距离能否通过途径v节点而变小</strong><br>DV算法存在的问题：<strong>路由选择环路</strong>，导致关于链路开销增加的<strong>坏消息传播的很慢</strong>！</p>
+<h3 id="LS与DV的比较"><a href="#LS与DV的比较" class="headerlink" title="LS与DV的比较"></a>LS与DV的比较</h3><ol>
+<li>报文复杂性<br>LS要求每个节点都知道网络中每条链路的开销，这就需要发送 O(|N||E|) 个报文，且任何一条链路的开销改变都需要在全网广播<br>DV要求在每次迭代时，在两个直接相连节点间交换报文。当链路开销改变时，DV仅当新的链路开销导致与该链路相连节点的最低开销路径发生改变时，才传播已改变的链路开销</li>
+<li>收敛速度<br>LS是一个O(|N|^2)算法<br>DV算法收敛较慢，且会遇到路由选择环路和无穷计数问题</li>
+<li>健壮性<br>在LS算法下，路由计算在某种程度上是分离的，这提供了一定程度的健壮性<br>DV算法中一个不正确的节点计算值会扩散到整个网络</li>
+</ol>
+<p>总之，两个算法没有一个是明显的赢家，它们的确都在因特网中得到了应用</p>
+<h2 id="自治系统内部的路由选择：OSPF"><a href="#自治系统内部的路由选择：OSPF" class="headerlink" title="自治系统内部的路由选择：OSPF"></a>自治系统内部的路由选择：OSPF</h2><p>为什么要划分<strong>自治系统</strong>（Autonomous Systerm, AS）？</p>
+<ul>
+<li>规模。必须采取一些措施以减少像因特网这种大型网络中的路由计算的复杂度</li>
+<li>管理自治。ISP通常希望按自己的意愿运行路由器，如在自己的网络中运行它所选的路由选择算法，或对外部隐藏其网络的内部组织面貌</li>
+</ul>
+<p>每个AS通常由一组处在相同管理控制下的路由器组成，ISP可在其整个网络使用一个AS或将其拆分为多个AS<br>每个AS有一个<strong>唯一的</strong>AS号（ASN），AS号由ICANN组织分配  </p>
+<h3 id="开放最短路优先OSPF（Open-Shortest-Path-First）"><a href="#开放最短路优先OSPF（Open-Shortest-Path-First）" class="headerlink" title="开放最短路优先OSPF（Open Shortest Path First）"></a>开放最短路优先OSPF（Open Shortest Path First）</h3><p>OSPF是一种<strong>链路状态协议</strong>，它使用洪泛链路状态信息和Dijkstra算法。<br>OSPF的优点：</p>
+<ul>
+<li>安全<br>能够鉴别OSPF路由器之间的交换，仅有受信任的路由器能参与AS内的OSPF协议，因此可防止恶意入侵者将不正确的信息注入路由表内</li>
+<li>多条相同开销的路径<br>当到达某目的地的多条路径具有相同的开销时，OSPF允许使用多条路径（无须仅选择单一的路径来承载所有的流量）</li>
+<li>对单播与多播路由选择的综合支持<br>多播OSPF（MOSPF）[RFC 1584]提供对OSPF的简单拓展，以便提供多播路由选择</li>
+<li>支持在单个AS中的<strong>层次结构</strong><br>一个OSPF自治系统能够层次化地配置多个区域，在每个区域一台或多台区域边界路由器负责为流向该区域以外的分组提供路由选择。最后，在AS内只有一个OSPF区域配置为主干区域，其作用是为该AS中的其他区域之间的流量提供路由选择。<br>整个过程为分组先到区域边界路由器，经过主干区域到达目的区域的边界路由器，最后到达目的地</li>
+</ul>
+<h2 id="ISP之间的路由选择：BGP"><a href="#ISP之间的路由选择：BGP" class="headerlink" title="ISP之间的路由选择：BGP"></a>ISP之间的路由选择：BGP</h2><p>在因特网中，所有的AS运行相同的AS间路由选择协议，称为<strong>边界网关协议</strong>（Border Gateway Protocol, BGP）</p>
 
       
     </div>
@@ -690,7 +737,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#路由选择算法"><span class="nav-number">1.</span> <span class="nav-text">路由选择算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#路由选择算法"><span class="nav-number">1.</span> <span class="nav-text">路由选择算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LS路由选择算法"><span class="nav-number">1.1.</span> <span class="nav-text">LS路由选择算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DV路由选择算法"><span class="nav-number">1.2.</span> <span class="nav-text">DV路由选择算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LS与DV的比较"><span class="nav-number">1.3.</span> <span class="nav-text">LS与DV的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自治系统内部的路由选择：OSPF"><span class="nav-number">2.</span> <span class="nav-text">自治系统内部的路由选择：OSPF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开放最短路优先OSPF（Open-Shortest-Path-First）"><span class="nav-number">2.1.</span> <span class="nav-text">开放最短路优先OSPF（Open Shortest Path First）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ISP之间的路由选择：BGP"><span class="nav-number">3.</span> <span class="nav-text">ISP之间的路由选择：BGP</span></a></li></ol></div>
             
 
           </div>
