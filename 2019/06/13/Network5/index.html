@@ -106,7 +106,7 @@
 <meta property="og:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径如下为计算机网络经典图模型路由选择算法的一种分类方式是根据集中还是分散来划分：    集中式路由选择算法：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有全局状态信息的算法被称作链路状态算法（Link Stat">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://godway999.github.io/2019/06/13/Network5/1.png">
-<meta property="og:updated_time" content="2019-06-14T12:25:38.499Z">
+<meta property="og:updated_time" content="2019-06-14T15:07:27.486Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第五章：网络层(控制平面)">
 <meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径如下为计算机网络经典图模型路由选择算法的一种分类方式是根据集中还是分散来划分：    集中式路由选择算法：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有全局状态信息的算法被称作链路状态算法（Link Stat">
@@ -415,7 +415,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-14 20:25:38" itemprop="dateModified" datetime="2019-06-14T20:25:38+08:00">2019-06-14</time>
+                <time title="Modified: 2019-06-14 23:07:27" itemprop="dateModified" datetime="2019-06-14T23:07:27+08:00">2019-06-14</time>
               
             
           </span>
@@ -967,6 +967,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
