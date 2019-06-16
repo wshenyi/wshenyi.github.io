@@ -98,17 +98,17 @@
 
 
 
-  <meta name="description" content="参考书目《计算机网络：自顶向下方法（第七版）》">
+  <meta name="description" content="参考书目《计算机网络：自顶向下方法（第七版）》  链路层概述链路层提供的服务：  成帧将网络层数据报封装成链路层帧。一个帧由一个数据字段和若干首部字段组成   链路接入媒体访问控制（Medium Access Control, MAC）协议规定了帧在链路上的传输的规则。对于点对点链路（PPP）MAC协议比较简单，当链路空闲时发送方都能发送；对于广播链路，即所谓的多路访问问题，MAC协议用于协调多">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络——第六章：链路层和局域网">
 <meta property="og:url" content="https://godway999.github.io/2019/06/14/Network6/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="参考书目《计算机网络：自顶向下方法（第七版）》">
+<meta property="og:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  链路层概述链路层提供的服务：  成帧将网络层数据报封装成链路层帧。一个帧由一个数据字段和若干首部字段组成   链路接入媒体访问控制（Medium Access Control, MAC）协议规定了帧在链路上的传输的规则。对于点对点链路（PPP）MAC协议比较简单，当链路空闲时发送方都能发送；对于广播链路，即所谓的多路访问问题，MAC协议用于协调多">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-14T12:26:54.460Z">
+<meta property="og:updated_time" content="2019-06-16T13:06:50.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第六章：链路层和局域网">
-<meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》">
+<meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  链路层概述链路层提供的服务：  成帧将网络层数据报封装成链路层帧。一个帧由一个数据字段和若干首部字段组成   链路接入媒体访问控制（Medium Access Control, MAC）协议规定了帧在链路上的传输的规则。对于点对点链路（PPP）MAC协议比较简单，当链路空闲时发送方都能发送；对于广播链路，即所谓的多路访问问题，MAC协议用于协调多">
 
 
 
@@ -396,12 +396,24 @@
                 
               
 
-              <time title="Created: 2019-06-14 14:53:09 / Modified: 20:26:54" itemprop="dateCreated datePublished" datetime="2019-06-14T14:53:09+08:00">2019-06-14</time>
+              <time title="Created: 2019-06-14 14:53:09" itemprop="dateCreated datePublished" datetime="2019-06-14T14:53:09+08:00">2019-06-14</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-16 21:06:50" itemprop="dateModified" datetime="2019-06-16T21:06:50+08:00">2019-06-16</time>
               
             
           </span>
@@ -463,6 +475,44 @@
         <blockquote>
 <p><em>参考书目《计算机网络：自顶向下方法（第七版）》</em></p>
 </blockquote>
+<h2 id="链路层概述"><a href="#链路层概述" class="headerlink" title="链路层概述"></a>链路层概述</h2><p>链路层提供的服务：</p>
+<ul>
+<li><strong>成帧</strong><br>将网络层数据报封装成链路层帧。一个帧由一个<em>数据字段</em>和若干<em>首部字段</em>组成  </li>
+<li><strong>链路接入</strong><br><strong>媒体访问控制</strong>（Medium Access Control, MAC）协议规定了帧在链路上的传输的规则。<br>对于<strong>点对点链路</strong>（PPP）MAC协议比较简单，当链路空闲时发送方都能发送；对于<strong>广播链路</strong>，即所谓的多路访问问题，MAC协议用于协调多个节点的帧传输</li>
+<li><strong>可靠交付</strong><br>链路层可靠交付服务通常用于<strong>易于产生高差错率</strong>的链路，如无线链路，其目的是本地纠正一个差错，而不是通过运输层或应用层协议迫使进行端到端的数据重传<br>对于低比特差错的链路，链路层可靠交付服务可能会认为是一种不必要的开销，因此<strong>许多有线的链路层协议不提供可靠交付服务</strong>  </li>
+<li><strong>差错检测和纠正</strong><br>链路层的差错检测通常更复杂，并且用硬件实现<br>差错纠正使得接收方检测出帧中出现的比特差错，而且能定位并纠正它们</li>
+</ul>
+<p>链路层的主体部分是在<strong>*网络适配器</strong>（network adapter）中实现的，网络适配器有时也被称为<strong>网卡</strong>（Network Interface Card, NIC）</p>
+<h2 id="差错检测和纠正技术"><a href="#差错检测和纠正技术" class="headerlink" title="差错检测和纠正技术"></a>差错检测和纠正技术</h2><p>使用差错检测和纠正技术仍有可能有未检出比特差错，因而需要选择一个方案使得这种事情的发生概率很小<br>传输数据中检测差错的三种技术：<strong>奇偶校验</strong>、<strong>检验和方法</strong>（更多用于传输层）、<strong>循环冗余检测</strong>（通常用于适配器中的链路层）</p>
+<h3 id="奇偶校验"><a href="#奇偶校验" class="headerlink" title="奇偶校验"></a>奇偶校验</h3><p><strong>单比特奇偶校验</strong>只能用于单比特差错检测，而实际中经常以聚集地方式出现<br><strong>二维奇偶检验</strong>可以<strong>检测</strong>到单比特差错并且定位<strong>纠正</strong>错误比特，但对于多比特差错则只能检测而不能纠正  </p>
+<p>接收方检测和纠正差错的能力被称为<strong>前向纠错</strong><br>通过请求发送方重传出错的数据称为<strong>后向纠错</strong></p>
+<h3 id="检验和方法"><a href="#检验和方法" class="headerlink" title="检验和方法"></a>检验和方法</h3><p><strong>因特网检验和</strong>（checksum）就基于这种方法，以16比特为单位求取检验和<br>为什么运输层使用检验和而链路层使用CRC？  </p>
+<ul>
+<li>传输层差错检测用软件实现，简单而快速如检验和这样的方案是重要的</li>
+<li>链路层差错检测在适配器中有专用硬件，能够快速执行更复杂的CRC操作</li>
+</ul>
+<h3 id="循环冗余检测"><a href="#循环冗余检测" class="headerlink" title="循环冗余检测"></a>循环冗余检测</h3><p><strong>循环冗余检测编码</strong>（CRC）也称为<strong>多项式编码</strong><br>CRC前提：对于$d$比特的数据$D$，发送方和接收方事先协商一个$r+1$比特的$G$（称为<strong>生成多项式(generator)</strong>），并且要求$G$的最高位为1<br>CRC核心思想：对于一个给定的$D$，发送方要选择$r$个附加比特R将其附加到D后面，使得得到的长为$d+r$的比特模式用模2算术恰好能被$G$整除<br>CRC检测过程：接收用G去除接收到的$d+r$比特，如果余数不为0，则说明出现了差错<br>$R$的计算方法：</p>
+<script type="math/tex; mode=display">R = (D * 2^r) \% G</script><p>CRC能检测小于$r+1$比特的突发差错，这意味着所有连续的$r$比特或者更少的差错都可以检测到</p>
+<h2 id="多路访问链路和协议"><a href="#多路访问链路和协议" class="headerlink" title="多路访问链路和协议"></a>多路访问链路和协议</h2><p><strong>点对点链路</strong>的链路层协议有：<strong>PPP</strong>（点对点）协议和<strong>HDLC</strong>（高级数据链路控制）协议<br>对于<strong>广播链路</strong>需要使用<strong>多路访问协议</strong>，可划分为三种类型：<strong>信道划分协议</strong>、<strong>随机接入协议</strong>、<strong>轮流协议</strong></p>
+<h3 id="信道划分协议"><a href="#信道划分协议" class="headerlink" title="信道划分协议"></a>信道划分协议</h3><p>常见的有三种：<strong>时分多路复用</strong>TDM、<strong>码分多路复用</strong>FDM、<strong>码分多址</strong>CDMA<br>TDM和FDM的优点：它避免了碰撞，并在N个节点之间公平的划分了带宽；缺点：现在一个节点只能使用R/N的带宽，从而链路利用效率不高<br>CDMA为每个节点分配一种不同的<strong>编码</strong>，然后每个节点用它唯一的编码来对它发送的数据进行编码。CDMA的特性在于不同节点能够<strong>同时传输</strong>，并且他们各自相应的接收方仍能<strong>正确接收</strong></p>
+<h3 id="随机接入协议"><a href="#随机接入协议" class="headerlink" title="随机接入协议"></a>随机接入协议</h3><p>在随机接入协议中，每个传输节点总是以信道的全部速率进行发送。当有碰撞时，每个节点等待一个随机时延后再次重发该帧，直到该帧无碰撞的通过为止<br>常用的有<strong>ALOHA协议</strong>和<strong>载波侦听多路访问协议</strong>（CSMA）<br>时隙ALOHA需要节点之间同步时钟，其的最大效率为$\frac{1}{e} \approx 0.37$<br>纯ALOHA不需要节点间的同步，其最大效率为$\frac{1}{2e} \approx 0.18$<br>在CSMA中，广播信道的端到端<strong>信道传播时延</strong>（信号从一个节点传播到另一个节点的时间），决定了<strong>最小帧长</strong>和<strong>线缆长度</strong>，因为该时延越长，一个待发送节点不能侦听到另一个已经开始传输的节点的概率越大<br>CSMA/CD运行流程：</p>
+<ol>
+<li>适配器从网络获得一条数据报，准备链路层帧，并将其放入帧适配器缓存中</li>
+<li>如果适配器侦听到信道空闲（侦听96比特时间表示空闲，同时也是为了保证帧间最小间隔，目的为了使刚刚收到数据帧的站可及时处理完接收缓存），它开始传输帧。若适配器侦听到信道正在忙，它将等待直到它判断信道空闲时才传输帧</li>
+<li>在传输的过程中，适配器监视是否其他节点也在使用广播信道</li>
+<li>若整个传输过程中都没有监测到其他适配器的信号能量，则代表该帧传输完成。若检测到来自其他适配器的信号能量，它在传输完<strong>强化冲突帧</strong>（32或48比特时间）之后中止传输，传输强化冲突帧是让为了确保所有用户都知道发生了碰撞</li>
+<li>中止传输后，适配器等待一个随机时间量，然后返回步骤2</li>
+</ol>
+<p>CSMA/CD使<strong>用二进制指数后退</strong>算法来决定碰撞后等待的随机时间量。假设传输一个给定帧，该帧经历了$n$次碰撞，节点随机的从${ 0, 1, … , 2^n-1 }$中选取一个$K$值，则该节点的等待的实际时间量为$K \bullet 512$，可看到$K$的可选集合长度随着碰撞次数呈指数增长，从而节点间再次碰撞的概率越小</p>
+<h3 id="轮流协议"><a href="#轮流协议" class="headerlink" title="轮流协议"></a>轮流协议</h3><ul>
+<li><strong>轮询协议</strong>：节点之一被指定为主节点，主节点以循环的方式<strong>轮询</strong>（poll）每个节点（问XX节点：“你现在要发送帧吗？”）</li>
+<li><strong>令牌传递协议</strong>：没有主节点，一个称为<strong>令牌</strong>（token）的小的特殊帧在节点间以某种固定的次序进行交换，拥有令牌的节点才能发送帧</li>
+</ul>
+<h2 id="交换局域网"><a href="#交换局域网" class="headerlink" title="交换局域网"></a>交换局域网</h2><p>适配器的MAC地址具有<strong>扁平结构</strong>，并且不论适配器到哪里都还不会发生变化；IP地址具有<strong>层次结构</strong>（即分为网络号和主机号），当主机移动时，主机的IP地址需要改变，即改变它所连接到的网络<br><strong>地址解析协议</strong>（Address Resolution Protocol, ARP），实现IP地址到MAC地址之间的转换<br>&amp;&amp;&amp;</p>
+<h2 id="问题与思考"><a href="#问题与思考" class="headerlink" title="问题与思考"></a>问题与思考</h2><p>差分曼切斯特编码比曼切斯特编码的变化要少，因此更适合与传输高速的信息，被广泛用于宽带高速网中</p>
+<p>这两种编码的效率仅可达到50%左右，因为频率增加了一倍但传输的信息量却没有增加</p>
+<p>冲突域是如何决定最小帧长的?<br>发送的帧的最短长度应当保证在发送完毕之前，必须能够检测到可能最晚来到的冲突信号，故而帧发送时间应该大于2倍的信道传播时延</p>
+<p>以太网从10M到10G是如何发展的？</p>
 
       
     </div>
@@ -502,6 +552,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/16/Network7/" rel="prev" title="计算机网络——第七章：无线网络和移动网络">
+                计算机网络——第七章：无线网络和移动网络 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -545,8 +599,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -563,7 +626,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -669,6 +732,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#链路层概述"><span class="nav-number">1.</span> <span class="nav-text">链路层概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差错检测和纠正技术"><span class="nav-number">2.</span> <span class="nav-text">差错检测和纠正技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#奇偶校验"><span class="nav-number">2.1.</span> <span class="nav-text">奇偶校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检验和方法"><span class="nav-number">2.2.</span> <span class="nav-text">检验和方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环冗余检测"><span class="nav-number">2.3.</span> <span class="nav-text">循环冗余检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多路访问链路和协议"><span class="nav-number">3.</span> <span class="nav-text">多路访问链路和协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信道划分协议"><span class="nav-number">3.1.</span> <span class="nav-text">信道划分协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机接入协议"><span class="nav-number">3.2.</span> <span class="nav-text">随机接入协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轮流协议"><span class="nav-number">3.3.</span> <span class="nav-text">轮流协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交换局域网"><span class="nav-number">4.</span> <span class="nav-text">交换局域网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题与思考"><span class="nav-number">5.</span> <span class="nav-text">问题与思考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -877,6 +957,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
