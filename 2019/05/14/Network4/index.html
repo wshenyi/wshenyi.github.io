@@ -116,7 +116,7 @@
 <meta property="og:image" content="https://godway999.github.io/2019/05/14/Network4/8.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/14/Network4/10.jpeg">
 <meta property="og:image" content="https://godway999.github.io/2019/05/14/Network4/11.jpg">
-<meta property="og:updated_time" content="2019-06-17T06:44:35.515Z">
+<meta property="og:updated_time" content="2019-06-17T11:51:36.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第四章：网络层(数据平面)">
 <meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  网络层概述转发和路由选择：数据平面和控制平面 网络层能够分解为两个相互作用的部分：数据平面和控制平面 转发：当一个分组到达某路由器的一条输入链路时，该路由器必须将该分组移动到适当的输出链路  转发是在数据平面中实现的唯一功能 转发（forwarding）是指将分组从一个输入链路接口转移到适当的输出链路接口的路由器本地动作 转发发生的时间尺度很短（">
@@ -425,7 +425,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-17 14:44:35" itemprop="dateModified" datetime="2019-06-17T14:44:35+08:00">2019-06-17</time>
+                <time title="Modified: 2019-06-17 19:51:36" itemprop="dateModified" datetime="2019-06-17T19:51:36+08:00">2019-06-17</time>
               
             
           </span>
@@ -508,6 +508,7 @@
 <li>因特网的网络层提供了单一的服务模型，称为<strong>尽力而为服务</strong>（best-effort service）</li>
 <li>ATM网络体系结构是面向连接的网络层协议，它提供了确保按序时延、有界时延和确保最小带宽</li>
 </ul>
+<hr>
 <h2 id="路由器工作原理"><a href="#路由器工作原理" class="headerlink" title="路由器工作原理"></a>路由器工作原理</h2><ul>
 <li>路由器四个组件：<strong>输入端口</strong>（input port）、<strong>交换结构</strong>（switch fabric）、<strong>输出端口</strong>（output port）、<strong>路由选择处理器</strong>（routing processor）<img src="/2019/05/14/Network4/1.png">
 </li>
@@ -541,6 +542,7 @@
 <li>循环排队</li>
 <li><strong>加权公平排队（WFQ）</strong></li>
 </ul>
+<hr>
 <h2 id="IPv4"><a href="#IPv4" class="headerlink" title="IPv4"></a>IPv4</h2><h3 id="IPv4数据报格式"><a href="#IPv4数据报格式" class="headerlink" title="IPv4数据报格式"></a>IPv4数据报格式</h3><img src="/2019/05/14/Network4/7.png">  
 <ul>
 <li>版本号（4 bit）；规定了数据报的IP协议版本</li>
@@ -565,6 +567,7 @@
 <li>为使目的主机确定初始数据报的最后一片已到达，最后一个片的<strong>标志比特</strong>被设为0，其余的<strong>标志比特</strong>都为1</li>
 <li>为了重组原数据报，使用<strong>片偏移</strong>指定当前片在初始IP数据报中的偏移位置（以字节为单位做偏移）</li>
 </ul>
+<hr>
 <h2 id="IPv4编址"><a href="#IPv4编址" class="headerlink" title="IPv4编址"></a>IPv4编址</h2><p>IP地址分为两个部分：网络号和主机号<br><img src="/2019/05/14/Network4/9.png"><br>IP地址的种类：</p>
 <ul>
 <li>A类：0 + 网络号（7位）+ 主机号（24位）</li>
@@ -587,6 +590,7 @@
 <li>无类别域间路由（CIDR）</li>
 </ul>
 <p>CIDR的形式：a.b.c.d/x，x指示了地址中网络号的比特数。一个地址的剩余32 - x比特可认为是用于区分该组织内部设备的，其中所有的设备具有相同的网络前缀，当组织内部的路由器转发分组时，才会考虑这些比特<br>使用单个网络前缀通告多个网咯的能力通常称为<strong>地址聚合</strong>，或称为<strong>路由聚合</strong>、<strong>路由摘要</strong><br>在寻址中使用<strong>最长前缀匹配</strong></p>
+<hr>
 <h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>IPv6报文格式<br><img src="/2019/05/14/Network4/10.jpeg">  </p>
 <ul>
 <li>版本；标识IP版本号，IPv6将该字段设置为6</li>
@@ -608,6 +612,7 @@
 <li><strong>首部检验和</strong>；因特网的运输层和数据链路层都执行了检验操作，设计者可能觉得在网络层实现该功能实属多余，所以将其删除。再次强调，<strong>快速处理</strong>IP分组是关注的重点，由于IPv4中的TTL字段，所以在每台路由器上都需要重新计算IPv4首部检验和，这也是一项耗时的操作</li>
 <li><strong>选项</strong>；不再是标准IP首部的一部分，但并没有消失，而是可能出现在“下一个首部”字段中。删除它使得IP首部成为<strong>定长的40字节</strong></li>
 </ul>
+<hr>
 <h2 id="动态主机配置协议DHCP（Dynamic-Host-Configuration）"><a href="#动态主机配置协议DHCP（Dynamic-Host-Configuration）" class="headerlink" title="动态主机配置协议DHCP（Dynamic Host Configuration）"></a>动态主机配置协议DHCP（Dynamic Host Configuration）</h2><ul>
 <li>DHCP允许主机自动获取（被分配）一个IP地址（或临时的IP地址）</li>
 <li>DHCP还允许主机得知其他信息，如它的<strong>子网掩码</strong>、它的第一跳路由器地址（通常称为<strong>默认网关</strong>）与它的<strong>本地DNS服务器地址</strong></li>
@@ -619,7 +624,9 @@
 <li><strong>DHCP请求</strong>；新到达的主机从一个或多个服务器提供中选择一个DHCP服务器，并向选中的DHCP服务器回复<strong>DHCP请求报文</strong>进行响应</li>
 <li><strong>DHCP ACK</strong>；DHCP服务器用<strong>DHCP ACK报文</strong>对DHCP请求报文进行响应</li>
 </ol>
+<hr>
 <h2 id="网络地址转换NAT（Network-Address-Translation）"><a href="#网络地址转换NAT（Network-Address-Translation）" class="headerlink" title="网络地址转换NAT（Network Address Translation）"></a>网络地址转换NAT（Network Address Translation）</h2><p>NAT路由器对外界的行为就如同一个具有单一IP地址的单一设备，本质上讲，NAT使能路由器对外界隐藏了私有网络的内部细节<br>NAT路由器通过维护<strong>NAT转换表</strong>，<strong>重写</strong>经过它的数据报<strong>的目的IP地址</strong>与<strong>端口号</strong>，从而完成内网到外网的IP地址和端口转换（因为端口号字段长度为16比特，从而NAT协议可支持超过60000个并行使用路由器广域网一侧单个IP地址的连接）<br><img src="/2019/05/14/Network4/11.jpg"><br>NAT违反了主机应当直接彼此对话这个原则，并且变相利用端口号用于主机寻址  </p>
+<hr>
 <h2 id="因特网控制报文协议ICMP（Internet-Control-Message-Protocol）"><a href="#因特网控制报文协议ICMP（Internet-Control-Message-Protocol）" class="headerlink" title="因特网控制报文协议ICMP（Internet Control Message Protocol）"></a>因特网控制报文协议ICMP（Internet Control Message Protocol）</h2><ul>
 <li>ICMP定义于RFC 792，被主机和路由器用来彼此沟通网络层的信息</li>
 <li>ICMP最典型的用途是<strong>差错报告</strong></li>
@@ -817,7 +824,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

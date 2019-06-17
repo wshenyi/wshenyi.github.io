@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://godway999.github.io/2019/06/13/Network5/1.png">
 <meta property="og:image" content="https://godway999.github.io/2019/06/13/Network5/2.png">
 <meta property="og:image" content="https://godway999.github.io/2019/06/13/Network5/3.png">
-<meta property="og:updated_time" content="2019-06-14T16:05:15.137Z">
+<meta property="og:updated_time" content="2019-06-17T11:52:02.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第五章：网络层(控制平面)">
 <meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径如下为计算机网络经典图模型路由选择算法的一种分类方式是根据集中还是分散来划分：    集中式路由选择算法：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有全局状态信息的算法被称作链路状态算法（Link Stat">
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-15 00:05:15" itemprop="dateModified" datetime="2019-06-15T00:05:15+08:00">2019-06-15</time>
+                <time title="Modified: 2019-06-17 19:52:02" itemprop="dateModified" datetime="2019-06-17T19:52:02+08:00">2019-06-17</time>
               
             
           </span>
@@ -499,6 +499,7 @@
 <li>健壮性<br>在LS算法下，路由计算在某种程度上是分离的，这提供了一定程度的健壮性<br>DV算法中一个不正确的节点计算值会扩散到整个网络</li>
 </ol>
 <p>总之，两个算法没有一个是明显的赢家，它们的确都在因特网中得到了应用</p>
+<hr>
 <h2 id="自治系统内部的路由选择：OSPF"><a href="#自治系统内部的路由选择：OSPF" class="headerlink" title="自治系统内部的路由选择：OSPF"></a>自治系统内部的路由选择：OSPF</h2><p>为什么要划分<strong>自治系统</strong>（Autonomous Systerm, AS）？</p>
 <ul>
 <li>规模。必须采取一些措施以减少像因特网这种大型网络中的路由计算的复杂度</li>
@@ -512,6 +513,7 @@
 <li>对单播与多播路由选择的综合支持<br>多播OSPF（MOSPF）[RFC 1584]提供对OSPF的简单拓展，以便提供多播路由选择</li>
 <li>支持在单个AS中的<strong>层次结构</strong><br>一个OSPF自治系统能够层次化地配置多个区域，在每个区域一台或多台区域边界路由器负责为流向该区域以外的分组提供路由选择。最后，在AS内只有一个OSPF区域配置为主干区域，其作用是为该AS中的其他区域之间的流量提供路由选择。<br>整个过程为分组先到区域边界路由器，经过主干区域到达目的区域的边界路由器，最后到达目的地</li>
 </ul>
+<hr>
 <h2 id="ISP之间的路由选择：BGP"><a href="#ISP之间的路由选择：BGP" class="headerlink" title="ISP之间的路由选择：BGP"></a>ISP之间的路由选择：BGP</h2><img src="/2019/06/13/Network5/2.png">  
 <p>在因特网中，所有的AS运行相同的AS间路由选择协议，称为<strong>边界网关协议</strong>（Border Gateway Protocol, BGP）<br>在BGP中，分组并不是路由到一个特定的目的地址，相反是路由到CIDR化的前缀，其中每个前缀表示一个子网或子网的集合（如138.16.68/22）<br><strong>在BGP中，每对路由器通过使用179端口的半永久TCP连接交换路由选择信息</strong><br>每条直接连接以及所有通过该链接发送的BGP报文称为<strong>BGP连接</strong>。此外，跨越两个AS的BGP连接称为<strong>外部BGP</strong>（eBGP）连接，在相同AS中的两台路由器之间的BGP会话称为<strong>内部BGP</strong>（iBGP）连接<br><img src="/2019/06/13/Network5/3.png"><br>在BGP前缀中的<strong>BGP</strong>属性中，<strong>AS-PATH</strong>和<strong>NEXT-HOP</strong>属性比较重要</p>
 <ul>
@@ -519,6 +521,7 @@
 <li>NEXT-HOP是AS-PATH起始的路由器接口的IP地址（即该路径的源的IP地址）</li>
 </ul>
 <p>BGP还常被用于实现<strong>IP任播</strong>（anycast）服务，该服务被DNS系统广泛用于将DNS请求指向最近的根DNS服务器</p>
+<hr>
 <h2 id="SDN：软件定义网络（Software-Defined-Networking）"><a href="#SDN：软件定义网络（Software-Defined-Networking）" class="headerlink" title="SDN：软件定义网络（Software-Defined Networking）"></a>SDN：软件定义网络（Software-Defined Networking）</h2><p>SDN体系结构的4个关键特征：</p>
 <ul>
 <li>基于流的转发<br>SDN控制的交换机的分组转发工作，能够基于运输层、网络层或链路层首部中任意数量的首部字段值进行（传统方法中的IP数据报的转发仅依据数据报的目的IP地址进行）</li>
@@ -556,8 +559,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/22/Database8/" rel="next" title="数据库原理——第八章：数据库">
-                <i class="fa fa-chevron-left"></i> 数据库原理——第八章：数据库
+              <a href="/2019/05/22/Database8/" rel="next" title="数据库原理——第八章：数据库编程">
+                <i class="fa fa-chevron-left"></i> 数据库原理——第八章：数据库编程
               </a>
             
           </div>
@@ -639,7 +642,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

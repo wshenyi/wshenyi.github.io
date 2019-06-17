@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/6.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/7.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/8.png">
-<meta property="og:updated_time" content="2019-06-16T16:13:50.150Z">
+<meta property="og:updated_time" content="2019-06-17T11:50:50.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第三章：运输层">
 <meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  概述和运输层服务 网络层提供了主机之间的逻辑通信，而运输层为运行在不同主机上的进程之间提供了逻辑通信 运输协议能够提供的服务不一定受制于底层网络层协议的服务模型。例如，即使网络协议不可靠或不保证机密性，运输协议也能提供可靠的数据传输或加密服务  IP的服务模型是尽力而为(best-effort)交付服务，它不保证报文段的交付、按序到达或完整性。从">
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-17 00:13:50" itemprop="dateModified" datetime="2019-06-17T00:13:50+08:00">2019-06-17</time>
+                <time title="Modified: 2019-06-17 19:50:50" itemprop="dateModified" datetime="2019-06-17T19:50:50+08:00">2019-06-17</time>
               
             
           </span>
@@ -494,6 +494,7 @@
 </li>
 <li>进程到进程的<strong>数据交付</strong>和<strong>差错检查</strong>是两种最低限度的运输层服务，也是UDP所能提供的仅有的两种服务</li>
 </ul>
+<hr>
 <h2 id="多路复用与多路分解"><a href="#多路复用与多路分解" class="headerlink" title="多路复用与多路分解"></a>多路复用与多路分解</h2><ul>
 <li><strong>多路复用</strong>：从不同套接字中收集数据块并为每个数据块<em>封装</em>上首部信息生成报文段，之后将报文段传递到网络层</li>
 <li><strong>多路分解</strong>：运输层报文段中的数据交付到正确的套接字</li>
@@ -503,6 +504,7 @@
 <li>一个UDP套接字由一个<strong>二元组</strong>全面标识，该二元组包含一个<strong>目的IP地址</strong>和一个<strong>目的端口号</strong></li>
 <li>如果两个UDP报文段拥有<strong>不同的</strong>源IP地址或(/和)源端口号，但具有<strong>相同的</strong>目的IP地址和目的端口号，那么这两个报文段将通过<strong>相同的目的套接字</strong>被定向到相同的目的进程</li>
 </ul>
+<hr>
 <h3 id="TCP的多路复用与多路分解"><a href="#TCP的多路复用与多路分解" class="headerlink" title="TCP的多路复用与多路分解"></a>TCP的多路复用与多路分解</h3><ul>
 <li>一个TCP套接字由一个<strong>四元组</strong>(<em>源IP地址</em>，<em>源端口号</em>，<em>目的IP地址</em>，<em>目的端口号</em>)来标识的</li>
 <li>两个具有<strong>不同</strong>源IP地址或源端口号的到达TCP报文段将被定向到两个<strong>不同</strong>的套接字，除非TCP报文段携带了初识创建连接的请求（例如Web服务器的80端口）</li>
@@ -511,6 +513,7 @@
 <li>连接套接字与进程之间并非总是有着<em>一对一</em>的关系；事实上。当今高性能Web服务器通常只使用一个<strong>进程</strong>，但是为每个新的客户连接创建一个具有<strong>新连接套接字</strong>的新<strong>线程</strong></li>
 <li>对于服务器来说，在任意给定时间都有可能有（具有不同标识的）许多连接套接字连接到相同的进程</li>
 </ul>
+<hr>
 <h2 id="无连接运输：UDP"><a href="#无连接运输：UDP" class="headerlink" title="无连接运输：UDP"></a>无连接运输：UDP</h2><ul>
 <li>运输层<em>最低限度</em>必须提供一种复用/分解服务，以便在网络层与正确的应用级进程之间传递数据</li>
 <li>由[RFC 768]定义的UDP只是做了运输层协议能够做的最少工作</li>
@@ -550,6 +553,7 @@
 <li>提供检验和的原因是：不能保证源和目的之间的所有链路都提供差错检测</li>
 <li><em>端到端原则</em>：某些功能(例如差错检测)必须基于端到端实现，因为“与在较高级别提供这些功能的代价相比，在较低级别上设置的功能可能是冗余的或几乎没有价值的”</li>
 </ul>
+<hr>
 <h2 id="可靠数据传输原理"><a href="#可靠数据传输原理" class="headerlink" title="可靠数据传输原理"></a>可靠数据传输原理</h2><p>可靠数据传输为上层实体提供的服务抽象是：数据可以通过一条可靠的信道进行传输。实现这种抽象的是<strong>可靠数据传输协议</strong>(reliable data transfer, rdt)</p>
 <h3 id="可靠数据传输机制及其用途的总结"><a href="#可靠数据传输机制及其用途的总结" class="headerlink" title="可靠数据传输机制及其用途的总结"></a>可靠数据传输机制及其用途的总结</h3><ul>
 <li>检验和：用于检测在一个传输分组中的比特错误</li>
@@ -620,6 +624,7 @@
 </ul>
 </li>
 </ul>
+<hr>
 <h2 id="面向连接的运输：TCP"><a href="#面向连接的运输：TCP" class="headerlink" title="面向连接的运输：TCP"></a>面向连接的运输：TCP</h2><ul>
 <li>TCP提供的是<strong>全双工</strong>(数据可以双向传输)、<strong>点对点</strong>(连接仅限于两台主机)的服务</li>
 <li>MTU，即<strong>最大传输单元</strong>(Maximum Transmission Unit)，表示物理接口(数据链路层)提供给其上层(通常是IP层)单次最大传输数据的大小，也表示从源到目的地的所有链路上发送的最大链路层帧</li>
@@ -667,6 +672,7 @@
 </ol>
 </li>
 </ul>
+<hr>
 <h2 id="拥塞控制原理"><a href="#拥塞控制原理" class="headerlink" title="拥塞控制原理"></a>拥塞控制原理</h2><ul>
 <li><p>网络拥塞的代价：</p>
 <ol>
@@ -683,6 +689,7 @@
 </ol>
 </li>
 </ul>
+<hr>
 <h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><p>一图胜千言。。。<br><img src="/2019/05/09/Network3/8.png"></p>
 <script type="math/tex; mode=display">一条连接的平均吞吐量 = \frac{1.22 \times MSS}{RTT \sqrt{L}}</script>
       
@@ -797,7 +804,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
