@@ -108,6 +108,10 @@
 <meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/1.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/3.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/8.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/10.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/11.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/12.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/13.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/1.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/6.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/7.png">
@@ -117,7 +121,7 @@
 <meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/16.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/17.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/22/Database8/18.png">
-<meta property="og:updated_time" content="2019-06-17T12:57:49.543Z">
+<meta property="og:updated_time" content="2019-06-17T13:09:25.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第八章：数据库编程">
 <meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  嵌入式SQL嵌入式SQL是将SQL语句嵌入程序设计语言中，被嵌入的语言如C、C++、Java等称为宿主语言，简称主语言SQL语言负责操纵数据库，高级程序语言负责控制逻辑流程数据库工作单元和源程序工作单元之间的通信主要包括：  向主语言传递SQL语句的执行信息，使主语言能够据此信息控制程序流程，主要用SQL通信区实现 主语言向SQL语句提供参数，主要用主变量">
@@ -426,7 +430,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-17 20:57:49" itemprop="dateModified" datetime="2019-06-17T20:57:49+08:00">2019-06-17</time>
+                <time title="Modified: 2019-06-17 21:09:25" itemprop="dateModified" datetime="2019-06-17T21:09:25+08:00">2019-06-17</time>
               
             
           </span>
@@ -595,26 +599,20 @@
 </li>
 <li><p>存储过程的参数传递<br> 我们假定这样一个场景，设计一个LowerBound的存储过程，它的功能是统计之前定义的test表中比输入的参数的值大的数据的个数，并将统计结果和该参数以及插入时间存入到counts表中<br> （1）首先我们创建counts表  </p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*创建counts表*/</span><br><span class="line">CREATE TABLE counts(Total INT, Boud INT, TimeInsert DATETIME);</span><br></pre></td></tr></table></figure>
+ <img src="/2019/05/22/Database8/10.png">  
+<p> （2）然后我们创建LowerBound存储过程，它的输入参数只有一个bound参数，模式为<code>IN</code>，类型为<code>INT</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/*创建LowerBound存储过程*/</span><br><span class="line">DELIMITER $</span><br><span class="line">CREATE PROCEDURE LowerBound(IN bound INT)</span><br><span class="line">BEGIN</span><br><span class="line">    INSERT INTO counts VALUES (</span><br><span class="line">        (SELECT COUNT(*) FROM test WHERE Num&gt;bound),</span><br><span class="line">        bound,</span><br><span class="line">        CURRENT_TIME()</span><br><span class="line">    );</span><br><span class="line">END $</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+ <img src="/2019/05/22/Database8/11.png">  
+<p> （3）之后我们调用LowerBound存储过程，bound值传入为150</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*调用LowerBound存储过程*/</span><br><span class="line">CALL LowerBound(150);</span><br></pre></td></tr></table></figure>
+ <img src="/2019/05/22/Database8/12.png">  
+<p> （3）最后我们查看一下调用LowerBound的结果，如果没有出错，统计结果应该为49</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*查看LowerBound的调用结果*/</span><br><span class="line">SELECT * FROM counts;</span><br></pre></td></tr></table></figure>
+ <img src="/2019/05/22/Database8/13.png">  
+<p> 可以看到统计结果为49，边界值Bound为150，插入时间如图所示</p>
 </li>
 </ol>
-<pre><code>{% asset_img 10.png %}  
-（2）然后我们创建LowerBound存储过程，它的输入参数只有一个bound参数，模式为`IN`，类型为`INT`
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/*创建LowerBound存储过程*/</span><br><span class="line">DELIMITER $</span><br><span class="line">CREATE PROCEDURE LowerBound(IN bound INT)</span><br><span class="line">BEGIN</span><br><span class="line">    INSERT INTO counts VALUES (</span><br><span class="line">        (SELECT COUNT(*) FROM test WHERE Num&gt;bound),</span><br><span class="line">        bound,</span><br><span class="line">        CURRENT_TIME()</span><br><span class="line">    );</span><br><span class="line">END $</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
-
-{% asset_img 11.png %}  
-（3）之后我们调用LowerBound存储过程，bound值传入为150
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*调用LowerBound存储过程*/</span><br><span class="line">CALL LowerBound(150);</span><br></pre></td></tr></table></figure>
-
-{% asset_img 12.png %}  
-（3）最后我们查看一下调用LowerBound的结果，如果没有出错，统计结果应该为49
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*查看LowerBound的调用结果*/</span><br><span class="line">SELECT * FROM counts;</span><br></pre></td></tr></table></figure>
-
-{% asset_img 13.png %}  
-可以看到统计结果为49，边界值Bound为150，插入时间如图所示
-</code></pre><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ol>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ol>
 <li><p>自定义函数定义<br> 定义函数的通用格式如下</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE FUNCTION &lt;函数名&gt; ([[参数名 参数类型],...]) RETURNS &lt;返回值类型&gt;</span><br><span class="line">[characteristics...]</span><br><span class="line">BEGIN</span><br><span class="line">    &lt;函数体&gt;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
 <p> <strong>注意</strong>自定义函数与存储过程的区别之一在于函数需要函数体内写<code>RETURN</code>值。区别之二在于，存储过程的参数可有<code>IN</code>、<code>OUT</code>、<code>INOUT</code>模式，而函数的参数没有<br> 其中characteristics指定函数特性，取值如下：</p>
