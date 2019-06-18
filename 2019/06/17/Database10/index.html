@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Godway&#39;s Studio">
 <meta property="og:description" content="参考书目《数据库系统概论（第5版）》  事务的基本概念事务是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位COMMIT操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中ROLLBACK操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态事务的ACID特性：  原子性（Atomicity）">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-18T02:12:16.995Z">
+<meta property="og:updated_time" content="2019-06-18T05:07:44.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第十章：数据库恢复技术">
 <meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  事务的基本概念事务是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位COMMIT操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中ROLLBACK操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态事务的ACID特性：  原子性（Atomicity）">
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-18 10:12:16" itemprop="dateModified" datetime="2019-06-18T10:12:16+08:00">2019-06-18</time>
+                <time title="Modified: 2019-06-18 13:07:44" itemprop="dateModified" datetime="2019-06-18T13:07:44+08:00">2019-06-18</time>
               
             
           </span>
@@ -502,7 +502,7 @@
 </ol>
 <hr>
 <h2 id="恢复的实现技术"><a href="#恢复的实现技术" class="headerlink" title="恢复的实现技术"></a>恢复的实现技术</h2><p>恢复的基本原理——<strong>冗余</strong>，常用技术有<strong>数据转储</strong>和<strong>登记日志文件</strong></p>
-<h3 id="数据转储"><a href="#数据转储" class="headerlink" title="数据转储"></a>数据转储</h3><p><strong>转储</strong>：即数据库管理员定期地将整个数据库复制到其他存储介质上保存起来地过程，备用数据称为<strong>后备副本</strong>（backup）<br>转储操作十分耗费时间和资源，不能频繁进行<br>转储可分为两种状态：<strong>静态转储</strong>和<strong>动态转储</strong></p>
+<h3 id="数据转储（backup）"><a href="#数据转储（backup）" class="headerlink" title="数据转储（backup）"></a>数据转储（backup）</h3><p><strong>转储</strong>：即数据库管理员定期地将整个数据库复制到其他存储介质上保存起来地过程，备用数据称为<strong>后备副本</strong><br>转储操作十分耗费时间和资源，不能频繁进行<br>转储可分为两种状态：<strong>静态转储</strong>和<strong>动态转储</strong></p>
 <ul>
 <li><strong>静态转储</strong>：在系统中无运行事务时进行的转储操作，转储期间不允许对数据库执行任何存取和修改<ul>
 <li>得到的是一个一致性副本</li>
@@ -520,7 +520,7 @@
 <li><strong>增量转储</strong>：每次只转储上一次转储后更新过的数据</li>
 </ul>
 <p>转储方法：<strong>动态海量转储</strong>、<strong>动态增量转储</strong>、<strong>静态海量转储</strong>、<strong>静态增量转储</strong></p>
-<h3 id="登记日志文件"><a href="#登记日志文件" class="headerlink" title="登记日志文件"></a>登记日志文件</h3><p>日志文件是用来记录事务对数据库地更新操作的文件<br>日志文件有两种格式：以<strong>记录</strong>为单位的日志文件和以<strong>数据块</strong>为单位的日志文件<br>对于以记录为单位的日志文件，其需要登记的内容包括：</p>
+<h3 id="登记日志文件（logging）"><a href="#登记日志文件（logging）" class="headerlink" title="登记日志文件（logging）"></a>登记日志文件（logging）</h3><p>日志文件是用来记录事务对数据库地更新操作的文件<br>日志文件有两种格式：以<strong>记录</strong>为单位的日志文件和以<strong>数据块</strong>为单位的日志文件<br>对于以记录为单位的日志文件，其需要登记的内容包括：</p>
 <ul>
 <li>各个事务的开始标记</li>
 <li>各个事务的结束标记</li>
@@ -538,10 +538,28 @@
 <li>必须先写日志文件，后写数据库</li>
 </ul>
 <hr>
-<h2 id="恢复策略"><a href="#恢复策略" class="headerlink" title="恢复策略"></a>恢复策略</h2><ol>
-<li>事务故障的恢复（由系统自动完成）</li>
-<li>系统故障的恢复（由系统在重新启动时自动完成）</li>
-<li>介质故障的恢复（需要数据库管理员介入）</li>
+<h2 id="恢复策略"><a href="#恢复策略" class="headerlink" title="恢复策略"></a>恢复策略</h2><h3 id="事务故障的恢复"><a href="#事务故障的恢复" class="headerlink" title="事务故障的恢复"></a>事务故障的恢复</h3><p>事务故障是指在运行至正常终止点前被终止，此时恢复子系统利用日志文件撤销（UNDO）此事务已对数据库进行的修改<br>事务故障的恢复由系统自动完成，对用户是透明的<br>恢复步骤为：</p>
+<ol>
+<li>反向扫描日志文件，查找该事务的更新操作</li>
+<li>对该事务的更新操作执行逆操作</li>
+<li>继续反向扫描日志文件，查找该事务的其他更新操作，并做同样处理</li>
+<li>如此处理下去，直到读到此事务的开始标记，事务故障恢复完成</li>
+</ol>
+<h3 id="系统故障的恢复"><a href="#系统故障的恢复" class="headerlink" title="系统故障的恢复"></a>系统故障的恢复</h3><p>系统故障导致不一致的原因有两个：</p>
+<ul>
+<li>未完成事务对数据库的更新已写入数据库</li>
+<li>已提交事务对数据库的更新可能还停留在缓冲区没来得及写入数据库</li>
+</ul>
+<p>恢复操作就是<strong>撤销故障发生时未完成的事务</strong>和<strong>重做已完成的事务</strong><br>系统故障的恢复由系统在重新启动时自动完成，不需要用户的干预<br>恢复步骤为：</p>
+<ol>
+<li>正向扫描日志文件，找出在故障发生前已经提交的事务，将其事务标识记入重做队列（REDO-LIST）。同时找出故障发生时尚未完成的事务，将其事务标识记入撤销队列（UNDO-LIST）</li>
+<li>对撤销队列中的各个事务进行撤销（UNDO）处理</li>
+<li>对重做队列中的各个事务进行重做（REDO）处理</li>
+</ol>
+<h3 id="介质故障的恢复（需要数据库管理员介入）"><a href="#介质故障的恢复（需要数据库管理员介入）" class="headerlink" title="介质故障的恢复（需要数据库管理员介入）"></a>介质故障的恢复（需要数据库管理员介入）</h3><p>发生介质故障后，磁盘上的物理数据和日志文件被破坏，这是最严重的故障，恢复方法是<strong>重装数据库，然后重做已完成的事务</strong><br>介质故障的恢复需要数据库管理员介入<br>恢复步骤为：</p>
+<ol>
+<li>装入最新的数据库副本</li>
+<li>装入相应的日志文件副本，重做已完成的事务</li>
 </ol>
 <hr>
 <h2 id="具有检查点的恢复技术"><a href="#具有检查点的恢复技术" class="headerlink" title="具有检查点的恢复技术"></a>具有检查点的恢复技术</h2><p>检查点记录的内容包括：</p>
@@ -779,7 +797,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的基本概念"><span class="nav-number">1.</span> <span class="nav-text">事务的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#故障的种类"><span class="nav-number">2.</span> <span class="nav-text">故障的种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复的实现技术"><span class="nav-number">3.</span> <span class="nav-text">恢复的实现技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据转储"><span class="nav-number">3.1.</span> <span class="nav-text">数据转储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登记日志文件"><span class="nav-number">3.2.</span> <span class="nav-text">登记日志文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复策略"><span class="nav-number">4.</span> <span class="nav-text">恢复策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具有检查点的恢复技术"><span class="nav-number">5.</span> <span class="nav-text">具有检查点的恢复技术</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的基本概念"><span class="nav-number">1.</span> <span class="nav-text">事务的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#故障的种类"><span class="nav-number">2.</span> <span class="nav-text">故障的种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复的实现技术"><span class="nav-number">3.</span> <span class="nav-text">恢复的实现技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据转储（backup）"><span class="nav-number">3.1.</span> <span class="nav-text">数据转储（backup）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登记日志文件（logging）"><span class="nav-number">3.2.</span> <span class="nav-text">登记日志文件（logging）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复策略"><span class="nav-number">4.</span> <span class="nav-text">恢复策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务故障的恢复"><span class="nav-number">4.1.</span> <span class="nav-text">事务故障的恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统故障的恢复"><span class="nav-number">4.2.</span> <span class="nav-text">系统故障的恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#介质故障的恢复（需要数据库管理员介入）"><span class="nav-number">4.3.</span> <span class="nav-text">介质故障的恢复（需要数据库管理员介入）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具有检查点的恢复技术"><span class="nav-number">5.</span> <span class="nav-text">具有检查点的恢复技术</span></a></li></ol></div>
             
 
           </div>

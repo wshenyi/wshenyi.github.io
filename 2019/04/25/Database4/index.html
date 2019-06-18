@@ -98,12 +98,12 @@
 
 
 
-  <meta name="description" content="参考书目《数据库系统概论（第5版）》  用户的权限操作用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆">
+  <meta name="description" content="参考书目《数据库系统概论（第5版）》  数据库安全性概述数据库安全标准：TCSEC和CCTCSEC/TDI安全级别划分(从上到下安全级别主键逐渐降低)     安全级别 定义     A1 验证设计   B3 安全域   B2 结构化保护   B1 标记安全保护   C2 受控的存取保护   C1 自主安全保护   D 最小保护     C1级：只提供了非常初级的自主安全保护，能够实现对用户和数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库原理——第四章：数据库安全性">
 <meta property="og:url" content="https://godway999.github.io/2019/04/25/Database4/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  用户的权限操作用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆">
+<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  数据库安全性概述数据库安全标准：TCSEC和CCTCSEC/TDI安全级别划分(从上到下安全级别主键逐渐降低)     安全级别 定义     A1 验证设计   B3 安全域   B2 结构化保护   B1 标记安全保护   C2 受控的存取保护   C1 自主安全保护   D 最小保护     C1级：只提供了非常初级的自主安全保护，能够实现对用户和数">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://godway999.github.io/2019/04/25/Database4/1.png">
 <meta property="og:image" content="https://godway999.github.io/2019/04/25/Database4/2.png">
@@ -123,10 +123,10 @@
 <meta property="og:image" content="https://godway999.github.io/2019/04/25/Database4/16.png">
 <meta property="og:image" content="https://godway999.github.io/2019/04/25/Database4/17.png">
 <meta property="og:image" content="https://godway999.github.io/2019/04/25/Database4/18.png">
-<meta property="og:updated_time" content="2019-06-17T11:43:32.935Z">
+<meta property="og:updated_time" content="2019-06-18T06:36:26.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第四章：数据库安全性">
-<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  用户的权限操作用户权限由两个要素组成：数据库对象、操作类型 创建用户12CREATE USER &amp;lt;用户名&amp;gt;@&amp;lt;用户登陆主机&amp;gt; [IDENTIFIED BY &amp;lt;密码&amp;gt;];CREATE USER &amp;lt;用户名&amp;gt;;  /*可以在本地无密码登录的账户*/  用户登录主机若不填写则默认为localhost，若要允许远程登陆">
+<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  数据库安全性概述数据库安全标准：TCSEC和CCTCSEC/TDI安全级别划分(从上到下安全级别主键逐渐降低)     安全级别 定义     A1 验证设计   B3 安全域   B2 结构化保护   B1 标记安全保护   C2 受控的存取保护   C1 自主安全保护   D 最小保护     C1级：只提供了非常初级的自主安全保护，能够实现对用户和数">
 <meta name="twitter:image" content="https://godway999.github.io/2019/04/25/Database4/1.png">
 
 
@@ -432,7 +432,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-17 19:43:32" itemprop="dateModified" datetime="2019-06-17T19:43:32+08:00">2019-06-17</time>
+                <time title="Modified: 2019-06-18 14:36:26" itemprop="dateModified" datetime="2019-06-18T14:36:26+08:00">2019-06-18</time>
               
             
           </span>
@@ -494,23 +494,79 @@
         <blockquote>
 <p><em>参考书目《数据库系统概论（第5版）》</em></p>
 </blockquote>
-<h2 id="用户的权限操作"><a href="#用户的权限操作" class="headerlink" title="用户的权限操作"></a>用户的权限操作</h2><p><em>用户权限由两个要素组成：<strong>数据库对象</strong>、<strong>操作类型</strong></em></p>
-<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &lt;用户名&gt;@&lt;用户登陆主机&gt; [IDENTIFIED BY &lt;密码&gt;];</span><br><span class="line">CREATE USER &lt;用户名&gt;;  /*可以在本地无密码登录的账户*/</span><br></pre></td></tr></table></figure>
+<h2 id="数据库安全性概述"><a href="#数据库安全性概述" class="headerlink" title="数据库安全性概述"></a>数据库安全性概述</h2><p>数据库安全标准：<strong>TCSEC</strong>和<strong>CC</strong><br>TCSEC/TDI安全级别划分(从上到下安全级别主键逐渐降低)</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">安全级别</th>
+<th style="text-align:center">定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A1</td>
+<td style="text-align:center">验证设计</td>
+</tr>
+<tr>
+<td style="text-align:center">B3</td>
+<td style="text-align:center">安全域</td>
+</tr>
+<tr>
+<td style="text-align:center">B2</td>
+<td style="text-align:center">结构化保护</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>B1</strong></td>
+<td style="text-align:center"><strong>标记安全保护</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">C2</td>
+<td style="text-align:center">受控的存取保护</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>C1</strong></td>
+<td style="text-align:center"><strong>自主安全保护</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">最小保护</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>C1级：只提供了非常初级的自主安全保护，能够实现对用户和数据的分离，进行<strong>自助存取控制</strong>（DAC）<br>B1级：对系统的数据加以标记，并对标记的主体和客体实施<strong>强制存取控制</strong>（MAC）以及<strong>审计</strong>等安全机制。B1级别的产品才被认为是真正意义上的安全产品</p>
+<hr>
+<h2 id="数据库安全性控制"><a href="#数据库安全性控制" class="headerlink" title="数据库安全性控制"></a>数据库安全性控制</h2><h3 id="用户身份鉴别"><a href="#用户身份鉴别" class="headerlink" title="用户身份鉴别"></a>用户身份鉴别</h3><p>这是数据库管理系统提供的最外层安全保护机制  </p>
+<ol>
+<li>静态口令鉴别</li>
+<li>动态口令鉴别</li>
+<li>生物特征鉴别</li>
+<li>智能卡鉴别</li>
+</ol>
+<h3 id="存取控制"><a href="#存取控制" class="headerlink" title="存取控制"></a>存取控制</h3><p>存取控制机制主要包括<strong>定义用户权限</strong>和<strong>合法权限检查</strong>，二者一起组成了数据库管理系统的<strong>存取控制子系统</strong>  </p>
 <ul>
-<li>用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接替换为：%（表示任何一台主机都可以远程登陆）。</li>
-<li>新用户的密码可以选择不创建。</li>
+<li><strong>自主存取控制</strong>：用户对于不同的数据库对象拥有不同的存取权限，不同用户对同一对象也有不同权限，而且用户可以将其拥有的权限转授给其他用户。因此<strong>自主存取控制非常灵活</strong></li>
+<li><strong>强制存取控制</strong>：每个数据库对象被标以一定的<strong>密级</strong>，每一个用户也被授予某一个级别的<strong>许可证</strong>。对于任意一个对象，只有具有合法许可证的用户才可以存取。因此<strong>强制存取控制相对比较严格</strong></li>
 </ul>
-<h3 id="修改用户密码"><a href="#修改用户密码" class="headerlink" title="修改用户密码"></a>修改用户密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &lt;用户名&gt;@&lt;用户登陆主机&gt; IDENTIFIED BY &lt;新密码&gt;</span><br><span class="line">SET PASSWORD FOR &lt;用户名&gt;@&lt;用户登陆主机&gt; = PASSWORD(&apos;新密码&apos;) /*创建新密码*/</span><br></pre></td></tr></table></figure>
-<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP USER [IF EXIST] &lt;用户名&gt;@&lt;用户登陆主机&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="给用户授权"><a href="#给用户授权" class="headerlink" title="给用户授权"></a>给用户授权</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限&gt;(属性名),... ON &lt;数据库名&gt;.&lt;数据库表名&gt;,... TO &lt;用户名&gt;@&lt;用户登陆主机&gt;,... [WITH GRANT OPTION]</span><br></pre></td></tr></table></figure>
+<h3 id="自主存取控制方法"><a href="#自主存取控制方法" class="headerlink" title="自主存取控制方法"></a>自主存取控制方法</h3><p>用户权限由两个要素组成：<strong>数据库对象</strong>、<strong>操作类型*</strong><br>定义存取权限称为<strong>授权</strong></p>
+<p><strong><em>———后续语句实现基于MySQL———</em></strong></p>
+<h4 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &lt;用户名&gt;@&lt;用户登陆主机&gt; [IDENTIFIED BY &lt;密码&gt;];</span><br><span class="line">CREATE USER &lt;用户名&gt;;  /*可以在本地无密码登录的账户*/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接替换为：%（表示任何一台主机都可以远程登陆）</li>
+<li>新用户的密码可以选择不创建</li>
+</ul>
+<h4 id="修改用户密码"><a href="#修改用户密码" class="headerlink" title="修改用户密码"></a>修改用户密码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &lt;用户名&gt;@&lt;用户登陆主机&gt; IDENTIFIED BY &lt;新密码&gt;</span><br><span class="line">SET PASSWORD FOR &lt;用户名&gt;@&lt;用户登陆主机&gt; = PASSWORD(&apos;新密码&apos;) /*创建新密码*/</span><br></pre></td></tr></table></figure>
+<h4 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP USER [IF EXIST] &lt;用户名&gt;@&lt;用户登陆主机&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="给用户授权"><a href="#给用户授权" class="headerlink" title="给用户授权"></a>给用户授权</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限&gt;(属性名),... ON &lt;数据库名&gt;.&lt;数据库表名&gt;,... TO &lt;用户名&gt;@&lt;用户登陆主机&gt;,... [WITH GRANT OPTION]</span><br></pre></td></tr></table></figure>
 <ul>
 <li>如果指定了<code>WITH GRANT OPTION</code>子句，则获得某种权限的用户还可以把这种权限再授予其他用户（传播权限）</li>
 <li>对于&lt;权限&gt;(属性名)，如UPDATE(Sno)表示对于Sno这个属性具有更新的权限，若不填则默认为所有属性</li>
 <li>如果想给新用户所有的权限，可以直接使用<code>ALL PRIVILEGES</code></li>
 </ul>
-<h3 id="收回授权"><a href="#收回授权" class="headerlink" title="收回授权"></a>收回授权</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REVOKE &lt;权限&gt;(属性名),... ON &lt;数据库名&gt;.&lt;数据库表名&gt;,... FROM &lt;用户名&gt;@&lt;用户登陆主机&gt;,...</span><br></pre></td></tr></table></figure>
+<h4 id="收回授权"><a href="#收回授权" class="headerlink" title="收回授权"></a>收回授权</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REVOKE &lt;权限&gt;(属性名),... ON &lt;数据库名&gt;.&lt;数据库表名&gt;,... FROM &lt;用户名&gt;@&lt;用户登陆主机&gt;,...</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="MySQL8-0新增角色管理"><a href="#MySQL8-0新增角色管理" class="headerlink" title="MySQL8.0新增角色管理"></a>MySQL8.0新增角色管理</h2><p>MySQL 8.0 为了用户权限管理更容易，提供了一个角色管理的新功能。角色是指定的权限集合，和用户帐户一样可以对角色进行权限的授予和撤消。如果用户被授予角色权限，则该用户拥有该角色的权限。<br>MySQL 8.0 提供的角色管理功能如下：</p>
+<h3 id="数据库角色"><a href="#数据库角色" class="headerlink" title="数据库角色"></a>数据库角色</h3><p><em>MySQL 8.0 为了用户权限管理更容易，提供了一个角色管理的新功能</em><br>数据库角色是被命名的一组与数据库操作相关的权限，角色是<strong>权限的集合</strong>。如果用户被授予角色权限，则该用户拥有该角色的权限，从而简化授权过程<br>MySQL 8.0 提供的角色管理功能如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE ROLE 角色创建</span><br><span class="line">DROP ROLE 角色删除</span><br><span class="line">GRANT 为用户和角色分配权限</span><br><span class="line">REVOKE 为用户和角色撤销权限</span><br><span class="line">SHOW GRANTS 显示用户和角色的权限</span><br><span class="line">SET DEFAULT ROLE 指定哪些帐户角色默认处于活动状态</span><br><span class="line">SET ROLE 更改当前会话中的活动角色</span><br><span class="line">CURRENT_ROLE() 显示当前会话中的活动角色</span><br></pre></td></tr></table></figure>
 <ol>
 <li><p>创建<strong>用户</strong>、分配权限、回收权限、验证</p>
@@ -560,7 +616,17 @@
 </li>
 </ol>
 <hr>
-<h2 id="审计功能"><a href="#审计功能" class="headerlink" title="审计功能"></a>审计功能</h2><ol>
+<h3 id="强制存取控制方法"><a href="#强制存取控制方法" class="headerlink" title="强制存取控制方法"></a>强制存取控制方法</h3><p>自助存取控制的可能不安全的根本原因在于：<strong>仅仅通过对数据的存取控制权限来进行安全控制，而数据本身并无安全性标记</strong><br>在强制存取控制中，全部实体被分为<strong>主体</strong>和<strong>客体</strong>两大类。<strong>主体</strong>是系统中的活动实体，<strong>客体</strong>是系统中的被动实体，受主体操控<br>数据库管理系统为每个实例指派一个<strong>敏感度标记</strong>，敏感度标记可被分为：TS &gt;= S &gt;= C &gt;= P<br>主体的敏感度标记称为<strong>许可证级别</strong>，客体的敏感度标记称为<strong>密级</strong><br>判定规则：</p>
+<ul>
+<li>仅当主体的许可证级别大于或等于客体的密级是，该主体才能<strong>读取</strong>相应的客体</li>
+<li>仅当主体的许可证级别小于或等于客体的密级是，该主体才能<strong>写</strong>相应的客体</li>
+</ul>
+<hr>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>通过视图机制把要保密的数据对无权存取的用户隐藏起来</p>
+<hr>
+<h2 id="审计"><a href="#审计" class="headerlink" title="审计"></a>审计</h2><p>审计功能把用户对数据库的所有操作自动记录下来放入审计日志中。管理人员可利用审计日志监控数据库的各种行为，重现操作过程，找出非法存取数据的人、时间和内容等  </p>
+<p><strong><em>———后续语句实现基于MySQL8.0———</em></strong></p>
+<ol>
 <li><p>开启审计功能  </p>
 <ul>
 <li><p>设置变量</p>
@@ -832,7 +898,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户的权限操作"><span class="nav-number">1.</span> <span class="nav-text">用户的权限操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户"><span class="nav-number">1.1.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改用户密码"><span class="nav-number">1.2.</span> <span class="nav-text">修改用户密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除用户"><span class="nav-number">1.3.</span> <span class="nav-text">删除用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给用户授权"><span class="nav-number">1.4.</span> <span class="nav-text">给用户授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#收回授权"><span class="nav-number">1.5.</span> <span class="nav-text">收回授权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL8-0新增角色管理"><span class="nav-number">2.</span> <span class="nav-text">MySQL8.0新增角色管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#审计功能"><span class="nav-number">3.</span> <span class="nav-text">审计功能</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库安全性概述"><span class="nav-number">1.</span> <span class="nav-text">数据库安全性概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库安全性控制"><span class="nav-number">2.</span> <span class="nav-text">数据库安全性控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户身份鉴别"><span class="nav-number">2.1.</span> <span class="nav-text">用户身份鉴别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存取控制"><span class="nav-number">2.2.</span> <span class="nav-text">存取控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自主存取控制方法"><span class="nav-number">2.3.</span> <span class="nav-text">自主存取控制方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建用户"><span class="nav-number">2.3.1.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改用户密码"><span class="nav-number">2.3.2.</span> <span class="nav-text">修改用户密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除用户"><span class="nav-number">2.3.3.</span> <span class="nav-text">删除用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#给用户授权"><span class="nav-number">2.3.4.</span> <span class="nav-text">给用户授权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收回授权"><span class="nav-number">2.3.5.</span> <span class="nav-text">收回授权</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库角色"><span class="nav-number">2.4.</span> <span class="nav-text">数据库角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强制存取控制方法"><span class="nav-number">2.5.</span> <span class="nav-text">强制存取控制方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图"><span class="nav-number">3.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#审计"><span class="nav-number">4.</span> <span class="nav-text">审计</span></a></li></ol></div>
             
 
           </div>
