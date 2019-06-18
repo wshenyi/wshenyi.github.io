@@ -98,17 +98,17 @@
 
 
 
-  <meta name="description" content="参考书目《数据库系统概论（第5版）》  关系数据库系统的查询处理关系数据库管理系统查询处理分为4个阶段：查询分析、查询检查、查询优化和查询执行  查询分析：对SQL语句进行语法分析和词法分析，报告语句中可能的语法错误 查询检查：   关系数据库系统的查询优化 代数优化 物理优化">
+  <meta name="description" content="参考书目《数据库系统概论（第5版）》  关系数据库系统的查询处理关系数据库管理系统查询处理分为4个阶段：查询分析、查询检查、查询优化和查询执行  查询分析：对SQL语句进行语法分析和词法分析，报告语句中可能的语法错误 查询检查：对合法的查询语句进行语义检查，即根据数据字典中有关的模式定义检查语句中的数据库对象，如关系名、属性名是否存在和合法 可能涉及视图消解、用户存取权限和完整性约束检查，这时的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库原理——第九章：关系查询处理和查询优化">
 <meta property="og:url" content="https://godway999.github.io/2019/06/17/Database9/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  关系数据库系统的查询处理关系数据库管理系统查询处理分为4个阶段：查询分析、查询检查、查询优化和查询执行  查询分析：对SQL语句进行语法分析和词法分析，报告语句中可能的语法错误 查询检查：   关系数据库系统的查询优化 代数优化 物理优化">
+<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  关系数据库系统的查询处理关系数据库管理系统查询处理分为4个阶段：查询分析、查询检查、查询优化和查询执行  查询分析：对SQL语句进行语法分析和词法分析，报告语句中可能的语法错误 查询检查：对合法的查询语句进行语义检查，即根据数据字典中有关的模式定义检查语句中的数据库对象，如关系名、属性名是否存在和合法 可能涉及视图消解、用户存取权限和完整性约束检查，这时的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-17T13:08:01.320Z">
+<meta property="og:updated_time" content="2019-06-18T00:19:42.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第九章：关系查询处理和查询优化">
-<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  关系数据库系统的查询处理关系数据库管理系统查询处理分为4个阶段：查询分析、查询检查、查询优化和查询执行  查询分析：对SQL语句进行语法分析和词法分析，报告语句中可能的语法错误 查询检查：   关系数据库系统的查询优化 代数优化 物理优化">
+<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  关系数据库系统的查询处理关系数据库管理系统查询处理分为4个阶段：查询分析、查询检查、查询优化和查询执行  查询分析：对SQL语句进行语法分析和词法分析，报告语句中可能的语法错误 查询检查：对合法的查询语句进行语义检查，即根据数据字典中有关的模式定义检查语句中的数据库对象，如关系名、属性名是否存在和合法 可能涉及视图消解、用户存取权限和完整性约束检查，这时的">
 
 
 
@@ -396,12 +396,24 @@
                 
               
 
-              <time title="Created: 2019-06-17 19:20:34 / Modified: 21:08:01" itemprop="dateCreated datePublished" datetime="2019-06-17T19:20:34+08:00">2019-06-17</time>
+              <time title="Created: 2019-06-17 19:20:34" itemprop="dateCreated datePublished" datetime="2019-06-17T19:20:34+08:00">2019-06-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-18 08:19:42" itemprop="dateModified" datetime="2019-06-18T08:19:42+08:00">2019-06-18</time>
               
             
           </span>
@@ -465,13 +477,45 @@
 </blockquote>
 <h2 id="关系数据库系统的查询处理"><a href="#关系数据库系统的查询处理" class="headerlink" title="关系数据库系统的查询处理"></a>关系数据库系统的查询处理</h2><p>关系数据库管理系统查询处理分为4个阶段：<strong>查询分析</strong>、<strong>查询检查</strong>、<strong>查询优化</strong>和<strong>查询执行</strong></p>
 <ol>
-<li>查询分析：对SQL语句进行语法分析和词法分析，报告语句中可能的语法错误</li>
-<li>查询检查：</li>
+<li>查询分析：对SQL语句进行<strong>语法分析</strong>和<strong>词法分析</strong>，报告语句中可能的语法错误</li>
+<li>查询检查：对合法的查询语句进行<strong>语义检查</strong>，即根据数据字典中有关的模式定义检查语句中的数据库对象，如关系名、属性名是否存在和合法<ul>
+<li>可能涉及<strong>视图消解</strong>、<strong>用户存取权限</strong>和<strong>完整性约束检查</strong>，这时的完整性检查是初步的、静态的检查</li>
+<li>关系数据库管理系统一般都用<strong>查询树</strong>（也即<strong>语法分析树</strong>）来表示扩展的关系代数表达式</li>
+</ul>
+</li>
+<li>查询优化：选择一个高效执行的查询处理策略；按照优化的层次一般可分为<strong>代数优化</strong>和<strong>物理优化</strong><ul>
+<li><em>代数优化</em>是指关系代数表达式的优化</li>
+<li><em>物理优化</em>是指存取路径和底层操作算法的选择</li>
+</ul>
+</li>
+<li>查询执行：依据优化器得到的执行策略生成查询执行计划，由<strong>代码生成器</strong>生成执行这个查询计划的代码。然后执行并回送查询结果</li>
 </ol>
 <hr>
-<h2 id="关系数据库系统的查询优化"><a href="#关系数据库系统的查询优化" class="headerlink" title="关系数据库系统的查询优化"></a>关系数据库系统的查询优化</h2><hr>
-<h2 id="代数优化"><a href="#代数优化" class="headerlink" title="代数优化"></a>代数优化</h2><hr>
-<h2 id="物理优化"><a href="#物理优化" class="headerlink" title="物理优化"></a>物理优化</h2>
+<h2 id="关系数据库系统的查询优化"><a href="#关系数据库系统的查询优化" class="headerlink" title="关系数据库系统的查询优化"></a>关系数据库系统的查询优化</h2><p><strong>查询优化</strong>在关系数据库系统中有着非常重要的地位，关系数据库系统取得巨大成功的原因关键是得益于查询优化技术的发展<br><strong>查询优化的优点不仅在于用户不必考虑如何最好地表达查询以获得较高的效率，而且在于系统可以比用户程序做的更好</strong>，原因如下：</p>
+<ol>
+<li>优化器可以从数据字典中获取许多统计信息，而用户程序则难以获得这些信息</li>
+<li>如果数据库的物理统计信息变了，系统可以自动对查询进行重新优化而不必重写程序</li>
+<li>优化器可以考虑数百种不同的执行方案，而程序员一般只能考虑有限的几种</li>
+<li>优化器中实现包含了很多复杂的优化技术，这些技术的实现降低了编写人员的门槛</li>
+</ol>
+<p>在集中式数据库中，查询执行开销主要包括<strong>磁盘存取块数</strong>（I/O代价）、<strong>处理机时间</strong>（CPU代价）以及查询的<strong>内存开销</strong>，在分布式数据库中还要加上<strong>通信代价</strong><br>查询执行的总代价 = I/O代价 + CPU代价 + 内存代价 + （通信代价）  </p>
+<hr>
+<h2 id="代数优化"><a href="#代数优化" class="headerlink" title="代数优化"></a>代数优化</h2><p>查询树的启发式优化：</p>
+<ol>
+<li>选择运算应尽可能先做</li>
+<li>把投影运算和选择运算同时进行</li>
+<li>把投影同其前或后的双目运算结合起来</li>
+<li>把某些选择同它前面要执行的笛卡尔积结合起来成为一个连接运算</li>
+<li>找出公共子表达式</li>
+</ol>
+<hr>
+<h2 id="物理优化"><a href="#物理优化" class="headerlink" title="物理优化"></a>物理优化</h2><p>物理优化的目的是为了选择高效合理的<strong>操作算法</strong>或<strong>存取路径</strong>，方法有</p>
+<ol>
+<li>基于规则的启发式优化</li>
+<li>基于代价估算的优化</li>
+<li>二者结合的优化方法</li>
+</ol>
+
       
     </div>
 

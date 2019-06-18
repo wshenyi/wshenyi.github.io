@@ -98,17 +98,17 @@
 
 
 
-  <meta name="description" content="参考书目《数据库系统概论（第5版）》">
+  <meta name="description" content="参考书目《数据库系统概论（第5版）》  并发控制概述并发操作带来的不一致性：  丢失修改 不可重复读 读错误数据  并发控制的主要技术：封锁、时间戳、乐观控制法和多版本并发控制  封锁与封锁协议封锁就是事务在对某数据对象操作之前先向系统发出请求，对其加锁基本的封锁类型有：  排他锁又称写锁（简称X锁） 共享锁又称读锁（简称S锁）  封锁协议：  一级封锁协议：事务T在修改数据R之前必须先对其加X">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库原理——第十一章：并发控制">
 <meta property="og:url" content="https://godway999.github.io/2019/06/17/Database11/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="参考书目《数据库系统概论（第5版）》">
+<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  并发控制概述并发操作带来的不一致性：  丢失修改 不可重复读 读错误数据  并发控制的主要技术：封锁、时间戳、乐观控制法和多版本并发控制  封锁与封锁协议封锁就是事务在对某数据对象操作之前先向系统发出请求，对其加锁基本的封锁类型有：  排他锁又称写锁（简称X锁） 共享锁又称读锁（简称S锁）  封锁协议：  一级封锁协议：事务T在修改数据R之前必须先对其加X">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-17T13:01:09.874Z">
+<meta property="og:updated_time" content="2019-06-18T03:38:31.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第十一章：并发控制">
-<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》">
+<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  并发控制概述并发操作带来的不一致性：  丢失修改 不可重复读 读错误数据  并发控制的主要技术：封锁、时间戳、乐观控制法和多版本并发控制  封锁与封锁协议封锁就是事务在对某数据对象操作之前先向系统发出请求，对其加锁基本的封锁类型有：  排他锁又称写锁（简称X锁） 共享锁又称读锁（简称S锁）  封锁协议：  一级封锁协议：事务T在修改数据R之前必须先对其加X">
 
 
 
@@ -396,12 +396,24 @@
                 
               
 
-              <time title="Created: 2019-06-17 19:21:04 / Modified: 21:01:09" itemprop="dateCreated datePublished" datetime="2019-06-17T19:21:04+08:00">2019-06-17</time>
+              <time title="Created: 2019-06-17 19:21:04" itemprop="dateCreated datePublished" datetime="2019-06-17T19:21:04+08:00">2019-06-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-18 11:38:31" itemprop="dateModified" datetime="2019-06-18T11:38:31+08:00">2019-06-18</time>
               
             
           </span>
@@ -463,6 +475,44 @@
         <blockquote>
 <p><em>参考书目《数据库系统概论（第5版）》</em></p>
 </blockquote>
+<h2 id="并发控制概述"><a href="#并发控制概述" class="headerlink" title="并发控制概述"></a>并发控制概述</h2><p>并发操作带来的不一致性：</p>
+<ul>
+<li>丢失修改</li>
+<li>不可重复读</li>
+<li>读错误数据</li>
+</ul>
+<p>并发控制的主要技术：封锁、时间戳、乐观控制法和多版本并发控制</p>
+<hr>
+<h2 id="封锁与封锁协议"><a href="#封锁与封锁协议" class="headerlink" title="封锁与封锁协议"></a>封锁与封锁协议</h2><p><strong>封锁</strong>就是事务在对某数据对象操作之前先向系统发出请求，对其<strong>加锁</strong><br>基本的封锁类型有：</p>
+<ul>
+<li><strong>排他锁</strong>又称<strong>写锁</strong>（简称X锁）</li>
+<li><strong>共享锁</strong>又称<strong>读锁</strong>（简称S锁）</li>
+</ul>
+<p>封锁协议：</p>
+<ol>
+<li>一级封锁协议：事务T在<strong>修改</strong>数据R之前必须先对其加X锁，直到事务结束才释放<br>一级封锁协议可防止丢失修改，并保证事务T是可恢复的，但其不保证可重复读和不读错误数据</li>
+<li>二级封锁协议：在一级封锁协议基础上，增加事务T在<strong>读取</strong>数据R之前必须先对其加S锁，<strong>读完后</strong>即可释放S锁<br>二级封锁协议除防止了丢失修改，还进一步防止读错误数据，但其不保证可重复读</li>
+<li>三级封锁协议：在一级封锁协议基础上，增加事务T在<strong>读取</strong>数据R之前必须先对其加S锁，<strong>直到事务结束</strong>才释放S锁<br>三级封锁协议除防止了丢失修改，读读错误数据和不可重复读</li>
+</ol>
+<hr>
+<h2 id="活锁和死锁"><a href="#活锁和死锁" class="headerlink" title="活锁和死锁"></a>活锁和死锁</h2><p>活锁：就是操作系统中的<strong>饥饿</strong>，使用FCFS来预防活锁<br>死锁：就是操作系统中的<strong>死锁</strong><br>死锁的预防：</p>
+<ul>
+<li>一次封锁法：一次将所有要使用的数据全部加锁</li>
+<li>顺序封锁法：先对数据对象规定一个封锁顺序，所有事务都按这个顺序实施封锁</li>
+</ul>
+<p>操作系统中采用的预防死锁不适合数据库，因此数据库普遍采用诊断并解除死锁的方法，即允许发生死锁， 然后采用一定手段定期诊断系统中有无死锁， 若有则解除之<br>死锁的<strong>诊断</strong>方法：</p>
+<ul>
+<li>超时法</li>
+<li>等待图法</li>
+</ul>
+<p>死锁的<strong>解除</strong>，通常采用的方法是：选择一个处理死锁代价最小的事务，将其撤销，释放此事务持有的所有锁，使其他事务得以继续运行下去</p>
+<h2 id="并发调度的可串行性"><a href="#并发调度的可串行性" class="headerlink" title="并发调度的可串行性"></a>并发调度的可串行性</h2><p><strong>可串行化调度</strong>：多个事务的并发执行是正确的，当且仅当其结果与按某一次序串行执行这些事务时的结果相同<br><strong>可串行性</strong>是并发事务正确调度的准则。即一个给定的并发调度，当且仅当它是可串行化的，才认为是<strong>正确调度</strong>  </p>
+<h2 id="两段锁协议"><a href="#两段锁协议" class="headerlink" title="两段锁协议"></a>两段锁协议</h2><p>数据库系统采用<strong>两段锁协议</strong>（2PL）的方法实现并发调度的可串行性，从而保证调度的正确性<br>两段锁协议是指所有事务必须分两个阶段对数据项加锁和解锁：</p>
+<ul>
+<li>扩展阶段（第一阶段）：获得封锁。在对任何数据进行读、写操作之前，首先要申请并获得对该数据的封锁；此阶段，可以申请获得任何数据项上任何类型的锁，但是不能释放锁</li>
+<li>收缩阶段（第二阶段）：释放封锁。在释放一个封锁之后，事务不再申请和获得任何其他封锁</li>
+</ul>
+<p>事务遵守两段锁协议是可串行化调度的<strong>充分条件</strong><br>一次封锁法遵守两段锁协议，但两段锁协议并不要求事务必须一次将所有要使用的数据全部加锁，因此<strong>遵守两段锁协议的事务仍可能发生死锁</strong></p>
 
       
     </div>
@@ -545,8 +595,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -669,6 +728,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发控制概述"><span class="nav-number">1.</span> <span class="nav-text">并发控制概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封锁与封锁协议"><span class="nav-number">2.</span> <span class="nav-text">封锁与封锁协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#活锁和死锁"><span class="nav-number">3.</span> <span class="nav-text">活锁和死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发调度的可串行性"><span class="nav-number">4.</span> <span class="nav-text">并发调度的可串行性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两段锁协议"><span class="nav-number">5.</span> <span class="nav-text">两段锁协议</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
