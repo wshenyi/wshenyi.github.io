@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Godway&#39;s Studio">
 <meta property="og:description" content="参考书目《数据库系统概论（第5版）》  并发控制概述并发操作带来的不一致性：  丢失修改：T1和T2同时读入并修改，后者的提交覆盖了前者的提交 不可重复读：T1读取了数据A，期间T2修改了数据A，当T1再次读取A时发现与原先不一致 读“脏”数据：T1保存了对A的修改，但在T2读取A的期间，T1对A的操作被撤销导致A恢复原值，从而T2读取的是错误数据  并发控制的主要技术：封锁、时间戳、乐观控制法">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-19T00:43:01.581Z">
+<meta property="og:updated_time" content="2019-06-19T06:22:15.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第十一章：并发控制">
 <meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  并发控制概述并发操作带来的不一致性：  丢失修改：T1和T2同时读入并修改，后者的提交覆盖了前者的提交 不可重复读：T1读取了数据A，期间T2修改了数据A，当T1再次读取A时发现与原先不一致 读“脏”数据：T1保存了对A的修改，但在T2读取A的期间，T1对A的操作被撤销导致A恢复原值，从而T2读取的是错误数据  并发控制的主要技术：封锁、时间戳、乐观控制法">
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-19 08:43:01" itemprop="dateModified" datetime="2019-06-19T08:43:01+08:00">2019-06-19</time>
+                <time title="Modified: 2019-06-19 14:22:15" itemprop="dateModified" datetime="2019-06-19T14:22:15+08:00">2019-06-19</time>
               
             
           </span>
@@ -507,7 +507,7 @@
 </ul>
 <p>死锁的<strong>解除</strong>，通常采用的方法是：<strong>选择一个处理死锁代价最小的事务，将其撤销，释放此事务持有的所有锁，使其他事务得以继续运行下去</strong></p>
 <hr>
-<h2 id="并发调度的可串行性"><a href="#并发调度的可串行性" class="headerlink" title="并发调度的可串行性"></a>并发调度的可串行性</h2><p><strong>可串行化调度</strong>：多个事务的并发执行是正确的，当且仅当其结果与按某一次序串行执行这些事务时的结果相同<br><strong>可串行性</strong>是并发事务正确调度的准则。即一个给定的并发调度，当且仅当它是可串行化的，才认为是<strong>正确调度</strong>  </p>
+<h2 id="并发调度的可串行性"><a href="#并发调度的可串行性" class="headerlink" title="并发调度的可串行性"></a>并发调度的可串行性</h2><p><strong>可串行化调度</strong>：多个事务的并发执行是正确的，当且仅当其结果与按某一次序串行执行这些事务时的结果相同<br><strong>可串行性</strong>是并发事务正确调度的准则。即一个给定的并发调度，当且仅当它是可串行化的，才认为是<strong>正确调度</strong><br>若一个调度是<strong>冲突可串行化</strong>，则一定是<strong>可串行化</strong>调度  </p>
 <hr>
 <h2 id="两段锁协议"><a href="#两段锁协议" class="headerlink" title="两段锁协议"></a>两段锁协议</h2><p>数据库系统采用<strong>两段锁协议</strong>（2PL）的方法实现并发调度的可串行性，从而保证调度的正确性<br>两段锁协议是指所有事务必须分两个阶段对数据项加锁和解锁：</p>
 <ul>
