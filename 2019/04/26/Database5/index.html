@@ -98,17 +98,17 @@
 
 
 
-  <meta name="description" content="参考书目《数据库系统概论（第5版）》  数据库的完整性是指数据的正确性和相容性 实体完整性关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义单属性构成的码有两种说明方式：列级约束条件、表级约束条件多属性构成的码只有一种说明方式：表级约束实体完整性检查和违约处理：  检验主码值是否唯一，如果不唯一则拒绝插入或修改 检查主码的各个属性是否为空，只要有一个为空就拒绝插入或修改">
+  <meta name="description" content="参考书目《数据库系统概论（第5版）》  数据库的完整性是指数据的正确性和相容性  数据的正确性是指数据是符合现实世界语义、反映当前实际状况的（实体完整性和用户定义的完整性） 数据的相容性是指数据库同一对象在不同关系表中的数据是符合逻辑的（参照完整性）  实体完整性关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义单属性构成的码有两种说明方式：列级约束条件、表级约束条件多">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库原理——第五章：数据库完整性">
 <meta property="og:url" content="https://godway999.github.io/2019/04/26/Database5/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  数据库的完整性是指数据的正确性和相容性 实体完整性关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义单属性构成的码有两种说明方式：列级约束条件、表级约束条件多属性构成的码只有一种说明方式：表级约束实体完整性检查和违约处理：  检验主码值是否唯一，如果不唯一则拒绝插入或修改 检查主码的各个属性是否为空，只要有一个为空就拒绝插入或修改">
+<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  数据库的完整性是指数据的正确性和相容性  数据的正确性是指数据是符合现实世界语义、反映当前实际状况的（实体完整性和用户定义的完整性） 数据的相容性是指数据库同一对象在不同关系表中的数据是符合逻辑的（参照完整性）  实体完整性关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义单属性构成的码有两种说明方式：列级约束条件、表级约束条件多">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-18T11:33:59.450Z">
+<meta property="og:updated_time" content="2019-06-18T13:10:38.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第五章：数据库完整性">
-<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  数据库的完整性是指数据的正确性和相容性 实体完整性关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义单属性构成的码有两种说明方式：列级约束条件、表级约束条件多属性构成的码只有一种说明方式：表级约束实体完整性检查和违约处理：  检验主码值是否唯一，如果不唯一则拒绝插入或修改 检查主码的各个属性是否为空，只要有一个为空就拒绝插入或修改">
+<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  数据库的完整性是指数据的正确性和相容性  数据的正确性是指数据是符合现实世界语义、反映当前实际状况的（实体完整性和用户定义的完整性） 数据的相容性是指数据库同一对象在不同关系表中的数据是符合逻辑的（参照完整性）  实体完整性关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义单属性构成的码有两种说明方式：列级约束条件、表级约束条件多">
 
 
 
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-18 19:33:59" itemprop="dateModified" datetime="2019-06-18T19:33:59+08:00">2019-06-18</time>
+                <time title="Modified: 2019-06-18 21:10:38" itemprop="dateModified" datetime="2019-06-18T21:10:38+08:00">2019-06-18</time>
               
             
           </span>
@@ -475,7 +475,11 @@
         <blockquote>
 <p><em>参考书目《数据库系统概论（第5版）》</em></p>
 </blockquote>
-<p><em>数据库的完整性是指数据的<strong>正确性</strong>和<strong>相容性</strong></em></p>
+<p>数据库的<strong>完整性</strong>是指数据的<strong>正确性</strong>和<strong>相容性</strong></p>
+<ul>
+<li>数据的<strong>正确性</strong>是指数据是符合现实世界语义、反映当前实际状况的（实体完整性和用户定义的完整性）</li>
+<li>数据的<strong>相容性</strong>是指数据库同一对象在不同关系表中的数据是符合逻辑的（参照完整性）</li>
+</ul>
 <h2 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h2><p>关系模式的实体完整性在<code>CREATE TABLE</code>中用<code>PRIMARY KEY</code>定义<br>单属性构成的码有两种说明方式：列级约束条件、表级约束条件<br>多属性构成的码只有一种说明方式：表级约束<br>实体完整性检查和违约处理：</p>
 <ul>
 <li>检验主码值是否唯一，如果不唯一则拒绝插入或修改</li>
@@ -531,7 +535,7 @@
 <p>修改表中的完整性限制，可以先删除原来的约束条件，再增加新的约束条件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;表名&gt; DROP CONSTRAINT &lt;完整性约束条件名&gt;</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD  CONSTRAINT &lt;完整性约束条件名&gt; &lt;完整性约束条件&gt;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><p><strong>触发器</strong>(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程。触发器类似于约束，但是比约束更加灵活，可以实施更为复杂的检查和操作，具有更精细和更强大的数据控制能力</p>
+<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><p><strong>触发器</strong>(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程<br>触发器类似于约束，但是比约束更加灵活，可以实施更为复杂的检查和操作，具有更精细和更强大的数据控制能力</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/*触发器一般格式*/</span><br><span class="line">CREATE TRIGGER &lt;触发器名&gt;</span><br><span class="line">[BEFORE|AFTER] [INSERT|DELETE|UPDATE] ON &lt;表名&gt;</span><br><span class="line">FOR EACH [ROW|STATEMENT]</span><br><span class="line">BEGIN</span><br><span class="line">  &lt;执行语句列表&gt;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
 <p>例如：建立触发器t1，当插入学生的年龄小于18岁时进行报错提示</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $   /*告诉mysql语句的结尾符号换成以$结束*/</span><br><span class="line">CREATE TRIGGER t1</span><br><span class="line">BEFORE INSERT ON Student</span><br><span class="line">FOR EACH ROW</span><br><span class="line">BEGIN</span><br><span class="line">    DECLARE msg VARCHAR(200);</span><br><span class="line">    IF NEW.Sage &lt; 18 THEN</span><br><span class="line">        SET msg = CONCAT(&apos;输入的年龄值: &apos;,NEW.Sage,&apos; 为无效的年龄，请确保学生年龄大于18岁&apos;);</span><br><span class="line">        SIGNAL SQLSTATE &apos;HY000&apos; SET MESSAGE_TEXT = msg;</span><br><span class="line">    END IF;</span><br><span class="line">END$</span><br><span class="line">DELIMITER ;    /*将结尾符号换回以;结束*/</span><br></pre></td></tr></table></figure>
