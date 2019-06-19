@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Godway&#39;s Studio">
 <meta property="og:description" content="参考书目《数据库系统概论（第5版）》  事务的基本概念事务是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位COMMIT操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中ROLLBACK操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态事务的ACID特性：  原子性（Atomicity）">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-19T01:49:34.683Z">
+<meta property="og:updated_time" content="2019-06-19T03:22:56.512Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第十章：数据库恢复技术">
 <meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  事务的基本概念事务是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位COMMIT操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中ROLLBACK操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态事务的ACID特性：  原子性（Atomicity）">
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-19 09:49:34" itemprop="dateModified" datetime="2019-06-19T09:49:34+08:00">2019-06-19</time>
+                <time title="Modified: 2019-06-19 11:22:56" itemprop="dateModified" datetime="2019-06-19T11:22:56+08:00">2019-06-19</time>
               
             
           </span>
@@ -520,7 +520,7 @@
 <li><strong>增量转储</strong>：每次只转储上一次转储后更新过的数据</li>
 </ul>
 <p>转储方法：<strong>动态海量转储</strong>、<strong>动态增量转储</strong>、<strong>静态海量转储</strong>、<strong>静态增量转储</strong></p>
-<h3 id="登记日志文件（logging）"><a href="#登记日志文件（logging）" class="headerlink" title="登记日志文件（logging）"></a>登记日志文件（logging）</h3><p>日志文件是用来记录事务对数据库地更新操作的文件<br>日志文件有两种格式：以<strong>记录</strong>为单位的日志文件和以<strong>数据块</strong>为单位的日志文件<br>对于以记录为单位的日志文件，其需要登记的内容包括：</p>
+<h3 id="登记日志文件（logging）"><a href="#登记日志文件（logging）" class="headerlink" title="登记日志文件（logging）"></a>登记日志文件（logging）</h3><p>日志文件是用来记录事务对<strong>数据库地更新操作</strong>的文件<br>日志文件有两种格式：以<strong>记录</strong>为单位的日志文件和以<strong>数据块</strong>为单位的日志文件<br>对于以记录为单位的日志文件，其需要登记的内容包括：</p>
 <ul>
 <li>各个事务的开始标记</li>
 <li>各个事务的结束标记</li>
