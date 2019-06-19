@@ -98,17 +98,17 @@
 
 
 
-  <meta name="description" content="参考书目《数据库系统概论（第5版）》  并发控制概述并发操作带来的不一致性：  丢失修改 不可重复读 读错误数据  并发控制的主要技术：封锁、时间戳、乐观控制法和多版本并发控制  封锁与封锁协议封锁就是事务在对某数据对象操作之前先向系统发出请求，对其加锁基本的封锁类型有：  排他锁又称写锁（简称X锁） 共享锁又称读锁（简称S锁）  封锁协议：  一级封锁协议：事务T在修改数据R之前必须先对其加X">
+  <meta name="description" content="参考书目《数据库系统概论（第5版）》  并发控制概述并发操作带来的不一致性：  丢失修改：T1和T2同时读入并修改，后者的提交覆盖了前者的提交 不可重复读：T1读取了数据A，期间T2修改了数据A，当T1再次读取A时发现与原先不一致 读“脏”数据：T1保存了对A的修改，但在T2读取A的期间，T1对A的操作被撤销导致A恢复原值，从而T2读取的是错误数据  并发控制的主要技术：封锁、时间戳、乐观控制法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库原理——第十一章：并发控制">
 <meta property="og:url" content="https://godway999.github.io/2019/06/17/Database11/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  并发控制概述并发操作带来的不一致性：  丢失修改 不可重复读 读错误数据  并发控制的主要技术：封锁、时间戳、乐观控制法和多版本并发控制  封锁与封锁协议封锁就是事务在对某数据对象操作之前先向系统发出请求，对其加锁基本的封锁类型有：  排他锁又称写锁（简称X锁） 共享锁又称读锁（简称S锁）  封锁协议：  一级封锁协议：事务T在修改数据R之前必须先对其加X">
+<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  并发控制概述并发操作带来的不一致性：  丢失修改：T1和T2同时读入并修改，后者的提交覆盖了前者的提交 不可重复读：T1读取了数据A，期间T2修改了数据A，当T1再次读取A时发现与原先不一致 读“脏”数据：T1保存了对A的修改，但在T2读取A的期间，T1对A的操作被撤销导致A恢复原值，从而T2读取的是错误数据  并发控制的主要技术：封锁、时间戳、乐观控制法">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-18T04:29:06.925Z">
+<meta property="og:updated_time" content="2019-06-19T00:43:01.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第十一章：并发控制">
-<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  并发控制概述并发操作带来的不一致性：  丢失修改 不可重复读 读错误数据  并发控制的主要技术：封锁、时间戳、乐观控制法和多版本并发控制  封锁与封锁协议封锁就是事务在对某数据对象操作之前先向系统发出请求，对其加锁基本的封锁类型有：  排他锁又称写锁（简称X锁） 共享锁又称读锁（简称S锁）  封锁协议：  一级封锁协议：事务T在修改数据R之前必须先对其加X">
+<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  并发控制概述并发操作带来的不一致性：  丢失修改：T1和T2同时读入并修改，后者的提交覆盖了前者的提交 不可重复读：T1读取了数据A，期间T2修改了数据A，当T1再次读取A时发现与原先不一致 读“脏”数据：T1保存了对A的修改，但在T2读取A的期间，T1对A的操作被撤销导致A恢复原值，从而T2读取的是错误数据  并发控制的主要技术：封锁、时间戳、乐观控制法">
 
 
 
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-18 12:29:06" itemprop="dateModified" datetime="2019-06-18T12:29:06+08:00">2019-06-18</time>
+                <time title="Modified: 2019-06-19 08:43:01" itemprop="dateModified" datetime="2019-06-19T08:43:01+08:00">2019-06-19</time>
               
             
           </span>
@@ -477,9 +477,9 @@
 </blockquote>
 <h2 id="并发控制概述"><a href="#并发控制概述" class="headerlink" title="并发控制概述"></a>并发控制概述</h2><p>并发操作带来的不一致性：</p>
 <ul>
-<li>丢失修改</li>
-<li>不可重复读</li>
-<li>读错误数据</li>
+<li>丢失修改：T1和T2同时读入并修改，后者的提交覆盖了前者的提交</li>
+<li>不可重复读：T1读取了数据A，期间T2修改了数据A，当T1再次读取A时发现与原先不一致</li>
+<li>读“脏”数据：T1保存了对A的修改，但在T2读取A的期间，T1对A的操作被撤销导致A恢复原值，从而T2读取的是<strong>错误数据</strong></li>
 </ul>
 <p>并发控制的主要技术：封锁、时间戳、乐观控制法和多版本并发控制</p>
 <hr>

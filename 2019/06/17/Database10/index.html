@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Godway&#39;s Studio">
 <meta property="og:description" content="参考书目《数据库系统概论（第5版）》  事务的基本概念事务是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位COMMIT操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中ROLLBACK操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态事务的ACID特性：  原子性（Atomicity）">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-18T05:07:44.137Z">
+<meta property="og:updated_time" content="2019-06-19T01:49:34.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库原理——第十章：数据库恢复技术">
 <meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  事务的基本概念事务是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位COMMIT操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中ROLLBACK操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态事务的ACID特性：  原子性（Atomicity）">
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-18 13:07:44" itemprop="dateModified" datetime="2019-06-18T13:07:44+08:00">2019-06-18</time>
+                <time title="Modified: 2019-06-19 09:49:34" itemprop="dateModified" datetime="2019-06-19T09:49:34+08:00">2019-06-19</time>
               
             
           </span>
@@ -534,8 +534,8 @@
 </ul>
 <p>为保证数据库是可恢复的，登记日志文件的两条原则：</p>
 <ul>
-<li>登记的次序严格按并发事务执行的时间次序</li>
-<li>必须先写日志文件，后写数据库</li>
+<li><strong>登记的次序严格按并发事务执行的时间次序</strong></li>
+<li><strong>必须先写日志文件，后写数据库</strong></li>
 </ul>
 <hr>
 <h2 id="恢复策略"><a href="#恢复策略" class="headerlink" title="恢复策略"></a>恢复策略</h2><h3 id="事务故障的恢复"><a href="#事务故障的恢复" class="headerlink" title="事务故障的恢复"></a>事务故障的恢复</h3><p>事务故障是指在运行至正常终止点前被终止，此时恢复子系统利用日志文件撤销（UNDO）此事务已对数据库进行的修改<br>事务故障的恢复由系统自动完成，对用户是透明的<br>恢复步骤为：</p>
@@ -556,7 +556,7 @@
 <li>对撤销队列中的各个事务进行撤销（UNDO）处理</li>
 <li>对重做队列中的各个事务进行重做（REDO）处理</li>
 </ol>
-<h3 id="介质故障的恢复（需要数据库管理员介入）"><a href="#介质故障的恢复（需要数据库管理员介入）" class="headerlink" title="介质故障的恢复（需要数据库管理员介入）"></a>介质故障的恢复（需要数据库管理员介入）</h3><p>发生介质故障后，磁盘上的物理数据和日志文件被破坏，这是最严重的故障，恢复方法是<strong>重装数据库，然后重做已完成的事务</strong><br>介质故障的恢复需要数据库管理员介入<br>恢复步骤为：</p>
+<h3 id="介质故障的恢复"><a href="#介质故障的恢复" class="headerlink" title="介质故障的恢复"></a>介质故障的恢复</h3><p>发生介质故障后，磁盘上的物理数据和日志文件被破坏，这是最严重的故障，恢复方法是<strong>重装数据库，然后重做已完成的事务</strong><br>介质故障的恢复需要数据库管理员介入<br>恢复步骤为：</p>
 <ol>
 <li>装入最新的数据库副本</li>
 <li>装入相应的日志文件副本，重做已完成的事务</li>
@@ -567,6 +567,24 @@
 <li>建立检查点时刻所有正在执行的事务清单</li>
 <li>这些事务最近一个日志记录的地址</li>
 </ul>
+<p>重新开始文件用来记录各个检查点记录在日志文件中的地址<br><strong>动态维护日志文件的方法是，周期性地执行建立检查点、保存数据库状态的操作</strong>，具体步骤为：  </p>
+<ol>
+<li>将当前日志缓冲区中的所有日志记录写入磁盘的日志文件上</li>
+<li>在日志文件中写入一个检查点记录</li>
+<li>将当前数据缓冲区的所有数据记录写入磁盘的数据库中</li>
+<li>把检查点记录在日志文件中的地址写入一个重新开始文件</li>
+</ol>
+<p><strong>简化为：保存日志 -&gt; 生成检查点 -&gt; 保存数据提交到数据库 -&gt; 将检查点写入重新开始文件</strong><br><strong>使用检查点方法可以改善恢复效率</strong><br>系统使用检查点方法进行恢复的步骤：</p>
+<ol>
+<li>从重新开始文件中找到最后一个检查点记录在日志文件中的地址，利用该地址找到日志文件中最后一个检查点记录</li>
+<li>由该检查点记录得到检查点建立时刻所有正在执行的事务清单，并将其做为UNDO-LIST。另外新建一个空的REDO-LIST</li>
+<li>从检查点开始正向扫描日志文件<ul>
+<li>如有新开始的事务T，将T加入UNDO-LIST</li>
+<li>如有提交的事务J，<strong>将J从UNDO-LIST移入REDO-LIST</strong></li>
+</ul>
+</li>
+<li>对UNDO-LIST中的每个事务执行<strong>撤销</strong>操作；对REDO-LIST中的每个事务执行<strong>重做</strong>操作</li>
+</ol>
 
       
     </div>
@@ -797,7 +815,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的基本概念"><span class="nav-number">1.</span> <span class="nav-text">事务的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#故障的种类"><span class="nav-number">2.</span> <span class="nav-text">故障的种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复的实现技术"><span class="nav-number">3.</span> <span class="nav-text">恢复的实现技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据转储（backup）"><span class="nav-number">3.1.</span> <span class="nav-text">数据转储（backup）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登记日志文件（logging）"><span class="nav-number">3.2.</span> <span class="nav-text">登记日志文件（logging）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复策略"><span class="nav-number">4.</span> <span class="nav-text">恢复策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务故障的恢复"><span class="nav-number">4.1.</span> <span class="nav-text">事务故障的恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统故障的恢复"><span class="nav-number">4.2.</span> <span class="nav-text">系统故障的恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#介质故障的恢复（需要数据库管理员介入）"><span class="nav-number">4.3.</span> <span class="nav-text">介质故障的恢复（需要数据库管理员介入）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具有检查点的恢复技术"><span class="nav-number">5.</span> <span class="nav-text">具有检查点的恢复技术</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的基本概念"><span class="nav-number">1.</span> <span class="nav-text">事务的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#故障的种类"><span class="nav-number">2.</span> <span class="nav-text">故障的种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复的实现技术"><span class="nav-number">3.</span> <span class="nav-text">恢复的实现技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据转储（backup）"><span class="nav-number">3.1.</span> <span class="nav-text">数据转储（backup）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登记日志文件（logging）"><span class="nav-number">3.2.</span> <span class="nav-text">登记日志文件（logging）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复策略"><span class="nav-number">4.</span> <span class="nav-text">恢复策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务故障的恢复"><span class="nav-number">4.1.</span> <span class="nav-text">事务故障的恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统故障的恢复"><span class="nav-number">4.2.</span> <span class="nav-text">系统故障的恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#介质故障的恢复"><span class="nav-number">4.3.</span> <span class="nav-text">介质故障的恢复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具有检查点的恢复技术"><span class="nav-number">5.</span> <span class="nav-text">具有检查点的恢复技术</span></a></li></ol></div>
             
 
           </div>
