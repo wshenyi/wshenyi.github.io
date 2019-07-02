@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/6.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/7.png">
 <meta property="og:image" content="https://godway999.github.io/2019/05/09/Network3/8.png">
-<meta property="og:updated_time" content="2019-06-17T11:50:50.655Z">
+<meta property="og:updated_time" content="2019-07-02T15:46:33.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——第三章：运输层">
 <meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  概述和运输层服务 网络层提供了主机之间的逻辑通信，而运输层为运行在不同主机上的进程之间提供了逻辑通信 运输协议能够提供的服务不一定受制于底层网络层协议的服务模型。例如，即使网络协议不可靠或不保证机密性，运输协议也能提供可靠的数据传输或加密服务  IP的服务模型是尽力而为(best-effort)交付服务，它不保证报文段的交付、按序到达或完整性。从">
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-17 19:50:50" itemprop="dateModified" datetime="2019-06-17T19:50:50+08:00">2019-06-17</time>
+                <time title="Modified: 2019-07-02 23:46:33" itemprop="dateModified" datetime="2019-07-02T23:46:33+08:00">2019-07-02</time>
               
             
           </span>
@@ -690,8 +690,16 @@
 </li>
 </ul>
 <hr>
-<h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><p>一图胜千言。。。<br><img src="/2019/05/09/Network3/8.png"></p>
-<script type="math/tex; mode=display">一条连接的平均吞吐量 = \frac{1.22 \times MSS}{RTT \sqrt{L}}</script>
+<h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><p>一图胜千言。。。<br><img src="/2019/05/09/Network3/8.png">  </p>
+<script type="math/tex; mode=display">一条连接的平均吞吐量 = \frac{1.22 \times MSS}{RTT \sqrt{L}}</script><p>TCP拥塞控制发展演进</p>
+<ol>
+<li>Tahoe 是 TCP 的早期版本,包括3 个最基本的拥塞控制算法:“慢启动” , “拥塞避免”和“快速重传”,“快速重传”根据 3 个重复的应答报文来判断报文的丢失,减少了超时重传的发生.</li>
+<li>Reno 在 Tahoe的基础上增加了“快速恢复”[25].“快速恢复”使用“管子”模型的“报文守恒”特性.发送方每收到一个重复的应答,就认为已经有一个报文离开网络,于是将发送方的拥塞窗口加一.  </li>
+<li>NewReno 对 Reno中“快速恢复”算法进行了补充.它考虑了一个发送窗口内多个报文丢失的情况.在“快速恢复”算法中,发送方收到一个不重复的应答后就退出“快速恢复”状态.而在NewReno 中,<strong>只有当所有报文都被应答后才退出“快速恢复”状态</strong>.</li>
+<li>SACK 也关注一个窗口内多个报文的丢失,它使用“选择性重复”(selective repeat)策略</li>
+<li>TCP Vegas通过观察TCP连接中RTT值改变感知网络是否发生拥塞，从而控制拥塞窗口大小</li>
+</ol>
+
       
     </div>
 
