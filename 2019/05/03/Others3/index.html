@@ -98,17 +98,31 @@
 
 
 
-  <meta name="description" content="参考书目《数据库系统概论（第5版）》  数据库系统概述数据库的4个基本概念数据、数据库、数据库管理系统、数据库系统是4个核心概念  数据（data）   数据是数据库中存储的基本对象   数据库（DataBase, DB)   数据库是存放数据的仓库 数据库是长期存储在计算机内、有组织的、可共享的大量数据的集合 数据库数据具有永久存储、有组织和可共享三个基本特点   数据库管理系统（DataBa">
+  <meta name="description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库原理——第一章：绪论">
-<meta property="og:url" content="https://godway999.github.io/2019/04/21/Database1/index.html">
+<meta property="og:title" content="Mac本地用Eclipse配置NS3开发环境(完整教程)">
+<meta property="og:url" content="https://godway999.github.io/2019/05/03/Others3/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
-<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  数据库系统概述数据库的4个基本概念数据、数据库、数据库管理系统、数据库系统是4个核心概念  数据（data）   数据是数据库中存储的基本对象   数据库（DataBase, DB)   数据库是存放数据的仓库 数据库是长期存储在计算机内、有组织的、可共享的大量数据的集合 数据库数据具有永久存储、有组织和可共享三个基本特点   数据库管理系统（DataBa">
+<meta property="og:description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-19T00:22:12.309Z">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic1.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic2.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic3.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic4.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic5.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic6.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic7.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic8.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic9.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic10.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic11.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic12.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic13.png">
+<meta property="og:updated_time" content="2019-07-03T02:43:17.384Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库原理——第一章：绪论">
-<meta name="twitter:description" content="参考书目《数据库系统概论（第5版）》  数据库系统概述数据库的4个基本概念数据、数据库、数据库管理系统、数据库系统是4个核心概念  数据（data）   数据是数据库中存储的基本对象   数据库（DataBase, DB)   数据库是存放数据的仓库 数据库是长期存储在计算机内、有组织的、可共享的大量数据的集合 数据库数据具有永久存储、有组织和可共享三个基本特点   数据库管理系统（DataBa">
+<meta name="twitter:title" content="Mac本地用Eclipse配置NS3开发环境(完整教程)">
+<meta name="twitter:description" content="前言  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境">
+<meta name="twitter:image" content="https://godway999.github.io/2019/05/03/Others3/pic1.png">
 
 
 
@@ -116,7 +130,7 @@
 
   
   
-  <link rel="canonical" href="https://godway999.github.io/2019/04/21/Database1/">
+  <link rel="canonical" href="https://godway999.github.io/2019/05/03/Others3/">
 
 
 
@@ -126,7 +140,7 @@
   };
 </script>
 
-  <title>数据库原理——第一章：绪论 | Godway's Studio</title>
+  <title>Mac本地用Eclipse配置NS3开发环境(完整教程) | Godway's Studio</title>
   
 
 
@@ -353,7 +367,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/04/21/Database1/">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/05/03/Others3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Godway">
@@ -370,7 +384,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">数据库原理——第一章：绪论
+          <h2 class="post-title" itemprop="name headline">Mac本地用Eclipse配置NS3开发环境(完整教程)
 
               
             
@@ -396,7 +410,7 @@
                 
               
 
-              <time title="Created: 2019-04-21 11:14:24" itemprop="dateCreated datePublished" datetime="2019-04-21T11:14:24+08:00">2019-04-21</time>
+              <time title="Created: 2019-05-03 21:48:29" itemprop="dateCreated datePublished" datetime="2019-05-03T21:48:29+08:00">2019-05-03</time>
             
 
             
@@ -413,7 +427,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-19 08:22:12" itemprop="dateModified" datetime="2019-06-19T08:22:12+08:00">2019-06-19</time>
+                <time title="Modified: 2019-07-03 10:43:17" itemprop="dateModified" datetime="2019-07-03T10:43:17+08:00">2019-07-03</time>
               
             
           </span>
@@ -430,7 +444,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库原理/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a></span>
 
                 
                 
@@ -472,166 +486,19 @@
       
 
       
-        <blockquote>
-<p><em>参考书目《数据库系统概论（第5版）》</em></p>
-</blockquote>
-<h2 id="数据库系统概述"><a href="#数据库系统概述" class="headerlink" title="数据库系统概述"></a>数据库系统概述</h2><h3 id="数据库的4个基本概念"><a href="#数据库的4个基本概念" class="headerlink" title="数据库的4个基本概念"></a>数据库的4个基本概念</h3><p><strong>数据</strong>、<strong>数据库</strong>、<strong>数据库管理系统</strong>、<strong>数据库系统</strong>是4个核心概念</p>
-<ol>
-<li><strong>数据</strong>（data）  <ul>
-<li>数据是数据库中存储的基本对象</li>
-</ul>
-</li>
-<li><strong>数据库</strong>（DataBase, DB)  <ul>
-<li>数据库是存放数据的仓库</li>
-<li>数据库是长期存储在计算机内、有组织的、可共享的大量数据的集合</li>
-<li>数据库数据具有<strong>永久存储</strong>、<strong>有组织</strong>和<strong>可共享</strong>三个基本特点</li>
-</ul>
-</li>
-<li><strong>数据库管理系统</strong>（DataBase Management System, DBMS）<ul>
-<li>数据库管理系统是位于用户与操作系统之间的一层数据管理软件</li>
-<li>数据库管理系统和操作系统一样是<strong>计算机的基础软件</strong>，也是一个大型复杂的<strong>软件系统</strong></li>
-<li>体系结构为(从低到高)：硬件 -&gt; 操作系统 -&gt; 数据库管理系统 -&gt; 应用开发工具 -&gt; 应用系统</li>
-</ul>
-</li>
-<li><strong>数据库系统</strong>（DataBase System, DBS）<ul>
-<li>数据库系统是由<strong>数据库</strong>、<strong>数据库管理系统</strong>(及其应用开发工具)、<strong>应用程序</strong>和<strong>数据库管理人员</strong>组成的存储、管理、处理和维护数据的系统</li>
-</ul>
-</li>
-</ol>
-<h3 id="数据库管理"><a href="#数据库管理" class="headerlink" title="数据库管理"></a>数据库管理</h3><p><strong>数据库管理是指对数据进行分类、组织、编码、存储、检索和维护</strong><br>数据库管理技术的历史：人工管理 -&gt; 文件系统 -&gt; 数据库系统<br>人工管理阶段特点：</p>
-<ul>
-<li>数据不保存</li>
-<li>应用程序管理数据</li>
-<li>数据不共享</li>
-<li>数据不具有独立性  </li>
-</ul>
-<p>文件系统阶段特点：</p>
-<ul>
-<li>数据可以长期保存</li>
-<li>由文件系统管理数据</li>
-<li>数据共享性差，冗余度大</li>
-<li>数据独立性差</li>
-</ul>
-<p><strong>数据库系统的特点</strong>：</p>
-<ol>
-<li><strong>数据结构化</strong><ul>
-<li>数据库系统实现整体数据的结构化，这也是其与文件系统的本质区别</li>
-<li><strong>结构化</strong>是指数据库中的数据不再仅针对某一具体应用，而是面向整个组织或企业</li>
-</ul>
-</li>
-<li><strong>数据的共享性高、冗余度低且易扩充</strong><ul>
-<li>数据的共享减少数据冗余，节约存储空间，避免数据之间的不相容性和不一致性</li>
-<li>由于结构化使得数据库系统弹性大，易于扩充</li>
-</ul>
-</li>
-<li><strong>数据独立性高</strong><ul>
-<li><strong>物理独立性</strong>：应用程序和物理存储是相互独立的</li>
-<li><strong>逻辑独立性</strong>：应用程序和逻辑结构是相互独立的</li>
-<li>数据独立性是由<strong>二级映像功能</strong>来保证的</li>
-</ul>
-</li>
-<li><strong>数据由数据库管理系统统一管理和控制</strong><ul>
-<li>数据安全性保护</li>
-<li>数据完整性检查</li>
-<li>并发控制</li>
-<li>数据库恢复</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p>数据模型分两类：第一类是<strong>概念模型</strong>，第二类是<strong>逻辑模型和物理模型</strong>  </p>
-<ul>
-<li><strong>概念模型</strong>主要用于<strong>数据库设计</strong></li>
-<li><strong>逻辑模型</strong>主要用于<strong>数据库管理系统的实现</strong>；常用的逻辑模型：层次模型、网状模型、关系模型、面向对象数据模型、 对象关系数据模型、半结构化数据模型等</li>
-<li><strong>物理模型</strong>描述数据在系统内部的表示方式和存取方法</li>
-</ul>
-<p>概念模型的一种表示方法：实体-联系方法（Entity-Relationship），即<strong>E-R图</strong><br>数据模型的组成要素:<strong>数据结构</strong>、<strong>数据操作</strong>、<strong>数据的完整性约束条件</strong><br>关系模型术语对比</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>关系术语</th>
-<th>一般表格的术语  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>关系名</td>
-<td>表名</td>
-</tr>
-<tr>
-<td>关系模式</td>
-<td>表头（表格的描述）</td>
-</tr>
-<tr>
-<td>关系</td>
-<td>（一张）二维表</td>
-</tr>
-<tr>
-<td>元组</td>
-<td>记录或行</td>
-</tr>
-<tr>
-<td>属性</td>
-<td>列</td>
-</tr>
-<tr>
-<td>属性名</td>
-<td>列名</td>
-</tr>
-<tr>
-<td>属性值</td>
-<td>列值</td>
-</tr>
-<tr>
-<td>分量</td>
-<td>一条记录中的一个列值</td>
-</tr>
-<tr>
-<td>非规范关系</td>
-<td>表中有表（大表中嵌有小表）</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>关系的完整性约束条件</p>
-<ul>
-<li>实体完整性</li>
-<li>参照完整性</li>
-<li>用户定义的完整性</li>
-</ul>
-<hr>
-<h2 id="数据库系统的结构"><a href="#数据库系统的结构" class="headerlink" title="数据库系统的结构"></a>数据库系统的结构</h2><p>数据库系统的三级模式结构是指数据库系统是由<strong>外模式</strong>、<strong>模式</strong>和<strong>内模式</strong>三级构成，分别代表数据的三个抽象级别  </p>
-<ul>
-<li><strong>模式</strong>：也称为<strong>逻辑模式</strong>，是数据库中全体数据的逻辑结构和特征的描述，是所有用户的公共数据视图<ul>
-<li>MySQL中的database等价于这里的模式</li>
-<li>一个数据库只有一个模式</li>
-</ul>
-</li>
-<li><strong>外模式</strong>：也称为<strong>子模式</strong>或<strong>用户模式</strong>，它是数据库用户能够看见和使用的<strong>局部数据</strong>的逻辑结构和特征的描述，是数据库用户的数据视图，是与某一应用有关的数据的逻辑表示<ul>
-<li>外模式通常是模式的<strong>子集</strong></li>
-<li>MySQL中的<strong>视图</strong>和SELECT出的结果(部分基本表)等价于这里的外模式</li>
-<li>外模式可用来保证数据库安全性，用户只能访问和看见所对应的外模式中的数据</li>
-</ul>
-</li>
-<li><strong>内模式</strong>：也称为<strong>存储模式</strong>，它是数据物理结构和存储方式的描述，是数据在数据库内部的组织方式<ul>
-<li>一个数据库只有一个内模式</li>
-</ul>
-</li>
-</ul>
-<h3 id="数据库的二级映射功能与数据独立性"><a href="#数据库的二级映射功能与数据独立性" class="headerlink" title="数据库的二级映射功能与数据独立性"></a>数据库的二级映射功能与数据独立性</h3><ol>
-<li><strong>外模式/模式映像</strong><br>当<strong>模式</strong>改变时，由数据库管理员对各个<strong>外模式/模式</strong>的映像作相应改变，可以使<strong>外模式</strong>保持不变；应用程序是依据数据的外模式编写的，从而应用程序不必修改，保证了数据与程序的逻辑独立性，简称数据的<strong>逻辑独立性</strong></li>
-<li><strong>模式/内模式映像</strong><br>当数据库的<strong>存储结构</strong>改变时，由数据库管理员对各个<strong>模式/内模式</strong>的映像作相应改变，可以使<strong>模式</strong>保持不变，从而应用程序也不必改变，保证了数据与程序的物理独立性，简称数据的<strong>物理独立性</strong></li>
-</ol>
-<p>数据库的二级映射保证了数据库外模式的稳定性，从而从底层保证了应用程序的稳定性（一般不需要修改）<br><strong>数据与程序之间的独立性使得数据的定义和描述可以从应用程序中分离出去</strong></p>
-<hr>
-<h2 id="数据库系统的组成"><a href="#数据库系统的组成" class="headerlink" title="数据库系统的组成"></a>数据库系统的组成</h2><p><strong>数据库系统</strong>是由<strong>数据库</strong>、<strong>数据库管理系统</strong>(及其应用开发工具)、<strong>应用程序</strong>和<strong>数据库管理人员</strong>组成  </p>
-<ol>
-<li>硬件平台及数据库</li>
-<li>软件</li>
-<li>人员</li>
-</ol>
-
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。</p>
+<h2 id="在终端下编译和运行NS3程序"><a href="#在终端下编译和运行NS3程序" class="headerlink" title="在终端下编译和运行NS3程序"></a>在终端下编译和运行NS3程序</h2><p>  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:<code>build.py</code>,<code>bake</code>,<code>waf</code>。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的依赖，我觉得容易出问题。<br>  在我的Mac上由于使用clang++，一定要加上<code>--disable-werror</code>，如果需要搭建python3的开发环境，需要指明python3具体位置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> (本地存放位置)/ns-allinone-3.29/ns-3.29/</span><br><span class="line">./waf --<span class="built_in">enable</span>-test --build-profile=debug --python=/usr/<span class="built_in">local</span>/bin/python3 --with-python=python3 --<span class="built_in">disable</span>-werror configure</span><br><span class="line">./waf build</span><br></pre></td></tr></table></figure>
+<p>经过一段时间的编译之后，在当前目录下运行一个官方例程<code>scratch-simulator</code>，如果一切顺利可以看到程序输出一行<code>Scratch Simulator</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./waf --run scratch/scratch-simulator</span><br></pre></td></tr></table></figure>
+<h2 id="在Eclipse上配置NS3开发环境"><a href="#在Eclipse上配置NS3开发环境" class="headerlink" title="在Eclipse上配置NS3开发环境"></a>在Eclipse上配置NS3开发环境</h2><p>  作为一个新手，如果没有一个友好的开发环境，很容易就进入从入门到放弃的阶段。NS3最让我不能接受的是必须用官方给的waf编译代码，我一开始尝试在Xcode搭建环境，然而Xcode好像对于使用外部编译器的支持不是很好，最终我还是转到在Eclipse上搭建开发环境。</p>
+<h3 id="在Eclipse上新建项目"><a href="#在Eclipse上新建项目" class="headerlink" title="在Eclipse上新建项目"></a>在Eclipse上新建项目</h3><p>按如下顺序<em>File -&gt; New -&gt; C/C++ Project</em>，创建C++项目<br><img src="/2019/05/03/Others3/pic1.png" title="Mac英文环境"><br><strong>着重强调！！！NS3的代码必须放到<em>(本地存放位置)/ns-allinone-3.29/ns-3.29/scratch/</em>文件夹下才能被正确编译执行</strong>所以工程位置放在<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/</code>,这里工程名字自己定，我这里取名为<code>NS3</code>，右侧的编译器随便选一个，之后点<code>finish</code>完成。<br><img src="/2019/05/03/Others3/pic2.png" title="Mac英文环境">  </p>
+<h3 id="编译NS3项目"><a href="#编译NS3项目" class="headerlink" title="编译NS3项目"></a>编译NS3项目</h3><p>如果前一步没遇到问题，现在左侧的工程目录应该基本长这样子，以后就直接在scratch目录下新创xxx.cc文件就好了。<br><img src="/2019/05/03/Others3/pic3.png" title="Mac英文环境"><br>之后这里右键NS3文件夹，进入工程属性面板。右侧点击<strong>C/C++ Build</strong>然后照我的样子配置两处。<br><strong>编译器类型记得选为外部编译器</strong>，编译器选为当前目录下的waf编译器，编译结果放在当前目录下的build文件夹中<br><img src="/2019/05/03/Others3/pic4.png" title="Mac英文环境"><br><img src="/2019/05/03/Others3/pic5.png" title="Mac英文环境"><br>之后进入到<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/</code>进行<code>configure</code>操作，如果之前已经<code>configure</code>过了可以跳过该步骤。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> (本地存放位置)/ns-allinone-3.29/ns-3.29/</span><br><span class="line">./waf --<span class="built_in">enable</span>-test --build-profile=debug --python=/usr/<span class="built_in">local</span>/bin/python3 --with-python=python3 --<span class="built_in">disable</span>-werror configure</span><br></pre></td></tr></table></figure>
+<p><code>configure</code>过了之后点击<em>Eclipse</em>左上角的<strong>Build</strong>按钮就可以编译整个NS3工程了</p>
+<h3 id="配置Eclipse使用外部编译器waf"><a href="#配置Eclipse使用外部编译器waf" class="headerlink" title="配置Eclipse使用外部编译器waf"></a>配置Eclipse使用外部编译器waf</h3><p>构建完了整个NS3工程之后，我们后续怎么运行我们自己写的代码呢？这时候需要配置使用外部编译器waf。<br>在<em>Eclipse</em>顶部按如下顺序<em>Run -&gt; Extern Tools -&gt; Extern Tools Configurations</em><br><img src="/2019/05/03/Others3/pic6.png" title="Mac英文环境"><br>左侧右键点击新建一个编译器。<br>我这里将这个外部编译器取名为<code>ns3-waf</code>，其余两个和之前一样，参数这里填写<code>--run &quot;${string_prompt}&quot;</code><br><img src="/2019/05/03/Others3/pic7.png" title="Mac英文环境"><br>这里点掉这个<code>Build before launch</code>选项<br><img src="/2019/05/03/Others3/pic8.png" title="Mac英文环境"><br>之后点击<em>Eclipse</em>上方红色方框内的按钮<br><img src="/2019/05/03/Others3/pic9.png" title="Mac英文环境"><br>然后会弹出一个选项框让填写<strong>你要编译的文件的名称</strong>，<strong>注意这里不用加.cc后缀</strong>,比如我要编译运行<code>scratch</code>文件夹下的<code>scratch-simulator.cc</code>，就直接填写<code>scratch-simulator</code>或<code>scratch/scratch-simulator</code>。如果你的自己写的文件之前已经build过了，就不需要再加文件目录<code>scratch/</code>，直接填写文件名就好。<br><img src="/2019/05/03/Others3/pic10.png" title="Mac英文环境"><br>下方显示运行结果<br><img src="/2019/05/03/Others3/pic11.png" title="Mac英文环境">  </p>
+<h3 id="配置NS工程路径"><a href="#配置NS工程路径" class="headerlink" title="配置NS工程路径"></a>配置NS工程路径</h3><p>此时虽然能够运行自己写的NS3代码了，但是代码中却还有一堆烦人的下波浪线〰️，并且头文件的引用等都是查询不到的，这里就需要配置一下NS3工程路径和环境。<br>和之前一样，首先进入属性面板。然后找到图中所示的配置目录<br>这一步将<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/build/ns3/</code>下所有工程头文件包含了进来。<br><img src="/2019/05/03/Others3/pic12.png" title="Mac英文环境"><br>然后构建会花费一小会时间，之后可以在左侧<code>NS3/includes/</code>下看到新生成了一个<code>NS3/build/ns3</code>文件，然后代码中的波浪线就全部消失了<br><img src="/2019/05/03/Others3/pic13.png" title="Mac英文环境">  </p>
+<h3 id="配置完成"><a href="#配置完成" class="headerlink" title="配置完成"></a>配置完成</h3>
       
     </div>
 
@@ -661,14 +528,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/05/03/Database7/" rel="next" title="数据库原理——第七章：数据库设计">
+                <i class="fa fa-chevron-left"></i> 数据库原理——第七章：数据库设计
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/22/Database2/" rel="prev" title="数据库原理——第二章：关系数据库">
-                数据库原理——第二章：关系数据库 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/04/Others1/" rel="prev" title="Markdown中Latex常用符号">
+                Markdown中Latex常用符号 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -855,7 +726,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库系统概述"><span class="nav-number">1.</span> <span class="nav-text">数据库系统概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库的4个基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">数据库的4个基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库管理"><span class="nav-number">1.2.</span> <span class="nav-text">数据库管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据模型"><span class="nav-number">2.</span> <span class="nav-text">数据模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库系统的结构"><span class="nav-number">3.</span> <span class="nav-text">数据库系统的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库的二级映射功能与数据独立性"><span class="nav-number">3.1.</span> <span class="nav-text">数据库的二级映射功能与数据独立性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库系统的组成"><span class="nav-number">4.</span> <span class="nav-text">数据库系统的组成</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在终端下编译和运行NS3程序"><span class="nav-number">2.</span> <span class="nav-text">在终端下编译和运行NS3程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在Eclipse上配置NS3开发环境"><span class="nav-number">3.</span> <span class="nav-text">在Eclipse上配置NS3开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在Eclipse上新建项目"><span class="nav-number">3.1.</span> <span class="nav-text">在Eclipse上新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译NS3项目"><span class="nav-number">3.2.</span> <span class="nav-text">编译NS3项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Eclipse使用外部编译器waf"><span class="nav-number">3.3.</span> <span class="nav-text">配置Eclipse使用外部编译器waf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置NS工程路径"><span class="nav-number">3.4.</span> <span class="nav-text">配置NS工程路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置完成"><span class="nav-number">3.5.</span> <span class="nav-text">配置完成</span></a></li></ol></li></ol></div>
             
 
           </div>
