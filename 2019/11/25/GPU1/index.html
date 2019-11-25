@@ -98,13 +98,24 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Godway&#39;s Studio">
-<meta property="og:url" content="https://godway999.github.io/archives/2019/04/index.html">
+  <meta name="description" content="Physical Architecture of GPU下图为Nvidia官网上找的一个GPU主板的概念图，对应Device  Device：与host做区分，可以理解为是指整个显卡   如下图所示（Nvidia Tesla P100），共包含60个SM（6GPC x 10SM）  SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nvidia GPU 基本概念">
+<meta property="og:url" content="https://godway999.github.io/2019/11/25/GPU1/index.html">
 <meta property="og:site_name" content="Godway&#39;s Studio">
+<meta property="og:description" content="Physical Architecture of GPU下图为Nvidia官网上找的一个GPU主板的概念图，对应Device  Device：与host做区分，可以理解为是指整个显卡   如下图所示（Nvidia Tesla P100），共包含60个SM（6GPC x 10SM）  SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一些">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic2.png">
+<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic3.png">
+<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic4.png">
+<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic6.png">
+<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic1.png">
+<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic5.png">
+<meta property="og:updated_time" content="2019-11-25T02:36:25.216Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Godway&#39;s Studio">
+<meta name="twitter:title" content="Nvidia GPU 基本概念">
+<meta name="twitter:description" content="Physical Architecture of GPU下图为Nvidia官网上找的一个GPU主板的概念图，对应Device  Device：与host做区分，可以理解为是指整个显卡   如下图所示（Nvidia Tesla P100），共包含60个SM（6GPC x 10SM）  SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一些">
+<meta name="twitter:image" content="https://godway999.github.io/2019/11/25/GPU1/pic2.png">
 
 
 
@@ -112,7 +123,7 @@
 
   
   
-  <link rel="canonical" href="https://godway999.github.io/archives/2019/04/">
+  <link rel="canonical" href="https://godway999.github.io/2019/11/25/GPU1/">
 
 
 
@@ -122,7 +133,7 @@
   };
 </script>
 
-  <title>Archive | Godway's Studio</title>
+  <title>Nvidia GPU 基本概念 | Godway's Studio</title>
   
 
 
@@ -170,7 +181,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -280,7 +291,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -329,279 +340,255 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/11/25/GPU1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Studio">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h2 class="post-title" itemprop="name headline">Nvidia GPU 基本概念
+
+              
+            
+          </h2>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-11-25 08:46:56 / Modified: 10:36:25" itemprop="dateCreated datePublished" datetime="2019-11-25T08:46:56+08:00">2019-11-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-        
-        Um..! 23 posts in total. Keep on posting.
-      </span>
-      
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/GPU/" itemprop="url" rel="index"><span itemprop="name">GPU</span></a></span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h2 class="archive-year" id="archive-year-2019">2019</h2>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/27/Database6/" itemprop="url">
+          
             
-              <span itemprop="name">数据库原理——第六章：关系数据库理论</span>
             
-          </a>
-        
-      </h3>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T19:42:54+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
+          
+          
 
-    </header>
-  </article>
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
 
+          
 
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/26/Database5/" itemprop="url">
-            
-              <span itemprop="name">数据库原理——第五章：数据库完整性</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-26T19:42:51+08:00" content="2019-04-26">
-          04-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/25/Database4/" itemprop="url">
-            
-              <span itemprop="name">数据库原理——第四章：数据库安全性</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-25T19:42:48+08:00" content="2019-04-25">
-          04-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h2 id="Physical-Architecture-of-GPU"><a href="#Physical-Architecture-of-GPU" class="headerlink" title="Physical Architecture of GPU"></a>Physical Architecture of GPU</h2><p>下图为Nvidia官网上找的一个GPU主板的概念图，对应Device</p>
+<ul>
+<li>Device：与host做区分，可以理解为是指整个显卡</li>
+</ul>
+<img src="/2019/11/25/GPU1/pic2.png">
+<p>如下图所示（Nvidia Tesla P100），共包含60个SM（6GPC x 10SM）</p>
+<ul>
+<li>SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一些硬件资源组成<ul>
+<li>其他硬件资源如：warp scheduler，register，shared memory等</li>
+<li>同一个block中的warp一定分配给同一个SM</li>
+<li>每个SM有自己独立的local L1 cache，但所有SM会共用Device的L2 cache</li>
+</ul>
+</li>
+</ul>
+<img src="/2019/11/25/GPU1/pic3.png">
+<p>每个SM有自己的内部结构，如下图所示GP100（Nvidia Tesla P100）中的SM内部结构，在GP100里，每一个SM有左右两个SM Processing Block（SMP）<br><img src="/2019/11/25/GPU1/pic4.png"></p>
+<ul>
+<li>SP(Streaming Processor)：最基本的处理单元，也称为CUDA core，表示在上图中为绿色的小格子<ul>
+<li>相当于一个简易的CPU</li>
+<li>内部包括控制单元Dispatch Port、Operand Collector，以及浮点计算单元FP Unit、整数计算单元Int Unit，另外还包括计算结果队列。当然还有Compare、Logic、Branch等</li>
+</ul>
+</li>
+</ul>
+<p>下图为SP（CUDA core）的内部结构<br><img src="/2019/11/25/GPU1/pic6.png"></p>
+<h2 id="Software-Concept-in-CUDA"><a href="#Software-Concept-in-CUDA" class="headerlink" title="Software Concept in CUDA"></a>Software Concept in CUDA</h2><ul>
+<li>Thread：一个CUDA的并行程序会被分配到多个threads来执行<ul>
+<li>一个SP对应执行一个thread</li>
+<li>threadId在cuda中为三维的概念，在一个block中由(x, y, z)来唯一定位</li>
+</ul>
+</li>
+<li>Block：多个thread群组成一个block<ul>
+<li>同一个block中的threads可以同步，也可以通过shared memory通信</li>
+<li>blockId在cuda中为二维的概念，在一个grid中由(x, y)来唯一定位</li>
+</ul>
+</li>
+<li>Grid：多个block构成grid<ul>
+<li>一个grid对应一个执行一个kernel函数</li>
+</ul>
+</li>
+</ul>
+<p>空间对应如下图所示<br><img src="/2019/11/25/GPU1/pic1.png"></p>
+<ul>
+<li>warp：执行任务的调度单元，同一时间一个SM只能运行一个warp<ul>
+<li>类比于CPU中的进程，当一个warp阻塞时，SM将切换执行另一个warp</li>
+<li>当前CUDA的warp大小为32个线程。这里表明Nvidia的GPU执行粒度小，执行线程粒度越小，并行度越高，掩盖延迟的能力越强</li>
+<li>同在一个warp中的线程，以不同数据资源执行相同的指令，即所谓的SIMT（Single Instruction Multiple Thread）</li>
+</ul>
+</li>
+</ul>
+<h2 id="CPU和GPU的结构对比"><a href="#CPU和GPU的结构对比" class="headerlink" title="CPU和GPU的结构对比"></a>CPU和GPU的结构对比</h2><img src="/2019/11/25/GPU1/pic5.png">
+<ul>
+<li>CPU是靠更大的缓存和复杂的逻辑控制（如流水线、乱序执行、指令预测和预处理等等）来掩饰延迟的</li>
+<li>GPU是靠更高的并行度来掩饰延迟的</li>
+</ul>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
+<li>GPU在并发的warp之间切换是没什么消耗的，因为硬件资源早就被分配到所有thread和block，所以新调度的warp的状态已经存储在SM中了。不同于CPU，CPU切换线程需要保存/读取线程上下文（register内容），这是非常耗时的，而GPU为每个threads提供物理register，无需保存/读取上下文。</li>
+<li>register和shared memory是SM的稀缺资源。CUDA将这些资源在程序执行前就分配给所有驻留在SM中的warp，并且整个程序执行周期都不再变动。因此这些有限的资源就会限制每个SM中active warp的数量，实验结果显示一个SM至少要存在6个active warp才能有效掩饰延迟</li>
+</ul>
+<h2 id="Reference-Material"><a href="#Reference-Material" class="headerlink" title="Reference Material"></a>Reference Material</h2><p><a href="https://blog.csdn.net/junparadox/article/details/50540602" target="_blank" rel="noopener">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a><br><a href="https://blog.csdn.net/fpgatom/article/details/82081422" target="_blank" rel="noopener">GPU高性能编程CUDA实战</a><br><a href="https://blog.csdn.net/asasasaababab/article/details/80447254" target="_blank" rel="noopener">Nvidia GPU架构 - Cuda Core，SM，SP</a><br><a href="https://blog.csdn.net/junparadox/article/details/50540602" target="_blank" rel="noopener">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a><br><a href="https://blog.csdn.net/qq_41598072/article/details/82877655" target="_blank" rel="noopener">CUDA中grid、block、thread、warp与SM、SP的关系</a></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/24/Database3/" itemprop="url">
-            
-              <span itemprop="name">数据库原理——第三章：关系数据库标准语言SQL</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-24T19:42:45+08:00" content="2019-04-24">
-          04-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/22/Database2/" itemprop="url">
-            
-              <span itemprop="name">数据库原理——第二章：关系数据库</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T19:40:06+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/21/Database1/" itemprop="url">
-            
-              <span itemprop="name">数据库原理——第一章：绪论</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-21T11:14:24+08:00" content="2019-04-21">
-          04-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/03/Others2/" rel="next" title="Shell中的常用通配符，字符类">
+                <i class="fa fa-chevron-left"></i> Shell中的常用通配符，字符类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -621,8 +608,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -745,6 +741,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Physical-Architecture-of-GPU"><span class="nav-number">1.</span> <span class="nav-text">Physical Architecture of GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Software-Concept-in-CUDA"><span class="nav-number">2.</span> <span class="nav-text">Software Concept in CUDA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU和GPU的结构对比"><span class="nav-number">3.</span> <span class="nav-text">CPU和GPU的结构对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Others"><span class="nav-number">4.</span> <span class="nav-text">Others</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference-Material"><span class="nav-number">5.</span> <span class="nav-text">Reference Material</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -915,6 +928,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
 
   
 
@@ -930,6 +947,8 @@
 
   
 
+
+  
 
 
   
