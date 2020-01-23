@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="nbQmeRysWc">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_32x32.ico?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16x16.ico?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="KMP算法：1对1模式匹配参考地址 1对1的意思是给定一个单词看是否在某个文章（长字符串）中出现 123456789101112131415161718192021// 计算next数组public static int[] getNext(String ps) &amp;#123;    char[] p = ps.toCharArray();    int[] next = new int[p.len">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模式匹配算法(KMP+字典树+AC自动机)">
+<meta property="og:url" content="https://godway999.github.io/2019/05/16/Algorithm1/index.html">
+<meta property="og:site_name" content="Godway&#39;s Studio">
+<meta property="og:description" content="KMP算法：1对1模式匹配参考地址 1对1的意思是给定一个单词看是否在某个文章（长字符串）中出现 123456789101112131415161718192021// 计算next数组public static int[] getNext(String ps) &amp;#123;    char[] p = ps.toCharArray();    int[] next = new int[p.len">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-11T00:57:27.015Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="模式匹配算法(KMP+字典树+AC自动机)">
+<meta name="twitter:description" content="KMP算法：1对1模式匹配参考地址 1对1的意思是给定一个单词看是否在某个文章（长字符串）中出现 123456789101112131415161718192021// 计算next数组public static int[] getNext(String ps) &amp;#123;    char[] p = ps.toCharArray();    int[] next = new int[p.len">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://godway999.github.io/2019/05/16/Algorithm1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>模式匹配算法(KMP+字典树+AC自动机) | Godway's Studio</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Godway's Studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">wsy</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/GODWAY999/GODWAY999.github.io" class="github-corner" title="Star me on GitHub" aria-label="Star me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/05/16/Algorithm1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">模式匹配算法(KMP+字典树+AC自动机)
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-16 09:20:06" itemprop="dateCreated datePublished" datetime="2019-05-16T09:20:06+08:00">2019-05-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-11 08:57:27" itemprop="dateModified" datetime="2019-06-11T08:57:27+08:00">2019-06-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="KMP算法：1对1模式匹配"><a href="#KMP算法：1对1模式匹配" class="headerlink" title="KMP算法：1对1模式匹配"></a>KMP算法：1对1模式匹配</h2><p><a href="https://www.cnblogs.com/yjiyjige/p/3263858.html" target="_blank" rel="noopener">参考地址</a></p>
+<p>1对1的意思是给定一个单词看是否在某个文章（长字符串）中出现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 计算next数组</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] getNext(String ps) &#123;</span><br><span class="line">    <span class="keyword">char</span>[] p = ps.toCharArray();</span><br><span class="line">    <span class="keyword">int</span>[] next = <span class="keyword">new</span> <span class="keyword">int</span>[p.length];</span><br><span class="line">    next[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (j &lt; p.length - <span class="number">1</span>) &#123;</span><br><span class="line">       <span class="keyword">if</span> (k == <span class="number">-1</span> || p[j] == p[k]) &#123;</span><br><span class="line">           <span class="keyword">if</span> (p[++j] == p[++k]) &#123; <span class="comment">// 当两个字符相等时要跳过</span></span><br><span class="line">              next[j] = next[k];</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            next[j] = k;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        k = next[k];</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//完整代码</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">KMP</span><span class="params">(String ts, String ps)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>[] t = ts.toCharArray();</span><br><span class="line">    <span class="keyword">char</span>[] p = ps.toCharArray();</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>; <span class="comment">// 主串的位置</span></span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>; <span class="comment">// 模式串的位置</span></span><br><span class="line">    <span class="keyword">int</span>[] next = getNext(ps);</span><br><span class="line">    <span class="keyword">while</span> (i &lt; t.length &amp;&amp; j &lt; p.length) &#123;</span><br><span class="line">       <span class="keyword">if</span> (j == <span class="number">-1</span> || t[i] == p[j]) &#123; <span class="comment">// 当j为-1时，要移动的是i，当然j也要归0</span></span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">           <span class="comment">// i不需要回溯了</span></span><br><span class="line">           <span class="comment">// i = i - j + 1;</span></span><br><span class="line"></span><br><span class="line">            j = next[j]; <span class="comment">// j回到指定位置</span></span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (j == p.length) &#123;</span><br><span class="line">        <span class="keyword">return</span> i - j;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="字典树：1对多模式匹配"><a href="#字典树：1对多模式匹配" class="headerlink" title="字典树：1对多模式匹配"></a>字典树：1对多模式匹配</h2><p>1对多的意思是指给定一个单词，看是否是否出现在一个给定的字典（包含多个单词）中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span>&#123;</span> <span class="comment">// 字典树节点</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> num;<span class="comment">// 有多少单词通过这个节点,即由根至该节点组成的字符串模式出现的次数</span></span><br><span class="line">    <span class="comment">// TrieNode** son;// 所有的儿子节点</span></span><br><span class="line">    TrieNode* son[<span class="number">26</span>];</span><br><span class="line">    <span class="keyword">bool</span> isEnd;<span class="comment">// 是不是最后一个节点</span></span><br><span class="line">    <span class="keyword">char</span> val;<span class="comment">// 节点的值</span></span><br><span class="line"></span><br><span class="line">    TrieNode()&#123;</span><br><span class="line">        num = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// son = new TrieNode*[26];</span></span><br><span class="line">        isEnd = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~TrieNode()&#123;</span><br><span class="line">        <span class="comment">// for(int i = 0; i &lt; 26; i++)&#123;</span></span><br><span class="line">        <span class="comment">//     delete son[i];</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="comment">// delete son;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;root;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立字典树</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="built_in">string</span> str)</span></span>&#123; <span class="comment">// 在字典树中插入一个单词</span></span><br><span class="line">    TrieNode* node = &amp;root;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, len = str.length(); i &lt; len; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> pos = str[i] - <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">if</span> (node-&gt;son[pos] == <span class="literal">NULL</span>)  <span class="comment">//如果当前节点的儿子节点中没有该字符，则构建一个TrieNode并复值该字符</span></span><br><span class="line">        &#123;</span><br><span class="line">            node-&gt;son[pos] = <span class="keyword">new</span> TrieNode;</span><br><span class="line">            node-&gt;son[pos]-&gt;val = str[i];</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span>   <span class="comment">//如果已经存在，则将由根至该儿子节点组成的字符串模式出现的次数+1</span></span><br><span class="line">        &#123;</span><br><span class="line">            node-&gt;son[pos]-&gt;num++;</span><br><span class="line">        &#125;</span><br><span class="line">        node = node-&gt;son[pos];</span><br><span class="line">    &#125;</span><br><span class="line">    node-&gt;isEnd = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在字典树中查找一个完全匹配的单词.</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(<span class="built_in">string</span> str)</span></span>&#123;</span><br><span class="line">    TrieNode* node = &amp;root;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>,len = str.length(); i &lt; len; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> pos =  str[i] - <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;son[pos] != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            node = node-&gt;son[pos];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//走到这一步，表明可能完全匹配，也可能部分匹配，如果最后一个字符节点为末端节点，则是完全匹配，否则是部分匹配</span></span><br><span class="line">    <span class="keyword">return</span> node-&gt;isEnd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以动态分配为实现的带增删改查的字典树模版.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一个以链表实现带删除功能允许重复字符串的字典树</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> charmapping[<span class="number">256</span>]; <span class="comment">//字符映射数组,charmapping[i]=x表示ascii码为i的字符对应于treenode中的next[x] </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_charmapping</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="string">'a'</span>;i&lt;=<span class="string">'z'</span>;i++)&#123; <span class="comment">//我的这个字典树现在只允许输入小写字符组成的字符串,然而由于有charmapping的存在,增加新字符添加映射并且增大maxn就好,很方便. </span></span><br><span class="line">        charmapping[i]=i-<span class="string">'a'</span>;</span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">26</span>; <span class="comment">//这里假设字符串中只出现26个小写字母 </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxm=<span class="number">100000</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">treenode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> count; <span class="comment">//标志此节点所表示字符串在所有字符串中以前缀形式出现的总次数 </span></span><br><span class="line">    treenode* next[maxn]; </span><br><span class="line">&#125;head;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_trie</span><span class="params">()</span></span>&#123;</span><br><span class="line">    head.count=<span class="number">1</span>; <span class="comment">//初始化为1包括空串并且避免树头被删 </span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;maxn;i++) head.next[i]=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function">treenode* <span class="title">createnew</span><span class="params">()</span></span>&#123; <span class="comment">//申请一个新结点并初始化它</span></span><br><span class="line">    treenode* newnode;</span><br><span class="line">    newnode=(treenode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(treenode));</span><br><span class="line">    newnode-&gt;count=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;maxn;i++) newnode-&gt;next[i]=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> newnode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">char</span>* s,<span class="keyword">int</span> num)</span></span>&#123; <span class="comment">//向字典树添加num个字符串s</span></span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>,temp;</span><br><span class="line">    treenode* t=&amp;head;</span><br><span class="line">    <span class="keyword">while</span>(s[k])&#123;</span><br><span class="line">        t-&gt;count+=num;</span><br><span class="line">        temp=charmapping[s[k]];</span><br><span class="line">        <span class="keyword">if</span>(!t-&gt;next[temp]) t-&gt;next[temp]=createnew(); </span><br><span class="line">        t=t-&gt;next[temp];</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    t-&gt;count+=num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(<span class="keyword">char</span>* s,<span class="keyword">int</span> num)</span></span>&#123;  <span class="comment">//查找字典树中是否已经存在num个字符串s</span></span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>,temp;</span><br><span class="line">    treenode* t=&amp;head;</span><br><span class="line">    <span class="keyword">while</span>(s[k])&#123;</span><br><span class="line">        temp=charmapping[s[k]];</span><br><span class="line">        <span class="keyword">if</span>(!t-&gt;next[temp]||t-&gt;next[temp]-&gt;count&lt;num) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//根本不存在字符串s或者存在的数目小于num直接失败 </span></span><br><span class="line">        t=t-&gt;next[temp];</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> snum=t-&gt;count;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;maxn;i++) <span class="keyword">if</span>(t-&gt;next[i]) snum-=t-&gt;next[i]-&gt;count; <span class="comment">//这里是核心!!!结点t代表的字符串出现的次数就是总次数减去所有子节点次数和 </span></span><br><span class="line">    <span class="keyword">if</span>(snum&gt;=num) <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//如果字符串s的数目snum大于等于num </span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">erase</span><span class="params">(<span class="keyword">char</span>* s,<span class="keyword">int</span> num)</span></span>&#123;  <span class="comment">//删除字典树中的num个字符串s并释放无用结点,删除前一定要先search是否存在 </span></span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>,temp;</span><br><span class="line">    treenode* t=&amp;head;</span><br><span class="line">    treenode* t1; <span class="comment">//t1后面的结点都是删除后需要被释放的 </span></span><br><span class="line">    head.count-=num;</span><br><span class="line">    <span class="keyword">while</span>(s[k])&#123;</span><br><span class="line">        temp=charmapping[s[k]];</span><br><span class="line">        t-&gt;next[temp]-&gt;count-=num;</span><br><span class="line">        <span class="keyword">if</span>(t-&gt;next[temp]-&gt;count==<span class="number">0</span>)&#123;</span><br><span class="line">            t1=t-&gt;next[temp];</span><br><span class="line">            t-&gt;next[temp]=<span class="literal">NULL</span>;</span><br><span class="line">            k++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        t=t-&gt;next[temp];</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(s[k])&#123; <span class="comment">//释放无用结点 </span></span><br><span class="line">        temp=charmapping[s[k]];</span><br><span class="line">        t=t1-&gt;next[temp];</span><br><span class="line">        <span class="built_in">free</span>(t1);</span><br><span class="line">        t1=t;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(t1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> temp[<span class="number">1000</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printall</span><span class="params">(treenode* tnode,<span class="keyword">int</span> pos)</span></span>&#123; <span class="comment">//递归打印字典树咯,打出了就是字典序升序的 </span></span><br><span class="line">    <span class="keyword">int</span> count=tnode-&gt;count;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;maxn;i++) <span class="keyword">if</span>(tnode-&gt;next[i]) count-=tnode-&gt;next[i]-&gt;count;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;count;i++) <span class="built_in">printf</span>(<span class="string">"\"%s\"\n"</span>,temp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="string">'a'</span>;i&lt;=<span class="string">'z'</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(tnode-&gt;next[charmapping[i]])&#123;</span><br><span class="line">            temp[pos]=i;</span><br><span class="line">            temp[++pos]=<span class="string">'\0'</span>;</span><br><span class="line">            printall(tnode-&gt;next[charmapping[i]],pos);</span><br><span class="line">            temp[--pos]=<span class="string">'\0'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    init_charmapping(); <span class="comment">//初始化映射 </span></span><br><span class="line">    init_trie();        <span class="comment">//初始化字典树 </span></span><br><span class="line">    <span class="keyword">char</span> x[<span class="number">1000</span>];</span><br><span class="line">    <span class="keyword">char</span> order; <span class="comment">//命令 </span></span><br><span class="line">    <span class="keyword">int</span> num;    <span class="comment">//数目 </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"q：查询\nu：插入\nd：删除\np：打印字典树\ne：退出\n"</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"请输入命令："</span>);</span><br><span class="line">        fflush(<span class="built_in">stdin</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%c"</span>,&amp;order);</span><br><span class="line">        <span class="keyword">if</span>(order==<span class="string">'q'</span>)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"请输入要查找的字符串与数目："</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s%d"</span>,&amp;x,&amp;num);</span><br><span class="line">            <span class="keyword">if</span>(search(x,num)) <span class="built_in">printf</span>(<span class="string">"匹配成功。\n\n"</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"匹配失败，不存在%d个\"%s\"\n\n"</span>,num,x); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(order==<span class="string">'u'</span>)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"请输入要插入的字符串与数目："</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s%d"</span>,&amp;x,&amp;num);</span><br><span class="line">            update(x,num);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d个\"%s\"已加入字典树。\n\n"</span>,num,x);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(order==<span class="string">'d'</span>)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"请输入要删除的字符串与数目："</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s%d"</span>,&amp;x,&amp;num);</span><br><span class="line">            <span class="keyword">if</span>(!search(x,num))&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"树中无%d个字符串\"%s\"请重新键入命令！\n\n"</span>,num,x);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            erase(x,num);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d个\"%s\"已从字典树中删除。\n\n"</span>,num,x);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(order==<span class="string">'p'</span>)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"当前字典树内有如下字符串：\n"</span>);</span><br><span class="line">            temp[<span class="number">0</span>]=<span class="string">'\0'</span>;</span><br><span class="line">            printall(&amp;head,<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(order==<span class="string">'e'</span>)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"退出ing....\n"</span>); </span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"无效命令,请重新输入！\n命令q：查询是否存在字符串\n命令u：往字典树加入字符串\n命令d：删除某个字符串\n命令p：按字典序升序输出字典树\n命令e：退出程序\n\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="AC自动机：多对多模式匹配"><a href="#AC自动机：多对多模式匹配" class="headerlink" title="AC自动机：多对多模式匹配"></a>AC自动机：多对多模式匹配</h2><p>多对多的意思是指给定多个单词，查看所有单词在给定文章中的出现的次数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> son[<span class="number">26</span>];</span><br><span class="line">    <span class="keyword">int</span> fail;</span><br><span class="line">    <span class="keyword">int</span> count;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">memset</span>(son, <span class="number">-1</span>, <span class="keyword">sizeof</span>(son));</span><br><span class="line">        fail = <span class="number">0</span>;</span><br><span class="line">        count = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;s[<span class="number">500005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">strlen</span>(str);</span><br><span class="line">    <span class="keyword">int</span> i, j, ind;</span><br><span class="line">    <span class="keyword">for</span>(i = ind = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        j = str[i] - <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">if</span>(s[ind].son[j] == <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            s[sind].init();</span><br><span class="line">            s[ind].son[j] = sind++;</span><br><span class="line">        &#125;</span><br><span class="line">        ind = s[ind].son[j];</span><br><span class="line">    &#125;</span><br><span class="line">    s[ind].count++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">make_fail</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    qin = qout = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i, ind, ind_f;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)  &#123;</span><br><span class="line">        <span class="keyword">if</span>(s[<span class="number">0</span>].son[i] != <span class="number">-1</span>) &#123;</span><br><span class="line">            q[qin++] = s[<span class="number">0</span>].son[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(qin != qout)   &#123;</span><br><span class="line">        ind = q[qout++];</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)   &#123;   <span class="comment">//找之后的子节点</span></span><br><span class="line">            <span class="keyword">if</span>(s[ind].son[i] != <span class="number">-1</span>)   &#123;</span><br><span class="line">                q[qin++] = s[ind].son[i];</span><br><span class="line">                ind_f = s[ind].fail;</span><br><span class="line">                <span class="keyword">while</span>(ind_f &gt; <span class="number">0</span> &amp;&amp; s[ind_f].son[i] == <span class="number">-1</span>)</span><br><span class="line">                    ind_f = s[ind_f].fail;</span><br><span class="line">                <span class="keyword">if</span>(s[ind_f].son[i] != <span class="number">-1</span>)</span><br><span class="line">                    ind_f = s[ind_f].son[i];</span><br><span class="line">                s[s[ind].son[i]].fail = ind_f;<span class="comment">//子节点的fail根据父节点fail指针的搞定</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fd</span><span class="params">()</span>  </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ct = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> di, i, ind, p;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">strlen</span>(des);<span class="comment">//这个是文章</span></span><br><span class="line">    <span class="keyword">for</span>(di = ind = <span class="number">0</span>; di &lt; len; di++)   &#123;</span><br><span class="line">        i = des[di] - <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">while</span>(ind &gt; <span class="number">0</span> &amp;&amp; s[ind].next[i] == <span class="number">-1</span>)</span><br><span class="line">            ind = s[ind].fail;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(s[ind].next[i] != <span class="number">-1</span>) &#123;<span class="comment">//等于-1的时候就已经是找打了根节点。</span></span><br><span class="line">            ind = s[ind].next[i];</span><br><span class="line">            p = ind;</span><br><span class="line">            <span class="keyword">while</span>(p &gt; <span class="number">0</span> &amp;&amp; s[p].count != <span class="number">-1</span>) &#123;<span class="comment">//这里是精髓。在找过某个有标记的节点的时候</span></span><br><span class="line">                ct += s[p].count;  <span class="comment">//答案            //会把该位的标记标记为-1，在下次经过有-1</span></span><br><span class="line">                s[p].count = <span class="number">-1</span>;                          <span class="comment">//标记的时候，说明之后的都被计算过，不用</span></span><br><span class="line">                p = s[p].fail;                                 <span class="comment">//再重复计算了。</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ct;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/14/Network4/" rel="next" title="计算机网络——第四章：网络层(数据平面)">
+                <i class="fa fa-chevron-left"></i> 计算机网络——第四章：网络层(数据平面)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/22/Database8/" rel="prev" title="数据库原理——第八章：数据库编程">
+                数据库原理——第八章：数据库编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.ico" alt="Godway">
+            
+              <p class="site-author-name" itemprop="name">Godway</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/475865836@qq.com" title="E-Mail &rarr; 475865836@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://randool.cn" title="https://randool.cn" rel="noopener" target="_blank">Randool</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/Smile_coderrr" title="https://me.csdn.net/Smile_coderrr" rel="noopener" target="_blank">Smile_coderrr</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP算法：1对1模式匹配"><span class="nav-number">1.</span> <span class="nav-text">KMP算法：1对1模式匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典树：1对多模式匹配"><span class="nav-number">2.</span> <span class="nav-text">字典树：1对多模式匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC自动机：多对多模式匹配"><span class="nav-number">3.</span> <span class="nav-text">AC自动机：多对多模式匹配</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Godway</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_lines.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
