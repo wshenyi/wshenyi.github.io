@@ -98,17 +98,17 @@
 
 
 
-  <meta name="description" content="top查看系统进程 screen12screen -S TaskName 创建一个名为TaskName的screenscreen -r TaskName 恢复（进入）名为TaskName的screen du/dfdu = disk used 硬盘使用情况df = disk free 硬盘剩余空间 123456789du -h [FileName] 查看指定文件大小df -hl 查看磁盘剩余空间df">
+  <meta name="description" content="top查看系统进程 screen12screen -S [TaskName] 创建一个名为TaskName的screenscreen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen du/dfdu = disk used 硬盘使用情况df = disk free 硬盘剩余空间 123456789du -h [FileName] 查看指定文件大小df -hl 查看">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下常用指令">
 <meta property="og:url" content="https://godway999.github.io/2020/02/05/Others4/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="top查看系统进程 screen12screen -S TaskName 创建一个名为TaskName的screenscreen -r TaskName 恢复（进入）名为TaskName的screen du/dfdu = disk used 硬盘使用情况df = disk free 硬盘剩余空间 123456789du -h [FileName] 查看指定文件大小df -hl 查看磁盘剩余空间df">
+<meta property="og:description" content="top查看系统进程 screen12screen -S [TaskName] 创建一个名为TaskName的screenscreen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen du/dfdu = disk used 硬盘使用情况df = disk free 硬盘剩余空间 123456789du -h [FileName] 查看指定文件大小df -hl 查看">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-02-05T06:57:42.107Z">
+<meta property="og:updated_time" content="2020-02-05T07:38:15.609Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下常用指令">
-<meta name="twitter:description" content="top查看系统进程 screen12screen -S TaskName 创建一个名为TaskName的screenscreen -r TaskName 恢复（进入）名为TaskName的screen du/dfdu = disk used 硬盘使用情况df = disk free 硬盘剩余空间 123456789du -h [FileName] 查看指定文件大小df -hl 查看磁盘剩余空间df">
+<meta name="twitter:description" content="top查看系统进程 screen12screen -S [TaskName] 创建一个名为TaskName的screenscreen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen du/dfdu = disk used 硬盘使用情况df = disk free 硬盘剩余空间 123456789du -h [FileName] 查看指定文件大小df -hl 查看">
 
 
 
@@ -396,7 +396,7 @@
                 
               
 
-              <time title="Created: 2020-02-05 14:46:11 / Modified: 14:57:42" itemprop="dateCreated datePublished" datetime="2020-02-05T14:46:11+08:00">2020-02-05</time>
+              <time title="Created: 2020-02-05 14:46:11 / Modified: 15:38:15" itemprop="dateCreated datePublished" datetime="2020-02-05T14:46:11+08:00">2020-02-05</time>
             
 
             
@@ -461,9 +461,14 @@
 
       
         <h2 id="top"><a href="#top" class="headerlink" title="top"></a>top</h2><p>查看系统进程</p>
-<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen -S TaskName 创建一个名为TaskName的screen</span><br><span class="line">screen -r TaskName 恢复（进入）名为TaskName的screen</span><br></pre></td></tr></table></figure>
+<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen -S [TaskName] 创建一个名为TaskName的screen</span><br><span class="line">screen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen</span><br></pre></td></tr></table></figure>
 <h2 id="du-df"><a href="#du-df" class="headerlink" title="du/df"></a>du/df</h2><p>du = disk used 硬盘使用情况<br>df = disk free 硬盘剩余空间</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">du -h [FileName] 查看指定文件大小</span><br><span class="line"></span><br><span class="line">df -hl 查看磁盘剩余空间</span><br><span class="line"></span><br><span class="line">df -h 查看每个根路径的分区大小</span><br><span class="line"></span><br><span class="line">du -sh [目录名] 返回该目录的大小</span><br><span class="line"></span><br><span class="line">du -sm [文件夹] 返回该文件夹总M数</span><br></pre></td></tr></table></figure>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find [location] -name [FileName] 在location下查找名字为FileName的文件</span><br></pre></td></tr></table></figure>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [字符串] [File] 在File中按行匹配字符串</span><br></pre></td></tr></table></figure>
+<h2 id="which-whereis"><a href="#which-whereis" class="headerlink" title="which/whereis"></a>which/whereis</h2><p>which 查看可执行文件的位置 ，只有设置了环境变量的程序才可以用<br>whereis 寻找特定文件，只能用于查找二进制文件、源代码文件和man手册页</p>
 
       
     </div>
@@ -694,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#top"><span class="nav-number">1.</span> <span class="nav-text">top</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#screen"><span class="nav-number">2.</span> <span class="nav-text">screen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du-df"><span class="nav-number">3.</span> <span class="nav-text">du/df</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#top"><span class="nav-number">1.</span> <span class="nav-text">top</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#screen"><span class="nav-number">2.</span> <span class="nav-text">screen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du-df"><span class="nav-number">3.</span> <span class="nav-text">du/df</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find"><span class="nav-number">4.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep"><span class="nav-number">5.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#which-whereis"><span class="nav-number">6.</span> <span class="nav-text">which/whereis</span></a></li></ol></div>
             
 
           </div>
