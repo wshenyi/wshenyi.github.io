@@ -98,12 +98,12 @@
 
 
 
-  <meta name="description" content="参考书目《统计学习方法（第2版）》 李航 著  无监督学习基本原理 无监督学习是从无标注的数据中学习数据的统计规律或者说内在结构的机器学习，主要包括聚类、降维、概率估计 无监督学习的基本想法是对给定数据（矩阵数据）进行某种“压缩”，从而找到数据的潜在结构。假定损失最小的压缩得到的结果就是最本质的结构  发掘数据的纵向结构，把相似的样本聚到同类，即对数据进行聚类发掘数据的横向结构，把高维空间的向量">
+  <meta name="description" content="参考书目《统计学习方法（第2版）》 李航 著  无监督学习基本原理  无监督学习是从无标注的数据中学习数据的统计规律或者说内在结构的机器学习，主要包括聚类、降维、概率估计 无监督学习的基本想法是对给定数据（矩阵数据）进行某种“压缩”，从而找到数据的潜在结构。假定损失最小的压缩得到的结果就是最本质的结构  发掘数据的纵向结构，把相似的样本聚到同类，即对数据进行聚类  发掘数据的横向结构，把高维空间">
 <meta property="og:type" content="article">
 <meta property="og:title" content="统计学习方法——第十三章：无监督学习概论">
 <meta property="og:url" content="https://godway999.github.io/2020/01/17/ML13/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="参考书目《统计学习方法（第2版）》 李航 著  无监督学习基本原理 无监督学习是从无标注的数据中学习数据的统计规律或者说内在结构的机器学习，主要包括聚类、降维、概率估计 无监督学习的基本想法是对给定数据（矩阵数据）进行某种“压缩”，从而找到数据的潜在结构。假定损失最小的压缩得到的结果就是最本质的结构  发掘数据的纵向结构，把相似的样本聚到同类，即对数据进行聚类发掘数据的横向结构，把高维空间的向量">
+<meta property="og:description" content="参考书目《统计学习方法（第2版）》 李航 著  无监督学习基本原理  无监督学习是从无标注的数据中学习数据的统计规律或者说内在结构的机器学习，主要包括聚类、降维、概率估计 无监督学习的基本想法是对给定数据（矩阵数据）进行某种“压缩”，从而找到数据的潜在结构。假定损失最小的压缩得到的结果就是最本质的结构  发掘数据的纵向结构，把相似的样本聚到同类，即对数据进行聚类  发掘数据的横向结构，把高维空间">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://godway999.github.io/2020/01/17/ML13/pic1.png">
 <meta property="og:image" content="https://godway999.github.io/2020/01/17/ML13/pic2.png">
@@ -113,7 +113,7 @@
 <meta property="og:updated_time" content="2020-01-20T13:44:53.687Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="统计学习方法——第十三章：无监督学习概论">
-<meta name="twitter:description" content="参考书目《统计学习方法（第2版）》 李航 著  无监督学习基本原理 无监督学习是从无标注的数据中学习数据的统计规律或者说内在结构的机器学习，主要包括聚类、降维、概率估计 无监督学习的基本想法是对给定数据（矩阵数据）进行某种“压缩”，从而找到数据的潜在结构。假定损失最小的压缩得到的结果就是最本质的结构  发掘数据的纵向结构，把相似的样本聚到同类，即对数据进行聚类发掘数据的横向结构，把高维空间的向量">
+<meta name="twitter:description" content="参考书目《统计学习方法（第2版）》 李航 著  无监督学习基本原理  无监督学习是从无标注的数据中学习数据的统计规律或者说内在结构的机器学习，主要包括聚类、降维、概率估计 无监督学习的基本想法是对给定数据（矩阵数据）进行某种“压缩”，从而找到数据的潜在结构。假定损失最小的压缩得到的结果就是最本质的结构  发掘数据的纵向结构，把相似的样本聚到同类，即对数据进行聚类  发掘数据的横向结构，把高维空间">
 <meta name="twitter:image" content="https://godway999.github.io/2020/01/17/ML13/pic1.png">
 
 
@@ -481,40 +481,48 @@
         <blockquote>
 <p><em>参考书目《统计学习方法（第2版）》 李航 著</em></p>
 </blockquote>
-<h2 id="无监督学习基本原理"><a href="#无监督学习基本原理" class="headerlink" title="无监督学习基本原理"></a>无监督学习基本原理</h2><ul>
+<h2 id="无监督学习基本原理">无监督学习基本原理</h2>
+<ul>
 <li>无监督学习是从无标注的数据中学习数据的统计规律或者说内在结构的机器学习，主要包括<strong>聚类、降维、概率估计</strong></li>
 <li>无监督学习的基本想法是对给定数据（矩阵数据）进行某种“压缩”，从而找到数据的潜在结构。<strong>假定损失最小的压缩得到的结果就是最本质的结构</strong></li>
 </ul>
-<p>发掘数据的<em>纵向结构</em>，把相似的样本聚到同类，即对数据进行<strong>聚类</strong><br><img src="/2020/01/17/ML13/pic1.png"><br>发掘数据的<em>横向结构</em>，把高维空间的向量转换为低维空间的向量，即对数据进行<strong>降维</strong>聚类<br><img src="/2020/01/17/ML13/pic2.png"><br>同时发掘数据的纵向和横向结构，假设数据由含有隐式结构的概率模型生成得到，从数据中<strong>学习该概率模型</strong><br><img src="/2020/01/17/ML13/pic3.png">  </p>
+<p>发掘数据的<em>纵向结构</em>，把相似的样本聚到同类，即对数据进行<strong>聚类</strong><br>
+<img src="/2020/01/17/ML13/pic1.png"><br>
+发掘数据的<em>横向结构</em>，把高维空间的向量转换为低维空间的向量，即对数据进行<strong>降维</strong>聚类<br>
+<img src="/2020/01/17/ML13/pic2.png"><br>
+同时发掘数据的纵向和横向结构，假设数据由含有隐式结构的概率模型生成得到，从数据中<strong>学习该概率模型</strong><br>
+<img src="/2020/01/17/ML13/pic3.png"></p>
 <hr>
-<h2 id="三个基本问题"><a href="#三个基本问题" class="headerlink" title="三个基本问题"></a>三个基本问题</h2><h3 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h3><ul>
+<h2 id="三个基本问题">三个基本问题</h2>
+<h3 id="聚类">聚类</h3>
+<ul>
 <li>聚类（clustering）是将样本集合中相似的样本（实例）分配到相同的类，不相似的样本分配到不同的类。</li>
 <li>聚类时，样本通常是欧氏空间中的向量，类别不是预先给定，而是从数据中自动发现，但类别的个数通常是预先给定的。样本之间的相似度或距离由 应用决定。</li>
-<li>如果一个样本只能属于一个类，则称为硬聚类（硬聚类）<script type="math/tex; mode=display">z_i = g_\theta(x_i), i = 1,2,...,N</script></li>
-<li>如果一个样本可以属于多个类，则称为软聚类（软聚类）<script type="math/tex; mode=display">P_\theta(z_i|x_i), i = 1,2,...,N</script></li>
+<li>如果一个样本只能属于一个类，则称为硬聚类（硬聚类） <span class="math display">\[z_i = g_\theta(x_i), i = 1,2,...,N\]</span></li>
+<li>如果一个样本可以属于多个类，则称为软聚类（软聚类） <span class="math display">\[P_\theta(z_i|x_i), i = 1,2,...,N\]</span></li>
 </ul>
-<h3 id="降维"><a href="#降维" class="headerlink" title="降维"></a>降维</h3><ul>
+<h3 id="降维">降维</h3>
+<ul>
 <li>降维（dimensionality reduction）是将训练数据中的样本（实例）从高维空间转换到低维空间</li>
 <li>假设样本原本存在于低维空间，或者近似地存在于低维空间，通过降维则可以更好地表示样本数据的结构，即更好地表示样本之间的关系</li>
 <li>高维空间通常是高维的欧氏空间，而低维空间是低维的欧氏空间或者流形（manifold)</li>
 <li>从高维到低维的降维中，要保证样本中的信息损失最小</li>
 </ul>
 <img src="/2020/01/17/ML13/pic4.png">
-<p>降维的模型是函数</p>
-<script type="math/tex; mode=display">z_i = g_\theta(x_i), i = 1,2,...,N</script><p>其中$x_i \in X$是样本的高维向量，$z_i \in Z$是样本的低维向量，$\theta$是参数，函数可以是线性函数也可以是非线性函数，降维的过程就是学习降维模型的过程</p>
-<h3 id="概率模型估计"><a href="#概率模型估计" class="headerlink" title="概率模型估计"></a>概率模型估计</h3><ul>
+<p>降维的模型是函数 <span class="math display">\[z_i = g_\theta(x_i), i = 1,2,...,N\]</span> 其中<span class="math inline">\(x_i \in X\)</span>是样本的高维向量，<span class="math inline">\(z_i \in Z\)</span>是样本的低维向量，<span class="math inline">\(\theta\)</span>是参数，函数可以是线性函数也可以是非线性函数，降维的过程就是学习降维模型的过程</p>
+<h3 id="概率模型估计">概率模型估计</h3>
+<ul>
 <li>概率模型估计（probility model estimation），简称概率估计，假设训练数据由一个概率模型生成，由训练数据学习概率模型的结构和参数。</li>
 <li>概率模型的<strong>结构类型</strong>（或者说概率模型的集合事先给定），而模型的<strong>具体结构与参数从数据中自动学习</strong>。学习的目标是找到最有可能生成数据的结构和参数。</li>
 </ul>
 <img src="/2020/01/17/ML13/pic5.png">
-<p>概率模型表示为条件概率分布</p>
-<script type="math/tex; mode=display">P_\theta(x|z)</script><p>随机变量$x$表示观测数据，可以是连续变量也可以是离散变量，随机变量$z$表示隐式结构，是离散变量，随机变量$\theta$表示参数。概率模型的一种特殊情况是隐式结构不存在，即满足</p>
-<script type="math/tex; mode=display">P_\theta(x|z) = P_\theta(x)</script><p>这时条件 概率分布估计变成概率分布估计，只要估计分布$P_\theta(x)$的参数即可</p>
+<p>概率模型表示为条件概率分布 <span class="math display">\[P_\theta(x|z)\]</span> 随机变量<span class="math inline">\(x\)</span>表示观测数据，可以是连续变量也可以是离散变量，随机变量<span class="math inline">\(z\)</span>表示隐式结构，是离散变量，随机变量<span class="math inline">\(\theta\)</span>表示参数。概率模型的一种特殊情况是隐式结构不存在，即满足 <span class="math display">\[P_\theta(x|z) = P_\theta(x)\]</span> 这时条件 概率分布估计变成概率分布估计，只要估计分布<span class="math inline">\(P_\theta(x)\)</span>的参数即可</p>
 <hr>
-<h2 id="无监督学习三要素"><a href="#无监督学习三要素" class="headerlink" title="无监督学习三要素"></a>无监督学习三要素</h2><ul>
-<li>(1)模型:<br>  函数<script type="math/tex">z = g_\theta(x)</script>，条件概率分布<script type="math/tex">P_\theta(z|x)</script>，或条件概率分布<script type="math/tex">P_\theta(x|z)</script></li>
-<li>(2)策略:<br>  目标函数的优化</li>
-<li>(3)算法:<br>  迭代算法，通过迭代达到对目标函数的最优化</li>
+<h2 id="无监督学习三要素">无监督学习三要素</h2>
+<ul>
+<li>(1)模型: 函数<span class="math display">\[z = g_\theta(x)\]</span>，条件概率分布<span class="math display">\[P_\theta(z|x)\]</span>，或条件概率分布<span class="math display">\[P_\theta(x|z)\]</span></li>
+<li>(2)策略: 目标函数的优化</li>
+<li>(3)算法: 迭代算法，通过迭代达到对目标函数的最优化</li>
 </ul>
 
       
@@ -629,7 +637,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">29</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -660,7 +668,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -681,7 +689,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

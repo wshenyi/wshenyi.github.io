@@ -98,17 +98,17 @@
 
 
 
-  <meta name="description" content="All materials come from Coursera《Game Theory》by Stanford University &amp;amp; The University of British Columbia  Intro to nash equilibriumIn order to deeply understand what is nash equalibrium, we firs">
+  <meta name="description" content="All materials come from Coursera《Game Theory》by Stanford University &amp;amp; The University of British Columbia  Intro to nash equilibrium In order to deeply understand what is nash equalibrium, we fir">
 <meta property="og:type" content="article">
 <meta property="og:title" content="博弈论2：纳什均衡">
 <meta property="og:url" content="https://godway999.github.io/2020/02/25/Game2/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="All materials come from Coursera《Game Theory》by Stanford University &amp;amp; The University of British Columbia  Intro to nash equilibriumIn order to deeply understand what is nash equalibrium, we firs">
+<meta property="og:description" content="All materials come from Coursera《Game Theory》by Stanford University &amp;amp; The University of British Columbia  Intro to nash equilibrium In order to deeply understand what is nash equalibrium, we fir">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2020-02-28T10:01:02.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博弈论2：纳什均衡">
-<meta name="twitter:description" content="All materials come from Coursera《Game Theory》by Stanford University &amp;amp; The University of British Columbia  Intro to nash equilibriumIn order to deeply understand what is nash equalibrium, we firs">
+<meta name="twitter:description" content="All materials come from Coursera《Game Theory》by Stanford University &amp;amp; The University of British Columbia  Intro to nash equilibrium In order to deeply understand what is nash equalibrium, we fir">
 
 
 
@@ -476,19 +476,22 @@
 <blockquote>
 <p>All materials come from <em>Coursera</em>《Game Theory》by Stanford University &amp; The University of British Columbia</p>
 </blockquote>
-<h2 id="Intro-to-nash-equilibrium"><a href="#Intro-to-nash-equilibrium" class="headerlink" title="Intro to nash equilibrium"></a>Intro to nash equilibrium</h2><p>In order to deeply understand what is nash equalibrium, we first need to know what is a <strong>best resonse</strong></p>
-<h2 id="Best-response"><a href="#Best-response" class="headerlink" title="Best response"></a>Best response</h2><p>Based on the previous lecture, given the notation $a_{-i}$, which means a sub action profile of other players act</p>
-<script type="math/tex; mode=display">a_{-i} = (a_1, a_2,..., a_{i-1}, a_{i+1},..., a_n)</script><p>now we can re-define $a$ (the whole action profile of the game) as</p>
-<script type="math/tex; mode=display">a = (a_i, a_{-i})</script><p>then the definition of <strong>Best Response</strong> showen below</p>
-<script type="math/tex; mode=display">a_i^* \in BR(a_{-i}) \ \ iff \ \ \forall a_i \in A_i, u_i(a_i^*, a_i) \ge u_i(a_i, a_i)</script><p>that is to say, based on the $a_{-i}$, the best response for player $i$ to play is $a_i^*$</p>
-<h2 id="Pure-strategy-and-Mixed-trategy"><a href="#Pure-strategy-and-Mixed-trategy" class="headerlink" title="Pure strategy and Mixed trategy"></a>Pure strategy and Mixed trategy</h2><p>the meaning of these two terms are listed below</p>
+<h2 id="intro-to-nash-equilibrium">Intro to nash equilibrium</h2>
+<p>In order to deeply understand what is nash equalibrium, we first need to know what is a <strong>best resonse</strong></p>
+<h2 id="best-response">Best response</h2>
+<p>Based on the previous lecture, given the notation <span class="math inline">\(a_{-i}\)</span>, which means a sub action profile of other players act <span class="math display">\[a_{-i} = (a_1, a_2,..., a_{i-1}, a_{i+1},..., a_n)\]</span> now we can re-define <span class="math inline">\(a\)</span> (the whole action profile of the game) as <span class="math display">\[a = (a_i, a_{-i})\]</span> then the definition of <strong>Best Response</strong> showen below <span class="math display">\[a_i^* \in BR(a_{-i}) \ \ iff \ \ \forall a_i \in A_i, u_i(a_i^*, a_i) \ge u_i(a_i, a_i)\]</span><br>
+that is to say, based on the <span class="math inline">\(a_{-i}\)</span>, the best response for player <span class="math inline">\(i\)</span> to play is <span class="math inline">\(a_i^*\)</span></p>
+<h2 id="pure-strategy-and-mixed-trategy">Pure strategy and Mixed trategy</h2>
+<p>the meaning of these two terms are listed below</p>
 <ul>
 <li>pure strategy: <strong>only one</strong> action is played with positive probability</li>
 <li>mixed strategy: <strong>more than one</strong> action is played with positive probability</li>
 </ul>
-<p>With a pure strategy, a player choose one action with 100% ensurance. While with a mixed strategy, a player can have a probability of 50% choosing action A and a probability of 50% choosing action B. In another word, player $i$ chooses action $a_i$ randomly from $A$ with corresponding probability.</p>
-<h2 id="Pure-strategy-nash-equilibrium"><a href="#Pure-strategy-nash-equilibrium" class="headerlink" title="Pure strategy nash equilibrium"></a>Pure strategy nash equilibrium</h2><p>$a = (a_1, a_2,…, a_n)$ is a (pure strategy) nash equlibrium iff</p>
-<script type="math/tex; mode=display">\forall i,\ a_i \in BR(a_{-i})</script><h2 id="Mixed-trategy-nash-equilibrium"><a href="#Mixed-trategy-nash-equilibrium" class="headerlink" title="Mixed trategy nash equilibrium"></a>Mixed trategy nash equilibrium</h2>
+<p>With a pure strategy, a player choose one action with 100% ensurance. While with a mixed strategy, a player can have a probability of 50% choosing action A and a probability of 50% choosing action B. In another word, player <span class="math inline">\(i\)</span> chooses action <span class="math inline">\(a_i\)</span> randomly from <span class="math inline">\(A\)</span> with corresponding probability.</p>
+<h2 id="pure-strategy-nash-equilibrium">Pure strategy nash equilibrium</h2>
+<p><span class="math inline">\(a = (a_1, a_2,..., a_n)\)</span> is a (pure strategy) nash equlibrium iff <span class="math display">\[\forall i,\ a_i \in BR(a_{-i})\]</span></p>
+<h2 id="mixed-trategy-nash-equilibrium">Mixed trategy nash equilibrium</h2>
+
       
     </div>
 
@@ -527,6 +530,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/27/RL1/" rel="prev" title="RL1：K-armed Bandits Problem">
+                RL1：K-armed Bandits Problem <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -597,7 +604,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">29</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -628,7 +635,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -649,7 +656,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -720,7 +729,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro-to-nash-equilibrium"><span class="nav-number">1.</span> <span class="nav-text">Intro to nash equilibrium</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Best-response"><span class="nav-number">2.</span> <span class="nav-text">Best response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pure-strategy-and-Mixed-trategy"><span class="nav-number">3.</span> <span class="nav-text">Pure strategy and Mixed trategy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pure-strategy-nash-equilibrium"><span class="nav-number">4.</span> <span class="nav-text">Pure strategy nash equilibrium</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixed-trategy-nash-equilibrium"><span class="nav-number">5.</span> <span class="nav-text">Mixed trategy nash equilibrium</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#intro-to-nash-equilibrium"><span class="nav-number">1.</span> <span class="nav-text">Intro to nash equilibrium</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#best-response"><span class="nav-number">2.</span> <span class="nav-text">Best response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pure-strategy-and-mixed-trategy"><span class="nav-number">3.</span> <span class="nav-text">Pure strategy and Mixed trategy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pure-strategy-nash-equilibrium"><span class="nav-number">4.</span> <span class="nav-text">Pure strategy nash equilibrium</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mixed-trategy-nash-equilibrium"><span class="nav-number">5.</span> <span class="nav-text">Mixed trategy nash equilibrium</span></a></li></ol></div>
             
 
           </div>
