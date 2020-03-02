@@ -113,8 +113,8 @@
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/6.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/7.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/8.png">
-<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/8.png">
-<meta property="og:updated_time" content="2020-03-02T17:26:07.668Z">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/9.png">
+<meta property="og:updated_time" content="2020-03-02T17:34:17.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL1：K-armed Bandits Problem">
 <meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  The K-Armed Bandi">
@@ -423,7 +423,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-03 01:26:07" itemprop="dateModified" datetime="2020-03-03T01:26:07+08:00">2020-03-03</time>
+                <time title="Modified: 2020-03-03 01:34:17" itemprop="dateModified" datetime="2020-03-03T01:34:17+08:00">2020-03-03</time>
               
             
           </span>
@@ -510,10 +510,10 @@ Q_{t+1}=\frac{1}{t}\sum_{i=1}^tR_i\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
 \]</span></p>
 <p>To generalize it, we replace <span class="math inline">\(\frac{1}{t}\)</span> with <span class="math inline">\(\alpha_t\)</span> to represent stepsize and it's easy to know <span class="math inline">\(\alpha_t \in [0,1]\)</span></p>
 <p><span class="math display">\[Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)\]</span></p>
-<p>and it can also express as below</p>
+<p>And it can also express as below</p>
 <p><span class="math display">\[NewEstimate \leftarrow OldEstimate\ +\  StepSize(Target\ -\ OldEstimate)\]</span></p>
 <h3 id="changing-distribution">Changing Distribution</h3>
-<p>what if the reward distribution of each action is <strong>changing over time</strong>? In this situation, what we learn form history may not correctly represent current state due to changing of reward distribution. Aiming to catch up this change, we can wieght more on recent reward than on ancient reward because recent information reflect changing more accurate. To do so, we can use a <strong>fixed stepsize</strong>,like 0.5, instead of <span class="math inline">\(\frac{1}{t}\)</span>. This can lead to decaying exponently past reward.</p>
+<p>What if the reward distribution of each action is <strong>changing over time</strong>? In this situation, what we learn form history may not correctly represent current state due to changing of reward distribution. Aiming to catch up this change, we can wieght more on recent reward than on ancient reward because recent information reflect changing more accurate. To do so, we can use a <strong>fixed stepsize</strong>,like 0.5, instead of <span class="math inline">\(\frac{1}{t}\)</span>. This can lead to decaying exponently past reward.</p>
 <p><span class="math display">\[Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)=\alpha_tR_t+(1-\alpha_t)Q_t\]</span></p>
 <p>As <span class="math inline">\(\alpha_t\)</span> increases, the more <span class="math inline">\(R_t\)</span> contributes to <span class="math inline">\(Q_{t+1}\)</span> and the less for <span class="math inline">\(Q_t\)</span>.</p>
 <h3 id="greedy-action">Greedy Action</h3>
@@ -561,7 +561,7 @@ After that, this time, we should select action 2.<br>
 The key idea in UCB is that it uses <strong>uncertainty</strong> in the value estimation for balancing exploration and exploitation</p>
 <p><span class="math display">\[A_t \doteq argmax_a [Q_t(a)+c\sqrt{\frac{\ln{t}}{N_t(a)}}\ ]\]</span></p>
 <p>We can clearly see here how UCB combines exploration and exploitation. The first term in the sum represents the exploitation part, and the second term represents the exploration part. The constant parameter <span class="math inline">\(c\)</span> is used to scale the extent of exploration<br>
-<img src="/2020/02/27/RL1/8.png"></p>
+<img src="/2020/02/27/RL1/9.png"></p>
 
       
     </div>
