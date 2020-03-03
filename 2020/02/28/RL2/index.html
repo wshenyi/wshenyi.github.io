@@ -98,24 +98,22 @@
 
 
 
-  <meta name="description" content="Physical Architecture of GPU 下图为Nvidia官网上找的一个GPU主板的概念图，对应Device  Device：与host做区分，可以理解为是指整个显卡   如下图所示（Nvidia Tesla P100），共包含60个SM（6GPC x 10SM）  SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一">
+  <meta name="description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  Introduction to M">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nvidia GPU 基本概念">
-<meta property="og:url" content="https://godway999.github.io/2019/11/25/GPU1/index.html">
+<meta property="og:title" content="RL2：Markov Decision Processes">
+<meta property="og:url" content="https://godway999.github.io/2020/02/28/RL2/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="Physical Architecture of GPU 下图为Nvidia官网上找的一个GPU主板的概念图，对应Device  Device：与host做区分，可以理解为是指整个显卡   如下图所示（Nvidia Tesla P100），共包含60个SM（6GPC x 10SM）  SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一">
+<meta property="og:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  Introduction to M">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic2.png">
-<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic3.png">
-<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic4.png">
-<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic6.png">
-<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic1.png">
-<meta property="og:image" content="https://godway999.github.io/2019/11/25/GPU1/pic5.png">
-<meta property="og:updated_time" content="2019-11-25T02:36:25.216Z">
+<meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/1.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/2.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/3.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/4.png">
+<meta property="og:updated_time" content="2020-03-03T05:21:58.688Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nvidia GPU 基本概念">
-<meta name="twitter:description" content="Physical Architecture of GPU 下图为Nvidia官网上找的一个GPU主板的概念图，对应Device  Device：与host做区分，可以理解为是指整个显卡   如下图所示（Nvidia Tesla P100），共包含60个SM（6GPC x 10SM）  SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一">
-<meta name="twitter:image" content="https://godway999.github.io/2019/11/25/GPU1/pic2.png">
+<meta name="twitter:title" content="RL2：Markov Decision Processes">
+<meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  Introduction to M">
+<meta name="twitter:image" content="https://godway999.github.io/2020/02/28/RL2/1.png">
 
 
 
@@ -123,7 +121,7 @@
 
   
   
-  <link rel="canonical" href="https://godway999.github.io/2019/11/25/GPU1/">
+  <link rel="canonical" href="https://godway999.github.io/2020/02/28/RL2/">
 
 
 
@@ -133,7 +131,7 @@
   };
 </script>
 
-  <title>Nvidia GPU 基本概念 | Godway's Notebook</title>
+  <title>RL2：Markov Decision Processes | Godway's Notebook</title>
   
 
 
@@ -360,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/11/25/GPU1/">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2020/02/28/RL2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Godway">
@@ -377,7 +375,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Nvidia GPU 基本概念
+          <h2 class="post-title" itemprop="name headline">RL2：Markov Decision Processes
 
               
             
@@ -403,12 +401,24 @@
                 
               
 
-              <time title="Created: 2019-11-25 08:46:56 / Modified: 10:36:25" itemprop="dateCreated datePublished" datetime="2019-11-25T08:46:56+08:00">2019-11-25</time>
+              <time title="Created: 2020-02-28 17:21:31" itemprop="dateCreated datePublished" datetime="2020-02-28T17:21:31+08:00">2020-02-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-03-03 13:21:58" itemprop="dateModified" datetime="2020-03-03T13:21:58+08:00">2020-03-03</time>
               
             
           </span>
@@ -425,7 +435,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/GPU/" itemprop="url" rel="index"><span itemprop="name">GPU</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/RL/" itemprop="url" rel="index"><span itemprop="name">RL</span></a></span>
 
                 
                 
@@ -467,71 +477,82 @@
       
 
       
-        <h2 id="physical-architecture-of-gpu">Physical Architecture of GPU</h2>
-<p>下图为Nvidia官网上找的一个GPU主板的概念图，对应Device</p>
+        <a id="more"></a>
+<blockquote>
+<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
+</blockquote>
+<h2 id="introduction-to-markov-decision-processes">Introduction to Markov Decision Processes</h2>
+<h3 id="definition-of-mdp">Definition of MDP</h3>
+<p>MDPs are meant to be a straightforward framing of the problem of learning from interaction to achieve a goal. Here are the key element in discribing a MDP</p>
 <ul>
-<li>Device：与host做区分，可以理解为是指整个显卡</li>
+<li><strong>agent</strong>: the learner and the decision maker</li>
+<li><strong>environment</strong>: the thing a agent interacts with, comprising everything outside the agent</li>
+<li><strong>action</strong>: selected by the agent to interact with the environment</li>
+<li><strong>reward</strong>: special numerical values that the agent seeks to maximize over time through its choice of actions.</li>
 </ul>
-<img src="/2019/11/25/GPU1/pic2.png">
-<p>如下图所示（Nvidia Tesla P100），共包含60个SM（6GPC x 10SM）</p>
+<p>the whole interacting process is precisely simplified as follow<br>
+<img src="/2020/02/28/RL2/1.png"><br>
+More specifically, the agent and the environment interact at each of a sequence of discrete time steps, <span class="math inline">\(t=0,1,2,3,...\)</span> At each time step <span class="math inline">\(t\)</span>, the agent recives some representation of the environment's <strong>state</strong>, <span class="math inline">\(S_t \in \mathbf{S}\)</span>, and on that basis selects an <strong>action</strong>, <span class="math inline">\(A_t \in \mathbf{A}(s)\)</span>.</p>
+<p>One time step later, in part as a consequence of its action, the agent receives a numerical reward, <span class="math inline">\(R_{t+1} \in \mathbf{R}\subset \mathbb{R}\)</span>, and finds itself in a new state, <span class="math inline">\(S_{t+1}\)</span>. The MDP and agent together thereby give rise to a sequence or trajectory that begins like this:<br>
+<img src="/2020/02/28/RL2/2.png"><br>
+In a finite MDP, the sets of states, actions, and rewards (<span class="math inline">\(\mathbf{S}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{R}\)</span>) all have a finite number of elements. In this case, the random variables <span class="math inline">\(R_t\)</span> and <span class="math inline">\(S_t\)</span> have well defined discrete probability distributions dependent only on the preceding state and action. That is, for particular values of these random variables, <span class="math inline">\(s^, \in \mathbf{S}\)</span> and <span class="math inline">\(r \in \mathbf{R}\)</span>, there is a probability of those values occurring at time t, given particular values of the preceding state and action: <span class="math display">\[p(s^,,r|s,a)\doteq P(S_t=s^,, R_t=r\ | \ S_{t-1}=s, A_{t-1}=a)\]</span> for all <span class="math inline">\(s^,,s \in \mathbf{S}\)</span>, <span class="math inline">\(r \in \mathbf{R}\)</span>, and <span class="math inline">\(a \in \mathbf{A}(s)\)</span>. The function <span class="math inline">\(p\)</span> defines the <strong>dynamics of the MDP</strong>. <span class="math display">\[p:\ \mathbf{S}\times \mathbf{R}\times \mathbf{S}\times \mathbf{A}\rightarrow [0,1]\]</span> With <span class="math inline">\(p(s^,,r|s,a)\)</span>, note that future state and reward only depends on the current state and action. This is called the <strong>Markov property</strong>. It means that the present state is sufficient and remembering earlier states would not improve predictions about the future.</p>
+<p>The <strong>MDP framework</strong> is a considerable <strong>abstraction</strong> of the problem of goal-directed learning from interaction. It can be used to formalize a wide variety of <strong>sequential decision-making</strong> problem. This also means that any problem of learning goal-directed behavior can be reduced to three signals passing back and forth between an agent and its environment: actions, states, rewards.</p>
+<h3 id="an-example-of-mdp">An Example of MDP</h3>
+<p>Here is an example of finite MDP, <strong>Recycling Robot</strong>. We can write down the transition probabilities and the expected rewards, with dynamics as indicated below.<br>
+<img src="/2020/02/28/RL2/3.png"><br>
+We can show it in another useful way called <strong>trasition graph</strong><br>
+<img src="/2020/02/28/RL2/4.png"><br>
+There are two kinds of nodes: state nodes and action nodes. The key point here is that the agent fisrtly chooses an action and then transits to a state with corresponding probability.</p>
+<hr>
+<h2 id="goal-of-reinforcement-learning">Goal of Reinforcement Learning</h2>
+<h3 id="the-goal-of-rl">The Goal of RL</h3>
+<p>First we denote the <strong>return</strong> at time step <span class="math inline">\(t\)</span> as <span class="math inline">\(G_t\)</span></p>
+<p><span class="math display">\[G_t\doteq R_{t+1}+R_{t+2}+R_{t+3}+...\]</span></p>
+<p>We intuitively want to maxmize <span class="math inline">\(G_t\)</span> at each time step. However, <span class="math inline">\(G_t\)</span> is a random variable because <strong>the dynamics of the MDP can be stochastic</strong>. That's why we define the goal of an agent is to <strong>maxmize the expected return</strong></p>
+<p><span class="math display">\[\mathbb{E}[G_t] = \mathbb{E}[R_{t+1}+R_{t+2}+R_{t+3}+...]\]</span></p>
+<h3 id="the-reward-hypothesis">The Reward Hypothesis</h3>
+<p>The <strong>Reinforcement Learning Hypothesis</strong> can be expressed as this:</p>
+<blockquote>
+<p>Intelligent behavior araises from the actions of an individual seeking to maximize its received reward signals in a complex and challenging world.</p>
+</blockquote>
+<p>There are two research programs:</p>
 <ul>
-<li>SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一些硬件资源组成
-<ul>
-<li>其他硬件资源如：warp scheduler，register，shared memory等</li>
-<li>同一个block中的warp一定分配给同一个SM</li>
-<li>每个SM有自己独立的local L1 cache，但所有SM会共用Device的L2 cache</li>
-</ul></li>
+<li>Identify where reward signals come from. (what reward the agent should optimize)</li>
+<li>Develop algorithms that search the space of action to maximize reward signals.</li>
 </ul>
-<img src="/2019/11/25/GPU1/pic3.png">
-<p>每个SM有自己的内部结构，如下图所示GP100（Nvidia Tesla P100）中的SM内部结构，在GP100里，每一个SM有左右两个SM Processing Block（SMP） <img src="/2019/11/25/GPU1/pic4.png"></p>
+<p>Informally, the agent’s goal is to <strong>maximize the total amount of reward it receives</strong>. This means maximizing not immediate reward, but cumulative reward in the long run. We can clearly state this informal idea as the <strong>reward hypothesis</strong>:</p>
+<blockquote>
+<p>That all of what we mean by goals and purposes can be well thought of as the maximization of the expected value of the cumulative sum of a received scalar signal (called reward).</p>
+</blockquote>
+<p>But how can we define reward? This is a trick problem. To use goals as rewards, we have some representations:</p>
 <ul>
-<li>SP(Streaming Processor)：最基本的处理单元，也称为CUDA core，表示在上图中为绿色的小格子
-<ul>
-<li>相当于一个简易的CPU</li>
-<li>内部包括控制单元Dispatch Port、Operand Collector，以及浮点计算单元FP Unit、整数计算单元Int Unit，另外还包括计算结果队列。当然还有Compare、Logic、Branch等</li>
-</ul></li>
+<li>goal-reward representation: 1 for achieving goal, 0 otherwise</li>
+<li>action-penalty representation: -1 for not achieving goal, 0 once goal reached</li>
 </ul>
-<p>下图为SP（CUDA core）的内部结构 <img src="/2019/11/25/GPU1/pic6.png"></p>
-<h2 id="software-concept-in-cuda">Software Concept in CUDA</h2>
+<p>Both of representations have its own limitation. They lack of some middel information to tell the agent how to achieve the goal as our expectation.</p>
+<hr>
+<h2 id="episodic-tasks-and-continuing-tasks">Episodic Tasks And Continuing Tasks</h2>
+<h3 id="episodic-tasks">Episodic Tasks</h3>
+<p>In an <strong>episodic task</strong>, the agent-environment interaction breaks up into <strong>episodes</strong>. Episodes are indepedent and each episode ends in a <strong>terminal state</strong> at time step <span class="math inline">\(T\)</span>. In this situation, time step is finite and we denote <span class="math inline">\(G_t\)</span> as</p>
+<p><span class="math display">\[G_t \doteq R_{t+1}+R_{t+2}+R_{t+1}+...+R_T\]</span></p>
+<h3 id="continuing-tasks">Continuing Tasks</h3>
+<p>The interaction between agent-environment goes on <strong>continually</strong> and there is no <strong>terminal state</strong>. In this situation, time step is infinite and we denote <span class="math inline">\(G_t\)</span> as</p>
+<p><span class="math display">\[G_t \doteq R_{t+1}+R_{t+2}+R_{t+3}+...\]</span></p>
+<p>Here comes to the problem: <span class="math inline">\(G_t\)</span> could be <span class="math inline">\(\infty\)</span> and impossible to calculate. So we can make <span class="math inline">\(G_t\)</span> finite by using <strong>discounting</strong></p>
+<h3 id="discounting">Discounting</h3>
+<p>Discount the rewards in the future by <span class="math inline">\(\gamma\)</span> called <strong>discount rate</strong>, where <span class="math inline">\(\gamma \in [0,1]\)</span></p>
+<p><span class="math display">\[\ \ \ \ \ \ \ \ \ \ 
+G_t \doteq R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...+\gamma^{k-1}R_{t+k}+...\\
+=\sum_{k=0}^\infty \gamma^kR_{t+k+1}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\
+=R_{t+1}+\gamma G_{t+1}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+\]</span></p>
+<p>Now we have recursive version of <span class="math inline">\(G_t\)</span>. Assume <span class="math inline">\(R_{max}\)</span> is the maximum reward the agent can receive</p>
+<p><span class="math display">\[G_t=\sum_{k=0}^\infty \gamma^kR_{t+k+1}\le \sum_{k=0}^\infty \gamma^kR_{max}=R_{max}\sum_{k=0}^\infty \gamma^k=R_{max}\times \frac{1}{1-\gamma}\]</span></p>
+<p>It proves that <span class="math inline">\(G_t\)</span> now is finite. To Specify, let's talk about <span class="math inline">\(\gamma=0\)</span> and <span class="math inline">\(\gamma=1\)</span>.</p>
 <ul>
-<li>Thread：一个CUDA的并行程序会被分配到多个threads来执行
-<ul>
-<li>一个SP对应执行一个thread</li>
-<li>threadId在cuda中为三维的概念，在一个block中由(x, y, z)来唯一定位</li>
-</ul></li>
-<li>Block：多个thread群组成一个block
-<ul>
-<li>同一个block中的threads可以同步，也可以通过shared memory通信</li>
-<li>blockId在cuda中为二维的概念，在一个grid中由(x, y)来唯一定位</li>
-</ul></li>
-<li>Grid：多个block构成grid
-<ul>
-<li>一个grid对应一个执行一个kernel函数</li>
-</ul></li>
+<li><span class="math inline">\(\gamma=0\Rightarrow G_t=R_t\)</span> : agent only cares about immediate reward. (<strong>short-sighted agent</strong>)</li>
+<li><span class="math inline">\(\gamma\rightarrow1\)</span> : agent takes future rewards into account more strongly. (<strong>far-sighted agent</strong>)</li>
 </ul>
-<p>空间对应如下图所示<br>
-<img src="/2019/11/25/GPU1/pic1.png"></p>
-<ul>
-<li>warp：执行任务的调度单元，同一时间一个SM只能运行一个warp
-<ul>
-<li>类比于CPU中的进程，当一个warp阻塞时，SM将切换执行另一个warp</li>
-<li>当前CUDA的warp大小为32个线程。这里表明Nvidia的GPU执行粒度小，执行线程粒度越小，并行度越高，掩盖延迟的能力越强</li>
-<li>同在一个warp中的线程，以不同数据资源执行相同的指令，即所谓的SIMT（Single Instruction Multiple Thread）</li>
-</ul></li>
-</ul>
-<h2 id="cpu和gpu的结构对比">CPU和GPU的结构对比</h2>
-<img src="/2019/11/25/GPU1/pic5.png">
-<ul>
-<li>CPU是靠更大的缓存和复杂的逻辑控制（如流水线、乱序执行、指令预测和预处理等等）来掩饰延迟的</li>
-<li>GPU是靠更高的并行度来掩饰延迟的</li>
-</ul>
-<h2 id="others">Others</h2>
-<ul>
-<li>GPU在并发的warp之间切换是没什么消耗的，因为硬件资源早就被分配到所有thread和block，所以新调度的warp的状态已经存储在SM中了。不同于CPU，CPU切换线程需要保存/读取线程上下文（register内容），这是非常耗时的，而GPU为每个threads提供物理register，无需保存/读取上下文。</li>
-<li>register和shared memory是SM的稀缺资源。CUDA将这些资源在程序执行前就分配给所有驻留在SM中的warp，并且整个程序执行周期都不再变动。因此这些有限的资源就会限制每个SM中active warp的数量，实验结果显示一个SM至少要存在6个active warp才能有效掩饰延迟</li>
-</ul>
-<h2 id="reference-material">Reference Material</h2>
-<p><a href="https://blog.csdn.net/junparadox/article/details/50540602" target="_blank" rel="noopener">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a> <a href="https://blog.csdn.net/fpgatom/article/details/82081422" target="_blank" rel="noopener">GPU高性能编程CUDA实战</a> <a href="https://blog.csdn.net/asasasaababab/article/details/80447254" target="_blank" rel="noopener">Nvidia GPU架构 - Cuda Core，SM，SP</a> <a href="https://blog.csdn.net/junparadox/article/details/50540602" target="_blank" rel="noopener">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a> <a href="https://blog.csdn.net/qq_41598072/article/details/82877655" target="_blank" rel="noopener">CUDA中grid、block、thread、warp与SM、SP的关系</a></p>
 
       
     </div>
@@ -562,8 +583,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/03/Others2/" rel="next" title="Shell中的常用通配符，字符类">
-                <i class="fa fa-chevron-left"></i> Shell中的常用通配符，字符类
+              <a href="/2020/02/27/RL1/" rel="next" title="RL1：K-armed Bandits Problem">
+                <i class="fa fa-chevron-left"></i> RL1：K-armed Bandits Problem
               </a>
             
           </div>
@@ -572,8 +593,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/01/17/ML13/" rel="prev" title="统计学习方法——第十三章：无监督学习概论">
-                统计学习方法——第十三章：无监督学习概论 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/02/29/Others5/" rel="prev" title="Git基本操作汇总">
+                Git基本操作汇总 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -770,7 +791,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#physical-architecture-of-gpu"><span class="nav-number">1.</span> <span class="nav-text">Physical Architecture of GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#software-concept-in-cuda"><span class="nav-number">2.</span> <span class="nav-text">Software Concept in CUDA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cpu和gpu的结构对比"><span class="nav-number">3.</span> <span class="nav-text">CPU和GPU的结构对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#others"><span class="nav-number">4.</span> <span class="nav-text">Others</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-material"><span class="nav-number">5.</span> <span class="nav-text">Reference Material</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-to-markov-decision-processes"><span class="nav-number">1.</span> <span class="nav-text">Introduction to Markov Decision Processes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#definition-of-mdp"><span class="nav-number">1.1.</span> <span class="nav-text">Definition of MDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#an-example-of-mdp"><span class="nav-number">1.2.</span> <span class="nav-text">An Example of MDP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goal-of-reinforcement-learning"><span class="nav-number">2.</span> <span class="nav-text">Goal of Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-goal-of-rl"><span class="nav-number">2.1.</span> <span class="nav-text">The Goal of RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-reward-hypothesis"><span class="nav-number">2.2.</span> <span class="nav-text">The Reward Hypothesis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#episodic-tasks-and-continuing-tasks"><span class="nav-number">3.</span> <span class="nav-text">Episodic Tasks And Continuing Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#episodic-tasks"><span class="nav-number">3.1.</span> <span class="nav-text">Episodic Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#continuing-tasks"><span class="nav-number">3.2.</span> <span class="nav-text">Continuing Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#discounting"><span class="nav-number">3.3.</span> <span class="nav-text">Discounting</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -984,6 +1005,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 

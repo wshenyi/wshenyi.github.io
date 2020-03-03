@@ -114,7 +114,8 @@
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/7.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/8.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/9.png">
-<meta property="og:updated_time" content="2020-03-02T17:34:17.424Z">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/10.png">
+<meta property="og:updated_time" content="2020-03-03T03:44:44.863Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL1：K-armed Bandits Problem">
 <meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  The K-Armed Bandi">
@@ -423,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-03 01:34:17" itemprop="dateModified" datetime="2020-03-03T01:34:17+08:00">2020-03-03</time>
+                <time title="Modified: 2020-03-03 11:44:44" itemprop="dateModified" datetime="2020-03-03T11:44:44+08:00">2020-03-03</time>
               
             
           </span>
@@ -491,8 +492,8 @@
 <p>In a word, <strong>decision making under uncertainty</strong> can be formalized by the <strong>k-armed bandit problem</strong></p>
 <h3 id="action-values">Action Values</h3>
 <p>the value of an action is the <strong>expected reward</strong> when that action is taken <span class="math display">\[q_*(a) \doteq \mathbb{E}[R_t\ | \ A_t = a],\ \forall a \in \mathbf{A}\\=\sum_rp(r|a)r\ \ \ \ \ \ \ \ \]</span> To clearly explain this, the reward of an action may not be fixed so the reward may comfirm to a uniform distribution or normal distribution. Here is an example to illustrate this process <img src="/2020/02/27/RL1/1.png"></p>
-<h3 id="goal">Goal</h3>
-<p>Remember that the agent's <strong>goal</strong> is to <strong>maximize the expected total reward over some timestep</strong>. We can call this procedure the <em>argmax</em> (the argument "a" which maximizes function <span class="math inline">\(q_*\)</span>) <span class="math display">\[argmax_a \ q_*(a)\]</span> It is clear that if you know the value of each action, then it would be trivial to solve the k-armed bandit problem: you would always select the <strong>action with highest value</strong>.</p>
+<h3 id="action-selection">Action Selection</h3>
+<p>Remember that the agent's <strong>goal</strong> is to <strong>maximize the expected total amount of reward it recieves</strong>. We can call this procedure the <em>argmax</em> (the argument "a" which maximizes function <span class="math inline">\(q_*\)</span>) <span class="math display">\[argmax_a \ q_*(a)\]</span> It is clear that if you know the value of each action, then it would be trivial to solve the k-armed bandit problem: you would always select the <strong>action with highest value</strong>.</p>
 <p>Thus, the problem here is that the agent do not know the action values with certainty. It only have to estimate the action values. But how to estimate action-values?</p>
 <hr>
 <h2 id="what-to-learn-estimating-action-values">What to Learn? Estimating Action Values</h2>
@@ -560,8 +561,11 @@ After that, this time, we should select action 2.<br>
 <img src="/2020/02/27/RL1/8.png"><br>
 The key idea in UCB is that it uses <strong>uncertainty</strong> in the value estimation for balancing exploration and exploitation</p>
 <p><span class="math display">\[A_t \doteq argmax_a [Q_t(a)+c\sqrt{\frac{\ln{t}}{N_t(a)}}\ ]\]</span></p>
-<p>We can clearly see here how UCB combines exploration and exploitation. The first term in the sum represents the exploitation part, and the second term represents the exploration part. The constant parameter <span class="math inline">\(c\)</span> is used to scale the extent of exploration<br>
+<p>We can clearly see here how UCB combines exploration and exploitation. The first term in the sum represents the exploitation part, and the second term represents the exploration part. The constant parameter <span class="math inline">\(c\)</span> is used to scale the extent of exploration.<br>
 <img src="/2020/02/27/RL1/9.png"></p>
+<h2 id="summary">Summary</h2>
+<p>we summarize a complete learning curve by its average value over the 1000 steps; this value is proportional to the area under the learning curve. This kind of graph is called a <strong>parameter study</strong>. Note that the parameter values are varied by factors of two and presented on a log scale. Note also the characteristic inverted-U shapes of each algorithm’s performance; all the algorithms perform best at an intermediate value of their parameter, neither too large nor too small.<br>
+<img src="/2020/02/27/RL1/10.png"></p>
 
       
     </div>
@@ -602,8 +606,8 @@ The key idea in UCB is that it uses <strong>uncertainty</strong> in the value es
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/29/Others5/" rel="prev" title="Git基本操作汇总">
-                Git基本操作汇总 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/02/28/RL2/" rel="prev" title="RL2：Markov Decision Processes">
+                RL2：Markov Decision Processes <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -675,7 +679,7 @@ The key idea in UCB is that it uses <strong>uncertainty</strong> in the value es
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -800,7 +804,7 @@ The key idea in UCB is that it uses <strong>uncertainty</strong> in the value es
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-k-armed-bandit-problem"><span class="nav-number">1.</span> <span class="nav-text">The K-Armed Bandit Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#action-values"><span class="nav-number">1.1.</span> <span class="nav-text">Action Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goal"><span class="nav-number">1.2.</span> <span class="nav-text">Goal</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-to-learn-estimating-action-values"><span class="nav-number">2.</span> <span class="nav-text">What to Learn? Estimating Action Values</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sample-average"><span class="nav-number">2.1.</span> <span class="nav-text">Sample-Average</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#changing-distribution"><span class="nav-number">2.2.</span> <span class="nav-text">Changing Distribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#greedy-action"><span class="nav-number">2.3.</span> <span class="nav-text">Greedy Action</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exploration-vs.-exploitation-tradeoff"><span class="nav-number">3.</span> <span class="nav-text">Exploration vs. Exploitation Tradeoff</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exploration-and-exploitation-dilemma"><span class="nav-number">3.1.</span> <span class="nav-text">Exploration and Exploitation Dilemma</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epsilon-greedy-action-selection"><span class="nav-number">3.2.</span> <span class="nav-text">Epsilon-Greedy Action Selection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#optimistic-initial-values"><span class="nav-number">3.3.</span> <span class="nav-text">Optimistic Initial Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upper-confidence-bound-ucb-action-selection"><span class="nav-number">3.4.</span> <span class="nav-text">Upper-Confidence Bound (UCB) Action Selection</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-k-armed-bandit-problem"><span class="nav-number">1.</span> <span class="nav-text">The K-Armed Bandit Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#action-values"><span class="nav-number">1.1.</span> <span class="nav-text">Action Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#action-selection"><span class="nav-number">1.2.</span> <span class="nav-text">Action Selection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-to-learn-estimating-action-values"><span class="nav-number">2.</span> <span class="nav-text">What to Learn? Estimating Action Values</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sample-average"><span class="nav-number">2.1.</span> <span class="nav-text">Sample-Average</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#changing-distribution"><span class="nav-number">2.2.</span> <span class="nav-text">Changing Distribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#greedy-action"><span class="nav-number">2.3.</span> <span class="nav-text">Greedy Action</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exploration-vs.-exploitation-tradeoff"><span class="nav-number">3.</span> <span class="nav-text">Exploration vs. Exploitation Tradeoff</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exploration-and-exploitation-dilemma"><span class="nav-number">3.1.</span> <span class="nav-text">Exploration and Exploitation Dilemma</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epsilon-greedy-action-selection"><span class="nav-number">3.2.</span> <span class="nav-text">Epsilon-Greedy Action Selection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#optimistic-initial-values"><span class="nav-number">3.3.</span> <span class="nav-text">Optimistic Initial Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upper-confidence-bound-ucb-action-selection"><span class="nav-number">3.4.</span> <span class="nav-text">Upper-Confidence Bound (UCB) Action Selection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li></ol></div>
             
 
           </div>
