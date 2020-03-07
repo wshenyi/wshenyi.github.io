@@ -109,7 +109,8 @@
 <meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/2.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/3.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/4.png">
-<meta property="og:updated_time" content="2020-03-03T05:21:58.688Z">
+<meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/5.png">
+<meta property="og:updated_time" content="2020-03-07T06:43:54.350Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL2：Markov Decision Processes">
 <meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  Introduction to M">
@@ -418,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-03 13:21:58" itemprop="dateModified" datetime="2020-03-03T13:21:58+08:00">2020-03-03</time>
+                <time title="Modified: 2020-03-07 14:43:54" itemprop="dateModified" datetime="2020-03-07T14:43:54+08:00">2020-03-07</time>
               
             
           </span>
@@ -541,18 +542,24 @@ There are two kinds of nodes: state nodes and action nodes. The key point here i
 <p>Here comes to the problem: <span class="math inline">\(G_t\)</span> could be <span class="math inline">\(\infty\)</span> and impossible to calculate. So we can make <span class="math inline">\(G_t\)</span> finite by using <strong>discounting</strong></p>
 <h3 id="discounting">Discounting</h3>
 <p>Discount the rewards in the future by <span class="math inline">\(\gamma\)</span> called <strong>discount rate</strong>, where <span class="math inline">\(\gamma \in [0,1]\)</span></p>
-<p><span class="math display">\[\ \ \ \ \ \ \ \ \ \ 
+<p><span class="math display">\[\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
 G_t \doteq R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...+\gamma^{k-1}R_{t+k}+...\\
-=\sum_{k=0}^\infty \gamma^kR_{t+k+1}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\
-=R_{t+1}+\gamma G_{t+1}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+=\sum_{k=0}^\infty \gamma^kR_{t+k+1}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
 \]</span></p>
-<p>Now we have recursive version of <span class="math inline">\(G_t\)</span>. Assume <span class="math inline">\(R_{max}\)</span> is the maximum reward the agent can receive</p>
+<p>We can also re-write <span class="math inline">\(G_t\)</span> in the recursive version</p>
+<p><span class="math display">\[G_t = R_{t+1}+\gamma G_{t+1} \]</span></p>
+<p>To prove <span class="math inline">\(G_t\)</span> is finite, let's assume <span class="math inline">\(R_{max}\)</span> is the maximum reward the agent can receive</p>
 <p><span class="math display">\[G_t=\sum_{k=0}^\infty \gamma^kR_{t+k+1}\le \sum_{k=0}^\infty \gamma^kR_{max}=R_{max}\sum_{k=0}^\infty \gamma^k=R_{max}\times \frac{1}{1-\gamma}\]</span></p>
 <p>It proves that <span class="math inline">\(G_t\)</span> now is finite. To Specify, let's talk about <span class="math inline">\(\gamma=0\)</span> and <span class="math inline">\(\gamma=1\)</span>.</p>
 <ul>
 <li><span class="math inline">\(\gamma=0\Rightarrow G_t=R_t\)</span> : agent only cares about immediate reward. (<strong>short-sighted agent</strong>)</li>
 <li><span class="math inline">\(\gamma\rightarrow1\)</span> : agent takes future rewards into account more strongly. (<strong>far-sighted agent</strong>)</li>
 </ul>
+<h3 id="unified-episodic-and-continuing-tasks">Unified Episodic and Continuing Tasks</h3>
+<p>we can consider episode termination to be the entering of a special <strong>absorbing state</strong> that transitions only to itself and that generates only rewards of zero. For example, consider the state transition diagram:<br>
+<img src="/2020/02/28/RL2/5.png"><br>
+Thus, we can informally regard epsoidic tasks as continuing task.</p>
 
       
     </div>
@@ -666,7 +673,7 @@ G_t \doteq R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...+\gamma^{k-1}R_{t+k}+...\\
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -697,7 +704,9 @@ G_t \doteq R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...+\gamma^{k-1}R_{t+k}+...\\
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -791,7 +800,7 @@ G_t \doteq R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...+\gamma^{k-1}R_{t+k}+...\\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-to-markov-decision-processes"><span class="nav-number">1.</span> <span class="nav-text">Introduction to Markov Decision Processes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#definition-of-mdp"><span class="nav-number">1.1.</span> <span class="nav-text">Definition of MDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#an-example-of-mdp"><span class="nav-number">1.2.</span> <span class="nav-text">An Example of MDP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goal-of-reinforcement-learning"><span class="nav-number">2.</span> <span class="nav-text">Goal of Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-goal-of-rl"><span class="nav-number">2.1.</span> <span class="nav-text">The Goal of RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-reward-hypothesis"><span class="nav-number">2.2.</span> <span class="nav-text">The Reward Hypothesis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#episodic-tasks-and-continuing-tasks"><span class="nav-number">3.</span> <span class="nav-text">Episodic Tasks And Continuing Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#episodic-tasks"><span class="nav-number">3.1.</span> <span class="nav-text">Episodic Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#continuing-tasks"><span class="nav-number">3.2.</span> <span class="nav-text">Continuing Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#discounting"><span class="nav-number">3.3.</span> <span class="nav-text">Discounting</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-to-markov-decision-processes"><span class="nav-number">1.</span> <span class="nav-text">Introduction to Markov Decision Processes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#definition-of-mdp"><span class="nav-number">1.1.</span> <span class="nav-text">Definition of MDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#an-example-of-mdp"><span class="nav-number">1.2.</span> <span class="nav-text">An Example of MDP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goal-of-reinforcement-learning"><span class="nav-number">2.</span> <span class="nav-text">Goal of Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-goal-of-rl"><span class="nav-number">2.1.</span> <span class="nav-text">The Goal of RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-reward-hypothesis"><span class="nav-number">2.2.</span> <span class="nav-text">The Reward Hypothesis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#episodic-tasks-and-continuing-tasks"><span class="nav-number">3.</span> <span class="nav-text">Episodic Tasks And Continuing Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#episodic-tasks"><span class="nav-number">3.1.</span> <span class="nav-text">Episodic Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#continuing-tasks"><span class="nav-number">3.2.</span> <span class="nav-text">Continuing Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#discounting"><span class="nav-number">3.3.</span> <span class="nav-text">Discounting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unified-episodic-and-continuing-tasks"><span class="nav-number">3.4.</span> <span class="nav-text">Unified Episodic and Continuing Tasks</span></a></li></ol></li></ol></div>
             
 
           </div>

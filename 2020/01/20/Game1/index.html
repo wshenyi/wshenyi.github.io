@@ -109,7 +109,7 @@
 <meta property="og:image" content="https://godway999.github.io/2020/01/20/Game1/pic2.png">
 <meta property="og:image" content="https://godway999.github.io/2020/01/20/Game1/pic3.png">
 <meta property="og:image" content="https://godway999.github.io/2020/01/20/Game1/pic4.png">
-<meta property="og:updated_time" content="2020-03-02T17:36:08.086Z">
+<meta property="og:updated_time" content="2020-03-07T01:56:51.227Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博弈论1：为什么囚徒困境是一个困境?">
 <meta name="twitter:description" content="All materials come from Coursera《Game Theory》by Stanford University &amp;amp; The University of British Columbia  囚徒困境 两个囚犯现在被捕，警察将他们两个分别关在了不同的房间（囚犯之间互相无法交谈），警察为了让他们招供，对两个人分别说了这样一番话：  若你和他都选择不招供，则在我们目前已有">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-03 01:36:08" itemprop="dateModified" datetime="2020-03-03T01:36:08+08:00">2020-03-03</time>
+                <time title="Modified: 2020-03-07 09:56:51" itemprop="dateModified" datetime="2020-03-07T09:56:51+08:00">2020-03-07</time>
               
             
           </span>
@@ -501,22 +501,22 @@
 <li>时序（Timing）：事件发生的顺序（例如大家下棋时轮流交替移动棋子）</li>
 <li>信息（information）：当玩家做出行动时他们都知道什么信息（参与者对其他参与者的了解程度）</li>
 </ul>
-<p>所以<strong>有限n人标准</strong>博弈的数学定义表示为<span class="math display">\[&lt;N, A, u&gt;\]</span>其中元素分别表示如下含义：</p>
+<p>所以<strong>有限n人标准</strong>博弈的数学定义表示为<span class="math inline">\(&lt;N, \mathbf{A}, u&gt;\)</span>其中元素分别表示如下含义：</p>
 <ul>
 <li><ol type="1">
 <li>玩家的集合<span class="math inline">\(N = \{1, 2, ..., n\}\)</span> 是一个大小为n的有限集合，用<span class="math inline">\(i\)</span>标识</li>
 </ol></li>
 <li><ol start="2" type="1">
-<li>行动组合的集合<span class="math inline">\(A = A_1 \times A_2 \times ... \times A_n\)</span>，其中<span class="math inline">\(A_i\)</span>表示玩家<span class="math inline">\(i\)</span>的行动集合，若<span class="math inline">\(a\)</span>表示一个行动组合（action profile），则有<span class="math inline">\(a = (a_1, a_2, ..., a_n) \in A\)</span></li>
+<li>行动组合的全集<span class="math inline">\(\mathbf{A} = A_1 \times A_2 \times ... \times A_n\)</span>，其中<span class="math inline">\(A_i\)</span>表示玩家<span class="math inline">\(i\)</span>的行动集合，若用<span class="math inline">\(a\)</span>表示一个行动组合（action profile），则有<span class="math inline">\(a = (a_1, a_2, ..., a_n) \in \mathbf{A}\)</span></li>
 </ol></li>
 <li><ol start="3" type="1">
-<li>效用(代价)函数组<span class="math inline">\(u = (u_1, u_2, ..., u_n)\)</span>，其中对于玩家<span class="math inline">\(i\)</span>，<span class="math inline">\(u_i: A \rightarrow R\)</span>，特别注意 ，此处的<span class="math inline">\(u_i\)</span>表示一个从行动组合集合<span class="math inline">\(A\)</span>到实数<span class="math inline">\(R\)</span>的映射</li>
+<li>效用(代价)函数组<span class="math inline">\(u = (u_1, u_2, ..., u_n)\)</span>，其中对于玩家<span class="math inline">\(i\)</span>，<span class="math inline">\(u_i: \mathbf{A} \rightarrow \mathbb{R}\)</span>，特别注意 ，此处的<span class="math inline">\(u_i\)</span>表示一个从行动组合集合<span class="math inline">\(a \in A\)</span>到实数<span class="math inline">\(\mathbf{R}\)</span>的映射</li>
 </ol></li>
 </ul>
 <hr>
 <h2 id="支配策略">支配策略</h2>
 <p>我们在参与游戏的时会有一个要实现的<strong>目标</strong>（goal），通常情况下的目标为最大化自己的收益（payoff），但是也可以有别的目标（比如以让对方获得最小收益为目标）</p>
-<p>为实现这个目标我们会有一个对应的<strong>策略</strong>（strategy），<strong>策略</strong>指导玩家该做出什么行动（或选择什么行动）。比如在囚徒困境中，囚犯的策略就是：<strong>做出怎样的选择(招供或不招供)，以使自己被判的时间最短</strong>。所以每个囚犯都会思考，如果对方招供的话我该怎么选，如果对方不招供的话我又该怎么选？从而我们这里引入一个概念<strong>支配策略</strong>（dominant strategy）</p>
+<p>为实现这个目标我们会有一个对应的<strong>策略</strong>（strategy），<strong>策略</strong>指导玩家该做出什么行动（或选择什么行动）。比如在囚徒困境中，囚犯的策略就是：<strong>做出怎样的选择(招供或不招供)，以使自己被判的时间最短</strong>。这里每个囚犯有两个选择：与另一个囚犯合作（Cooperate）和欺骗另一个囚犯（Deceive），选择合作意味着<strong>不招供</strong>而欺骗意味着<strong>招供</strong>，所以每个囚犯都会思考，如果对方招供的话我该怎么选，如果对方不招供的话我又该怎么选？从而我们这里引入一个概念<strong>支配策略</strong>（dominant strategy）</p>
 <p>支配策略：A dominant strategy for a player is one that produces the highest payoff of any strategy available for every possible action by the other players。通俗点讲就是：不管别人做出怎样的行动，我所做的选择都可以让我得到最大收益。还以囚徒困境举例</p>
 <p>情况一：当<strong>囚犯2选择C不招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判1年，而D招供那么自己可以无罪释放（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong> <img src="/2020/01/20/Game1/pic2.png"></p>
 <p>情况二：当<strong>囚犯2选择D招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判3年，而D招供那么自己会被判2年（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong> <img src="/2020/01/20/Game1/pic3.png"></p>
@@ -638,7 +638,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -669,7 +669,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

@@ -115,7 +115,7 @@
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/8.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/9.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/10.png">
-<meta property="og:updated_time" content="2020-03-03T03:44:44.863Z">
+<meta property="og:updated_time" content="2020-03-07T06:20:57.862Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL1：K-armed Bandits Problem">
 <meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  The K-Armed Bandi">
@@ -424,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-03 11:44:44" itemprop="dateModified" datetime="2020-03-03T11:44:44+08:00">2020-03-03</time>
+                <time title="Modified: 2020-03-07 14:20:57" itemprop="dateModified" datetime="2020-03-07T14:20:57+08:00">2020-03-07</time>
               
             
           </span>
@@ -513,8 +513,9 @@ Q_{t+1}=\frac{1}{t}\sum_{i=1}^tR_i\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
 <p><span class="math display">\[Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)\]</span></p>
 <p>And it can also express as below</p>
 <p><span class="math display">\[NewEstimate \leftarrow OldEstimate\ +\  StepSize(Target\ -\ OldEstimate)\]</span></p>
-<h3 id="changing-distribution">Changing Distribution</h3>
-<p>What if the reward distribution of each action is <strong>changing over time</strong>? In this situation, what we learn form history may not correctly represent current state due to changing of reward distribution. Aiming to catch up this change, we can wieght more on recent reward than on ancient reward because recent information reflect changing more accurate. To do so, we can use a <strong>fixed stepsize</strong>,like 0.5, instead of <span class="math inline">\(\frac{1}{t}\)</span>. This can lead to decaying exponently past reward.</p>
+<p>The expression <span class="math inline">\((Target-OldEstimate)\)</span> is an <strong>error</strong> in the estimate. It is reduced by taking a step toward the “Target.” <strong>The target is presumed to indicate a desirable direction in which to move, though it may be noisy.</strong> In the case above, for example, the target is the nth reward.</p>
+<h3 id="nonstationary-problem">Nonstationary Problem</h3>
+<p>What if the reward distribution of each action is <strong>changing over time</strong>? In this situation, what we learn form history may not correctly represent current state due to changing of reward distribution. In such cases it makes sense to give more weight to recent rewards than to long-past rewards because recent information reflect changing more accurate. To do so, we can use a <strong>fixed stepsize</strong>,like 0.5, instead of <span class="math inline">\(\frac{1}{t}\)</span>. This can lead to decaying exponently past reward.</p>
 <p><span class="math display">\[Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)=\alpha_tR_t+(1-\alpha_t)Q_t\]</span></p>
 <p>As <span class="math inline">\(\alpha_t\)</span> increases, the more <span class="math inline">\(R_t\)</span> contributes to <span class="math inline">\(Q_{t+1}\)</span> and the less for <span class="math inline">\(Q_t\)</span>.</p>
 <h3 id="greedy-action">Greedy Action</h3>
@@ -545,27 +546,35 @@ a\sim Uniform(\mathbf{A})\ \ \ \ \ \ \epsilon
 <img src="/2020/02/27/RL1/5.png"><br>
 We run each agent with different <span class="math inline">\(\epsilon\)</span> for 2000 independent runs, each run for 1000 time steps. Then we average 2000 runs to get the learning algorithm’s average behavior.<br>
 <img src="/2020/02/27/RL1/4.png"></p>
+<p>The advantage of epsilon-greedy over greedy methods depends on the task. If the reward variance is large, like 10, then more explorations to detect best action is important. More detections give the agent more confidence to pick up optimal action.</p>
+<p>On the other hand, if the reward variance is zero, then greedy method would know the true value of each action after trying it once. Seemingly, in this case, greedy method would soon find the greedy action and it might perform best. But, this can not be guaranteed under nonstationary situations. Nonstation means the true values of the actions changed over time. In this case, exploration is needed to ensure that one of the nongreedy actions has not changed to become better than the greedy one.</p>
 <h3 id="optimistic-initial-values">Optimistic Initial Values</h3>
 <p><strong>Optimistic initial values</strong> encourage <strong>early exploration</strong>. In real programing, don't intialize all acion values defaut to 0. Here is an example to show algorithm's performance by using this method.<br>
 <img src="/2020/02/27/RL1/6.png"><br>
 Limitation of optimistic inital values:</p>
 <ul>
 <li>Optimistic intial values <strong>only drive early exploration</strong></li>
-<li>They are not will suited for <strong>non-stationary problems</strong></li>
+<li>They are not will suited for <strong>nonstationary problems</strong></li>
 <li>We may not know what the <strong>optimistic values</strong> should be</li>
 </ul>
 <h3 id="upper-confidence-bound-ucb-action-selection">Upper-Confidence Bound (UCB) Action Selection</h3>
+<p>Epsilon-greedy action selection forces the non-greedy actions to be tried, but indiscriminately and <strong>uniformly</strong>, with no preference for those that are nearly greedy or particularly uncertain. It would be better to select among the non-greedy actions according to their <strong>potential for actually being optimal</strong>, taking into account both how close their estimates are to being maximal and the uncertainties in those estimates.</p>
 <p>In <strong>upper-confidence bound</strong>(UCB) action selection, we follow the principle of optimism in the face of uncertainty. This simply means that if we are uncertain about something, we should optimistically assume that it is good.</p>
 <p>For instance, say we have these three actions with associated uncertainties. The larger confidence interval means bigger uncertainies. So the agent optimistically picks the action that has the highest upper bound, action 1. <img src="/2020/02/27/RL1/7.png"><br>
 After that, this time, we should select action 2.<br>
 <img src="/2020/02/27/RL1/8.png"><br>
-The key idea in UCB is that it uses <strong>uncertainty</strong> in the value estimation for balancing exploration and exploitation</p>
+The key idea in UCB is that it uses <strong>uncertainty</strong> or <strong>variance</strong> (sqrt root) in the value estimation for balancing exploration and exploitation.</p>
 <p><span class="math display">\[A_t \doteq argmax_a [Q_t(a)+c\sqrt{\frac{\ln{t}}{N_t(a)}}\ ]\]</span></p>
-<p>We can clearly see here how UCB combines exploration and exploitation. The first term in the sum represents the exploitation part, and the second term represents the exploration part. The constant parameter <span class="math inline">\(c\)</span> is used to scale the extent of exploration.<br>
-<img src="/2020/02/27/RL1/9.png"></p>
+<p>We can clearly see here how UCB combines exploration and exploitation. The first term in the sum represents the exploitation part, and the second term represents the exploration part. The constant parameter <span class="math inline">\(c\)</span> is used to scale the extent of exploration. <span class="math inline">\(N_t(a)\)</span> denotes the number of times that action <span class="math inline">\(a\)</span> has been selected prior to time <span class="math inline">\(t\)</span>.<br>
+<img src="/2020/02/27/RL1/9.png"><br>
+The limitation of UCB is <strong>not practical for very huge state spaces</strong>.</p>
 <h2 id="summary">Summary</h2>
-<p>we summarize a complete learning curve by its average value over the 1000 steps; this value is proportional to the area under the learning curve. This kind of graph is called a <strong>parameter study</strong>. Note that the parameter values are varied by factors of two and presented on a log scale. Note also the characteristic inverted-U shapes of each algorithm’s performance; all the algorithms perform best at an intermediate value of their parameter, neither too large nor too small.<br>
-<img src="/2020/02/27/RL1/10.png"></p>
+<p>The gap between k-armed bandit problem and the full reinforcement learning problem:</p>
+<ol type="1">
+<li>there is <strong>no association</strong> between actions and situations(or <strong>states</strong>). Each selection of actions is <strong>non-contextual</strong> or independent.</li>
+<li>thers is <strong>no policy</strong>, which designate actions at each situation(or <strong>state</strong>).</li>
+</ol>
+<p>we summarize a complete learning curve by its average value over the 1000 steps; this value is proportional to the area under the learning curve. This kind of graph is called a <strong>parameter study</strong>. <img src="/2020/02/27/RL1/10.png"></p>
 
       
     </div>
@@ -596,8 +605,8 @@ The key idea in UCB is that it uses <strong>uncertainty</strong> in the value es
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/25/Game2/" rel="next" title="博弈论2：纳什均衡">
-                <i class="fa fa-chevron-left"></i> 博弈论2：纳什均衡
+              <a href="/2020/02/25/Game2/" rel="next" title="博弈论2：纯策略纳什均衡">
+                <i class="fa fa-chevron-left"></i> 博弈论2：纯策略纳什均衡
               </a>
             
           </div>
@@ -679,7 +688,7 @@ The key idea in UCB is that it uses <strong>uncertainty</strong> in the value es
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -710,7 +719,9 @@ The key idea in UCB is that it uses <strong>uncertainty</strong> in the value es
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -804,7 +815,7 @@ The key idea in UCB is that it uses <strong>uncertainty</strong> in the value es
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-k-armed-bandit-problem"><span class="nav-number">1.</span> <span class="nav-text">The K-Armed Bandit Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#action-values"><span class="nav-number">1.1.</span> <span class="nav-text">Action Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#action-selection"><span class="nav-number">1.2.</span> <span class="nav-text">Action Selection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-to-learn-estimating-action-values"><span class="nav-number">2.</span> <span class="nav-text">What to Learn? Estimating Action Values</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sample-average"><span class="nav-number">2.1.</span> <span class="nav-text">Sample-Average</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#changing-distribution"><span class="nav-number">2.2.</span> <span class="nav-text">Changing Distribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#greedy-action"><span class="nav-number">2.3.</span> <span class="nav-text">Greedy Action</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exploration-vs.-exploitation-tradeoff"><span class="nav-number">3.</span> <span class="nav-text">Exploration vs. Exploitation Tradeoff</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exploration-and-exploitation-dilemma"><span class="nav-number">3.1.</span> <span class="nav-text">Exploration and Exploitation Dilemma</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epsilon-greedy-action-selection"><span class="nav-number">3.2.</span> <span class="nav-text">Epsilon-Greedy Action Selection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#optimistic-initial-values"><span class="nav-number">3.3.</span> <span class="nav-text">Optimistic Initial Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upper-confidence-bound-ucb-action-selection"><span class="nav-number">3.4.</span> <span class="nav-text">Upper-Confidence Bound (UCB) Action Selection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-k-armed-bandit-problem"><span class="nav-number">1.</span> <span class="nav-text">The K-Armed Bandit Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#action-values"><span class="nav-number">1.1.</span> <span class="nav-text">Action Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#action-selection"><span class="nav-number">1.2.</span> <span class="nav-text">Action Selection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-to-learn-estimating-action-values"><span class="nav-number">2.</span> <span class="nav-text">What to Learn? Estimating Action Values</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sample-average"><span class="nav-number">2.1.</span> <span class="nav-text">Sample-Average</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nonstationary-problem"><span class="nav-number">2.2.</span> <span class="nav-text">Nonstationary Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#greedy-action"><span class="nav-number">2.3.</span> <span class="nav-text">Greedy Action</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exploration-vs.-exploitation-tradeoff"><span class="nav-number">3.</span> <span class="nav-text">Exploration vs. Exploitation Tradeoff</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exploration-and-exploitation-dilemma"><span class="nav-number">3.1.</span> <span class="nav-text">Exploration and Exploitation Dilemma</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epsilon-greedy-action-selection"><span class="nav-number">3.2.</span> <span class="nav-text">Epsilon-Greedy Action Selection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#optimistic-initial-values"><span class="nav-number">3.3.</span> <span class="nav-text">Optimistic Initial Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upper-confidence-bound-ucb-action-selection"><span class="nav-number">3.4.</span> <span class="nav-text">Upper-Confidence Bound (UCB) Action Selection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li></ol></div>
             
 
           </div>
