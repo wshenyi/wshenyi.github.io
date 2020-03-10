@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="nbQmeRysWc">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_32x32.ico?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16x16.ico?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  Introduction to M">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RL2：Markov Decision Processes">
+<meta property="og:url" content="https://godway999.github.io/2020/02/28/RL2/index.html">
+<meta property="og:site_name" content="Godway&#39;s Notebook">
+<meta property="og:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  Introduction to M">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/1.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/2.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/3.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/4.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/5.png">
+<meta property="og:updated_time" content="2020-03-07T06:43:54.350Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RL2：Markov Decision Processes">
+<meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  Introduction to M">
+<meta name="twitter:image" content="https://godway999.github.io/2020/02/28/RL2/1.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://godway999.github.io/2020/02/28/RL2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>RL2：Markov Decision Processes | Godway's Notebook</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Godway's Notebook</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">wsy</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/GODWAY999/GODWAY999.github.io" class="github-corner" title="Star me on GitHub" aria-label="Star me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2020/02/28/RL2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">RL2：Markov Decision Processes
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-02-28 17:21:31" itemprop="dateCreated datePublished" datetime="2020-02-28T17:21:31+08:00">2020-02-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-03-07 14:43:54" itemprop="dateModified" datetime="2020-03-07T14:43:54+08:00">2020-03-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/RL/" itemprop="url" rel="index"><span itemprop="name">RL</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<blockquote>
+<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
+</blockquote>
+<h2 id="introduction-to-markov-decision-processes">Introduction to Markov Decision Processes</h2>
+<h3 id="definition-of-mdp">Definition of MDP</h3>
+<p>MDPs are meant to be a straightforward framing of the problem of learning from interaction to achieve a goal. Here are the key element in discribing a MDP</p>
+<ul>
+<li><strong>agent</strong>: the learner and the decision maker</li>
+<li><strong>environment</strong>: the thing a agent interacts with, comprising everything outside the agent</li>
+<li><strong>action</strong>: selected by the agent to interact with the environment</li>
+<li><strong>reward</strong>: special numerical values that the agent seeks to maximize over time through its choice of actions.</li>
+</ul>
+<p>the whole interacting process is precisely simplified as follow<br>
+<img src="/2020/02/28/RL2/1.png"><br>
+More specifically, the agent and the environment interact at each of a sequence of discrete time steps, <span class="math inline">\(t=0,1,2,3,...\)</span> At each time step <span class="math inline">\(t\)</span>, the agent recives some representation of the environment's <strong>state</strong>, <span class="math inline">\(S_t \in \mathbf{S}\)</span>, and on that basis selects an <strong>action</strong>, <span class="math inline">\(A_t \in \mathbf{A}(s)\)</span>.</p>
+<p>One time step later, in part as a consequence of its action, the agent receives a numerical reward, <span class="math inline">\(R_{t+1} \in \mathbf{R}\subset \mathbb{R}\)</span>, and finds itself in a new state, <span class="math inline">\(S_{t+1}\)</span>. The MDP and agent together thereby give rise to a sequence or trajectory that begins like this:<br>
+<img src="/2020/02/28/RL2/2.png"><br>
+In a finite MDP, the sets of states, actions, and rewards (<span class="math inline">\(\mathbf{S}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{R}\)</span>) all have a finite number of elements. In this case, the random variables <span class="math inline">\(R_t\)</span> and <span class="math inline">\(S_t\)</span> have well defined discrete probability distributions dependent only on the preceding state and action. That is, for particular values of these random variables, <span class="math inline">\(s^, \in \mathbf{S}\)</span> and <span class="math inline">\(r \in \mathbf{R}\)</span>, there is a probability of those values occurring at time t, given particular values of the preceding state and action: <span class="math display">\[p(s^,,r|s,a)\doteq P(S_t=s^,, R_t=r\ | \ S_{t-1}=s, A_{t-1}=a)\]</span> for all <span class="math inline">\(s^,,s \in \mathbf{S}\)</span>, <span class="math inline">\(r \in \mathbf{R}\)</span>, and <span class="math inline">\(a \in \mathbf{A}(s)\)</span>. The function <span class="math inline">\(p\)</span> defines the <strong>dynamics of the MDP</strong>. <span class="math display">\[p:\ \mathbf{S}\times \mathbf{R}\times \mathbf{S}\times \mathbf{A}\rightarrow [0,1]\]</span> With <span class="math inline">\(p(s^,,r|s,a)\)</span>, note that future state and reward only depends on the current state and action. This is called the <strong>Markov property</strong>. It means that the present state is sufficient and remembering earlier states would not improve predictions about the future.</p>
+<p>The <strong>MDP framework</strong> is a considerable <strong>abstraction</strong> of the problem of goal-directed learning from interaction. It can be used to formalize a wide variety of <strong>sequential decision-making</strong> problem. This also means that any problem of learning goal-directed behavior can be reduced to three signals passing back and forth between an agent and its environment: actions, states, rewards.</p>
+<h3 id="an-example-of-mdp">An Example of MDP</h3>
+<p>Here is an example of finite MDP, <strong>Recycling Robot</strong>. We can write down the transition probabilities and the expected rewards, with dynamics as indicated below.<br>
+<img src="/2020/02/28/RL2/3.png"><br>
+We can show it in another useful way called <strong>trasition graph</strong><br>
+<img src="/2020/02/28/RL2/4.png"><br>
+There are two kinds of nodes: state nodes and action nodes. The key point here is that the agent fisrtly chooses an action and then transits to a state with corresponding probability.</p>
+<hr>
+<h2 id="goal-of-reinforcement-learning">Goal of Reinforcement Learning</h2>
+<h3 id="the-goal-of-rl">The Goal of RL</h3>
+<p>First we denote the <strong>return</strong> at time step <span class="math inline">\(t\)</span> as <span class="math inline">\(G_t\)</span></p>
+<p><span class="math display">\[G_t\doteq R_{t+1}+R_{t+2}+R_{t+3}+...\]</span></p>
+<p>We intuitively want to maxmize <span class="math inline">\(G_t\)</span> at each time step. However, <span class="math inline">\(G_t\)</span> is a random variable because <strong>the dynamics of the MDP can be stochastic</strong>. That's why we define the goal of an agent is to <strong>maxmize the expected return</strong></p>
+<p><span class="math display">\[\mathbb{E}[G_t] = \mathbb{E}[R_{t+1}+R_{t+2}+R_{t+3}+...]\]</span></p>
+<h3 id="the-reward-hypothesis">The Reward Hypothesis</h3>
+<p>The <strong>Reinforcement Learning Hypothesis</strong> can be expressed as this:</p>
+<blockquote>
+<p>Intelligent behavior araises from the actions of an individual seeking to maximize its received reward signals in a complex and challenging world.</p>
+</blockquote>
+<p>There are two research programs:</p>
+<ul>
+<li>Identify where reward signals come from. (what reward the agent should optimize)</li>
+<li>Develop algorithms that search the space of action to maximize reward signals.</li>
+</ul>
+<p>Informally, the agent’s goal is to <strong>maximize the total amount of reward it receives</strong>. This means maximizing not immediate reward, but cumulative reward in the long run. We can clearly state this informal idea as the <strong>reward hypothesis</strong>:</p>
+<blockquote>
+<p>That all of what we mean by goals and purposes can be well thought of as the maximization of the expected value of the cumulative sum of a received scalar signal (called reward).</p>
+</blockquote>
+<p>But how can we define reward? This is a trick problem. To use goals as rewards, we have some representations:</p>
+<ul>
+<li>goal-reward representation: 1 for achieving goal, 0 otherwise</li>
+<li>action-penalty representation: -1 for not achieving goal, 0 once goal reached</li>
+</ul>
+<p>Both of representations have its own limitation. They lack of some middel information to tell the agent how to achieve the goal as our expectation.</p>
+<hr>
+<h2 id="episodic-tasks-and-continuing-tasks">Episodic Tasks And Continuing Tasks</h2>
+<h3 id="episodic-tasks">Episodic Tasks</h3>
+<p>In an <strong>episodic task</strong>, the agent-environment interaction breaks up into <strong>episodes</strong>. Episodes are indepedent and each episode ends in a <strong>terminal state</strong> at time step <span class="math inline">\(T\)</span>. In this situation, time step is finite and we denote <span class="math inline">\(G_t\)</span> as</p>
+<p><span class="math display">\[G_t \doteq R_{t+1}+R_{t+2}+R_{t+1}+...+R_T\]</span></p>
+<h3 id="continuing-tasks">Continuing Tasks</h3>
+<p>The interaction between agent-environment goes on <strong>continually</strong> and there is no <strong>terminal state</strong>. In this situation, time step is infinite and we denote <span class="math inline">\(G_t\)</span> as</p>
+<p><span class="math display">\[G_t \doteq R_{t+1}+R_{t+2}+R_{t+3}+...\]</span></p>
+<p>Here comes to the problem: <span class="math inline">\(G_t\)</span> could be <span class="math inline">\(\infty\)</span> and impossible to calculate. So we can make <span class="math inline">\(G_t\)</span> finite by using <strong>discounting</strong></p>
+<h3 id="discounting">Discounting</h3>
+<p>Discount the rewards in the future by <span class="math inline">\(\gamma\)</span> called <strong>discount rate</strong>, where <span class="math inline">\(\gamma \in [0,1]\)</span></p>
+<p><span class="math display">\[\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+G_t \doteq R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...+\gamma^{k-1}R_{t+k}+...\\
+=\sum_{k=0}^\infty \gamma^kR_{t+k+1}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+\]</span></p>
+<p>We can also re-write <span class="math inline">\(G_t\)</span> in the recursive version</p>
+<p><span class="math display">\[G_t = R_{t+1}+\gamma G_{t+1} \]</span></p>
+<p>To prove <span class="math inline">\(G_t\)</span> is finite, let's assume <span class="math inline">\(R_{max}\)</span> is the maximum reward the agent can receive</p>
+<p><span class="math display">\[G_t=\sum_{k=0}^\infty \gamma^kR_{t+k+1}\le \sum_{k=0}^\infty \gamma^kR_{max}=R_{max}\sum_{k=0}^\infty \gamma^k=R_{max}\times \frac{1}{1-\gamma}\]</span></p>
+<p>It proves that <span class="math inline">\(G_t\)</span> now is finite. To Specify, let's talk about <span class="math inline">\(\gamma=0\)</span> and <span class="math inline">\(\gamma=1\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\gamma=0\Rightarrow G_t=R_t\)</span> : agent only cares about immediate reward. (<strong>short-sighted agent</strong>)</li>
+<li><span class="math inline">\(\gamma\rightarrow1\)</span> : agent takes future rewards into account more strongly. (<strong>far-sighted agent</strong>)</li>
+</ul>
+<h3 id="unified-episodic-and-continuing-tasks">Unified Episodic and Continuing Tasks</h3>
+<p>we can consider episode termination to be the entering of a special <strong>absorbing state</strong> that transitions only to itself and that generates only rewards of zero. For example, consider the state transition diagram:<br>
+<img src="/2020/02/28/RL2/5.png"><br>
+Thus, we can informally regard epsoidic tasks as continuing task.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/27/RL1/" rel="next" title="RL1：K-armed Bandits Problem">
+                <i class="fa fa-chevron-left"></i> RL1：K-armed Bandits Problem
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/29/Others5/" rel="prev" title="Git基本操作汇总">
+                Git基本操作汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.ico" alt="Godway">
+            
+              <p class="site-author-name" itemprop="name">Godway</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/475865836@qq.com" title="E-Mail &rarr; 475865836@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://randool.cn" title="https://randool.cn" rel="noopener" target="_blank">Randool</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/Smile_coderrr" title="https://me.csdn.net/Smile_coderrr" rel="noopener" target="_blank">Smile_coderrr</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-to-markov-decision-processes"><span class="nav-number">1.</span> <span class="nav-text">Introduction to Markov Decision Processes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#definition-of-mdp"><span class="nav-number">1.1.</span> <span class="nav-text">Definition of MDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#an-example-of-mdp"><span class="nav-number">1.2.</span> <span class="nav-text">An Example of MDP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goal-of-reinforcement-learning"><span class="nav-number">2.</span> <span class="nav-text">Goal of Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-goal-of-rl"><span class="nav-number">2.1.</span> <span class="nav-text">The Goal of RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-reward-hypothesis"><span class="nav-number">2.2.</span> <span class="nav-text">The Reward Hypothesis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#episodic-tasks-and-continuing-tasks"><span class="nav-number">3.</span> <span class="nav-text">Episodic Tasks And Continuing Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#episodic-tasks"><span class="nav-number">3.1.</span> <span class="nav-text">Episodic Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#continuing-tasks"><span class="nav-number">3.2.</span> <span class="nav-text">Continuing Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#discounting"><span class="nav-number">3.3.</span> <span class="nav-text">Discounting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unified-episodic-and-continuing-tasks"><span class="nav-number">3.4.</span> <span class="nav-text">Unified Episodic and Continuing Tasks</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Godway</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_lines.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

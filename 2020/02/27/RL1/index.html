@@ -115,7 +115,7 @@
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/8.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/9.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/10.png">
-<meta property="og:updated_time" content="2020-03-07T06:20:57.862Z">
+<meta property="og:updated_time" content="2020-03-10T11:49:49.486Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL1：K-armed Bandits Problem">
 <meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  The K-Armed Bandi">
@@ -424,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-07 14:20:57" itemprop="dateModified" datetime="2020-03-07T14:20:57+08:00">2020-03-07</time>
+                <time title="Modified: 2020-03-10 19:49:49" itemprop="dateModified" datetime="2020-03-10T19:49:49+08:00">2020-03-10</time>
               
             
           </span>
@@ -493,7 +493,7 @@
 <h3 id="action-values">Action Values</h3>
 <p>the value of an action is the <strong>expected reward</strong> when that action is taken <span class="math display">\[q_*(a) \doteq \mathbb{E}[R_t\ | \ A_t = a],\ \forall a \in \mathbf{A}\\=\sum_rp(r|a)r\ \ \ \ \ \ \ \ \]</span> To clearly explain this, the reward of an action may not be fixed so the reward may comfirm to a uniform distribution or normal distribution. Here is an example to illustrate this process <img src="/2020/02/27/RL1/1.png"></p>
 <h3 id="action-selection">Action Selection</h3>
-<p>Remember that the agent's <strong>goal</strong> is to <strong>maximize the expected total amount of reward it recieves</strong>. We can call this procedure the <em>argmax</em> (the argument "a" which maximizes function <span class="math inline">\(q_*\)</span>) <span class="math display">\[argmax_a \ q_*(a)\]</span> It is clear that if you know the value of each action, then it would be trivial to solve the k-armed bandit problem: you would always select the <strong>action with highest value</strong>.</p>
+<p>Remember that the agent's <strong>goal</strong> is to <strong>maximize the expected total amount of reward it recieves</strong>. We can call this procedure the <em>argmax</em> (the argument "a" which maximizes function <span class="math inline">\(q_*\)</span>) <span class="math display">\[\mathop{argmax}_a \ q_*(a)\]</span> It is clear that if you know the value of each action, then it would be trivial to solve the k-armed bandit problem: you would always select the <strong>action with highest value</strong>.</p>
 <p>Thus, the problem here is that the agent do not know the action values with certainty. It only have to estimate the action values. But how to estimate action-values?</p>
 <hr>
 <h2 id="what-to-learn-estimating-action-values">What to Learn? Estimating Action Values</h2>
@@ -504,10 +504,13 @@
 Here is an example of medical trail. <img src="/2020/02/27/RL1/2.png"><br>
 And we can simplify <span class="math inline">\(Q_t\)</span> by extending it in <strong>incremental update rule</strong></p>
 <p><span class="math display">\[
-Q_{t+1}=\frac{1}{t}\sum_{i=1}^tR_i\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\ \ \ \ \ \ \ \ \ \ 
-=\frac{1}{t}(R_t+(t-1)\frac{1}{t-1}\sum_{i=1}^{t-1}R_i)\\
-=\frac{1}{t}(R_t+(t-1)Q_t)\ \ \ \ \ \\
-=Q_t+\frac{1}{t}(R_t-Q_t)\ \ \ \ \ \ \ \ \\
+\begin{aligned}
+Q_{t+1}
+&amp; =\frac{1}{t}\sum_{i=1}^tR_i\\
+&amp; =\frac{1}{t}(R_t+(t-1)\frac{1}{t-1}\sum_{i=1}^{t-1}R_i)\\
+&amp; =\frac{1}{t}(R_t+(t-1)Q_t)\\
+&amp; =Q_t+\frac{1}{t}(R_t-Q_t)
+\end{aligned}
 \]</span></p>
 <p>To generalize it, we replace <span class="math inline">\(\frac{1}{t}\)</span> with <span class="math inline">\(\alpha_t\)</span> to represent stepsize and it's easy to know <span class="math inline">\(\alpha_t \in [0,1]\)</span></p>
 <p><span class="math display">\[Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)\]</span></p>
@@ -520,7 +523,7 @@ Q_{t+1}=\frac{1}{t}\sum_{i=1}^tR_i\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
 <p>As <span class="math inline">\(\alpha_t\)</span> increases, the more <span class="math inline">\(R_t\)</span> contributes to <span class="math inline">\(Q_{t+1}\)</span> and the less for <span class="math inline">\(Q_t\)</span>.</p>
 <h3 id="greedy-action">Greedy Action</h3>
 <p>At each time step, the agent could alway choose the action with the highest action value estimated by history. And this is called <strong>greedy action</strong>.</p>
-<p><span class="math display">\[a_g = argmax_a\ \ Q(a)\]</span></p>
+<p><span class="math display">\[a_g = \mathop{argmax}_a\ \ Q(a)\]</span></p>
 <p>Seemingly we can through greedy action to archieve our goal, maxmizing expected total reward. But there is still a problem exists: how does the agent know its estimation about each action is correctly approximating to the real distribution? Greedy action is greatly impact by initial action value. Why does the agent know other actions are worse than greedy action even trying them only a few times?</p>
 <p>I think the agent should spend some time trying other actions instead of greedy action. And this come to the <strong>exploration and exploitation tradeoff</strong></p>
 <hr>
@@ -534,11 +537,11 @@ Q_{t+1}=\frac{1}{t}\sum_{i=1}^tR_i\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
 <h3 id="epsilon-greedy-action-selection">Epsilon-Greedy Action Selection</h3>
 <p>One very simple method for choosing between exploration and exploitation is to <strong>choose randomly</strong>. We could choose to exploit most of the time with a small chance of exploring. For instance, we could roll a dice.<br>
 <img src="/2020/02/27/RL1/3.png"><br>
-This is called <strong>epsilon-greedy action selection</strong>. We formulize it as below, where <span class="math inline">\(\epsilon \in [0,1]\)</span></p>
+This is called <strong><span class="math inline">\(\epsilon\)</span>-greedy action selection</strong>. We formulize it as below, where <span class="math inline">\(\epsilon \in [0,1]\)</span></p>
 <p><span class="math display">\[
 A_t\leftarrow
 \begin{cases}
-argmax_a Q_t(a)\ \ \ \ \ \ \ \ 1-\epsilon\\
+\mathop{argmax}_a Q_t(a)\ \ \ \ \ \ \ \ 1-\epsilon\\ \\
 a\sim Uniform(\mathbf{A})\ \ \ \ \ \ \epsilon
 \end{cases}
 \]</span></p>
@@ -546,7 +549,7 @@ a\sim Uniform(\mathbf{A})\ \ \ \ \ \ \epsilon
 <img src="/2020/02/27/RL1/5.png"><br>
 We run each agent with different <span class="math inline">\(\epsilon\)</span> for 2000 independent runs, each run for 1000 time steps. Then we average 2000 runs to get the learning algorithm’s average behavior.<br>
 <img src="/2020/02/27/RL1/4.png"></p>
-<p>The advantage of epsilon-greedy over greedy methods depends on the task. If the reward variance is large, like 10, then more explorations to detect best action is important. More detections give the agent more confidence to pick up optimal action.</p>
+<p>The advantage of <span class="math inline">\(\epsilon\)</span>-greedy over greedy methods depends on the task. If the reward variance is large, like 10, then more explorations to detect best action is important. More detections give the agent more confidence to pick up optimal action.</p>
 <p>On the other hand, if the reward variance is zero, then greedy method would know the true value of each action after trying it once. Seemingly, in this case, greedy method would soon find the greedy action and it might perform best. But, this can not be guaranteed under nonstationary situations. Nonstation means the true values of the actions changed over time. In this case, exploration is needed to ensure that one of the nongreedy actions has not changed to become better than the greedy one.</p>
 <h3 id="optimistic-initial-values">Optimistic Initial Values</h3>
 <p><strong>Optimistic initial values</strong> encourage <strong>early exploration</strong>. In real programing, don't intialize all acion values defaut to 0. Here is an example to show algorithm's performance by using this method.<br>
@@ -558,13 +561,13 @@ Limitation of optimistic inital values:</p>
 <li>We may not know what the <strong>optimistic values</strong> should be</li>
 </ul>
 <h3 id="upper-confidence-bound-ucb-action-selection">Upper-Confidence Bound (UCB) Action Selection</h3>
-<p>Epsilon-greedy action selection forces the non-greedy actions to be tried, but indiscriminately and <strong>uniformly</strong>, with no preference for those that are nearly greedy or particularly uncertain. It would be better to select among the non-greedy actions according to their <strong>potential for actually being optimal</strong>, taking into account both how close their estimates are to being maximal and the uncertainties in those estimates.</p>
+<p><span class="math inline">\(\epsilon\)</span>-greedy action selection forces the non-greedy actions to be tried, but indiscriminately and <strong>uniformly</strong>, with no preference for those that are nearly greedy or particularly uncertain. It would be better to select among the non-greedy actions according to their <strong>potential for actually being optimal</strong>, taking into account both how close their estimates are to being maximal and the uncertainties in those estimates.</p>
 <p>In <strong>upper-confidence bound</strong>(UCB) action selection, we follow the principle of optimism in the face of uncertainty. This simply means that if we are uncertain about something, we should optimistically assume that it is good.</p>
 <p>For instance, say we have these three actions with associated uncertainties. The larger confidence interval means bigger uncertainies. So the agent optimistically picks the action that has the highest upper bound, action 1. <img src="/2020/02/27/RL1/7.png"><br>
 After that, this time, we should select action 2.<br>
 <img src="/2020/02/27/RL1/8.png"><br>
 The key idea in UCB is that it uses <strong>uncertainty</strong> or <strong>variance</strong> (sqrt root) in the value estimation for balancing exploration and exploitation.</p>
-<p><span class="math display">\[A_t \doteq argmax_a [Q_t(a)+c\sqrt{\frac{\ln{t}}{N_t(a)}}\ ]\]</span></p>
+<p><span class="math display">\[A_t \doteq \mathop{argmax}_a [Q_t(a)+c\sqrt{\frac{\ln{t}}{N_t(a)}}\ ]\]</span></p>
 <p>We can clearly see here how UCB combines exploration and exploitation. The first term in the sum represents the exploitation part, and the second term represents the exploration part. The constant parameter <span class="math inline">\(c\)</span> is used to scale the extent of exploration. <span class="math inline">\(N_t(a)\)</span> denotes the number of times that action <span class="math inline">\(a\)</span> has been selected prior to time <span class="math inline">\(t\)</span>.<br>
 <img src="/2020/02/27/RL1/9.png"><br>
 The limitation of UCB is <strong>not practical for very huge state spaces</strong>.</p>
@@ -688,7 +691,7 @@ The limitation of UCB is <strong>not practical for very huge state spaces</stron
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

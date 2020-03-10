@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="nbQmeRysWc">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_32x32.ico?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16x16.ico?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言 这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序 NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的依">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac本地用Eclipse配置NS3开发环境(完整教程)">
+<meta property="og:url" content="https://godway999.github.io/2019/05/03/Others3/index.html">
+<meta property="og:site_name" content="Godway&#39;s Notebook">
+<meta property="og:description" content="前言 这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序 NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的依">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic1.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic2.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic3.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic4.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic5.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic6.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic7.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic8.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic9.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic10.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic11.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic12.png">
+<meta property="og:image" content="https://godway999.github.io/2019/05/03/Others3/pic13.png">
+<meta property="og:updated_time" content="2019-07-03T02:43:17.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac本地用Eclipse配置NS3开发环境(完整教程)">
+<meta name="twitter:description" content="前言 这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。 在终端下编译和运行NS3程序 NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:build.py,bake,waf。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的依">
+<meta name="twitter:image" content="https://godway999.github.io/2019/05/03/Others3/pic1.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://godway999.github.io/2019/05/03/Others3/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Mac本地用Eclipse配置NS3开发环境(完整教程) | Godway's Notebook</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Godway's Notebook</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">wsy</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/GODWAY999/GODWAY999.github.io" class="github-corner" title="Star me on GitHub" aria-label="Star me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/05/03/Others3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Mac本地用Eclipse配置NS3开发环境(完整教程)
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-03 21:48:29" itemprop="dateCreated datePublished" datetime="2019-05-03T21:48:29+08:00">2019-05-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-03 10:43:17" itemprop="dateModified" datetime="2019-07-03T10:43:17+08:00">2019-07-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言">前言</h2>
+<p>这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。</p>
+<h2 id="在终端下编译和运行ns3程序">在终端下编译和运行NS3程序</h2>
+<p>NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:<code>build.py</code>,<code>bake</code>,<code>waf</code>。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的依赖，我觉得容易出问题。 在我的Mac上由于使用clang++，一定要加上<code>--disable-werror</code>，如果需要搭建python3的开发环境，需要指明python3具体位置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> (本地存放位置)/ns-allinone-3.29/ns-3.29/</span><br><span class="line">./waf --<span class="built_in">enable</span>-test --build-profile=debug --python=/usr/<span class="built_in">local</span>/bin/python3 --with-python=python3 --<span class="built_in">disable</span>-werror configure</span><br><span class="line">./waf build</span><br></pre></td></tr></table></figure>
+<p>经过一段时间的编译之后，在当前目录下运行一个官方例程<code>scratch-simulator</code>，如果一切顺利可以看到程序输出一行<code>Scratch Simulator</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./waf --run scratch/scratch-simulator</span><br></pre></td></tr></table></figure>
+<h2 id="在eclipse上配置ns3开发环境">在Eclipse上配置NS3开发环境</h2>
+<p>作为一个新手，如果没有一个友好的开发环境，很容易就进入从入门到放弃的阶段。NS3最让我不能接受的是必须用官方给的waf编译代码，我一开始尝试在Xcode搭建环境，然而Xcode好像对于使用外部编译器的支持不是很好，最终我还是转到在Eclipse上搭建开发环境。</p>
+<h3 id="在eclipse上新建项目">在Eclipse上新建项目</h3>
+<p>按如下顺序<em>File -&gt; New -&gt; C/C++ Project</em>，创建C++项目<br>
+<img src="/2019/05/03/Others3/pic1.png" title="Mac英文环境"><br>
+<strong>着重强调！！！NS3的代码必须放到<em>(本地存放位置)/ns-allinone-3.29/ns-3.29/scratch/</em>文件夹下才能被正确编译执行</strong>所以工程位置放在<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/</code>,这里工程名字自己定，我这里取名为<code>NS3</code>，右侧的编译器随便选一个，之后点<code>finish</code>完成。 <img src="/2019/05/03/Others3/pic2.png" title="Mac英文环境"></p>
+<h3 id="编译ns3项目">编译NS3项目</h3>
+<p>如果前一步没遇到问题，现在左侧的工程目录应该基本长这样子，以后就直接在scratch目录下新创xxx.cc文件就好了。 <img src="/2019/05/03/Others3/pic3.png" title="Mac英文环境"><br>
+之后这里右键NS3文件夹，进入工程属性面板。右侧点击<strong>C/C++ Build</strong>然后照我的样子配置两处。<br>
+<strong>编译器类型记得选为外部编译器</strong>，编译器选为当前目录下的waf编译器，编译结果放在当前目录下的build文件夹中<br>
+<img src="/2019/05/03/Others3/pic4.png" title="Mac英文环境"><br>
+<img src="/2019/05/03/Others3/pic5.png" title="Mac英文环境"><br>
+之后进入到<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/</code>进行<code>configure</code>操作，如果之前已经<code>configure</code>过了可以跳过该步骤。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> (本地存放位置)/ns-allinone-3.29/ns-3.29/</span><br><span class="line">./waf --<span class="built_in">enable</span>-test --build-profile=debug --python=/usr/<span class="built_in">local</span>/bin/python3 --with-python=python3 --<span class="built_in">disable</span>-werror configure</span><br></pre></td></tr></table></figure>
+<p><code>configure</code>过了之后点击<em>Eclipse</em>左上角的<strong>Build</strong>按钮就可以编译整个NS3工程了</p>
+<h3 id="配置eclipse使用外部编译器waf">配置Eclipse使用外部编译器waf</h3>
+<p>构建完了整个NS3工程之后，我们后续怎么运行我们自己写的代码呢？这时候需要配置使用外部编译器waf。<br>
+在<em>Eclipse</em>顶部按如下顺序<em>Run -&gt; Extern Tools -&gt; Extern Tools Configurations</em><br>
+<img src="/2019/05/03/Others3/pic6.png" title="Mac英文环境"><br>
+左侧右键点击新建一个编译器。<br>
+我这里将这个外部编译器取名为<code>ns3-waf</code>，其余两个和之前一样，参数这里填写<code>--run "${string_prompt}"</code> <img src="/2019/05/03/Others3/pic7.png" title="Mac英文环境"><br>
+这里点掉这个<code>Build before launch</code>选项<br>
+<img src="/2019/05/03/Others3/pic8.png" title="Mac英文环境"><br>
+之后点击<em>Eclipse</em>上方红色方框内的按钮<br>
+<img src="/2019/05/03/Others3/pic9.png" title="Mac英文环境"><br>
+然后会弹出一个选项框让填写<strong>你要编译的文件的名称</strong>，<strong>注意这里不用加.cc后缀</strong>,比如我要编译运行<code>scratch</code>文件夹下的<code>scratch-simulator.cc</code>，就直接填写<code>scratch-simulator</code>或<code>scratch/scratch-simulator</code>。如果你的自己写的文件之前已经build过了，就不需要再加文件目录<code>scratch/</code>，直接填写文件名就好。 <img src="/2019/05/03/Others3/pic10.png" title="Mac英文环境"><br>
+下方显示运行结果<br>
+<img src="/2019/05/03/Others3/pic11.png" title="Mac英文环境"></p>
+<h3 id="配置ns工程路径">配置NS工程路径</h3>
+<p>此时虽然能够运行自己写的NS3代码了，但是代码中却还有一堆烦人的下波浪线〰️，并且头文件的引用等都是查询不到的，这里就需要配置一下NS3工程路径和环境。<br>
+和之前一样，首先进入属性面板。然后找到图中所示的配置目录<br>
+这一步将<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/build/ns3/</code>下所有工程头文件包含了进来。 <img src="/2019/05/03/Others3/pic12.png" title="Mac英文环境"><br>
+然后构建会花费一小会时间，之后可以在左侧<code>NS3/includes/</code>下看到新生成了一个<code>NS3/build/ns3</code>文件，然后代码中的波浪线就全部消失了<br>
+<img src="/2019/05/03/Others3/pic13.png" title="Mac英文环境"></p>
+<h3 id="配置完成">配置完成</h3>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/03/Database7/" rel="next" title="数据库原理——第七章：数据库设计">
+                <i class="fa fa-chevron-left"></i> 数据库原理——第七章：数据库设计
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/04/Others1/" rel="prev" title="Markdown中Latex常用符号">
+                Markdown中Latex常用符号 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.ico" alt="Godway">
+            
+              <p class="site-author-name" itemprop="name">Godway</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/475865836@qq.com" title="E-Mail &rarr; 475865836@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://randool.cn" title="https://randool.cn" rel="noopener" target="_blank">Randool</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/Smile_coderrr" title="https://me.csdn.net/Smile_coderrr" rel="noopener" target="_blank">Smile_coderrr</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在终端下编译和运行ns3程序"><span class="nav-number">2.</span> <span class="nav-text">在终端下编译和运行NS3程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在eclipse上配置ns3开发环境"><span class="nav-number">3.</span> <span class="nav-text">在Eclipse上配置NS3开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在eclipse上新建项目"><span class="nav-number">3.1.</span> <span class="nav-text">在Eclipse上新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译ns3项目"><span class="nav-number">3.2.</span> <span class="nav-text">编译NS3项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置eclipse使用外部编译器waf"><span class="nav-number">3.3.</span> <span class="nav-text">配置Eclipse使用外部编译器waf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置ns工程路径"><span class="nav-number">3.4.</span> <span class="nav-text">配置NS工程路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置完成"><span class="nav-number">3.5.</span> <span class="nav-text">配置完成</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Godway</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_lines.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

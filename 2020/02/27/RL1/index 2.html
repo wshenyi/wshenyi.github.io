@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="nbQmeRysWc">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_32x32.ico?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16x16.ico?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  The K-Armed Bandi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RL1：K-armed Bandits Problem">
+<meta property="og:url" content="https://godway999.github.io/2020/02/27/RL1/index.html">
+<meta property="og:site_name" content="Godway&#39;s Notebook">
+<meta property="og:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  The K-Armed Bandi">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/1.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/2.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/3.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/5.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/4.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/6.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/7.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/8.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/9.png">
+<meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/10.png">
+<meta property="og:updated_time" content="2020-03-07T06:20:57.862Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RL1：K-armed Bandits Problem">
+<meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  The K-Armed Bandi">
+<meta name="twitter:image" content="https://godway999.github.io/2020/02/27/RL1/1.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://godway999.github.io/2020/02/27/RL1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>RL1：K-armed Bandits Problem | Godway's Notebook</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Godway's Notebook</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">wsy</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/GODWAY999/GODWAY999.github.io" class="github-corner" title="Star me on GitHub" aria-label="Star me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2020/02/27/RL1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">RL1：K-armed Bandits Problem
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-02-27 12:35:49" itemprop="dateCreated datePublished" datetime="2020-02-27T12:35:49+08:00">2020-02-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-03-07 14:20:57" itemprop="dateModified" datetime="2020-03-07T14:20:57+08:00">2020-03-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/RL/" itemprop="url" rel="index"><span itemprop="name">RL</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<blockquote>
+<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
+</blockquote>
+<h2 id="the-k-armed-bandit-problem">The K-Armed Bandit Problem</h2>
+<p>In the k-armed bandit problem, we have an <strong>agent</strong> who choooses between "k" <strong>action</strong> and recieves a <strong>reward</strong> based on the action it chooses. The <strong>goal</strong> of the agent is to maximize the expected total reward over some time period, or <strong>time steps</strong>.</p>
+<p>In a word, <strong>decision making under uncertainty</strong> can be formalized by the <strong>k-armed bandit problem</strong></p>
+<h3 id="action-values">Action Values</h3>
+<p>the value of an action is the <strong>expected reward</strong> when that action is taken <span class="math display">\[q_*(a) \doteq \mathbb{E}[R_t\ | \ A_t = a],\ \forall a \in \mathbf{A}\\=\sum_rp(r|a)r\ \ \ \ \ \ \ \ \]</span> To clearly explain this, the reward of an action may not be fixed so the reward may comfirm to a uniform distribution or normal distribution. Here is an example to illustrate this process <img src="/2020/02/27/RL1/1.png"></p>
+<h3 id="action-selection">Action Selection</h3>
+<p>Remember that the agent's <strong>goal</strong> is to <strong>maximize the expected total amount of reward it recieves</strong>. We can call this procedure the <em>argmax</em> (the argument "a" which maximizes function <span class="math inline">\(q_*\)</span>) <span class="math display">\[argmax_a \ q_*(a)\]</span> It is clear that if you know the value of each action, then it would be trivial to solve the k-armed bandit problem: you would always select the <strong>action with highest value</strong>.</p>
+<p>Thus, the problem here is that the agent do not know the action values with certainty. It only have to estimate the action values. But how to estimate action-values?</p>
+<hr>
+<h2 id="what-to-learn-estimating-action-values">What to Learn? Estimating Action Values</h2>
+<h3 id="sample-average">Sample-Average</h3>
+<p>One way to estimate <span class="math inline">\(q_*\)</span> is to compute a <strong>sample-average</strong>. Here we denote the estimated value of action <span class="math inline">\(a\)</span> at time step <span class="math inline">\(t\)</span> as <span class="math inline">\(Q_t(a)\)</span>. We would like <span class="math inline">\(Q_t(a)\)</span> to be close to <span class="math inline">\(q_*(a)\)</span>.</p>
+<p><span class="math display">\[Q_t(a) \doteq \frac{\sum_{i=1}^{t-1}R_i}{t-1}\]</span></p>
+<p>Notice that we use <span class="math inline">\(t-1\)</span> because we are calculating <span class="math inline">\(Q_t(a)\)</span> with history prior to <span class="math inline">\(t\)</span>. And to be clear, <span class="math inline">\(t\)</span> has <strong>separate corresponding value for each action</strong>.<br>
+Here is an example of medical trail. <img src="/2020/02/27/RL1/2.png"><br>
+And we can simplify <span class="math inline">\(Q_t\)</span> by extending it in <strong>incremental update rule</strong></p>
+<p><span class="math display">\[
+Q_{t+1}=\frac{1}{t}\sum_{i=1}^tR_i\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\ \ \ \ \ \ \ \ \ \ 
+=\frac{1}{t}(R_t+(t-1)\frac{1}{t-1}\sum_{i=1}^{t-1}R_i)\\
+=\frac{1}{t}(R_t+(t-1)Q_t)\ \ \ \ \ \\
+=Q_t+\frac{1}{t}(R_t-Q_t)\ \ \ \ \ \ \ \ \\
+\]</span></p>
+<p>To generalize it, we replace <span class="math inline">\(\frac{1}{t}\)</span> with <span class="math inline">\(\alpha_t\)</span> to represent stepsize and it's easy to know <span class="math inline">\(\alpha_t \in [0,1]\)</span></p>
+<p><span class="math display">\[Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)\]</span></p>
+<p>And it can also express as below</p>
+<p><span class="math display">\[NewEstimate \leftarrow OldEstimate\ +\  StepSize(Target\ -\ OldEstimate)\]</span></p>
+<p>The expression <span class="math inline">\((Target-OldEstimate)\)</span> is an <strong>error</strong> in the estimate. It is reduced by taking a step toward the “Target.” <strong>The target is presumed to indicate a desirable direction in which to move, though it may be noisy.</strong> In the case above, for example, the target is the nth reward.</p>
+<h3 id="nonstationary-problem">Nonstationary Problem</h3>
+<p>What if the reward distribution of each action is <strong>changing over time</strong>? In this situation, what we learn form history may not correctly represent current state due to changing of reward distribution. In such cases it makes sense to give more weight to recent rewards than to long-past rewards because recent information reflect changing more accurate. To do so, we can use a <strong>fixed stepsize</strong>,like 0.5, instead of <span class="math inline">\(\frac{1}{t}\)</span>. This can lead to decaying exponently past reward.</p>
+<p><span class="math display">\[Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)=\alpha_tR_t+(1-\alpha_t)Q_t\]</span></p>
+<p>As <span class="math inline">\(\alpha_t\)</span> increases, the more <span class="math inline">\(R_t\)</span> contributes to <span class="math inline">\(Q_{t+1}\)</span> and the less for <span class="math inline">\(Q_t\)</span>.</p>
+<h3 id="greedy-action">Greedy Action</h3>
+<p>At each time step, the agent could alway choose the action with the highest action value estimated by history. And this is called <strong>greedy action</strong>.</p>
+<p><span class="math display">\[a_g = argmax_a\ \ Q(a)\]</span></p>
+<p>Seemingly we can through greedy action to archieve our goal, maxmizing expected total reward. But there is still a problem exists: how does the agent know its estimation about each action is correctly approximating to the real distribution? Greedy action is greatly impact by initial action value. Why does the agent know other actions are worse than greedy action even trying them only a few times?</p>
+<p>I think the agent should spend some time trying other actions instead of greedy action. And this come to the <strong>exploration and exploitation tradeoff</strong></p>
+<hr>
+<h2 id="exploration-vs.-exploitation-tradeoff">Exploration vs. Exploitation Tradeoff</h2>
+<h3 id="exploration-and-exploitation-dilemma">Exploration and Exploitation Dilemma</h3>
+<ul>
+<li>Exploration: <strong>improve</strong> knowledge for <strong>long-term</strong> benefit</li>
+<li>Exploitation: <strong>exploit</strong> knowledge for <strong>short-term</strong> benefit</li>
+</ul>
+<p>The dilemma means: How do we choose when to exploit and when to explore? When we <strong>explore</strong>, we get more accurate estimates of our values. When we <strong>exploit</strong>, we might get more reward. We cannot however choose to do both simultaneously.</p>
+<h3 id="epsilon-greedy-action-selection">Epsilon-Greedy Action Selection</h3>
+<p>One very simple method for choosing between exploration and exploitation is to <strong>choose randomly</strong>. We could choose to exploit most of the time with a small chance of exploring. For instance, we could roll a dice.<br>
+<img src="/2020/02/27/RL1/3.png"><br>
+This is called <strong>epsilon-greedy action selection</strong>. We formulize it as below, where <span class="math inline">\(\epsilon \in [0,1]\)</span></p>
+<p><span class="math display">\[
+A_t\leftarrow
+\begin{cases}
+argmax_a Q_t(a)\ \ \ \ \ \ \ \ 1-\epsilon\\
+a\sim Uniform(\mathbf{A})\ \ \ \ \ \ \epsilon
+\end{cases}
+\]</span></p>
+<p>Let's evaluate on 10-armed testbed<br>
+<img src="/2020/02/27/RL1/5.png"><br>
+We run each agent with different <span class="math inline">\(\epsilon\)</span> for 2000 independent runs, each run for 1000 time steps. Then we average 2000 runs to get the learning algorithm’s average behavior.<br>
+<img src="/2020/02/27/RL1/4.png"></p>
+<p>The advantage of epsilon-greedy over greedy methods depends on the task. If the reward variance is large, like 10, then more explorations to detect best action is important. More detections give the agent more confidence to pick up optimal action.</p>
+<p>On the other hand, if the reward variance is zero, then greedy method would know the true value of each action after trying it once. Seemingly, in this case, greedy method would soon find the greedy action and it might perform best. But, this can not be guaranteed under nonstationary situations. Nonstation means the true values of the actions changed over time. In this case, exploration is needed to ensure that one of the nongreedy actions has not changed to become better than the greedy one.</p>
+<h3 id="optimistic-initial-values">Optimistic Initial Values</h3>
+<p><strong>Optimistic initial values</strong> encourage <strong>early exploration</strong>. In real programing, don't intialize all acion values defaut to 0. Here is an example to show algorithm's performance by using this method.<br>
+<img src="/2020/02/27/RL1/6.png"><br>
+Limitation of optimistic inital values:</p>
+<ul>
+<li>Optimistic intial values <strong>only drive early exploration</strong></li>
+<li>They are not will suited for <strong>nonstationary problems</strong></li>
+<li>We may not know what the <strong>optimistic values</strong> should be</li>
+</ul>
+<h3 id="upper-confidence-bound-ucb-action-selection">Upper-Confidence Bound (UCB) Action Selection</h3>
+<p>Epsilon-greedy action selection forces the non-greedy actions to be tried, but indiscriminately and <strong>uniformly</strong>, with no preference for those that are nearly greedy or particularly uncertain. It would be better to select among the non-greedy actions according to their <strong>potential for actually being optimal</strong>, taking into account both how close their estimates are to being maximal and the uncertainties in those estimates.</p>
+<p>In <strong>upper-confidence bound</strong>(UCB) action selection, we follow the principle of optimism in the face of uncertainty. This simply means that if we are uncertain about something, we should optimistically assume that it is good.</p>
+<p>For instance, say we have these three actions with associated uncertainties. The larger confidence interval means bigger uncertainies. So the agent optimistically picks the action that has the highest upper bound, action 1. <img src="/2020/02/27/RL1/7.png"><br>
+After that, this time, we should select action 2.<br>
+<img src="/2020/02/27/RL1/8.png"><br>
+The key idea in UCB is that it uses <strong>uncertainty</strong> or <strong>variance</strong> (sqrt root) in the value estimation for balancing exploration and exploitation.</p>
+<p><span class="math display">\[A_t \doteq argmax_a [Q_t(a)+c\sqrt{\frac{\ln{t}}{N_t(a)}}\ ]\]</span></p>
+<p>We can clearly see here how UCB combines exploration and exploitation. The first term in the sum represents the exploitation part, and the second term represents the exploration part. The constant parameter <span class="math inline">\(c\)</span> is used to scale the extent of exploration. <span class="math inline">\(N_t(a)\)</span> denotes the number of times that action <span class="math inline">\(a\)</span> has been selected prior to time <span class="math inline">\(t\)</span>.<br>
+<img src="/2020/02/27/RL1/9.png"><br>
+The limitation of UCB is <strong>not practical for very huge state spaces</strong>.</p>
+<h2 id="summary">Summary</h2>
+<p>The gap between k-armed bandit problem and the full reinforcement learning problem:</p>
+<ol type="1">
+<li>there is <strong>no association</strong> between actions and situations(or <strong>states</strong>). Each selection of actions is <strong>non-contextual</strong> or independent.</li>
+<li>thers is <strong>no policy</strong>, which designate actions at each situation(or <strong>state</strong>).</li>
+</ol>
+<p>we summarize a complete learning curve by its average value over the 1000 steps; this value is proportional to the area under the learning curve. This kind of graph is called a <strong>parameter study</strong>. <img src="/2020/02/27/RL1/10.png"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/25/Game2/" rel="next" title="博弈论2：纯策略纳什均衡">
+                <i class="fa fa-chevron-left"></i> 博弈论2：纯策略纳什均衡
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/28/RL2/" rel="prev" title="RL2：Markov Decision Processes">
+                RL2：Markov Decision Processes <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.ico" alt="Godway">
+            
+              <p class="site-author-name" itemprop="name">Godway</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/475865836@qq.com" title="E-Mail &rarr; 475865836@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://randool.cn" title="https://randool.cn" rel="noopener" target="_blank">Randool</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/Smile_coderrr" title="https://me.csdn.net/Smile_coderrr" rel="noopener" target="_blank">Smile_coderrr</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-k-armed-bandit-problem"><span class="nav-number">1.</span> <span class="nav-text">The K-Armed Bandit Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#action-values"><span class="nav-number">1.1.</span> <span class="nav-text">Action Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#action-selection"><span class="nav-number">1.2.</span> <span class="nav-text">Action Selection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-to-learn-estimating-action-values"><span class="nav-number">2.</span> <span class="nav-text">What to Learn? Estimating Action Values</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sample-average"><span class="nav-number">2.1.</span> <span class="nav-text">Sample-Average</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nonstationary-problem"><span class="nav-number">2.2.</span> <span class="nav-text">Nonstationary Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#greedy-action"><span class="nav-number">2.3.</span> <span class="nav-text">Greedy Action</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exploration-vs.-exploitation-tradeoff"><span class="nav-number">3.</span> <span class="nav-text">Exploration vs. Exploitation Tradeoff</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exploration-and-exploitation-dilemma"><span class="nav-number">3.1.</span> <span class="nav-text">Exploration and Exploitation Dilemma</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epsilon-greedy-action-selection"><span class="nav-number">3.2.</span> <span class="nav-text">Epsilon-Greedy Action Selection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#optimistic-initial-values"><span class="nav-number">3.3.</span> <span class="nav-text">Optimistic Initial Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upper-confidence-bound-ucb-action-selection"><span class="nav-number">3.4.</span> <span class="nav-text">Upper-Confidence Bound (UCB) Action Selection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Godway</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_lines.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="nbQmeRysWc">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_32x32.ico?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16x16.ico?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="参考书目《计算机网络：自顶向下方法（第七版）》  概述 无线网络分类：  单跳，基于基础设施。如802.11网络和4G LTE 单跳，无基础设施。如蓝牙网络和自组织模式的802.11网络 多跳，基于基础设施。如耨鞋无线传感网络和无线网状网络 多跳，无基础设施。如移动自组织网络（mobile ad hoc network, MANET）和车载自组织网络（vehicular ad hoc netwo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络——第七章：无线网络和移动网络">
+<meta property="og:url" content="https://godway999.github.io/2019/06/16/Network7/index.html">
+<meta property="og:site_name" content="Godway&#39;s Notebook">
+<meta property="og:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  概述 无线网络分类：  单跳，基于基础设施。如802.11网络和4G LTE 单跳，无基础设施。如蓝牙网络和自组织模式的802.11网络 多跳，基于基础设施。如耨鞋无线传感网络和无线网状网络 多跳，无基础设施。如移动自组织网络（mobile ad hoc network, MANET）和车载自组织网络（vehicular ad hoc netwo">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://godway999.github.io/2019/06/16/Network7/1.png">
+<meta property="og:image" content="https://godway999.github.io/2019/06/16/Network7/2.png">
+<meta property="og:image" content="https://godway999.github.io/2019/06/16/Network7/3.png">
+<meta property="og:updated_time" content="2019-07-14T01:39:30.290Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机网络——第七章：无线网络和移动网络">
+<meta name="twitter:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  概述 无线网络分类：  单跳，基于基础设施。如802.11网络和4G LTE 单跳，无基础设施。如蓝牙网络和自组织模式的802.11网络 多跳，基于基础设施。如耨鞋无线传感网络和无线网状网络 多跳，无基础设施。如移动自组织网络（mobile ad hoc network, MANET）和车载自组织网络（vehicular ad hoc netwo">
+<meta name="twitter:image" content="https://godway999.github.io/2019/06/16/Network7/1.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://godway999.github.io/2019/06/16/Network7/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>计算机网络——第七章：无线网络和移动网络 | Godway's Notebook</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Godway's Notebook</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">wsy</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/GODWAY999/GODWAY999.github.io" class="github-corner" title="Star me on GitHub" aria-label="Star me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://godway999.github.io/2019/06/16/Network7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">计算机网络——第七章：无线网络和移动网络
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-16 11:53:59" itemprop="dateCreated datePublished" datetime="2019-06-16T11:53:59+08:00">2019-06-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-14 09:39:30" itemprop="dateModified" datetime="2019-07-14T09:39:30+08:00">2019-07-14</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机网络/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><em>参考书目《计算机网络：自顶向下方法（第七版）》</em></p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p>无线网络分类：</p>
+<ul>
+<li>单跳，基于基础设施。如802.11网络和4G LTE</li>
+<li>单跳，无基础设施。如蓝牙网络和自组织模式的802.11网络</li>
+<li>多跳，基于基础设施。如耨鞋无线传感网络和<em>无线网状网络</em></li>
+<li>多跳，无基础设施。如<strong>移动自组织网络</strong>（mobile ad hoc network, MANET）和<strong>车载自组织网络</strong>（vehicular ad hoc network, VANET）</li>
+</ul>
+<hr>
+<h2 id="无线链路和网络特征">无线链路和网络特征</h2>
+<p>有线链路和无线链路的区别：</p>
+<ul>
+<li><strong>递减的信号强度</strong>。如电磁波在穿过物体时强度将衰减</li>
+<li><strong>来自其它源的干扰</strong>。来自环境和其他发送源的干扰</li>
+<li><strong>多径传播</strong>。电磁波的一部分受物体和地面的反射，到达接收方时走了不同长度的路径，则会出现<strong>多径传播</strong>，会导致接收方收到的信号变得模糊</li>
+</ul>
+<p>较大的<strong>信噪比</strong>（SNR）使接收方更容易从背景噪声中提取传输信号；<strong>比特差错率</strong>（BER）表示接收方收到的有错传输比特的概率<br>
+<strong>物理层</strong>的特征：</p>
+<ul>
+<li>对于给定的调制方案，SNR越高，BER越低</li>
+<li>对于给定的eSNR，具有较高比特传输率的调制技术（无论差错与否）将具有较高的BER</li>
+<li>物理层调制技术的动态选择能用于适配对信道条件的调制技术</li>
+</ul>
+<h3 id="cdma">CDMA</h3>
+<p>在CDMA协议中，要发送的每个比特都通过乘以一个信号（编码）的比特来进行编码，这个信号的变化速率（通常称为<strong>码片速率</strong>）比初始数据比特序列的变化速率要快得多<br>
+选择CDMA编码的关键是：<strong>使所有节点的CDMA编码所表示的代数向量彼此之间相互垂直</strong></p>
+<hr>
+<h2 id="wifi802.11-无线lan">WiFi：802.11 无线LAN</h2>
+<h3 id="体系结构">802.11 体系结构</h3>
+<p>802.11 体系结构的基本构件模块是<strong>基本服务集</strong>（Basic Service Set, BSS），一个BSS包括一个或多个无线站点和一个<strong>接入点</strong>（Access Point, AP）的<strong>中央基站</strong><br>
+802.11规定：</p>
+<ul>
+<li>每个无线站点若要发送或接收数据，必须先与一个AP相关联；在环境中有多个AP时，仅有关联的AP才会向你的无线站点发送数据</li>
+<li>每个AP会被分配到一个<strong>服务集标识</strong>（Service Set Identifier, SSID）</li>
+<li>802.11定义了11个部分重叠的信道，特别是1、6和11是唯一的3个非重叠信道</li>
+<li>每个AP必须周期性地发送<strong>信标帧</strong>，每个信标帧包含该AP的SSID和MAC地址</li>
+</ul>
+<p>扫描信道和监听信标帧的过程被称为<strong>被动扫描</strong>；无线主机也能够通过广播探测帧执行<strong>主动扫描</strong>，但对于主动扫描需要二次请求/响应握手</p>
+<h3 id="mac协议">802.11 MAC协议</h3>
+<p>802.11 MAC协议使用<strong>带碰撞避免的CSMA</strong>（CSMA/CA），并且由于无线信道相对较高的比特粗误码率，使用<strong>链路层确认/重传（ARQ）方案</strong><br>
+802.11 MAC协议未实现碰撞检测的原因？</p>
+<ul>
+<li>检测碰撞的能力要求站点具有同时发送和接收的能力，由于接收信号的强度通常远远小于发送强度，制造这种硬件的代价较大。</li>
+<li>即使能做到，也会因为信号衰减和终端隐藏问题，而无法检测到所有碰撞</li>
+</ul>
+<p><strong>链路层确认</strong>方案的过程：</p>
+<ol type="1">
+<li>目的站点收到一个<strong>通过CRC校验</strong>的帧后，他等待一个被称为<strong>短帧间间隔</strong>（Short Inter-Frame Spacing, SIFS）的一小段时间，然后发挥一个确认帧</li>
+<li>若发送站点在给定时间内未收到确认帧，则使用CSMA/CA协议重传该帧</li>
+<li>若在固定次重传之后仍未收到确认，则发送站点放弃发送并丢弃该帧</li>
+</ol>
+<p>CSMA/CA协议过程：</p>
+<ol type="1">
+<li>如果某站点最初监听到信道空闲，它将在一个被称作<strong>分布式帧间间隔</strong>（Distributed Inter-Frame Spacing, DIFS）的短时间段后发送该帧</li>
+<li>否则该站点选取一个随机回退值（像CSMA/CD那样）并且在侦听信道空闲时递减该值。当侦听到信道忙时，计数值保持不变</li>
+<li>当计数值减为0时（注意到这只可能发生在信道被侦听为空闲时），该站点发送整个数据帧并等待确认</li>
+<li>如果收到确认，发送站点知道它的帧已经被目的站点正确接收。如果该站点要发送另一帧，它将从第2步开始CSMA/CA协议。如果未收到确认，发送站点将重新进入第2步中的回退阶段</li>
+</ol>
+<p>802.11的目标是<strong>无论如何尽可能避免碰撞</strong></p>
+<h3 id="处理隐藏终端rts和cts">处理隐藏终端：RTS和CTS</h3>
+<p>站点使用短<strong>请求发送</strong>（Request to Send, RTS）控制帧和短<strong>允许发送</strong>（Clear to Send, CTS）控制帧来<strong>预约</strong>对信道的访问。过程如下：</p>
+<ol type="1">
+<li>当发送方要发送一个DATA帧时，他首先等待一个DIFS，然后向AP发送一个RTS帧，指示传输DATA帧和确认（ACK）帧需要的总时间</li>
+<li>当AP收到RTS帧后，等待一个SIFS，之后它广播一个CTS帧作为响应。该CTS有两个目的：给发送方明确发送许可，也指示其他站点在预约期内不要发送</li>
+<li>发送方收到CTS后，在等待一个SIFS之后发送DATA</li>
+<li>接收方在完全接收DATA数据之后，等待一个SIFS后，广播一个ACK帧，传递预约结束的消息</li>
+</ol>
+<p>使用RTS和CTS能够在两个重要方面提高性能：</p>
+<ul>
+<li>终端隐藏问题被缓解了，因为长的DATA帧只有在预约过后才会发送</li>
+<li>因为RTS和CTS帧较短，涉及RTS和CTS帧的碰撞将仅持续短RTS和CTS帧的持续时间</li>
+</ul>
+<h3 id="ieee-802.11-帧结构">IEEE 802.11 帧结构</h3>
+<p>892.11帧中最引人注的的是他有4个MAC地址字段</p>
+<ul>
+<li>地址1是接收该帧的无线站点的MAC地址</li>
+<li>地址2是传输该帧的站点的MAC地址</li>
+<li>地址3是当前BSS中的AP的第一跳路由器接口的MAC地址（地址3允许AP在构建以太网帧时能够<strong>确定目的MAC地址</strong>），所以其在BSS和在有线局域网互联中起着关键的作用</li>
+<li>地址4当AP在自组织模式中互相转发时使用</li>
+</ul>
+<hr>
+<h2 id="移动管理">移动管理</h2>
+<p>间接路由<br>
+<img src="/2019/06/16/Network7/1.png"><br>
+直接路由<br>
+<img src="/2019/06/16/Network7/2.png"></p>
+<ul>
+<li>间接路由存在三角路由选择问题。直接路由克服了这个低效的问题，但却是以增加复杂性为代价。</li>
+</ul>
+<h2 id="移动ip">移动IP</h2>
+<img src="/2019/06/16/Network7/3.png">
+<hr>
+<h2 id="问题与思考">问题与思考</h2>
+<p>无线网络中高出错率是怎样影响效率的？</p>
+<p>拥塞控制的问题主要集中在效率和公平性</p>
+<p>改进 TCP 的两个重要原则就是:<br>
+(1) 让发送端清楚网络的真实状态 (2) 采用跨层设计的思想，让 IP 层、逻辑链路层和 MAC 层都恰当地参与问题发现和问题解决过程，缩短控制周期</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/14/Network6/" rel="next" title="计算机网络——第六章：链路层和局域网">
+                <i class="fa fa-chevron-left"></i> 计算机网络——第六章：链路层和局域网
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/17/Database9/" rel="prev" title="数据库原理——第九章：关系查询处理和查询优化">
+                数据库原理——第九章：关系查询处理和查询优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.ico" alt="Godway">
+            
+              <p class="site-author-name" itemprop="name">Godway</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/475865836@qq.com" title="E-Mail &rarr; 475865836@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://randool.cn" title="https://randool.cn" rel="noopener" target="_blank">Randool</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/Smile_coderrr" title="https://me.csdn.net/Smile_coderrr" rel="noopener" target="_blank">Smile_coderrr</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无线链路和网络特征"><span class="nav-number">2.</span> <span class="nav-text">无线链路和网络特征</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cdma"><span class="nav-number">2.1.</span> <span class="nav-text">CDMA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wifi802.11-无线lan"><span class="nav-number">3.</span> <span class="nav-text">WiFi：802.11 无线LAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#体系结构"><span class="nav-number">3.1.</span> <span class="nav-text">802.11 体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mac协议"><span class="nav-number">3.2.</span> <span class="nav-text">802.11 MAC协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理隐藏终端rts和cts"><span class="nav-number">3.3.</span> <span class="nav-text">处理隐藏终端：RTS和CTS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ieee-802.11-帧结构"><span class="nav-number">3.4.</span> <span class="nav-text">IEEE 802.11 帧结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动管理"><span class="nav-number">4.</span> <span class="nav-text">移动管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动ip"><span class="nav-number">5.</span> <span class="nav-text">移动IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题与思考"><span class="nav-number">6.</span> <span class="nav-text">问题与思考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Godway</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_lines.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

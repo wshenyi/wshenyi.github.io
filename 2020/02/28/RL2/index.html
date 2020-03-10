@@ -110,7 +110,7 @@
 <meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/3.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/4.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/5.png">
-<meta property="og:updated_time" content="2020-03-07T06:43:54.350Z">
+<meta property="og:updated_time" content="2020-03-10T11:51:56.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL2：Markov Decision Processes">
 <meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  Introduction to M">
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-07 14:43:54" itemprop="dateModified" datetime="2020-03-07T14:43:54+08:00">2020-03-07</time>
+                <time title="Modified: 2020-03-10 19:51:56" itemprop="dateModified" datetime="2020-03-10T19:51:56+08:00">2020-03-10</time>
               
             
           </span>
@@ -496,7 +496,7 @@
 More specifically, the agent and the environment interact at each of a sequence of discrete time steps, <span class="math inline">\(t=0,1,2,3,...\)</span> At each time step <span class="math inline">\(t\)</span>, the agent recives some representation of the environment's <strong>state</strong>, <span class="math inline">\(S_t \in \mathbf{S}\)</span>, and on that basis selects an <strong>action</strong>, <span class="math inline">\(A_t \in \mathbf{A}(s)\)</span>.</p>
 <p>One time step later, in part as a consequence of its action, the agent receives a numerical reward, <span class="math inline">\(R_{t+1} \in \mathbf{R}\subset \mathbb{R}\)</span>, and finds itself in a new state, <span class="math inline">\(S_{t+1}\)</span>. The MDP and agent together thereby give rise to a sequence or trajectory that begins like this:<br>
 <img src="/2020/02/28/RL2/2.png"><br>
-In a finite MDP, the sets of states, actions, and rewards (<span class="math inline">\(\mathbf{S}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{R}\)</span>) all have a finite number of elements. In this case, the random variables <span class="math inline">\(R_t\)</span> and <span class="math inline">\(S_t\)</span> have well defined discrete probability distributions dependent only on the preceding state and action. That is, for particular values of these random variables, <span class="math inline">\(s^, \in \mathbf{S}\)</span> and <span class="math inline">\(r \in \mathbf{R}\)</span>, there is a probability of those values occurring at time t, given particular values of the preceding state and action: <span class="math display">\[p(s^,,r|s,a)\doteq P(S_t=s^,, R_t=r\ | \ S_{t-1}=s, A_{t-1}=a)\]</span> for all <span class="math inline">\(s^,,s \in \mathbf{S}\)</span>, <span class="math inline">\(r \in \mathbf{R}\)</span>, and <span class="math inline">\(a \in \mathbf{A}(s)\)</span>. The function <span class="math inline">\(p\)</span> defines the <strong>dynamics of the MDP</strong>. <span class="math display">\[p:\ \mathbf{S}\times \mathbf{R}\times \mathbf{S}\times \mathbf{A}\rightarrow [0,1]\]</span> With <span class="math inline">\(p(s^,,r|s,a)\)</span>, note that future state and reward only depends on the current state and action. This is called the <strong>Markov property</strong>. It means that the present state is sufficient and remembering earlier states would not improve predictions about the future.</p>
+In a finite MDP, the sets of states, actions, and rewards (<span class="math inline">\(\mathbf{S}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{R}\)</span>) all have a finite number of elements. In this case, the random variables <span class="math inline">\(R_t\)</span> and <span class="math inline">\(S_t\)</span> have well defined discrete probability distributions dependent only on the preceding state and action. That is, for particular values of these random variables, <span class="math inline">\(s^, \in \mathbf{S}\)</span> and <span class="math inline">\(r \in \mathbf{R}\)</span>, there is a probability of those values occurring at time t, given particular values of the preceding state and action: <span class="math display">\[p(s^,,r|s,a)\doteq P(S_t=s^,, R_t=r\ | \ S_{t-1}=s, A_{t-1}=a)\]</span> for all <span class="math inline">\(s^,,s \in \mathbf{S}\)</span>, <span class="math inline">\(r \in \mathbf{R}\)</span>, and <span class="math inline">\(a \in \mathbf{A}(s)\)</span>. The function <span class="math inline">\(p\)</span> defines the <strong>dynamics of the MDP</strong>. <span class="math display">\[p:\ \mathbf{S}\times \mathbf{R}\times \mathbf{S}\times \mathbf{A}\rightarrow [0,1]\]</span> With <span class="math inline">\(p(s^,,r|s,a)\)</span>, note that <strong>future state and reward only depends on the current state and action</strong>. This is called the <strong>Markov property</strong>. It means that the present state is sufficient and remembering earlier states would not improve predictions about the future.</p>
 <p>The <strong>MDP framework</strong> is a considerable <strong>abstraction</strong> of the problem of goal-directed learning from interaction. It can be used to formalize a wide variety of <strong>sequential decision-making</strong> problem. This also means that any problem of learning goal-directed behavior can be reduced to three signals passing back and forth between an agent and its environment: actions, states, rewards.</p>
 <h3 id="an-example-of-mdp">An Example of MDP</h3>
 <p>Here is an example of finite MDP, <strong>Recycling Robot</strong>. We can write down the transition probabilities and the expected rewards, with dynamics as indicated below.<br>
@@ -507,7 +507,7 @@ There are two kinds of nodes: state nodes and action nodes. The key point here i
 <hr>
 <h2 id="goal-of-reinforcement-learning">Goal of Reinforcement Learning</h2>
 <h3 id="the-goal-of-rl">The Goal of RL</h3>
-<p>First we denote the <strong>return</strong> at time step <span class="math inline">\(t\)</span> as <span class="math inline">\(G_t\)</span></p>
+<p>In reinforcement learning, reward captures the notion of short-term gain. The objective however, is to learn a policy that achieves the most reward in the long run. With this premise, we denote the <strong>return</strong> at time step <span class="math inline">\(t\)</span> as <span class="math inline">\(G_t\)</span></p>
 <p><span class="math display">\[G_t\doteq R_{t+1}+R_{t+2}+R_{t+3}+...\]</span></p>
 <p>We intuitively want to maxmize <span class="math inline">\(G_t\)</span> at each time step. However, <span class="math inline">\(G_t\)</span> is a random variable because <strong>the dynamics of the MDP can be stochastic</strong>. That's why we define the goal of an agent is to <strong>maxmize the expected return</strong></p>
 <p><span class="math display">\[\mathbb{E}[G_t] = \mathbb{E}[R_{t+1}+R_{t+2}+R_{t+3}+...]\]</span></p>
@@ -542,10 +542,12 @@ There are two kinds of nodes: state nodes and action nodes. The key point here i
 <p>Here comes to the problem: <span class="math inline">\(G_t\)</span> could be <span class="math inline">\(\infty\)</span> and impossible to calculate. So we can make <span class="math inline">\(G_t\)</span> finite by using <strong>discounting</strong></p>
 <h3 id="discounting">Discounting</h3>
 <p>Discount the rewards in the future by <span class="math inline">\(\gamma\)</span> called <strong>discount rate</strong>, where <span class="math inline">\(\gamma \in [0,1]\)</span></p>
-<p><span class="math display">\[\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
-G_t \doteq R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...+\gamma^{k-1}R_{t+k}+...\\
-=\sum_{k=0}^\infty \gamma^kR_{t+k+1}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+<p><span class="math display">\[
+\begin{aligned}
+G_t
+&amp; \doteq R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...+\gamma^{k-1}R_{t+k}+...\\
+&amp; =\sum_{k=0}^\infty \gamma^kR_{t+k+1}
+\end{aligned}
 \]</span></p>
 <p>We can also re-write <span class="math inline">\(G_t\)</span> in the recursive version</p>
 <p><span class="math display">\[G_t = R_{t+1}+\gamma G_{t+1} \]</span></p>
@@ -600,8 +602,8 @@ Thus, we can informally regard epsoidic tasks as continuing task.</p>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/29/Others5/" rel="prev" title="Git基本操作汇总">
-                Git基本操作汇总 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/02/29/RL3/" rel="prev" title="RL3：Value Functions & Bellman Equations">
+                RL3：Value Functions & Bellman Equations <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -673,7 +675,7 @@ Thus, we can informally regard epsoidic tasks as continuing task.</p>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
