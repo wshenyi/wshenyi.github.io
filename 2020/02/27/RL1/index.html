@@ -115,7 +115,7 @@
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/8.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/9.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/27/RL1/10.png">
-<meta property="og:updated_time" content="2020-03-10T13:08:44.436Z">
+<meta property="og:updated_time" content="2020-03-16T09:54:30.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL1：K-armed Bandits Problem">
 <meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  The K-Armed Bandi">
@@ -424,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-10 21:08:44" itemprop="dateModified" datetime="2020-03-10T21:08:44+08:00">2020-03-10</time>
+                <time title="Modified: 2020-03-16 17:54:30" itemprop="dateModified" datetime="2020-03-16T17:54:30+08:00">2020-03-16</time>
               
             
           </span>
@@ -540,9 +540,8 @@ Q_{t+1}
 </ul>
 <p>The dilemma means: How do we choose when to exploit and when to explore? When we <strong>explore</strong>, we get more accurate estimates of our values. When we <strong>exploit</strong>, we might get more reward. We cannot however choose to do both simultaneously.</p>
 <h3 id="epsilon-greedy-action-selection">Epsilon-Greedy Action Selection</h3>
-<p>One very simple method for choosing between exploration and exploitation is to <strong>choose randomly</strong>. We could choose to exploit most of the time with a small chance of exploring. For instance, we could roll a dice.<br>
-<img src="/2020/02/27/RL1/3.png"><br>
-This is called <strong><span class="math inline">\(\epsilon\)</span>-greedy action selection</strong>. We formulize it as below, where <span class="math inline">\(\epsilon \in [0,1]\)</span></p>
+<p>One very simple method for choosing between exploration and exploitation is to <strong>choose randomly</strong>. We could choose to exploit most of the time with a small chance of exploring. For instance, we could roll a dice.</p>
+<p>This is called <strong><span class="math inline">\(\epsilon\)</span>-greedy action selection</strong>. We formulize it as below, where <span class="math inline">\(\epsilon \in [0,1]\)</span></p>
 <p><span class="math display">\[
 A_t\leftarrow
 \begin{cases}
@@ -550,6 +549,7 @@ A_t\leftarrow
 a\sim Uniform(\mathbf{A})\ \ \ \ \ \ \epsilon
 \end{cases}
 \]</span></p>
+<img src="/2020/02/27/RL1/3.png">
 <p>Let's evaluate on 10-armed testbed<br>
 <img src="/2020/02/27/RL1/5.png"><br>
 We run each agent with different <span class="math inline">\(\epsilon\)</span> for 2000 independent runs, each run for 1000 time steps. Then we average 2000 runs to get the learning algorithm’s average behavior.<br>

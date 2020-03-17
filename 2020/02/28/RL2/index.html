@@ -110,7 +110,7 @@
 <meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/3.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/4.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/28/RL2/5.png">
-<meta property="og:updated_time" content="2020-03-10T13:03:09.826Z">
+<meta property="og:updated_time" content="2020-03-10T15:58:11.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL2：Markov Decision Processes">
 <meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  Introduction to M">
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-10 21:03:09" itemprop="dateModified" datetime="2020-03-10T21:03:09+08:00">2020-03-10</time>
+                <time title="Modified: 2020-03-10 23:58:11" itemprop="dateModified" datetime="2020-03-10T23:58:11+08:00">2020-03-10</time>
               
             
           </span>
@@ -534,12 +534,12 @@ There are two kinds of nodes: state nodes and action nodes. The key point here i
 <hr>
 <h2 id="episodic-tasks-and-continuing-tasks">Episodic Tasks And Continuing Tasks</h2>
 <h3 id="episodic-tasks">Episodic Tasks</h3>
-<p>In an <strong>episodic task</strong>, the agent-environment interaction breaks up into <strong>episodes</strong>. Episodes are indepedent and each episode ends in a <strong>terminal state</strong> at time step <span class="math inline">\(T\)</span>. In this situation, time step is finite and we change <span class="math inline">\((2.2)\)</span> define <span class="math inline">\(G_t\)</span> as</p>
+<p>In an <strong>episodic task</strong>, the agent-environment interaction breaks up into <strong>episodes</strong>. Episodes are indepedent and each episode ends in a <strong>terminal state</strong> at time step <span class="math inline">\(T\)</span>. In this situation, time step is finite and we change <a href="#the-goal-of-rl">(2.2)</a> as</p>
 <p><span class="math display">\[G_t \doteq R_{t+1}+R_{t+2}+R_{t+1}+...+R_T\tag{2.4}\]</span></p>
 <h3 id="continuing-tasks">Continuing Tasks</h3>
-<p>The interaction between agent-environment goes on <strong>continually</strong> and there is no <strong>terminal state</strong>. In this situation, time step is infinite and <span class="math inline">\(G_t\)</span> is same to <span class="math inline">\((2.2)\)</span></p>
+<p>The interaction between agent-environment goes on <strong>continually</strong> and there is no <strong>terminal state</strong>. In this situation, time step is infinite and <span class="math inline">\(G_t\)</span> is the same in <span class="math inline">\((2.2)\)</span></p>
 <p><span class="math display">\[G_t \doteq R_{t+1}+R_{t+2}+R_{t+3}+...\]</span></p>
-<p>But here comes to the problem: <span class="math inline">\(G_t\)</span> could be <span class="math inline">\(\infty\)</span> and impossible to calculate. So we can make <span class="math inline">\(G_t\)</span> finite by using <strong>discounting</strong></p>
+<p>But here comes to the problem: <span class="math inline">\(G_t\)</span> could be <span class="math inline">\(\infty\)</span> and impossible to calculate. Therefore, we should make <span class="math inline">\(G_t\)</span> finite, which by using <strong>discounting</strong> method.</p>
 <h3 id="discounting">Discounting</h3>
 <p>Discount the rewards in the future by <span class="math inline">\(\gamma\)</span> called <strong>discount rate</strong>, where <span class="math inline">\(\gamma \in [0,1]\)</span></p>
 <p><span class="math display">\[

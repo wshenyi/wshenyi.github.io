@@ -116,7 +116,7 @@
 <meta property="og:image" content="https://godway999.github.io/2020/02/29/RL3/9.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/29/RL3/10.png">
 <meta property="og:image" content="https://godway999.github.io/2020/02/29/RL3/11.png">
-<meta property="og:updated_time" content="2020-03-10T12:50:13.699Z">
+<meta property="og:updated_time" content="2020-03-17T08:03:20.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL3：Value Functions &amp; Bellman Equations">
 <meta name="twitter:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp;amp; Alberta Machine Intelligence Institute  Policies and Valu">
@@ -425,7 +425,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-10 20:50:13" itemprop="dateModified" datetime="2020-03-10T20:50:13+08:00">2020-03-10</time>
+                <time title="Modified: 2020-03-17 16:03:20" itemprop="dateModified" datetime="2020-03-17T16:03:20+08:00">2020-03-17</time>
               
             
           </span>
@@ -579,12 +579,26 @@ q_\pi(s,a)
 q_*(s,a)\doteq \mathop{max}_\pi\ q_\pi(s,a)\\
 for\ all\ s\in \mathbf{S},a\in \mathbf{A}\]</span></p>
 <h3 id="optimal-value-functions">Optimal Value Functions</h3>
-<p>Because the optimal policy <span class="math inline">\(\pi_*\)</span> is a <strong>deterministic policy</strong>, the optimal action <span class="math inline">\(a_*\)</span> with <span class="math inline">\(\pi(a_*|s)\)</span> equals to 1 and all other actions' probability equal to 0. We can re-write <span class="math inline">\(v_*\)</span> with bellman equation as below, called <strong>Bellman optimality equation for <span class="math inline">\(v_*\)</span></strong>.</p>
-<p><span class="math display">\[v_*(s)=\mathop{max}_a\ \sum_{s&#39;,r}p(s&#39;,r|s,a)(r+\gamma v_*(s&#39;))\tag{3.5}\]</span></p>
-<p>Similarly, <strong>Bellman optimality equation for <span class="math inline">\(q_*\)</span></strong> is</p>
-<p><span class="math display">\[q_*(s,a)=\sum_{s&#39;,r}p(s&#39;,r|s,a)(r+\gamma \mathop{max}_{a&#39;}\ q_*(s&#39;,a&#39;))\tag{3.6}\]</span></p>
+<p>Because the optimal policy <span class="math inline">\(\pi_*\)</span> is a <strong>deterministic policy</strong>, the optimal action <span class="math inline">\(a_*\)</span> with <span class="math inline">\(\pi(a_*|s)\)</span> equals to 1 and all other actions' probability equal to 0. We can re-write <span class="math inline">\(v_*\)</span> with bellman equation as below, called <strong>bellman optimality equation for <span class="math inline">\(v_*\)</span></strong>.</p>
+<p><span class="math display">\[
+\begin{eqnarray*}
+v_*(s)
+&amp;=&amp;\mathop{max}_\pi\ v_\pi(s)\\
+&amp;=&amp;\mathop{max}_a \mathbb{E}[R_{t+1}+\gamma v_*(S_{t+1})|S_t=s,A_t=a]\\
+&amp;=&amp;\mathop{max}_a\ \sum_{s&#39;,r}p(s&#39;,r|s,a)(r+\gamma v_*(s&#39;))\tag{3.5}
+\end{eqnarray*}
+\]</span></p>
+<p>Similarly, <strong>bellman optimality equation for <span class="math inline">\(q_*\)</span></strong> is</p>
+<p><span class="math display">\[
+\begin{eqnarray*}
+q_*(s,a)
+&amp;=&amp;\mathop{max}_\pi\ q_\pi(s,a)\\
+&amp;=&amp;\mathbb{E}[R_{t+1}+\gamma \mathop{max}_{a&#39;}\ q_*(S_{t+1},a&#39;)|S_t=s,A_t=a]\\
+&amp;=&amp;\sum_{s&#39;,r}p(s&#39;,r|s,a)(r+\gamma \mathop{max}_{a&#39;}\ q_*(s&#39;,a&#39;))\tag{3.6}
+\end{eqnarray*}
+\]</span></p>
 <img src="/2020/02/29/RL3/9.png">
-<p>The <strong>Bellman optimality equations</strong> relate the value of a state or state-action pair, to it's possible successors under <strong>any optimal policy</strong>.</p>
+<p>The <strong>bellman optimality equations</strong> relate the value of a state or state-action pair, to it's possible successors under <strong>any optimal policy</strong>.</p>
 <p>Unfortunately, the <span class="math inline">\(max\)</span> funtion here is <strong>not linear</strong>, we <strong>cannot through linear system solver</strong> to directly solve bellman optimality equation to obtain all <span class="math inline">\(v_*\)</span> in MDPs. Although, in principle, one can use a variety of methods for solving systems of nonlinear equations, it is not recommended due to its extreme computational cost.</p>
 <h3 id="get-optimal-policy">Get Optimal Policy</h3>
 <p>Once one has <span class="math inline">\(v_*\)</span>, it is relatively easy to determine an optimal policy. Because, for each state <span class="math inline">\(s\)</span>, there will be one or more actions at which the maximum is obtained in the Bellman optimality equation. That is to say <strong>any policy that is greedy with respect to the optimal evaluation function <span class="math inline">\(v_*\)</span> is an optimal policy</strong>.</p>
