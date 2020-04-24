@@ -499,7 +499,7 @@ LS算法存在的潜在问题————振荡。这是由于消息传播的时
 <li><strong>迭代的</strong>：因为此过程一直要持续到邻居之间无更多信息交互为止（有趣的是，此算法是自我终止的）</li>
 <li><strong>异步的</strong>：因为它不要求所有节点相互之间步伐一致地操作</li>
 </ul>
-<p>DV算法的核心思想基于贝尔曼-弗洛伊德方程 <span class="math display">\[d_x(y) = min_v{c(x, v) + d_v(y)}\]</span> 其中<span class="math inline">\(d_x(y)\)</span>表示从节点x到节点y的最低开销路径的开销，<span class="math inline">\(c(x, v)\)</span>表示从节点x到节点v的开销，该算法思想一句话总结就是：<strong>从x到y的距离能否通过途径v节点而变小</strong><br>
+<p>DV算法的核心思想基于Bellman-Ford方程 <span class="math display">\[d_x(y) = min_v\{c(x, v) + d_v(y)\}\]</span> 其中<span class="math inline">\(d_x(y)\)</span>表示从节点x到节点y的最低开销路径的开销，<span class="math inline">\(c(x, v)\)</span>表示从节点x到节点v的开销，该算法思想一句话总结就是：<strong>从x到y的距离能否通过途径v节点而变小</strong><br>
 DV算法存在的问题：<strong>路由选择环路</strong>，导致关于链路开销增加的<strong>坏消息传播的很慢</strong>！</p>
 <h3 id="ls与dv的比较">LS与DV的比较</h3>
 <ol type="1">
