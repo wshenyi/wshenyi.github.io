@@ -479,7 +479,7 @@
 <ul>
 <li>针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即<em>应该构建几个关系模式，每个关系由哪些属性组成等</em>。这是数据库设计的问题，确切地讲是<strong>关系数据库逻辑设计问题（如何构造合适的数据模式）</strong>。</li>
 <li><strong>数据依赖</strong>是一个关系内部属性与属性之间的<em>约束关系</em>，这种约束关系是通过<strong>属性值</strong>的相等与否体现出来的数据间相关联系。</li>
-<li>一个好的关系模式不会发生<strong>插入异常</strong>、<strong>删除异常</strong>和<strong>更新异常</strong>，<strong>数据冗余</strong>尽可能的少。</li>
+<li>一个好的关系模式不会发生<strong>插入异常</strong>、<strong>删除异常</strong>和<strong>更新异常</strong>，<strong>数据冗余尽可能的少。</strong></li>
 </ul>
 <hr>
 <h2 id="规范化">规范化</h2>
@@ -488,7 +488,7 @@
 <li><p>定义：若属性组<span class="math inline">\(X\)</span>能唯一确定属性组<span class="math inline">\(Y\)</span>，则称<span class="math inline">\(X\)</span><strong>函数确定</strong><span class="math inline">\(Y\)</span>或<span class="math inline">\(Y\)</span><strong>函数依赖</strong><span class="math inline">\(X\)</span>，记作<span class="math inline">\(X \rightarrow Y\)</span>。</p></li>
 <li><p><span class="math inline">\(X \rightarrow Y\)</span>，但<span class="math inline">\(Y \nsubseteq X\)</span>，则称<span class="math inline">\(X \rightarrow Y\)</span>是<strong>非平凡的函数依赖</strong>。<span class="math inline">\(X\)</span>称为这个函数依赖的决定属性<strong>组</strong>，也称为<strong>决定属性</strong>。</p></li>
 <li><p><span class="math inline">\(X \rightarrow Y\)</span>，但<span class="math inline">\(Y \subseteq X\)</span>，则称<span class="math inline">\(X \rightarrow Y\)</span>是<strong>平凡的函数依赖</strong>。对于任一关系模式，平凡函数依赖都是必然成立的，它不反映新的语义。若不特别声明，总是讨论非平凡的函数依赖。</p></li>
-<li><p>若<span class="math inline">\(X \rightarrow Y\)</span>，<span class="math inline">\(Y \rightarrow X\)</span>，则记作<span class="math inline">\(X \leftarrow \rightarrow Y\)</span>（即直接函数依赖）</p></li>
+<li><p>若<span class="math inline">\(X \rightarrow Y\)</span>，<span class="math inline">\(Y \rightarrow X\)</span>，则记作<span class="math inline">\(X \leftarrow \rightarrow Y\)</span></p></li>
 <li><p>若<span class="math inline">\(Y\)</span>不函数依赖于<span class="math inline">\(X\)</span>，则记作<span class="math inline">\(X \nrightarrow Y\)</span></p></li>
 <li><p>定义：在<span class="math inline">\(R(U)\)</span>中，如果<span class="math inline">\(X \rightarrow Y\)</span>，并且对于<span class="math inline">\(X\)</span>的任何一个<strong>真子集</strong><span class="math inline">\(X&#39;\)</span>，都有<span class="math inline">\(X&#39; \nrightarrow Y\)</span>，则称<span class="math inline">\(Y\)</span>对<span class="math inline">\(X\)</span><strong>完全函数依赖</strong>，记作<span class="math inline">\(X \stackrel{F}{\rightarrow} Y\)</span></p></li>
 <li><p>若<span class="math inline">\(X \rightarrow Y\)</span>，但<span class="math inline">\(Y\)</span>不完全函数依赖于<span class="math inline">\(X\)</span>，则称Y对X<strong>部分函数依赖</strong>，记作<span class="math inline">\(X \stackrel{P}{\rightarrow} Y\)</span>，等价于在完全函数依赖中加入冗余属性使之变成部分函数依赖</p></li>
