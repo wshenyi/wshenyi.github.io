@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/04/26/Database5/">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/06/17/Database10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.ico">
@@ -178,7 +178,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/26/Database5/" class="post-title-link" itemprop="url">数据库原理——第五章：数据库完整性</a>
+            <a href="/2019/06/17/Database10/" class="post-title-link" itemprop="url">数据库原理——第十章：数据库恢复技术</a>
         </h2>
 
         <div class="post-meta">
@@ -188,14 +188,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-04-26 19:42:51" itemprop="dateCreated datePublished" datetime="2019-04-26T19:42:51-04:00">2019-04-26</time>
+              <time title="Created: 2019-06-17 19:21:01" itemprop="dateCreated datePublished" datetime="2019-06-17T19:21:01-04:00">2019-06-17</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-06-18 09:10:38" itemprop="dateModified" datetime="2019-06-18T09:10:38-04:00">2019-06-18</time>
+                <time title="Modified: 2019-06-18 23:22:56" itemprop="dateModified" datetime="2019-06-18T23:22:56-04:00">2019-06-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,84 +221,145 @@
           <blockquote>
 <p><em>参考书目《数据库系统概论（第5版）》</em></p>
 </blockquote>
-<p>数据库的<strong>完整性</strong>是指数据的<strong>正确性</strong>和<strong>相容性</strong></p>
+<h2 id="事务的基本概念">事务的基本概念</h2>
+<p><strong>事务</strong>是用户定义的一个数据库<strong>操作序列</strong>，这些操作要么全做，要么全不做，是一个不可分割的工作单位<br />
+<strong>COMMIT</strong>操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中<br />
+<strong>ROLLBACK</strong>操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态<br />
+事务的<strong>ACID</strong>特性：</p>
 <ul>
-<li>数据的<strong>正确性</strong>是指数据是符合现实世界语义、反映当前实际状况的（实体完整性和用户定义的完整性）</li>
-<li>数据的<strong>相容性</strong>是指数据库同一对象在不同关系表中的数据是符合逻辑的（参照完整性）</li>
+<li><strong>原子性</strong>（<strong>A</strong>tomicity）：事务是数据库的逻辑工作单位，事务中包括的诸操作要么都做，要么都不做</li>
+<li><strong>一致性</strong>（<strong>C</strong>onsistency）：事务执行的结果必须是使数据库从一个一致状态变到另一个一致状态；一致性与原子性是密切相关的</li>
+<li><strong>隔离性</strong>（<strong>I</strong>solation）：一个事务的执行不能被其他事务干扰</li>
+<li><strong>持续性</strong>（<strong>D</strong>urability）：也称为<strong>永久性</strong>，一个事务一旦提交，他对数据库中的数据改变就应该是永久性的</li>
 </ul>
-<h2 id="实体完整性">实体完整性</h2>
-<p>关系模式的实体完整性在<code>CREATE TABLE</code>中用<code>PRIMARY KEY</code>定义<br />
-单属性构成的码有两种说明方式：列级约束条件、表级约束条件<br />
-多属性构成的码只有一种说明方式：表级约束<br />
-实体完整性检查和违约处理：</p>
-<ul>
-<li>检验主码值是否唯一，如果不唯一则拒绝插入或修改</li>
-<li>检查主码的各个属性是否为空，只要有一个为空就拒绝插入或修改</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE XXX(</span><br><span class="line">  Sno CHAR(20) PRIMARY KEY,  /*单属性可以在列级定义主码*/</span><br><span class="line">  PRIMARY KEY(Sno,Cno,...),  /*多属性只能在表级定义主码*/</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="参照完整性">参照完整性</h2>
-<p>关系模式的参照完整性在<code>CREATE TABLE</code>中用<code>FORIEGN KEY</code>短语定义哪些属性为<em>外码</em>,用<code>REFERENCES</code>指明这些外码参照哪些表的主码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE XXX(</span><br><span class="line">  Cno CHAR(20),</span><br><span class="line">  FOREIGN KEY(Cno) REFERENCES Course(Cno), /*在表级定义参照完整性*/</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>可能破坏参照完整性的情况及违约处理：</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">被参照表&lt;=&gt;参照表</th>
-<th style="text-align: center;">违约处理</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">可能破坏参照完整性&lt;-插入元组</td>
-<td style="text-align: center;">拒绝</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">可能破坏参照完整性&lt;-修改外码值</td>
-<td style="text-align: center;">拒绝</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">删除元组-&gt;可能破坏参照完整性</td>
-<td style="text-align: center;">拒绝/级联删除/设为空值</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">修改主码值-&gt;可能破坏参照完整性</td>
-<td style="text-align: center;">拒绝/级联删除/设为空值</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="用户定义的完整性">用户定义的完整性</h2>
-<p>用户定义的完整性就是针对某一具体应用的数据必须满足的语义要求<br />
-在<code>CREATE TABLE</code>中定义属性的同时，可以根据应用的要求定义<em>属性上</em>的约束条件，即<strong>属性值的限制</strong>，包括：</p>
-<ul>
-<li>列值非空（<code>NOT NULL</code>）</li>
-<li>值唯一（<code>UNIQUE</code>）</li>
-<li>检查列值是否满足一个条件表达式（<code>CHECK</code>短语）</li>
-</ul>
-<p>与属性上约束条件的定义类似，在<code>CREATE TABLE</code>语句中可以用<code>CHECK</code>短语定义<em>元组上</em>的约束条件，即<strong>元组级的限制</strong>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE Student(</span><br><span class="line">  Sno CHAR(9) UNIQUE NOT NULL, /*要求Sno值唯一且不能为空*/</span><br><span class="line">  Sname CHAR(8) NOT NULL,</span><br><span class="line">  Sage int CHECK(Sage &gt;= 15 AND Sage &lt;= 50) /*列级CHECK短语*/</span><br><span class="line">  Ssex CHAR(2),</span><br><span class="line">  CHECK(Ssex=&#x27;女&#x27; OR Sname NOT LIKE&#x27;Ms.%&#x27;)  /*定义了元组中两个属性值之间的约束*/</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="完整性约束命名子句">完整性约束命名子句</h2>
-<p>用完整性约束命名子句<code>CONSTRAINT</code>，用来对完整性约束条件命名，从而便于管理完整性约束条件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONSTRAINT &lt;完整性约束条件名&gt; &lt;完整性约束条件&gt;</span><br></pre></td></tr></table></figure>
-<p>其中<完整性约束条件>包括<code>NOT NULL</code>、<code>UNIQUE</code>、<code>PRIMARY KEY</code>、<code>FOREIGN KEY</code>、<code>CHECK</code>等</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE Student(</span><br><span class="line">  Sno NUMERIC(6),</span><br><span class="line">  Sname CHAR(20),</span><br><span class="line">  Sage NUMERIC(3) NOT NULL,</span><br><span class="line">  CONSTRAINT StudentKey PRIMARY KEY(Sno),</span><br><span class="line">  CONSTRAINT SnameKey FOREIGN KEY(Sname) REFERENCES Course(Sname),</span><br><span class="line">  CONSTRAINT C1 CHECK(Sno BETWEEN 90000 AND 99999),</span><br><span class="line">  CONSTRAINT C2 UNIQUE(Sname)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>修改表中的完整性限制，可以先删除原来的约束条件，再增加新的约束条件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;表名&gt; DROP CONSTRAINT &lt;完整性约束条件名&gt;</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD  CONSTRAINT &lt;完整性约束条件名&gt; &lt;完整性约束条件&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="触发器">触发器</h2>
-<p><strong>触发器</strong>(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程<br />
-触发器类似于约束，但是比约束更加灵活，可以实施更为复杂的检查和操作，具有更精细和更强大的数据控制能力</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/*触发器一般格式*/</span><br><span class="line">CREATE TRIGGER &lt;触发器名&gt;</span><br><span class="line">[BEFORE|AFTER] [INSERT|DELETE|UPDATE] ON &lt;表名&gt;</span><br><span class="line">FOR EACH [ROW|STATEMENT]</span><br><span class="line">BEGIN</span><br><span class="line">  &lt;执行语句列表&gt;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
-<p>例如：建立触发器t1，当插入学生的年龄小于18岁时进行报错提示</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $   /*告诉mysql语句的结尾符号换成以$结束*/</span><br><span class="line">CREATE TRIGGER t1</span><br><span class="line">BEFORE INSERT ON Student</span><br><span class="line">FOR EACH ROW</span><br><span class="line">BEGIN</span><br><span class="line">    DECLARE msg VARCHAR(200);</span><br><span class="line">    IF NEW.Sage &lt; 18 THEN</span><br><span class="line">        SET msg = CONCAT(&#x27;输入的年龄值: &#x27;,NEW.Sage,&#x27; 为无效的年龄，请确保学生年龄大于18岁&#x27;);</span><br><span class="line">        SIGNAL SQLSTATE &#x27;HY000&#x27; SET MESSAGE_TEXT = msg;</span><br><span class="line">    END IF;</span><br><span class="line">END$</span><br><span class="line">DELIMITER ;    /*将结尾符号换回以;结束*/</span><br></pre></td></tr></table></figure>
-<p>MySQL 中定义了<code>NEW</code>和<code>OLD</code>，用来表示触发器的所在表中，触发了触发器的那一行数据，来引用触发器中发生变化的记录内容，具体地：</p>
+<p>ACID可能遭到破坏的因素有：</p>
 <ol type="1">
-<li>在<code>INSERT</code>型触发器中，<code>NEW</code>用来表示将要（<code>BEFORE</code>）或已经（<code>AFTER</code>）插入的新数据</li>
-<li>在<code>UPDATE</code>型触发器中，<code>OLD</code>用来表示将要或已经被修改的原数据，<code>NEW</code>用来表示将要或已经修改为的新数据</li>
-<li>在<code>DELETE</code>型触发器中，<code>OLD</code>用来表示将要或已经被删除的原数据</li>
-<li>另外<code>OLD</code>是只读的，而<code>NEW</code>则可以在触发器中赋值，这样不会再次触发触发器，导致递归循环调用</li>
+<li>多个事务并发运行时，不同事务的操作交叉执行</li>
+<li>事务在运行过程中被强行停止</li>
+</ol>
+<p><strong>数据库恢复</strong>：数据库管理系统把数据库错误状态恢复到某一已知的正确状态（亦称为一致状态）</p>
+<hr />
+<h2 id="故障的种类">故障的种类</h2>
+<ol type="1">
+<li><strong>事务内部的故障</strong><br />
+事务内部的故障指事务执行到某一位置主动选择回滚。例如银行执行扣款时，若余额小于0，则主动执行回滚，回到未扣款前的状态</li>
+<li><strong>系统故障</strong><br />
+系统故障指造成系统停止运转的任何事件，使得系统要重新启动<br />
+回复子系统在系统重启后，需要撤销所有未完成的事务，重做所有已提交的事务，以将数据库恢复到一致状态</li>
+<li><strong>介质故障</strong><br />
+指外存故障，如磁盘损坏、瞬时强磁场干扰、火灾等，破坏性最大</li>
+<li><strong>计算机病毒</strong></li>
+</ol>
+<p>各类故障对数据库的影响有两种结果：</p>
+<ol type="1">
+<li>数据库本身被破坏</li>
+<li>数据库未被破坏，但数据可能不正确，这是由于事务的运行被非正常终止造成的</li>
+</ol>
+<hr />
+<h2 id="恢复的实现技术">恢复的实现技术</h2>
+<p>恢复的基本原理——<strong>冗余</strong>，常用技术有<strong>数据转储</strong>和<strong>登记日志文件</strong></p>
+<h3 id="数据转储backup">数据转储（backup）</h3>
+<p><strong>转储</strong>：即数据库管理员定期地将整个数据库复制到其他存储介质上保存起来地过程，备用数据称为<strong>后备副本</strong><br />
+转储操作十分耗费时间和资源，不能频繁进行<br />
+转储可分为两种状态：<strong>静态转储</strong>和<strong>动态转储</strong></p>
+<ul>
+<li><strong>静态转储</strong>：在系统中无运行事务时进行的转储操作，转储期间不允许对数据库执行任何存取和修改
+<ul>
+<li>得到的是一个一致性副本</li>
+<li>降低数据库的可用性</li>
+</ul></li>
+<li><strong>动态转储</strong>：转储期间允许对数据库进行存取和修改，即转储和用户事务可以并发执行
+<ul>
+<li>必须把转储期间各事务对数据库的修改活动记录下来，建立<strong>日志文件</strong></li>
+</ul></li>
+</ul>
+<p>转储还可分为两种方式：<strong>海量转储</strong>和<strong>增量转储</strong></p>
+<ul>
+<li><strong>海量转储</strong>：每次转储全部数据库</li>
+<li><strong>增量转储</strong>：每次只转储上一次转储后更新过的数据</li>
+</ul>
+<p>转储方法：<strong>动态海量转储</strong>、<strong>动态增量转储</strong>、<strong>静态海量转储</strong>、<strong>静态增量转储</strong></p>
+<h3 id="登记日志文件logging">登记日志文件（logging）</h3>
+<p>日志文件是用来记录事务对<strong>数据库地更新操作</strong>的文件<br />
+日志文件有两种格式：以<strong>记录</strong>为单位的日志文件和以<strong>数据块</strong>为单位的日志文件<br />
+对于以记录为单位的日志文件，其需要登记的内容包括：</p>
+<ul>
+<li>各个事务的开始标记</li>
+<li>各个事务的结束标记</li>
+<li>各个事务的所有更新操作</li>
+</ul>
+<p>日志文件的作用：</p>
+<ul>
+<li>事务故障恢复和系统故障恢复必须用日志文件</li>
+<li>在动态转储方式中必须建立日志文件，后备副本和日志文件结合起来才能有效的恢复数据库</li>
+<li>在静态转储中也可以建立日志文件，用于加速数据库恢复过程</li>
+</ul>
+<p>为保证数据库是可恢复的，登记日志文件的两条原则：</p>
+<ul>
+<li><strong>登记的次序严格按并发事务执行的时间次序</strong></li>
+<li><strong>必须先写日志文件，后写数据库</strong></li>
+</ul>
+<hr />
+<h2 id="恢复策略">恢复策略</h2>
+<h3 id="事务故障的恢复">事务故障的恢复</h3>
+<p>事务故障是指在运行至正常终止点前被终止，此时恢复子系统利用日志文件撤销（UNDO）此事务已对数据库进行的修改<br />
+事务故障的恢复由系统自动完成，对用户是透明的<br />
+恢复步骤为：</p>
+<ol type="1">
+<li>反向扫描日志文件，查找该事务的更新操作</li>
+<li>对该事务的更新操作执行逆操作</li>
+<li>继续反向扫描日志文件，查找该事务的其他更新操作，并做同样处理</li>
+<li>如此处理下去，直到读到此事务的开始标记，事务故障恢复完成</li>
+</ol>
+<h3 id="系统故障的恢复">系统故障的恢复</h3>
+<p>系统故障导致不一致的原因有两个：</p>
+<ul>
+<li>未完成事务对数据库的更新已写入数据库</li>
+<li>已提交事务对数据库的更新可能还停留在缓冲区没来得及写入数据库</li>
+</ul>
+<p>恢复操作就是<strong>撤销故障发生时未完成的事务</strong>和<strong>重做已完成的事务</strong><br />
+系统故障的恢复由系统在重新启动时自动完成，不需要用户的干预<br />
+恢复步骤为：</p>
+<ol type="1">
+<li>正向扫描日志文件，找出在故障发生前已经提交的事务，将其事务标识记入重做队列（REDO-LIST）。同时找出故障发生时尚未完成的事务，将其事务标识记入撤销队列（UNDO-LIST）</li>
+<li>对撤销队列中的各个事务进行撤销（UNDO）处理</li>
+<li>对重做队列中的各个事务进行重做（REDO）处理</li>
+</ol>
+<h3 id="介质故障的恢复">介质故障的恢复</h3>
+<p>发生介质故障后，磁盘上的物理数据和日志文件被破坏，这是最严重的故障，恢复方法是<strong>重装数据库，然后重做已完成的事务</strong><br />
+介质故障的恢复需要数据库管理员介入<br />
+恢复步骤为：</p>
+<ol type="1">
+<li>装入最新的数据库副本</li>
+<li>装入相应的日志文件副本，重做已完成的事务</li>
+</ol>
+<hr />
+<h2 id="具有检查点的恢复技术">具有检查点的恢复技术</h2>
+<p>检查点记录的内容包括：</p>
+<ul>
+<li>建立检查点时刻所有正在执行的事务清单</li>
+<li>这些事务最近一个日志记录的地址</li>
+</ul>
+<p>重新开始文件用来记录各个检查点记录在日志文件中的地址<br />
+<strong>动态维护日志文件的方法是，周期性地执行建立检查点、保存数据库状态的操作</strong>，具体步骤为：</p>
+<ol type="1">
+<li>将当前日志缓冲区中的所有日志记录写入磁盘的日志文件上</li>
+<li>在日志文件中写入一个检查点记录</li>
+<li>将当前数据缓冲区的所有数据记录写入磁盘的数据库中</li>
+<li>把检查点记录在日志文件中的地址写入一个重新开始文件</li>
+</ol>
+<p><strong>简化为：保存日志 -&gt; 生成检查点 -&gt; 保存数据提交到数据库 -&gt; 将检查点写入重新开始文件</strong><br />
+<strong>使用检查点方法可以改善恢复效率</strong><br />
+系统使用检查点方法进行恢复的步骤：</p>
+<ol type="1">
+<li>从重新开始文件中找到最后一个检查点记录在日志文件中的地址，利用该地址找到日志文件中最后一个检查点记录</li>
+<li>由该检查点记录得到检查点建立时刻所有正在执行的事务清单，并将其做为UNDO-LIST。另外新建一个空的REDO-LIST</li>
+<li>从检查点开始正向扫描日志文件
+<ul>
+<li>如有新开始的事务T，将T加入UNDO-LIST</li>
+<li>如有提交的事务J，<strong>将J从UNDO-LIST移入REDO-LIST</strong></li>
+</ul></li>
+<li>对UNDO-LIST中的每个事务执行<strong>撤销</strong>操作；对REDO-LIST中的每个事务执行<strong>重做</strong>操作</li>
 </ol>
 
       
@@ -319,7 +380,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/04/25/Database4/">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/06/17/Database9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.ico">
@@ -333,7 +394,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/25/Database4/" class="post-title-link" itemprop="url">数据库原理——第四章：数据库安全性</a>
+            <a href="/2019/06/17/Database9/" class="post-title-link" itemprop="url">数据库原理——第九章：关系查询处理和查询优化</a>
         </h2>
 
         <div class="post-meta">
@@ -343,14 +404,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-04-25 19:42:48" itemprop="dateCreated datePublished" datetime="2019-04-25T19:42:48-04:00">2019-04-25</time>
+              <time title="Created: 2019-06-17 19:20:34" itemprop="dateCreated datePublished" datetime="2019-06-17T19:20:34-04:00">2019-06-17</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-06-18 09:00:32" itemprop="dateModified" datetime="2019-06-18T09:00:32-04:00">2019-06-18</time>
+                <time title="Modified: 2019-06-19 00:13:23" itemprop="dateModified" datetime="2019-06-19T00:13:23-04:00">2019-06-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -376,1031 +437,628 @@
           <blockquote>
 <p><em>参考书目《数据库系统概论（第5版）》</em></p>
 </blockquote>
-<h2 id="数据库安全性概述">数据库安全性概述</h2>
-<p>数据库安全标准：<strong>TCSEC</strong>和<strong>CC</strong><br />
-TCSEC/TDI安全级别划分(从上到下安全级别逐渐降低)</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">安全级别</th>
-<th style="text-align: center;">定义</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">A1</td>
-<td style="text-align: center;">验证设计</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">B3</td>
-<td style="text-align: center;">安全域</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">B2</td>
-<td style="text-align: center;">结构化保护</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><strong>B1</strong></td>
-<td style="text-align: center;"><strong>标记安全保护</strong></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">C2</td>
-<td style="text-align: center;">受控的存取保护</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><strong>C1</strong></td>
-<td style="text-align: center;"><strong>自主安全保护</strong></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">D</td>
-<td style="text-align: center;">最小保护</td>
-</tr>
-</tbody>
-</table>
-<p>C1级：只提供了非常初级的自主安全保护，能够实现对用户和数据的分离，进行<strong>自助存取控制</strong>（DAC）<br />
-B1级：对系统的数据加以标记，并对标记的主体和客体实施<strong>强制存取控制</strong>（MAC）以及<strong>审计</strong>等安全机制。B1级别的产品才被认为是真正意义上的安全产品</p>
-<hr />
-<h2 id="数据库安全性控制">数据库安全性控制</h2>
-<h3 id="用户身份鉴别">用户身份鉴别</h3>
-<p>这是数据库管理系统提供的最外层安全保护机制</p>
+<h2 id="关系数据库系统的查询处理">关系数据库系统的查询处理</h2>
+<p>关系数据库管理系统查询处理分为4个阶段：<strong>查询分析</strong>、<strong>查询检查</strong>、<strong>查询优化</strong>和<strong>查询执行</strong></p>
 <ol type="1">
-<li>静态口令鉴别</li>
-<li>动态口令鉴别</li>
-<li>生物特征鉴别</li>
-<li>智能卡鉴别</li>
+<li>查询分析：对SQL语句进行<strong>语法分析</strong>和<strong>词法分析</strong>，报告语句中可能的语法错误</li>
+<li>查询检查：对合法的查询语句进行<strong>语义检查</strong>，即根据数据字典中有关的模式定义检查语句中的数据库对象，如关系名、属性名是否存在和合法
+<ul>
+<li>可能涉及<strong>视图消解</strong>、<strong>用户存取权限</strong>和<strong>完整性约束检查</strong>，这时的完整性检查是初步的、静态的检查</li>
+<li>关系数据库管理系统一般都用<strong>查询树</strong>（也即<strong>语法分析树</strong>）来表示扩展的关系代数表达式</li>
+</ul></li>
+<li>查询优化：选择一个高效执行的查询处理策略；按照优化的层次一般可分为<strong>代数优化</strong>和<strong>物理优化</strong>
+<ul>
+<li><strong>代数优化</strong>是指关系代数表达式的优化</li>
+<li><strong>物理优化</strong>是指存取路径和底层操作算法的选择</li>
+</ul></li>
+<li>查询执行：依据优化器得到的执行策略生成查询执行计划，由<strong>代码生成器</strong>生成执行这个查询计划的代码。然后执行并回送查询结果</li>
 </ol>
-<h3 id="存取控制">存取控制</h3>
-<p>存取控制机制主要包括<strong>定义用户权限</strong>和<strong>合法权限检查</strong>，二者一起组成了数据库管理系统的<strong>存取控制子系统</strong></p>
-<ul>
-<li><strong>自主存取控制</strong>：用户对于不同的数据库对象拥有不同的存取权限，不同用户对同一对象也有不同权限，而且用户可以将其拥有的权限转授给其他用户。因此<strong>自主存取控制非常灵活</strong></li>
-<li><strong>强制存取控制</strong>：每个数据库对象被标以一定的<strong>密级</strong>，每一个用户也被授予某一个级别的<strong>许可证</strong>。对于任意一个对象，只有具有合法许可证的用户才可以存取。因此<strong>强制存取控制相对比较严格</strong></li>
-</ul>
-<h3 id="自主存取控制方法">自主存取控制方法</h3>
-<p>用户权限由两个要素组成：<strong>数据库对象</strong>、<strong>操作类型</strong><br />
-定义用户的存取权限称为<strong>授权</strong></p>
-<p><strong><em>------后续语句实现基于MySQL------</em></strong></p>
-<h4 id="创建用户">创建用户</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &lt;用户名&gt;@&lt;用户登陆主机&gt; [IDENTIFIED BY &lt;密码&gt;];</span><br><span class="line">CREATE USER &lt;用户名&gt;;  /*可以在本地无密码登录的账户*/</span><br></pre></td></tr></table></figure>
-<ul>
-<li>用户登录主机若不填写则默认为localhost，若要允许远程登陆，则localhost可以替换为相应的主机ip，或者直接替换为：%（表示任何一台主机都可以远程登陆）</li>
-<li>新用户的密码可以选择不创建</li>
-</ul>
-<h4 id="修改用户密码">修改用户密码</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &lt;用户名&gt;@&lt;用户登陆主机&gt; IDENTIFIED BY &lt;新密码&gt;</span><br><span class="line">SET PASSWORD FOR &lt;用户名&gt;@&lt;用户登陆主机&gt; = PASSWORD(&#x27;新密码&#x27;) /*创建新密码*/</span><br></pre></td></tr></table></figure>
-<h4 id="删除用户">删除用户</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP USER [IF EXIST] &lt;用户名&gt;@&lt;用户登陆主机&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="给用户授权">给用户授权</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限&gt;(属性名),... ON &lt;数据库名&gt;.&lt;数据库表名&gt;,... TO &lt;用户名&gt;@&lt;用户登陆主机&gt;,... [WITH GRANT OPTION]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>如果指定了<code>WITH GRANT OPTION</code>子句，则获得某种权限的用户还可以把这种权限再授予其他用户（传播权限）</li>
-<li>对于<权限>(属性名)，如UPDATE(Sno)表示对于Sno这个属性具有更新的权限，若不填则默认为所有属性</li>
-<li>如果想给新用户所有的权限，可以直接使用<code>ALL PRIVILEGES</code></li>
-</ul>
-<h4 id="收回授权">收回授权</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REVOKE &lt;权限&gt;(属性名),... ON &lt;数据库名&gt;.&lt;数据库表名&gt;,... FROM &lt;用户名&gt;@&lt;用户登陆主机&gt;,...</span><br></pre></td></tr></table></figure>
 <hr />
-<h3 id="数据库角色">数据库角色</h3>
-<p><em>MySQL 8.0 为了用户权限管理更容易，提供了一个角色管理的新功能</em><br />
-数据库角色是被命名的一组与数据库操作相关的权限，角色是<strong>权限的集合</strong>。如果用户被授予角色权限，则该用户拥有该角色的权限，从而简化授权过程<br />
-MySQL 8.0 提供的角色管理功能如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE ROLE 角色创建</span><br><span class="line">DROP ROLE 角色删除</span><br><span class="line">GRANT 为用户和角色分配权限</span><br><span class="line">REVOKE 为用户和角色撤销权限</span><br><span class="line">SHOW GRANTS 显示用户和角色的权限</span><br><span class="line">SET DEFAULT ROLE 指定哪些帐户角色默认处于活动状态</span><br><span class="line">SET ROLE 更改当前会话中的活动角色</span><br><span class="line">CURRENT_ROLE() 显示当前会话中的活动角色</span><br></pre></td></tr></table></figure>
+<h2 id="关系数据库系统的查询优化">关系数据库系统的查询优化</h2>
+<p><strong>查询优化</strong>在关系数据库系统中有着非常重要的地位，关系数据库系统取得巨大成功的原因关键是得益于查询优化技术的发展<br />
+<strong>查询优化的优点不仅在于用户不必考虑如何最好地表达查询以获得较高的效率，而且在于系统可以比用户程序做的更好</strong>，原因如下：</p>
 <ol type="1">
-<li><p>创建<strong>用户</strong>、分配权限、回收权限、验证</p>
+<li>优化器可以从数据字典中获取许多统计信息，而用户程序则难以获得这些信息</li>
+<li>如果数据库的物理统计信息变了，系统可以自动对查询进行重新优化而不必重写程序</li>
+<li>优化器可以考虑数百种不同的执行方案，而程序员一般只能考虑有限的几种</li>
+<li>优化器中实现包含了很多复杂的优化技术，这些技术的实现降低了编写人员的门槛</li>
+</ol>
+<p>在集中式数据库中，查询执行开销主要包括<strong>磁盘存取块数</strong>（I/O代价）、<strong>处理机时间</strong>（CPU代价）以及查询的<strong>内存开销</strong>，在分布式数据库中还要加上<strong>通信代价</strong><br />
+查询执行的总代价 = I/O代价 + CPU代价 + 内存代价 + （通信代价）</p>
+<hr />
+<h2 id="代数优化">代数优化</h2>
+<p>查询树的启发式优化：</p>
+<ol type="1">
+<li>选择运算应尽可能先做</li>
+<li>把投影运算和选择运算同时进行</li>
+<li>把投影同其前或后的双目运算结合起来</li>
+<li>把某些选择同它前面要执行的笛卡尔积结合起来成为一个连接运算</li>
+<li>找出公共子表达式</li>
+</ol>
+<hr />
+<h2 id="物理优化">物理优化</h2>
+<p>物理优化的目的是为了选择高效合理的<strong>操作算法</strong>或<strong>存取路径</strong>，方法有</p>
+<ol type="1">
+<li>基于规则的启发式优化</li>
+<li>基于代价估算的优化</li>
+<li>二者结合的优化方法</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/06/16/Network7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/16/Network7/" class="post-title-link" itemprop="url">计算机网络——第七章：无线网络和移动网络</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-06-16 11:53:59" itemprop="dateCreated datePublished" datetime="2019-06-16T11:53:59-04:00">2019-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-13 21:39:30" itemprop="dateModified" datetime="2019-07-13T21:39:30-04:00">2019-07-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><em>参考书目《计算机网络：自顶向下方法（第七版）》</em></p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p>无线网络分类：</p>
 <ul>
-<li>创建用户</li>
+<li>单跳，基于基础设施。如802.11网络和4G LTE</li>
+<li>单跳，无基础设施。如蓝牙网络和自组织模式的802.11网络</li>
+<li>多跳，基于基础设施。如耨鞋无线传感网络和<em>无线网状网络</em></li>
+<li>多跳，无基础设施。如<strong>移动自组织网络</strong>（mobile ad hoc network, MANET）和<strong>车载自组织网络</strong>（vehicular ad hoc network, VANET）</li>
 </ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER wsy@&#x27;%&#x27; IDENTIFIED BY &#x27;111111&#x27;;</span><br></pre></td></tr></table></figure></p>
-<p></p>
+<hr />
+<h2 id="无线链路和网络特征">无线链路和网络特征</h2>
+<p>有线链路和无线链路的区别：</p>
 <ul>
-<li>分配权限</li>
+<li><strong>递减的信号强度</strong>。如电磁波在穿过物体时强度将衰减</li>
+<li><strong>来自其它源的干扰</strong>。来自环境和其他发送源的干扰</li>
+<li><strong>多径传播</strong>。电磁波的一部分受物体和地面的反射，到达接收方时走了不同长度的路径，则会出现<strong>多径传播</strong>，会导致接收方收到的信号变得模糊</li>
 </ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT INSERT,UPDATE,ALTER ON test.* TO wsy@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure></p>
-<p></p>
+<p>较大的<strong>信噪比</strong>（SNR）使接收方更容易从背景噪声中提取传输信号；<strong>比特差错率</strong>（BER）表示接收方收到的有错传输比特的概率<br />
+<strong>物理层</strong>的特征：</p>
 <ul>
-<li>回收权限</li>
+<li>对于给定的调制方案，SNR越高，BER越低</li>
+<li>对于给定的eSNR，具有较高比特传输率的调制技术（无论差错与否）将具有较高的BER</li>
+<li>物理层调制技术的动态选择能用于适配对信道条件的调制技术</li>
 </ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REVOKE UPDATE ON test.* FROM wsy@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure></p>
-<p></p>
+<h3 id="cdma">CDMA</h3>
+<p>在CDMA协议中，要发送的每个比特都通过乘以一个信号（编码）的比特来进行编码，这个信号的变化速率（通常称为<strong>码片速率</strong>）比初始数据比特序列的变化速率要快得多<br />
+选择CDMA编码的关键是：<strong>使所有节点的CDMA编码所表示的代数向量彼此之间相互垂直</strong></p>
+<hr />
+<h2 id="wifi802.11-无线lan">WiFi：802.11 无线LAN</h2>
+<h3 id="体系结构">802.11 体系结构</h3>
+<p>802.11 体系结构的基本构件模块是<strong>基本服务集</strong>（Basic Service Set, BSS），一个BSS包括一个或多个无线站点和一个<strong>接入点</strong>（Access Point, AP）的<strong>中央基站</strong><br />
+802.11规定：</p>
 <ul>
-<li>验证</li>
+<li>每个无线站点若要发送或接收数据，必须先与一个AP相关联；在环境中有多个AP时，仅有关联的AP才会向你的无线站点发送数据</li>
+<li>每个AP会被分配到一个<strong>服务集标识</strong>（Service Set Identifier, SSID）</li>
+<li>802.11定义了11个部分重叠的信道，特别是1、6和11是唯一的3个非重叠信道</li>
+<li>每个AP必须周期性地发送<strong>信标帧</strong>，每个信标帧包含该AP的SSID和MAC地址</li>
 </ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/*使用用户wsy登录Mysql之后*/</span><br><span class="line">SELECT user();</span><br><span class="line">USE test;</span><br><span class="line">DESC P;</span><br><span class="line">INSERT INTO P VALUES (&#x27;P7&#x27;, &#x27;螺母&#x27;, &#x27;绿&#x27;, 32);</span><br><span class="line">SELECT * FROM P WHERE PNO=&#x27;P1&#x27;</span><br><span class="line">UPDATE P SET P=P+10 WHERE COLOR=&#x27;红&#x27;;</span><br></pre></td></tr></table></figure></p>
-<p>结果如下 <br />
+<p>扫描信道和监听信标帧的过程被称为<strong>被动扫描</strong>；无线主机也能够通过广播探测帧执行<strong>主动扫描</strong>，但对于主动扫描需要二次请求/响应握手</p>
+<h3 id="mac协议">802.11 MAC协议</h3>
+<p>802.11 MAC协议使用<strong>带碰撞避免的CSMA</strong>（CSMA/CA），并且由于无线信道相对较高的比特粗误码率，使用<strong>链路层确认/重传（ARQ）方案</strong><br />
+802.11 MAC协议未实现碰撞检测的原因？</p>
+<ul>
+<li>检测碰撞的能力要求站点具有同时发送和接收的能力，由于接收信号的强度通常远远小于发送强度，制造这种硬件的代价较大。</li>
+<li>即使能做到，也会因为信号衰减和终端隐藏问题，而无法检测到所有碰撞</li>
+</ul>
+<p><strong>链路层确认</strong>方案的过程：</p>
+<ol type="1">
+<li>目的站点收到一个<strong>通过CRC校验</strong>的帧后，他等待一个被称为<strong>短帧间间隔</strong>（Short Inter-Frame Spacing, SIFS）的一小段时间，然后发挥一个确认帧</li>
+<li>若发送站点在给定时间内未收到确认帧，则使用CSMA/CA协议重传该帧</li>
+<li>若在固定次重传之后仍未收到确认，则发送站点放弃发送并丢弃该帧</li>
+</ol>
+<p>CSMA/CA协议过程：</p>
+<ol type="1">
+<li>如果某站点最初监听到信道空闲，它将在一个被称作<strong>分布式帧间间隔</strong>（Distributed Inter-Frame Spacing, DIFS）的短时间段后发送该帧</li>
+<li>否则该站点选取一个随机回退值（像CSMA/CD那样）并且在侦听信道空闲时递减该值。当侦听到信道忙时，计数值保持不变</li>
+<li>当计数值减为0时（注意到这只可能发生在信道被侦听为空闲时），该站点发送整个数据帧并等待确认</li>
+<li>如果收到确认，发送站点知道它的帧已经被目的站点正确接收。如果该站点要发送另一帧，它将从第2步开始CSMA/CA协议。如果未收到确认，发送站点将重新进入第2步中的回退阶段</li>
+</ol>
+<p>802.11的目标是<strong>无论如何尽可能避免碰撞</strong></p>
+<h3 id="处理隐藏终端rts和cts">处理隐藏终端：RTS和CTS</h3>
+<p>站点使用短<strong>请求发送</strong>（Request to Send, RTS）控制帧和短<strong>允许发送</strong>（Clear to Send, CTS）控制帧来<strong>预约</strong>对信道的访问。过程如下：</p>
+<ol type="1">
+<li>当发送方要发送一个DATA帧时，他首先等待一个DIFS，然后向AP发送一个RTS帧，指示传输DATA帧和确认（ACK）帧需要的总时间</li>
+<li>当AP收到RTS帧后，等待一个SIFS，之后它广播一个CTS帧作为响应。该CTS有两个目的：给发送方明确发送许可，也指示其他站点在预约期内不要发送</li>
+<li>发送方收到CTS后，在等待一个SIFS之后发送DATA</li>
+<li>接收方在完全接收DATA数据之后，等待一个SIFS后，广播一个ACK帧，传递预约结束的消息</li>
+</ol>
+<p>使用RTS和CTS能够在两个重要方面提高性能：</p>
+<ul>
+<li>终端隐藏问题被缓解了，因为长的DATA帧只有在预约过后才会发送</li>
+<li>因为RTS和CTS帧较短，涉及RTS和CTS帧的碰撞将仅持续短RTS和CTS帧的持续时间</li>
+</ul>
+<h3 id="ieee-802.11-帧结构">IEEE 802.11 帧结构</h3>
+<p>892.11帧中最引人注的的是他有4个MAC地址字段</p>
+<ul>
+<li>地址1是接收该帧的无线站点的MAC地址</li>
+<li>地址2是传输该帧的站点的MAC地址</li>
+<li>地址3是当前BSS中的AP的第一跳路由器接口的MAC地址（地址3允许AP在构建以太网帧时能够<strong>确定目的MAC地址</strong>），所以其在BSS和在有线局域网互联中起着关键的作用</li>
+<li>地址4当AP在自组织模式中互相转发时使用</li>
+</ul>
+<hr />
+<h2 id="移动管理">移动管理</h2>
+<p>间接路由<br />
 <br />
+直接路由<br />
+</p>
+<ul>
+<li>间接路由存在三角路由选择问题。直接路由克服了这个低效的问题，但却是以增加复杂性为代价。</li>
+</ul>
+<h2 id="移动ip">移动IP</h2>
+
+<hr />
+<h2 id="问题与思考">问题与思考</h2>
+<p>无线网络中高出错率是怎样影响效率的？</p>
+<p>拥塞控制的问题主要集中在效率和公平性</p>
+<p>改进 TCP 的两个重要原则就是:<br />
+(1) 让发送端清楚网络的真实状态 (2) 采用跨层设计的思想，让 IP 层、逻辑链路层和 MAC 层都恰当地参与问题发现和问题解决过程，缩短控制周期</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/06/14/Network6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/14/Network6/" class="post-title-link" itemprop="url">计算机网络——第六章：链路层和局域网</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-06-14 14:53:09" itemprop="dateCreated datePublished" datetime="2019-06-14T14:53:09-04:00">2019-06-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-02 11:49:25" itemprop="dateModified" datetime="2019-07-02T11:49:25-04:00">2019-07-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><em>参考书目《计算机网络：自顶向下方法（第七版）》</em></p>
+</blockquote>
+<h2 id="链路层概述">链路层概述</h2>
+<p>链路层提供的服务：</p>
+<ul>
+<li><strong>成帧</strong><br />
+将网络层数据报封装成链路层帧。一个帧由一个<em>数据字段</em>和若干<em>首部字段</em>组成<br />
+</li>
+<li><strong>链路接入</strong><br />
+<strong>媒体访问控制</strong>（Medium Access Control, MAC）协议规定了帧在链路上的传输的规则。<br />
+对于<strong>点对点链路</strong>（PPP）MAC协议比较简单，当链路空闲时发送方都能发送；对于<strong>广播链路</strong>，即所谓的多路访问问题，MAC协议用于协调多个节点的帧传输</li>
+<li><strong>可靠交付</strong><br />
+链路层可靠交付服务通常用于<strong>易于产生高差错率</strong>的链路，如无线链路，其目的是本地纠正一个差错，而不是通过运输层或应用层协议迫使进行端到端的数据重传<br />
+对于低比特差错的链路，链路层可靠交付服务可能会认为是一种不必要的开销，因此<strong>许多有线的链路层协议不提供可靠交付服务</strong><br />
+</li>
+<li><strong>差错检测和纠正</strong><br />
+链路层的差错检测通常更复杂，并且用硬件实现<br />
+差错纠正使得接收方检测出帧中出现的比特差错，而且能定位并纠正它们</li>
+</ul>
+<p>链路层的主体部分是在*<strong>网络适配器</strong>（network adapter）中实现的，网络适配器有时也被称为<strong>网卡</strong>（Network Interface Card, NIC）</p>
+<hr />
+<h2 id="差错检测和纠正技术">差错检测和纠正技术</h2>
+<p>使用差错检测和纠正技术仍有可能有未检出比特差错，因而需要选择一个方案使得这种事情的发生概率很小<br />
+传输数据中检测差错的三种技术：<strong>奇偶校验</strong>、<strong>检验和方法</strong>（更多用于传输层）、<strong>循环冗余检测</strong>（通常用于适配器中的链路层）</p>
+<h3 id="奇偶校验">奇偶校验</h3>
+<p><strong>单比特奇偶校验</strong>只能用于单比特差错检测，而实际中经常以聚集地方式出现<br />
+<strong>二维奇偶检验</strong>可以<strong>检测</strong>到单比特差错并且定位<strong>纠正</strong>错误比特，但对于多比特差错则只能检测而不能纠正<br />
+ 接收方检测和纠正差错的能力被称为<strong>前向纠错</strong><br />
+通过请求发送方重传出错的数据称为<strong>后向纠错</strong></p>
+<h3 id="检验和方法">检验和方法</h3>
+<p><strong>因特网检验和</strong>（checksum）就基于这种方法，以16比特为单位求取检验和<br />
+为什么运输层使用检验和而链路层使用CRC？</p>
+<ul>
+<li>传输层差错检测用软件实现，简单而快速如检验和这样的方案是重要的</li>
+<li>链路层差错检测在适配器中有专用硬件，能够快速执行更复杂的CRC操作</li>
+</ul>
+<h3 id="循环冗余检测">循环冗余检测</h3>
+<p><strong>循环冗余检测编码</strong>（CRC）也称为<strong>多项式编码</strong><br />
+CRC前提：对于<span class="math inline">\(d\)</span>比特的数据<span class="math inline">\(D\)</span>，发送方和接收方事先协商一个<span class="math inline">\(r+1\)</span>比特的<span class="math inline">\(G\)</span>（称为<strong>生成多项式(generator)</strong>），并且要求<span class="math inline">\(G\)</span>的最高位为1<br />
+CRC核心思想：对于一个给定的<span class="math inline">\(D\)</span>，发送方要选择<span class="math inline">\(r\)</span>个附加比特R将其附加到D后面，使得得到的长为<span class="math inline">\(d+r\)</span>的比特模式用模2算术恰好能被<span class="math inline">\(G\)</span>整除<br />
+CRC检测过程：接收用G去除接收到的<span class="math inline">\(d+r\)</span>比特，如果余数不为0，则说明出现了差错<br />
+<span class="math inline">\(R\)</span>的计算方法： <span class="math display">\[R = (D * 2^r) \% G\]</span><br />
+CRC能检测小于<span class="math inline">\(r+1\)</span>比特的突发差错，这意味着所有连续的<span class="math inline">\(r\)</span>比特或者更少的差错都可以检测到</p>
+<hr />
+<h2 id="多路访问链路和协议">多路访问链路和协议</h2>
+<p><strong>点对点链路</strong>的链路层协议有：<strong>PPP</strong>（点对点）协议和<strong>HDLC</strong>（高级数据链路控制）协议<br />
+对于<strong>广播链路</strong>需要使用<strong>多路访问协议</strong>，可划分为三种类型：<strong>信道划分协议</strong>、<strong>随机接入协议</strong>、<strong>轮流协议</strong></p>
+<h3 id="信道划分协议">信道划分协议</h3>
+<p>常见的有三种：<strong>时分多路复用</strong>TDM、<strong>码分多路复用</strong>FDM、<strong>码分多址</strong>CDMA<br />
+TDM和FDM的优点：它避免了碰撞，并在N个节点之间公平的划分了带宽；缺点：现在一个节点只能使用R/N的带宽，从而链路利用效率不高<br />
+CDMA为每个节点分配一种不同的<strong>编码</strong>，然后每个节点用它唯一的编码来对它发送的数据进行编码。CDMA的特性在于不同节点能够<strong>同时传输</strong>，并且他们各自相应的接收方仍能<strong>正确接收</strong><br />
+CDMA例子<br />
+</p>
+<h3 id="随机接入协议">随机接入协议</h3>
+<p>在随机接入协议中，每个传输节点总是以信道的全部速率进行发送。当有碰撞时，每个节点等待一个随机时延后再次重发该帧，直到该帧无碰撞的通过为止<br />
+常用的有<strong>ALOHA协议</strong>和<strong>载波侦听多路访问协议</strong>（CSMA）<br />
+时隙ALOHA需要节点之间同步时钟，其的最大效率为<span class="math inline">\(\frac{1}{e} \approx 0.37\)</span><br />
+纯ALOHA不需要节点间的同步，其最大效率为<span class="math inline">\(\frac{1}{2e} \approx 0.18\)</span><br />
+在CSMA中，广播信道的端到端<strong>信道传播时延</strong>（信号从一个节点传播到另一个节点的时间），决定了<strong>最小帧长</strong>和<strong>线缆长度</strong>，因为该时延越长，一个待发送节点不能侦听到另一个已经开始传输的节点的概率越大<br />
+CSMA/CD运行流程：</p>
+<ol type="1">
+<li>适配器从网络获得一条数据报，准备链路层帧，并将其放入帧适配器缓存中</li>
+<li>如果适配器侦听到信道空闲（侦听96比特时间表示空闲，同时也是为了保证帧间最小间隔，目的为了使刚刚收到数据帧的站可及时处理完接收缓存），它开始传输帧。若适配器侦听到信道正在忙，它将等待直到它判断信道空闲时才传输帧</li>
+<li>在传输的过程中，适配器监视是否其他节点也在使用广播信道</li>
+<li>若整个传输过程中都没有监测到其他适配器的信号能量，则代表该帧传输完成。若检测到来自其他适配器的信号能量，它在传输完<strong>强化冲突帧</strong>（32或48比特时间）之后中止传输，传输强化冲突帧是让为了确保所有用户都知道发生了碰撞</li>
+<li>中止传输后，适配器等待一个随机时间量，然后返回步骤2</li>
+</ol>
+<p>CSMA/CD使<strong>用二进制指数后退</strong>算法来决定碰撞后等待的随机时间量。假设传输一个给定帧，该帧经历了<span class="math inline">\(n\)</span>次碰撞，节点随机的从<span class="math inline">\(\{ 0, 1, ... , 2^n-1 \}\)</span>中选取一个<span class="math inline">\(K\)</span>值，则该节点的等待的实际时间量为<span class="math inline">\(K \bullet 512\)</span>，可看到<span class="math inline">\(K\)</span>的可选集合长度随着碰撞次数呈指数增长，从而节点间再次碰撞的概率越小<br />
+CSMA/CD效率定义为：*当有大量的活跃节点，且每个节点有大量的帧要发送时，帧在信道中无碰撞地传输的那部分时间在长期运行时间中所占的份额。令<span class="math inline">\(d_{prop}\)</span>表示信号能量在任意两个适配器之间传播所需的最大时间，<span class="math inline">\(d_{trans}\)</span>表示传输一个最大长度的以太网帧的时间 <span class="math display">\[效率 = \frac{1}{1 + 5d_{prop}/d_{trans}}\]</span></p>
+<h3 id="轮流协议">轮流协议</h3>
+<ul>
+<li><strong>轮询协议</strong>：节点之一被指定为主节点，主节点以循环的方式<strong>轮询</strong>（poll）每个节点（问XX节点：“你现在要发送帧吗？”）</li>
+<li><strong>令牌传递协议</strong>：没有主节点，一个称为<strong>令牌</strong>（token）的小的特殊帧在节点间以某种固定的次序进行交换，拥有令牌的节点才能发送帧</li>
+</ul>
+<hr />
+<h2 id="交换局域网">交换局域网</h2>
+<p>适配器的MAC地址具有<strong>扁平结构</strong>，并且不论适配器到哪里都还不会发生变化<br />
+IP地址具有<strong>层次结构</strong>（即分为网络号和主机号），当主机移动时，主机的IP地址需要改变，即改变它所连接到的网络<br />
+主机和路由器接口除了网络层地址之外还有MAC地址的原因</p>
+<ol type="1">
+<li>局域网是为任意网络层协议而设计的，而不只是用于IP和因特网，使用MAC地址，可以保持兼容性</li>
+<li>如果适配器使用网络层地址不使用MAC地址的话，网络层地址必须存储在适配器的RAM中，每次适配器移动（或上电）时要重新配置</li>
+</ol>
+<h3 id="arp协议">ARP协议</h3>
+<p><strong>地址解析协议</strong>（Address Resolution Protocol, ARP），实现IP地址到MAC地址之间的转换<br />
+每台主机或路由器在其内存中具有一个<strong>ARP表</strong>，这张表包含<strong>IP地址到MAC地址</strong>的映射关系，其中TTL指示了从表中删除每个映射的时间。举例如下</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">IP地址</th>
+<th style="text-align: center;">MAC地址</th>
+<th style="text-align: center;">TTL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">222.222.222.221</td>
+<td style="text-align: center;">88-B2-2F-54-1A-0F</td>
+<td style="text-align: center;">13:45:00</td>
+</tr>
+</tbody>
+</table>
+<p>关于ARP</p>
+<ul>
+<li><strong>查询ARP报文</strong>是在广播帧中发送的，而<strong>响应ARP</strong>在一个标准帧中发送</li>
+<li>ARP是即插即用的，也就是说ARP表是自动建立的，即它不需要系统管理员来配置</li>
+</ul>
+<h3 id="以太网帧结构">以太网帧结构</h3>
+
+<ul>
+<li><strong>数据字段</strong>（46～1500字节）；这个字段承载了IP数据报。以太网的最大传输单元MTU是1500字节，数据字段的最小长度是46字节（如果IP数据报小于46字节则必须被填充到46字节）</li>
+<li><strong>目的地址</strong>（6字节）；包含目的适配器的MAC地址</li>
+<li><strong>源地址</strong>（6字节）；包含传输该帧到局域网上的适配器的MAC地址</li>
+<li><strong>类型字段</strong>（2字节）；类型字段允许以太网<strong>复用</strong>多种网络协议。适配器根据该字段选择将数据字段的内容传递给哪个网络层协议。该字段和网络层中数据报中的<strong>协议字段</strong>、运输层报文段中的<strong>端口号</strong>相类似，都是为了<strong>把一层中的某协议与上一层的某协议结合起来</strong></li>
+<li><strong>CRC</strong>（4字节）；用于CRC循环冗余检测</li>
+<li><strong>前同步码</strong>（8字节）；以太网帧以一个8字节的前同步码字段开始，该字段前7个字节用于“唤醒”接受适配器，并将它们的时钟和发送方的<strong>时钟同步</strong></li>
+</ul>
+<p>所有的以太网技术都向网络层提供<strong>无连接服务</strong>：发送帧前没有握手的过程<br />
+以太网技术都向网络层提供<strong>不可靠服务</strong>：当适配器收到一个帧时，不论是否通过CRC校验，该适配器并不回复发送方它是否正确收到，因此发送方根本不知道它发送的帧是否到达了接收方并通过了CRC校验</p>
+<h3 id="以太网技术">以太网技术</h3>
+<p>以太网从10M到10G是如何发展的？</p>
+<ul>
+<li><strong>在100mbs的以太网中</strong>，<em>采用的是保持最短帧长不变</em>，但将一个网段的最大电缆长度减小到100m，帧时间间隔从原来的9.6us改为现在的0.96us。</li>
+<li><strong>吉比特以太网</strong>，仍保持一个网段<strong>最大长度为100m</strong>，但采用“<strong>载波延伸</strong>”技术，使得最小帧仍为64字节（保持兼容性），如果数据帧不超过512字节，则在FCS域后面添加“载波延伸”域。为了避免载波延伸延伸浪费，又使用了“<strong>分组突发</strong>”技术。当很多短帧要发送时，第一个短帧采用“载波延伸”方法进行填充，后面的一些短帧可以一个接一个发送，它们之间只要留必要的帧间最小间隔即可。这样就形成一串分组突发，直到达到1500字节或稍多一些为止。从而提高链路的利用率。</li>
+<li><strong>10吉比特网</strong>仍保持标准规定的以太网最小最大帧长，为了保持兼容。由于数据率很高，吉比特以太网不再使用铜线而只使用光纤作为传输媒体。减小时间间隔。</li>
+</ul>
+<p><strong>以太网帧结构从始至终一直保持不变</strong><br />
+<strong>现代交换机是全双工的</strong>，这使得一台交换机和一个节点能够同时向对方发送帧而没有干扰。也就是说，在<strong>基于交换机的以太局域网</strong>中，<strong>没有碰撞</strong>，因此可以没必要再使用MAC协议</p>
+<h3 id="链路层交换机">链路层交换机</h3>
+<p>交换机的任务是接收<strong>入链路</strong>层帧并将它们转发到<strong>出链路</strong>，并且交换机对于子网中的主机和路由器是<strong>透明的</strong><br />
+交换机转发和过滤</p>
+<ul>
+<li><strong>过滤</strong>：决定一个帧应该转发到某个接口还是应当将其丢弃</li>
+<li><strong>转发</strong>：决定一个帧应该被导向哪个接口，并把该帧移动到那些接口</li>
+</ul>
+<p>交换机的优点</p>
+<ul>
+<li><strong>消除碰撞</strong>，没有因碰撞而浪费的带宽</li>
+<li><strong>异质的链路</strong>，局域网中的不同链路能够以<strong>不同的速率</strong>（如100Mbps和1Gbps）并且能够在<strong>不同的媒体</strong>（如铜线和光纤）上运行</li>
+<li><strong>管理</strong>，易于进行网络管理</li>
+<li><strong>自学习的</strong>，是即插即用设备</li>
+</ul>
+<p>交换机和路由器比较</p>
+<ol type="1">
+<li>都是存储转发的设备</li>
+<li>路由器维持一个路由表，使用路由算法</li>
+<li>交换机维持一个交换表，使用过滤、自学习算法</li>
+<li>交换机是即插即用的，而路由器需要管理人员的配置</li>
+<li>优化路由，路由器有，交换机无</li>
+<li>交换机的活跃拓扑限制为一棵<strong>生成树</strong>。而路由器则没有生成树限制从而可以产生<strong>多条</strong>活跃链路</li>
+<li>路由器提供了更健壮的<strong>流量隔离</strong>方式和对<strong>广播风暴</strong>的控制，而交换机对<strong>广播风暴</strong>不提供任何保护</li>
+</ol>
+<h3 id="虚拟局域网">虚拟局域网</h3>
+<p>传统局域网的3个缺点</p>
+<ol type="1">
+<li>缺乏流量隔离</li>
+<li>交换机的无效使用</li>
+<li>管理用户</li>
+</ol>
+<p>支持<strong>虚拟局域网</strong>（VLAN）的交换机允许一个单一的物理局域网基础设施定义多个虚拟局域网<br />
+在一个基于端口的VLAN中，交换机的接口由网络管理员划分为组，每个组构成一个VLAN，在每个VLAN中的接口形成一个广播域</p>
+<hr />
+<h2 id="链路虚拟化网络作为链路层">链路虚拟化：网络作为链路层</h2>
+<p><strong>多协议标签交换</strong>（MPLS）和<strong>VPN</strong></p>
+<hr />
+<h2 id="问题与思考">问题与思考</h2>
+<p>差分曼切斯特编码比曼切斯特编码的变化要少，因此更适合与传输高速的信息，被广泛用于宽带高速网中。但这两种编码的效率仅可达到50%左右，因为频率增加了一倍但传输的信息量却没有增加  冲突域是如何决定最小帧长的?</p>
+<ul>
+<li>发送的帧的最短长度应当保证在发送完毕之前，必须能够检测到可能最晚来到的冲突信号，故而帧发送时间应该大于2倍的信道传播时延</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/06/13/Network5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/13/Network5/" class="post-title-link" itemprop="url">计算机网络——第五章：网络层(控制平面)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-06-13 20:08:11" itemprop="dateCreated datePublished" datetime="2019-06-13T20:08:11-04:00">2019-06-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-06-17 07:52:02" itemprop="dateModified" datetime="2019-06-17T07:52:02-04:00">2019-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><em>参考书目《计算机网络：自顶向下方法（第七版）》</em></p>
+</blockquote>
+<h2 id="路由选择算法">路由选择算法</h2>
+<p><strong>路由选择算法</strong>的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有<strong>最低开销</strong>的路径<br />
+如下为计算机网络经典图模型 <br />
+路由选择算法的一种分类方式是根据集中还是分散来划分：</p>
+<ul>
+<li><strong>集中式路由选择算法</strong>：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有<strong>全局状态信息</strong>的算法被称作<strong>链路状态算法</strong>（Link State, LS）</li>
+<li><strong>分散式路由选择算法</strong>：路由器以迭代、分布式的方式计算出最低开销路径。这种分散式路由选择算法称为<strong>距离向量算法DV</strong>（Distance Vector, DV）</li>
+</ul>
+<h3 id="ls路由选择算法">LS路由选择算法</h3>
+<p>在LS中，网络拓扑和所有的链路开销都是已知的，实践中这是通过让每个节点向网络中所有其他节点广播链路状态分组来完成的，其中每个链路状态分组包含它所连接的链路的标识和开销<br />
+节点广播的结果是所有节点都具有该网络的统一、完整的视图，于是每个节点都能够像其他节点一样，运行LS算法并计算出相同的最低开销路径集合<br />
+书上介绍了<strong>Dijkstra最短路径算法</strong>，此处不再赘述<br />
+LS算法存在的潜在问题————振荡。这是由于消息传播的时延导致的，它不仅存在于LS算法中，也存在于任何使用拥塞或基于时延的链路测度的算法</p>
+<h3 id="dv路由选择算法">DV路由选择算法</h3>
+<p>距离向量算法是一种<strong>迭代的</strong>、<strong>异步的</strong>和<strong>分布式的</strong>算法</p>
+<ul>
+<li><strong>分布式的</strong>：因为每个节点都要从一个或多个直接相连的邻居接收某些信息，执行计算，然后将其结算结果分发给邻居</li>
+<li><strong>迭代的</strong>：因为此过程一直要持续到邻居之间无更多信息交互为止（有趣的是，此算法是自我终止的）</li>
+<li><strong>异步的</strong>：因为它不要求所有节点相互之间步伐一致地操作</li>
+</ul>
+<p>DV算法的核心思想基于贝尔曼-弗洛伊德方程 <span class="math display">\[d_x(y) = min_v{c(x, v) + d_v(y)}\]</span> 其中<span class="math inline">\(d_x(y)\)</span>表示从节点x到节点y的最低开销路径的开销，<span class="math inline">\(c(x, v)\)</span>表示从节点x到节点v的开销，该算法思想一句话总结就是：<strong>从x到y的距离能否通过途径v节点而变小</strong><br />
+DV算法存在的问题：<strong>路由选择环路</strong>，导致关于链路开销增加的<strong>坏消息传播的很慢</strong>！</p>
+<h3 id="ls与dv的比较">LS与DV的比较</h3>
+<ol type="1">
+<li>报文复杂性<br />
+LS要求每个节点都知道网络中每条链路的开销，这就需要发送 O(|N||E|) 个报文，且任何一条链路的开销改变都需要在全网广播<br />
+DV要求在每次迭代时，在两个直接相连节点间交换报文。当链路开销改变时，DV仅当新的链路开销导致与该链路相连节点的最低开销路径发生改变时，才传播已改变的链路开销</li>
+<li>收敛速度<br />
+LS是一个O(|N|^2)算法<br />
+DV算法收敛较慢，且会遇到路由选择环路和无穷计数问题</li>
+<li>健壮性<br />
+在LS算法下，路由计算在某种程度上是分离的，这提供了一定程度的健壮性<br />
+DV算法中一个不正确的节点计算值会扩散到整个网络</li>
+</ol>
+<p>总之，两个算法没有一个是明显的赢家，它们的确都在因特网中得到了应用</p>
+<hr />
+<h2 id="自治系统内部的路由选择ospf">自治系统内部的路由选择：OSPF</h2>
+<p>为什么要划分<strong>自治系统</strong>（Autonomous Systerm, AS）？</p>
+<ul>
+<li>规模。必须采取一些措施以减少像因特网这种大型网络中的路由计算的复杂度</li>
+<li>管理自治。ISP通常希望按自己的意愿运行路由器，如在自己的网络中运行它所选的路由选择算法，或对外部隐藏其网络的内部组织面貌</li>
+</ul>
+<p>每个AS通常由一组处在相同管理控制下的路由器组成，ISP可在其整个网络使用一个AS或将其拆分为多个AS<br />
+每个AS有一个<strong>唯一的</strong>AS号（ASN），AS号由ICANN组织分配</p>
+<h3 id="开放最短路优先ospfopen-shortest-path-first">开放最短路优先OSPF（Open Shortest Path First）</h3>
+<p>OSPF是一种<strong>链路状态协议</strong>，它使用洪泛链路状态信息和Dijkstra算法。<br />
+OSPF的优点：</p>
+<ul>
+<li>安全<br />
+能够鉴别OSPF路由器之间的交换，仅有受信任的路由器能参与AS内的OSPF协议，因此可防止恶意入侵者将不正确的信息注入路由表内</li>
+<li>多条相同开销的路径 当到达某目的地的多条路径具有相同的开销时，OSPF允许使用多条路径（无须仅选择单一的路径来承载所有的流量）</li>
+<li>对单播与多播路由选择的综合支持 多播OSPF（MOSPF）[RFC 1584]提供对OSPF的简单拓展，以便提供多播路由选择</li>
+<li>支持在单个AS中的<strong>层次结构</strong><br />
+一个OSPF自治系统能够层次化地配置多个区域，在每个区域一台或多台区域边界路由器负责为流向该区域以外的分组提供路由选择。最后，在AS内只有一个OSPF区域配置为主干区域，其作用是为该AS中的其他区域之间的流量提供路由选择。<br />
+整个过程为分组先到区域边界路由器，经过主干区域到达目的区域的边界路由器，最后到达目的地</li>
+</ul>
+<hr />
+<h2 id="isp之间的路由选择bgp">ISP之间的路由选择：BGP</h2>
+
+<p>在因特网中，所有的AS运行相同的AS间路由选择协议，称为<strong>边界网关协议</strong>（Border Gateway Protocol, BGP）<br />
+在BGP中，分组并不是路由到一个特定的目的地址，相反是路由到CIDR化的前缀，其中每个前缀表示一个子网或子网的集合（如138.16.68/22）<br />
+<strong>在BGP中，每对路由器通过使用179端口的半永久TCP连接交换路由选择信息</strong><br />
+每条直接连接以及所有通过该链接发送的BGP报文称为<strong>BGP连接</strong>。此外，跨越两个AS的BGP连接称为<strong>外部BGP</strong>（eBGP）连接，在相同AS中的两台路由器之间的BGP会话称为<strong>内部BGP</strong>（iBGP）连接<br />
 <br />
-<br />
-</p></li>
-<li><p>创建<strong>角色</strong>、分配权限、回收权限、验证</p>
+在BGP前缀中的<strong>BGP</strong>属性中，<strong>AS-PATH</strong>和<strong>NEXT-HOP</strong>属性比较重要</p>
 <ul>
-<li>创建角色</li>
+<li>AS-PATH属性包含了通告已经通过的AS的列表（使用ASN标识，如AS1 AS2 ...），BGP还使用该属性来检测和防止通告环路（若路由器在路径列表看到自己的AS，它将拒绝该通告）</li>
+<li>NEXT-HOP是AS-PATH起始的路由器接口的IP地址（即该路径的源的IP地址）</li>
 </ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE ROLE visitor;</span><br></pre></td></tr></table></figure></p>
-<p></p>
-<ul>
-<li>分配权限</li>
-</ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT SELECT ON test.* TO visitor;</span><br></pre></td></tr></table></figure></p>
-<p></p>
-<ul>
-<li>回收权限</li>
-</ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REVOKE SELECT ON test.* FROM visitor;</span><br></pre></td></tr></table></figure></p>
-<p></p>
-<ul>
-<li>验证</li>
-</ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*root账户下，分配visitor角色给wsy*/</span><br><span class="line">GRANT visitor TO wsy;</span><br><span class="line"></span><br><span class="line">/*使用用户wsy登录Mysql之后*/</span><br><span class="line">USE test;</span><br></pre></td></tr></table></figure></p>
-<p></p></li>
-</ol>
+<p>BGP还常被用于实现<strong>IP任播</strong>（anycast）服务，该服务被DNS系统广泛用于将DNS请求指向最近的根DNS服务器</p>
 <hr />
-<h3 id="强制存取控制方法">强制存取控制方法</h3>
-<p>自助存取控制可能不安全的根本原因在于：<strong>仅仅通过对数据的存取控制权限来进行安全控制，而数据本身并无安全性标记</strong><br />
-在强制存取控制中，全部实体被分为<strong>主体</strong>和<strong>客体</strong>两大类。<strong>主体</strong>是系统中的活动实体，<strong>客体</strong>是系统中的被动实体，受主体操控<br />
-数据库管理系统为每个实例指派一个<strong>敏感度标记</strong>，敏感度标记可被分为：TS &gt;= S &gt;= C &gt;= P<br />
-主体的敏感度标记称为<strong>许可证级别</strong>，客体的敏感度标记称为<strong>密级</strong><br />
-判定规则：</p>
+<h2 id="sdn软件定义网络software-defined-networking">SDN：软件定义网络（Software-Defined Networking）</h2>
+<p>SDN体系结构的4个关键特征：</p>
 <ul>
-<li>仅当主体的许可证级别大于或等于客体的密级是，该主体才能<strong>读取</strong>相应的客体</li>
-<li>仅当主体的许可证级别小于或等于客体的密级是，该主体才能<strong>写</strong>相应的客体</li>
+<li>基于流的转发<br />
+SDN控制的交换机的分组转发工作，能够基于运输层、网络层或链路层首部中任意数量的首部字段值进行（传统方法中的IP数据报的转发仅依据数据报的目的IP地址进行）</li>
+<li>数据平面与控制平面分离<br />
+数据平面由网络交换机组成；控制平面由服务器以及决定和管理交换机流表的软件组成</li>
+<li>网路控制功能：位于数据平面交换机外部<br />
+控制平面自身由两个组件组成：SDN控制器（或网络操作系统）以及若干网络控制应用程序</li>
+<li>可编程的网络<br />
+通过运行在控制平面中的网络控制应用程序，该网络是可编程的</li>
 </ul>
-<hr />
-<h2 id="视图">视图</h2>
-<p>通过视图机制把要保密的数据对无权存取的用户隐藏起来</p>
-<hr />
-<h2 id="审计">审计</h2>
-<p>审计功能把用户对数据库的所有操作自动记录下来放入审计日志中。管理人员可利用审计日志监控数据库的各种行为，重现操作过程，找出非法存取数据的人、时间和内容等</p>
-<p><strong><em>------后续语句实现基于MySQL8.0------</em></strong></p>
-<ol type="1">
-<li><p>开启审计功能</p>
-<ul>
-<li>设置变量</li>
-</ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/*打开审计开关*/</span><br><span class="line">set global general_log = on;</span><br><span class="line">set global general_log_file = &#x27;/var/lib/mysql/operation.log&#x27;;</span><br><span class="line">set global log_timestamps = SYSTEM;</span><br><span class="line"></span><br><span class="line">/*查看审计状态*/</span><br><span class="line">show global variables like &#x27;log_timestamps&#x27;;</span><br><span class="line">show global variables like &#x27;%general%&#x27;;</span><br></pre></td></tr></table></figure></p>
-<p></p></li>
-<li><p>设置审计权限</p>
-<ul>
-<li>创建用于存放连接日志的数据库和表</li>
-</ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">create database auditlog;</span><br><span class="line">create table auditlog.t_audit(</span><br><span class="line">id int not null auto_increment,</span><br><span class="line">thread_id int not null,</span><br><span class="line">login_time timestamp,</span><br><span class="line">localname varchar(50) default null,</span><br><span class="line">matchname varchar(50) default null,</span><br><span class="line">primary key (id)</span><br><span class="line">)ENGINE=InnoDB default charset=utf8 comment &#x27;审计用户登录信息&#x27;;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>授权某个用户拥有对审计表的select和insert权限</li>
-</ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*给出对所有用户授权的语句（拼结授权语句）*/</span><br><span class="line">SELECT concat(&quot;GRANT SELECT,INSERT ON auditlog.t_audit to &#x27;&quot;,user,&quot;&#x27;@&#x27;&quot;,host,&quot;&#x27;;&quot;) FROM mysql.user;</span><br><span class="line"></span><br><span class="line">/*授权用户wsy*/</span><br><span class="line">GRANT SELECT,INSERT ON auditlog.* to wsy@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure></p>
-<p></p>
-<ul>
-<li>设置init_connect参数</li>
-</ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET GLOBAL init_connect=&#x27;INSERT INTO auditlog.t_audit(id,thread_id,login_time,localname,matchname) VALUES(null,connection_id(),now(),user(),current_user());&#x27;;</span><br></pre></td></tr></table></figure></p>
-<p><br />
-</p></li>
-<li><p>普通用户登录，执行操作</p>
-<ul>
-<li>查看登录记录</li>
-</ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM t_audit WHERE matchname=&#x27;wsy@%&#x27;;</span><br></pre></td></tr></table></figure></p>
-<p></p>
-<ul>
-<li>执行插入操作</li>
-</ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO P VALUES (&#x27;P8&#x27;, &#x27;丝轴&#x27;, &#x27;银&#x27;, 12);</span><br></pre></td></tr></table></figure></p>
-<p>之后查看日志记录<code>cat /var/lib/mysql/operation.log</code> <br />
-可以看到insert操作已经被记录下来</p>
-<ul>
-<li>查照操作者</li>
-</ul>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*使用root用户*/</span><br><span class="line">SELECT * FROM t_audit；</span><br></pre></td></tr></table></figure></p>
-<p><br />
-可以看到用户wsy在2019-05-07 19:10:56登录，并在2019-05-07 19:11:11进行了insert操作。</p></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/04/24/Database3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/24/Database3/" class="post-title-link" itemprop="url">数据库原理——第三章：关系数据库标准语言SQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-24 19:42:45" itemprop="dateCreated datePublished" datetime="2019-04-24T19:42:45-04:00">2019-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-10 10:08:04" itemprop="dateModified" datetime="2020-03-10T10:08:04-04:00">2020-03-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><em>参考书目《数据库系统概论（第5版）》</em></p>
-</blockquote>
-<h2 id="sql概述">SQL概述</h2>
-<p><strong>SQL</strong> 结构化查询语言（Structured Query Language) 的主要特点：</p>
-<ul>
-<li>综合统一</li>
-<li>高度非过程化</li>
-<li>面向集合的操作方式</li>
-<li>以同一种语法结构提供多种使用方式</li>
-<li>语言简洁，易学易用</li>
-</ul>
-<p>SQL的动词</p>
-<table>
-<thead>
-<tr class="header">
-<th>SQL功能</th>
-<th>动词</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>数据查询</td>
-<td>SELECT</td>
-</tr>
-<tr class="even">
-<td>数据定义</td>
-<td>CREATE，DROP，ALTER</td>
-</tr>
-<tr class="odd">
-<td>数据操作</td>
-<td>INSERT，UPDATE，DELETE</td>
-</tr>
-<tr class="even">
-<td>数据控制</td>
-<td>GRANT，REVOKE</td>
-</tr>
-</tbody>
-</table>
-<table style="width:6%;">
-<colgroup>
-<col style="width: 5%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>(后续语句实现基于MySQL)</td>
-</tr>
-<tr class="even">
-<td>## 数据库的定义与删除</td>
-</tr>
-<tr class="odd">
-<td>* 1.定义数据库</td>
-</tr>
-<tr class="even">
-<td><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure></td>
-</tr>
-<tr class="odd">
-<td>* 2.删除数据库</td>
-</tr>
-<tr class="even">
-<td><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE [IF EXIST] &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure></td>
-</tr>
-</tbody>
-</table>
-<h2 id="基本表的定义删除与修改">基本表的定义、删除与修改</h2>
-<ul>
-<li><p>1.定义基本表</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;表名&gt; (</span><br><span class="line">&lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">&lt;属性名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">...</span><br><span class="line">[表级完整性约束],</span><br><span class="line">[表级完整性约束],</span><br><span class="line">...</span><br><span class="line">)[CHARSET=utf8];</span><br></pre></td></tr></table></figure></p></li>
-<li><p>2.数据类型</p></li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th>数据类型</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>CHAR(n)</td>
-<td>长度为n的定长字符串</td>
-</tr>
-<tr class="even">
-<td>VARCHAR(n)</td>
-<td>最大长度为n的变长字符串</td>
-</tr>
-<tr class="odd">
-<td>TINYBLOB/BLOB/LONGBLOB</td>
-<td>不同大小的二进制形式的文本数据</td>
-</tr>
-<tr class="even">
-<td>TINYTEXT/TEXT/LONGTEXT</td>
-<td>不同大小的文本数据</td>
-</tr>
-<tr class="odd">
-<td>TINTINT/SMALLINT/BIGINT</td>
-<td>不同字节大小的整数</td>
-</tr>
-<tr class="even">
-<td>FLOAT/DOUBLE</td>
-<td>单/双精度浮点数</td>
-</tr>
-<tr class="odd">
-<td>DATE</td>
-<td>日期值（YYYY-MM-DD）</td>
-</tr>
-<tr class="even">
-<td>TIME</td>
-<td>时间值（HH:MM:SS）</td>
-</tr>
-<tr class="odd">
-<td>YEAR</td>
-<td>年份值（YYYY）</td>
-</tr>
-<tr class="even">
-<td>DATETIME</td>
-<td>混合日期和时间值</td>
-</tr>
-<tr class="odd">
-<td>TIMESTAMP</td>
-<td>混合日期和时间值，时间戳</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p>3.修改基本表</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#增加列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD &lt;新属性名&gt; &lt;数据类型&gt; [列级完整性约束];</span><br><span class="line"></span><br><span class="line">#删除列（属性）</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP &lt;选择的属性名&gt;;</span><br><span class="line"></span><br><span class="line">#添加表级完整性约束条件</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD [列级完整性约束];</span><br><span class="line"></span><br><span class="line">#删除键约束</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP PRIMARY KEY;</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP FOREIGN KEY &lt;键名&gt;;</span><br><span class="line">/*可以通过使用SHOW CREATE TABLE &lt;表名&gt;;来查询外键的键名*/</span><br><span class="line"></span><br><span class="line">#修改属性的数据类型</span><br><span class="line">ALTER TABLE &lt;表名&gt; MODIFY &lt;选择的属性名&gt; &lt;新数据类型&gt;;</span><br></pre></td></tr></table></figure></p></li>
-<li><p>4.删除基本表</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE [IF EXIST] &lt;表名&gt;;</span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<hr />
-<h2 id="索引的建立与删除">索引的建立与删除</h2>
-<ul>
-<li><p>1.建立索引</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*若属性为字符串等类型，可以加上length表示根据前多个字符作为索引，从而节省建立索引的开销*/</span><br><span class="line">CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX &lt;索引名&gt; ON &lt;表名&gt;(属性名[(length)],...);</span><br></pre></td></tr></table></figure></p></li>
-<li><p>2.删除索引</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;表名&gt; DROP INDEX &lt;索引名&gt;;</span><br><span class="line">DROP INDEX &lt;索引名&gt; ON &lt;表名&gt;;</span><br></pre></td></tr></table></figure></p></li>
-<li><p>3.查看索引</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW INDEX FROM [&lt;数据库名&gt;.]&lt;表名&gt;;</span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<hr />
-<h2 id="数据字典">数据字典</h2>
-<ul>
-<li><strong>数据字典</strong>是关系数据库系统内部的一组<strong>系统表</strong>，它记录了数据库中所有的定义信息，包括关系模式定义、视图定义、索引定义、完整性约束定义、各类用户对数据库的操作权限、统计信息等。</li>
-<li>在进行<em>查询优化</em>和<em>查询处理</em>时，数据字典中的信息是其重要的依据。</li>
-</ul>
-<hr />
-<h2 id="数据的查询">数据的查询</h2>
-<h3 id="单表查询">单表查询</h3>
-<ul>
-<li><p>1.选择表中的的若干列</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT [ALL|DISTINCT] &lt;目标属性表达式&gt;,... FROM &lt;表名或视图名&gt;;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li><code>SECLECT</code>默认使用<code>ALL</code>，表示将结果全部显示。但在有些情况下，投影出来的结果会出现重复行，此时可以用<code>DISTINCT</code>去掉重复行</li>
-<li><目标属性表达式>可以简单的写为<em>目标属性名</em></li>
-<li>如果属性列的显示顺序与在基本表中的顺序相同，也可简单的将<目标属性表达式>指定为 *</li>
-<li><目标属性表达式>不仅可以是表中的属性列，也可以是<strong>算数表达式</strong>、<strong>字符串常量</strong>、<strong>函数</strong>等。</li>
-<li>用户可以通过指定别名来改变查询结果的列标题</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#查询指定列或全部列</span><br><span class="line">SELECT Sname,Sno FROM Student;</span><br><span class="line">SELECT * FROM Student;</span><br><span class="line"></span><br><span class="line">#使用算术表达式、字符串常量和函数</span><br><span class="line">SELECT Sname,‘Year of Birth’,2019-Sage,LOWER(Sdept) FROM Student;</span><br><span class="line"></span><br><span class="line">#使用别名</span><br><span class="line">SELECT Sname NAME,‘Year of Birth’ BIRTH,2019-Sage BIRTHDAY,</span><br><span class="line">LOWER(Sdept) DEPARTMENT FROM Student;</span><br></pre></td></tr></table></figure></li>
-<li><p>2.查询满足条件的元组</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;目标属性表达式&gt;,... FROM &lt;表名或视图名&gt; WHERE &lt;条件表达式&gt;;</span><br></pre></td></tr></table></figure></p>
-<p>查询满足指定条件的元组可以通过<code>WHERE</code>子句实现。例子如下</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">(1)比较大小</span><br><span class="line">SELECT Sname FROM Student WHERE Sdept=&#x27;CS&#x27;;</span><br><span class="line">SELECT DISTINCT Sno FROM SC WHERE Grade&lt;60;</span><br><span class="line"></span><br><span class="line">(2)确定范围</span><br><span class="line">SELECT Sname,Sage FROM Student WHERE Sage [NOT] BETWEEN 20 AND 23;</span><br><span class="line"></span><br><span class="line">(3)确定集合(谓词IN用来查找属性值属于指定集合的元组)</span><br><span class="line">SELECT Sname FROM Student WHERE Sdept IN (&#x27;CS&#x27;,&#x27;MA&#x27;,&#x27;EE&#x27;);</span><br><span class="line"></span><br><span class="line">(4)字符匹配</span><br><span class="line">SELECT * FROM Student WHERE Sname LIKE &#x27;刘%&#x27;;</span><br><span class="line"></span><br><span class="line">(5)涉及空值的查询</span><br><span class="line">SELECT Sno,Cno FROM SC WHERE Grade IS NULL; /*分数值为空的对应属性*/</span><br><span class="line"></span><br><span class="line">(6)多重条件查询</span><br><span class="line">SELECT Sname FROM Student WHERE Sdept=&#x27;CS&#x27; AND Sage&lt;20;</span><br></pre></td></tr></table></figure></p>
-<p>谓词LIKE用来进行字符串的匹配,一般格式如下</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[NOT] LIKE &#x27;&lt;匹配串&gt;&#x27; [ESCAPE &#x27;\&#x27;]</span><br></pre></td></tr></table></figure></p>
-<p><code>ESCAPE '\'</code> 表示''为换码符，用于转义 % 和 _<br />
-<匹配串>可以是一个完整的字符串，也可以含有通配符 % 和 _ ,其中：</p>
-<ul>
-<li>%(百分号)代表任意长度的字符串。如a%b表示以a开头以b结尾的任意长度的字符串</li>
-<li>_(下划线)代表任意单个字符，类似于占位符。如a_b表示以a开头以b结尾长度为3的字符串</li>
-</ul></li>
-</ul>
-<p><em>注：<code>WHERE</code>子句常用的查询条件表如下</em></p>
-<table>
-<thead>
-<tr class="header">
-<th>查询条件</th>
-<th>谓词</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>比较</td>
-<td>=,&gt;,&lt;,&gt;=,&lt;=,!=,&lt;&gt;,!&gt;,!&lt; ; NOT+上述比较运算符</td>
-</tr>
-<tr class="even">
-<td>确定范围</td>
-<td>BETWEEN AND, NOT BETWEEN AND</td>
-</tr>
-<tr class="odd">
-<td>确定集合</td>
-<td>IN, NOT IN</td>
-</tr>
-<tr class="even">
-<td>字符匹配</td>
-<td>LIKE, NOT LIKE</td>
-</tr>
-<tr class="odd">
-<td>空值</td>
-<td>IS NULL, IS NOT NULL</td>
-</tr>
-<tr class="even">
-<td>多重条件(逻辑运算)</td>
-<td>AND, OR, NOT</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p>3.<code>ORDER BY</code>子句</p>
-<p>可以用<code>ORDER BY</code>子句对查询结果按照一个或多个属性的升序（<code>ASC</code>）或降序（<code>DESC</code>）排列，默认值为升序<br />
-用法为<code>ORDER BY &lt;属性名&gt; ASC|DESC</code></p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#例</span><br><span class="line">SELECT Sno,Grade FROM SC WHERE Cno=&#x27;3&#x27; ORDER BY Grade DESC;</span><br></pre></td></tr></table></figure></p></li>
-<li><p>4.聚集函数</p>
-<p>聚集函数遇到空值时，除了COUNT(*)外，都跳过空值而只处理非空值<br />
-<code>WHERE</code>子句中是不能用聚集函数作为条件表达式的。<strong>聚集函数只能用于<code>SELECT子句</code>和<code>GROUP BY</code>中的<code>HAVING</code>子句</strong></p></li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th>函数名</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>COUNT(*)</td>
-<td>统计元组个数</td>
-</tr>
-<tr class="even">
-<td>COUNT([ALL/DISTINCT] <列名>)</td>
-<td>统计一列中值的个数</td>
-</tr>
-<tr class="odd">
-<td>SUM([ALL/DISTINCT] <列名>)</td>
-<td>计算一列值的总和(此列必须是数值型)</td>
-</tr>
-<tr class="even">
-<td>AVG([ALL/DISTINCT] <列名>)</td>
-<td>计算一列值的平均值(此列必须是数值型)</td>
-</tr>
-<tr class="odd">
-<td>MAX([ALL/DISTINCT] <列名>)</td>
-<td>求一列值中的最大值</td>
-</tr>
-<tr class="even">
-<td>MIN([ALL/DISTINCT] <列名>)</td>
-<td>求一列值中的最小值</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p>5.<code>GROUP BY</code>子句</p>
-<p><code>GROUP BY</code>子句将查询结果按某一列或多列的值分组，值相等的为一组。<br />
-对查询结果分组的目的是为了细化聚集函数的作用对象。分组后聚集函数将作用于每组，即每一组都有一个函数值。<br />
-<strong><code>WHERE</code>子句与<code>HAVING</code>短语的区别在于作用对象不同。<code>WHERE</code>子句作用于<em>基本表或视图</em>，从中选择满足条件的<em>元组</em>；<code>HAVING</code>短语作用于<em>组</em>，从中选择满足条件的<em>组</em></strong></p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#例</span><br><span class="line">SELECT Cno, COUNT(Sno) FROM SC GROUP BY Cno;</span><br><span class="line">SELECT Sno FROM SC GROUP BY Sno HAVING COUNT(*) &gt; 3;</span><br><span class="line">SELECT Sno, AVG(Grade) FROM SC GROUP BY Sno HAVING AVG(Grade) &gt;= 90;</span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<h3 id="连接查询">连接查询</h3>
-<ul>
-<li><p>1.等值与非等值连接查询</p>
-<p>当连接运算符为=时，称为<em>等值连接</em>。使用其他运算符称为<em>非等值连接</em>。<br />
-注意：若选择的属性列在两个表中是唯一的，则可以省去表名前缀；若不唯一，则引用时必须加上表名前缀。</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#等值连接</span><br><span class="line">SELECT Student.*, SC.* FROM Student, SC WHERE Student.Sno=SC.Sno;</span><br><span class="line"></span><br><span class="line">#非等值连接</span><br><span class="line">SELECT Student.Sno, Sname FROM Student, SC WHERE</span><br><span class="line">Student.Sno=SC.Sno AND SC.Cno=&#x27;2&#x27; AND SC.Grade&gt;90;</span><br></pre></td></tr></table></figure></p></li>
-<li><p>2.自身连接</p>
-<p>连接操作不仅可以在两个表之间进行，也可以是一个表与其自身进行连接，称为表的<strong>自身连接</strong>。</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#例</span><br><span class="line">SELECT FIRST.Cno, SECOND.Cpno FROM Course FIRST, Course SECOND WHERE FIRST.Cpno=SECOND.Cno;</span><br><span class="line">/*为了区分自身的两个表而给这两个表分别取了别名FIRST和SECOND*/</span><br></pre></td></tr></table></figure></p></li>
-<li><p>3.外连接</p>
-<p>两个表进行连接时，若其中一个表没有相关的元组信息，则按普通的两表连接则会省去某些元组，若想保留则可以使用外连接。</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#例</span><br><span class="line">SELECT Student.Sno, Sname, Ssex, Sage, Sdept, Cno, Grade FROM Student LEFT OUTER JOIN SC ON (Student.Sno=SC.Sno);</span><br></pre></td></tr></table></figure></p></li>
-<li><p>4.多表连接</p>
-<p>还可以进行两个表以上的连接，称为多表连接。</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#例</span><br><span class="line">SELECT Student.Sno, Sname, Cname, Grade FROM Student, SC, Course WHERE Student.Sno=SC.Sno AND SC.Cno=Course.Cno;</span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<h3 id="嵌套查询">嵌套查询</h3>
-<p>一个<code>SELECT-FROM-WHERE</code>语句称为一个<code>查询块</code>。将一个查询块嵌套在另一个查询块的WHERE子句或HAVING短语的条件中的查询称为<strong>嵌套查询</strong><br />
-子查询的<code>SELECT</code>语句不能使用<code>ORDER BY</code>子句，<code>ORDER BY子</code>句只能对最终的查询结果排序<br />
-子查询的查询条件不依赖于父查询，称为<strong>不相关子查询</strong>，否则称为<strong>相关子查询</strong></p>
-<ul>
-<li><p>1.带有IN谓词的子查询</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#查询与Sam在同一个系的学生</span><br><span class="line">SELECT Sno, Sname, Sdept FROM Student WHERE Sdept IN (</span><br><span class="line">    SELECT Sdept FROM Student WHERE Sname=&#x27;Sam&#x27;</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-<p>有些查询可以用连接查询替代，有些是不能替代的</p></li>
-<li><p>2.带有比较运算符的子查询</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#查询每个学生超过他自己选修课程平均成绩的课程号（此例为一个相关子查询）</span><br><span class="line">SELECT Sno, Cno FROM SC x WHERE Grade &gt;= (</span><br><span class="line">    SELECT AVG(Grade) FROM SC y WHERE y.Sno=x.Sno</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p></li>
-<li><p>3.带有ANY(SOME)或ALL谓词的子查询</p>
-<p>子查询返回多值时需要使用ANY和ALL谓词修饰。其中：ANY(表示某个)，ALL(表示所有)</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#查询非计算机系中比计算机科学系&#x27;某个&#x27;学生年龄小的学生姓名和年龄</span><br><span class="line">SELECT Sname, Sage FROM Student WHERE Sage &lt; ANY (</span><br><span class="line">    SELECT Sage FROM Student WHERE Sdept=&#x27;CS&#x27;</span><br><span class="line">) AND Sdept &lt;&gt; &#x27;CS&#x27;;</span><br><span class="line"></span><br><span class="line">#查询非计算机系中比计算机科学系&#x27;所有&#x27;学生年龄小的学生姓名和年龄</span><br><span class="line">SELECT Sname, Sage FROM Student WHERE Sage &lt; ALL (</span><br><span class="line">    SELECT Sage FROM Student WHERE Sdept=&#x27;CS&#x27;</span><br><span class="line">) AND Sdept &lt;&gt; &#x27;CS&#x27;;</span><br></pre></td></tr></table></figure></p></li>
-<li><p>4.带有EXISTS谓词的子查询</p>
-<p>带有EXISTS谓词的子查询不返回任何数据，只产生逻辑结果真值“true”或逻辑假值“false”</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#查询所有选修了1号课程的学生姓名</span><br><span class="line">SELECT Sname FROM Student WHERE EXISTS (</span><br><span class="line">    SELECT * FROM SC WHERE</span><br><span class="line">        Sno=Student.Sno AND Cno=&#x27;1&#x27;);</span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<h3 id="集合查询">集合查询</h3>
-<ul>
-<li><p>SQL集合操作包括：并操作<code>UNION</code>、交操作<code>INTERSECT</code>、差操作<code>EXCEPT</code><br />
-</p></li>
-<li><p>MySql并没有提供对交和差操作的支持，这里就不再举例</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#查询计算机科学系的学生及年龄不大于19岁的学生</span><br><span class="line">SELECT * FROM Student WHERE Sdept=&#x27;CS&#x27;</span><br><span class="line">    UNION</span><br><span class="line">        SELECT * FROM Student WHERE Sage&lt;=19;</span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<h3 id="基于派生表的查询">基于派生表的查询</h3>
-<ul>
-<li><p>子查询不仅可以出现在WHERE子句中，也可以出现在FROM子句中，这时子查询生成的<strong>临时派生表</strong>成为主查询的查询对象</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#例</span><br><span class="line">SELECT Sname FROM Student,</span><br><span class="line">    (SELECT Sno FROM SC WHERE Cno=&#x27;1&#x27;) AS SC1</span><br><span class="line">        WHERE Student.Sno=SC1.Sno;</span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<h3 id="select语句的一般格式">SELECT语句的一般格式</h3>
-<ul>
-<li><p>一般格式</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT [ALL|DISTINCT] &lt;目标属性表达式&gt; [别名],...</span><br><span class="line">FROM &lt;表名或视图名&gt;,... | (&lt;子查询&gt;) [AS] &lt;别名&gt;</span><br><span class="line">[WHERE &lt;&gt;]</span><br><span class="line">[GROUP BY &lt;属性名1&gt; [HAVING &lt;条件表达式&gt;]]</span><br><span class="line">[ORDER BY &lt;属性名2&gt; [ASC|DESC]];</span><br></pre></td></tr></table></figure></p></li>
-<li><p><子查询>由<code>SELECT</code>语句构成</p></li>
-<li><p>目标属性表达式的可选格式：</p>
-<ol type="1">
-<li>*</li>
-<li><表名>.*</li>
-<li>COUNT([DISTINCT] *)</li>
-<li>[<表名>.]<属性名表达式>,... 其中，属性名表达式可以是由属性名、作用于属性的聚集函数和常量的任意算数运算（+，-，*，/）组成的运算公式</li>
-</ol></li>
-<li><p>聚集函数的一般格式 COUNT|SUM|AVG|MAX|MIN( [DISTINCT|ALL] <属性名> )</p></li>
-<li><p>WHERE子句的条件表达式的可选格式</p>
-<ol type="1">
-<li><属性名> <span class="math inline">\(\theta\)</span> <属性名>|<常量>|[ALL|ANY](子查询)</li>
-<li><属性名> [NOT] BETWEEN <属性名>|<常量>|(<子查询>) AND <属性名>|<常量>|(<子查询>)</li>
-<li><属性名> [NOT] IN (<值1>, <值2>, ...)|(<子查询>)</li>
-<li><属性名> NOT LIKE 匹配串</li>
-<li><属性名> IS [NOT] NULL</li>
-<li>[NOT] EXISTS(<子查询>)</li>
-<li><条件表达式> AND|OR <条件表达式> AND|OR ...</li>
-</ol></li>
-</ul>
-<hr />
-<h2 id="数据的更新">数据的更新</h2>
-<ul>
-<li><p>1.插入数据</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 插入元组</span><br><span class="line">INSERT INTO &lt;表名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">VALUES (&lt;对应属性的常量&gt;,...);</span><br><span class="line"></span><br><span class="line"># 插入子查询结果（建立一个新表）</span><br><span class="line">INSERT INTO &lt;新的表名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">&lt;子查询&gt;;</span><br><span class="line"># 例：对每一个系，求学生的平均年龄，并把结果存入新数据表</span><br><span class="line">INSERT INTO Dept_age(Sdept, Avg_age) (</span><br><span class="line">    SELECT Sdept,AVG(Sage)</span><br><span class="line">    FROM Student</span><br><span class="line">    GTOUP BY Sdept</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p></li>
-<li><p>2.修改数据</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">UPDATE &lt;表名&gt;</span><br><span class="line">SET &lt;列名&gt;=&lt;表达式&gt;,...</span><br><span class="line">[WHERE &lt;条件&gt;|&lt;子查询&gt;];</span><br><span class="line"></span><br><span class="line"># 例：将计算机科学系全体学生的成绩置为零</span><br><span class="line">UPDATE SC</span><br><span class="line">SET Grade=0</span><br><span class="line">WHERE Sno IN (</span><br><span class="line">    SELECT Sno</span><br><span class="line">    FROM Student</span><br><span class="line">    WHERE Sdept=&#x27;CS&#x27;</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p></li>
-<li><p>3.删除数据</p>
-<p><code>DELETE</code>语句删除的是表中的数据，而不是关于表的定义，表的定义仍在字典中。</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DELETE</span><br><span class="line">FROM &lt;表名&gt;</span><br><span class="line">[WHERE &lt;条件&gt;|&lt;子查询&gt;];</span><br><span class="line"></span><br><span class="line"># 例：删除计算机科学系全体学生的选课记录（SC表）</span><br><span class="line">DELETE</span><br><span class="line">FROM SC</span><br><span class="line">WHERE Sno IN (</span><br><span class="line">    SELECT Sno</span><br><span class="line">    FROM Student</span><br><span class="line">    WHERE Sdept=&#x27;CS&#x27;</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<hr />
-<h2 id="视图">视图</h2>
-<p>视图是从一个或几个基本表（或视图）导出的表。它与基本表不同，是一个虚表</p>
-<ul>
-<li><p>1.建立视图</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW &lt;视图名&gt;[(&lt;属性名&gt;,...)]</span><br><span class="line">AS &lt;子查询&gt;</span><br><span class="line">[WITH [CASCADED|LOCAL] CHECK OPTION];</span><br></pre></td></tr></table></figure></p>
-<p><子查询>可以是任意的<code>SELECT</code>语句。<br />
-<code>WITH [CASCADED|LOCAL] CHECK OPTION</code>表示对视图进行<code>UPDATE</code>、<code>INSERT</code>和<code>DELETE</code>操作时要保证更新、插入或删除的行满足视图定义中的谓词条件（即子查询中的条件表达式）。<br />
-组成视图的属性列名或者<em>全部省略</em>或者<em>全部指定</em>，没有第三种选择。但在下列三种情况下必须明确指明：<br />
-1. 某个目标列不是单纯的属性名，而是聚集函数或列表达式<br />
-2. 多表连接时选出了几个同名列作为视图的字段<br />
-3. 需要在视图中为某个列启用新的更合适的名字<br />
-关系数据库管理系统执行<code>CREATE VIEW</code>语句的结果，只是<strong>把视图的定义存入数据字典</strong>，并不执行其中的<code>SELECT</code>语句。<br />
-定义：若一个视图是从单个基本表导出的，并且只是去掉了基本表的某些行和某些列，但是保留了主码，则称这类视图为<strong>行列子视图</strong>。</p></li>
-<li><p>2.删除视图</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP VIEW &lt;视图名&gt; [CASCADE];</span><br></pre></td></tr></table></figure></p>
-<p>视图删除后视图的定义将从数据字典中删除。如果该视图上还导出了其他视图，则使用<code>CASCADE</code>级联删除语句一起删除。</p></li>
-<li><p>3.查询视图</p>
-<p>从数据字典中取出视图的定义，将其转换成等价的对基本表的操作后再执行，这一转换过程称为<strong>视图消解</strong>。</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#使用定义的视图IS_Student进行查询年龄小于20岁的学生</span><br><span class="line">SELECT Sno, Sage FROM IS_Student WHERE Sage&lt;20;</span><br></pre></td></tr></table></figure></p></li>
-<li><p>4.更新视图</p>
-<p>对试图的更新最终要转换为对基本表的更新，但不是所有的视图都是可更新的，一般的，<strong>行列子集视图</strong>是可更新的。</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#例：将信息系学生视图IS_Student中学号为“201215125”的学生姓名改为“lili”</span><br><span class="line">UPDATE IS_Student SET Sname=&#x27;lili&#x27; WHERE Sno=&#x27;201215125&#x27;;</span><br></pre></td></tr></table></figure></p></li>
-<li><p>5.视图的作用</p>
-<ol type="1">
-<li>视图能够简化用户的操作</li>
-<li>视图使用户能以多种角度看待同一数据</li>
-<li>视图对重构数据库提供了一定程度的逻辑独立性</li>
-<li>视图能够对机密数据提供安全保护</li>
-<li>适当利用视图可以更清晰地表达查询</li>
-</ol></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/04/22/Database2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/22/Database2/" class="post-title-link" itemprop="url">数据库原理——第二章：关系数据库</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-22 19:40:06" itemprop="dateCreated datePublished" datetime="2019-04-22T19:40:06-04:00">2019-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-06-18 09:19:32" itemprop="dateModified" datetime="2019-06-18T09:19:32-04:00">2019-06-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><em>参考书目《数据库系统概论（第5版）》</em></p>
-</blockquote>
-<h2 id="关系数据结构及形式化定义">关系数据结构及形式化定义</h2>
-<p><strong>关系数据库是支持关系模型的数据库系统</strong> 关系模型是由三部分组成：<strong>关系数据结构</strong>、<strong>关系操作集合</strong>、<strong>关系完整性约束</strong></p>
-<h3 id="关系">关系</h3>
-<ul>
-<li><strong>域</strong>是一组具有相同数据类型的值的集合。属性的取值范围来自某个域<br />
-</li>
-<li>一个域允许的不同取值个数称为这个域的<strong>基数</strong><br />
-</li>
-<li>某一<em>属性组</em>的值能唯一的标识一个元组，而<strong>其子集不能</strong>，则称该属性组为<strong>候选码</strong></li>
-<li>若一个关系中有多个候选码，则选定其中一个为<strong>主码</strong><br />
-</li>
-<li>关系模式的所有属性是这个关系模式的候选码，称为<strong>全码</strong><br />
-元组：表中的一行<br />
-码：表中的某个属性组，它可以唯一确定一个元组</li>
-</ul>
-<h3 id="关系模式">关系模式</h3>
-<p><strong>关系模式是对关系的描述，关系模式是型，关系是值</strong> 定义： <strong>关系</strong>的描述称为<strong>关系模式</strong>。它可以形式化的表示为R（U，D，DOM，F）</p>
-<ul>
-<li><strong>R</strong>为关系名</li>
-<li><strong>U</strong>为组成该关系的属性名集合</li>
-<li><strong>D</strong>为U中属性所来自的域</li>
-<li><strong>DOM</strong>为属性向域的映像集合</li>
-<li><strong>F</strong>为属性间数据的依赖关系集合</li>
-</ul>
-<hr />
-<h2 id="关系操作">关系操作</h2>
-<p>常用的关系操作：<strong>查询和插入、删除和修改</strong><br />
-传统的集合运算：<strong>并、差、交、笛卡尔积</strong><br />
-专门的关系运算：<strong>选择、投影、连接、除运算</strong><br />
-<strong>结构化查询语言</strong>（Structured Query Language, SQL）</p>
-<hr />
-<h2 id="关系的完整性">关系的完整性</h2>
-<p>关系模型的<strong>完整性规则</strong>是对关系的某种约束条件<br />
-关系模型中有三类完整性约束：<strong>实体完整性</strong>、<strong>参照完整性</strong>、<strong>用户定义的完整性</strong></p>
-<ul>
-<li><strong>实体完整性</strong><br />
-若属性A是基本关系R的主属性，则A不能取空值</li>
-<li><strong>参照完整性</strong><br />
-设F是基本关系R的一个或一组属性，但不是关系R的码，Ks是基本关系S的主码。如果F与Ks相对应，则称F是R的<strong>外码</strong><br />
-参照完整性规则就是定义外码与主码之间的引用规则<br />
-若属性（或属性组）F是基本关系R的外码，它与基本关系S的主码Ks相对应（基本关系R和S不一定是不同的关系），则对于R中的每个元组在F上的值必须：
-<ul>
-<li>或者取空值（F的每个属性值均为空值）</li>
-<li>或者等于S中某个元组的主码值</li>
-</ul></li>
-<li><strong>用户定义的完整性</strong><br />
-用户定义的完整性就是针对某一具体的关系数据库的约束条件，它反映某一具体应用所涉及的数据必须满足的语义条件</li>
-</ul>
-<hr />
-<h2 id="关系代数">关系代数</h2>
-<p>传统的集合运算：<strong>并、差、交、笛卡尔积</strong><br />
-专门的关系运算：<strong>选择、投影、连接、除运算</strong></p>
-<ol type="1">
-<li><strong>选择</strong>（取行）<br />
-选择又称为限制。它是在关系R中选择满足给定条件的诸元组</li>
-<li><strong>投影</strong>（取列）<br />
-从R中选择出若干属性列组成新的关系<br />
-投影后可能会取消某些元组，因为取消了某些属性列之后可能会出现重复行，应取消相同的行<br />
-<strong>不能只简单的理解为取列，投影操作还可以获得某属性的所有取值的集合</strong><br />
-</li>
-<li><strong>连接</strong><br />
-它从两个关系的笛卡尔积中选取属性间满足一定条件的元组<br />
-<strong>自然连接</strong>是一种特殊的等值连接。它要求两个关系中进行比较的分量必须是同名的属性组，并且在结果中把重复的属性列去掉<br />
-在做<strong>自然连接</strong>时，可能会舍弃某些元组，这些元组被称为<strong>悬浮元组</strong></li>
-<li><strong>除运算</strong><br />
-设关系R处以关系S的结果为关系T，则T包含所有在R但不在S中的属性及其值，且T的元组与S的元组的所有的组合都在R中</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/04/21/Database1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/21/Database1/" class="post-title-link" itemprop="url">数据库原理——第一章：绪论</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-21 11:14:24" itemprop="dateCreated datePublished" datetime="2019-04-21T11:14:24-04:00">2019-04-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-06-18 20:22:12" itemprop="dateModified" datetime="2019-06-18T20:22:12-04:00">2019-06-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><em>参考书目《数据库系统概论（第5版）》</em></p>
-</blockquote>
-<h2 id="数据库系统概述">数据库系统概述</h2>
-<h3 id="数据库的4个基本概念">数据库的4个基本概念</h3>
-<p><strong>数据</strong>、<strong>数据库</strong>、<strong>数据库管理系统</strong>、<strong>数据库系统</strong>是4个核心概念</p>
-<ol type="1">
-<li><strong>数据</strong>（data）
-<ul>
-<li>数据是数据库中存储的基本对象</li>
-</ul></li>
-<li><strong>数据库</strong>（DataBase, DB)
-<ul>
-<li>数据库是存放数据的仓库</li>
-<li>数据库是长期存储在计算机内、有组织的、可共享的大量数据的集合</li>
-<li>数据库数据具有<strong>永久存储</strong>、<strong>有组织</strong>和<strong>可共享</strong>三个基本特点</li>
-</ul></li>
-<li><strong>数据库管理系统</strong>（DataBase Management System, DBMS）
-<ul>
-<li>数据库管理系统是位于用户与操作系统之间的一层数据管理软件</li>
-<li>数据库管理系统和操作系统一样是<strong>计算机的基础软件</strong>，也是一个大型复杂的<strong>软件系统</strong></li>
-<li>体系结构为(从低到高)：硬件 -&gt; 操作系统 -&gt; 数据库管理系统 -&gt; 应用开发工具 -&gt; 应用系统</li>
-</ul></li>
-<li><strong>数据库系统</strong>（DataBase System, DBS）
-<ul>
-<li>数据库系统是由<strong>数据库</strong>、<strong>数据库管理系统</strong>(及其应用开发工具)、<strong>应用程序</strong>和<strong>数据库管理人员</strong>组成的存储、管理、处理和维护数据的系统</li>
-</ul></li>
-</ol>
-<h3 id="数据库管理">数据库管理</h3>
-<p><strong>数据库管理是指对数据进行分类、组织、编码、存储、检索和维护</strong> 数据库管理技术的历史：人工管理 -&gt; 文件系统 -&gt; 数据库系统<br />
-人工管理阶段特点：</p>
-<ul>
-<li>数据不保存</li>
-<li>应用程序管理数据</li>
-<li>数据不共享</li>
-<li>数据不具有独立性</li>
-</ul>
-<p>文件系统阶段特点：</p>
-<ul>
-<li>数据可以长期保存</li>
-<li>由文件系统管理数据</li>
-<li>数据共享性差，冗余度大</li>
-<li>数据独立性差</li>
-</ul>
-<p><strong>数据库系统的特点</strong>：</p>
-<ol type="1">
-<li><strong>数据结构化</strong>
-<ul>
-<li>数据库系统实现整体数据的结构化，这也是其与文件系统的本质区别</li>
-<li><strong>结构化</strong>是指数据库中的数据不再仅针对某一具体应用，而是面向整个组织或企业</li>
-</ul></li>
-<li><strong>数据的共享性高、冗余度低且易扩充</strong>
-<ul>
-<li>数据的共享减少数据冗余，节约存储空间，避免数据之间的不相容性和不一致性</li>
-<li>由于结构化使得数据库系统弹性大，易于扩充</li>
-</ul></li>
-<li><strong>数据独立性高</strong>
-<ul>
-<li><strong>物理独立性</strong>：应用程序和物理存储是相互独立的</li>
-<li><strong>逻辑独立性</strong>：应用程序和逻辑结构是相互独立的</li>
-<li>数据独立性是由<strong>二级映像功能</strong>来保证的</li>
-</ul></li>
-<li><strong>数据由数据库管理系统统一管理和控制</strong>
-<ul>
-<li>数据安全性保护</li>
-<li>数据完整性检查</li>
-<li>并发控制</li>
-<li>数据库恢复</li>
-</ul></li>
-</ol>
-<hr />
-<h2 id="数据模型">数据模型</h2>
-<p>数据模型分两类：第一类是<strong>概念模型</strong>，第二类是<strong>逻辑模型和物理模型</strong></p>
-<ul>
-<li><strong>概念模型</strong>主要用于<strong>数据库设计</strong></li>
-<li><strong>逻辑模型</strong>主要用于<strong>数据库管理系统的实现</strong>；常用的逻辑模型：层次模型、网状模型、关系模型、面向对象数据模型、 对象关系数据模型、半结构化数据模型等</li>
-<li><strong>物理模型</strong>描述数据在系统内部的表示方式和存取方法</li>
-</ul>
-<p>概念模型的一种表示方法：实体-联系方法（Entity-Relationship），即<strong>E-R图</strong><br />
-数据模型的组成要素:<strong>数据结构</strong>、<strong>数据操作</strong>、<strong>数据的完整性约束条件</strong><br />
-关系模型术语对比</p>
-<table>
-<thead>
-<tr class="header">
-<th>关系术语</th>
-<th>一般表格的术语</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>关系名</td>
-<td>表名</td>
-</tr>
-<tr class="even">
-<td>关系模式</td>
-<td>表头（表格的描述）</td>
-</tr>
-<tr class="odd">
-<td>关系</td>
-<td>（一张）二维表</td>
-</tr>
-<tr class="even">
-<td>元组</td>
-<td>记录或行</td>
-</tr>
-<tr class="odd">
-<td>属性</td>
-<td>列</td>
-</tr>
-<tr class="even">
-<td>属性名</td>
-<td>列名</td>
-</tr>
-<tr class="odd">
-<td>属性值</td>
-<td>列值</td>
-</tr>
-<tr class="even">
-<td>分量</td>
-<td>一条记录中的一个列值</td>
-</tr>
-<tr class="odd">
-<td>非规范关系</td>
-<td>表中有表（大表中嵌有小表）</td>
-</tr>
-</tbody>
-</table>
-<p>关系的完整性约束条件</p>
-<ul>
-<li>实体完整性</li>
-<li>参照完整性</li>
-<li>用户定义的完整性</li>
-</ul>
-<hr />
-<h2 id="数据库系统的结构">数据库系统的结构</h2>
-<p>数据库系统的三级模式结构是指数据库系统是由<strong>外模式</strong>、<strong>模式</strong>和<strong>内模式</strong>三级构成，分别代表数据的三个抽象级别</p>
-<ul>
-<li><strong>模式</strong>：也称为<strong>逻辑模式</strong>，是数据库中全体数据的逻辑结构和特征的描述，是所有用户的公共数据视图
-<ul>
-<li>MySQL中的database等价于这里的模式</li>
-<li>一个数据库只有一个模式</li>
-</ul></li>
-<li><strong>外模式</strong>：也称为<strong>子模式</strong>或<strong>用户模式</strong>，它是数据库用户能够看见和使用的<strong>局部数据</strong>的逻辑结构和特征的描述，是数据库用户的数据视图，是与某一应用有关的数据的逻辑表示
-<ul>
-<li>外模式通常是模式的<strong>子集</strong></li>
-<li>MySQL中的<strong>视图</strong>和SELECT出的结果(部分基本表)等价于这里的外模式</li>
-<li>外模式可用来保证数据库安全性，用户只能访问和看见所对应的外模式中的数据</li>
-</ul></li>
-<li><strong>内模式</strong>：也称为<strong>存储模式</strong>，它是数据物理结构和存储方式的描述，是数据在数据库内部的组织方式
-<ul>
-<li>一个数据库只有一个内模式</li>
-</ul></li>
-</ul>
-<h3 id="数据库的二级映射功能与数据独立性">数据库的二级映射功能与数据独立性</h3>
-<ol type="1">
-<li><strong>外模式/模式映像</strong><br />
-当<strong>模式</strong>改变时，由数据库管理员对各个<strong>外模式/模式</strong>的映像作相应改变，可以使<strong>外模式</strong>保持不变；应用程序是依据数据的外模式编写的，从而应用程序不必修改，保证了数据与程序的逻辑独立性，简称数据的<strong>逻辑独立性</strong></li>
-<li><strong>模式/内模式映像</strong><br />
-当数据库的<strong>存储结构</strong>改变时，由数据库管理员对各个<strong>模式/内模式</strong>的映像作相应改变，可以使<strong>模式</strong>保持不变，从而应用程序也不必改变，保证了数据与程序的物理独立性，简称数据的<strong>物理独立性</strong></li>
-</ol>
-<p>数据库的二级映射保证了数据库外模式的稳定性，从而从底层保证了应用程序的稳定性（一般不需要修改）<br />
-<strong>数据与程序之间的独立性使得数据的定义和描述可以从应用程序中分离出去</strong></p>
-<hr />
-<h2 id="数据库系统的组成">数据库系统的组成</h2>
-<p><strong>数据库系统</strong>是由<strong>数据库</strong>、<strong>数据库管理系统</strong>(及其应用开发工具)、<strong>应用程序</strong>和<strong>数据库管理人员</strong>组成</p>
-<ol type="1">
-<li>硬件平台及数据库</li>
-<li>软件</li>
-<li>人员</li>
-</ol>
 
       
     </div>
@@ -1419,7 +1077,7 @@ MySQL 8.0 提供的角色管理功能如下：</p>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
