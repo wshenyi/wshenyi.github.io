@@ -20,17 +20,21 @@
     var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法 路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径 如下为计算机网络经典图模型  路由选择算法的一种分类方式是根据集中还是分散来划分：  集中式路由选择算法：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有全局状态信息的算法被称作链路状态算法（Link St">
+  <meta name="description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径如下为计算机网络经典图模型    路由选择算法的一种分类方式是根据集中还是分散来划分：    集中式路由选择算法：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有全局状态信息的算法被称作链路状态算法（Link">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络——第五章：网络层(控制平面)">
 <meta property="og:url" content="https://wshenyi.github.io/2019/06/13/Network5/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法 路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径 如下为计算机网络经典图模型  路由选择算法的一种分类方式是根据集中还是分散来划分：  集中式路由选择算法：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有全局状态信息的算法被称作链路状态算法（Link St">
+<meta property="og:description" content="参考书目《计算机网络：自顶向下方法（第七版）》  路由选择算法路由选择算法的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有最低开销的路径如下为计算机网络经典图模型    路由选择算法的一种分类方式是根据集中还是分散来划分：    集中式路由选择算法：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有全局状态信息的算法被称作链路状态算法（Link">
 <meta property="og:locale">
+<meta property="og:image" content="https://wshenyi.github.io/2019/06/13/Network5/1.png">
+<meta property="og:image" content="https://wshenyi.github.io/2019/06/13/Network5/2.png">
+<meta property="og:image" content="https://wshenyi.github.io/2019/06/13/Network5/3.png">
 <meta property="article:published_time" content="2019-06-14T00:08:11.000Z">
 <meta property="article:modified_time" content="2019-06-17T11:52:02.000Z">
 <meta property="article:author" content="Godway">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wshenyi.github.io/2019/06/13/Network5/1.png">
 
 <link rel="canonical" href="https://wshenyi.github.io/2019/06/13/Network5/">
 
@@ -232,88 +236,58 @@
         <blockquote>
 <p><em>参考书目《计算机网络：自顶向下方法（第七版）》</em></p>
 </blockquote>
-<h2 id="路由选择算法">路由选择算法</h2>
-<p><strong>路由选择算法</strong>的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有<strong>最低开销</strong>的路径<br />
-如下为计算机网络经典图模型 <br />
-路由选择算法的一种分类方式是根据集中还是分散来划分：</p>
+<h2 id="路由选择算法"><a href="#路由选择算法" class="headerlink" title="路由选择算法"></a>路由选择算法</h2><p><strong>路由选择算法</strong>的目的是从发送方到接收方的过程确定一条好的路由路径。通常，一条好的路由路径指具有<strong>最低开销</strong>的路径<br>如下为计算机网络经典图模型</p>
+<img src="/2019/06/13/Network5/1.png" class="">  
+<p>路由选择算法的一种分类方式是根据集中还是分散来划分：  </p>
 <ul>
 <li><strong>集中式路由选择算法</strong>：用完整的、全局性的网络知识计算出从源到目的地之间的最低开销路径。具有<strong>全局状态信息</strong>的算法被称作<strong>链路状态算法</strong>（Link State, LS）</li>
 <li><strong>分散式路由选择算法</strong>：路由器以迭代、分布式的方式计算出最低开销路径。这种分散式路由选择算法称为<strong>距离向量算法DV</strong>（Distance Vector, DV）</li>
 </ul>
-<h3 id="ls路由选择算法">LS路由选择算法</h3>
-<p>在LS中，网络拓扑和所有的链路开销都是已知的，实践中这是通过让每个节点向网络中所有其他节点广播链路状态分组来完成的，其中每个链路状态分组包含它所连接的链路的标识和开销<br />
-节点广播的结果是所有节点都具有该网络的统一、完整的视图，于是每个节点都能够像其他节点一样，运行LS算法并计算出相同的最低开销路径集合<br />
-书上介绍了<strong>Dijkstra最短路径算法</strong>，此处不再赘述<br />
-LS算法存在的潜在问题————振荡。这是由于消息传播的时延导致的，它不仅存在于LS算法中，也存在于任何使用拥塞或基于时延的链路测度的算法</p>
-<h3 id="dv路由选择算法">DV路由选择算法</h3>
-<p>距离向量算法是一种<strong>迭代的</strong>、<strong>异步的</strong>和<strong>分布式的</strong>算法</p>
+<h3 id="LS路由选择算法"><a href="#LS路由选择算法" class="headerlink" title="LS路由选择算法"></a>LS路由选择算法</h3><p>在LS中，网络拓扑和所有的链路开销都是已知的，实践中这是通过让每个节点向网络中所有其他节点广播链路状态分组来完成的，其中每个链路状态分组包含它所连接的链路的标识和开销<br>节点广播的结果是所有节点都具有该网络的统一、完整的视图，于是每个节点都能够像其他节点一样，运行LS算法并计算出相同的最低开销路径集合<br>书上介绍了<strong>Dijkstra最短路径算法</strong>，此处不再赘述<br>LS算法存在的潜在问题————振荡。这是由于消息传播的时延导致的，它不仅存在于LS算法中，也存在于任何使用拥塞或基于时延的链路测度的算法  </p>
+<h3 id="DV路由选择算法"><a href="#DV路由选择算法" class="headerlink" title="DV路由选择算法"></a>DV路由选择算法</h3><p>距离向量算法是一种<strong>迭代的</strong>、<strong>异步的</strong>和<strong>分布式的</strong>算法</p>
 <ul>
 <li><strong>分布式的</strong>：因为每个节点都要从一个或多个直接相连的邻居接收某些信息，执行计算，然后将其结算结果分发给邻居</li>
 <li><strong>迭代的</strong>：因为此过程一直要持续到邻居之间无更多信息交互为止（有趣的是，此算法是自我终止的）</li>
 <li><strong>异步的</strong>：因为它不要求所有节点相互之间步伐一致地操作</li>
 </ul>
-<p>DV算法的核心思想基于贝尔曼-弗洛伊德方程 <span class="math display">\[d_x(y) = min_v{c(x, v) + d_v(y)}\]</span> 其中<span class="math inline">\(d_x(y)\)</span>表示从节点x到节点y的最低开销路径的开销，<span class="math inline">\(c(x, v)\)</span>表示从节点x到节点v的开销，该算法思想一句话总结就是：<strong>从x到y的距离能否通过途径v节点而变小</strong><br />
-DV算法存在的问题：<strong>路由选择环路</strong>，导致关于链路开销增加的<strong>坏消息传播的很慢</strong>！</p>
-<h3 id="ls与dv的比较">LS与DV的比较</h3>
-<ol type="1">
-<li>报文复杂性<br />
-LS要求每个节点都知道网络中每条链路的开销，这就需要发送 O(|N||E|) 个报文，且任何一条链路的开销改变都需要在全网广播<br />
-DV要求在每次迭代时，在两个直接相连节点间交换报文。当链路开销改变时，DV仅当新的链路开销导致与该链路相连节点的最低开销路径发生改变时，才传播已改变的链路开销</li>
-<li>收敛速度<br />
-LS是一个O(|N|^2)算法<br />
-DV算法收敛较慢，且会遇到路由选择环路和无穷计数问题</li>
-<li>健壮性<br />
-在LS算法下，路由计算在某种程度上是分离的，这提供了一定程度的健壮性<br />
-DV算法中一个不正确的节点计算值会扩散到整个网络</li>
+<p>DV算法的核心思想基于贝尔曼-弗洛伊德方程<br>$$d_x(y) = min_v{c(x, v) + d_v(y)}$$<br>其中$d_x(y)$表示从节点x到节点y的最低开销路径的开销，$c(x, v)$表示从节点x到节点v的开销，该算法思想一句话总结就是：<strong>从x到y的距离能否通过途径v节点而变小</strong><br>DV算法存在的问题：<strong>路由选择环路</strong>，导致关于链路开销增加的<strong>坏消息传播的很慢</strong>！</p>
+<h3 id="LS与DV的比较"><a href="#LS与DV的比较" class="headerlink" title="LS与DV的比较"></a>LS与DV的比较</h3><ol>
+<li>报文复杂性<br>LS要求每个节点都知道网络中每条链路的开销，这就需要发送 O(|N||E|) 个报文，且任何一条链路的开销改变都需要在全网广播<br>DV要求在每次迭代时，在两个直接相连节点间交换报文。当链路开销改变时，DV仅当新的链路开销导致与该链路相连节点的最低开销路径发生改变时，才传播已改变的链路开销</li>
+<li>收敛速度<br>LS是一个O(|N|^2)算法<br>DV算法收敛较慢，且会遇到路由选择环路和无穷计数问题</li>
+<li>健壮性<br>在LS算法下，路由计算在某种程度上是分离的，这提供了一定程度的健壮性<br>DV算法中一个不正确的节点计算值会扩散到整个网络</li>
 </ol>
 <p>总之，两个算法没有一个是明显的赢家，它们的确都在因特网中得到了应用</p>
-<hr />
-<h2 id="自治系统内部的路由选择ospf">自治系统内部的路由选择：OSPF</h2>
-<p>为什么要划分<strong>自治系统</strong>（Autonomous Systerm, AS）？</p>
+<hr>
+<h2 id="自治系统内部的路由选择：OSPF"><a href="#自治系统内部的路由选择：OSPF" class="headerlink" title="自治系统内部的路由选择：OSPF"></a>自治系统内部的路由选择：OSPF</h2><p>为什么要划分<strong>自治系统</strong>（Autonomous Systerm, AS）？</p>
 <ul>
 <li>规模。必须采取一些措施以减少像因特网这种大型网络中的路由计算的复杂度</li>
 <li>管理自治。ISP通常希望按自己的意愿运行路由器，如在自己的网络中运行它所选的路由选择算法，或对外部隐藏其网络的内部组织面貌</li>
 </ul>
-<p>每个AS通常由一组处在相同管理控制下的路由器组成，ISP可在其整个网络使用一个AS或将其拆分为多个AS<br />
-每个AS有一个<strong>唯一的</strong>AS号（ASN），AS号由ICANN组织分配</p>
-<h3 id="开放最短路优先ospfopen-shortest-path-first">开放最短路优先OSPF（Open Shortest Path First）</h3>
-<p>OSPF是一种<strong>链路状态协议</strong>，它使用洪泛链路状态信息和Dijkstra算法。<br />
-OSPF的优点：</p>
+<p>每个AS通常由一组处在相同管理控制下的路由器组成，ISP可在其整个网络使用一个AS或将其拆分为多个AS<br>每个AS有一个<strong>唯一的</strong>AS号（ASN），AS号由ICANN组织分配  </p>
+<h3 id="开放最短路优先OSPF（Open-Shortest-Path-First）"><a href="#开放最短路优先OSPF（Open-Shortest-Path-First）" class="headerlink" title="开放最短路优先OSPF（Open Shortest Path First）"></a>开放最短路优先OSPF（Open Shortest Path First）</h3><p>OSPF是一种<strong>链路状态协议</strong>，它使用洪泛链路状态信息和Dijkstra算法。<br>OSPF的优点：</p>
 <ul>
-<li>安全<br />
-能够鉴别OSPF路由器之间的交换，仅有受信任的路由器能参与AS内的OSPF协议，因此可防止恶意入侵者将不正确的信息注入路由表内</li>
-<li>多条相同开销的路径 当到达某目的地的多条路径具有相同的开销时，OSPF允许使用多条路径（无须仅选择单一的路径来承载所有的流量）</li>
-<li>对单播与多播路由选择的综合支持 多播OSPF（MOSPF）[RFC 1584]提供对OSPF的简单拓展，以便提供多播路由选择</li>
-<li>支持在单个AS中的<strong>层次结构</strong><br />
-一个OSPF自治系统能够层次化地配置多个区域，在每个区域一台或多台区域边界路由器负责为流向该区域以外的分组提供路由选择。最后，在AS内只有一个OSPF区域配置为主干区域，其作用是为该AS中的其他区域之间的流量提供路由选择。<br />
-整个过程为分组先到区域边界路由器，经过主干区域到达目的区域的边界路由器，最后到达目的地</li>
+<li>安全<br>能够鉴别OSPF路由器之间的交换，仅有受信任的路由器能参与AS内的OSPF协议，因此可防止恶意入侵者将不正确的信息注入路由表内</li>
+<li>多条相同开销的路径<br>当到达某目的地的多条路径具有相同的开销时，OSPF允许使用多条路径（无须仅选择单一的路径来承载所有的流量）</li>
+<li>对单播与多播路由选择的综合支持<br>多播OSPF（MOSPF）[RFC 1584]提供对OSPF的简单拓展，以便提供多播路由选择</li>
+<li>支持在单个AS中的<strong>层次结构</strong><br>一个OSPF自治系统能够层次化地配置多个区域，在每个区域一台或多台区域边界路由器负责为流向该区域以外的分组提供路由选择。最后，在AS内只有一个OSPF区域配置为主干区域，其作用是为该AS中的其他区域之间的流量提供路由选择。<br>整个过程为分组先到区域边界路由器，经过主干区域到达目的区域的边界路由器，最后到达目的地</li>
 </ul>
-<hr />
-<h2 id="isp之间的路由选择bgp">ISP之间的路由选择：BGP</h2>
-
-<p>在因特网中，所有的AS运行相同的AS间路由选择协议，称为<strong>边界网关协议</strong>（Border Gateway Protocol, BGP）<br />
-在BGP中，分组并不是路由到一个特定的目的地址，相反是路由到CIDR化的前缀，其中每个前缀表示一个子网或子网的集合（如138.16.68/22）<br />
-<strong>在BGP中，每对路由器通过使用179端口的半永久TCP连接交换路由选择信息</strong><br />
-每条直接连接以及所有通过该链接发送的BGP报文称为<strong>BGP连接</strong>。此外，跨越两个AS的BGP连接称为<strong>外部BGP</strong>（eBGP）连接，在相同AS中的两台路由器之间的BGP会话称为<strong>内部BGP</strong>（iBGP）连接<br />
-<br />
-在BGP前缀中的<strong>BGP</strong>属性中，<strong>AS-PATH</strong>和<strong>NEXT-HOP</strong>属性比较重要</p>
+<hr>
+<h2 id="ISP之间的路由选择：BGP"><a href="#ISP之间的路由选择：BGP" class="headerlink" title="ISP之间的路由选择：BGP"></a>ISP之间的路由选择：BGP</h2><img src="/2019/06/13/Network5/2.png" class="">  
+<p>在因特网中，所有的AS运行相同的AS间路由选择协议，称为<strong>边界网关协议</strong>（Border Gateway Protocol, BGP）<br>在BGP中，分组并不是路由到一个特定的目的地址，相反是路由到CIDR化的前缀，其中每个前缀表示一个子网或子网的集合（如138.16.68/22）<br><strong>在BGP中，每对路由器通过使用179端口的半永久TCP连接交换路由选择信息</strong><br>每条直接连接以及所有通过该链接发送的BGP报文称为<strong>BGP连接</strong>。此外，跨越两个AS的BGP连接称为<strong>外部BGP</strong>（eBGP）连接，在相同AS中的两台路由器之间的BGP会话称为<strong>内部BGP</strong>（iBGP）连接  </p>
+<img src="/2019/06/13/Network5/3.png" class="">  
+<p>在BGP前缀中的<strong>BGP</strong>属性中，<strong>AS-PATH</strong>和<strong>NEXT-HOP</strong>属性比较重要</p>
 <ul>
-<li>AS-PATH属性包含了通告已经通过的AS的列表（使用ASN标识，如AS1 AS2 ...），BGP还使用该属性来检测和防止通告环路（若路由器在路径列表看到自己的AS，它将拒绝该通告）</li>
+<li>AS-PATH属性包含了通告已经通过的AS的列表（使用ASN标识，如AS1 AS2 …），BGP还使用该属性来检测和防止通告环路（若路由器在路径列表看到自己的AS，它将拒绝该通告）</li>
 <li>NEXT-HOP是AS-PATH起始的路由器接口的IP地址（即该路径的源的IP地址）</li>
 </ul>
 <p>BGP还常被用于实现<strong>IP任播</strong>（anycast）服务，该服务被DNS系统广泛用于将DNS请求指向最近的根DNS服务器</p>
-<hr />
-<h2 id="sdn软件定义网络software-defined-networking">SDN：软件定义网络（Software-Defined Networking）</h2>
-<p>SDN体系结构的4个关键特征：</p>
+<hr>
+<h2 id="SDN：软件定义网络（Software-Defined-Networking）"><a href="#SDN：软件定义网络（Software-Defined-Networking）" class="headerlink" title="SDN：软件定义网络（Software-Defined Networking）"></a>SDN：软件定义网络（Software-Defined Networking）</h2><p>SDN体系结构的4个关键特征：</p>
 <ul>
-<li>基于流的转发<br />
-SDN控制的交换机的分组转发工作，能够基于运输层、网络层或链路层首部中任意数量的首部字段值进行（传统方法中的IP数据报的转发仅依据数据报的目的IP地址进行）</li>
-<li>数据平面与控制平面分离<br />
-数据平面由网络交换机组成；控制平面由服务器以及决定和管理交换机流表的软件组成</li>
-<li>网路控制功能：位于数据平面交换机外部<br />
-控制平面自身由两个组件组成：SDN控制器（或网络操作系统）以及若干网络控制应用程序</li>
-<li>可编程的网络<br />
-通过运行在控制平面中的网络控制应用程序，该网络是可编程的</li>
+<li>基于流的转发<br>SDN控制的交换机的分组转发工作，能够基于运输层、网络层或链路层首部中任意数量的首部字段值进行（传统方法中的IP数据报的转发仅依据数据报的目的IP地址进行）</li>
+<li>数据平面与控制平面分离<br>数据平面由网络交换机组成；控制平面由服务器以及决定和管理交换机流表的软件组成</li>
+<li>网路控制功能：位于数据平面交换机外部<br>控制平面自身由两个组件组成：SDN控制器（或网络操作系统）以及若干网络控制应用程序</li>
+<li>可编程的网络<br>通过运行在控制平面中的网络控制应用程序，该网络是可编程的</li>
 </ul>
 
     </div>
@@ -395,7 +369,7 @@ SDN控制的交换机的分组转发工作，能够基于运输层、网络层�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">路由选择算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ls%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">LS路由选择算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dv%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">DV路由选择算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls%E4%B8%8Edv%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">1.3.</span> <span class="nav-text">LS与DV的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F%E5%86%85%E9%83%A8%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9ospf"><span class="nav-number">2.</span> <span class="nav-text">自治系统内部的路由选择：OSPF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%94%BE%E6%9C%80%E7%9F%AD%E8%B7%AF%E4%BC%98%E5%85%88ospfopen-shortest-path-first"><span class="nav-number">2.1.</span> <span class="nav-text">开放最短路优先OSPF（Open Shortest Path First）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isp%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9bgp"><span class="nav-number">3.</span> <span class="nav-text">ISP之间的路由选择：BGP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sdn%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%BD%91%E7%BB%9Csoftware-defined-networking"><span class="nav-number">4.</span> <span class="nav-text">SDN：软件定义网络（Software-Defined Networking）</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">路由选择算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LS%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">LS路由选择算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DV%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">DV路由选择算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LS%E4%B8%8EDV%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">1.3.</span> <span class="nav-text">LS与DV的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F%E5%86%85%E9%83%A8%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%EF%BC%9AOSPF"><span class="nav-number">2.</span> <span class="nav-text">自治系统内部的路由选择：OSPF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%94%BE%E6%9C%80%E7%9F%AD%E8%B7%AF%E4%BC%98%E5%85%88OSPF%EF%BC%88Open-Shortest-Path-First%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">开放最短路优先OSPF（Open Shortest Path First）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ISP%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%EF%BC%9ABGP"><span class="nav-number">3.</span> <span class="nav-text">ISP之间的路由选择：BGP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDN%EF%BC%9A%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%BD%91%E7%BB%9C%EF%BC%88Software-Defined-Networking%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">SDN：软件定义网络（Software-Defined Networking）</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

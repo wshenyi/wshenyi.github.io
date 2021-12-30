@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="All materials come from Coursera《Game Theory》by Stanford University &amp; The University of British Columbia  Intro to nash equilibrium Attributes of nash equilibrium  nobody has an incentive to dev">
+  <meta name="description" content="All materials come from Coursera《Game Theory》by Stanford University &amp; The University of British Columbia  Intro to nash equilibriumAttributes of nash equilibrium  nobody has an incentive to dev">
 <meta property="og:type" content="article">
 <meta property="og:title" content="博弈论2：纯策略纳什均衡">
 <meta property="og:url" content="https://wshenyi.github.io/2020/02/25/Game2/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="All materials come from Coursera《Game Theory》by Stanford University &amp; The University of British Columbia  Intro to nash equilibrium Attributes of nash equilibrium  nobody has an incentive to dev">
+<meta property="og:description" content="All materials come from Coursera《Game Theory》by Stanford University &amp; The University of British Columbia  Intro to nash equilibriumAttributes of nash equilibrium  nobody has an incentive to dev">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-02-25T16:23:24.000Z">
 <meta property="article:modified_time" content="2020-03-22T01:43:02.000Z">
@@ -230,40 +230,35 @@
 
       
         <span id="more"></span>
+
 <blockquote>
 <p>All materials come from <em>Coursera</em>《Game Theory》by Stanford University &amp; The University of British Columbia</p>
 </blockquote>
-<h2 id="intro-to-nash-equilibrium">Intro to nash equilibrium</h2>
-<p>Attributes of nash equilibrium</p>
+<h2 id="Intro-to-nash-equilibrium"><a href="#Intro-to-nash-equilibrium" class="headerlink" title="Intro to nash equilibrium"></a>Intro to nash equilibrium</h2><p>Attributes of nash equilibrium</p>
 <ul>
-<li><strong>nobody has an incentive to </strong>deviate** from their actions if a nash equilibrium is achieved**</li>
-<li>each player's action <strong>maximizes his/her payoff</strong> given the actions of others</li>
+<li><strong>nobody has an incentive to <strong>deviate</strong> from their actions if a nash equilibrium is achieved</strong></li>
+<li>each player’s action <strong>maximizes his/her payoff</strong> given the actions of others</li>
 <li>a self-consistent or <strong>stable</strong> profile</li>
 </ul>
-<h2 id="pure-strategy-nash-equilibrium">Pure Strategy Nash Equilibrium</h2>
-<h3 id="pure-strategy-and-mixed-strategy">Pure Strategy And Mixed Strategy</h3>
-<p>the informal definitions of <strong>pure strategy</strong> and <strong>mixed strategy</strong> are</p>
+<h2 id="Pure-Strategy-Nash-Equilibrium"><a href="#Pure-Strategy-Nash-Equilibrium" class="headerlink" title="Pure Strategy Nash Equilibrium"></a>Pure Strategy Nash Equilibrium</h2><h3 id="Pure-Strategy-And-Mixed-Strategy"><a href="#Pure-Strategy-And-Mixed-Strategy" class="headerlink" title="Pure Strategy And Mixed Strategy"></a>Pure Strategy And Mixed Strategy</h3><p>the informal definitions of <strong>pure strategy</strong> and <strong>mixed strategy</strong> are</p>
 <ul>
 <li>pure strategy: <strong>only one</strong> action is played with positive probability</li>
 <li>mixed strategy: <strong>more than one</strong> action is played with positive probability</li>
 </ul>
-<p>With a pure strategy, a player choose one action with 100% ensurance. While with a mixed strategy, a player can have a probability of 50% choosing action A and a probability of 50% choosing action B. In another word, player <span class="math inline">\(i\)</span> chooses action <span class="math inline">\(a_i\)</span> randomly from <span class="math inline">\(A\)</span> with corresponding probability.</p>
-<h3 id="best-response">Best Response</h3>
-<p>The idea of <strong>Best Response</strong>: if you know what everyone else was going to do, it would be easy to pick your own action.</p>
-<p>Based on the previous lecture, <span class="math inline">\(a\)</span> represents <strong>action profile</strong>, which organized by <span class="math inline">\(n\)</span> players' action</p>
-<p><span class="math display">\[a = (a_1, a_2,..., a_n)\]</span></p>
-<p>Now we denote <span class="math inline">\(a_{-i}\)</span>, which means a sub action profile of other players act</p>
-<p><span class="math display">\[a_{-i} = (a_1, a_2,..., a_{i-1}, a_{i+1},..., a_n)\]</span></p>
-<p>Then we can re-define <span class="math inline">\(a\)</span> as</p>
-<p><span class="math display">\[a = (a_i, a_{-i})\]</span></p>
+<p>With a pure strategy, a player choose one action with 100% ensurance. While with a mixed strategy, a player can have a probability of 50% choosing action A and a probability of 50% choosing action B. In another word, player $i$ chooses action $a_i$ randomly from $A$ with corresponding probability.</p>
+<h3 id="Best-Response"><a href="#Best-Response" class="headerlink" title="Best Response"></a>Best Response</h3><p>The idea of <strong>Best Response</strong>: if you know what everyone else was going to do, it would be easy to pick your own action.</p>
+<p>Based on the previous lecture, $a$ represents <strong>action profile</strong>, which organized by $n$ players’ action</p>
+<p>$$a = (a_1, a_2,…, a_n)$$</p>
+<p>Now we denote $a_{-i}$, which means a sub action profile of other players act</p>
+<p>$$a_{-i} = (a_1, a_2,…, a_{i-1}, a_{i+1},…, a_n)$$</p>
+<p>Then we can re-define $a$ as</p>
+<p>$$a = (a_i, a_{-i})$$</p>
 <p>Therefore, the definition of <strong>Best Response</strong> is showen below</p>
-<p><span class="math display">\[a_i^* \in BR(a_{-i}) \ \ iff \ \ \forall a_i \in A_i, u_i(a_i^*, a_{-i}) \ge u_i(a_i, a_{-i})\]</span></p>
-<p>That is to say, given <span class="math inline">\(a_{-i}\)</span>, <span class="math inline">\(a_i^*\)</span> is the best response for player <span class="math inline">\(i\)</span> to play.</p>
-<p>But in practice, no agent knows what the others will do, so we can't say about what actions will actually occur. The idea here is to look for <strong>stable action profiles</strong>, leading to equilibrium point. <span class="math inline">\(a = (a_1, a_2,..., a_n)\)</span> is a (pure strategy) <strong>nash equilibrium</strong> iff <span class="math inline">\(\forall i,\ a_i \in BR(a_{-i})\)</span></p>
-<h3 id="dominant-strategy">Dominant Strategy</h3>
-<p>generalize from actions to strategies</p>
-<h2 id="mixed-strategy-nash-equilibrium">Mixed Strategy Nash Equilibrium</h2>
-
+<p>$$a_i^* \in BR(a_{-i}) \ \ iff \ \ \forall a_i \in A_i, u_i(a_i^*, a_{-i}) \ge u_i(a_i, a_{-i})$$  </p>
+<p>That is to say, given $a_{-i}$, $a_i^*$ is the best response for player $i$ to play.</p>
+<p>But in practice, no agent knows what the others will do, so we can’t say about what actions will actually occur. The idea here is to look for <strong>stable action profiles</strong>, leading to equilibrium point. $a = (a_1, a_2,…, a_n)$ is a (pure strategy) <strong>nash equilibrium</strong> iff $\forall i,\ a_i \in BR(a_{-i})$</p>
+<h3 id="Dominant-Strategy"><a href="#Dominant-Strategy" class="headerlink" title="Dominant Strategy"></a>Dominant Strategy</h3><p>generalize from actions to strategies</p>
+<h2 id="Mixed-Strategy-Nash-Equilibrium"><a href="#Mixed-Strategy-Nash-Equilibrium" class="headerlink" title="Mixed Strategy Nash Equilibrium"></a>Mixed Strategy Nash Equilibrium</h2>
     </div>
 
     
@@ -343,7 +338,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#intro-to-nash-equilibrium"><span class="nav-number">1.</span> <span class="nav-text">Intro to nash equilibrium</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pure-strategy-nash-equilibrium"><span class="nav-number">2.</span> <span class="nav-text">Pure Strategy Nash Equilibrium</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pure-strategy-and-mixed-strategy"><span class="nav-number">2.1.</span> <span class="nav-text">Pure Strategy And Mixed Strategy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#best-response"><span class="nav-number">2.2.</span> <span class="nav-text">Best Response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dominant-strategy"><span class="nav-number">2.3.</span> <span class="nav-text">Dominant Strategy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mixed-strategy-nash-equilibrium"><span class="nav-number">3.</span> <span class="nav-text">Mixed Strategy Nash Equilibrium</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro-to-nash-equilibrium"><span class="nav-number">1.</span> <span class="nav-text">Intro to nash equilibrium</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pure-Strategy-Nash-Equilibrium"><span class="nav-number">2.</span> <span class="nav-text">Pure Strategy Nash Equilibrium</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pure-Strategy-And-Mixed-Strategy"><span class="nav-number">2.1.</span> <span class="nav-text">Pure Strategy And Mixed Strategy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Response"><span class="nav-number">2.2.</span> <span class="nav-text">Best Response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dominant-Strategy"><span class="nav-number">2.3.</span> <span class="nav-text">Dominant Strategy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixed-Strategy-Nash-Equilibrium"><span class="nav-number">3.</span> <span class="nav-text">Mixed Strategy Nash Equilibrium</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

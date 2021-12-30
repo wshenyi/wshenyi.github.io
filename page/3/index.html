@@ -221,20 +221,18 @@
           <blockquote>
 <p>All materials come from <em>Coursera</em>《Game Theory》by Stanford University &amp; The University of British Columbia</p>
 </blockquote>
-<h2 id="囚徒困境">囚徒困境</h2>
-<p>两个囚犯现在被捕，警察将他们两个分别关在了不同的房间（囚犯之间互相无法交谈），警察为了让他们招供，对两个人分别说了这样一番话：</p>
-<ol type="1">
+<h2 id="囚徒困境"><a href="#囚徒困境" class="headerlink" title="囚徒困境"></a>囚徒困境</h2><p>两个囚犯现在被捕，警察将他们两个分别关在了不同的房间（囚犯之间互相无法交谈），警察为了让他们招供，对两个人分别说了这样一番话：</p>
+<ol>
 <li>若你和他都选择不招供，则在我们目前已有证据的基础上，我们有信心将你们<strong>两个都判1年</strong></li>
 <li>若你选择招供告发他，而他不招供，那么我们将<strong>直接无罪释放你并且他会被判3年</strong></li>
 <li>若你和他都选择了招供，那问题就很简单了，你们将<strong>都被判2年</strong></li>
 </ol>
-<p>现在我们将上述规则以更简练的矩阵形式表示出来<br />
-<br />
-其中C表示囚犯选择与对方合作（Cooperate）即<strong>不招供</strong>，D表示囚犯选择欺骗对方（Defect）即选择<strong>招供</strong>，左边的C和D代表囚犯1可以做的两个选择，同理上方的C和D代表囚犯2可以做的两个选择。举个例子，对于<strong>右上角</strong>的方格，表示<strong>囚犯1选择不招供(C)而囚犯2选择招供(D)</strong>，结果<strong>囚犯1被判了3年而囚犯2无罪释放</strong></p>
+<p>现在我们将上述规则以更简练的矩阵形式表示出来  </p>
+<img src="/2020/01/20/Game1/pic1.png" class="">  
+<p>其中C表示囚犯选择与对方合作（Cooperate）即<strong>不招供</strong>，D表示囚犯选择欺骗对方（Defect）即选择<strong>招供</strong>，左边的C和D代表囚犯1可以做的两个选择，同理上方的C和D代表囚犯2可以做的两个选择。举个例子，对于<strong>右上角</strong>的方格，表示<strong>囚犯1选择不招供(C)而囚犯2选择招供(D)<strong>，结果</strong>囚犯1被判了3年而囚犯2无罪释放</strong></p>
 <p>为了进一步说明这个问题，我们先引入一些博弈论的基本概念</p>
-<hr />
-<h2 id="博弈的基本定义">博弈的基本定义</h2>
-<p>博弈的基本元素有以下几个：</p>
+<hr>
+<h2 id="博弈的基本定义"><a href="#博弈的基本定义" class="headerlink" title="博弈的基本定义"></a>博弈的基本定义</h2><p>博弈的基本元素有以下几个：</p>
 <ul>
 <li>玩家（Players）：做出决定的个体</li>
 <li>行动（Actions）：每个玩家可以做出怎样的行动</li>
@@ -242,30 +240,26 @@
 <li>时序（Timing）：事件发生的顺序（例如大家下棋时轮流交替移动棋子）</li>
 <li>信息（information）：当玩家做出行动时他们都知道什么信息（参与者对其他参与者的了解程度）</li>
 </ul>
-<p>所以<strong>有限n人标准</strong>博弈的数学定义表示为<span class="math inline">\(&lt;N, \mathbf{A}, u&gt;\)</span>其中元素分别表示如下含义：</p>
+<p>所以<strong>有限n人标准</strong>博弈的数学定义表示为$&lt;N, \mathbf{A}, u&gt;$其中元素分别表示如下含义：</p>
 <ul>
-<li><ol type="1">
-<li>玩家的集合<span class="math inline">\(N = \{1, 2, ..., n\}\)</span> 是一个大小为n的有限集合，用<span class="math inline">\(i\)</span>标识</li>
-</ol></li>
-<li><ol start="2" type="1">
-<li>行动组合的全集<span class="math inline">\(\mathbf{A} = A_1 \times A_2 \times ... \times A_n\)</span>，其中<span class="math inline">\(A_i\)</span>表示玩家<span class="math inline">\(i\)</span>的行动集合，若用<span class="math inline">\(a\)</span>表示一个行动组合（action profile），则有<span class="math inline">\(a = (a_1, a_2, ..., a_n) \in \mathbf{A}\)</span></li>
-</ol></li>
-<li><ol start="3" type="1">
-<li>效用(代价)函数组<span class="math inline">\(u = (u_1, u_2, ..., u_n)\)</span>，其中对于玩家<span class="math inline">\(i\)</span>，<span class="math inline">\(u_i: \mathbf{A} \rightarrow \mathbb{R}\)</span>，特别注意 ，此处的<span class="math inline">\(u_i\)</span>表示一个从行动组合集合<span class="math inline">\(a \in A\)</span>到实数<span class="math inline">\(\mathbf{R}\)</span>的映射</li>
-</ol></li>
+<li>(1) 玩家的集合$N = {1, 2, …, n}$ 是一个大小为n的有限集合，用$i$标识</li>
+<li>(2) 行动组合的全集$\mathbf{A} = A_1 \times A_2 \times … \times A_n$，其中$A_i$表示玩家$i$的行动集合，若用$a$表示一个行动组合（action profile），则有$a = (a_1, a_2, …, a_n) \in \mathbf{A}$</li>
+<li>(3) 效用(代价)函数组$u = (u_1, u_2, …, u_n)$，其中对于玩家$i$，$u_i: \mathbf{A} \rightarrow \mathbb{R}$，特别注意 ，此处的$u_i$表示一个从行动组合集合$a \in A$到实数$\mathbf{R}$的映射</li>
 </ul>
-<hr />
-<h2 id="支配策略">支配策略</h2>
-<p>我们在参与游戏的时会有一个要实现的<strong>目标</strong>（goal），通常情况下的目标为最大化自己的收益（payoff），但是也可以有别的目标（比如以让对方获得最小收益为目标）</p>
+<hr>
+<h2 id="支配策略"><a href="#支配策略" class="headerlink" title="支配策略"></a>支配策略</h2><p>我们在参与游戏的时会有一个要实现的<strong>目标</strong>（goal），通常情况下的目标为最大化自己的收益（payoff），但是也可以有别的目标（比如以让对方获得最小收益为目标）</p>
 <p>为实现这个目标我们会有一个对应的<strong>策略</strong>（strategy），<strong>策略</strong>指导玩家该做出什么行动（或选择什么行动）。比如在囚徒困境中，囚犯的策略就是：<strong>做出怎样的选择(招供或不招供)，以使自己被判的时间最短</strong>。这里每个囚犯有两个选择：与另一个囚犯合作（Cooperate）和欺骗另一个囚犯（Deceive），选择合作意味着<strong>不招供</strong>而欺骗意味着<strong>招供</strong>，所以每个囚犯都会思考，如果对方招供的话我该怎么选，如果对方不招供的话我又该怎么选？从而我们这里引入一个概念<strong>支配策略</strong>（dominant strategy）</p>
-<p>支配策略：A dominant strategy for a player is one that produces the highest payoff of any strategy available for every possible action by the other players。通俗点讲就是：不管别人做出怎样的行动，我所做的选择都可以让我得到最大收益。还以囚徒困境举例</p>
-<p>情况一：当<strong>囚犯2选择C不招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判1年，而D招供那么自己可以无罪释放（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong> </p>
-<p>情况二：当<strong>囚犯2选择D招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判3年，而D招供那么自己会被判2年（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong> </p>
+<p>支配策略：A dominant strategy for a player is one that produces the highest payoff of any strategy available for every possible action by the other players。通俗点讲就是：不管别人做出怎样的行动，我所做的选择都可以让我得到最大收益。还以囚徒困境举例  </p>
+<p>情况一：当<strong>囚犯2选择C不招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判1年，而D招供那么自己可以无罪释放（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong></p>
+<img src="/2020/01/20/Game1/pic2.png" class="">  
+
+<p>情况二：当<strong>囚犯2选择D招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判3年，而D招供那么自己会被判2年（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong></p>
+<img src="/2020/01/20/Game1/pic3.png" class="">  
+
 <p>综合上述两种情况，我们可以得出结论：<strong>不论囚犯2如何选择，囚犯1的最佳选择都是D招供</strong>（也就是囚犯1的支配策略）。同样的道理，由于囚犯1和囚犯2的地位是<strong>对称的</strong>，所以<strong>囚犯2的支配策略也是D招供</strong></p>
-<h2 id="关于囚徒困境的结论">关于囚徒困境的结论</h2>
-<p>根据之前的支配策略的分析，两个囚犯的支配策略都是D招供，从而两个人<strong>都被判2年</strong>。而囚徒困境的令人诧异的地方也就出现于此，我们如果从一个上帝视角来看，很明显，两个囚犯的最佳选择明明是选择都不招供，这样两个人加起来判的时间是最少的，是全局最优解，但是如果从个人角度来分析，就会发现，无论如何他们两个都不会去选择一起合作不招供。这恰恰就是囚徒困境的背景————两个人无法交流即非合作博弈，<strong>其所谓的上帝视角其实是不存在的</strong>，因为将其推广到繁杂的现实，就会发现没有“上帝”可以看到整个全局，没有人的信息是全局的，从而从这个思想出发，反驳了亚当斯密的一个基本观点:所有人的最优选择会形成整个群体的最优选择，因为当所有人做到自己的最优时，对于整个社会来说可能是最坏的（两个囚犯加起来一共判了4年）</p>
-<h2 id="补充">补充</h2>
-<p>囚徒困境的标准通式满足： <span class="math display">\[c &gt; a &gt; d &gt; b\]</span> </p>
+<h2 id="关于囚徒困境的结论"><a href="#关于囚徒困境的结论" class="headerlink" title="关于囚徒困境的结论"></a>关于囚徒困境的结论</h2><p>根据之前的支配策略的分析，两个囚犯的支配策略都是D招供，从而两个人<strong>都被判2年</strong>。而囚徒困境的令人诧异的地方也就出现于此，我们如果从一个上帝视角来看，很明显，两个囚犯的最佳选择明明是选择都不招供，这样两个人加起来判的时间是最少的，是全局最优解，但是如果从个人角度来分析，就会发现，无论如何他们两个都不会去选择一起合作不招供。这恰恰就是囚徒困境的背景————两个人无法交流即非合作博弈，<strong>其所谓的上帝视角其实是不存在的</strong>，因为将其推广到繁杂的现实，就会发现没有“上帝”可以看到整个全局，没有人的信息是全局的，从而从这个思想出发，反驳了亚当斯密的一个基本观点:所有人的最优选择会形成整个群体的最优选择，因为当所有人做到自己的最优时，对于整个社会来说可能是最坏的（两个囚犯加起来一共判了4年）</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>囚徒困境的标准通式满足：<br>$$c &gt; a &gt; d &gt; b$$</p>
+<img src="/2020/01/20/Game1/pic4.png" class="">
 
       
     </div>
@@ -342,48 +336,45 @@
           <blockquote>
 <p><em>参考书目《统计学习方法（第2版）》 李航 著</em></p>
 </blockquote>
-<h2 id="无监督学习基本原理">无监督学习基本原理</h2>
-<ul>
+<h2 id="无监督学习基本原理"><a href="#无监督学习基本原理" class="headerlink" title="无监督学习基本原理"></a>无监督学习基本原理</h2><ul>
 <li>无监督学习是从无标注的数据中学习数据的统计规律或者说内在结构的机器学习，主要包括<strong>聚类、降维、概率估计</strong></li>
 <li>无监督学习的基本想法是对给定数据（矩阵数据）进行某种“压缩”，从而找到数据的潜在结构。<strong>假定损失最小的压缩得到的结果就是最本质的结构</strong></li>
 </ul>
-<p>发掘数据的<em>纵向结构</em>，把相似的样本聚到同类，即对数据进行<strong>聚类</strong><br />
-<br />
-发掘数据的<em>横向结构</em>，把高维空间的向量转换为低维空间的向量，即对数据进行<strong>降维</strong>聚类<br />
-<br />
-同时发掘数据的纵向和横向结构，假设数据由含有隐式结构的概率模型生成得到，从数据中<strong>学习该概率模型</strong><br />
-</p>
-<hr />
-<h2 id="三个基本问题">三个基本问题</h2>
-<h3 id="聚类">聚类</h3>
-<ul>
+<p>发掘数据的<em>纵向结构</em>，把相似的样本聚到同类，即对数据进行<strong>聚类</strong>  </p>
+<img src="/2020/01/17/ML13/pic1.png" class="">  
+<p>发掘数据的<em>横向结构</em>，把高维空间的向量转换为低维空间的向量，即对数据进行<strong>降维</strong>聚类  </p>
+<img src="/2020/01/17/ML13/pic2.png" class="">  
+<p>同时发掘数据的纵向和横向结构，假设数据由含有隐式结构的概率模型生成得到，从数据中<strong>学习该概率模型</strong>  </p>
+<img src="/2020/01/17/ML13/pic3.png" class="">  
+
+<hr>
+<h2 id="三个基本问题"><a href="#三个基本问题" class="headerlink" title="三个基本问题"></a>三个基本问题</h2><h3 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h3><ul>
 <li>聚类（clustering）是将样本集合中相似的样本（实例）分配到相同的类，不相似的样本分配到不同的类。</li>
 <li>聚类时，样本通常是欧氏空间中的向量，类别不是预先给定，而是从数据中自动发现，但类别的个数通常是预先给定的。样本之间的相似度或距离由 应用决定。</li>
-<li>如果一个样本只能属于一个类，则称为硬聚类（硬聚类） <span class="math display">\[z_i = g_\theta(x_i), i = 1,2,...,N\]</span></li>
-<li>如果一个样本可以属于多个类，则称为软聚类（软聚类） <span class="math display">\[P_\theta(z_i|x_i), i = 1,2,...,N\]</span></li>
+<li>如果一个样本只能属于一个类，则称为硬聚类（硬聚类）<br>  $$z_i = g_\theta(x_i), i = 1,2,…,N$$</li>
+<li>如果一个样本可以属于多个类，则称为软聚类（软聚类）<br>  $$P_\theta(z_i|x_i), i = 1,2,…,N$$</li>
 </ul>
-<h3 id="降维">降维</h3>
-<ul>
+<h3 id="降维"><a href="#降维" class="headerlink" title="降维"></a>降维</h3><ul>
 <li>降维（dimensionality reduction）是将训练数据中的样本（实例）从高维空间转换到低维空间</li>
 <li>假设样本原本存在于低维空间，或者近似地存在于低维空间，通过降维则可以更好地表示样本数据的结构，即更好地表示样本之间的关系</li>
 <li>高维空间通常是高维的欧氏空间，而低维空间是低维的欧氏空间或者流形（manifold)</li>
 <li>从高维到低维的降维中，要保证样本中的信息损失最小</li>
 </ul>
+<img src="/2020/01/17/ML13/pic4.png" class="">
 
-<p>降维的模型是函数 <span class="math display">\[z_i = g_\theta(x_i), i = 1,2,...,N\]</span> 其中<span class="math inline">\(x_i \in X\)</span>是样本的高维向量，<span class="math inline">\(z_i \in Z\)</span>是样本的低维向量，<span class="math inline">\(\theta\)</span>是参数，函数可以是线性函数也可以是非线性函数，降维的过程就是学习降维模型的过程</p>
-<h3 id="概率模型估计">概率模型估计</h3>
-<ul>
+<p>降维的模型是函数<br>$$z_i = g_\theta(x_i), i = 1,2,…,N$$<br>其中$x_i \in X$是样本的高维向量，$z_i \in Z$是样本的低维向量，$\theta$是参数，函数可以是线性函数也可以是非线性函数，降维的过程就是学习降维模型的过程</p>
+<h3 id="概率模型估计"><a href="#概率模型估计" class="headerlink" title="概率模型估计"></a>概率模型估计</h3><ul>
 <li>概率模型估计（probility model estimation），简称概率估计，假设训练数据由一个概率模型生成，由训练数据学习概率模型的结构和参数。</li>
 <li>概率模型的<strong>结构类型</strong>（或者说概率模型的集合事先给定），而模型的<strong>具体结构与参数从数据中自动学习</strong>。学习的目标是找到最有可能生成数据的结构和参数。</li>
 </ul>
+<img src="/2020/01/17/ML13/pic5.png" class="">
 
-<p>概率模型表示为条件概率分布 <span class="math display">\[P_\theta(x|z)\]</span> 随机变量<span class="math inline">\(x\)</span>表示观测数据，可以是连续变量也可以是离散变量，随机变量<span class="math inline">\(z\)</span>表示隐式结构，是离散变量，随机变量<span class="math inline">\(\theta\)</span>表示参数。概率模型的一种特殊情况是隐式结构不存在，即满足 <span class="math display">\[P_\theta(x|z) = P_\theta(x)\]</span> 这时条件 概率分布估计变成概率分布估计，只要估计分布<span class="math inline">\(P_\theta(x)\)</span>的参数即可</p>
-<hr />
-<h2 id="无监督学习三要素">无监督学习三要素</h2>
-<ul>
-<li>(1)模型: 函数<span class="math display">\[z = g_\theta(x)\]</span>，条件概率分布<span class="math display">\[P_\theta(z|x)\]</span>，或条件概率分布<span class="math display">\[P_\theta(x|z)\]</span></li>
-<li>(2)策略: 目标函数的优化</li>
-<li>(3)算法: 迭代算法，通过迭代达到对目标函数的最优化</li>
+<p>概率模型表示为条件概率分布<br>$$P_\theta(x|z)$$<br>随机变量$x$表示观测数据，可以是连续变量也可以是离散变量，随机变量$z$表示隐式结构，是离散变量，随机变量$\theta$表示参数。概率模型的一种特殊情况是隐式结构不存在，即满足<br>$$P_\theta(x|z) = P_\theta(x)$$<br>这时条件 概率分布估计变成概率分布估计，只要估计分布$P_\theta(x)$的参数即可</p>
+<hr>
+<h2 id="无监督学习三要素"><a href="#无监督学习三要素" class="headerlink" title="无监督学习三要素"></a>无监督学习三要素</h2><ul>
+<li>(1)模型:<br>  函数$$z = g_\theta(x)$$，条件概率分布$$P_\theta(z|x)$$，或条件概率分布$$P_\theta(x|z)$$</li>
+<li>(2)策略:<br>  目标函数的优化</li>
+<li>(3)算法:<br>  迭代算法，通过迭代达到对目标函数的最优化</li>
 </ul>
 
       
@@ -458,71 +449,73 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="physical-architecture-of-gpu">Physical Architecture of GPU</h2>
-<p>下图为Nvidia官网上找的一个GPU主板的概念图，对应Device</p>
+          <h2 id="Physical-Architecture-of-GPU"><a href="#Physical-Architecture-of-GPU" class="headerlink" title="Physical Architecture of GPU"></a>Physical Architecture of GPU</h2><p>下图为Nvidia官网上找的一个GPU主板的概念图，对应Device</p>
 <ul>
 <li>Device：与host做区分，可以理解为是指整个显卡</li>
 </ul>
-
+<img src="/2019/11/25/GPU1/pic2.png" class="">
 <p>如下图所示（Nvidia Tesla P100），共包含60个SM（6GPC x 10SM）</p>
 <ul>
-<li>SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一些硬件资源组成
-<ul>
+<li>SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一些硬件资源组成<ul>
 <li>其他硬件资源如：warp scheduler，register，shared memory等</li>
 <li>同一个block中的warp一定分配给同一个SM</li>
 <li>每个SM有自己独立的local L1 cache，但所有SM会共用Device的L2 cache</li>
-</ul></li>
 </ul>
+</li>
+</ul>
+<img src="/2019/11/25/GPU1/pic3.png" class="">
 
-<p>每个SM有自己的内部结构，如下图所示GP100（Nvidia Tesla P100）中的SM内部结构，在GP100里，每一个SM有左右两个SM Processing Block（SMP） </p>
+<p>每个SM有自己的内部结构，如下图所示GP100（Nvidia Tesla P100）中的SM内部结构，在GP100里，每一个SM有左右两个SM Processing Block（SMP）</p>
+<img src="/2019/11/25/GPU1/pic4.png" class="">
+
 <ul>
-<li>SP(Streaming Processor)：最基本的处理单元，也称为CUDA core，表示在上图中为绿色的小格子
-<ul>
+<li>SP(Streaming Processor)：最基本的处理单元，也称为CUDA core，表示在上图中为绿色的小格子<ul>
 <li>相当于一个简易的CPU</li>
 <li>内部包括控制单元Dispatch Port、Operand Collector，以及浮点计算单元FP Unit、整数计算单元Int Unit，另外还包括计算结果队列。当然还有Compare、Logic、Branch等</li>
-</ul></li>
 </ul>
-<p>下图为SP（CUDA core）的内部结构 </p>
-<h2 id="software-concept-in-cuda">Software Concept in CUDA</h2>
-<ul>
-<li>Thread：一个CUDA的并行程序会被分配到多个threads来执行
-<ul>
+</li>
+</ul>
+<p>下图为SP（CUDA core）的内部结构</p>
+<img src="/2019/11/25/GPU1/pic6.png" class="">
+
+<h2 id="Software-Concept-in-CUDA"><a href="#Software-Concept-in-CUDA" class="headerlink" title="Software Concept in CUDA"></a>Software Concept in CUDA</h2><ul>
+<li>Thread：一个CUDA的并行程序会被分配到多个threads来执行<ul>
 <li>一个SP对应执行一个thread</li>
 <li>threadId在cuda中为三维的概念，在一个block中由(x, y, z)来唯一定位</li>
-</ul></li>
-<li>Block：多个thread群组成一个block
-<ul>
+</ul>
+</li>
+<li>Block：多个thread群组成一个block<ul>
 <li>同一个block中的threads可以同步，也可以通过shared memory通信</li>
 <li>blockId在cuda中为二维的概念，在一个grid中由(x, y)来唯一定位</li>
-</ul></li>
-<li>Grid：多个block构成grid
-<ul>
-<li>一个grid对应一个执行一个kernel函数</li>
-</ul></li>
 </ul>
-<p>空间对应如下图所示<br />
-</p>
+</li>
+<li>Grid：多个block构成grid<ul>
+<li>一个grid对应一个执行一个kernel函数</li>
+</ul>
+</li>
+</ul>
+<p>空间对应如下图所示  </p>
+<img src="/2019/11/25/GPU1/pic1.png" class="">
+
 <ul>
-<li>warp：执行任务的调度单元，同一时间一个SM只能运行一个warp
-<ul>
+<li>warp：执行任务的调度单元，同一时间一个SM只能运行一个warp<ul>
 <li>类比于CPU中的进程，当一个warp阻塞时，SM将切换执行另一个warp</li>
 <li>当前CUDA的warp大小为32个线程。这里表明Nvidia的GPU执行粒度小，执行线程粒度越小，并行度越高，掩盖延迟的能力越强</li>
 <li>同在一个warp中的线程，以不同数据资源执行相同的指令，即所谓的SIMT（Single Instruction Multiple Thread）</li>
-</ul></li>
 </ul>
-<h2 id="cpu和gpu的结构对比">CPU和GPU的结构对比</h2>
+</li>
+</ul>
+<h2 id="CPU和GPU的结构对比"><a href="#CPU和GPU的结构对比" class="headerlink" title="CPU和GPU的结构对比"></a>CPU和GPU的结构对比</h2><img src="/2019/11/25/GPU1/pic5.png" class="">
 
 <ul>
 <li>CPU是靠更大的缓存和复杂的逻辑控制（如流水线、乱序执行、指令预测和预处理等等）来掩饰延迟的</li>
 <li>GPU是靠更高的并行度来掩饰延迟的</li>
 </ul>
-<h2 id="others">Others</h2>
-<ul>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
 <li>GPU在并发的warp之间切换是没什么消耗的，因为硬件资源早就被分配到所有thread和block，所以新调度的warp的状态已经存储在SM中了。不同于CPU，CPU切换线程需要保存/读取线程上下文（register内容），这是非常耗时的，而GPU为每个threads提供物理register，无需保存/读取上下文。</li>
 <li>register和shared memory是SM的稀缺资源。CUDA将这些资源在程序执行前就分配给所有驻留在SM中的warp，并且整个程序执行周期都不再变动。因此这些有限的资源就会限制每个SM中active warp的数量，实验结果显示一个SM至少要存在6个active warp才能有效掩饰延迟</li>
 </ul>
-<h2 id="reference-material">Reference Material</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/junparadox/article/details/50540602">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/fpgatom/article/details/82081422">GPU高性能编程CUDA实战</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/asasasaababab/article/details/80447254">Nvidia GPU架构 - Cuda Core，SM，SP</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/junparadox/article/details/50540602">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41598072/article/details/82877655">CUDA中grid、block、thread、warp与SM、SP的关系</a></p>
+<h2 id="Reference-Material"><a href="#Reference-Material" class="headerlink" title="Reference Material"></a>Reference Material</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/junparadox/article/details/50540602">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/fpgatom/article/details/82081422">GPU高性能编程CUDA实战</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/asasasaababab/article/details/80447254">Nvidia GPU架构 - Cuda Core，SM，SP</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/junparadox/article/details/50540602">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41598072/article/details/82877655">CUDA中grid、block、thread、warp与SM、SP的关系</a></p>
 
       
     </div>
@@ -596,116 +589,77 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hxphp/p/6707718.html">转载出处</a><br />
-因为 shell 频繁 地使用文件名，shell 提供了特殊字符来帮助你快速指定一组文件名。这些特殊字符叫做通配符。</p>
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hxphp/p/6707718.html">转载出处</a><br>因为 shell 频繁 地使用文件名，shell 提供了特殊字符来帮助你快速指定一组文件名。这些特殊字符叫做通配符。</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>通配符</th>
 <th>意义</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
+<tbody><tr>
 <td>*</td>
 <td>匹配任意多个字符（包括零个或一个）</td>
 </tr>
-<tr class="even">
+<tr>
 <td>?</td>
 <td>匹配任意一个字符（不包括零个）</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>[characters]</td>
 <td>匹配任意一个属于字符集中的字符</td>
 </tr>
-<tr class="even">
+<tr>
 <td>[!characters]</td>
 <td>匹配任意一个不是字符集中的字符</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>[[:class:]]</td>
 <td>匹配任意一个属于指定字符类中的字符</td>
 </tr>
-</tbody>
-</table>
-<p> </p>
+</tbody></table>
+<p>&emsp;</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>字符类</th>
 <th>意义</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
+<tbody><tr>
 <td>[:alnum:]</td>
 <td>匹配任意一个字母或数字</td>
 </tr>
-<tr class="even">
+<tr>
 <td>[:alpha:]</td>
 <td>匹配任意一个字母</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>[:digit:]</td>
 <td>匹配任意一个数字</td>
 </tr>
-<tr class="even">
+<tr>
 <td>[:lower:]</td>
 <td>匹配任意一个小写字母</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>[:upper]</td>
 <td>匹配任意一个大写字母</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>一些常用的匹配：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>模式</th>
 <th>匹配对象</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
-<td>*</td>
-<td>所有文件</td>
-</tr>
-<tr class="even">
-<td>g*</td>
-<td>文件名以“g”开头的文件</td>
-</tr>
-<tr class="odd">
-<td>b*.txt 以”b”</td>
-<td>开头，中间有零个或任意多个字符，并以”.txt” 结尾的文件</td>
-</tr>
-<tr class="even">
-<td>Data???</td>
-<td>以“Data”开头，其后紧接着 3 个字符的文件</td>
-</tr>
-<tr class="odd">
-<td>[abc]*</td>
-<td>文件名以”a”,”b”, 或”c” 开头的文件</td>
-</tr>
-<tr class="even">
-<td>BACKUP.[0-9][0-9][0-9]</td>
-<td>以”BACKUP.” 开头，并紧接着 3 个数字的文件</td>
-</tr>
-<tr class="odd">
-<td>[[:upper:]]*</td>
-<td>以大写字母开头的文件</td>
-</tr>
-<tr class="even">
-<td>[[:digit:]]*</td>
-<td>不以数字开头的文件</td>
-</tr>
-<tr class="odd">
-<td>*[[:lower:]123]</td>
-<td>文件名以小写字母结尾，或以“1”，“2”，或“3”结尾的文件</td>
-</tr>
-</tbody>
 </table>
+<ul>
+<li>| 所有文件<br>g* | 文件名以“g”开头的文件<br>b*.txt 以”b” | 开头，中间有零个或任意多个字符，并以”.txt” 结尾的文件<br>Data??? | 以“Data”开头，其后紧接着 3 个字符的文件<br>[abc]* | 文件名以”a”,”b”, 或”c” 开头的文件<br>BACKUP.[0-9][0-9][0-9] | 以”BACKUP.” 开头，并紧接着 3 个数字的文件<br>[[:upper:]]* | 以大写字母开头的文件<br>[![:digit:]]* | 不以数字开头的文件</li>
+<li>[[:lower:]123] | 文件名以小写字母结尾，或以“1”，“2”，或“3”结尾的文件</li>
+</ul>
 
       
     </div>
@@ -782,62 +736,46 @@
           <blockquote>
 <p><em>参考书目《数据库系统概论（第5版）》</em></p>
 </blockquote>
-<h2 id="并发控制概述">并发控制概述</h2>
-<p>并发操作带来的不一致性：</p>
+<h2 id="并发控制概述"><a href="#并发控制概述" class="headerlink" title="并发控制概述"></a>并发控制概述</h2><p>并发操作带来的不一致性：</p>
 <ul>
 <li>丢失修改：T1和T2同时读入并修改，后者的提交覆盖了前者的提交</li>
 <li>不可重复读：T1读取了数据A，期间T2修改了数据A，当T1再次读取A时发现与原先不一致</li>
 <li>读“脏”数据：T1保存了对A的修改，但在T2读取A的期间，T1对A的操作被撤销导致A恢复原值，从而T2读取的是<strong>错误数据</strong></li>
 </ul>
 <p>并发控制的主要技术：封锁、时间戳、乐观控制法和多版本并发控制</p>
-<hr />
-<h2 id="封锁与封锁协议">封锁与封锁协议</h2>
-<p><strong>封锁</strong>就是事务在对某数据对象操作之前先向系统发出请求，对其<strong>加锁</strong><br />
-基本的封锁类型有：</p>
+<hr>
+<h2 id="封锁与封锁协议"><a href="#封锁与封锁协议" class="headerlink" title="封锁与封锁协议"></a>封锁与封锁协议</h2><p><strong>封锁</strong>就是事务在对某数据对象操作之前先向系统发出请求，对其<strong>加锁</strong><br>基本的封锁类型有：</p>
 <ul>
 <li><strong>排他锁</strong>又称<strong>写锁</strong>（简称X锁）</li>
 <li><strong>共享锁</strong>又称<strong>读锁</strong>（简称S锁）</li>
 </ul>
 <p>封锁协议：</p>
-<ol type="1">
-<li>一级封锁协议：事务T在<strong>修改</strong>数据R之前必须先对其加X锁，直到事务结束才释放<br />
-一级封锁协议可防止丢失修改，并保证事务T是可恢复的，但其不保证可重复读和不读错误数据</li>
-<li>二级封锁协议：在一级封锁协议基础上，增加事务T在<strong>读取</strong>数据R之前必须先对其加S锁，<strong>读完后</strong>即可释放S锁<br />
-二级封锁协议除防止了丢失修改，还进一步防止读错误数据，但其不保证可重复读</li>
-<li>三级封锁协议：在一级封锁协议基础上，增加事务T在<strong>读取</strong>数据R之前必须先对其加S锁，<strong>直到事务结束</strong>释放S锁<br />
-三级封锁协议除防止了丢失修改，读读错误数据和不可重复读</li>
+<ol>
+<li>一级封锁协议：事务T在<strong>修改</strong>数据R之前必须先对其加X锁，直到事务结束才释放<br>一级封锁协议可防止丢失修改，并保证事务T是可恢复的，但其不保证可重复读和不读错误数据</li>
+<li>二级封锁协议：在一级封锁协议基础上，增加事务T在<strong>读取</strong>数据R之前必须先对其加S锁，<strong>读完后</strong>即可释放S锁<br>二级封锁协议除防止了丢失修改，还进一步防止读错误数据，但其不保证可重复读</li>
+<li>三级封锁协议：在一级封锁协议基础上，增加事务T在<strong>读取</strong>数据R之前必须先对其加S锁，<strong>直到事务结束</strong>释放S锁<br>三级封锁协议除防止了丢失修改，读读错误数据和不可重复读</li>
 </ol>
-<hr />
-<h2 id="活锁和死锁">活锁和死锁</h2>
-<p>活锁：就是操作系统中的<strong>饥饿</strong>，使用FCFS来预防活锁<br />
-死锁：就是操作系统中的<strong>死锁</strong><br />
-死锁的预防：</p>
+<hr>
+<h2 id="活锁和死锁"><a href="#活锁和死锁" class="headerlink" title="活锁和死锁"></a>活锁和死锁</h2><p>活锁：就是操作系统中的<strong>饥饿</strong>，使用FCFS来预防活锁<br>死锁：就是操作系统中的<strong>死锁</strong><br>死锁的预防：</p>
 <ul>
 <li>一次封锁法：一次将所有要使用的数据全部加锁</li>
 <li>顺序封锁法：先对数据对象规定一个封锁顺序，所有事务都按这个顺序实施封锁</li>
 </ul>
-<p>操作系统中采用的预防死锁不适合数据库，因此数据库普遍采用诊断并解除死锁的方法，即允许发生死锁， 然后采用一定手段定期诊断系统中有无死锁， 若有则解除之<br />
-死锁的<strong>诊断</strong>方法：</p>
+<p>操作系统中采用的预防死锁不适合数据库，因此数据库普遍采用诊断并解除死锁的方法，即允许发生死锁， 然后采用一定手段定期诊断系统中有无死锁， 若有则解除之<br>死锁的<strong>诊断</strong>方法：</p>
 <ul>
 <li>超时法</li>
 <li>等待图法</li>
 </ul>
 <p>死锁的<strong>解除</strong>，通常采用的方法是：<strong>选择一个处理死锁代价最小的事务，将其撤销，释放此事务持有的所有锁，使其他事务得以继续运行下去</strong></p>
-<hr />
-<h2 id="并发调度的可串行性">并发调度的可串行性</h2>
-<p><strong>可串行化调度</strong>：多个事务的并发执行是正确的，当且仅当其结果与按某一次序串行执行这些事务时的结果相同<br />
-<strong>可串行性</strong>是并发事务正确调度的准则。即一个给定的并发调度，当且仅当它是可串行化的，才认为是<strong>正确调度</strong><br />
-若一个调度是<strong>冲突可串行化</strong>，则一定是<strong>可串行化</strong>调度</p>
-<hr />
-<h2 id="两段锁协议">两段锁协议</h2>
-<p>数据库系统采用<strong>两段锁协议</strong>（2PL）的方法实现并发调度的可串行性，从而保证调度的正确性<br />
-两段锁协议是指所有事务必须分两个阶段对数据项加锁和解锁：</p>
+<hr>
+<h2 id="并发调度的可串行性"><a href="#并发调度的可串行性" class="headerlink" title="并发调度的可串行性"></a>并发调度的可串行性</h2><p><strong>可串行化调度</strong>：多个事务的并发执行是正确的，当且仅当其结果与按某一次序串行执行这些事务时的结果相同<br><strong>可串行性</strong>是并发事务正确调度的准则。即一个给定的并发调度，当且仅当它是可串行化的，才认为是<strong>正确调度</strong><br>若一个调度是<strong>冲突可串行化</strong>，则一定是<strong>可串行化</strong>调度  </p>
+<hr>
+<h2 id="两段锁协议"><a href="#两段锁协议" class="headerlink" title="两段锁协议"></a>两段锁协议</h2><p>数据库系统采用<strong>两段锁协议</strong>（2PL）的方法实现并发调度的可串行性，从而保证调度的正确性<br>两段锁协议是指所有事务必须分两个阶段对数据项加锁和解锁：</p>
 <ul>
 <li>扩展阶段（第一阶段）：获得封锁。在对任何数据进行读、写操作之前，首先要申请并获得对该数据的封锁；此阶段，可以申请获得任何数据项上任何类型的锁，但是不能释放锁</li>
 <li>收缩阶段（第二阶段）：释放封锁。在释放一个封锁之后，事务不再申请和获得任何其他封锁</li>
 </ul>
-<p>事务遵守两段锁协议是可串行化调度的<strong>充分条件</strong><br />
-一次封锁法遵守两段锁协议，但两段锁协议并不要求事务必须一次将所有要使用的数据全部加锁，因此<strong>遵守两段锁协议的事务仍可能发生死锁</strong></p>
+<p>事务遵守两段锁协议是可串行化调度的<strong>充分条件</strong><br>一次封锁法遵守两段锁协议，但两段锁协议并不要求事务必须一次将所有要使用的数据全部加锁，因此<strong>遵守两段锁协议的事务仍可能发生死锁</strong></p>
 
       
     </div>

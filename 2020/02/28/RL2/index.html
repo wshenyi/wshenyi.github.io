@@ -20,17 +20,23 @@
     var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute  Introduction to M">
+  <meta name="description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute  Introduction to">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RL2：Markov Decision Processes">
 <meta property="og:url" content="https://wshenyi.github.io/2020/02/28/RL2/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute  Introduction to M">
+<meta property="og:description" content="Refer from Reinforcement Learning An Introduction (2nd) and Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute  Introduction to">
 <meta property="og:locale">
+<meta property="og:image" content="https://wshenyi.github.io/2020/02/28/RL2/1.png">
+<meta property="og:image" content="https://wshenyi.github.io/2020/02/28/RL2/2.png">
+<meta property="og:image" content="https://wshenyi.github.io/2020/02/28/RL2/3.png">
+<meta property="og:image" content="https://wshenyi.github.io/2020/02/28/RL2/4.png">
+<meta property="og:image" content="https://wshenyi.github.io/2020/02/28/RL2/5.png">
 <meta property="article:published_time" content="2020-02-28T22:21:31.000Z">
 <meta property="article:modified_time" content="2020-04-03T07:34:00.000Z">
 <meta property="article:author" content="Godway">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wshenyi.github.io/2020/02/28/RL2/1.png">
 
 <link rel="canonical" href="https://wshenyi.github.io/2020/02/28/RL2/">
 
@@ -230,40 +236,35 @@
 
       
         <span id="more"></span>
+
 <blockquote>
 <p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
 </blockquote>
-<h2 id="introduction-to-markov-decision-processes">Introduction to Markov Decision Processes</h2>
-<h3 id="definition-of-mdp">Definition of MDP</h3>
-<p>MDPs are meant to be a straightforward framing of the problem of learning from interaction to achieve a goal. Here are the key element in discribing a MDP</p>
+<h2 id="Introduction-to-Markov-Decision-Processes"><a href="#Introduction-to-Markov-Decision-Processes" class="headerlink" title="Introduction to Markov Decision Processes"></a>Introduction to Markov Decision Processes</h2><h3 id="Definition-of-MDP"><a href="#Definition-of-MDP" class="headerlink" title="Definition of MDP"></a>Definition of MDP</h3><p>MDPs are meant to be a straightforward framing of the problem of learning from interaction to achieve a goal. Here are the key element in discribing a MDP</p>
 <ul>
 <li><strong>agent</strong>: the learner and the decision maker</li>
 <li><strong>environment</strong>: the thing a agent interacts with, comprising everything outside the agent</li>
 <li><strong>action</strong>: selected by the agent to interact with the environment</li>
 <li><strong>reward</strong>: special numerical values that the agent seeks to maximize over time through its choice of actions.</li>
 </ul>
-<p>the whole interacting process is precisely simplified as follow<br />
-<br />
-More specifically, the agent and the environment interact at each of a sequence of discrete time steps, <span class="math inline">\(t=0,1,2,3,...\)</span> At each time step <span class="math inline">\(t\)</span>, the agent recives some representation of the environment's <strong>state</strong>, <span class="math inline">\(S_t \in \mathbf{S}\)</span>, and on that basis selects an <strong>action</strong>, <span class="math inline">\(A_t \in \mathbf{A}(s)\)</span>.</p>
-<p>One time step later, in part as a consequence of its action, the agent receives a numerical reward, <span class="math inline">\(R_{t+1} \in \mathbf{R}\subset \mathbb{R}\)</span>, and finds itself in a new state, <span class="math inline">\(S_{t+1}\)</span>. The MDP and agent together thereby give rise to a sequence or trajectory that begins like this:<br />
-<br />
-In a finite MDP, the sets of states, actions, and rewards (<span class="math inline">\(\mathbf{S}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{R}\)</span>) all have a finite number of elements. In this case, the random variables <span class="math inline">\(R_t\)</span> and <span class="math inline">\(S_t\)</span> have well defined discrete probability distributions dependent only on the preceding state and action. That is, for particular values of these random variables, <span class="math inline">\(s&#39; \in \mathbf{S}\)</span> and <span class="math inline">\(r \in \mathbf{R}\)</span>, there is a probability of those values occurring at time t, given particular values of the preceding state and action: <span class="math display">\[p(s&#39;,r|s,a)\doteq P(S_t=s&#39;, R_t=r\ | \ S_{t-1}=s, A_{t-1}=a)\tag{2.1}\]</span> for all <span class="math inline">\(s&#39;,s \in \mathbf{S}\)</span>, <span class="math inline">\(r \in \mathbf{R}\)</span>, and <span class="math inline">\(a \in \mathbf{A}(s)\)</span>. The function <span class="math inline">\(p\)</span> defines the <strong>dynamics of the MDP</strong>. <span class="math display">\[p:\ \mathbf{S}\times \mathbf{R}\times \mathbf{S}\times \mathbf{A}\rightarrow [0,1]\]</span> With <span class="math inline">\(p(s&#39;,r|s,a)\)</span>, note that <strong>future state and reward only depends on the current state and action</strong>. This is called the <strong>Markov property</strong>. It means that the present state is sufficient and remembering earlier states would not improve predictions about the future.</p>
+<p>the whole interacting process is precisely simplified as follow  </p>
+<img src="/2020/02/28/RL2/1.png" class="">  
+<p>More specifically, the agent and the environment interact at each of a sequence of discrete time steps, $t=0,1,2,3,…$ At each time step $t$, the agent recives some representation of the environment’s <strong>state</strong>, $S_t \in \mathbf{S}$, and on that basis selects an <strong>action</strong>, $A_t \in \mathbf{A}(s)$.</p>
+<p>One time step later, in part as a consequence of its action, the agent receives a numerical reward, $R_{t+1} \in \mathbf{R}\subset \mathbb{R}$, and finds itself in a new state, $S_{t+1}$. The MDP and agent together thereby give rise to a sequence or trajectory that begins like this:  </p>
+<img src="/2020/02/28/RL2/2.png" class="">  
+<p>In a finite MDP, the sets of states, actions, and rewards ($\mathbf{S}$, $\mathbf{A}$, and $\mathbf{R}$) all have a finite number of elements. In this case, the random variables $R_t$ and $S_t$ have well defined discrete probability distributions dependent only on the preceding state and action. That is, for particular values of these random variables, $s’ \in \mathbf{S}$ and $r \in \mathbf{R}$, there is a probability of those values occurring at time t, given particular values of the preceding state and action:<br>$$p(s’,r|s,a)\doteq P(S_t=s’, R_t=r\ | \ S_{t-1}=s, A_{t-1}=a)\tag{2.1}$$<br>for all $s’,s \in \mathbf{S}$, $r \in \mathbf{R}$, and $a \in \mathbf{A}(s)$. The function $p$ defines the <strong>dynamics of the MDP</strong>.<br>$$p:\ \mathbf{S}\times \mathbf{R}\times \mathbf{S}\times \mathbf{A}\rightarrow [0,1]$$<br>With $p(s’,r|s,a)$, note that <strong>future state and reward only depends on the current state and action</strong>. This is called the <strong>Markov property</strong>. It means that the present state is sufficient and remembering earlier states would not improve predictions about the future.</p>
 <p>The <strong>MDP framework</strong> is a considerable <strong>abstraction</strong> of the problem of goal-directed learning from interaction. It can be used to formalize a wide variety of <strong>sequential decision-making</strong> problem. This also means that any problem of learning goal-directed behavior can be reduced to three signals passing back and forth between an agent and its environment: actions, states, rewards.</p>
-<h3 id="an-example-of-mdp">An Example of MDP</h3>
-<p>Here is an example of finite MDP, <strong>Recycling Robot</strong>. We can write down the transition probabilities and the expected rewards, with dynamics as indicated below.<br />
-<br />
-We can show it in another useful way called <strong>trasition graph</strong><br />
-<br />
-There are two kinds of nodes: state nodes and action nodes. The key point here is that the agent fisrtly chooses an action and then transits to a state with corresponding probability.</p>
-<hr />
-<h2 id="goal-of-reinforcement-learning">Goal of Reinforcement Learning</h2>
-<h3 id="the-goal-of-rl">The Goal of RL</h3>
-<p>In reinforcement learning, reward captures the notion of short-term gain. The objective however, is to learn a policy that achieves the most reward in the long run. With this premise, we denote the <strong>return</strong> at time step <span class="math inline">\(t\)</span> as <span class="math inline">\(G_t\)</span></p>
-<p><span class="math display">\[G_t\doteq R_{t+1}+R_{t+2}+R_{t+3}+...\tag{2.2}\]</span></p>
-<p>We intuitively want to maxmize <span class="math inline">\(G_t\)</span> at each time step. However, <span class="math inline">\(G_t\)</span> is a random variable because <strong>the dynamics of the MDP can be stochastic</strong>. That's why we define the goal of an agent is to <strong>maxmize the expected return</strong></p>
-<p><span class="math display">\[\mathbb{E}[G_t] = \mathbb{E}[R_{t+1}+R_{t+2}+R_{t+3}+...]\tag{2.3}\]</span></p>
-<h3 id="the-reward-hypothesis">The Reward Hypothesis</h3>
-<p>The <strong>Reinforcement Learning Hypothesis</strong> can be expressed as this:</p>
+<h3 id="An-Example-of-MDP"><a href="#An-Example-of-MDP" class="headerlink" title="An Example of MDP"></a>An Example of MDP</h3><p>Here is an example of finite MDP, <strong>Recycling Robot</strong>. We can write down the transition probabilities and the expected rewards, with dynamics as indicated below.  </p>
+<img src="/2020/02/28/RL2/3.png" class="">  
+<p>We can show it in another useful way called <strong>trasition graph</strong>  </p>
+<img src="/2020/02/28/RL2/4.png" class="">  
+<p>There are two kinds of nodes: state nodes and action nodes. The key point here is that the agent fisrtly chooses an action and then transits to a state with corresponding probability.</p>
+<hr>
+<h2 id="Goal-of-Reinforcement-Learning"><a href="#Goal-of-Reinforcement-Learning" class="headerlink" title="Goal of Reinforcement Learning"></a>Goal of Reinforcement Learning</h2><h3 id="The-Goal-of-RL"><a href="#The-Goal-of-RL" class="headerlink" title="The Goal of RL"></a>The Goal of RL</h3><p>In reinforcement learning, reward captures the notion of short-term gain. The objective however, is to learn a policy that achieves the most reward in the long run. With this premise, we denote the <strong>return</strong> at time step $t$ as $G_t$</p>
+<p>$$G_t\doteq R_{t+1}+R_{t+2}+R_{t+3}+…\tag{2.2}$$</p>
+<p>We intuitively want to maxmize $G_t$ at each time step. However, $G_t$ is a random variable because <strong>the dynamics of the MDP can be stochastic</strong>. That’s why we define the goal of an agent is to <strong>maxmize the expected return</strong></p>
+<p>$$\mathbb{E}[G_t] = \mathbb{E}[R_{t+1}+R_{t+2}+R_{t+3}+…]\tag{2.3}$$</p>
+<h3 id="The-Reward-Hypothesis"><a href="#The-Reward-Hypothesis" class="headerlink" title="The Reward Hypothesis"></a>The Reward Hypothesis</h3><p>The <strong>Reinforcement Learning Hypothesis</strong> can be expressed as this:</p>
 <blockquote>
 <p>That all of what we mean by goals and purposes can be well thought of as maximization of the expected value of the cumulative sum of a received scalar signal (reward).</p>
 </blockquote>
@@ -282,43 +283,26 @@ There are two kinds of nodes: state nodes and action nodes. The key point here i
 <li>action-penalty representation: -1 for not achieving goal, 0 once goal reached</li>
 </ul>
 <p>Both of representations have its own limitation. They lack of some middel information to tell the agent how to achieve the goal as our expectation.</p>
-<hr />
-<h2 id="episodic-tasks-and-continuing-tasks">Episodic Tasks And Continuing Tasks</h2>
-<h3 id="episodic-tasks">Episodic Tasks</h3>
-<p>In an <strong>episodic task</strong>, the agent-environment interaction breaks up into <strong>episodes</strong>. Episodes are indepedent and each episode ends in a <strong>terminal state</strong> at time step <span class="math inline">\(T\)</span>. In this situation, time step is finite and we change <a href="#the-goal-of-rl">(2.2)</a> as</p>
-<p><span class="math display">\[G_t \doteq R_{t+1}+R_{t+2}+R_{t+1}+...+R_T\tag{2.4}\]</span></p>
-<h3 id="continuing-tasks">Continuing Tasks</h3>
-<p>The interaction between agent-environment goes on <strong>continually</strong> and there is no <strong>terminal state</strong>. In this situation, time step is infinite and <span class="math inline">\(G_t\)</span> is the same in <span class="math inline">\((2.2)\)</span></p>
-<p><span class="math display">\[G_t \doteq R_{t+1}+R_{t+2}+R_{t+3}+...\]</span></p>
-<p>But here comes to one problem: <span class="math inline">\(G_t\)</span> could be <span class="math inline">\(\infty\)</span> and impossible to calculate. Therefore, we should make <span class="math inline">\(G_t\)</span> finite, which by using <strong>discounting</strong> method.</p>
-<h3 id="discounting-return">Discounting Return</h3>
-<p>Discount the rewards in the future by <span class="math inline">\(\gamma\)</span> called <strong>discount rate</strong>, where <span class="math inline">\(\gamma \in [0,1]\)</span></p>
-<p><span class="math display">\[
-\begin{eqnarray*}
-G_t
-&amp;\doteq&amp; R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...+\gamma^{k-1}R_{t+k}+...\\
-&amp;=&amp;\sum_{k=0}^\infty \gamma^kR_{t+k+1}\tag{2.5}
-\end{eqnarray*}
-\]</span></p>
-<p>We can also re-write <span class="math inline">\(G_t\)</span> in the recursive version</p>
-<p><span class="math display">\[G_t = R_{t+1}+\gamma G_{t+1}\tag{2.6}\]</span></p>
-<p>To prove <span class="math inline">\(G_t\)</span> is finite, let's assume <span class="math inline">\(R_{max}\)</span> is the maximum reward the agent can receive</p>
-<p><span class="math display">\[
-\begin{eqnarray*}
-G_t=\sum_{k=0}^\infty \gamma^kR_{t+k+1}&amp;\le&amp; \sum_{k=0}^\infty \gamma^kR_{max}\\
-&amp;=&amp;R_{max}\sum_{k=0}^\infty \gamma^k\\
-&amp;=&amp;R_{max}\times \frac{1}{1-\gamma}
-\end{eqnarray*}
-\]</span></p>
-<p>It proves that <span class="math inline">\(G_t\)</span> now is finite. To Specify, let's talk about <span class="math inline">\(\gamma=0\)</span> and <span class="math inline">\(\gamma=1\)</span>.</p>
+<hr>
+<h2 id="Episodic-Tasks-And-Continuing-Tasks"><a href="#Episodic-Tasks-And-Continuing-Tasks" class="headerlink" title="Episodic Tasks And Continuing Tasks"></a>Episodic Tasks And Continuing Tasks</h2><h3 id="Episodic-Tasks"><a href="#Episodic-Tasks" class="headerlink" title="Episodic Tasks"></a>Episodic Tasks</h3><p>In an <strong>episodic task</strong>, the agent-environment interaction breaks up into <strong>episodes</strong>. Episodes are indepedent and each episode ends in a <strong>terminal state</strong> at time step $T$. In this situation, time step is finite and we change <a href="#the-goal-of-rl">(2.2)</a> as</p>
+<p>$$G_t \doteq R_{t+1}+R_{t+2}+R_{t+1}+…+R_T\tag{2.4}$$</p>
+<h3 id="Continuing-Tasks"><a href="#Continuing-Tasks" class="headerlink" title="Continuing Tasks"></a>Continuing Tasks</h3><p>The interaction between agent-environment goes on <strong>continually</strong> and there is no <strong>terminal state</strong>. In this situation, time step is infinite and $G_t$ is the same in $(2.2)$</p>
+<p>$$G_t \doteq R_{t+1}+R_{t+2}+R_{t+3}+…$$</p>
+<p>But here comes to one problem: $G_t$ could be $\infty$ and impossible to calculate. Therefore, we should make $G_t$ finite, which by using <strong>discounting</strong> method.</p>
+<h3 id="Discounting-Return"><a href="#Discounting-Return" class="headerlink" title="Discounting Return"></a>Discounting Return</h3><p>Discount the rewards in the future by $\gamma$ called <strong>discount rate</strong>, where $\gamma \in [0,1]$</p>
+<p>$$<br>\begin{eqnarray*}<br>G_t<br>&amp;\doteq&amp; R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+…+\gamma^{k-1}R_{t+k}+…\<br>&amp;=&amp;\sum_{k=0}^\infty \gamma^kR_{t+k+1}\tag{2.5}<br>\end{eqnarray*}<br>$$</p>
+<p>We can also re-write $G_t$ in the recursive version</p>
+<p>$$G_t = R_{t+1}+\gamma G_{t+1}\tag{2.6}$$</p>
+<p>To prove $G_t$ is finite, let’s assume $R_{max}$ is the maximum reward the agent can receive</p>
+<p>$$<br>\begin{eqnarray*}<br>G_t=\sum_{k=0}^\infty \gamma^kR_{t+k+1}&amp;\le&amp; \sum_{k=0}^\infty \gamma^kR_{max}\<br>&amp;=&amp;R_{max}\sum_{k=0}^\infty \gamma^k\<br>&amp;=&amp;R_{max}\times \frac{1}{1-\gamma}<br>\end{eqnarray*}<br>$$</p>
+<p>It proves that $G_t$ now is finite. To Specify, let’s talk about $\gamma=0$ and $\gamma=1$.</p>
 <ul>
-<li><span class="math inline">\(\gamma=0\Rightarrow G_t=R_t\)</span> : agent only cares about immediate reward. (<strong>short-sighted agent</strong>)</li>
-<li><span class="math inline">\(\gamma\rightarrow1\)</span> : agent takes future rewards into account more strongly. (<strong>far-sighted agent</strong>)</li>
+<li>$\gamma=0\Rightarrow G_t=R_t$ : agent only cares about immediate reward. (<strong>short-sighted agent</strong>)</li>
+<li>$\gamma\rightarrow1$ : agent takes future rewards into account more strongly. (<strong>far-sighted agent</strong>)</li>
 </ul>
-<h3 id="unified-episodic-and-continuing-tasks">Unified Episodic and Continuing Tasks</h3>
-<p>we can consider episode termination to be the entering of a special <strong>absorbing state</strong> that transitions only to itself and that generates only rewards of zero. For example, consider the state transition diagram:<br />
-<br />
-Thus, we can informally regard epsoidic tasks as continuing task.</p>
+<h3 id="Unified-Episodic-and-Continuing-Tasks"><a href="#Unified-Episodic-and-Continuing-Tasks" class="headerlink" title="Unified Episodic and Continuing Tasks"></a>Unified Episodic and Continuing Tasks</h3><p>we can consider episode termination to be the entering of a special <strong>absorbing state</strong> that transitions only to itself and that generates only rewards of zero. For example, consider the state transition diagram:  </p>
+<img src="/2020/02/28/RL2/5.png" class="">  
+<p>Thus, we can informally regard epsoidic tasks as continuing task.</p>
 
     </div>
 
@@ -399,7 +383,7 @@ Thus, we can informally regard epsoidic tasks as continuing task.</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-to-markov-decision-processes"><span class="nav-number">1.</span> <span class="nav-text">Introduction to Markov Decision Processes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#definition-of-mdp"><span class="nav-number">1.1.</span> <span class="nav-text">Definition of MDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#an-example-of-mdp"><span class="nav-number">1.2.</span> <span class="nav-text">An Example of MDP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goal-of-reinforcement-learning"><span class="nav-number">2.</span> <span class="nav-text">Goal of Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-goal-of-rl"><span class="nav-number">2.1.</span> <span class="nav-text">The Goal of RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-reward-hypothesis"><span class="nav-number">2.2.</span> <span class="nav-text">The Reward Hypothesis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#episodic-tasks-and-continuing-tasks"><span class="nav-number">3.</span> <span class="nav-text">Episodic Tasks And Continuing Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#episodic-tasks"><span class="nav-number">3.1.</span> <span class="nav-text">Episodic Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#continuing-tasks"><span class="nav-number">3.2.</span> <span class="nav-text">Continuing Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#discounting-return"><span class="nav-number">3.3.</span> <span class="nav-text">Discounting Return</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unified-episodic-and-continuing-tasks"><span class="nav-number">3.4.</span> <span class="nav-text">Unified Episodic and Continuing Tasks</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-to-Markov-Decision-Processes"><span class="nav-number">1.</span> <span class="nav-text">Introduction to Markov Decision Processes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition-of-MDP"><span class="nav-number">1.1.</span> <span class="nav-text">Definition of MDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#An-Example-of-MDP"><span class="nav-number">1.2.</span> <span class="nav-text">An Example of MDP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Goal-of-Reinforcement-Learning"><span class="nav-number">2.</span> <span class="nav-text">Goal of Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Goal-of-RL"><span class="nav-number">2.1.</span> <span class="nav-text">The Goal of RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Reward-Hypothesis"><span class="nav-number">2.2.</span> <span class="nav-text">The Reward Hypothesis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Episodic-Tasks-And-Continuing-Tasks"><span class="nav-number">3.</span> <span class="nav-text">Episodic Tasks And Continuing Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Episodic-Tasks"><span class="nav-number">3.1.</span> <span class="nav-text">Episodic Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Continuing-Tasks"><span class="nav-number">3.2.</span> <span class="nav-text">Continuing Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Discounting-Return"><span class="nav-number">3.3.</span> <span class="nav-text">Discounting Return</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unified-Episodic-and-Continuing-Tasks"><span class="nav-number">3.4.</span> <span class="nav-text">Unified Episodic and Continuing Tasks</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

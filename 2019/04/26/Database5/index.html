@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="参考书目《数据库系统概论（第5版）》  数据库的完整性是指数据的正确性和相容性  数据的正确性是指数据是符合现实世界语义、反映当前实际状况的（实体完整性和用户定义的完整性） 数据的相容性是指数据库同一对象在不同关系表中的数据是符合逻辑的（参照完整性）  实体完整性 关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义 单属性构成的码有两种说明方式：列级约束条件、表级约束条">
+  <meta name="description" content="参考书目《数据库系统概论（第5版）》  数据库的完整性是指数据的正确性和相容性  数据的正确性是指数据是符合现实世界语义、反映当前实际状况的（实体完整性和用户定义的完整性） 数据的相容性是指数据库同一对象在不同关系表中的数据是符合逻辑的（参照完整性）  实体完整性关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义单属性构成的码有两种说明方式：列级约束条件、表级约束条件多">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库原理——第五章：数据库完整性">
 <meta property="og:url" content="https://wshenyi.github.io/2019/04/26/Database5/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  数据库的完整性是指数据的正确性和相容性  数据的正确性是指数据是符合现实世界语义、反映当前实际状况的（实体完整性和用户定义的完整性） 数据的相容性是指数据库同一对象在不同关系表中的数据是符合逻辑的（参照完整性）  实体完整性 关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义 单属性构成的码有两种说明方式：列级约束条件、表级约束条">
+<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  数据库的完整性是指数据的正确性和相容性  数据的正确性是指数据是符合现实世界语义、反映当前实际状况的（实体完整性和用户定义的完整性） 数据的相容性是指数据库同一对象在不同关系表中的数据是符合逻辑的（参照完整性）  实体完整性关系模式的实体完整性在CREATE TABLE中用PRIMARY KEY定义单属性构成的码有两种说明方式：列级约束条件、表级约束条件多">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-04-26T23:42:51.000Z">
 <meta property="article:modified_time" content="2019-06-18T13:10:38.000Z">
@@ -237,51 +237,43 @@
 <li>数据的<strong>正确性</strong>是指数据是符合现实世界语义、反映当前实际状况的（实体完整性和用户定义的完整性）</li>
 <li>数据的<strong>相容性</strong>是指数据库同一对象在不同关系表中的数据是符合逻辑的（参照完整性）</li>
 </ul>
-<h2 id="实体完整性">实体完整性</h2>
-<p>关系模式的实体完整性在<code>CREATE TABLE</code>中用<code>PRIMARY KEY</code>定义<br />
-单属性构成的码有两种说明方式：列级约束条件、表级约束条件<br />
-多属性构成的码只有一种说明方式：表级约束<br />
-实体完整性检查和违约处理：</p>
+<h2 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h2><p>关系模式的实体完整性在<code>CREATE TABLE</code>中用<code>PRIMARY KEY</code>定义<br>单属性构成的码有两种说明方式：列级约束条件、表级约束条件<br>多属性构成的码只有一种说明方式：表级约束<br>实体完整性检查和违约处理：</p>
 <ul>
 <li>检验主码值是否唯一，如果不唯一则拒绝插入或修改</li>
 <li>检查主码的各个属性是否为空，只要有一个为空就拒绝插入或修改</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE XXX(</span><br><span class="line">  Sno CHAR(20) PRIMARY KEY,  /*单属性可以在列级定义主码*/</span><br><span class="line">  PRIMARY KEY(Sno,Cno,...),  /*多属性只能在表级定义主码*/</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="参照完整性">参照完整性</h2>
-<p>关系模式的参照完整性在<code>CREATE TABLE</code>中用<code>FORIEGN KEY</code>短语定义哪些属性为<em>外码</em>,用<code>REFERENCES</code>指明这些外码参照哪些表的主码</p>
+
+<hr>
+<h2 id="参照完整性"><a href="#参照完整性" class="headerlink" title="参照完整性"></a>参照完整性</h2><p>关系模式的参照完整性在<code>CREATE TABLE</code>中用<code>FORIEGN KEY</code>短语定义哪些属性为<em>外码</em>,用<code>REFERENCES</code>指明这些外码参照哪些表的主码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE XXX(</span><br><span class="line">  Cno CHAR(20),</span><br><span class="line">  FOREIGN KEY(Cno) REFERENCES Course(Cno), /*在表级定义参照完整性*/</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p>可能破坏参照完整性的情况及违约处理：</p>
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: center;">被参照表&lt;=&gt;参照表</th>
-<th style="text-align: center;">违约处理</th>
+<tr>
+<th align="center">被参照表&lt;=&gt;参照表</th>
+<th align="center">违约处理</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">可能破坏参照完整性&lt;-插入元组</td>
-<td style="text-align: center;">拒绝</td>
+<tbody><tr>
+<td align="center">可能破坏参照完整性&lt;-插入元组</td>
+<td align="center">拒绝</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;">可能破坏参照完整性&lt;-修改外码值</td>
-<td style="text-align: center;">拒绝</td>
+<tr>
+<td align="center">可能破坏参照完整性&lt;-修改外码值</td>
+<td align="center">拒绝</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;">删除元组-&gt;可能破坏参照完整性</td>
-<td style="text-align: center;">拒绝/级联删除/设为空值</td>
+<tr>
+<td align="center">删除元组-&gt;可能破坏参照完整性</td>
+<td align="center">拒绝/级联删除/设为空值</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;">修改主码值-&gt;可能破坏参照完整性</td>
-<td style="text-align: center;">拒绝/级联删除/设为空值</td>
+<tr>
+<td align="center">修改主码值-&gt;可能破坏参照完整性</td>
+<td align="center">拒绝/级联删除/设为空值</td>
 </tr>
-</tbody>
-</table>
-<hr />
-<h2 id="用户定义的完整性">用户定义的完整性</h2>
-<p>用户定义的完整性就是针对某一具体应用的数据必须满足的语义要求<br />
-在<code>CREATE TABLE</code>中定义属性的同时，可以根据应用的要求定义<em>属性上</em>的约束条件，即<strong>属性值的限制</strong>，包括：</p>
+</tbody></table>
+<hr>
+<h2 id="用户定义的完整性"><a href="#用户定义的完整性" class="headerlink" title="用户定义的完整性"></a>用户定义的完整性</h2><p>用户定义的完整性就是针对某一具体应用的数据必须满足的语义要求<br>在<code>CREATE TABLE</code>中定义属性的同时，可以根据应用的要求定义<em>属性上</em>的约束条件，即<strong>属性值的限制</strong>，包括：</p>
 <ul>
 <li>列值非空（<code>NOT NULL</code>）</li>
 <li>值唯一（<code>UNIQUE</code>）</li>
@@ -289,23 +281,26 @@
 </ul>
 <p>与属性上约束条件的定义类似，在<code>CREATE TABLE</code>语句中可以用<code>CHECK</code>短语定义<em>元组上</em>的约束条件，即<strong>元组级的限制</strong>。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE Student(</span><br><span class="line">  Sno CHAR(9) UNIQUE NOT NULL, /*要求Sno值唯一且不能为空*/</span><br><span class="line">  Sname CHAR(8) NOT NULL,</span><br><span class="line">  Sage int CHECK(Sage &gt;= 15 AND Sage &lt;= 50) /*列级CHECK短语*/</span><br><span class="line">  Ssex CHAR(2),</span><br><span class="line">  CHECK(Ssex=&#x27;女&#x27; OR Sname NOT LIKE&#x27;Ms.%&#x27;)  /*定义了元组中两个属性值之间的约束*/</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="完整性约束命名子句">完整性约束命名子句</h2>
-<p>用完整性约束命名子句<code>CONSTRAINT</code>，用来对完整性约束条件命名，从而便于管理完整性约束条件</p>
+
+<hr>
+<h2 id="完整性约束命名子句"><a href="#完整性约束命名子句" class="headerlink" title="完整性约束命名子句"></a>完整性约束命名子句</h2><p>用完整性约束命名子句<code>CONSTRAINT</code>，用来对完整性约束条件命名，从而便于管理完整性约束条件  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONSTRAINT &lt;完整性约束条件名&gt; &lt;完整性约束条件&gt;</span><br></pre></td></tr></table></figure>
-<p>其中<完整性约束条件>包括<code>NOT NULL</code>、<code>UNIQUE</code>、<code>PRIMARY KEY</code>、<code>FOREIGN KEY</code>、<code>CHECK</code>等</p>
+
+<p>其中&lt;完整性约束条件&gt;包括<code>NOT NULL</code>、<code>UNIQUE</code>、<code>PRIMARY KEY</code>、<code>FOREIGN KEY</code>、<code>CHECK</code>等</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE Student(</span><br><span class="line">  Sno NUMERIC(6),</span><br><span class="line">  Sname CHAR(20),</span><br><span class="line">  Sage NUMERIC(3) NOT NULL,</span><br><span class="line">  CONSTRAINT StudentKey PRIMARY KEY(Sno),</span><br><span class="line">  CONSTRAINT SnameKey FOREIGN KEY(Sname) REFERENCES Course(Sname),</span><br><span class="line">  CONSTRAINT C1 CHECK(Sno BETWEEN 90000 AND 99999),</span><br><span class="line">  CONSTRAINT C2 UNIQUE(Sname)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
 <p>修改表中的完整性限制，可以先删除原来的约束条件，再增加新的约束条件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;表名&gt; DROP CONSTRAINT &lt;完整性约束条件名&gt;</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD  CONSTRAINT &lt;完整性约束条件名&gt; &lt;完整性约束条件&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="触发器">触发器</h2>
-<p><strong>触发器</strong>(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程<br />
-触发器类似于约束，但是比约束更加灵活，可以实施更为复杂的检查和操作，具有更精细和更强大的数据控制能力</p>
+
+<hr>
+<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><p><strong>触发器</strong>(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程<br>触发器类似于约束，但是比约束更加灵活，可以实施更为复杂的检查和操作，具有更精细和更强大的数据控制能力</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/*触发器一般格式*/</span><br><span class="line">CREATE TRIGGER &lt;触发器名&gt;</span><br><span class="line">[BEFORE|AFTER] [INSERT|DELETE|UPDATE] ON &lt;表名&gt;</span><br><span class="line">FOR EACH [ROW|STATEMENT]</span><br><span class="line">BEGIN</span><br><span class="line">  &lt;执行语句列表&gt;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
 <p>例如：建立触发器t1，当插入学生的年龄小于18岁时进行报错提示</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $   /*告诉mysql语句的结尾符号换成以$结束*/</span><br><span class="line">CREATE TRIGGER t1</span><br><span class="line">BEFORE INSERT ON Student</span><br><span class="line">FOR EACH ROW</span><br><span class="line">BEGIN</span><br><span class="line">    DECLARE msg VARCHAR(200);</span><br><span class="line">    IF NEW.Sage &lt; 18 THEN</span><br><span class="line">        SET msg = CONCAT(&#x27;输入的年龄值: &#x27;,NEW.Sage,&#x27; 为无效的年龄，请确保学生年龄大于18岁&#x27;);</span><br><span class="line">        SIGNAL SQLSTATE &#x27;HY000&#x27; SET MESSAGE_TEXT = msg;</span><br><span class="line">    END IF;</span><br><span class="line">END$</span><br><span class="line">DELIMITER ;    /*将结尾符号换回以;结束*/</span><br></pre></td></tr></table></figure>
+
 <p>MySQL 中定义了<code>NEW</code>和<code>OLD</code>，用来表示触发器的所在表中，触发了触发器的那一行数据，来引用触发器中发生变化的记录内容，具体地：</p>
-<ol type="1">
+<ol>
 <li>在<code>INSERT</code>型触发器中，<code>NEW</code>用来表示将要（<code>BEFORE</code>）或已经（<code>AFTER</code>）插入的新数据</li>
 <li>在<code>UPDATE</code>型触发器中，<code>OLD</code>用来表示将要或已经被修改的原数据，<code>NEW</code>用来表示将要或已经修改为的新数据</li>
 <li>在<code>DELETE</code>型触发器中，<code>OLD</code>用来表示将要或已经被删除的原数据</li>

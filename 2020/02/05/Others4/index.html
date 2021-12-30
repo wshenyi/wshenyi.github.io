@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="top 查看系统进程 screen 12screen -S [TaskName] 创建一个名为TaskName的screenscreen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen 快捷指令：  上下分屏：ctrl + a 再按shift + s 切换屏幕：ctrl + a 再按tab键 新建一个终端：ctrl + a 再按c  du、df du &#x3D; dis">
+  <meta name="description" content="top查看系统进程 screen12screen -S [TaskName] 创建一个名为TaskName的screenscreen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen  快捷指令：  上下分屏：ctrl + a  再按shift + s 切换屏幕：ctrl + a  再按tab键 新建一个终端：ctrl + a  再按c  du、dfdu &#x3D; di">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下常用指令">
 <meta property="og:url" content="https://wshenyi.github.io/2020/02/05/Others4/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="top 查看系统进程 screen 12screen -S [TaskName] 创建一个名为TaskName的screenscreen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen 快捷指令：  上下分屏：ctrl + a 再按shift + s 切换屏幕：ctrl + a 再按tab键 新建一个终端：ctrl + a 再按c  du、df du &#x3D; dis">
+<meta property="og:description" content="top查看系统进程 screen12screen -S [TaskName] 创建一个名为TaskName的screenscreen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen  快捷指令：  上下分屏：ctrl + a  再按shift + s 切换屏幕：ctrl + a  再按tab键 新建一个终端：ctrl + a  再按c  du、dfdu &#x3D; di">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-02-05T19:46:11.000Z">
 <meta property="article:modified_time" content="2020-02-29T09:03:22.000Z">
@@ -229,41 +229,38 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="top">top</h2>
-<p>查看系统进程</p>
-<h2 id="screen">screen</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen -S [TaskName] 创建一个名为TaskName的screen</span><br><span class="line">screen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen</span><br></pre></td></tr></table></figure>
+        <h2 id="top"><a href="#top" class="headerlink" title="top"></a>top</h2><p>查看系统进程</p>
+<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen -S [TaskName] 创建一个名为TaskName的screen</span><br><span class="line">screen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen</span><br></pre></td></tr></table></figure>
+
 <p>快捷指令：</p>
 <ul>
-<li>上下分屏：ctrl + a 再按shift + s</li>
-<li>切换屏幕：ctrl + a 再按tab键</li>
-<li>新建一个终端：ctrl + a 再按c</li>
+<li>上下分屏：ctrl + a  再按shift + s</li>
+<li>切换屏幕：ctrl + a  再按tab键</li>
+<li>新建一个终端：ctrl + a  再按c</li>
 </ul>
-<h2 id="dudf">du、df</h2>
-<p>du = disk used 硬盘使用情况 df = disk free 硬盘剩余空间</p>
+<h2 id="du、df"><a href="#du、df" class="headerlink" title="du、df"></a>du、df</h2><p>du = disk used 硬盘使用情况<br>df = disk free 硬盘剩余空间</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">du -h [FileName] 查看指定文件大小</span><br><span class="line"></span><br><span class="line">df -hl 查看磁盘剩余空间</span><br><span class="line"></span><br><span class="line">df -h 查看每个根路径的分区大小</span><br><span class="line"></span><br><span class="line">du -sh [目录名] 返回该目录的大小</span><br><span class="line"></span><br><span class="line">du -sm [文件夹] 返回该文件夹总M数</span><br></pre></td></tr></table></figure>
-<h2 id="find">find</h2>
-<p>find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等</p>
+
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find [location] -name [FileName] 在location下查找名字为FileName的文件</span><br></pre></td></tr></table></figure>
-<h2 id="grep">grep</h2>
-<p>grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找</p>
+
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [字符串] [File] 在File中按行匹配字符串</span><br></pre></td></tr></table></figure>
-<h2 id="whichwhereis">which、whereis</h2>
-<p>which 查看可执行文件的位置 ，只有设置了环境变量的程序才可以用 whereis 寻找特定文件，只能用于查找二进制文件、源代码文件和man手册页</p>
-<h2 id="moreless">more/less</h2>
-<p>查看文件内容，当文件内容很大时比cat命令要好用</p>
-<h2 id="headtail">head、tail</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head(tail) -n 1000 [FileName] 显示FileName文件的前1000行(后1000行)</span><br><span class="line">tail -n +1000 [FileName] 显示FileName文件从1000行往后的内容</span><br><span class="line">tail -f [FileName] 追踪（follow）文件FileName</span><br></pre></td></tr></table></figure>
-<h2 id="freeswapoffmkswapswapon">free、swapoff、mkswap、swapon</h2>
-<p>查看内存状态命令，可以显示memory、swap、buffer/cache等的大小及使用状况</p>
+
+<h2 id="which、whereis"><a href="#which、whereis" class="headerlink" title="which、whereis"></a>which、whereis</h2><p>which 查看可执行文件的位置 ，只有设置了环境变量的程序才可以用<br>whereis 寻找特定文件，只能用于查找二进制文件、源代码文件和man手册页</p>
+<h2 id="more-less"><a href="#more-less" class="headerlink" title="more/less"></a>more/less</h2><p>查看文件内容，当文件内容很大时比cat命令要好用</p>
+<h2 id="head、tail"><a href="#head、tail" class="headerlink" title="head、tail"></a>head、tail</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head(tail) -n 1000 [FileName] 显示FileName文件的前1000行(后1000行)</span><br><span class="line">tail -n +1000 [FileName] 显示FileName文件从1000行往后的内容</span><br><span class="line">tail -f [FileName] 追踪（follow）文件FileName</span><br></pre></td></tr></table></figure>
+
+<h2 id="free、swapoff、mkswap、swapon"><a href="#free、swapoff、mkswap、swapon" class="headerlink" title="free、swapoff、mkswap、swapon"></a>free、swapoff、mkswap、swapon</h2><p>查看内存状态命令，可以显示memory、swap、buffer/cache等的大小及使用状况</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">free -h 查看内存状态</span><br><span class="line"></span><br><span class="line">swapoff -a 取消所有挂载的swap空间</span><br><span class="line"></span><br><span class="line">dd if=/dev/zero of=/var/swapfile bs=1M count=1024 在/var目录下创建大小为1G的文件用做swap空间</span><br><span class="line"></span><br><span class="line">mkswap /var/swapfile 格式化swap文件</span><br><span class="line"></span><br><span class="line">swapon /var/swapfile 挂载swap空间</span><br></pre></td></tr></table></figure>
-<h2 id="netstat">netstat</h2>
-<p>查看网络状态（地址和端口号）</p>
+
+<h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><p>查看网络状态（地址和端口号）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunlp 其中t（tcp）、u（udp），nlp分别是三个flag参数</span><br></pre></td></tr></table></figure>
-<h2 id="tmux">tmux</h2>
-<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/10/tmux.html">详细内容参考</a></p>
+
+<h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h2><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/10/tmux.html">详细内容参考</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s [NewSessionName] 创建标签为NewSessionName的新会话，默认数字index从0开始</span><br><span class="line">tmux attach -t [index/name] 恢复到index/name的会话连接</span><br><span class="line">tmux ls 查看所有会话</span><br><span class="line">tmux switch -t [index/name] 切换到index/name会话</span><br></pre></td></tr></table></figure>
-<p>快捷指令 ：</p>
+
+<p>快捷指令  ：</p>
 <ul>
 <li>ctrl + b %： 左右分屏</li>
 <li>ctrl + b “： 上下分屏</li>
@@ -350,7 +347,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#top"><span class="nav-number">1.</span> <span class="nav-text">top</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#screen"><span class="nav-number">2.</span> <span class="nav-text">screen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dudf"><span class="nav-number">3.</span> <span class="nav-text">du、df</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find"><span class="nav-number">4.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep"><span class="nav-number">5.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#whichwhereis"><span class="nav-number">6.</span> <span class="nav-text">which、whereis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#moreless"><span class="nav-number">7.</span> <span class="nav-text">more&#x2F;less</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#headtail"><span class="nav-number">8.</span> <span class="nav-text">head、tail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#freeswapoffmkswapswapon"><span class="nav-number">9.</span> <span class="nav-text">free、swapoff、mkswap、swapon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#netstat"><span class="nav-number">10.</span> <span class="nav-text">netstat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tmux"><span class="nav-number">11.</span> <span class="nav-text">tmux</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#top"><span class="nav-number">1.</span> <span class="nav-text">top</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#screen"><span class="nav-number">2.</span> <span class="nav-text">screen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du%E3%80%81df"><span class="nav-number">3.</span> <span class="nav-text">du、df</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find"><span class="nav-number">4.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep"><span class="nav-number">5.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#which%E3%80%81whereis"><span class="nav-number">6.</span> <span class="nav-text">which、whereis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#more-less"><span class="nav-number">7.</span> <span class="nav-text">more&#x2F;less</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#head%E3%80%81tail"><span class="nav-number">8.</span> <span class="nav-text">head、tail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#free%E3%80%81swapoff%E3%80%81mkswap%E3%80%81swapon"><span class="nav-number">9.</span> <span class="nav-text">free、swapoff、mkswap、swapon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#netstat"><span class="nav-number">10.</span> <span class="nav-text">netstat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tmux"><span class="nav-number">11.</span> <span class="nav-text">tmux</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -219,126 +219,78 @@
 
       
           <span id="more"></span>
+
 <blockquote>
 <p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
 </blockquote>
-<h2 id="policies-and-value-functions">Policies and Value Functions</h2>
-<h3 id="policy">Policy</h3>
-<p>Formally, a <strong>policy</strong> is a mapping from <strong>states</strong> to probabilities of selecting each possible <strong>action</strong>.</p>
+<h2 id="Policies-and-Value-Functions"><a href="#Policies-and-Value-Functions" class="headerlink" title="Policies and Value Functions"></a>Policies and Value Functions</h2><h3 id="Policy"><a href="#Policy" class="headerlink" title="Policy"></a>Policy</h3><p>Formally, a <strong>policy</strong> is a mapping from <strong>states</strong> to probabilities of selecting each possible <strong>action</strong>.</p>
 <ul>
-<li><strong>deterministic policy</strong>, denote <span class="math inline">\(\pi(s)=a\)</span>: one state correspond to one action</li>
-<li><strong>stochastic policy</strong>, <span class="math inline">\(\pi(a|s)\)</span>: a probability distribution over all visable actions</li>
+<li><strong>deterministic policy</strong>, denote $\pi(s)=a$: one state correspond to one action</li>
+<li><strong>stochastic policy</strong>, $\pi(a|s)$: a probability distribution over all visable actions</li>
 </ul>
+<img src="/2020/02/29/RL3/1.png" class="">
+<img src="/2020/02/29/RL3/2.png" class="">
 
+<p>It’s important that <strong>policies depend only on the current state</strong>, not on other things like time or previous states.</p>
+<h3 id="State-value-Function"><a href="#State-value-Function" class="headerlink" title="State-value Function"></a>State-value Function</h3><p>Almost all reinforcement learning algorithms involve <strong>estimating value functions</strong> – functions of states (or of state–action pairs) that estimate <strong>how good</strong> it is for the agent to be in a given state (or <strong>how good</strong> it is to perform a given action in a given state), which means value function predicts reward into future.</p>
+<p>The value function of a state $s$ under a policy $\pi$, denoted $v_\pi(s)$, is <strong>the expected return when starting in $s$ and following $\pi$ thereafter</strong>. For MDPs, we can define $v_\pi$ formally by</p>
+<p>$$v_\pi(s)\doteq \mathbb{E}<em>\pi[G_t|S_t=s]=\mathbb{E}<em>\pi[\sum</em>{k=0}^\infty \gamma^kR</em>{t+k+1}|S_t=s],\ for\ all\ s\in \mathbf{S}$$</p>
+<p>We call the function $v_\pi$ the <strong>state-value function for policy $\pi$</strong></p>
+<h3 id="Action-value-Function"><a href="#Action-value-Function" class="headerlink" title="Action-value Function"></a>Action-value Function</h3><p>Similarly, we define the value of taking action $a$ in state $s$ under a policy $\pi$, denoted $q_\pi(s,a)$, as <strong>the expected return starting from $s$, taking the action $a$, and thereafter following policy $\pi$</strong>:</p>
+<p>$$q_\pi(s,a)\doteq \mathbb{E}<em>\pi[G_t|S_t=s,A_t=a]=\mathbb{E}<em>\pi[\sum</em>{k=0}^\infty \gamma^kR</em>{t+k+1}|S_t=s,A_t=a]$$</p>
+<p>We call the function $q_\pi$ the <strong>action-value function for policy \pi</strong>,</p>
+<hr>
+<h2 id="Bellman-Equations"><a href="#Bellman-Equations" class="headerlink" title="Bellman Equations"></a>Bellman Equations</h2><h3 id="Transform-Between-v-pi-And-q-pi"><a href="#Transform-Between-v-pi-And-q-pi" class="headerlink" title="Transform Between $v_\pi$ And $q_\pi$"></a>Transform Between $v_\pi$ And $q_\pi$</h3><p>Through the given diagram, we can derivate an equation for $v_\pi$ in terms of $q_\pi$ and $\pi$.</p>
+<img src="/2020/02/29/RL3/6.png" class="">
 
-<p>It's important that <strong>policies depend only on the current state</strong>, not on other things like time or previous states.</p>
-<h3 id="state-value-function">State-value Function</h3>
-<p>Almost all reinforcement learning algorithms involve <strong>estimating value functions</strong> -- functions of states (or of state–action pairs) that estimate <strong>how good</strong> it is for the agent to be in a given state (or <strong>how good</strong> it is to perform a given action in a given state), which means value function predicts reward into future.</p>
-<p>The value function of a state <span class="math inline">\(s\)</span> under a policy <span class="math inline">\(\pi\)</span>, denoted <span class="math inline">\(v_\pi(s)\)</span>, is <strong>the expected return when starting in <span class="math inline">\(s\)</span> and following <span class="math inline">\(\pi\)</span> thereafter</strong>. For MDPs, we can define <span class="math inline">\(v_\pi\)</span> formally by</p>
-<p><span class="math display">\[v_\pi(s)\doteq \mathbb{E}_\pi[G_t|S_t=s]=\mathbb{E}_\pi[\sum_{k=0}^\infty \gamma^kR_{t+k+1}|S_t=s],\ for\ all\ s\in \mathbf{S}\]</span></p>
-<p>We call the function <span class="math inline">\(v_\pi\)</span> the <strong>state-value function for policy <span class="math inline">\(\pi\)</span></strong></p>
-<h3 id="action-value-function">Action-value Function</h3>
-<p>Similarly, we define the value of taking action <span class="math inline">\(a\)</span> in state <span class="math inline">\(s\)</span> under a policy <span class="math inline">\(\pi\)</span>, denoted <span class="math inline">\(q_\pi(s,a)\)</span>, as <strong>the expected return starting from <span class="math inline">\(s\)</span>, taking the action <span class="math inline">\(a\)</span>, and thereafter following policy <span class="math inline">\(\pi\)</span></strong>:</p>
-<p><span class="math display">\[q_\pi(s,a)\doteq \mathbb{E}_\pi[G_t|S_t=s,A_t=a]=\mathbb{E}_\pi[\sum_{k=0}^\infty \gamma^kR_{t+k+1}|S_t=s,A_t=a]\]</span></p>
-<p>We call the function <span class="math inline">\(q_\pi\)</span> the **action-value function for policy *,</p>
-<hr />
-<h2 id="bellman-equations">Bellman Equations</h2>
-<h3 id="transform-between-v_pi-and-q_pi">Transform Between <span class="math inline">\(v_\pi\)</span> And <span class="math inline">\(q_\pi\)</span></h3>
-<p>Through the given diagram, we can derivate an equation for <span class="math inline">\(v_\pi\)</span> in terms of <span class="math inline">\(q_\pi\)</span> and <span class="math inline">\(\pi\)</span>.</p>
+<p>$$<br>\begin{eqnarray*}<br>v_\pi(s)<br>&amp;=&amp;\mathbb{E}<em>\pi[G_t|S_t=s]\<br>&amp;=&amp;\sum_a\pi(a|s)\mathbb{E}[G_t|S_t=s,A_t=a]\<br>&amp;=&amp;\sum_a\pi(a|s)q(s,a)\tag{3.1}<br>\end{eqnarray*}<br>$$<br>Recall that $G_t=R</em>{t+1}+\gamma G_{t+1}$. With given diagram below, we can derivate an equation for $q_\pi$ in terms of $v_\pi$ and $p(s’,r|s,a)$. (use markov property to simplify original equation)</p>
+<img src="/2020/02/29/RL3/7.png" class="">
 
-<p><span class="math display">\[
-\begin{eqnarray*}
-v_\pi(s)
-&amp;=&amp;\mathbb{E}_\pi[G_t|S_t=s]\\
-&amp;=&amp;\sum_a\pi(a|s)\mathbb{E}[G_t|S_t=s,A_t=a]\\
-&amp;=&amp;\sum_a\pi(a|s)q(s,a)\tag{3.1}
-\end{eqnarray*}
-\]</span> Recall that <span class="math inline">\(G_t=R_{t+1}+\gamma G_{t+1}\)</span>. With given diagram below, we can derivate an equation for <span class="math inline">\(q_\pi\)</span> in terms of <span class="math inline">\(v_\pi\)</span> and <span class="math inline">\(p(s&#39;,r|s,a)\)</span>. (use markov property to simplify original equation)</p>
+<p>$$<br>\begin{eqnarray*}<br>q_\pi(s,a)<br>&amp;=&amp;\mathbb{E}<em>\pi[G_t|S_t=s,A_t=a]\<br>&amp;=&amp;\mathbb{E}<em>\pi[R</em>{t+1}+\gamma G</em>{t+1}]\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma \mathbb{E}<em>\pi[G</em>{t+1}|S_{t+1}=s’])\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{3.2}<br>\end{eqnarray*}<br>$$</p>
+<h3 id="Bellman-Equations-for-v-pi"><a href="#Bellman-Equations-for-v-pi" class="headerlink" title="Bellman Equations for $v_\pi$"></a>Bellman Equations for $v_\pi$</h3><p><strong>Bellamn equation allows us to relate the value of the current state to the value of future states without waiting to observe all the future rewards.</strong><br>With $(3.1),(3.2)$, we can easiy get bellamn equation for $v_\pi$</p>
+<p>$$<br>\begin{eqnarray*}<br>v_\pi(s)<br>&amp;=&amp;\sum_a\pi(a|s)q(s,a)\<br>&amp;=&amp;\sum_a\pi(a|s)\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{3.3}<br>\end{eqnarray*}<br>$$</p>
+<p>$s’$ here stands for next state. <strong>Bellamn equation expresses a relationship between the value of a state and the values of its successor states (next state).</strong>  You can get a more intiutive understanding about how this equation forms though its backup diagram below: <strong>we first choose actions through policy and then transites to a successor state with corresponding reward under environment dynamics</strong>. The open circles represent state nodes and solid circles represent action nodes.</p>
+<img src="/2020/02/29/RL3/4.png" class="">
 
-<p><span class="math display">\[
-\begin{eqnarray*}
-q_\pi(s,a)
-&amp;=&amp;\mathbb{E}_\pi[G_t|S_t=s,A_t=a]\\
-&amp;=&amp;\mathbb{E}_\pi[R_{t+1}+\gamma G_{t+1}]\\
-&amp;=&amp;\sum_{s&#39;,r}p(s&#39;,r|s,a)(r+\gamma \mathbb{E}_\pi[G_{t+1}|S_{t+1}=s&#39;])\\
-&amp;=&amp;\sum_{s&#39;,r}p(s&#39;,r|s,a)(r+\gamma v_\pi(s&#39;))\tag{3.2}
-\end{eqnarray*}
-\]</span></p>
-<h3 id="bellman-equations-for-v_pi">Bellman Equations for <span class="math inline">\(v_\pi\)</span></h3>
-<p><strong>Bellamn equation allows us to relate the value of the current state to the value of future states without waiting to observe all the future rewards.</strong><br />
-With <span class="math inline">\((3.1),(3.2)\)</span>, we can easiy get bellamn equation for <span class="math inline">\(v_\pi\)</span></p>
-<p><span class="math display">\[
-\begin{eqnarray*}
-v_\pi(s)
-&amp;=&amp;\sum_a\pi(a|s)q(s,a)\\
-&amp;=&amp;\sum_a\pi(a|s)\sum_{s&#39;,r}p(s&#39;,r|s,a)(r+\gamma v_\pi(s&#39;))\tag{3.3}
-\end{eqnarray*}
-\]</span></p>
-<p><span class="math inline">\(s&#39;\)</span> here stands for next state. <strong>Bellamn equation expresses a relationship between the value of a state and the values of its successor states (next state).</strong> You can get a more intiutive understanding about how this equation forms though its backup diagram below: <strong>we first choose actions through policy and then transites to a successor state with corresponding reward under environment dynamics</strong>. The open circles represent state nodes and solid circles represent action nodes.</p>
+<h3 id="Bellman-Equations-For-q-pi"><a href="#Bellman-Equations-For-q-pi" class="headerlink" title="Bellman Equations For $q_\pi$"></a>Bellman Equations For $q_\pi$</h3><p>With $(3.1),(3.2)$, we can easiy get bellamn equation for $q_\pi$</p>
+<p>$$<br>\begin{eqnarray*}<br>q_\pi(s,a)<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma\sum_{a’} q_\pi(s’,a’))\tag{3.4}<br>\end{eqnarray*}<br>$$</p>
+<p>$a’$ here stands for actions under possible state $s’$. Similarly, <strong>this equation express a relationship betweeen the value of an action and the values of actions under possible successor state $s’$</strong></p>
+<img src="/2020/02/29/RL3/5.png" class="">
 
-<h3 id="bellman-equations-for-q_pi">Bellman Equations For <span class="math inline">\(q_\pi\)</span></h3>
-<p>With <span class="math inline">\((3.1),(3.2)\)</span>, we can easiy get bellamn equation for <span class="math inline">\(q_\pi\)</span></p>
-<p><span class="math display">\[
-\begin{eqnarray*}
-q_\pi(s,a)
-&amp;=&amp;\sum_{s&#39;,r}p(s&#39;,r|s,a)(r+\gamma v_\pi(s&#39;))\\
-&amp;=&amp;\sum_{s&#39;,r}p(s&#39;,r|s,a)(r+\gamma\sum_{a&#39;} q_\pi(s&#39;,a&#39;))\tag{3.4}
-\end{eqnarray*}
-\]</span></p>
-<p><span class="math inline">\(a&#39;\)</span> here stands for actions under possible state <span class="math inline">\(s&#39;\)</span>. Similarly, <strong>this equation express a relationship betweeen the value of an action and the values of actions under possible successor state <span class="math inline">\(s&#39;\)</span></strong></p>
-
-<h3 id="an-example-of-value-function-grideworld">An Example of Value Function: Grideworld</h3>
-<ul>
+<h3 id="An-Example-of-Value-Function-Grideworld"><a href="#An-Example-of-Value-Function-Grideworld" class="headerlink" title="An Example of Value Function: Grideworld"></a>An Example of Value Function: Grideworld</h3><ul>
 <li><strong>State</strong>: each grid (totally 25 states)</li>
 <li><strong>Action</strong>: north, south, east, and west</li>
-<li><strong>Reward</strong>: actions that would take the agent off the grid leave its location unchanged, but also result in a reward of -1. Other actions results in a reward 0. Every time the agent moves any directions at position A would be transited to A' with reward +10. This is the same to B and B' except for reward +5.</li>
+<li><strong>Reward</strong>: actions that would take the agent off the grid leave its location unchanged, but also result in a reward of -1. Other actions results in a reward 0. Every time the agent moves any directions at position A would be transited to A’ with reward +10. This is the same to B and B’ except for reward +5.</li>
 <li><strong>Policy</strong>: random policy, each direction has equal probability, 25%.</li>
 </ul>
-<p><span class="math inline">\(\gamma=0.9\)</span></p>
+<p>$\gamma=0.9$</p>
+<img src="/2020/02/29/RL3/3.png" class="">
 
-<p>Now, just for curious, we can verify the <span class="math inline">\(v_\pi(s)\)</span> bellman equation in this example. Let's say we choose center state.</p>
-<p><span class="math display">\[(0.7\times0.9+0)\times0.25+(2.3\times0.9+0)\times0.25+(0.4\times0.9+0)\times0.25\\+(-0.4\times0.9+0)\times0.25=0.69\approx0.7\]</span></p>
-<h3 id="why-bellman-equations">Why Bellman Equations?</h3>
-<p>We use bellman equations to calculate <span class="math inline">\(v_\pi(s)\)</span> for all <span class="math inline">\(s\in \mathbf{S}\)</span> by solving the system of linear equations.</p>
+<p>Now, just for curious, we can verify the $v_\pi(s)$ bellman equation in this example. Let’s say we choose center state.</p>
+<p>$$(0.7\times0.9+0)\times0.25+(2.3\times0.9+0)\times0.25+(0.4\times0.9+0)\times0.25\+(-0.4\times0.9+0)\times0.25=0.69\approx0.7$$</p>
+<h3 id="Why-Bellman-Equations"><a href="#Why-Bellman-Equations" class="headerlink" title="Why Bellman Equations?"></a>Why Bellman Equations?</h3><p>We use bellman equations to calculate $v_\pi(s)$ for all $s\in \mathbf{S}$ by solving the system of linear equations.</p>
 <p>Still the previous example, gride world. It has 25 states and we get 25 unknown parameters. For each state we can get a bellman equation, therefore we get 25 equations. Through 25 equations, we sovle them to obtain 25 state values.</p>
-<p>But bellman equation is not pragmatic for many reasons. One of them is that sometimes the number of states is too large and it's impossible to calculate results in a short time. It can <strong>only solve small MDPs</strong>.</p>
-<hr />
-<h2 id="optimality-optimal-policies-value-functions">Optimality (Optimal Policies &amp; Value Functions)</h2>
-<h3 id="optimal-policy">Optimal Policy</h3>
-<p>A policy <span class="math inline">\(\pi\)</span> is defined to be better than or equal to a policy <span class="math inline">\(\pi&#39;\)</span> if its expected return is greater than or equal to that of <span class="math inline">\(\pi&#39;\)</span> for all states. In other words,</p>
-<p><span class="math display">\[\pi&gt;\pi&#39; \ \ iff\ v_\pi(s)\ge v_{\pi&#39;}(s)\ for\ all\ s \in \mathbf{S}\]</span></p>
+<p>But bellman equation is not pragmatic for many reasons. One of them is that sometimes the number of states is too large and it’s impossible to calculate results in a short time. It can <strong>only solve small MDPs</strong>.</p>
+<hr>
+<h2 id="Optimality-Optimal-Policies-amp-Value-Functions"><a href="#Optimality-Optimal-Policies-amp-Value-Functions" class="headerlink" title="Optimality (Optimal Policies &amp; Value Functions)"></a>Optimality (Optimal Policies &amp; Value Functions)</h2><h3 id="Optimal-Policy"><a href="#Optimal-Policy" class="headerlink" title="Optimal Policy"></a>Optimal Policy</h3><p>A policy $\pi$ is defined to be better than or equal to a policy $\pi’$ if its expected return is greater than or equal to that of $\pi’$ for all states. In other words,</p>
+<p>$$\pi&gt;\pi’ \ \ iff\ v_\pi(s)\ge v_{\pi’}(s)\ for\ all\ s \in \mathbf{S}$$</p>
+<img src="/2020/02/29/RL3/8.png" class="">
 
-<p><strong>There is always at least one deterministic policy that is better than or equal to all other policies. This is an optimal policy.</strong> Although <strong>there may be more than one</strong>, we denote all the optimal policies by <span class="math inline">\(\pi_*\)</span>. They share the same state-value function, called the <strong>optimal state-value function</strong>, denoted <span class="math inline">\(v_*\)</span>, and the same <strong>optimal action-value function</strong>, denoted <span class="math inline">\(q_*\)</span></p>
-<p><span class="math display">\[v_*(s)\doteq \mathop{max}_\pi\ v_\pi(s)\\
-q_*(s,a)\doteq \mathop{max}_\pi\ q_\pi(s,a)\\
-for\ all\ s\in \mathbf{S},a\in \mathbf{A}\]</span></p>
-<h3 id="optimal-value-functions">Optimal Value Functions</h3>
-<p>Because the optimal policy <span class="math inline">\(\pi_*\)</span> is a <strong>deterministic policy</strong>, the optimal action <span class="math inline">\(a_*\)</span> with <span class="math inline">\(\pi(a_*|s)\)</span> equals to 1 and all other actions' probability equal to 0. We can re-write <span class="math inline">\(v_*\)</span> with bellman equation as below, called <strong>bellman optimality equation for <span class="math inline">\(v_*\)</span></strong>.</p>
-<p><span class="math display">\[
-\begin{eqnarray*}
-v_*(s)
-&amp;=&amp;\mathop{max}_\pi\ v_\pi(s)\\
-&amp;=&amp;\mathop{max}_a \mathbb{E}[R_{t+1}+\gamma v_*(S_{t+1})|S_t=s,A_t=a]\\
-&amp;=&amp;\mathop{max}_a\ \sum_{s&#39;,r}p(s&#39;,r|s,a)(r+\gamma v_*(s&#39;))\tag{3.5}
-\end{eqnarray*}
-\]</span></p>
-<p>Similarly, <strong>bellman optimality equation for <span class="math inline">\(q_*\)</span></strong> is</p>
-<p><span class="math display">\[
-\begin{eqnarray*}
-q_*(s,a)
-&amp;=&amp;\mathop{max}_\pi\ q_\pi(s,a)\\
-&amp;=&amp;\mathbb{E}[R_{t+1}+\gamma \mathop{max}_{a&#39;}\ q_*(S_{t+1},a&#39;)|S_t=s,A_t=a]\\
-&amp;=&amp;\sum_{s&#39;,r}p(s&#39;,r|s,a)(r+\gamma \mathop{max}_{a&#39;}\ q_*(s&#39;,a&#39;))\tag{3.6}
-\end{eqnarray*}
-\]</span></p>
+<p><strong>There is always at least one deterministic policy that is better than or equal to all other policies. This is an optimal policy.</strong> Although <strong>there may be more than one</strong>, we denote all the optimal policies by $\pi_*$. They share the same state-value function, called the <strong>optimal state-value function</strong>, denoted $v_*$, and the same <strong>optimal action-value function</strong>, denoted $q_*$</p>
+<p>$$v_*(s)\doteq \mathop{max}<em>\pi\ v_\pi(s)\<br>q</em>*(s,a)\doteq \mathop{max}_\pi\ q_\pi(s,a)\<br>for\ all\ s\in \mathbf{S},a\in \mathbf{A}$$</p>
+<h3 id="Optimal-Value-Functions"><a href="#Optimal-Value-Functions" class="headerlink" title="Optimal Value Functions"></a>Optimal Value Functions</h3><p>Because the optimal policy $\pi_*$ is a <strong>deterministic policy</strong>, the optimal action $a_*$ with $\pi(a_*|s)$ equals to 1 and all other actions’ probability equal to 0. We can re-write $v_*$ with bellman equation as below, called <strong>bellman optimality equation for $v_*$</strong>.</p>
+<p>$$<br>\begin{eqnarray*}<br>v_*(s)<br>&amp;=&amp;\mathop{max}<em>\pi\ v_\pi(s)\<br>&amp;=&amp;\mathop{max}<em>a \mathbb{E}[R</em>{t+1}+\gamma v</em><em>(S_{t+1})|S_t=s,A_t=a]\<br>&amp;=&amp;\mathop{max}<em>a\ \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_</em>(s’))\tag{3.5}<br>\end{eqnarray*}<br>$$</p>
+<p>Similarly, <strong>bellman optimality equation for $q_*$</strong> is</p>
+<p>$$<br>\begin{eqnarray*}<br>q_*(s,a)<br>&amp;=&amp;\mathop{max}<em>\pi\ q_\pi(s,a)\<br>&amp;=&amp;\mathbb{E}[R</em>{t+1}+\gamma \mathop{max}<em>{a’}\ q</em><em>(S_{t+1},a’)|S_t=s,A_t=a]\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma \mathop{max}<em>{a’}\ q</em></em>(s’,a’))\tag{3.6}<br>\end{eqnarray*}<br>$$</p>
+<img src="/2020/02/29/RL3/9.png" class="">
 
-<p>The <strong>bellman optimality equations</strong> relate the value of a state or state-action pair, to it's possible successors under <strong>any optimal policy</strong>.</p>
-<p>Unfortunately, the <span class="math inline">\(max\)</span> funtion here is <strong>not linear</strong>, we <strong>cannot through linear system solver</strong> to directly solve bellman optimality equation to obtain all <span class="math inline">\(v_*\)</span> in MDPs. Although, in principle, one can use a variety of methods for solving systems of nonlinear equations, it is not recommended due to its extreme computational cost.</p>
-<h3 id="get-optimal-policy">Get Optimal Policy</h3>
-<p>Once one has <span class="math inline">\(v_*\)</span>, it is relatively easy to determine an optimal policy. Because, for each state <span class="math inline">\(s\)</span>, there will be one or more actions at which the maximum is obtained in the Bellman optimality equation. That is to say <strong>any policy that is greedy with respect to the optimal evaluation function <span class="math inline">\(v_*\)</span> is an optimal policy</strong>.</p>
+<p>The <strong>bellman optimality equations</strong> relate the value of a state or state-action pair, to it’s possible successors under <strong>any optimal policy</strong>.</p>
+<p>Unfortunately, the $max$ funtion here is <strong>not linear</strong>, we <strong>cannot through linear system solver</strong> to directly solve bellman optimality equation to obtain all $v_*$ in MDPs. Although, in principle, one can use a variety of methods for solving systems of nonlinear equations, it is not recommended due to its extreme computational cost.</p>
+<h3 id="Get-Optimal-Policy"><a href="#Get-Optimal-Policy" class="headerlink" title="Get Optimal Policy"></a>Get Optimal Policy</h3><p>Once one has $v_*$, it is relatively easy to determine an optimal policy. Because, for each state $s$, there will be one or more actions at which the maximum is obtained in the Bellman optimality equation. That is to say <strong>any policy that is greedy with respect to the optimal evaluation function $v_*$ is an optimal policy</strong>.</p>
+<img src="/2020/02/29/RL3/10.png" class="">
 
-<p>Having <span class="math inline">\(q_*\)</span> makes choosing optimal actions even easier. The action-value function effectively caches the results of all one-step-ahead searches.</p>
-
+<p>Having $q_*$ makes choosing optimal actions even easier. The action-value function effectively caches the results of all one-step-ahead searches.</p>
+<img src="/2020/02/29/RL3/11.png" class="">
 
       
     </div>
@@ -413,40 +365,35 @@ q_*(s,a)
 
       
           <span id="more"></span>
+
 <blockquote>
 <p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
 </blockquote>
-<h2 id="introduction-to-markov-decision-processes">Introduction to Markov Decision Processes</h2>
-<h3 id="definition-of-mdp">Definition of MDP</h3>
-<p>MDPs are meant to be a straightforward framing of the problem of learning from interaction to achieve a goal. Here are the key element in discribing a MDP</p>
+<h2 id="Introduction-to-Markov-Decision-Processes"><a href="#Introduction-to-Markov-Decision-Processes" class="headerlink" title="Introduction to Markov Decision Processes"></a>Introduction to Markov Decision Processes</h2><h3 id="Definition-of-MDP"><a href="#Definition-of-MDP" class="headerlink" title="Definition of MDP"></a>Definition of MDP</h3><p>MDPs are meant to be a straightforward framing of the problem of learning from interaction to achieve a goal. Here are the key element in discribing a MDP</p>
 <ul>
 <li><strong>agent</strong>: the learner and the decision maker</li>
 <li><strong>environment</strong>: the thing a agent interacts with, comprising everything outside the agent</li>
 <li><strong>action</strong>: selected by the agent to interact with the environment</li>
 <li><strong>reward</strong>: special numerical values that the agent seeks to maximize over time through its choice of actions.</li>
 </ul>
-<p>the whole interacting process is precisely simplified as follow<br />
-<br />
-More specifically, the agent and the environment interact at each of a sequence of discrete time steps, <span class="math inline">\(t=0,1,2,3,...\)</span> At each time step <span class="math inline">\(t\)</span>, the agent recives some representation of the environment's <strong>state</strong>, <span class="math inline">\(S_t \in \mathbf{S}\)</span>, and on that basis selects an <strong>action</strong>, <span class="math inline">\(A_t \in \mathbf{A}(s)\)</span>.</p>
-<p>One time step later, in part as a consequence of its action, the agent receives a numerical reward, <span class="math inline">\(R_{t+1} \in \mathbf{R}\subset \mathbb{R}\)</span>, and finds itself in a new state, <span class="math inline">\(S_{t+1}\)</span>. The MDP and agent together thereby give rise to a sequence or trajectory that begins like this:<br />
-<br />
-In a finite MDP, the sets of states, actions, and rewards (<span class="math inline">\(\mathbf{S}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{R}\)</span>) all have a finite number of elements. In this case, the random variables <span class="math inline">\(R_t\)</span> and <span class="math inline">\(S_t\)</span> have well defined discrete probability distributions dependent only on the preceding state and action. That is, for particular values of these random variables, <span class="math inline">\(s&#39; \in \mathbf{S}\)</span> and <span class="math inline">\(r \in \mathbf{R}\)</span>, there is a probability of those values occurring at time t, given particular values of the preceding state and action: <span class="math display">\[p(s&#39;,r|s,a)\doteq P(S_t=s&#39;, R_t=r\ | \ S_{t-1}=s, A_{t-1}=a)\tag{2.1}\]</span> for all <span class="math inline">\(s&#39;,s \in \mathbf{S}\)</span>, <span class="math inline">\(r \in \mathbf{R}\)</span>, and <span class="math inline">\(a \in \mathbf{A}(s)\)</span>. The function <span class="math inline">\(p\)</span> defines the <strong>dynamics of the MDP</strong>. <span class="math display">\[p:\ \mathbf{S}\times \mathbf{R}\times \mathbf{S}\times \mathbf{A}\rightarrow [0,1]\]</span> With <span class="math inline">\(p(s&#39;,r|s,a)\)</span>, note that <strong>future state and reward only depends on the current state and action</strong>. This is called the <strong>Markov property</strong>. It means that the present state is sufficient and remembering earlier states would not improve predictions about the future.</p>
+<p>the whole interacting process is precisely simplified as follow  </p>
+<img src="/2020/02/28/RL2/1.png" class="">  
+<p>More specifically, the agent and the environment interact at each of a sequence of discrete time steps, $t=0,1,2,3,…$ At each time step $t$, the agent recives some representation of the environment’s <strong>state</strong>, $S_t \in \mathbf{S}$, and on that basis selects an <strong>action</strong>, $A_t \in \mathbf{A}(s)$.</p>
+<p>One time step later, in part as a consequence of its action, the agent receives a numerical reward, $R_{t+1} \in \mathbf{R}\subset \mathbb{R}$, and finds itself in a new state, $S_{t+1}$. The MDP and agent together thereby give rise to a sequence or trajectory that begins like this:  </p>
+<img src="/2020/02/28/RL2/2.png" class="">  
+<p>In a finite MDP, the sets of states, actions, and rewards ($\mathbf{S}$, $\mathbf{A}$, and $\mathbf{R}$) all have a finite number of elements. In this case, the random variables $R_t$ and $S_t$ have well defined discrete probability distributions dependent only on the preceding state and action. That is, for particular values of these random variables, $s’ \in \mathbf{S}$ and $r \in \mathbf{R}$, there is a probability of those values occurring at time t, given particular values of the preceding state and action:<br>$$p(s’,r|s,a)\doteq P(S_t=s’, R_t=r\ | \ S_{t-1}=s, A_{t-1}=a)\tag{2.1}$$<br>for all $s’,s \in \mathbf{S}$, $r \in \mathbf{R}$, and $a \in \mathbf{A}(s)$. The function $p$ defines the <strong>dynamics of the MDP</strong>.<br>$$p:\ \mathbf{S}\times \mathbf{R}\times \mathbf{S}\times \mathbf{A}\rightarrow [0,1]$$<br>With $p(s’,r|s,a)$, note that <strong>future state and reward only depends on the current state and action</strong>. This is called the <strong>Markov property</strong>. It means that the present state is sufficient and remembering earlier states would not improve predictions about the future.</p>
 <p>The <strong>MDP framework</strong> is a considerable <strong>abstraction</strong> of the problem of goal-directed learning from interaction. It can be used to formalize a wide variety of <strong>sequential decision-making</strong> problem. This also means that any problem of learning goal-directed behavior can be reduced to three signals passing back and forth between an agent and its environment: actions, states, rewards.</p>
-<h3 id="an-example-of-mdp">An Example of MDP</h3>
-<p>Here is an example of finite MDP, <strong>Recycling Robot</strong>. We can write down the transition probabilities and the expected rewards, with dynamics as indicated below.<br />
-<br />
-We can show it in another useful way called <strong>trasition graph</strong><br />
-<br />
-There are two kinds of nodes: state nodes and action nodes. The key point here is that the agent fisrtly chooses an action and then transits to a state with corresponding probability.</p>
-<hr />
-<h2 id="goal-of-reinforcement-learning">Goal of Reinforcement Learning</h2>
-<h3 id="the-goal-of-rl">The Goal of RL</h3>
-<p>In reinforcement learning, reward captures the notion of short-term gain. The objective however, is to learn a policy that achieves the most reward in the long run. With this premise, we denote the <strong>return</strong> at time step <span class="math inline">\(t\)</span> as <span class="math inline">\(G_t\)</span></p>
-<p><span class="math display">\[G_t\doteq R_{t+1}+R_{t+2}+R_{t+3}+...\tag{2.2}\]</span></p>
-<p>We intuitively want to maxmize <span class="math inline">\(G_t\)</span> at each time step. However, <span class="math inline">\(G_t\)</span> is a random variable because <strong>the dynamics of the MDP can be stochastic</strong>. That's why we define the goal of an agent is to <strong>maxmize the expected return</strong></p>
-<p><span class="math display">\[\mathbb{E}[G_t] = \mathbb{E}[R_{t+1}+R_{t+2}+R_{t+3}+...]\tag{2.3}\]</span></p>
-<h3 id="the-reward-hypothesis">The Reward Hypothesis</h3>
-<p>The <strong>Reinforcement Learning Hypothesis</strong> can be expressed as this:</p>
+<h3 id="An-Example-of-MDP"><a href="#An-Example-of-MDP" class="headerlink" title="An Example of MDP"></a>An Example of MDP</h3><p>Here is an example of finite MDP, <strong>Recycling Robot</strong>. We can write down the transition probabilities and the expected rewards, with dynamics as indicated below.  </p>
+<img src="/2020/02/28/RL2/3.png" class="">  
+<p>We can show it in another useful way called <strong>trasition graph</strong>  </p>
+<img src="/2020/02/28/RL2/4.png" class="">  
+<p>There are two kinds of nodes: state nodes and action nodes. The key point here is that the agent fisrtly chooses an action and then transits to a state with corresponding probability.</p>
+<hr>
+<h2 id="Goal-of-Reinforcement-Learning"><a href="#Goal-of-Reinforcement-Learning" class="headerlink" title="Goal of Reinforcement Learning"></a>Goal of Reinforcement Learning</h2><h3 id="The-Goal-of-RL"><a href="#The-Goal-of-RL" class="headerlink" title="The Goal of RL"></a>The Goal of RL</h3><p>In reinforcement learning, reward captures the notion of short-term gain. The objective however, is to learn a policy that achieves the most reward in the long run. With this premise, we denote the <strong>return</strong> at time step $t$ as $G_t$</p>
+<p>$$G_t\doteq R_{t+1}+R_{t+2}+R_{t+3}+…\tag{2.2}$$</p>
+<p>We intuitively want to maxmize $G_t$ at each time step. However, $G_t$ is a random variable because <strong>the dynamics of the MDP can be stochastic</strong>. That’s why we define the goal of an agent is to <strong>maxmize the expected return</strong></p>
+<p>$$\mathbb{E}[G_t] = \mathbb{E}[R_{t+1}+R_{t+2}+R_{t+3}+…]\tag{2.3}$$</p>
+<h3 id="The-Reward-Hypothesis"><a href="#The-Reward-Hypothesis" class="headerlink" title="The Reward Hypothesis"></a>The Reward Hypothesis</h3><p>The <strong>Reinforcement Learning Hypothesis</strong> can be expressed as this:</p>
 <blockquote>
 <p>That all of what we mean by goals and purposes can be well thought of as maximization of the expected value of the cumulative sum of a received scalar signal (reward).</p>
 </blockquote>
@@ -465,43 +412,26 @@ There are two kinds of nodes: state nodes and action nodes. The key point here i
 <li>action-penalty representation: -1 for not achieving goal, 0 once goal reached</li>
 </ul>
 <p>Both of representations have its own limitation. They lack of some middel information to tell the agent how to achieve the goal as our expectation.</p>
-<hr />
-<h2 id="episodic-tasks-and-continuing-tasks">Episodic Tasks And Continuing Tasks</h2>
-<h3 id="episodic-tasks">Episodic Tasks</h3>
-<p>In an <strong>episodic task</strong>, the agent-environment interaction breaks up into <strong>episodes</strong>. Episodes are indepedent and each episode ends in a <strong>terminal state</strong> at time step <span class="math inline">\(T\)</span>. In this situation, time step is finite and we change <a href="#the-goal-of-rl">(2.2)</a> as</p>
-<p><span class="math display">\[G_t \doteq R_{t+1}+R_{t+2}+R_{t+1}+...+R_T\tag{2.4}\]</span></p>
-<h3 id="continuing-tasks">Continuing Tasks</h3>
-<p>The interaction between agent-environment goes on <strong>continually</strong> and there is no <strong>terminal state</strong>. In this situation, time step is infinite and <span class="math inline">\(G_t\)</span> is the same in <span class="math inline">\((2.2)\)</span></p>
-<p><span class="math display">\[G_t \doteq R_{t+1}+R_{t+2}+R_{t+3}+...\]</span></p>
-<p>But here comes to one problem: <span class="math inline">\(G_t\)</span> could be <span class="math inline">\(\infty\)</span> and impossible to calculate. Therefore, we should make <span class="math inline">\(G_t\)</span> finite, which by using <strong>discounting</strong> method.</p>
-<h3 id="discounting-return">Discounting Return</h3>
-<p>Discount the rewards in the future by <span class="math inline">\(\gamma\)</span> called <strong>discount rate</strong>, where <span class="math inline">\(\gamma \in [0,1]\)</span></p>
-<p><span class="math display">\[
-\begin{eqnarray*}
-G_t
-&amp;\doteq&amp; R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...+\gamma^{k-1}R_{t+k}+...\\
-&amp;=&amp;\sum_{k=0}^\infty \gamma^kR_{t+k+1}\tag{2.5}
-\end{eqnarray*}
-\]</span></p>
-<p>We can also re-write <span class="math inline">\(G_t\)</span> in the recursive version</p>
-<p><span class="math display">\[G_t = R_{t+1}+\gamma G_{t+1}\tag{2.6}\]</span></p>
-<p>To prove <span class="math inline">\(G_t\)</span> is finite, let's assume <span class="math inline">\(R_{max}\)</span> is the maximum reward the agent can receive</p>
-<p><span class="math display">\[
-\begin{eqnarray*}
-G_t=\sum_{k=0}^\infty \gamma^kR_{t+k+1}&amp;\le&amp; \sum_{k=0}^\infty \gamma^kR_{max}\\
-&amp;=&amp;R_{max}\sum_{k=0}^\infty \gamma^k\\
-&amp;=&amp;R_{max}\times \frac{1}{1-\gamma}
-\end{eqnarray*}
-\]</span></p>
-<p>It proves that <span class="math inline">\(G_t\)</span> now is finite. To Specify, let's talk about <span class="math inline">\(\gamma=0\)</span> and <span class="math inline">\(\gamma=1\)</span>.</p>
+<hr>
+<h2 id="Episodic-Tasks-And-Continuing-Tasks"><a href="#Episodic-Tasks-And-Continuing-Tasks" class="headerlink" title="Episodic Tasks And Continuing Tasks"></a>Episodic Tasks And Continuing Tasks</h2><h3 id="Episodic-Tasks"><a href="#Episodic-Tasks" class="headerlink" title="Episodic Tasks"></a>Episodic Tasks</h3><p>In an <strong>episodic task</strong>, the agent-environment interaction breaks up into <strong>episodes</strong>. Episodes are indepedent and each episode ends in a <strong>terminal state</strong> at time step $T$. In this situation, time step is finite and we change <a href="#the-goal-of-rl">(2.2)</a> as</p>
+<p>$$G_t \doteq R_{t+1}+R_{t+2}+R_{t+1}+…+R_T\tag{2.4}$$</p>
+<h3 id="Continuing-Tasks"><a href="#Continuing-Tasks" class="headerlink" title="Continuing Tasks"></a>Continuing Tasks</h3><p>The interaction between agent-environment goes on <strong>continually</strong> and there is no <strong>terminal state</strong>. In this situation, time step is infinite and $G_t$ is the same in $(2.2)$</p>
+<p>$$G_t \doteq R_{t+1}+R_{t+2}+R_{t+3}+…$$</p>
+<p>But here comes to one problem: $G_t$ could be $\infty$ and impossible to calculate. Therefore, we should make $G_t$ finite, which by using <strong>discounting</strong> method.</p>
+<h3 id="Discounting-Return"><a href="#Discounting-Return" class="headerlink" title="Discounting Return"></a>Discounting Return</h3><p>Discount the rewards in the future by $\gamma$ called <strong>discount rate</strong>, where $\gamma \in [0,1]$</p>
+<p>$$<br>\begin{eqnarray*}<br>G_t<br>&amp;\doteq&amp; R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+…+\gamma^{k-1}R_{t+k}+…\<br>&amp;=&amp;\sum_{k=0}^\infty \gamma^kR_{t+k+1}\tag{2.5}<br>\end{eqnarray*}<br>$$</p>
+<p>We can also re-write $G_t$ in the recursive version</p>
+<p>$$G_t = R_{t+1}+\gamma G_{t+1}\tag{2.6}$$</p>
+<p>To prove $G_t$ is finite, let’s assume $R_{max}$ is the maximum reward the agent can receive</p>
+<p>$$<br>\begin{eqnarray*}<br>G_t=\sum_{k=0}^\infty \gamma^kR_{t+k+1}&amp;\le&amp; \sum_{k=0}^\infty \gamma^kR_{max}\<br>&amp;=&amp;R_{max}\sum_{k=0}^\infty \gamma^k\<br>&amp;=&amp;R_{max}\times \frac{1}{1-\gamma}<br>\end{eqnarray*}<br>$$</p>
+<p>It proves that $G_t$ now is finite. To Specify, let’s talk about $\gamma=0$ and $\gamma=1$.</p>
 <ul>
-<li><span class="math inline">\(\gamma=0\Rightarrow G_t=R_t\)</span> : agent only cares about immediate reward. (<strong>short-sighted agent</strong>)</li>
-<li><span class="math inline">\(\gamma\rightarrow1\)</span> : agent takes future rewards into account more strongly. (<strong>far-sighted agent</strong>)</li>
+<li>$\gamma=0\Rightarrow G_t=R_t$ : agent only cares about immediate reward. (<strong>short-sighted agent</strong>)</li>
+<li>$\gamma\rightarrow1$ : agent takes future rewards into account more strongly. (<strong>far-sighted agent</strong>)</li>
 </ul>
-<h3 id="unified-episodic-and-continuing-tasks">Unified Episodic and Continuing Tasks</h3>
-<p>we can consider episode termination to be the entering of a special <strong>absorbing state</strong> that transitions only to itself and that generates only rewards of zero. For example, consider the state transition diagram:<br />
-<br />
-Thus, we can informally regard epsoidic tasks as continuing task.</p>
+<h3 id="Unified-Episodic-and-Continuing-Tasks"><a href="#Unified-Episodic-and-Continuing-Tasks" class="headerlink" title="Unified Episodic and Continuing Tasks"></a>Unified Episodic and Continuing Tasks</h3><p>we can consider episode termination to be the entering of a special <strong>absorbing state</strong> that transitions only to itself and that generates only rewards of zero. For example, consider the state transition diagram:  </p>
+<img src="/2020/02/28/RL2/5.png" class="">  
+<p>Thus, we can informally regard epsoidic tasks as continuing task.</p>
 
       
     </div>
@@ -576,105 +506,80 @@ Thus, we can informally regard epsoidic tasks as continuing task.</p>
 
       
           <span id="more"></span>
+
 <blockquote>
 <p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
 </blockquote>
-<h2 id="the-k-armed-bandit-problem">The K-Armed Bandit Problem</h2>
-<p>In the k-armed bandit problem, we have an <strong>agent</strong> who choooses between "k" <strong>action</strong> and recieves a <strong>reward</strong> based on the action it chooses. The <strong>goal</strong> of the agent is to maximize the expected total reward over some time period, or <strong>time steps</strong>.</p>
+<h2 id="The-K-Armed-Bandit-Problem"><a href="#The-K-Armed-Bandit-Problem" class="headerlink" title="The K-Armed Bandit Problem"></a>The K-Armed Bandit Problem</h2><p>In the k-armed bandit problem, we have an <strong>agent</strong> who choooses between “k” <strong>action</strong> and recieves a <strong>reward</strong> based on the action it chooses. The <strong>goal</strong> of the agent is to maximize the expected total reward over some time period, or <strong>time steps</strong>.</p>
 <p>In a word, <strong>decision making under uncertainty</strong> can be formalized by the <strong>k-armed bandit problem</strong></p>
-<h3 id="action-values">Action Values</h3>
-<p>the value of an action is the <strong>expected reward</strong> when that action is taken <span class="math display">\[
-\begin{eqnarray*}
-q_*(a) &amp;\doteq&amp; \mathbb{E}[R_t\ | \ A_t = a],\ \forall a \in \mathbf{A}\\
-&amp;=&amp;\sum_rp(r|a)r\tag{1.1}
-\end{eqnarray*}
-\]</span> To clearly explain this, the reward of an action may not be fixed so the reward may comfirm to a uniform distribution or normal distribution. Here is an example to illustrate this process </p>
-<h3 id="action-selection">Action Selection</h3>
-<p>Remember that the agent's <strong>goal</strong> is to <strong>maximize the expected total amount of reward it recieves</strong>. We can call this procedure the <em>argmax</em> (the argument "a" which maximizes function <span class="math inline">\(q_*\)</span>) <span class="math display">\[\mathop{argmax}_a \ q_*(a)\]</span> It is clear that if you know the value of each action, then it would be trivial to solve the k-armed bandit problem: you would always select the <strong>action with highest value</strong>.</p>
+<h3 id="Action-Values"><a href="#Action-Values" class="headerlink" title="Action Values"></a>Action Values</h3><p>the value of an action is the <strong>expected reward</strong> when that action is taken<br>$$<br>\begin{eqnarray*}<br>q_*(a) &amp;\doteq&amp; \mathbb{E}[R_t\ | \ A_t = a],\ \forall a \in \mathbf{A}\<br>&amp;=&amp;\sum_rp(r|a)r\tag{1.1}<br>\end{eqnarray*}<br>$$<br>To clearly explain this, the reward of an action may not be fixed so the reward may comfirm to a uniform distribution or normal distribution. Here is an example to illustrate this process</p>
+<img src="/2020/02/27/RL1/1.png" class="">  
+
+<h3 id="Action-Selection"><a href="#Action-Selection" class="headerlink" title="Action Selection"></a>Action Selection</h3><p>Remember that the agent’s <strong>goal</strong> is to <strong>maximize the expected total amount of reward it recieves</strong>. We can call this procedure the <em>argmax</em> (the argument “a” which maximizes function $q_*$)<br>$$\mathop{argmax}<em>a \ q</em>*(a)$$<br>It is clear that if you know the value of each action, then it would be trivial to solve the k-armed bandit problem: you would always select the <strong>action with highest value</strong>.</p>
 <p>Thus, the problem here is that the agent do not know the action values with certainty. It only have to estimate the action values. But how to estimate action-values?</p>
-<hr />
-<h2 id="what-to-learn-estimating-action-values">What to Learn? Estimating Action Values</h2>
-<h3 id="sample-average">Sample-Average</h3>
-<p>One way to estimate <span class="math inline">\(q_*\)</span> is to compute a <strong>sample-average</strong>. Here we denote the estimated value of action <span class="math inline">\(a\)</span> at time step <span class="math inline">\(t\)</span> as <span class="math inline">\(Q_t(a)\)</span>. We would like <span class="math inline">\(Q_t(a)\)</span> to be close to <span class="math inline">\(q_*(a)\)</span>.</p>
-<p><span class="math display">\[Q_t(a) \doteq \frac{\sum_{i=1}^{t-1}R_i}{t-1}\tag{1.2}\]</span></p>
-<p>Notice that we use <span class="math inline">\(t-1\)</span> because we are calculating <span class="math inline">\(Q_t(a)\)</span> with history prior to <span class="math inline">\(t\)</span>. And to be clear, <span class="math inline">\(t\)</span> has <strong>separate corresponding value for each action</strong>.<br />
-Here is an example of medical trail. <br />
-And we can simplify <span class="math inline">\(Q_t\)</span> by extending it in <strong>incremental update rule</strong></p>
-<p><span class="math display">\[
-\begin{eqnarray*}
-Q_{t+1}
-&amp;=&amp;\frac{1}{t}\sum_{i=1}^tR_i\\
-&amp;=&amp;\frac{1}{t}(R_t+(t-1)\frac{1}{t-1}\sum_{i=1}^{t-1}R_i)\\
-&amp;=&amp;\frac{1}{t}(R_t+(t-1)Q_t)\\
-&amp;=&amp;Q_t+\frac{1}{t}(R_t-Q_t)\tag{1.3}
-\end{eqnarray*}
-\]</span></p>
-<p>To generalize it, we replace <span class="math inline">\(\frac{1}{t}\)</span> with <span class="math inline">\(\alpha_t\)</span> to represent stepsize and it's easy to know <span class="math inline">\(\alpha_t \in [0,1]\)</span></p>
-<p><span class="math display">\[Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)\tag{1.4}\]</span></p>
+<hr>
+<h2 id="What-to-Learn-Estimating-Action-Values"><a href="#What-to-Learn-Estimating-Action-Values" class="headerlink" title="What to Learn? Estimating Action Values"></a>What to Learn? Estimating Action Values</h2><h3 id="Sample-Average"><a href="#Sample-Average" class="headerlink" title="Sample-Average"></a>Sample-Average</h3><p>One way to estimate $q_*$ is to compute a <strong>sample-average</strong>. Here we denote the estimated value of action $a$ at time step $t$ as $Q_t(a)$. We would like $Q_t(a)$ to be close to $q_*(a)$.</p>
+<p>$$Q_t(a) \doteq \frac{\sum_{i=1}^{t-1}R_i}{t-1}\tag{1.2}$$</p>
+<p>Notice that we use $t-1$ because we are calculating $Q_t(a)$ with history prior to $t$. And to be clear, $t$ has <strong>separate corresponding value for each action</strong>.<br>Here is an example of medical trail.</p>
+<img src="/2020/02/27/RL1/2.png" class="">  
+<p>And we can simplify $Q_t$ by extending it in <strong>incremental update rule</strong></p>
+<p>$$<br>\begin{eqnarray*}<br>Q_{t+1}<br>&amp;=&amp;\frac{1}{t}\sum_{i=1}^tR_i\<br>&amp;=&amp;\frac{1}{t}(R_t+(t-1)\frac{1}{t-1}\sum_{i=1}^{t-1}R_i)\<br>&amp;=&amp;\frac{1}{t}(R_t+(t-1)Q_t)\<br>&amp;=&amp;Q_t+\frac{1}{t}(R_t-Q_t)\tag{1.3}<br>\end{eqnarray*}<br>$$</p>
+<p>To generalize it, we replace $\frac{1}{t}$ with $\alpha_t$ to represent stepsize and it’s easy to know $\alpha_t \in [0,1]$</p>
+<p>$$Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)\tag{1.4}$$</p>
 <p>And it can also express as below</p>
-<p><span class="math display">\[NewEstimate \leftarrow OldEstimate\ +\  StepSize(Target\ -\ OldEstimate)\]</span></p>
-<p>The expression <span class="math inline">\((Target-OldEstimate)\)</span> is an <strong>error</strong> in the estimate. It is reduced by taking a step toward the “Target.” <strong>The target is presumed to indicate a desirable direction in which to move, though it may be noisy.</strong> In the case above, for example, the target is the nth reward.</p>
-<h3 id="nonstationary-problem">Nonstationary Problem</h3>
-<p>What if the reward distribution of each action is <strong>changing over time</strong>? In this situation, what we learn form history may not correctly represent current state due to changing of reward distribution. In such cases it makes sense to give more weight to recent rewards than to long-past rewards because recent information reflect changing more accurate. To do so, we can use a <strong>fixed stepsize</strong>,like 0.5, instead of <span class="math inline">\(\frac{1}{t}\)</span>. This can lead to decaying exponently past reward.</p>
-<p><span class="math display">\[Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)=\alpha_tR_t+(1-\alpha_t)Q_t\tag{1.5}\]</span></p>
-<p>As <span class="math inline">\(\alpha_t\)</span> increases, the more <span class="math inline">\(R_t\)</span> contributes to <span class="math inline">\(Q_{t+1}\)</span> and the less for <span class="math inline">\(Q_t\)</span>.</p>
-<h3 id="greedy-action">Greedy Action</h3>
-<p>At each time step, the agent could alway choose the action with the highest action value estimated by history. And this is called <strong>greedy action</strong>.</p>
-<p><span class="math display">\[a_g = \mathop{argmax}_a\ \ Q(a)\]</span></p>
+<p>$$NewEstimate \leftarrow OldEstimate\ +\  StepSize(Target\ -\ OldEstimate)$$</p>
+<p>The expression $(Target-OldEstimate)$ is an <strong>error</strong> in the estimate. It is reduced by taking a step toward the “Target.” <strong>The target is presumed to indicate a desirable direction in which to move, though it may be noisy.</strong> In the case above, for example, the target is the nth reward.</p>
+<h3 id="Nonstationary-Problem"><a href="#Nonstationary-Problem" class="headerlink" title="Nonstationary Problem"></a>Nonstationary Problem</h3><p>What if the reward distribution of each action is <strong>changing over time</strong>? In this situation, what we learn form history may not correctly represent current state due to changing of reward distribution. In such cases it makes sense to give more weight to recent rewards than to long-past rewards because recent information reflect changing more accurate. To do so, we can use a <strong>fixed stepsize</strong>,like 0.5, instead of $\frac{1}{t}$. This can lead to decaying exponently past reward.</p>
+<p>$$Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)=\alpha_tR_t+(1-\alpha_t)Q_t\tag{1.5}$$</p>
+<p>As $\alpha_t$ increases, the more $R_t$ contributes to $Q_{t+1}$ and the less for $Q_t$.</p>
+<h3 id="Greedy-Action"><a href="#Greedy-Action" class="headerlink" title="Greedy Action"></a>Greedy Action</h3><p>At each time step, the agent could alway choose the action with the highest action value estimated by history. And this is called <strong>greedy action</strong>.</p>
+<p>$$a_g = \mathop{argmax}_a\ \ Q(a)$$</p>
 <p>Seemingly we can through greedy action to archieve our goal, maxmizing expected total reward. But there is still a problem exists: how does the agent know its estimation about each action is correctly approximating to the real distribution? Greedy action is greatly impact by initial action value. Why does the agent know other actions are worse than greedy action even trying them only a few times?</p>
 <p>I think the agent should spend some time trying other actions instead of greedy action. And this come to the <strong>exploration and exploitation tradeoff</strong></p>
-<hr />
-<h2 id="exploration-vs.-exploitation-tradeoff">Exploration vs. Exploitation Tradeoff</h2>
-<h3 id="exploration-and-exploitation-dilemma">Exploration and Exploitation Dilemma</h3>
-<ul>
+<hr>
+<h2 id="Exploration-vs-Exploitation-Tradeoff"><a href="#Exploration-vs-Exploitation-Tradeoff" class="headerlink" title="Exploration vs. Exploitation Tradeoff"></a>Exploration vs. Exploitation Tradeoff</h2><h3 id="Exploration-and-Exploitation-Dilemma"><a href="#Exploration-and-Exploitation-Dilemma" class="headerlink" title="Exploration and Exploitation Dilemma"></a>Exploration and Exploitation Dilemma</h3><ul>
 <li>Exploration: <strong>improve</strong> knowledge for <strong>long-term</strong> benefit</li>
 <li>Exploitation: <strong>exploit</strong> knowledge for <strong>short-term</strong> benefit</li>
 </ul>
 <p>The dilemma means: How do we choose when to exploit and when to explore? When we <strong>explore</strong>, we get more accurate estimates of our values. When we <strong>exploit</strong>, we might get more reward. We cannot however choose to do both simultaneously.</p>
-<h3 id="epsilon-greedy-action-selection">Epsilon-Greedy Action Selection</h3>
-<p>One very simple method for choosing between exploration and exploitation is to <strong>choose randomly</strong>. We could choose to exploit most of the time with a small chance of exploring. For instance, we could roll a dice.</p>
-<p>This is called <strong><span class="math inline">\(\epsilon\)</span>-greedy action selection</strong>. We formulize it as below, where <span class="math inline">\(\epsilon \in [0,1]\)</span></p>
-<p><span class="math display">\[
-A_t\leftarrow
-\begin{cases}
-\mathop{argmax}_a Q_t(a)\ \ \ \ \ \ \ \ 1-\epsilon\\ \\
-a\sim Uniform(\mathbf{A})\ \ \ \ \ \ \epsilon
-\end{cases}
-\]</span></p>
+<h3 id="Epsilon-Greedy-Action-Selection"><a href="#Epsilon-Greedy-Action-Selection" class="headerlink" title="Epsilon-Greedy Action Selection"></a>Epsilon-Greedy Action Selection</h3><p>One very simple method for choosing between exploration and exploitation is to <strong>choose randomly</strong>. We could choose to exploit most of the time with a small chance of exploring. For instance, we could roll a dice.  </p>
+<p>This is called <strong>$\epsilon$-greedy action selection</strong>. We formulize it as below, where $\epsilon \in [0,1]$</p>
+<p>$$<br>A_t\leftarrow<br>\begin{cases}<br>\mathop{argmax}_a Q_t(a)\ \ \ \ \ \ \ \ 1-\epsilon\ \<br>a\sim Uniform(\mathbf{A})\ \ \ \ \ \ \epsilon<br>\end{cases}<br>$$</p>
+<img src="/2020/02/27/RL1/3.png" class="">  
 
-<p>Let's evaluate on 10-armed testbed<br />
-<br />
-We run each agent with different <span class="math inline">\(\epsilon\)</span> for 2000 independent runs, each run for 1000 time steps. Then we average 2000 runs to get the learning algorithm’s average behavior.<br />
-</p>
-<p>The advantage of <span class="math inline">\(\epsilon\)</span>-greedy over greedy methods depends on the task. If the reward variance is large, like 10, then more explorations to detect best action is important. More detections give the agent more confidence to pick up optimal action.</p>
+<p>Let’s evaluate on 10-armed testbed  </p>
+<img src="/2020/02/27/RL1/5.png" class="">  
+<p>We run each agent with different $\epsilon$ for 2000 independent runs, each run for 1000 time steps. Then we average 2000 runs to get the learning algorithm’s average behavior.  </p>
+<img src="/2020/02/27/RL1/4.png" class="">  
+
+<p>The advantage of $\epsilon$-greedy over greedy methods depends on the task. If the reward variance is large, like 10, then more explorations to detect best action is important. More detections give the agent more confidence to pick up optimal action.</p>
 <p>On the other hand, if the reward variance is zero, then greedy method would know the true value of each action after trying it once. Seemingly, in this case, greedy method would soon find the greedy action and it might perform best. But, this can not be guaranteed under nonstationary situations. Nonstation means the true values of the actions changed over time. In this case, exploration is needed to ensure that one of the nongreedy actions has not changed to become better than the greedy one.</p>
-<h3 id="optimistic-initial-values">Optimistic Initial Values</h3>
-<p><strong>Optimistic initial values</strong> encourage <strong>early exploration</strong>. In real programing, don't intialize all acion values defaut to 0. Here is an example to show algorithm's performance by using this method.<br />
-<br />
-Limitation of optimistic inital values:</p>
+<h3 id="Optimistic-Initial-Values"><a href="#Optimistic-Initial-Values" class="headerlink" title="Optimistic Initial Values"></a>Optimistic Initial Values</h3><p><strong>Optimistic initial values</strong> encourage <strong>early exploration</strong>. In real programing, don’t intialize all acion values defaut to 0. Here is an example to show algorithm’s performance by using this method.  </p>
+<img src="/2020/02/27/RL1/6.png" class="">  
+<p>Limitation of optimistic inital values:</p>
 <ul>
 <li>Optimistic intial values <strong>only drive early exploration</strong></li>
 <li>They are not will suited for <strong>nonstationary problems</strong></li>
 <li>We may not know what the <strong>optimistic values</strong> should be</li>
 </ul>
-<h3 id="upper-confidence-bound-ucb-action-selection">Upper-Confidence Bound (UCB) Action Selection</h3>
-<p><span class="math inline">\(\epsilon\)</span>-greedy action selection forces the non-greedy actions to be tried, but indiscriminately and <strong>uniformly</strong>, with no preference for those that are nearly greedy or particularly uncertain. It would be better to select among the non-greedy actions according to their <strong>potential for actually being optimal</strong>, taking into account both how close their estimates are to being maximal and the uncertainties in those estimates.</p>
+<h3 id="Upper-Confidence-Bound-UCB-Action-Selection"><a href="#Upper-Confidence-Bound-UCB-Action-Selection" class="headerlink" title="Upper-Confidence Bound (UCB) Action Selection"></a>Upper-Confidence Bound (UCB) Action Selection</h3><p>$\epsilon$-greedy action selection forces the non-greedy actions to be tried, but indiscriminately and <strong>uniformly</strong>, with no preference for those that are nearly greedy or particularly uncertain. It would be better to select among the non-greedy actions according to their <strong>potential for actually being optimal</strong>, taking into account both how close their estimates are to being maximal and the uncertainties in those estimates.</p>
 <p>In <strong>upper-confidence bound</strong>(UCB) action selection, we follow the principle of optimism in the face of uncertainty. This simply means that if we are uncertain about something, we should optimistically assume that it is good.</p>
-<p>For instance, say we have these three actions with associated uncertainties. The larger confidence interval means bigger uncertainies. So the agent optimistically picks the action that has the highest upper bound, action 1. <br />
-After that, this time, we should select action 2.<br />
-<br />
-The key idea in UCB is that it uses <strong>uncertainty</strong> or <strong>variance</strong> (sqrt root) in the value estimation for balancing exploration and exploitation.</p>
-<p><span class="math display">\[A_t \doteq \mathop{argmax}_a [Q_t(a)+c\sqrt{\frac{\ln{t}}{N_t(a)}}\ ]\]</span></p>
-<p>We can clearly see here how UCB combines exploration and exploitation. The first term in the sum represents the exploitation part, and the second term represents the exploration part. The constant parameter <span class="math inline">\(c\)</span> is used to scale the extent of exploration. <span class="math inline">\(N_t(a)\)</span> denotes the number of times that action <span class="math inline">\(a\)</span> has been selected prior to time <span class="math inline">\(t\)</span>.<br />
-<br />
-The limitation of UCB is <strong>not practical for very huge state spaces</strong>.</p>
-<h2 id="summary">Summary</h2>
-<p>The gap between k-armed bandit problem and the full reinforcement learning problem:</p>
-<ol type="1">
+<p>For instance, say we have these three actions with associated uncertainties. The larger confidence interval means bigger uncertainies. So the agent optimistically picks the action that has the highest upper bound, action 1.</p>
+<img src="/2020/02/27/RL1/7.png" class="">  
+<p>After that, this time, we should select action 2.  </p>
+<img src="/2020/02/27/RL1/8.png" class="">  
+<p>The key idea in UCB is that it uses <strong>uncertainty</strong> or <strong>variance</strong> (sqrt root) in the value estimation for balancing exploration and exploitation.</p>
+<p>$$A_t \doteq \mathop{argmax}_a [Q_t(a)+c\sqrt{\frac{\ln{t}}{N_t(a)}}\ ]$$</p>
+<p>We can clearly see here how UCB combines exploration and exploitation. The first term in the sum represents the exploitation part, and the second term represents the exploration part. The constant parameter $c$ is used to scale the extent of exploration. $N_t(a)$ denotes the number of times that action $a$ has been selected prior to time $t$.  </p>
+<img src="/2020/02/27/RL1/9.png" class="">  
+<p>The limitation of UCB is <strong>not practical for very huge state spaces</strong>.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The gap between k-armed bandit problem and the full reinforcement learning problem:</p>
+<ol>
 <li>there is <strong>no association</strong> between actions and situations(or <strong>states</strong>). Each selection of actions is <strong>non-contextual</strong> or independent.</li>
 <li>thers is <strong>no policy</strong>, which designate actions at each situation(or <strong>state</strong>).</li>
 </ol>
 <p>we summarize a complete learning curve by its average value over the 1000 steps; this value is proportional to the area under the learning curve. This kind of graph is called a <strong>parameter study</strong>. </p>
+<img src="/2020/02/27/RL1/10.png" class="">
 
       
     </div>
@@ -749,40 +654,35 @@ The limitation of UCB is <strong>not practical for very huge state spaces</stron
 
       
           <span id="more"></span>
+
 <blockquote>
 <p>All materials come from <em>Coursera</em>《Game Theory》by Stanford University &amp; The University of British Columbia</p>
 </blockquote>
-<h2 id="intro-to-nash-equilibrium">Intro to nash equilibrium</h2>
-<p>Attributes of nash equilibrium</p>
+<h2 id="Intro-to-nash-equilibrium"><a href="#Intro-to-nash-equilibrium" class="headerlink" title="Intro to nash equilibrium"></a>Intro to nash equilibrium</h2><p>Attributes of nash equilibrium</p>
 <ul>
-<li><strong>nobody has an incentive to </strong>deviate** from their actions if a nash equilibrium is achieved**</li>
-<li>each player's action <strong>maximizes his/her payoff</strong> given the actions of others</li>
+<li><strong>nobody has an incentive to <strong>deviate</strong> from their actions if a nash equilibrium is achieved</strong></li>
+<li>each player’s action <strong>maximizes his/her payoff</strong> given the actions of others</li>
 <li>a self-consistent or <strong>stable</strong> profile</li>
 </ul>
-<h2 id="pure-strategy-nash-equilibrium">Pure Strategy Nash Equilibrium</h2>
-<h3 id="pure-strategy-and-mixed-strategy">Pure Strategy And Mixed Strategy</h3>
-<p>the informal definitions of <strong>pure strategy</strong> and <strong>mixed strategy</strong> are</p>
+<h2 id="Pure-Strategy-Nash-Equilibrium"><a href="#Pure-Strategy-Nash-Equilibrium" class="headerlink" title="Pure Strategy Nash Equilibrium"></a>Pure Strategy Nash Equilibrium</h2><h3 id="Pure-Strategy-And-Mixed-Strategy"><a href="#Pure-Strategy-And-Mixed-Strategy" class="headerlink" title="Pure Strategy And Mixed Strategy"></a>Pure Strategy And Mixed Strategy</h3><p>the informal definitions of <strong>pure strategy</strong> and <strong>mixed strategy</strong> are</p>
 <ul>
 <li>pure strategy: <strong>only one</strong> action is played with positive probability</li>
 <li>mixed strategy: <strong>more than one</strong> action is played with positive probability</li>
 </ul>
-<p>With a pure strategy, a player choose one action with 100% ensurance. While with a mixed strategy, a player can have a probability of 50% choosing action A and a probability of 50% choosing action B. In another word, player <span class="math inline">\(i\)</span> chooses action <span class="math inline">\(a_i\)</span> randomly from <span class="math inline">\(A\)</span> with corresponding probability.</p>
-<h3 id="best-response">Best Response</h3>
-<p>The idea of <strong>Best Response</strong>: if you know what everyone else was going to do, it would be easy to pick your own action.</p>
-<p>Based on the previous lecture, <span class="math inline">\(a\)</span> represents <strong>action profile</strong>, which organized by <span class="math inline">\(n\)</span> players' action</p>
-<p><span class="math display">\[a = (a_1, a_2,..., a_n)\]</span></p>
-<p>Now we denote <span class="math inline">\(a_{-i}\)</span>, which means a sub action profile of other players act</p>
-<p><span class="math display">\[a_{-i} = (a_1, a_2,..., a_{i-1}, a_{i+1},..., a_n)\]</span></p>
-<p>Then we can re-define <span class="math inline">\(a\)</span> as</p>
-<p><span class="math display">\[a = (a_i, a_{-i})\]</span></p>
+<p>With a pure strategy, a player choose one action with 100% ensurance. While with a mixed strategy, a player can have a probability of 50% choosing action A and a probability of 50% choosing action B. In another word, player $i$ chooses action $a_i$ randomly from $A$ with corresponding probability.</p>
+<h3 id="Best-Response"><a href="#Best-Response" class="headerlink" title="Best Response"></a>Best Response</h3><p>The idea of <strong>Best Response</strong>: if you know what everyone else was going to do, it would be easy to pick your own action.</p>
+<p>Based on the previous lecture, $a$ represents <strong>action profile</strong>, which organized by $n$ players’ action</p>
+<p>$$a = (a_1, a_2,…, a_n)$$</p>
+<p>Now we denote $a_{-i}$, which means a sub action profile of other players act</p>
+<p>$$a_{-i} = (a_1, a_2,…, a_{i-1}, a_{i+1},…, a_n)$$</p>
+<p>Then we can re-define $a$ as</p>
+<p>$$a = (a_i, a_{-i})$$</p>
 <p>Therefore, the definition of <strong>Best Response</strong> is showen below</p>
-<p><span class="math display">\[a_i^* \in BR(a_{-i}) \ \ iff \ \ \forall a_i \in A_i, u_i(a_i^*, a_{-i}) \ge u_i(a_i, a_{-i})\]</span></p>
-<p>That is to say, given <span class="math inline">\(a_{-i}\)</span>, <span class="math inline">\(a_i^*\)</span> is the best response for player <span class="math inline">\(i\)</span> to play.</p>
-<p>But in practice, no agent knows what the others will do, so we can't say about what actions will actually occur. The idea here is to look for <strong>stable action profiles</strong>, leading to equilibrium point. <span class="math inline">\(a = (a_1, a_2,..., a_n)\)</span> is a (pure strategy) <strong>nash equilibrium</strong> iff <span class="math inline">\(\forall i,\ a_i \in BR(a_{-i})\)</span></p>
-<h3 id="dominant-strategy">Dominant Strategy</h3>
-<p>generalize from actions to strategies</p>
-<h2 id="mixed-strategy-nash-equilibrium">Mixed Strategy Nash Equilibrium</h2>
-
+<p>$$a_i^* \in BR(a_{-i}) \ \ iff \ \ \forall a_i \in A_i, u_i(a_i^*, a_{-i}) \ge u_i(a_i, a_{-i})$$  </p>
+<p>That is to say, given $a_{-i}$, $a_i^*$ is the best response for player $i$ to play.</p>
+<p>But in practice, no agent knows what the others will do, so we can’t say about what actions will actually occur. The idea here is to look for <strong>stable action profiles</strong>, leading to equilibrium point. $a = (a_1, a_2,…, a_n)$ is a (pure strategy) <strong>nash equilibrium</strong> iff $\forall i,\ a_i \in BR(a_{-i})$</p>
+<h3 id="Dominant-Strategy"><a href="#Dominant-Strategy" class="headerlink" title="Dominant Strategy"></a>Dominant Strategy</h3><p>generalize from actions to strategies</p>
+<h2 id="Mixed-Strategy-Nash-Equilibrium"><a href="#Mixed-Strategy-Nash-Equilibrium" class="headerlink" title="Mixed Strategy Nash Equilibrium"></a>Mixed Strategy Nash Equilibrium</h2>
       
     </div>
 
@@ -855,41 +755,38 @@ The limitation of UCB is <strong>not practical for very huge state spaces</stron
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="top">top</h2>
-<p>查看系统进程</p>
-<h2 id="screen">screen</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen -S [TaskName] 创建一个名为TaskName的screen</span><br><span class="line">screen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen</span><br></pre></td></tr></table></figure>
+          <h2 id="top"><a href="#top" class="headerlink" title="top"></a>top</h2><p>查看系统进程</p>
+<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen -S [TaskName] 创建一个名为TaskName的screen</span><br><span class="line">screen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen</span><br></pre></td></tr></table></figure>
+
 <p>快捷指令：</p>
 <ul>
-<li>上下分屏：ctrl + a 再按shift + s</li>
-<li>切换屏幕：ctrl + a 再按tab键</li>
-<li>新建一个终端：ctrl + a 再按c</li>
+<li>上下分屏：ctrl + a  再按shift + s</li>
+<li>切换屏幕：ctrl + a  再按tab键</li>
+<li>新建一个终端：ctrl + a  再按c</li>
 </ul>
-<h2 id="dudf">du、df</h2>
-<p>du = disk used 硬盘使用情况 df = disk free 硬盘剩余空间</p>
+<h2 id="du、df"><a href="#du、df" class="headerlink" title="du、df"></a>du、df</h2><p>du = disk used 硬盘使用情况<br>df = disk free 硬盘剩余空间</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">du -h [FileName] 查看指定文件大小</span><br><span class="line"></span><br><span class="line">df -hl 查看磁盘剩余空间</span><br><span class="line"></span><br><span class="line">df -h 查看每个根路径的分区大小</span><br><span class="line"></span><br><span class="line">du -sh [目录名] 返回该目录的大小</span><br><span class="line"></span><br><span class="line">du -sm [文件夹] 返回该文件夹总M数</span><br></pre></td></tr></table></figure>
-<h2 id="find">find</h2>
-<p>find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等</p>
+
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find [location] -name [FileName] 在location下查找名字为FileName的文件</span><br></pre></td></tr></table></figure>
-<h2 id="grep">grep</h2>
-<p>grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找</p>
+
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [字符串] [File] 在File中按行匹配字符串</span><br></pre></td></tr></table></figure>
-<h2 id="whichwhereis">which、whereis</h2>
-<p>which 查看可执行文件的位置 ，只有设置了环境变量的程序才可以用 whereis 寻找特定文件，只能用于查找二进制文件、源代码文件和man手册页</p>
-<h2 id="moreless">more/less</h2>
-<p>查看文件内容，当文件内容很大时比cat命令要好用</p>
-<h2 id="headtail">head、tail</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head(tail) -n 1000 [FileName] 显示FileName文件的前1000行(后1000行)</span><br><span class="line">tail -n +1000 [FileName] 显示FileName文件从1000行往后的内容</span><br><span class="line">tail -f [FileName] 追踪（follow）文件FileName</span><br></pre></td></tr></table></figure>
-<h2 id="freeswapoffmkswapswapon">free、swapoff、mkswap、swapon</h2>
-<p>查看内存状态命令，可以显示memory、swap、buffer/cache等的大小及使用状况</p>
+
+<h2 id="which、whereis"><a href="#which、whereis" class="headerlink" title="which、whereis"></a>which、whereis</h2><p>which 查看可执行文件的位置 ，只有设置了环境变量的程序才可以用<br>whereis 寻找特定文件，只能用于查找二进制文件、源代码文件和man手册页</p>
+<h2 id="more-less"><a href="#more-less" class="headerlink" title="more/less"></a>more/less</h2><p>查看文件内容，当文件内容很大时比cat命令要好用</p>
+<h2 id="head、tail"><a href="#head、tail" class="headerlink" title="head、tail"></a>head、tail</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head(tail) -n 1000 [FileName] 显示FileName文件的前1000行(后1000行)</span><br><span class="line">tail -n +1000 [FileName] 显示FileName文件从1000行往后的内容</span><br><span class="line">tail -f [FileName] 追踪（follow）文件FileName</span><br></pre></td></tr></table></figure>
+
+<h2 id="free、swapoff、mkswap、swapon"><a href="#free、swapoff、mkswap、swapon" class="headerlink" title="free、swapoff、mkswap、swapon"></a>free、swapoff、mkswap、swapon</h2><p>查看内存状态命令，可以显示memory、swap、buffer/cache等的大小及使用状况</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">free -h 查看内存状态</span><br><span class="line"></span><br><span class="line">swapoff -a 取消所有挂载的swap空间</span><br><span class="line"></span><br><span class="line">dd if=/dev/zero of=/var/swapfile bs=1M count=1024 在/var目录下创建大小为1G的文件用做swap空间</span><br><span class="line"></span><br><span class="line">mkswap /var/swapfile 格式化swap文件</span><br><span class="line"></span><br><span class="line">swapon /var/swapfile 挂载swap空间</span><br></pre></td></tr></table></figure>
-<h2 id="netstat">netstat</h2>
-<p>查看网络状态（地址和端口号）</p>
+
+<h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><p>查看网络状态（地址和端口号）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunlp 其中t（tcp）、u（udp），nlp分别是三个flag参数</span><br></pre></td></tr></table></figure>
-<h2 id="tmux">tmux</h2>
-<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/10/tmux.html">详细内容参考</a></p>
+
+<h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h2><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/10/tmux.html">详细内容参考</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s [NewSessionName] 创建标签为NewSessionName的新会话，默认数字index从0开始</span><br><span class="line">tmux attach -t [index/name] 恢复到index/name的会话连接</span><br><span class="line">tmux ls 查看所有会话</span><br><span class="line">tmux switch -t [index/name] 切换到index/name会话</span><br></pre></td></tr></table></figure>
-<p>快捷指令 ：</p>
+
+<p>快捷指令  ：</p>
 <ul>
 <li>ctrl + b %： 左右分屏</li>
 <li>ctrl + b “： 上下分屏</li>

@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="参考书目《数据库系统概论（第5版）》  问题的提出  针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。 数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。 一个好的关系模式不会发生插入异常、删除异常">
+  <meta name="description" content="参考书目《数据库系统概论（第5版）》  问题的提出 针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。 数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。 一个好的关系模式不会发生插入异常、删除异常和">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库原理——第六章：关系数据库理论">
 <meta property="og:url" content="https://wshenyi.github.io/2019/04/27/Database6/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  问题的提出  针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。 数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。 一个好的关系模式不会发生插入异常、删除异常">
+<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  问题的提出 针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即应该构建几个关系模式，每个关系由哪些属性组成等。这是数据库设计的问题，确切地讲是关系数据库逻辑设计问题（如何构造合适的数据模式）。 数据依赖是一个关系内部属性与属性之间的约束关系，这种约束关系是通过属性值的相等与否体现出来的数据间相关联系。 一个好的关系模式不会发生插入异常、删除异常和">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-04-27T23:42:54.000Z">
 <meta property="article:modified_time" content="2019-06-19T00:48:23.000Z">
@@ -232,75 +232,46 @@
         <blockquote>
 <p><em>参考书目《数据库系统概论（第5版）》</em></p>
 </blockquote>
-<h2 id="问题的提出">问题的提出</h2>
-<ul>
+<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><ul>
 <li>针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即<em>应该构建几个关系模式，每个关系由哪些属性组成等</em>。这是数据库设计的问题，确切地讲是<strong>关系数据库逻辑设计问题（如何构造合适的数据模式）</strong>。</li>
 <li><strong>数据依赖</strong>是一个关系内部属性与属性之间的<em>约束关系</em>，这种约束关系是通过<strong>属性值</strong>的相等与否体现出来的数据间相关联系。</li>
 <li>一个好的关系模式不会发生<strong>插入异常</strong>、<strong>删除异常</strong>和<strong>更新异常</strong>，<strong>数据冗余</strong>尽可能的少。</li>
 </ul>
-<hr />
-<h2 id="规范化">规范化</h2>
-<h3 id="函数依赖">函数依赖</h3>
-<ul>
-<li><p>定义：若属性组<span class="math inline">\(X\)</span>能唯一确定属性组<span class="math inline">\(Y\)</span>，则称<span class="math inline">\(X\)</span><strong>函数确定</strong><span class="math inline">\(Y\)</span>或<span class="math inline">\(Y\)</span><strong>函数依赖</strong><span class="math inline">\(X\)</span>，记作<span class="math inline">\(X \rightarrow Y\)</span>。</p></li>
-<li><p><span class="math inline">\(X \rightarrow Y\)</span>，但<span class="math inline">\(Y \nsubseteq X\)</span>，则称<span class="math inline">\(X \rightarrow Y\)</span>是<strong>非平凡的函数依赖</strong>。<span class="math inline">\(X\)</span>称为这个函数依赖的决定属性<strong>组</strong>，也称为<strong>决定属性</strong>。</p></li>
-<li><p><span class="math inline">\(X \rightarrow Y\)</span>，但<span class="math inline">\(Y \subseteq X\)</span>，则称<span class="math inline">\(X \rightarrow Y\)</span>是<strong>平凡的函数依赖</strong>。对于任一关系模式，平凡函数依赖都是必然成立的，它不反映新的语义。若不特别声明，总是讨论非平凡的函数依赖。</p></li>
-<li><p>若<span class="math inline">\(X \rightarrow Y\)</span>，<span class="math inline">\(Y \rightarrow X\)</span>，则记作<span class="math inline">\(X \leftarrow \rightarrow Y\)</span>（即直接函数依赖）</p></li>
-<li><p>若<span class="math inline">\(Y\)</span>不函数依赖于<span class="math inline">\(X\)</span>，则记作<span class="math inline">\(X \nrightarrow Y\)</span></p></li>
-<li><p>定义：在<span class="math inline">\(R(U)\)</span>中，如果<span class="math inline">\(X \rightarrow Y\)</span>，并且对于<span class="math inline">\(X\)</span>的任何一个<strong>真子集</strong><span class="math inline">\(X&#39;\)</span>，都有<span class="math inline">\(X&#39; \nrightarrow Y\)</span>，则称<span class="math inline">\(Y\)</span>对<span class="math inline">\(X\)</span><strong>完全函数依赖</strong>，记作<span class="math inline">\(X \stackrel{F}{\rightarrow} Y\)</span></p></li>
-<li><p>若<span class="math inline">\(X \rightarrow Y\)</span>，但<span class="math inline">\(Y\)</span>不完全函数依赖于<span class="math inline">\(X\)</span>，则称Y对X<strong>部分函数依赖</strong>，记作<span class="math inline">\(X \stackrel{P}{\rightarrow} Y\)</span>，等价于在完全函数依赖中加入冗余属性使之变成部分函数依赖</p></li>
-<li><p>定义：在<span class="math inline">\(R(U)\)</span>中，如果<span class="math inline">\(X \rightarrow Y (Y \nsubseteq X)\)</span>，<span class="math inline">\(Y \nrightarrow X\)</span>，<span class="math inline">\(Y \rightarrow Z\)</span>，<span class="math inline">\(Z \nsubseteq Y\)</span>，则称<span class="math inline">\(Z\)</span>对<span class="math inline">\(X\)</span><strong>传递函数依赖</strong>，记作<span class="math inline">\(X \stackrel{传递}{\rightarrow} Y\)</span></p></li>
+<hr>
+<h2 id="规范化"><a href="#规范化" class="headerlink" title="规范化"></a>规范化</h2><h3 id="函数依赖"><a href="#函数依赖" class="headerlink" title="函数依赖"></a>函数依赖</h3><ul>
+<li><p>定义：若属性组$X$能唯一确定属性组$Y$，则称$X$<strong>函数确定</strong>$Y$或$Y$<strong>函数依赖</strong>$X$，记作$X \rightarrow Y$。</p>
+</li>
+<li><p>$X \rightarrow Y$，但$Y \nsubseteq X$，则称$X \rightarrow Y$是<strong>非平凡的函数依赖</strong>。$X$称为这个函数依赖的决定属性<strong>组</strong>，也称为<strong>决定属性</strong>。</p>
+</li>
+<li><p>$X \rightarrow Y$，但$Y \subseteq X$，则称$X \rightarrow Y$是<strong>平凡的函数依赖</strong>。对于任一关系模式，平凡函数依赖都是必然成立的，它不反映新的语义。若不特别声明，总是讨论非平凡的函数依赖。</p>
+</li>
+<li><p>若$X \rightarrow Y$，$Y \rightarrow X$，则记作$X \leftarrow \rightarrow Y$（即直接函数依赖）</p>
+</li>
+<li><p>若$Y$不函数依赖于$X$，则记作$X \nrightarrow Y$</p>
+</li>
+<li><p>定义：在$R(U)$中，如果$X \rightarrow Y$，并且对于$X$的任何一个<strong>真子集</strong>$X’$，都有$X’ \nrightarrow Y$，则称$Y$对$X$<strong>完全函数依赖</strong>，记作$X \stackrel{F}{\rightarrow} Y$</p>
+</li>
+<li><p>若$X \rightarrow Y$，但$Y$不完全函数依赖于$X$，则称Y对X<strong>部分函数依赖</strong>，记作$X \stackrel{P}{\rightarrow} Y$，等价于在完全函数依赖中加入冗余属性使之变成部分函数依赖</p>
+</li>
+<li><p>定义：在$R(U)$中，如果$X \rightarrow Y (Y \nsubseteq X)$，$Y \nrightarrow X$，$Y \rightarrow Z$，$Z \nsubseteq Y$，则称$Z$对$X$<strong>传递函数依赖</strong>，记作$X \stackrel{传递}{\rightarrow} Y$</p>
+</li>
 </ul>
-<h3 id="码">码</h3>
-<p>定义：设<span class="math inline">\(K\)</span>为<span class="math inline">\(R&lt; U,F &gt;\)</span>中的属性或属性组合，若<span class="math inline">\(K \stackrel{F}{\rightarrow} U\)</span>，则<span class="math inline">\(K\)</span>为<span class="math inline">\(R\)</span>的<strong>候选码</strong><br />
-如果<span class="math inline">\(K \stackrel{P}{\rightarrow} U\)</span>，则<span class="math inline">\(K\)</span>称为<strong>超码</strong>。<strong>候选码是最小的超码</strong>，即<span class="math inline">\(K\)</span>的任何一个真子集都不是候选码<br />
-包含在任何一个候选码中的属性称为<strong>主属性</strong>，不包含在任何候选码中的属性称为<strong>非主属性</strong>，整个属性组都是码称为<strong>全码</strong><br />
-定义：关系模式<span class="math inline">\(R\)</span>中属性或属性组合<span class="math inline">\(X\)</span>并非<span class="math inline">\(R\)</span>的码，但<span class="math inline">\(X\)</span>是另一个关系模式的码，则称<span class="math inline">\(X\)</span>是<span class="math inline">\(R\)</span>的<strong>外码</strong></p>
-<hr />
-<h2 id="范式">范式</h2>
-<p>关系数据库中的关系是要满足一定要求的，满足不同程度要求的为不同范式<br />
-各种范式之间的关系有：<br />
-<span class="math display">\[5NF \subset 4NF \subset BCNF \subset 3NF \subset 2NF \subset 1NF\]</span> 一个低一级范式的关系模式通过<strong>模式分解</strong>（schema decomposition）可以转化为若干高一级范式的关系模式的集合，这叫做<strong>规范化</strong>（normalization）</p>
-<h3 id="nf">1NF</h3>
-<p>每个分量（属性）必须是不可分的数据项</p>
-<h3 id="nf-1">2NF</h3>
-<p>相比于1NF，消除了<strong>非主属性对码的部分函数依赖</strong><br />
-定义：设关系模式<span class="math inline">\(R&lt; U,F &gt;\)</span>, 若<span class="math inline">\(R \in 1NF\)</span>，且每个非主属性<strong>完全函数依赖</strong>于任何一个候选码，则<span class="math inline">\(R \in 2NF\)</span><br />
-一个关系模式R若不属于2NF，可能会产生：插入异常、删除异常、修改复杂</p>
-<h3 id="nf-2">3NF</h3>
-<p>相比于2NF，消除了<strong>非主属性对码的传递函数依赖</strong><br />
-定义：设关系模式<span class="math inline">\(R&lt; U,F &gt;\)</span>，若<span class="math inline">\(R \in 3NF\)</span>，则每个非主属性既不传递依赖于码，也不部分依赖于码，也就是说，若R属于3NF则必有R属于2NF</p>
-<h3 id="bcnf">BCNF</h3>
-<p>相比于3NF，消除了<strong>主属性对码的部分和传递函数依赖</strong><br />
-定义：设关系模式<span class="math inline">\(R&lt; U,F &gt;\)</span>，若<strong>每个决定因素</strong>都包含码（候选码），则<span class="math inline">\(R \in BCNF\)</span><br />
-满足BCNF的关系模式的性值：</p>
-<ol type="1">
+<h3 id="码"><a href="#码" class="headerlink" title="码"></a>码</h3><p>定义：设$K$为$R&lt; U,F &gt;$中的属性或属性组合，若$K \stackrel{F}{\rightarrow} U$，则$K$为$R$的<strong>候选码</strong><br>如果$K \stackrel{P}{\rightarrow} U$，则$K$称为<strong>超码</strong>。<strong>候选码是最小的超码</strong>，即$K$的任何一个真子集都不是候选码<br>包含在任何一个候选码中的属性称为<strong>主属性</strong>，不包含在任何候选码中的属性称为<strong>非主属性</strong>，整个属性组都是码称为<strong>全码</strong><br>定义：关系模式$R$中属性或属性组合$X$并非$R$的码，但$X$是另一个关系模式的码，则称$X$是$R$的<strong>外码</strong>  </p>
+<hr>
+<h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><p>关系数据库中的关系是要满足一定要求的，满足不同程度要求的为不同范式<br>各种范式之间的关系有：<br>$$5NF \subset 4NF \subset BCNF \subset 3NF \subset 2NF \subset 1NF$$<br>一个低一级范式的关系模式通过<strong>模式分解</strong>（schema decomposition）可以转化为若干高一级范式的关系模式的集合，这叫做<strong>规范化</strong>（normalization）</p>
+<h3 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h3><p>每个分量（属性）必须是不可分的数据项</p>
+<h3 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h3><p>相比于1NF，消除了<strong>非主属性对码的部分函数依赖</strong><br>定义：设关系模式$R&lt; U,F &gt;$, 若$R \in 1NF$，且每个非主属性<strong>完全函数依赖</strong>于任何一个候选码，则$R \in 2NF$<br>一个关系模式R若不属于2NF，可能会产生：插入异常、删除异常、修改复杂</p>
+<h3 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h3><p>相比于2NF，消除了<strong>非主属性对码的传递函数依赖</strong><br>定义：设关系模式$R&lt; U,F &gt;$，若$R \in 3NF$，则每个非主属性既不传递依赖于码，也不部分依赖于码，也就是说，若R属于3NF则必有R属于2NF  </p>
+<h3 id="BCNF"><a href="#BCNF" class="headerlink" title="BCNF"></a>BCNF</h3><p>相比于3NF，消除了<strong>主属性对码的部分和传递函数依赖</strong><br>定义：设关系模式$R&lt; U,F &gt;$，若<strong>每个决定因素</strong>都包含码（候选码），则$R \in BCNF$<br>满足BCNF的关系模式的性值：  </p>
+<ol>
 <li>所有非主属性对每一个码都是完全函数依赖</li>
 <li>所有主属性对每一个不包含它的码也是完全函数依赖</li>
 <li>没有任何属性完全函数依赖于非码的任何一组属性</li>
 </ol>
-<h3 id="多值依赖">多值依赖</h3>
-<p>&amp;&amp;&amp;</p>
-<h3 id="nf-3">4NF</h3>
-<p>相比于BCNF，消除了<strong>非平凡且非函数依赖的多值依赖</strong></p>
-<h3 id="规范化小结">规范化小结</h3>
-<p>规范化的基本思想是逐步消除数据依赖中不合适的部分</p>
-<div id="flowchart-0" class="flow-chart">
-
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script>
-<textarea id="flowchart-0-code" style="display: none">o1=>operation: 1NF
-i12=>inputoutput: 消除非主属性对码的部分函数依赖
-o2=>operation: 2NF
-i23=>inputoutput: 消除非主属性对码的传递函数依赖
-o3=>operation: 3NF
-i3b=>inputoutput: 消除主属性对码的部分和传递函数依赖
-ob=>operation: BCNF
-ib4=>inputoutput: 消除非平凡且非函数依赖的多值依赖
-o4=>operation: 4NF
-
-o1->i12->o2->i23->o3->i3b->ob->ib4->o4</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script>
+<h3 id="多值依赖"><a href="#多值依赖" class="headerlink" title="多值依赖"></a>多值依赖</h3><p>&amp;&amp;&amp;</p>
+<h3 id="4NF"><a href="#4NF" class="headerlink" title="4NF"></a>4NF</h3><p>相比于BCNF，消除了<strong>非平凡且非函数依赖的多值依赖</strong>  </p>
+<h3 id="规范化小结"><a href="#规范化小结" class="headerlink" title="规范化小结"></a>规范化小结</h3><p>规范化的基本思想是逐步消除数据依赖中不合适的部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">o1=&gt;operation: 1NF</span><br><span class="line">i12=&gt;inputoutput: 消除非主属性对码的部分函数依赖</span><br><span class="line">o2=&gt;operation: 2NF</span><br><span class="line">i23=&gt;inputoutput: 消除非主属性对码的传递函数依赖</span><br><span class="line">o3=&gt;operation: 3NF</span><br><span class="line">i3b=&gt;inputoutput: 消除主属性对码的部分和传递函数依赖</span><br><span class="line">ob=&gt;operation: BCNF</span><br><span class="line">ib4=&gt;inputoutput: 消除非平凡且非函数依赖的多值依赖</span><br><span class="line">o4=&gt;operation: 4NF</span><br><span class="line"></span><br><span class="line">o1-&gt;i12-&gt;o2-&gt;i23-&gt;o3-&gt;i3b-&gt;ob-&gt;ib4-&gt;o4</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -381,7 +352,7 @@ o1->i12->o2->i23->o3->i3b->ob->ib4->o4</textarea><textarea id="flowchart-0-optio
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E6%8F%90%E5%87%BA"><span class="nav-number">1.</span> <span class="nav-text">问题的提出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">规范化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%BE%9D%E8%B5%96"><span class="nav-number">2.1.</span> <span class="nav-text">函数依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%83%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">范式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nf"><span class="nav-number">3.1.</span> <span class="nav-text">1NF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nf-1"><span class="nav-number">3.2.</span> <span class="nav-text">2NF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nf-2"><span class="nav-number">3.3.</span> <span class="nav-text">3NF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bcnf"><span class="nav-number">3.4.</span> <span class="nav-text">BCNF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%80%BC%E4%BE%9D%E8%B5%96"><span class="nav-number">3.5.</span> <span class="nav-text">多值依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nf-3"><span class="nav-number">3.6.</span> <span class="nav-text">4NF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E5%8C%96%E5%B0%8F%E7%BB%93"><span class="nav-number">3.7.</span> <span class="nav-text">规范化小结</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E6%8F%90%E5%87%BA"><span class="nav-number">1.</span> <span class="nav-text">问题的提出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">规范化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%BE%9D%E8%B5%96"><span class="nav-number">2.1.</span> <span class="nav-text">函数依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%83%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">范式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1NF"><span class="nav-number">3.1.</span> <span class="nav-text">1NF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2NF"><span class="nav-number">3.2.</span> <span class="nav-text">2NF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3NF"><span class="nav-number">3.3.</span> <span class="nav-text">3NF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BCNF"><span class="nav-number">3.4.</span> <span class="nav-text">BCNF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%80%BC%E4%BE%9D%E8%B5%96"><span class="nav-number">3.5.</span> <span class="nav-text">多值依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4NF"><span class="nav-number">3.6.</span> <span class="nav-text">4NF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E5%8C%96%E5%B0%8F%E7%BB%93"><span class="nav-number">3.7.</span> <span class="nav-text">规范化小结</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

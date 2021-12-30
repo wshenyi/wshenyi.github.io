@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="参考书目《数据库系统概论（第5版）》  事务的基本概念 事务是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位 COMMIT操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中 ROLLBACK操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态 事务的ACID特性：  原子性（Atomic">
+  <meta name="description" content="参考书目《数据库系统概论（第5版）》  事务的基本概念事务是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位COMMIT操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中ROLLBACK操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态事务的ACID特性：  原子性（Atomicity）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库原理——第十章：数据库恢复技术">
 <meta property="og:url" content="https://wshenyi.github.io/2019/06/17/Database10/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  事务的基本概念 事务是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位 COMMIT操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中 ROLLBACK操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态 事务的ACID特性：  原子性（Atomic">
+<meta property="og:description" content="参考书目《数据库系统概论（第5版）》  事务的基本概念事务是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位COMMIT操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中ROLLBACK操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态事务的ACID特性：  原子性（Atomicity）">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-06-17T23:21:01.000Z">
 <meta property="article:modified_time" content="2019-06-19T03:22:56.000Z">
@@ -232,11 +232,7 @@
         <blockquote>
 <p><em>参考书目《数据库系统概论（第5版）》</em></p>
 </blockquote>
-<h2 id="事务的基本概念">事务的基本概念</h2>
-<p><strong>事务</strong>是用户定义的一个数据库<strong>操作序列</strong>，这些操作要么全做，要么全不做，是一个不可分割的工作单位<br />
-<strong>COMMIT</strong>操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中<br />
-<strong>ROLLBACK</strong>操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态<br />
-事务的<strong>ACID</strong>特性：</p>
+<h2 id="事务的基本概念"><a href="#事务的基本概念" class="headerlink" title="事务的基本概念"></a>事务的基本概念</h2><p><strong>事务</strong>是用户定义的一个数据库<strong>操作序列</strong>，这些操作要么全做，要么全不做，是一个不可分割的工作单位<br><strong>COMMIT</strong>操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中<br><strong>ROLLBACK</strong>操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态<br>事务的<strong>ACID</strong>特性：</p>
 <ul>
 <li><strong>原子性</strong>（<strong>A</strong>tomicity）：事务是数据库的逻辑工作单位，事务中包括的诸操作要么都做，要么都不做</li>
 <li><strong>一致性</strong>（<strong>C</strong>onsistency）：事务执行的结果必须是使数据库从一个一致状态变到另一个一致状态；一致性与原子性是密切相关的</li>
@@ -244,45 +240,36 @@
 <li><strong>持续性</strong>（<strong>D</strong>urability）：也称为<strong>永久性</strong>，一个事务一旦提交，他对数据库中的数据改变就应该是永久性的</li>
 </ul>
 <p>ACID可能遭到破坏的因素有：</p>
-<ol type="1">
+<ol>
 <li>多个事务并发运行时，不同事务的操作交叉执行</li>
 <li>事务在运行过程中被强行停止</li>
 </ol>
 <p><strong>数据库恢复</strong>：数据库管理系统把数据库错误状态恢复到某一已知的正确状态（亦称为一致状态）</p>
-<hr />
-<h2 id="故障的种类">故障的种类</h2>
-<ol type="1">
-<li><strong>事务内部的故障</strong><br />
-事务内部的故障指事务执行到某一位置主动选择回滚。例如银行执行扣款时，若余额小于0，则主动执行回滚，回到未扣款前的状态</li>
-<li><strong>系统故障</strong><br />
-系统故障指造成系统停止运转的任何事件，使得系统要重新启动<br />
-回复子系统在系统重启后，需要撤销所有未完成的事务，重做所有已提交的事务，以将数据库恢复到一致状态</li>
-<li><strong>介质故障</strong><br />
-指外存故障，如磁盘损坏、瞬时强磁场干扰、火灾等，破坏性最大</li>
-<li><strong>计算机病毒</strong></li>
+<hr>
+<h2 id="故障的种类"><a href="#故障的种类" class="headerlink" title="故障的种类"></a>故障的种类</h2><ol>
+<li><strong>事务内部的故障</strong><br>事务内部的故障指事务执行到某一位置主动选择回滚。例如银行执行扣款时，若余额小于0，则主动执行回滚，回到未扣款前的状态</li>
+<li><strong>系统故障</strong><br>系统故障指造成系统停止运转的任何事件，使得系统要重新启动<br>回复子系统在系统重启后，需要撤销所有未完成的事务，重做所有已提交的事务，以将数据库恢复到一致状态</li>
+<li><strong>介质故障</strong><br>指外存故障，如磁盘损坏、瞬时强磁场干扰、火灾等，破坏性最大</li>
+<li><strong>计算机病毒</strong>  </li>
 </ol>
 <p>各类故障对数据库的影响有两种结果：</p>
-<ol type="1">
+<ol>
 <li>数据库本身被破坏</li>
 <li>数据库未被破坏，但数据可能不正确，这是由于事务的运行被非正常终止造成的</li>
 </ol>
-<hr />
-<h2 id="恢复的实现技术">恢复的实现技术</h2>
-<p>恢复的基本原理——<strong>冗余</strong>，常用技术有<strong>数据转储</strong>和<strong>登记日志文件</strong></p>
-<h3 id="数据转储backup">数据转储（backup）</h3>
-<p><strong>转储</strong>：即数据库管理员定期地将整个数据库复制到其他存储介质上保存起来地过程，备用数据称为<strong>后备副本</strong><br />
-转储操作十分耗费时间和资源，不能频繁进行<br />
-转储可分为两种状态：<strong>静态转储</strong>和<strong>动态转储</strong></p>
+<hr>
+<h2 id="恢复的实现技术"><a href="#恢复的实现技术" class="headerlink" title="恢复的实现技术"></a>恢复的实现技术</h2><p>恢复的基本原理——<strong>冗余</strong>，常用技术有<strong>数据转储</strong>和<strong>登记日志文件</strong></p>
+<h3 id="数据转储（backup）"><a href="#数据转储（backup）" class="headerlink" title="数据转储（backup）"></a>数据转储（backup）</h3><p><strong>转储</strong>：即数据库管理员定期地将整个数据库复制到其他存储介质上保存起来地过程，备用数据称为<strong>后备副本</strong><br>转储操作十分耗费时间和资源，不能频繁进行<br>转储可分为两种状态：<strong>静态转储</strong>和<strong>动态转储</strong></p>
 <ul>
-<li><strong>静态转储</strong>：在系统中无运行事务时进行的转储操作，转储期间不允许对数据库执行任何存取和修改
-<ul>
+<li><strong>静态转储</strong>：在系统中无运行事务时进行的转储操作，转储期间不允许对数据库执行任何存取和修改<ul>
 <li>得到的是一个一致性副本</li>
 <li>降低数据库的可用性</li>
-</ul></li>
-<li><strong>动态转储</strong>：转储期间允许对数据库进行存取和修改，即转储和用户事务可以并发执行
-<ul>
+</ul>
+</li>
+<li><strong>动态转储</strong>：转储期间允许对数据库进行存取和修改，即转储和用户事务可以并发执行<ul>
 <li>必须把转储期间各事务对数据库的修改活动记录下来，建立<strong>日志文件</strong></li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <p>转储还可分为两种方式：<strong>海量转储</strong>和<strong>增量转储</strong></p>
 <ul>
@@ -290,10 +277,7 @@
 <li><strong>增量转储</strong>：每次只转储上一次转储后更新过的数据</li>
 </ul>
 <p>转储方法：<strong>动态海量转储</strong>、<strong>动态增量转储</strong>、<strong>静态海量转储</strong>、<strong>静态增量转储</strong></p>
-<h3 id="登记日志文件logging">登记日志文件（logging）</h3>
-<p>日志文件是用来记录事务对<strong>数据库地更新操作</strong>的文件<br />
-日志文件有两种格式：以<strong>记录</strong>为单位的日志文件和以<strong>数据块</strong>为单位的日志文件<br />
-对于以记录为单位的日志文件，其需要登记的内容包括：</p>
+<h3 id="登记日志文件（logging）"><a href="#登记日志文件（logging）" class="headerlink" title="登记日志文件（logging）"></a>登记日志文件（logging）</h3><p>日志文件是用来记录事务对<strong>数据库地更新操作</strong>的文件<br>日志文件有两种格式：以<strong>记录</strong>为单位的日志文件和以<strong>数据块</strong>为单位的日志文件<br>对于以记录为单位的日志文件，其需要登记的内容包括：</p>
 <ul>
 <li>各个事务的开始标记</li>
 <li>各个事务的结束标记</li>
@@ -310,66 +294,52 @@
 <li><strong>登记的次序严格按并发事务执行的时间次序</strong></li>
 <li><strong>必须先写日志文件，后写数据库</strong></li>
 </ul>
-<hr />
-<h2 id="恢复策略">恢复策略</h2>
-<h3 id="事务故障的恢复">事务故障的恢复</h3>
-<p>事务故障是指在运行至正常终止点前被终止，此时恢复子系统利用日志文件撤销（UNDO）此事务已对数据库进行的修改<br />
-事务故障的恢复由系统自动完成，对用户是透明的<br />
-恢复步骤为：</p>
-<ol type="1">
+<hr>
+<h2 id="恢复策略"><a href="#恢复策略" class="headerlink" title="恢复策略"></a>恢复策略</h2><h3 id="事务故障的恢复"><a href="#事务故障的恢复" class="headerlink" title="事务故障的恢复"></a>事务故障的恢复</h3><p>事务故障是指在运行至正常终止点前被终止，此时恢复子系统利用日志文件撤销（UNDO）此事务已对数据库进行的修改<br>事务故障的恢复由系统自动完成，对用户是透明的<br>恢复步骤为：</p>
+<ol>
 <li>反向扫描日志文件，查找该事务的更新操作</li>
 <li>对该事务的更新操作执行逆操作</li>
 <li>继续反向扫描日志文件，查找该事务的其他更新操作，并做同样处理</li>
 <li>如此处理下去，直到读到此事务的开始标记，事务故障恢复完成</li>
 </ol>
-<h3 id="系统故障的恢复">系统故障的恢复</h3>
-<p>系统故障导致不一致的原因有两个：</p>
+<h3 id="系统故障的恢复"><a href="#系统故障的恢复" class="headerlink" title="系统故障的恢复"></a>系统故障的恢复</h3><p>系统故障导致不一致的原因有两个：</p>
 <ul>
 <li>未完成事务对数据库的更新已写入数据库</li>
 <li>已提交事务对数据库的更新可能还停留在缓冲区没来得及写入数据库</li>
 </ul>
-<p>恢复操作就是<strong>撤销故障发生时未完成的事务</strong>和<strong>重做已完成的事务</strong><br />
-系统故障的恢复由系统在重新启动时自动完成，不需要用户的干预<br />
-恢复步骤为：</p>
-<ol type="1">
+<p>恢复操作就是<strong>撤销故障发生时未完成的事务</strong>和<strong>重做已完成的事务</strong><br>系统故障的恢复由系统在重新启动时自动完成，不需要用户的干预<br>恢复步骤为：</p>
+<ol>
 <li>正向扫描日志文件，找出在故障发生前已经提交的事务，将其事务标识记入重做队列（REDO-LIST）。同时找出故障发生时尚未完成的事务，将其事务标识记入撤销队列（UNDO-LIST）</li>
 <li>对撤销队列中的各个事务进行撤销（UNDO）处理</li>
 <li>对重做队列中的各个事务进行重做（REDO）处理</li>
 </ol>
-<h3 id="介质故障的恢复">介质故障的恢复</h3>
-<p>发生介质故障后，磁盘上的物理数据和日志文件被破坏，这是最严重的故障，恢复方法是<strong>重装数据库，然后重做已完成的事务</strong><br />
-介质故障的恢复需要数据库管理员介入<br />
-恢复步骤为：</p>
-<ol type="1">
+<h3 id="介质故障的恢复"><a href="#介质故障的恢复" class="headerlink" title="介质故障的恢复"></a>介质故障的恢复</h3><p>发生介质故障后，磁盘上的物理数据和日志文件被破坏，这是最严重的故障，恢复方法是<strong>重装数据库，然后重做已完成的事务</strong><br>介质故障的恢复需要数据库管理员介入<br>恢复步骤为：</p>
+<ol>
 <li>装入最新的数据库副本</li>
 <li>装入相应的日志文件副本，重做已完成的事务</li>
 </ol>
-<hr />
-<h2 id="具有检查点的恢复技术">具有检查点的恢复技术</h2>
-<p>检查点记录的内容包括：</p>
+<hr>
+<h2 id="具有检查点的恢复技术"><a href="#具有检查点的恢复技术" class="headerlink" title="具有检查点的恢复技术"></a>具有检查点的恢复技术</h2><p>检查点记录的内容包括：</p>
 <ul>
 <li>建立检查点时刻所有正在执行的事务清单</li>
 <li>这些事务最近一个日志记录的地址</li>
 </ul>
-<p>重新开始文件用来记录各个检查点记录在日志文件中的地址<br />
-<strong>动态维护日志文件的方法是，周期性地执行建立检查点、保存数据库状态的操作</strong>，具体步骤为：</p>
-<ol type="1">
+<p>重新开始文件用来记录各个检查点记录在日志文件中的地址<br><strong>动态维护日志文件的方法是，周期性地执行建立检查点、保存数据库状态的操作</strong>，具体步骤为：  </p>
+<ol>
 <li>将当前日志缓冲区中的所有日志记录写入磁盘的日志文件上</li>
 <li>在日志文件中写入一个检查点记录</li>
 <li>将当前数据缓冲区的所有数据记录写入磁盘的数据库中</li>
 <li>把检查点记录在日志文件中的地址写入一个重新开始文件</li>
 </ol>
-<p><strong>简化为：保存日志 -&gt; 生成检查点 -&gt; 保存数据提交到数据库 -&gt; 将检查点写入重新开始文件</strong><br />
-<strong>使用检查点方法可以改善恢复效率</strong><br />
-系统使用检查点方法进行恢复的步骤：</p>
-<ol type="1">
+<p><strong>简化为：保存日志 -&gt; 生成检查点 -&gt; 保存数据提交到数据库 -&gt; 将检查点写入重新开始文件</strong><br><strong>使用检查点方法可以改善恢复效率</strong><br>系统使用检查点方法进行恢复的步骤：</p>
+<ol>
 <li>从重新开始文件中找到最后一个检查点记录在日志文件中的地址，利用该地址找到日志文件中最后一个检查点记录</li>
 <li>由该检查点记录得到检查点建立时刻所有正在执行的事务清单，并将其做为UNDO-LIST。另外新建一个空的REDO-LIST</li>
-<li>从检查点开始正向扫描日志文件
-<ul>
+<li>从检查点开始正向扫描日志文件<ul>
 <li>如有新开始的事务T，将T加入UNDO-LIST</li>
 <li>如有提交的事务J，<strong>将J从UNDO-LIST移入REDO-LIST</strong></li>
-</ul></li>
+</ul>
+</li>
 <li>对UNDO-LIST中的每个事务执行<strong>撤销</strong>操作；对REDO-LIST中的每个事务执行<strong>重做</strong>操作</li>
 </ol>
 
@@ -452,7 +422,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">事务的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">故障的种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%8A%80%E6%9C%AF"><span class="nav-number">3.</span> <span class="nav-text">恢复的实现技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%82%A8backup"><span class="nav-number">3.1.</span> <span class="nav-text">数据转储（backup）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E8%AE%B0%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6logging"><span class="nav-number">3.2.</span> <span class="nav-text">登记日志文件（logging）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E7%AD%96%E7%95%A5"><span class="nav-number">4.</span> <span class="nav-text">恢复策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E6%95%85%E9%9A%9C%E7%9A%84%E6%81%A2%E5%A4%8D"><span class="nav-number">4.1.</span> <span class="nav-text">事务故障的恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%95%85%E9%9A%9C%E7%9A%84%E6%81%A2%E5%A4%8D"><span class="nav-number">4.2.</span> <span class="nav-text">系统故障的恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E8%B4%A8%E6%95%85%E9%9A%9C%E7%9A%84%E6%81%A2%E5%A4%8D"><span class="nav-number">4.3.</span> <span class="nav-text">介质故障的恢复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E6%9C%89%E6%A3%80%E6%9F%A5%E7%82%B9%E7%9A%84%E6%81%A2%E5%A4%8D%E6%8A%80%E6%9C%AF"><span class="nav-number">5.</span> <span class="nav-text">具有检查点的恢复技术</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">事务的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">故障的种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%8A%80%E6%9C%AF"><span class="nav-number">3.</span> <span class="nav-text">恢复的实现技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%82%A8%EF%BC%88backup%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">数据转储（backup）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E8%AE%B0%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%EF%BC%88logging%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">登记日志文件（logging）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E7%AD%96%E7%95%A5"><span class="nav-number">4.</span> <span class="nav-text">恢复策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E6%95%85%E9%9A%9C%E7%9A%84%E6%81%A2%E5%A4%8D"><span class="nav-number">4.1.</span> <span class="nav-text">事务故障的恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%95%85%E9%9A%9C%E7%9A%84%E6%81%A2%E5%A4%8D"><span class="nav-number">4.2.</span> <span class="nav-text">系统故障的恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E8%B4%A8%E6%95%85%E9%9A%9C%E7%9A%84%E6%81%A2%E5%A4%8D"><span class="nav-number">4.3.</span> <span class="nav-text">介质故障的恢复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E6%9C%89%E6%A3%80%E6%9F%A5%E7%82%B9%E7%9A%84%E6%81%A2%E5%A4%8D%E6%8A%80%E6%9C%AF"><span class="nav-number">5.</span> <span class="nav-text">具有检查点的恢复技术</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
