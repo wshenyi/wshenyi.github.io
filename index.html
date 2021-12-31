@@ -189,7 +189,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-12-30 00:33:29 / Modified: 11:42:47" itemprop="dateCreated datePublished" datetime="2021-12-30T00:33:29-05:00">2021-12-30</time>
+              <time title="Created: 2021-12-30 00:33:29 / Modified: 23:34:39" itemprop="dateCreated datePublished" datetime="2021-12-30T00:33:29-05:00">2021-12-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -212,28 +212,45 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Keywards:concurrent program, concurrency bug, bug characteristics</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Author: Shan Lu, Soyeon Park, Eunsoo Seo and Yuanyuan Zhou</span><br></pre></td></tr></table></figure>
-
+          <p><em><strong>Keywards</strong></em> concurrent program, concurrency bug, bug characteristics</p>
+<blockquote>
+<p>Author: Shan Lu, Soyeon Park, Eunsoo Seo and Yuanyuan Zhou</p>
+</blockquote>
 <hr>
-<h2 id="What-is-the-Problem-gt-Motivation-gt-Find-from-Introduction-part"><a href="#What-is-the-Problem-gt-Motivation-gt-Find-from-Introduction-part" class="headerlink" title="What is the Problem? -&gt; Motivation -&gt; Find from Introduction part"></a>What is the Problem? -&gt; Motivation -&gt; Find from Introduction part</h2><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This paper provides a comprehensive real world concurrency bug characteristic study. It specifically focus on <strong>concurrency bug patterns</strong>, <strong>manifestation</strong>, and <strong>fix strategies</strong>. The study reveals several interesting findings and provide useful guildance for concurrency bug detection, testing, and concurrent programming language design.</p>
-<h2 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h2><p>Some of findings:</p>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Writting correct concurrent programs is difficult and it faces many challenge. Although some progress have made over the past years, there are still many open, unsolved issues:</p>
+<ol>
+<li>Concurrency bug detection.<ul>
+<li>Can existing bug detection tool <em>detect all</em> real world concurrency bugs?</li>
+<li>How helpful are existing tools in <em>diagnosing and fixing</em> the real world concurrency bugs detected by them?</li>
+</ul>
+</li>
+<li>Concurrent program testing and model checking.<ul>
+<li>Existing testing techniques mainly focus on the <em>sequential</em> aspect of programs, while the major challenge of concurrency testing is the exponential <em>interleaving</em> space of concurrent programs.</li>
+<li>An open question: can we selectively test a small number of representative interleaving and still expose most of the concurrency bugs?</li>
+<li>Better understanding of the manifestation of real world concurrency bugs can help model checking prioritize the program states and alleviate its state explosion problem.</li>
+</ul>
+</li>
+<li>Concurrent programming language design.<ul>
+<li>Transactional memory (TM) is a promising trend.</li>
+<li>A real-world concurrency bug characteristic study is needed.</li>
+</ul>
+</li>
+</ol>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This paper provides a comprehensive real world concurrency bug characteristic study. It specifically focus on <strong>concurrency bug patterns</strong>, <strong>manifestation</strong>, and <strong>fix strategies</strong>. The study reveals several interesting findings and provide useful guildance for concurrency bug detection, testing, and concurrent programming language design.</p>
+<p>Some of findings:</p>
 <ol>
 <li>Around one third of examined non-deadlock concurrency bugs are caused by violation to <strong>programmers’ order intentions</strong>, which may not be easily expressed via synchronization primitives.</li>
 <li>Around one third of examined non-deadlock concurrency bugs involve multiple variables, which are not well addressed by existing bug detection tools.</li>
 <li>Testing concurrency bugs can target at exploring possible orders among every small groups of memory accesses, instead of among all memory accesses.</li>
 <li>Fixing concurrency bugs are not easy and many of the fixes were not correct at the first time, indicating the difficulty of reasoning concurrent execution by programmers.</li>
 </ol>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h2 id="Key-Insights-Up-to-2-insights-gt-key-ideas-that-make-their-paper-works"><a href="#Key-Insights-Up-to-2-insights-gt-key-ideas-that-make-their-paper-works" class="headerlink" title="Key Insights [Up to 2 insights] -&gt;key ideas that make their paper works"></a>Key Insights [Up to 2 insights] -&gt;key ideas that make their paper works</h2><ul>
-<li></li>
+<h2 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h2><img src="/2021/12/30/R0/1.png" class="">
+
+<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
+<li>Bug pattern study</li>
+<li>Bug manifestation study</li>
+<li>Bug fix study</li>
 </ul>
-<h2 id="Notable-Design-Details-Strengths-Up-to-2-details-strengths"><a href="#Notable-Design-Details-Strengths-Up-to-2-details-strengths" class="headerlink" title="Notable Design Details/Strengths [Up to 2 details/strengths]"></a>Notable Design Details/Strengths [Up to 2 details/strengths]</h2><ul>
-<li></li>
-</ul>
-<h2 id="Limitations-Weaknesses-up-to-2-weaknesses"><a href="#Limitations-Weaknesses-up-to-2-weaknesses" class="headerlink" title="Limitations/Weaknesses [up to 2 weaknesses]"></a>Limitations/Weaknesses [up to 2 weaknesses]</h2><ul>
-<li></li>
-</ul>
-<h2 id="Open-Questions-Where-to-go-from-here"><a href="#Open-Questions-Where-to-go-from-here" class="headerlink" title="Open Questions [Where to go from here?]"></a>Open Questions [Where to go from here?]</h2><p>- </p>
 
       
     </div>
@@ -2588,8 +2605,8 @@ Name: col3, dtype: object
 
 
   <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
@@ -2663,8 +2680,6 @@ Name: col3, dtype: object
   </div>
 
   
-  
-  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
