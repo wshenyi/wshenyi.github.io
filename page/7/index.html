@@ -164,6 +164,258 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/05/03/Database7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/03/Database7/" class="post-title-link" itemprop="url">数据库原理——第七章：数据库设计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-03 19:42:57" itemprop="dateCreated datePublished" datetime="2019-05-03T19:42:57-04:00">2019-05-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-06-19 02:16:40" itemprop="dateModified" datetime="2019-06-19T02:16:40-04:00">2019-06-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><em>参考书目《数据库系统概论（第5版）》</em></p>
+</blockquote>
+<h2 id="数据库设计概述"><a href="#数据库设计概述" class="headerlink" title="数据库设计概述"></a>数据库设计概述</h2><p><strong>数据库设计</strong>的一般定义：<br>    数据库设计是指对于一个给定的应用环境，构造（设计）优化的数据库逻辑模式和物理结构，并据此建立数据库及其应用系统，使之能够有效地存储和管理数据，满足各种用户的应用需求，包括信息管理要求和数据操作要求</p>
+<p>数据库设计的6个阶段：</p>
+<ol>
+<li>需求分析阶段。</li>
+<li>概念结构设计阶段。</li>
+<li>逻辑结构设计阶段。</li>
+<li>物理结构设计阶段。</li>
+<li>数据库实施阶段。</li>
+<li>数据库运行和维护阶段。</li>
+</ol>
+<p><strong>需求分析</strong>和<strong>概念结构设计</strong>可以独立于任何数据库管理系统进行，<strong>逻辑结构设计</strong>和<strong>物理结构设计</strong>与选用的数据库管理系统密切相关  </p>
+<hr>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p><em>简单的说就是用户缺少计算机知识，我们需要通过与他们的交流来获得我们构建数据库所必要的信息以及用户的需求</em>  </p>
+<p>通过调查明确用户的各种需求：<br>  （1）信息要求：用户需要从数据库中获得信息的内容与实质<br>  （2）数据要求：数据库需要存储哪些数据<br>  （3）处理要求：用户要完成的数据处理功能<br>  （4）安全性与完整性要求。  </p>
+<h3 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h3><p>结构：</p>
+<ol>
+<li>数据项。数据的最小组成单元</li>
+<li>数据结构。反应数据之间的组合关系</li>
+<li>数据流。是数据结构在系统内传输的路径</li>
+<li>数据存储。是数据结构停留或保存的地方，也是数据流的来源和去向之一</li>
+<li>处理过程。具体处理逻辑一般用判定表或判定树来描述</li>
+</ol>
+<hr>
+<h2 id="概念结构设计"><a href="#概念结构设计" class="headerlink" title="概念结构设计"></a>概念结构设计</h2><p><em>将需求分析得到的用户需求抽象为信息结构（即概念模型）的过程就是概念结构设计</em>  </p>
+<p>需要根据数据库关系理论对数据库结构进行优化，如<strong>模式分解</strong></p>
+<p>需要注意的是并不是规范化程度越高的关系就越优</p>
+<h3 id="E-R模型"><a href="#E-R模型" class="headerlink" title="E-R模型"></a>E-R模型</h3><p>E-R图提供了表示<strong>实体型</strong>、<strong>属性</strong>和<strong>联系</strong>的方法：<br>  （1）实体型用矩形表示，矩形框内写明实体名<br>  （2）属性用椭圆表示，并用无向边将其与相应的实体型连接起来<br>  （3）联系用菱形表示，菱形框内写明联系名，并用无向边分别与有关实体型连接起来，同时在无向边旁标上联系的类型（1:1、1:n或m:n）  </p>
+<hr>
+<h2 id="逻辑结构设计"><a href="#逻辑结构设计" class="headerlink" title="逻辑结构设计"></a>逻辑结构设计</h2><p>逻辑结构设计的任务就是把概念结构设计阶段设计好的基本E-R图转化为与选用数据库管理系统产品所支持的数据模型相符合的逻辑结构</p>
+<h3 id="E-R图向关系魔性的转换"><a href="#E-R图向关系魔性的转换" class="headerlink" title="E-R图向关系魔性的转换"></a>E-R图向关系魔性的转换</h3><ol>
+<li>一个<strong>实体型</strong>转化为一个<strong>关系模式</strong></li>
+<li>一个1:1<strong>联系</strong>可以转化为一个<strong>独立的关系模式</strong>，也可以与任意端的<strong>关系模式合并</strong><ul>
+<li>若与某一端合并，则需要在该关系模式的属性中加入<strong>另一关系模式的码</strong>和<strong>联系本身的属性</strong></li>
+</ul>
+</li>
+<li>一个1:n<strong>联系</strong>可以转化为一个<strong>独立的关系模式</strong>，也可以与n端的<strong>关系模式合并</strong></li>
+<li>一个m:n<strong>联系</strong>转化为一个<strong>关系模式</strong><ul>
+<li>与该关系模式相连的各实体的码以及联系本身的属性均转化为关系的属性，<strong>各实体的码组成关系的码或关系码的一部分</strong></li>
+</ul>
+</li>
+<li>三个或三个以上实体间的<strong>多元联系</strong>可以转化为一个<strong>关系模式</strong></li>
+<li>具有相同码的关系模式可以合并</li>
+</ol>
+<hr>
+<h2 id="物理结构设计"><a href="#物理结构设计" class="headerlink" title="物理结构设计"></a>物理结构设计</h2><p>为一个给定的逻辑数据模型选取一个最合适应用要求的物理结构的过程，就是数据库的物理设计</p>
+<p>数据库的物理设计通常分为两步：</p>
+<ol>
+<li><strong>确定数据库的物理结构</strong>，在关系型数据库中主要指存取方法和存储结构</li>
+<li><strong>对物理结构进行评价</strong>，评价的重点是时间和空间效率</li>
+</ol>
+<p>数据库管理系统一般提供多种存取方法。常用的存取方法为<strong>索引方法</strong>和<strong>聚簇方法</strong></p>
+<p><strong>B+树索引</strong>和<strong>hash索引</strong>是数据库中经典的存取方法  </p>
+<hr>
+<h2 id="数据库的实施与维护"><a href="#数据库的实施与维护" class="headerlink" title="数据库的实施与维护"></a>数据库的实施与维护</h2><p>数据库的维护工作：</p>
+<ol>
+<li>数据库的转储和恢复</li>
+<li>数据库的安全性、完整性控制</li>
+<li>数据库性能的监督、分析和改造</li>
+<li>数据库的重组织与重构造</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/04/27/Database6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/27/Database6/" class="post-title-link" itemprop="url">数据库原理——第六章：关系数据库理论</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-27 19:42:54" itemprop="dateCreated datePublished" datetime="2019-04-27T19:42:54-04:00">2019-04-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-06-18 20:48:23" itemprop="dateModified" datetime="2019-06-18T20:48:23-04:00">2019-06-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><em>参考书目《数据库系统概论（第5版）》</em></p>
+</blockquote>
+<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><ul>
+<li>针对一个具体的问题，应该如何构建一个适用于它的数据库模式，即<em>应该构建几个关系模式，每个关系由哪些属性组成等</em>。这是数据库设计的问题，确切地讲是<strong>关系数据库逻辑设计问题（如何构造合适的数据模式）</strong>。</li>
+<li><strong>数据依赖</strong>是一个关系内部属性与属性之间的<em>约束关系</em>，这种约束关系是通过<strong>属性值</strong>的相等与否体现出来的数据间相关联系。</li>
+<li>一个好的关系模式不会发生<strong>插入异常</strong>、<strong>删除异常</strong>和<strong>更新异常</strong>，<strong>数据冗余</strong>尽可能的少。</li>
+</ul>
+<hr>
+<h2 id="规范化"><a href="#规范化" class="headerlink" title="规范化"></a>规范化</h2><h3 id="函数依赖"><a href="#函数依赖" class="headerlink" title="函数依赖"></a>函数依赖</h3><ul>
+<li><p>定义：若属性组$X$能唯一确定属性组$Y$，则称$X$<strong>函数确定</strong>$Y$或$Y$<strong>函数依赖</strong>$X$，记作$X \rightarrow Y$。</p>
+</li>
+<li><p>$X \rightarrow Y$，但$Y \nsubseteq X$，则称$X \rightarrow Y$是<strong>非平凡的函数依赖</strong>。$X$称为这个函数依赖的决定属性<strong>组</strong>，也称为<strong>决定属性</strong>。</p>
+</li>
+<li><p>$X \rightarrow Y$，但$Y \subseteq X$，则称$X \rightarrow Y$是<strong>平凡的函数依赖</strong>。对于任一关系模式，平凡函数依赖都是必然成立的，它不反映新的语义。若不特别声明，总是讨论非平凡的函数依赖。</p>
+</li>
+<li><p>若$X \rightarrow Y$，$Y \rightarrow X$，则记作$X \leftarrow \rightarrow Y$（即直接函数依赖）</p>
+</li>
+<li><p>若$Y$不函数依赖于$X$，则记作$X \nrightarrow Y$</p>
+</li>
+<li><p>定义：在$R(U)$中，如果$X \rightarrow Y$，并且对于$X$的任何一个<strong>真子集</strong>$X’$，都有$X’ \nrightarrow Y$，则称$Y$对$X$<strong>完全函数依赖</strong>，记作$X \stackrel{F}{\rightarrow} Y$</p>
+</li>
+<li><p>若$X \rightarrow Y$，但$Y$不完全函数依赖于$X$，则称Y对X<strong>部分函数依赖</strong>，记作$X \stackrel{P}{\rightarrow} Y$，等价于在完全函数依赖中加入冗余属性使之变成部分函数依赖</p>
+</li>
+<li><p>定义：在$R(U)$中，如果$X \rightarrow Y (Y \nsubseteq X)$，$Y \nrightarrow X$，$Y \rightarrow Z$，$Z \nsubseteq Y$，则称$Z$对$X$<strong>传递函数依赖</strong>，记作$X \stackrel{传递}{\rightarrow} Y$</p>
+</li>
+</ul>
+<h3 id="码"><a href="#码" class="headerlink" title="码"></a>码</h3><p>定义：设$K$为$R&lt; U,F &gt;$中的属性或属性组合，若$K \stackrel{F}{\rightarrow} U$，则$K$为$R$的<strong>候选码</strong><br>如果$K \stackrel{P}{\rightarrow} U$，则$K$称为<strong>超码</strong>。<strong>候选码是最小的超码</strong>，即$K$的任何一个真子集都不是候选码<br>包含在任何一个候选码中的属性称为<strong>主属性</strong>，不包含在任何候选码中的属性称为<strong>非主属性</strong>，整个属性组都是码称为<strong>全码</strong><br>定义：关系模式$R$中属性或属性组合$X$并非$R$的码，但$X$是另一个关系模式的码，则称$X$是$R$的<strong>外码</strong>  </p>
+<hr>
+<h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><p>关系数据库中的关系是要满足一定要求的，满足不同程度要求的为不同范式<br>各种范式之间的关系有：<br>$$5NF \subset 4NF \subset BCNF \subset 3NF \subset 2NF \subset 1NF$$<br>一个低一级范式的关系模式通过<strong>模式分解</strong>（schema decomposition）可以转化为若干高一级范式的关系模式的集合，这叫做<strong>规范化</strong>（normalization）</p>
+<h3 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h3><p>每个分量（属性）必须是不可分的数据项</p>
+<h3 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h3><p>相比于1NF，消除了<strong>非主属性对码的部分函数依赖</strong><br>定义：设关系模式$R&lt; U,F &gt;$, 若$R \in 1NF$，且每个非主属性<strong>完全函数依赖</strong>于任何一个候选码，则$R \in 2NF$<br>一个关系模式R若不属于2NF，可能会产生：插入异常、删除异常、修改复杂</p>
+<h3 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h3><p>相比于2NF，消除了<strong>非主属性对码的传递函数依赖</strong><br>定义：设关系模式$R&lt; U,F &gt;$，若$R \in 3NF$，则每个非主属性既不传递依赖于码，也不部分依赖于码，也就是说，若R属于3NF则必有R属于2NF  </p>
+<h3 id="BCNF"><a href="#BCNF" class="headerlink" title="BCNF"></a>BCNF</h3><p>相比于3NF，消除了<strong>主属性对码的部分和传递函数依赖</strong><br>定义：设关系模式$R&lt; U,F &gt;$，若<strong>每个决定因素</strong>都包含码（候选码），则$R \in BCNF$<br>满足BCNF的关系模式的性值：  </p>
+<ol>
+<li>所有非主属性对每一个码都是完全函数依赖</li>
+<li>所有主属性对每一个不包含它的码也是完全函数依赖</li>
+<li>没有任何属性完全函数依赖于非码的任何一组属性</li>
+</ol>
+<h3 id="多值依赖"><a href="#多值依赖" class="headerlink" title="多值依赖"></a>多值依赖</h3><p>&amp;&amp;&amp;</p>
+<h3 id="4NF"><a href="#4NF" class="headerlink" title="4NF"></a>4NF</h3><p>相比于BCNF，消除了<strong>非平凡且非函数依赖的多值依赖</strong>  </p>
+<h3 id="规范化小结"><a href="#规范化小结" class="headerlink" title="规范化小结"></a>规范化小结</h3><p>规范化的基本思想是逐步消除数据依赖中不合适的部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">o1=&gt;operation: 1NF</span><br><span class="line">i12=&gt;inputoutput: 消除非主属性对码的部分函数依赖</span><br><span class="line">o2=&gt;operation: 2NF</span><br><span class="line">i23=&gt;inputoutput: 消除非主属性对码的传递函数依赖</span><br><span class="line">o3=&gt;operation: 3NF</span><br><span class="line">i3b=&gt;inputoutput: 消除主属性对码的部分和传递函数依赖</span><br><span class="line">ob=&gt;operation: BCNF</span><br><span class="line">ib4=&gt;inputoutput: 消除非平凡且非函数依赖的多值依赖</span><br><span class="line">o4=&gt;operation: 4NF</span><br><span class="line"></span><br><span class="line">o1-&gt;i12-&gt;o2-&gt;i23-&gt;o3-&gt;i3b-&gt;ob-&gt;ib4-&gt;o4</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/04/26/Database5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1003,350 +1255,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/04/22/Database2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/22/Database2/" class="post-title-link" itemprop="url">数据库原理——第二章：关系数据库</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-22 19:40:06" itemprop="dateCreated datePublished" datetime="2019-04-22T19:40:06-04:00">2019-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-06-18 09:19:32" itemprop="dateModified" datetime="2019-06-18T09:19:32-04:00">2019-06-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><em>参考书目《数据库系统概论（第5版）》</em></p>
-</blockquote>
-<h2 id="关系数据结构及形式化定义"><a href="#关系数据结构及形式化定义" class="headerlink" title="关系数据结构及形式化定义"></a>关系数据结构及形式化定义</h2><p><strong>关系数据库是支持关系模型的数据库系统</strong><br>关系模型是由三部分组成：<strong>关系数据结构</strong>、<strong>关系操作集合</strong>、<strong>关系完整性约束</strong></p>
-<h3 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h3><ul>
-<li><strong>域</strong>是一组具有相同数据类型的值的集合。属性的取值范围来自某个域  </li>
-<li>一个域允许的不同取值个数称为这个域的<strong>基数</strong>  </li>
-<li>某一<em>属性组</em>的值能唯一的标识一个元组，而<strong>其子集不能</strong>，则称该属性组为<strong>候选码</strong></li>
-<li>若一个关系中有多个候选码，则选定其中一个为<strong>主码</strong>  </li>
-<li>关系模式的所有属性是这个关系模式的候选码，称为<strong>全码</strong><br>元组：表中的一行<br>码：表中的某个属性组，它可以唯一确定一个元组  </li>
-</ul>
-<h3 id="关系模式"><a href="#关系模式" class="headerlink" title="关系模式"></a>关系模式</h3><p><strong>关系模式是对关系的描述，关系模式是型，关系是值</strong><br>定义： <strong>关系</strong>的描述称为<strong>关系模式</strong>。它可以形式化的表示为R（U，D，DOM，F）</p>
-<ul>
-<li><strong>R</strong>为关系名</li>
-<li><strong>U</strong>为组成该关系的属性名集合</li>
-<li><strong>D</strong>为U中属性所来自的域</li>
-<li><strong>DOM</strong>为属性向域的映像集合</li>
-<li><strong>F</strong>为属性间数据的依赖关系集合  </li>
-</ul>
-<hr>
-<h2 id="关系操作"><a href="#关系操作" class="headerlink" title="关系操作"></a>关系操作</h2><p>常用的关系操作：<strong>查询和插入、删除和修改</strong><br>传统的集合运算：<strong>并、差、交、笛卡尔积</strong><br>专门的关系运算：<strong>选择、投影、连接、除运算</strong><br><strong>结构化查询语言</strong>（Structured Query Language, SQL）</p>
-<hr>
-<h2 id="关系的完整性"><a href="#关系的完整性" class="headerlink" title="关系的完整性"></a>关系的完整性</h2><p>关系模型的<strong>完整性规则</strong>是对关系的某种约束条件<br>关系模型中有三类完整性约束：<strong>实体完整性</strong>、<strong>参照完整性</strong>、<strong>用户定义的完整性</strong></p>
-<ul>
-<li><strong>实体完整性</strong><br>若属性A是基本关系R的主属性，则A不能取空值</li>
-<li><strong>参照完整性</strong><br>设F是基本关系R的一个或一组属性，但不是关系R的码，Ks是基本关系S的主码。如果F与Ks相对应，则称F是R的<strong>外码</strong><br>参照完整性规则就是定义外码与主码之间的引用规则<br>若属性（或属性组）F是基本关系R的外码，它与基本关系S的主码Ks相对应（基本关系R和S不一定是不同的关系），则对于R中的每个元组在F上的值必须：<ul>
-<li>或者取空值（F的每个属性值均为空值）</li>
-<li>或者等于S中某个元组的主码值</li>
-</ul>
-</li>
-<li><strong>用户定义的完整性</strong><br>用户定义的完整性就是针对某一具体的关系数据库的约束条件，它反映某一具体应用所涉及的数据必须满足的语义条件</li>
-</ul>
-<hr>
-<h2 id="关系代数"><a href="#关系代数" class="headerlink" title="关系代数"></a>关系代数</h2><p>传统的集合运算：<strong>并、差、交、笛卡尔积</strong><br>专门的关系运算：<strong>选择、投影、连接、除运算</strong>  </p>
-<ol>
-<li><strong>选择</strong>（取行）<br>选择又称为限制。它是在关系R中选择满足给定条件的诸元组</li>
-<li><strong>投影</strong>（取列）<br>从R中选择出若干属性列组成新的关系<br>投影后可能会取消某些元组，因为取消了某些属性列之后可能会出现重复行，应取消相同的行  </li>
-</ol>
-<p><strong>不能只简单的理解为取列，投影操作还可以获得某属性的所有取值的集合</strong><br>3. <strong>连接</strong><br>它从两个关系的笛卡尔积中选取属性间满足一定条件的元组<br><strong>自然连接</strong>是一种特殊的等值连接。它要求两个关系中进行比较的分量必须是同名的属性组，并且在结果中把重复的属性列去掉<br>在做<strong>自然连接</strong>时，可能会舍弃某些元组，这些元组被称为<strong>悬浮元组</strong><br>4. <strong>除运算</strong><br>设关系R处以关系S的结果为关系T，则T包含所有在R但不在S中的属性及其值，且T的元组与S的元组的所有的组合都在R中</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/04/21/Database1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/21/Database1/" class="post-title-link" itemprop="url">数据库原理——第一章：绪论</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-21 11:14:24" itemprop="dateCreated datePublished" datetime="2019-04-21T11:14:24-04:00">2019-04-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-06-18 20:22:12" itemprop="dateModified" datetime="2019-06-18T20:22:12-04:00">2019-06-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><em>参考书目《数据库系统概论（第5版）》</em></p>
-</blockquote>
-<h2 id="数据库系统概述"><a href="#数据库系统概述" class="headerlink" title="数据库系统概述"></a>数据库系统概述</h2><h3 id="数据库的4个基本概念"><a href="#数据库的4个基本概念" class="headerlink" title="数据库的4个基本概念"></a>数据库的4个基本概念</h3><p><strong>数据</strong>、<strong>数据库</strong>、<strong>数据库管理系统</strong>、<strong>数据库系统</strong>是4个核心概念</p>
-<ol>
-<li><strong>数据</strong>（data）  <ul>
-<li>数据是数据库中存储的基本对象</li>
-</ul>
-</li>
-<li><strong>数据库</strong>（DataBase, DB)  <ul>
-<li>数据库是存放数据的仓库</li>
-<li>数据库是长期存储在计算机内、有组织的、可共享的大量数据的集合</li>
-<li>数据库数据具有<strong>永久存储</strong>、<strong>有组织</strong>和<strong>可共享</strong>三个基本特点</li>
-</ul>
-</li>
-<li><strong>数据库管理系统</strong>（DataBase Management System, DBMS）<ul>
-<li>数据库管理系统是位于用户与操作系统之间的一层数据管理软件</li>
-<li>数据库管理系统和操作系统一样是<strong>计算机的基础软件</strong>，也是一个大型复杂的<strong>软件系统</strong></li>
-<li>体系结构为(从低到高)：硬件 -&gt; 操作系统 -&gt; 数据库管理系统 -&gt; 应用开发工具 -&gt; 应用系统</li>
-</ul>
-</li>
-<li><strong>数据库系统</strong>（DataBase System, DBS）<ul>
-<li>数据库系统是由<strong>数据库</strong>、<strong>数据库管理系统</strong>(及其应用开发工具)、<strong>应用程序</strong>和<strong>数据库管理人员</strong>组成的存储、管理、处理和维护数据的系统</li>
-</ul>
-</li>
-</ol>
-<h3 id="数据库管理"><a href="#数据库管理" class="headerlink" title="数据库管理"></a>数据库管理</h3><p><strong>数据库管理是指对数据进行分类、组织、编码、存储、检索和维护</strong><br>数据库管理技术的历史：人工管理 -&gt; 文件系统 -&gt; 数据库系统<br>人工管理阶段特点：</p>
-<ul>
-<li>数据不保存</li>
-<li>应用程序管理数据</li>
-<li>数据不共享</li>
-<li>数据不具有独立性  </li>
-</ul>
-<p>文件系统阶段特点：</p>
-<ul>
-<li>数据可以长期保存</li>
-<li>由文件系统管理数据</li>
-<li>数据共享性差，冗余度大</li>
-<li>数据独立性差</li>
-</ul>
-<p><strong>数据库系统的特点</strong>：</p>
-<ol>
-<li><strong>数据结构化</strong><ul>
-<li>数据库系统实现整体数据的结构化，这也是其与文件系统的本质区别</li>
-<li><strong>结构化</strong>是指数据库中的数据不再仅针对某一具体应用，而是面向整个组织或企业</li>
-</ul>
-</li>
-<li><strong>数据的共享性高、冗余度低且易扩充</strong><ul>
-<li>数据的共享减少数据冗余，节约存储空间，避免数据之间的不相容性和不一致性</li>
-<li>由于结构化使得数据库系统弹性大，易于扩充</li>
-</ul>
-</li>
-<li><strong>数据独立性高</strong><ul>
-<li><strong>物理独立性</strong>：应用程序和物理存储是相互独立的</li>
-<li><strong>逻辑独立性</strong>：应用程序和逻辑结构是相互独立的</li>
-<li>数据独立性是由<strong>二级映像功能</strong>来保证的</li>
-</ul>
-</li>
-<li><strong>数据由数据库管理系统统一管理和控制</strong><ul>
-<li>数据安全性保护</li>
-<li>数据完整性检查</li>
-<li>并发控制</li>
-<li>数据库恢复</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p>数据模型分两类：第一类是<strong>概念模型</strong>，第二类是<strong>逻辑模型和物理模型</strong>  </p>
-<ul>
-<li><strong>概念模型</strong>主要用于<strong>数据库设计</strong></li>
-<li><strong>逻辑模型</strong>主要用于<strong>数据库管理系统的实现</strong>；常用的逻辑模型：层次模型、网状模型、关系模型、面向对象数据模型、 对象关系数据模型、半结构化数据模型等</li>
-<li><strong>物理模型</strong>描述数据在系统内部的表示方式和存取方法</li>
-</ul>
-<p>概念模型的一种表示方法：实体-联系方法（Entity-Relationship），即<strong>E-R图</strong><br>数据模型的组成要素:<strong>数据结构</strong>、<strong>数据操作</strong>、<strong>数据的完整性约束条件</strong><br>关系模型术语对比</p>
-<table>
-<thead>
-<tr>
-<th>关系术语</th>
-<th>一般表格的术语</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>关系名</td>
-<td>表名</td>
-</tr>
-<tr>
-<td>关系模式</td>
-<td>表头（表格的描述）</td>
-</tr>
-<tr>
-<td>关系</td>
-<td>（一张）二维表</td>
-</tr>
-<tr>
-<td>元组</td>
-<td>记录或行</td>
-</tr>
-<tr>
-<td>属性</td>
-<td>列</td>
-</tr>
-<tr>
-<td>属性名</td>
-<td>列名</td>
-</tr>
-<tr>
-<td>属性值</td>
-<td>列值</td>
-</tr>
-<tr>
-<td>分量</td>
-<td>一条记录中的一个列值</td>
-</tr>
-<tr>
-<td>非规范关系</td>
-<td>表中有表（大表中嵌有小表）</td>
-</tr>
-</tbody></table>
-<p>关系的完整性约束条件</p>
-<ul>
-<li>实体完整性</li>
-<li>参照完整性</li>
-<li>用户定义的完整性</li>
-</ul>
-<hr>
-<h2 id="数据库系统的结构"><a href="#数据库系统的结构" class="headerlink" title="数据库系统的结构"></a>数据库系统的结构</h2><p>数据库系统的三级模式结构是指数据库系统是由<strong>外模式</strong>、<strong>模式</strong>和<strong>内模式</strong>三级构成，分别代表数据的三个抽象级别  </p>
-<ul>
-<li><strong>模式</strong>：也称为<strong>逻辑模式</strong>，是数据库中全体数据的逻辑结构和特征的描述，是所有用户的公共数据视图<ul>
-<li>MySQL中的database等价于这里的模式</li>
-<li>一个数据库只有一个模式</li>
-</ul>
-</li>
-<li><strong>外模式</strong>：也称为<strong>子模式</strong>或<strong>用户模式</strong>，它是数据库用户能够看见和使用的<strong>局部数据</strong>的逻辑结构和特征的描述，是数据库用户的数据视图，是与某一应用有关的数据的逻辑表示<ul>
-<li>外模式通常是模式的<strong>子集</strong></li>
-<li>MySQL中的<strong>视图</strong>和SELECT出的结果(部分基本表)等价于这里的外模式</li>
-<li>外模式可用来保证数据库安全性，用户只能访问和看见所对应的外模式中的数据</li>
-</ul>
-</li>
-<li><strong>内模式</strong>：也称为<strong>存储模式</strong>，它是数据物理结构和存储方式的描述，是数据在数据库内部的组织方式<ul>
-<li>一个数据库只有一个内模式</li>
-</ul>
-</li>
-</ul>
-<h3 id="数据库的二级映射功能与数据独立性"><a href="#数据库的二级映射功能与数据独立性" class="headerlink" title="数据库的二级映射功能与数据独立性"></a>数据库的二级映射功能与数据独立性</h3><ol>
-<li><strong>外模式/模式映像</strong><br>当<strong>模式</strong>改变时，由数据库管理员对各个<strong>外模式/模式</strong>的映像作相应改变，可以使<strong>外模式</strong>保持不变；应用程序是依据数据的外模式编写的，从而应用程序不必修改，保证了数据与程序的逻辑独立性，简称数据的<strong>逻辑独立性</strong></li>
-<li><strong>模式/内模式映像</strong><br>当数据库的<strong>存储结构</strong>改变时，由数据库管理员对各个<strong>模式/内模式</strong>的映像作相应改变，可以使<strong>模式</strong>保持不变，从而应用程序也不必改变，保证了数据与程序的物理独立性，简称数据的<strong>物理独立性</strong></li>
-</ol>
-<p>数据库的二级映射保证了数据库外模式的稳定性，从而从底层保证了应用程序的稳定性（一般不需要修改）<br><strong>数据与程序之间的独立性使得数据的定义和描述可以从应用程序中分离出去</strong></p>
-<hr>
-<h2 id="数据库系统的组成"><a href="#数据库系统的组成" class="headerlink" title="数据库系统的组成"></a>数据库系统的组成</h2><p><strong>数据库系统</strong>是由<strong>数据库</strong>、<strong>数据库管理系统</strong>(及其应用开发工具)、<strong>应用程序</strong>和<strong>数据库管理人员</strong>组成  </p>
-<ol>
-<li>硬件平台及数据库</li>
-<li>软件</li>
-<li>人员</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1414,7 +1326,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1472,7 +1384,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

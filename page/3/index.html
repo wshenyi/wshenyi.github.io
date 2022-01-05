@@ -164,6 +164,219 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/25/Game2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/25/Game2/" class="post-title-link" itemprop="url">博弈论2：纯策略纳什均衡</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-25 11:23:24" itemprop="dateCreated datePublished" datetime="2020-02-25T11:23:24-05:00">2020-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-21 21:43:02" itemprop="dateModified" datetime="2020-03-21T21:43:02-04:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Game-Theory/" itemprop="url" rel="index"><span itemprop="name">Game Theory</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<blockquote>
+<p>All materials come from <em>Coursera</em>《Game Theory》by Stanford University &amp; The University of British Columbia</p>
+</blockquote>
+<h2 id="Intro-to-nash-equilibrium"><a href="#Intro-to-nash-equilibrium" class="headerlink" title="Intro to nash equilibrium"></a>Intro to nash equilibrium</h2><p>Attributes of nash equilibrium</p>
+<ul>
+<li><strong>nobody has an incentive to <strong>deviate</strong> from their actions if a nash equilibrium is achieved</strong></li>
+<li>each player’s action <strong>maximizes his/her payoff</strong> given the actions of others</li>
+<li>a self-consistent or <strong>stable</strong> profile</li>
+</ul>
+<h2 id="Pure-Strategy-Nash-Equilibrium"><a href="#Pure-Strategy-Nash-Equilibrium" class="headerlink" title="Pure Strategy Nash Equilibrium"></a>Pure Strategy Nash Equilibrium</h2><h3 id="Pure-Strategy-And-Mixed-Strategy"><a href="#Pure-Strategy-And-Mixed-Strategy" class="headerlink" title="Pure Strategy And Mixed Strategy"></a>Pure Strategy And Mixed Strategy</h3><p>the informal definitions of <strong>pure strategy</strong> and <strong>mixed strategy</strong> are</p>
+<ul>
+<li>pure strategy: <strong>only one</strong> action is played with positive probability</li>
+<li>mixed strategy: <strong>more than one</strong> action is played with positive probability</li>
+</ul>
+<p>With a pure strategy, a player choose one action with 100% ensurance. While with a mixed strategy, a player can have a probability of 50% choosing action A and a probability of 50% choosing action B. In another word, player $i$ chooses action $a_i$ randomly from $A$ with corresponding probability.</p>
+<h3 id="Best-Response"><a href="#Best-Response" class="headerlink" title="Best Response"></a>Best Response</h3><p>The idea of <strong>Best Response</strong>: if you know what everyone else was going to do, it would be easy to pick your own action.</p>
+<p>Based on the previous lecture, $a$ represents <strong>action profile</strong>, which organized by $n$ players’ action</p>
+<p>$$a = (a_1, a_2,…, a_n)$$</p>
+<p>Now we denote $a_{-i}$, which means a sub action profile of other players act</p>
+<p>$$a_{-i} = (a_1, a_2,…, a_{i-1}, a_{i+1},…, a_n)$$</p>
+<p>Then we can re-define $a$ as</p>
+<p>$$a = (a_i, a_{-i})$$</p>
+<p>Therefore, the definition of <strong>Best Response</strong> is showen below</p>
+<p>$$a_i^* \in BR(a_{-i}) \ \ iff \ \ \forall a_i \in A_i, u_i(a_i^*, a_{-i}) \ge u_i(a_i, a_{-i})$$  </p>
+<p>That is to say, given $a_{-i}$, $a_i^*$ is the best response for player $i$ to play.</p>
+<p>But in practice, no agent knows what the others will do, so we can’t say about what actions will actually occur. The idea here is to look for <strong>stable action profiles</strong>, leading to equilibrium point. $a = (a_1, a_2,…, a_n)$ is a (pure strategy) <strong>nash equilibrium</strong> iff $\forall i,\ a_i \in BR(a_{-i})$</p>
+<h3 id="Dominant-Strategy"><a href="#Dominant-Strategy" class="headerlink" title="Dominant Strategy"></a>Dominant Strategy</h3><p>generalize from actions to strategies</p>
+<h2 id="Mixed-Strategy-Nash-Equilibrium"><a href="#Mixed-Strategy-Nash-Equilibrium" class="headerlink" title="Mixed Strategy Nash Equilibrium"></a>Mixed Strategy Nash Equilibrium</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/05/Others4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/05/Others4/" class="post-title-link" itemprop="url">Linux下常用指令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-05 14:46:11" itemprop="dateCreated datePublished" datetime="2020-02-05T14:46:11-05:00">2020-02-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-29 04:03:22" itemprop="dateModified" datetime="2020-02-29T04:03:22-05:00">2020-02-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="top"><a href="#top" class="headerlink" title="top"></a>top</h2><p>查看系统进程</p>
+<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen -S [TaskName] 创建一个名为TaskName的screen</span><br><span class="line">screen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen</span><br></pre></td></tr></table></figure>
+
+<p>快捷指令：</p>
+<ul>
+<li>上下分屏：ctrl + a  再按shift + s</li>
+<li>切换屏幕：ctrl + a  再按tab键</li>
+<li>新建一个终端：ctrl + a  再按c</li>
+</ul>
+<h2 id="du、df"><a href="#du、df" class="headerlink" title="du、df"></a>du、df</h2><p>du = disk used 硬盘使用情况<br>df = disk free 硬盘剩余空间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">du -h [FileName] 查看指定文件大小</span><br><span class="line"></span><br><span class="line">df -hl 查看磁盘剩余空间</span><br><span class="line"></span><br><span class="line">df -h 查看每个根路径的分区大小</span><br><span class="line"></span><br><span class="line">du -sh [目录名] 返回该目录的大小</span><br><span class="line"></span><br><span class="line">du -sm [文件夹] 返回该文件夹总M数</span><br></pre></td></tr></table></figure>
+
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find [location] -name [FileName] 在location下查找名字为FileName的文件</span><br></pre></td></tr></table></figure>
+
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [字符串] [File] 在File中按行匹配字符串</span><br></pre></td></tr></table></figure>
+
+<h2 id="which、whereis"><a href="#which、whereis" class="headerlink" title="which、whereis"></a>which、whereis</h2><p>which 查看可执行文件的位置 ，只有设置了环境变量的程序才可以用<br>whereis 寻找特定文件，只能用于查找二进制文件、源代码文件和man手册页</p>
+<h2 id="more-less"><a href="#more-less" class="headerlink" title="more/less"></a>more/less</h2><p>查看文件内容，当文件内容很大时比cat命令要好用</p>
+<h2 id="head、tail"><a href="#head、tail" class="headerlink" title="head、tail"></a>head、tail</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head(tail) -n 1000 [FileName] 显示FileName文件的前1000行(后1000行)</span><br><span class="line">tail -n +1000 [FileName] 显示FileName文件从1000行往后的内容</span><br><span class="line">tail -f [FileName] 追踪（follow）文件FileName</span><br></pre></td></tr></table></figure>
+
+<h2 id="free、swapoff、mkswap、swapon"><a href="#free、swapoff、mkswap、swapon" class="headerlink" title="free、swapoff、mkswap、swapon"></a>free、swapoff、mkswap、swapon</h2><p>查看内存状态命令，可以显示memory、swap、buffer/cache等的大小及使用状况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">free -h 查看内存状态</span><br><span class="line"></span><br><span class="line">swapoff -a 取消所有挂载的swap空间</span><br><span class="line"></span><br><span class="line">dd if=/dev/zero of=/var/swapfile bs=1M count=1024 在/var目录下创建大小为1G的文件用做swap空间</span><br><span class="line"></span><br><span class="line">mkswap /var/swapfile 格式化swap文件</span><br><span class="line"></span><br><span class="line">swapon /var/swapfile 挂载swap空间</span><br></pre></td></tr></table></figure>
+
+<h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><p>查看网络状态（地址和端口号）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunlp 其中t（tcp）、u（udp），nlp分别是三个flag参数</span><br></pre></td></tr></table></figure>
+
+<h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h2><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/10/tmux.html">详细内容参考</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s [NewSessionName] 创建标签为NewSessionName的新会话，默认数字index从0开始</span><br><span class="line">tmux attach -t [index/name] 恢复到index/name的会话连接</span><br><span class="line">tmux ls 查看所有会话</span><br><span class="line">tmux switch -t [index/name] 切换到index/name会话</span><br></pre></td></tr></table></figure>
+
+<p>快捷指令  ：</p>
+<ul>
+<li>ctrl + b %： 左右分屏</li>
+<li>ctrl + b “： 上下分屏</li>
+<li>ctrl + b 空格： 左右分屏</li>
+<li>ctrl + b 上下左右： 切换分屏</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/01/20/Game1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -531,270 +744,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/07/03/Others2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/03/Others2/" class="post-title-link" itemprop="url">Shell中的常用通配符，字符类</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-07-03 10:42:24" itemprop="dateCreated datePublished" datetime="2019-07-03T10:42:24-04:00">2019-07-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-02 22:49:35" itemprop="dateModified" datetime="2019-07-02T22:49:35-04:00">2019-07-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hxphp/p/6707718.html">转载出处</a><br>因为 shell 频繁 地使用文件名，shell 提供了特殊字符来帮助你快速指定一组文件名。这些特殊字符叫做通配符。</p>
-<table>
-<thead>
-<tr>
-<th>通配符</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>*</td>
-<td>匹配任意多个字符（包括零个或一个）</td>
-</tr>
-<tr>
-<td>?</td>
-<td>匹配任意一个字符（不包括零个）</td>
-</tr>
-<tr>
-<td>[characters]</td>
-<td>匹配任意一个属于字符集中的字符</td>
-</tr>
-<tr>
-<td>[!characters]</td>
-<td>匹配任意一个不是字符集中的字符</td>
-</tr>
-<tr>
-<td>[[:class:]]</td>
-<td>匹配任意一个属于指定字符类中的字符</td>
-</tr>
-</tbody></table>
-<p>&emsp;</p>
-<table>
-<thead>
-<tr>
-<th>字符类</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[:alnum:]</td>
-<td>匹配任意一个字母或数字</td>
-</tr>
-<tr>
-<td>[:alpha:]</td>
-<td>匹配任意一个字母</td>
-</tr>
-<tr>
-<td>[:digit:]</td>
-<td>匹配任意一个数字</td>
-</tr>
-<tr>
-<td>[:lower:]</td>
-<td>匹配任意一个小写字母</td>
-</tr>
-<tr>
-<td>[:upper]</td>
-<td>匹配任意一个大写字母</td>
-</tr>
-</tbody></table>
-<p>一些常用的匹配：</p>
-<table>
-<thead>
-<tr>
-<th>模式</th>
-<th>匹配对象</th>
-</tr>
-</thead>
-</table>
-<ul>
-<li>| 所有文件<br>g* | 文件名以“g”开头的文件<br>b*.txt 以”b” | 开头，中间有零个或任意多个字符，并以”.txt” 结尾的文件<br>Data??? | 以“Data”开头，其后紧接着 3 个字符的文件<br>[abc]* | 文件名以”a”,”b”, 或”c” 开头的文件<br>BACKUP.[0-9][0-9][0-9] | 以”BACKUP.” 开头，并紧接着 3 个数字的文件<br>[[:upper:]]* | 以大写字母开头的文件<br>[![:digit:]]* | 不以数字开头的文件</li>
-<li>[[:lower:]123] | 文件名以小写字母结尾，或以“1”，“2”，或“3”结尾的文件</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/06/17/Database11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/17/Database11/" class="post-title-link" itemprop="url">数据库原理——第十一章：并发控制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-06-17 19:21:04" itemprop="dateCreated datePublished" datetime="2019-06-17T19:21:04-04:00">2019-06-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-06-19 02:22:15" itemprop="dateModified" datetime="2019-06-19T02:22:15-04:00">2019-06-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><em>参考书目《数据库系统概论（第5版）》</em></p>
-</blockquote>
-<h2 id="并发控制概述"><a href="#并发控制概述" class="headerlink" title="并发控制概述"></a>并发控制概述</h2><p>并发操作带来的不一致性：</p>
-<ul>
-<li>丢失修改：T1和T2同时读入并修改，后者的提交覆盖了前者的提交</li>
-<li>不可重复读：T1读取了数据A，期间T2修改了数据A，当T1再次读取A时发现与原先不一致</li>
-<li>读“脏”数据：T1保存了对A的修改，但在T2读取A的期间，T1对A的操作被撤销导致A恢复原值，从而T2读取的是<strong>错误数据</strong></li>
-</ul>
-<p>并发控制的主要技术：封锁、时间戳、乐观控制法和多版本并发控制</p>
-<hr>
-<h2 id="封锁与封锁协议"><a href="#封锁与封锁协议" class="headerlink" title="封锁与封锁协议"></a>封锁与封锁协议</h2><p><strong>封锁</strong>就是事务在对某数据对象操作之前先向系统发出请求，对其<strong>加锁</strong><br>基本的封锁类型有：</p>
-<ul>
-<li><strong>排他锁</strong>又称<strong>写锁</strong>（简称X锁）</li>
-<li><strong>共享锁</strong>又称<strong>读锁</strong>（简称S锁）</li>
-</ul>
-<p>封锁协议：</p>
-<ol>
-<li>一级封锁协议：事务T在<strong>修改</strong>数据R之前必须先对其加X锁，直到事务结束才释放<br>一级封锁协议可防止丢失修改，并保证事务T是可恢复的，但其不保证可重复读和不读错误数据</li>
-<li>二级封锁协议：在一级封锁协议基础上，增加事务T在<strong>读取</strong>数据R之前必须先对其加S锁，<strong>读完后</strong>即可释放S锁<br>二级封锁协议除防止了丢失修改，还进一步防止读错误数据，但其不保证可重复读</li>
-<li>三级封锁协议：在一级封锁协议基础上，增加事务T在<strong>读取</strong>数据R之前必须先对其加S锁，<strong>直到事务结束</strong>释放S锁<br>三级封锁协议除防止了丢失修改，读读错误数据和不可重复读</li>
-</ol>
-<hr>
-<h2 id="活锁和死锁"><a href="#活锁和死锁" class="headerlink" title="活锁和死锁"></a>活锁和死锁</h2><p>活锁：就是操作系统中的<strong>饥饿</strong>，使用FCFS来预防活锁<br>死锁：就是操作系统中的<strong>死锁</strong><br>死锁的预防：</p>
-<ul>
-<li>一次封锁法：一次将所有要使用的数据全部加锁</li>
-<li>顺序封锁法：先对数据对象规定一个封锁顺序，所有事务都按这个顺序实施封锁</li>
-</ul>
-<p>操作系统中采用的预防死锁不适合数据库，因此数据库普遍采用诊断并解除死锁的方法，即允许发生死锁， 然后采用一定手段定期诊断系统中有无死锁， 若有则解除之<br>死锁的<strong>诊断</strong>方法：</p>
-<ul>
-<li>超时法</li>
-<li>等待图法</li>
-</ul>
-<p>死锁的<strong>解除</strong>，通常采用的方法是：<strong>选择一个处理死锁代价最小的事务，将其撤销，释放此事务持有的所有锁，使其他事务得以继续运行下去</strong></p>
-<hr>
-<h2 id="并发调度的可串行性"><a href="#并发调度的可串行性" class="headerlink" title="并发调度的可串行性"></a>并发调度的可串行性</h2><p><strong>可串行化调度</strong>：多个事务的并发执行是正确的，当且仅当其结果与按某一次序串行执行这些事务时的结果相同<br><strong>可串行性</strong>是并发事务正确调度的准则。即一个给定的并发调度，当且仅当它是可串行化的，才认为是<strong>正确调度</strong><br>若一个调度是<strong>冲突可串行化</strong>，则一定是<strong>可串行化</strong>调度  </p>
-<hr>
-<h2 id="两段锁协议"><a href="#两段锁协议" class="headerlink" title="两段锁协议"></a>两段锁协议</h2><p>数据库系统采用<strong>两段锁协议</strong>（2PL）的方法实现并发调度的可串行性，从而保证调度的正确性<br>两段锁协议是指所有事务必须分两个阶段对数据项加锁和解锁：</p>
-<ul>
-<li>扩展阶段（第一阶段）：获得封锁。在对任何数据进行读、写操作之前，首先要申请并获得对该数据的封锁；此阶段，可以申请获得任何数据项上任何类型的锁，但是不能释放锁</li>
-<li>收缩阶段（第二阶段）：释放封锁。在释放一个封锁之后，事务不再申请和获得任何其他封锁</li>
-</ul>
-<p>事务遵守两段锁协议是可串行化调度的<strong>充分条件</strong><br>一次封锁法遵守两段锁协议，但两段锁协议并不要求事务必须一次将所有要使用的数据全部加锁，因此<strong>遵守两段锁协议的事务仍可能发生死锁</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -862,7 +815,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -920,7 +873,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

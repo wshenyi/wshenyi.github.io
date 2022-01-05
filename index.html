@@ -164,6 +164,219 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/01/R2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/01/R2/" class="post-title-link" itemprop="url">003 "Near-memory computing:Past, present, and future"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-01 21:04:13" itemprop="dateCreated datePublished" datetime="2022-01-01T21:04:13-05:00">2022-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-04 11:50:17" itemprop="dateModified" datetime="2022-01-04T11:50:17-05:00">2022-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> bounded model checking</p>
+<blockquote>
+<p>Author: Gagandeep Singh, Lorenzo Chelini, Stefano Corda, Ahsan Javed Awan, Sander Stuijk, Roel Jordans, Henk Corporaal, Albert-Jan Boonstra</p>
+</blockquote>
+<hr>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Although numerous techiques such as decomposition, abstraction and various reductions have been proposed to tackle the memory explosion problem of BDD-based model checking, full verification of many designs is still beyond the capacity of BDD-based symbolic model checkers.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The authors survey a technique called Bounded Model Checking (BMC), which uses a propositional SAT solver rather than BDD manipulation techniques. Experiments have shown that BMC can solve many cases that cannot be solved by BDD-based techniques. However, BMC also has its drawback compared with BDD-based method. Therefore, BMC joins the arseanal of automatic verification tools but not replace any of them.</p>
+<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>A great comprehensive review for <strong>model checking</strong> technique.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>In model checking, the design to be verified is modeled as a finite state machine, and the specification is formalized by writing <em>temporal logic</em> properties.</p>
+<p>In general, properties are classified to ‘<strong>safety</strong>‘ and ‘<strong>liveness</strong>‘ properties.</p>
+<ul>
+<li>Safety: what should not happen (or what should always happen).</li>
+<li>Liveness: what should happen.</li>
+</ul>
+<p>In case the property fails, a comterexample is generated in the form of a sequence of states.</p>
+<ul>
+<li>A counterexample of safety properties is a trace of states, where the last state contradict the property.</li>
+<li>A counterexample to liveness properties, in its simplest form, is a path to a loop that does not contain the desired state.</li>
+</ul>
+<p>There is no such thing as a ‘correct system’; it is only possible to check whether a system satisfies its specification or not.</p>
+<h2 id="Key-Insights-Up-to-2-insights-gt-key-ideas-that-make-their-paper-works"><a href="#Key-Insights-Up-to-2-insights-gt-key-ideas-that-make-their-paper-works" class="headerlink" title="Key Insights [Up to 2 insights] -&gt;key ideas that make their paper works"></a>Key Insights [Up to 2 insights] -&gt;key ideas that make their paper works</h2><ul>
+<li></li>
+</ul>
+<h2 id="Notable-Design-Details-Strengths-Up-to-2-details-strengths"><a href="#Notable-Design-Details-Strengths-Up-to-2-details-strengths" class="headerlink" title="Notable Design Details/Strengths [Up to 2 details/strengths]"></a>Notable Design Details/Strengths [Up to 2 details/strengths]</h2><ul>
+<li></li>
+</ul>
+<h2 id="Limitations-Weaknesses-up-to-2-weaknesses"><a href="#Limitations-Weaknesses-up-to-2-weaknesses" class="headerlink" title="Limitations/Weaknesses [up to 2 weaknesses]"></a>Limitations/Weaknesses [up to 2 weaknesses]</h2><ul>
+<li></li>
+</ul>
+<h2 id="Open-Questions-Where-to-go-from-here"><a href="#Open-Questions-Where-to-go-from-here" class="headerlink" title="Open Questions [Where to go from here?]"></a>Open Questions [Where to go from here?]</h2><p>- </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2021/12/31/R1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/31/R1/" class="post-title-link" itemprop="url">002 "Bounded Model Checking"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-31 10:12:43" itemprop="dateCreated datePublished" datetime="2021-12-31T10:12:43-05:00">2021-12-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-05 01:53:42" itemprop="dateModified" datetime="2022-01-05T01:53:42-05:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> bounded model checking</p>
+<blockquote>
+<p>Author: Armin Biere, Alessandro Cimatti, Edmund M. Clarke, Ofer Strichman, Yunshan Zhu</p>
+</blockquote>
+<hr>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Although numerous techiques such as decomposition, abstraction and various reductions have been proposed to tackle the memory explosion problem of BDD-based model checking, full verification of many designs is still beyond the capacity of BDD-based symbolic model checkers.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The authors survey a technique called Bounded Model Checking (BMC), which uses a propositional SAT solver rather than BDD manipulation techniques. Experiments have shown that BMC can solve many cases that cannot be solved by BDD-based techniques. The converse is also true: there are also some problems that BMC can’t solve. Therefore, BMC is regraded as a complementary techqiue to BDD-based symbolic model checking.</p>
+<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>A great comprehensive review for <strong>bounded model checking</strong> technique.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>In model checking, the design to be verified is modeled as a finite state machine, and the specification is formalized by writing <em>temporal logic</em> properties.</p>
+<p>In general, properties are classified to ‘<strong>safety</strong>‘ and ‘<strong>liveness</strong>‘ properties.</p>
+<ul>
+<li>Safety: what should not happen (or what should always happen). =&gt; decribe <strong>invariants</strong> of a system</li>
+<li>Liveness: what should happen.</li>
+</ul>
+<p>In case the property fails, a comterexample is generated in the form of a sequence of states.</p>
+<ul>
+<li>A counterexample of safety properties is a trace of states, where the last state contradict the property.</li>
+<li>A counterexample to liveness properties, in its simplest form, is a path to a loop that does not contain the desired state.</li>
+</ul>
+<p>There is no such thing as a ‘correct system’; it is only possible to check whether a system satisfies its specification or not.</p>
+<p>Users of model checking tools typically consider it as <strong>complimentary</strong> to the more traditional methods of <strong>testing and simulation</strong>, and not as an <strong>alternative</strong>.</p>
+<p>Model Checking (MC) uses <em>explicit state representation</em> when it is first proposed. However, explicit representation restrict the capacity of model checkers to systems with a few million states. This makes MC impossible to sacle to examples with inductrial complexity. The introduction of <em>symbolic model checking</em> made the first breakthrough towards wide usage of MC techiques. In symbolic model checking, sets of states are represented implicitly using <em>Boolean functions</em>. Manipulating boolean formulas can be done efficiently with Reduced Ordered Binary Decision Diagrams (ROBDD). The combination of symbolic model checking with BDDs, pushed the barrier to systems with $10^{20}$ states and more.</p>
+<p>The bottleneck of these methods is the amount of memory that is required for storing and manipulating BDDs.</p>
+<h2 id="Model-Checking-and-LTL"><a href="#Model-Checking-and-LTL" class="headerlink" title="Model Checking and LTL"></a>Model Checking and LTL</h2><p>Model checking has three fundamental features:</p>
+<ol>
+<li>it is automatic</li>
+<li>the system are assumed to be finite (though using abstration techniques can process infinite space.)</li>
+<li>temporal logic (LTL, CTL, CTL*) is used for specifying the system properties.</li>
+</ol>
+<p><strong>Model checking can be summarized as an algorithm technique for checking temporal properties of finite systems</strong>.</p>
+<img src="/2021/12/31/R1/1.png" class="">
+
+<ul>
+<li>The <em>Globally</em> operator $G$ is used for <strong>safety property</strong></li>
+<li>The <em>Finally</em> operator $F$ is used for <strong>liveness property</strong></li>
+</ul>
+<p>A temporal formula $f$ holds for a Kripke structure $M$, written $M$ |= $f$, iff $\phi$ |= $f$ for all initialized paths $\phi$ of $M$.</p>
+<h2 id="Bounded-Model-Checking"><a href="#Bounded-Model-Checking" class="headerlink" title="Bounded Model Checking"></a>Bounded Model Checking</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2021/12/30/R0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -187,10 +400,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-12-30 00:33:29 / Modified: 23:34:39" itemprop="dateCreated datePublished" datetime="2021-12-30T00:33:29-05:00">2021-12-30</time>
+              <time title="Created: 2021-12-30 00:33:29" itemprop="dateCreated datePublished" datetime="2021-12-30T00:33:29-05:00">2021-12-30</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-31 10:14:08" itemprop="dateModified" datetime="2021-12-31T10:14:08-05:00">2021-12-31</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -2287,231 +2506,10 @@ Name: col3, dtype: object
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/02/RL4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/02/RL4/" class="post-title-link" itemprop="url">RL4：Dynamic Programming</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-02 14:05:03" itemprop="dateCreated datePublished" datetime="2020-03-02T14:05:03-05:00">2020-03-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-18 03:24:41" itemprop="dateModified" datetime="2020-03-18T03:24:41-04:00">2020-03-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reinforcement-Learning/" itemprop="url" rel="index"><span itemprop="name">Reinforcement Learning</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<blockquote>
-<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
-</blockquote>
-<p>The key idea of DP, and reinforcement learning generally, is <strong>the use of value functions to orgnize and structure the search for good policy</strong>. The limitation of DP is that <strong>it requires a complete and accurate model of the environment</strong>, which is impossible to know in most of the time.</p>
-<ul>
-<li><strong>Policy Evaluation</strong> is the tasks of determining the state-value function $v_\pi$ for a particular policy $\pi$</li>
-<li><strong>Policy Improvement</strong> is the task of improving an existed policy on given state values.</li>
-<li><strong>Policy Control</strong> is the iteration of combining evaluation and improvement to get the optimal policy.</li>
-</ul>
-<h2 id="Policy-Evaluation-Prediction"><a href="#Policy-Evaluation-Prediction" class="headerlink" title="Policy Evaluation(Prediction)"></a>Policy Evaluation(Prediction)</h2><p>The aim of the <strong>policy evaluation</strong> is to calculate value functions. Its idea is to change the bellman equation into an <strong>update rule</strong>.</p>
-<p>$$<br>\begin{eqnarray*}<br>v_{k+1}(s)<br>&amp;\doteq&amp;\sum_a\pi(a|s) q_k(s,a)\<br>&amp;=&amp;\sum_a\pi(a|s) \sum_{s’,r}p(s’,r|s,a)(r+\gamma v_k(s’))\tag{4.1}<br>\end{eqnarray*}<br>$$</p>
-<p>We arbitrarily choose inital value for each state and the terminal state, if any, must be given value 0 and never be updated. Indeed, the sequence ${vk}$ can be shown in general to converge to $v_\pi$ as $k\rightarrow\infty$ under the same conditions that guarantee the existence of $v_\pi$. This algorithm is called <strong>iterative policy evaluation</strong>.</p>
-<img src="/2020/03/02/RL4/1.png" class="">
-
-<p>We call this kind of operation an <strong>expected update</strong>. All the updates done in DP algorithms are called expected updates because they are based on an expectation over all possible next states rather than on a sample next state.</p>
-<p>Let’s consider the $4\times4$ gride world below.</p>
-<img src="/2020/03/02/RL4/2.png" class="">
-
-<ul>
-<li>Action: up, left, down, right.</li>
-<li>State: shadow blocks for terminal states and white blocks with numbers for non-terminal states.</li>
-<li>Reward: all transitions for a reward -1.</li>
-<li>Policy: <strong>random move policy</strong>(four actions have equal probabilities to choose at each state)</li>
-</ul>
-<p>With $\theta = 0.001$, we finally get this.</p>
-<img src="/2020/03/02/RL4/3.png" class="">
-
-<hr>
-<h2 id="Policy-Improvement"><a href="#Policy-Improvement" class="headerlink" title="Policy Improvement"></a>Policy Improvement</h2><p>It is obvious that after we calculate state-value functions, the aim of the <strong>policy improvement</strong> is to improve the current policy $\pi$. Its idea is to change $\pi$ towards the optimal policy a little step. We call this <strong>policy improvement theorem</strong>$(4.2)$. $\pi’$ is the next new policy and both $\pi$ and $\pi’$ are <strong>deterministic</strong> policy.</p>
-<p>$$<br>q_\pi(s, \pi’(s)) \ge v_\pi(s),\ \forall s\in \mathbf{S}\tag{4.2}\<br>\Rightarrow v_\pi’(s)) \ge v_\pi(s)<br>$$</p>
-<p>The premise of improvement is</p>
-<p>$$<br>q_\pi(s, \pi’(s)) &gt; q_\pi(s, \pi(s)), \ \exists s\in\mathbf{S}<br>$$</p>
-<p>AS well as this condition is avaliable, the new policy can always be a <strong>strictly improvement</strong> over $\pi$ unless $\pi$ is already optimal. Obviously we can get $\pi’$ by <strong>greedy selection of action values at each state</strong>.</p>
-<p>$$<br>\begin{eqnarray*}<br>\pi’(s)<br>&amp;=&amp;\mathop{argmax}_a q_\pi(s,a)\<br>&amp;=&amp;\mathop{argmax}<em>a \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{4.3}<br>\end{eqnarray*}<br>$$</p>
-<p>The process of making a new policy that improves on an original policy, by making it greedy with respect to the value function of the original policy, is called <strong>policy improvement</strong>.</p>
-<p>Notice that from $(4.3)$ we actually get an “optimal policy” based on current state values (formal  optimal policy establish on $v_*$). We can imagine if all our value function can hold for <strong>optimal  bellman equation</strong>, then the current policy must be the optimal policy $\pi_*$.</p>
-<p>The gride world example is so simple that we just get the optimal policy after once improvement.</p>
-<img src="/2020/03/02/RL4/5.png" class="">
-
-<p>we can notice <strong>even though we already get optimal policy but state values can still change (not converge)</strong>.</p>
-<img src="/2020/03/02/RL4/4.png" class="">
-
-<hr>
-<h2 id="Policy-Iteration-Control"><a href="#Policy-Iteration-Control" class="headerlink" title="Policy Iteration(Control)"></a>Policy Iteration(Control)</h2><p>Once a policy, $\pi$, has been improved using $v_\pi$ to yield a better policy, $\pi’$, we can then compute $v_\pi’$ and improve it again to yield an even better $\pi’’$. Through alternating <strong>evaluation</strong> and <strong>improvement</strong>, we can thus obtain a sequence of monotonically improving policies and value functions</p>
-<p>$$<br>\pi_1 \mathop{\rightarrow}^E v_{\pi_1} \mathop{\rightarrow}^I<br>\pi_2 \mathop{\rightarrow}^E v_{\pi_2} \mathop{\rightarrow}^I<br>\pi_3 \mathop{\rightarrow}^E … \mathop{\rightarrow}^I<br>\pi_* \mathop{\rightarrow}^E v_{\pi_*} \mathop{\rightarrow}^I \pi_*<br>$$</p>
-<p>This way of finding an optimal policy is called <strong>policy iteration</strong>. It follows a sequcence of better and better policies and value functions until it reaches the optimal policy and accosiated optimal value function.</p>
-<img src="/2020/03/02/RL4/6.png" class="">
-
-<p>Here is a simple algorithnm for policy iteration with iterative policy evaluation</p>
-<img src="/2020/03/02/RL4/7.png" class="">
-
-<hr>
-<h2 id="Generalized-Policy-Iteration"><a href="#Generalized-Policy-Iteration" class="headerlink" title="Generalized Policy Iteration"></a>Generalized Policy Iteration</h2><p>One big problem of above policy iteration algorithnm is that we first have to wait for the convergence  of policy evaluation and then improve policy. This waste so much time and its efficience is low.</p>
-<p>The <strong>generalized policy iteration</strong>(GPI) flex the process and still gaurantee convergence of policy iteration. In each step, we don’t have to reach the boundary but just incomplete steps towards each boundary.</p>
-<img src="/2020/03/02/RL4/8.png" class="">
-
-<h3 id="Value-Iteration"><a href="#Value-Iteration" class="headerlink" title="Value Iteration"></a>Value Iteration</h3><p>Value iteration is a special case of GPI as well as the policy iteration. In this case, we don’t have to wait for completely finishing of policy evaluation. We stop after <strong>update evaluation one sweep</strong> (only one update of each state). It combines policy evaluation and improvement by changing <strong>bellman optimality equation</strong> into an update rule.</p>
-<p>$$<br>\begin{eqnarray*}<br>v_{k+1}(s)<br>&amp;\doteq&amp;\mathop{max}_a q_k(s,a)\<br>&amp;=&amp;\mathop{max}<em>a \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_k(s’))\tag{4.4}<br>\end{eqnarray*}<br>$$</p>
-<img src="/2020/03/02/RL4/9.png" class="">
-
-<p>Value iteration effectively combines, in each of its sweeps, one sweep of policy evaluation and one sweep of policy improvement. Faster convergence is often achieved by <strong>interposing multiple policy evaluation sweeps between each policy improvement sweep</strong>.</p>
-<h3 id="Asynchronous-DP"><a href="#Asynchronous-DP" class="headerlink" title="Asynchronous DP"></a>Asynchronous DP</h3><ul>
-<li>synchronous DP: in each iteration, sweep all states and update them all.</li>
-<li>asynchronous DP: in each iteration, just update some of states and update in any order</li>
-</ul>
-<p>When state space is too large, sometimes it’s impossible to use synchronous method to update all states.</p>
-<hr>
-<h2 id="Efficiency-of-Dynamic-Programming"><a href="#Efficiency-of-Dynamic-Programming" class="headerlink" title="Efficiency of Dynamic Programming"></a>Efficiency of Dynamic Programming</h2><p>DP may not be practical for very large problems, but compared with other methods for solving MDPs (like linear programing or brute search), DP methods are actually quite efficient.</p>
-<p>If $n$ and $k$ denote the number of states and actions, this means that a DP method takes a number of computational operations that is less than some polynomial function of $n$ and $k$. A DP method is guaranteed to find an optimal policy in polynomial time even though the total number of (deterministic) policies is $k^n$.</p>
-<p>Here comes to the <strong>curse of demensionality</strong>:</p>
-<ul>
-<li>The size of state space grows <strong>exponentially</strong> as the number of relevant features increase.</li>
-<li>This is not an issue with DP, but an inherent complexity of the problem.</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/29/Others5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/29/Others5/" class="post-title-link" itemprop="url">Git基本操作汇总</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-02-29 17:05:25 / Modified: 04:16:59" itemprop="dateCreated datePublished" datetime="2020-02-29T17:05:25-05:00">2020-02-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<h2 id="Git流程图"><a href="#Git流程图" class="headerlink" title="Git流程图"></a>Git流程图</h2><img src="/2020/02/29/Others5/1.png" class="">
-
-<h2 id="Git操作"><a href="#Git操作" class="headerlink" title="Git操作"></a>Git操作</h2><img src="/2020/02/29/Others5/2.png" class="">
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2579,7 +2577,7 @@ Name: col3, dtype: object
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -2637,7 +2635,7 @@ Name: col3, dtype: object
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -164,6 +164,227 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/02/RL4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/02/RL4/" class="post-title-link" itemprop="url">RL4：Dynamic Programming</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-02 14:05:03" itemprop="dateCreated datePublished" datetime="2020-03-02T14:05:03-05:00">2020-03-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-18 03:24:41" itemprop="dateModified" datetime="2020-03-18T03:24:41-04:00">2020-03-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reinforcement-Learning/" itemprop="url" rel="index"><span itemprop="name">Reinforcement Learning</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<blockquote>
+<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
+</blockquote>
+<p>The key idea of DP, and reinforcement learning generally, is <strong>the use of value functions to orgnize and structure the search for good policy</strong>. The limitation of DP is that <strong>it requires a complete and accurate model of the environment</strong>, which is impossible to know in most of the time.</p>
+<ul>
+<li><strong>Policy Evaluation</strong> is the tasks of determining the state-value function $v_\pi$ for a particular policy $\pi$</li>
+<li><strong>Policy Improvement</strong> is the task of improving an existed policy on given state values.</li>
+<li><strong>Policy Control</strong> is the iteration of combining evaluation and improvement to get the optimal policy.</li>
+</ul>
+<h2 id="Policy-Evaluation-Prediction"><a href="#Policy-Evaluation-Prediction" class="headerlink" title="Policy Evaluation(Prediction)"></a>Policy Evaluation(Prediction)</h2><p>The aim of the <strong>policy evaluation</strong> is to calculate value functions. Its idea is to change the bellman equation into an <strong>update rule</strong>.</p>
+<p>$$<br>\begin{eqnarray*}<br>v_{k+1}(s)<br>&amp;\doteq&amp;\sum_a\pi(a|s) q_k(s,a)\<br>&amp;=&amp;\sum_a\pi(a|s) \sum_{s’,r}p(s’,r|s,a)(r+\gamma v_k(s’))\tag{4.1}<br>\end{eqnarray*}<br>$$</p>
+<p>We arbitrarily choose inital value for each state and the terminal state, if any, must be given value 0 and never be updated. Indeed, the sequence ${vk}$ can be shown in general to converge to $v_\pi$ as $k\rightarrow\infty$ under the same conditions that guarantee the existence of $v_\pi$. This algorithm is called <strong>iterative policy evaluation</strong>.</p>
+<img src="/2020/03/02/RL4/1.png" class="">
+
+<p>We call this kind of operation an <strong>expected update</strong>. All the updates done in DP algorithms are called expected updates because they are based on an expectation over all possible next states rather than on a sample next state.</p>
+<p>Let’s consider the $4\times4$ gride world below.</p>
+<img src="/2020/03/02/RL4/2.png" class="">
+
+<ul>
+<li>Action: up, left, down, right.</li>
+<li>State: shadow blocks for terminal states and white blocks with numbers for non-terminal states.</li>
+<li>Reward: all transitions for a reward -1.</li>
+<li>Policy: <strong>random move policy</strong>(four actions have equal probabilities to choose at each state)</li>
+</ul>
+<p>With $\theta = 0.001$, we finally get this.</p>
+<img src="/2020/03/02/RL4/3.png" class="">
+
+<hr>
+<h2 id="Policy-Improvement"><a href="#Policy-Improvement" class="headerlink" title="Policy Improvement"></a>Policy Improvement</h2><p>It is obvious that after we calculate state-value functions, the aim of the <strong>policy improvement</strong> is to improve the current policy $\pi$. Its idea is to change $\pi$ towards the optimal policy a little step. We call this <strong>policy improvement theorem</strong>$(4.2)$. $\pi’$ is the next new policy and both $\pi$ and $\pi’$ are <strong>deterministic</strong> policy.</p>
+<p>$$<br>q_\pi(s, \pi’(s)) \ge v_\pi(s),\ \forall s\in \mathbf{S}\tag{4.2}\<br>\Rightarrow v_\pi’(s)) \ge v_\pi(s)<br>$$</p>
+<p>The premise of improvement is</p>
+<p>$$<br>q_\pi(s, \pi’(s)) &gt; q_\pi(s, \pi(s)), \ \exists s\in\mathbf{S}<br>$$</p>
+<p>AS well as this condition is avaliable, the new policy can always be a <strong>strictly improvement</strong> over $\pi$ unless $\pi$ is already optimal. Obviously we can get $\pi’$ by <strong>greedy selection of action values at each state</strong>.</p>
+<p>$$<br>\begin{eqnarray*}<br>\pi’(s)<br>&amp;=&amp;\mathop{argmax}_a q_\pi(s,a)\<br>&amp;=&amp;\mathop{argmax}<em>a \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{4.3}<br>\end{eqnarray*}<br>$$</p>
+<p>The process of making a new policy that improves on an original policy, by making it greedy with respect to the value function of the original policy, is called <strong>policy improvement</strong>.</p>
+<p>Notice that from $(4.3)$ we actually get an “optimal policy” based on current state values (formal  optimal policy establish on $v_*$). We can imagine if all our value function can hold for <strong>optimal  bellman equation</strong>, then the current policy must be the optimal policy $\pi_*$.</p>
+<p>The gride world example is so simple that we just get the optimal policy after once improvement.</p>
+<img src="/2020/03/02/RL4/5.png" class="">
+
+<p>we can notice <strong>even though we already get optimal policy but state values can still change (not converge)</strong>.</p>
+<img src="/2020/03/02/RL4/4.png" class="">
+
+<hr>
+<h2 id="Policy-Iteration-Control"><a href="#Policy-Iteration-Control" class="headerlink" title="Policy Iteration(Control)"></a>Policy Iteration(Control)</h2><p>Once a policy, $\pi$, has been improved using $v_\pi$ to yield a better policy, $\pi’$, we can then compute $v_\pi’$ and improve it again to yield an even better $\pi’’$. Through alternating <strong>evaluation</strong> and <strong>improvement</strong>, we can thus obtain a sequence of monotonically improving policies and value functions</p>
+<p>$$<br>\pi_1 \mathop{\rightarrow}^E v_{\pi_1} \mathop{\rightarrow}^I<br>\pi_2 \mathop{\rightarrow}^E v_{\pi_2} \mathop{\rightarrow}^I<br>\pi_3 \mathop{\rightarrow}^E … \mathop{\rightarrow}^I<br>\pi_* \mathop{\rightarrow}^E v_{\pi_*} \mathop{\rightarrow}^I \pi_*<br>$$</p>
+<p>This way of finding an optimal policy is called <strong>policy iteration</strong>. It follows a sequcence of better and better policies and value functions until it reaches the optimal policy and accosiated optimal value function.</p>
+<img src="/2020/03/02/RL4/6.png" class="">
+
+<p>Here is a simple algorithnm for policy iteration with iterative policy evaluation</p>
+<img src="/2020/03/02/RL4/7.png" class="">
+
+<hr>
+<h2 id="Generalized-Policy-Iteration"><a href="#Generalized-Policy-Iteration" class="headerlink" title="Generalized Policy Iteration"></a>Generalized Policy Iteration</h2><p>One big problem of above policy iteration algorithnm is that we first have to wait for the convergence  of policy evaluation and then improve policy. This waste so much time and its efficience is low.</p>
+<p>The <strong>generalized policy iteration</strong>(GPI) flex the process and still gaurantee convergence of policy iteration. In each step, we don’t have to reach the boundary but just incomplete steps towards each boundary.</p>
+<img src="/2020/03/02/RL4/8.png" class="">
+
+<h3 id="Value-Iteration"><a href="#Value-Iteration" class="headerlink" title="Value Iteration"></a>Value Iteration</h3><p>Value iteration is a special case of GPI as well as the policy iteration. In this case, we don’t have to wait for completely finishing of policy evaluation. We stop after <strong>update evaluation one sweep</strong> (only one update of each state). It combines policy evaluation and improvement by changing <strong>bellman optimality equation</strong> into an update rule.</p>
+<p>$$<br>\begin{eqnarray*}<br>v_{k+1}(s)<br>&amp;\doteq&amp;\mathop{max}_a q_k(s,a)\<br>&amp;=&amp;\mathop{max}<em>a \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_k(s’))\tag{4.4}<br>\end{eqnarray*}<br>$$</p>
+<img src="/2020/03/02/RL4/9.png" class="">
+
+<p>Value iteration effectively combines, in each of its sweeps, one sweep of policy evaluation and one sweep of policy improvement. Faster convergence is often achieved by <strong>interposing multiple policy evaluation sweeps between each policy improvement sweep</strong>.</p>
+<h3 id="Asynchronous-DP"><a href="#Asynchronous-DP" class="headerlink" title="Asynchronous DP"></a>Asynchronous DP</h3><ul>
+<li>synchronous DP: in each iteration, sweep all states and update them all.</li>
+<li>asynchronous DP: in each iteration, just update some of states and update in any order</li>
+</ul>
+<p>When state space is too large, sometimes it’s impossible to use synchronous method to update all states.</p>
+<hr>
+<h2 id="Efficiency-of-Dynamic-Programming"><a href="#Efficiency-of-Dynamic-Programming" class="headerlink" title="Efficiency of Dynamic Programming"></a>Efficiency of Dynamic Programming</h2><p>DP may not be practical for very large problems, but compared with other methods for solving MDPs (like linear programing or brute search), DP methods are actually quite efficient.</p>
+<p>If $n$ and $k$ denote the number of states and actions, this means that a DP method takes a number of computational operations that is less than some polynomial function of $n$ and $k$. A DP method is guaranteed to find an optimal policy in polynomial time even though the total number of (deterministic) policies is $k^n$.</p>
+<p>Here comes to the <strong>curse of demensionality</strong>:</p>
+<ul>
+<li>The size of state space grows <strong>exponentially</strong> as the number of relevant features increase.</li>
+<li>This is not an issue with DP, but an inherent complexity of the problem.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/29/Others5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/29/Others5/" class="post-title-link" itemprop="url">Git基本操作汇总</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-02-29 17:05:25 / Modified: 04:16:59" itemprop="dateCreated datePublished" datetime="2020-02-29T17:05:25-05:00">2020-02-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<h2 id="Git流程图"><a href="#Git流程图" class="headerlink" title="Git流程图"></a>Git流程图</h2><img src="/2020/02/29/Others5/1.png" class="">
+
+<h2 id="Git操作"><a href="#Git操作" class="headerlink" title="Git操作"></a>Git操作</h2><img src="/2020/02/29/Others5/2.png" class="">
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/29/RL3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -595,223 +816,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/25/Game2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/25/Game2/" class="post-title-link" itemprop="url">博弈论2：纯策略纳什均衡</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-25 11:23:24" itemprop="dateCreated datePublished" datetime="2020-02-25T11:23:24-05:00">2020-02-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-21 21:43:02" itemprop="dateModified" datetime="2020-03-21T21:43:02-04:00">2020-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Game-Theory/" itemprop="url" rel="index"><span itemprop="name">Game Theory</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<blockquote>
-<p>All materials come from <em>Coursera</em>《Game Theory》by Stanford University &amp; The University of British Columbia</p>
-</blockquote>
-<h2 id="Intro-to-nash-equilibrium"><a href="#Intro-to-nash-equilibrium" class="headerlink" title="Intro to nash equilibrium"></a>Intro to nash equilibrium</h2><p>Attributes of nash equilibrium</p>
-<ul>
-<li><strong>nobody has an incentive to <strong>deviate</strong> from their actions if a nash equilibrium is achieved</strong></li>
-<li>each player’s action <strong>maximizes his/her payoff</strong> given the actions of others</li>
-<li>a self-consistent or <strong>stable</strong> profile</li>
-</ul>
-<h2 id="Pure-Strategy-Nash-Equilibrium"><a href="#Pure-Strategy-Nash-Equilibrium" class="headerlink" title="Pure Strategy Nash Equilibrium"></a>Pure Strategy Nash Equilibrium</h2><h3 id="Pure-Strategy-And-Mixed-Strategy"><a href="#Pure-Strategy-And-Mixed-Strategy" class="headerlink" title="Pure Strategy And Mixed Strategy"></a>Pure Strategy And Mixed Strategy</h3><p>the informal definitions of <strong>pure strategy</strong> and <strong>mixed strategy</strong> are</p>
-<ul>
-<li>pure strategy: <strong>only one</strong> action is played with positive probability</li>
-<li>mixed strategy: <strong>more than one</strong> action is played with positive probability</li>
-</ul>
-<p>With a pure strategy, a player choose one action with 100% ensurance. While with a mixed strategy, a player can have a probability of 50% choosing action A and a probability of 50% choosing action B. In another word, player $i$ chooses action $a_i$ randomly from $A$ with corresponding probability.</p>
-<h3 id="Best-Response"><a href="#Best-Response" class="headerlink" title="Best Response"></a>Best Response</h3><p>The idea of <strong>Best Response</strong>: if you know what everyone else was going to do, it would be easy to pick your own action.</p>
-<p>Based on the previous lecture, $a$ represents <strong>action profile</strong>, which organized by $n$ players’ action</p>
-<p>$$a = (a_1, a_2,…, a_n)$$</p>
-<p>Now we denote $a_{-i}$, which means a sub action profile of other players act</p>
-<p>$$a_{-i} = (a_1, a_2,…, a_{i-1}, a_{i+1},…, a_n)$$</p>
-<p>Then we can re-define $a$ as</p>
-<p>$$a = (a_i, a_{-i})$$</p>
-<p>Therefore, the definition of <strong>Best Response</strong> is showen below</p>
-<p>$$a_i^* \in BR(a_{-i}) \ \ iff \ \ \forall a_i \in A_i, u_i(a_i^*, a_{-i}) \ge u_i(a_i, a_{-i})$$  </p>
-<p>That is to say, given $a_{-i}$, $a_i^*$ is the best response for player $i$ to play.</p>
-<p>But in practice, no agent knows what the others will do, so we can’t say about what actions will actually occur. The idea here is to look for <strong>stable action profiles</strong>, leading to equilibrium point. $a = (a_1, a_2,…, a_n)$ is a (pure strategy) <strong>nash equilibrium</strong> iff $\forall i,\ a_i \in BR(a_{-i})$</p>
-<h3 id="Dominant-Strategy"><a href="#Dominant-Strategy" class="headerlink" title="Dominant Strategy"></a>Dominant Strategy</h3><p>generalize from actions to strategies</p>
-<h2 id="Mixed-Strategy-Nash-Equilibrium"><a href="#Mixed-Strategy-Nash-Equilibrium" class="headerlink" title="Mixed Strategy Nash Equilibrium"></a>Mixed Strategy Nash Equilibrium</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/05/Others4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/05/Others4/" class="post-title-link" itemprop="url">Linux下常用指令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-05 14:46:11" itemprop="dateCreated datePublished" datetime="2020-02-05T14:46:11-05:00">2020-02-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-29 04:03:22" itemprop="dateModified" datetime="2020-02-29T04:03:22-05:00">2020-02-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="top"><a href="#top" class="headerlink" title="top"></a>top</h2><p>查看系统进程</p>
-<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen -S [TaskName] 创建一个名为TaskName的screen</span><br><span class="line">screen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen</span><br></pre></td></tr></table></figure>
-
-<p>快捷指令：</p>
-<ul>
-<li>上下分屏：ctrl + a  再按shift + s</li>
-<li>切换屏幕：ctrl + a  再按tab键</li>
-<li>新建一个终端：ctrl + a  再按c</li>
-</ul>
-<h2 id="du、df"><a href="#du、df" class="headerlink" title="du、df"></a>du、df</h2><p>du = disk used 硬盘使用情况<br>df = disk free 硬盘剩余空间</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">du -h [FileName] 查看指定文件大小</span><br><span class="line"></span><br><span class="line">df -hl 查看磁盘剩余空间</span><br><span class="line"></span><br><span class="line">df -h 查看每个根路径的分区大小</span><br><span class="line"></span><br><span class="line">du -sh [目录名] 返回该目录的大小</span><br><span class="line"></span><br><span class="line">du -sm [文件夹] 返回该文件夹总M数</span><br></pre></td></tr></table></figure>
-
-<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find [location] -name [FileName] 在location下查找名字为FileName的文件</span><br></pre></td></tr></table></figure>
-
-<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [字符串] [File] 在File中按行匹配字符串</span><br></pre></td></tr></table></figure>
-
-<h2 id="which、whereis"><a href="#which、whereis" class="headerlink" title="which、whereis"></a>which、whereis</h2><p>which 查看可执行文件的位置 ，只有设置了环境变量的程序才可以用<br>whereis 寻找特定文件，只能用于查找二进制文件、源代码文件和man手册页</p>
-<h2 id="more-less"><a href="#more-less" class="headerlink" title="more/less"></a>more/less</h2><p>查看文件内容，当文件内容很大时比cat命令要好用</p>
-<h2 id="head、tail"><a href="#head、tail" class="headerlink" title="head、tail"></a>head、tail</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head(tail) -n 1000 [FileName] 显示FileName文件的前1000行(后1000行)</span><br><span class="line">tail -n +1000 [FileName] 显示FileName文件从1000行往后的内容</span><br><span class="line">tail -f [FileName] 追踪（follow）文件FileName</span><br></pre></td></tr></table></figure>
-
-<h2 id="free、swapoff、mkswap、swapon"><a href="#free、swapoff、mkswap、swapon" class="headerlink" title="free、swapoff、mkswap、swapon"></a>free、swapoff、mkswap、swapon</h2><p>查看内存状态命令，可以显示memory、swap、buffer/cache等的大小及使用状况</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">free -h 查看内存状态</span><br><span class="line"></span><br><span class="line">swapoff -a 取消所有挂载的swap空间</span><br><span class="line"></span><br><span class="line">dd if=/dev/zero of=/var/swapfile bs=1M count=1024 在/var目录下创建大小为1G的文件用做swap空间</span><br><span class="line"></span><br><span class="line">mkswap /var/swapfile 格式化swap文件</span><br><span class="line"></span><br><span class="line">swapon /var/swapfile 挂载swap空间</span><br></pre></td></tr></table></figure>
-
-<h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><p>查看网络状态（地址和端口号）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunlp 其中t（tcp）、u（udp），nlp分别是三个flag参数</span><br></pre></td></tr></table></figure>
-
-<h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h2><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/10/tmux.html">详细内容参考</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s [NewSessionName] 创建标签为NewSessionName的新会话，默认数字index从0开始</span><br><span class="line">tmux attach -t [index/name] 恢复到index/name的会话连接</span><br><span class="line">tmux ls 查看所有会话</span><br><span class="line">tmux switch -t [index/name] 切换到index/name会话</span><br></pre></td></tr></table></figure>
-
-<p>快捷指令  ：</p>
-<ul>
-<li>ctrl + b %： 左右分屏</li>
-<li>ctrl + b “： 上下分屏</li>
-<li>ctrl + b 空格： 左右分屏</li>
-<li>ctrl + b 上下左右： 切换分屏</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -879,7 +887,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -937,7 +945,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
