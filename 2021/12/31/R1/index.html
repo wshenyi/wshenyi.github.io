@@ -22,14 +22,14 @@
 
   <meta name="description" content="Keywards bounded model checking  Author: Armin Biere, Alessandro Cimatti, Edmund M. Clarke, Ofer Strichman, Yunshan Zhu   What is the Problem?Although numerous techiques such as decomposition, abstrac">
 <meta property="og:type" content="article">
-<meta property="og:title" content="002 &quot;Bounded Model Checking&quot;">
+<meta property="og:title" content="001 &quot;Bounded Model Checking&quot;">
 <meta property="og:url" content="https://wshenyi.github.io/2021/12/31/R1/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
 <meta property="og:description" content="Keywards bounded model checking  Author: Armin Biere, Alessandro Cimatti, Edmund M. Clarke, Ofer Strichman, Yunshan Zhu   What is the Problem?Although numerous techiques such as decomposition, abstrac">
 <meta property="og:locale">
 <meta property="og:image" content="https://wshenyi.github.io/2021/12/31/R1/1.png">
 <meta property="article:published_time" content="2021-12-31T15:12:43.000Z">
-<meta property="article:modified_time" content="2022-01-05T06:53:42.793Z">
+<meta property="article:modified_time" content="2022-01-15T23:19:10.452Z">
 <meta property="article:author" content="Godway">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://wshenyi.github.io/2021/12/31/R1/1.png">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>002 "Bounded Model Checking" | Godway's Notebook</title>
+  <title>001 "Bounded Model Checking" | Godway's Notebook</title>
   
 
 
@@ -184,7 +184,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          002 "Bounded Model Checking"
+          001 "Bounded Model Checking"
         </h1>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-05 01:53:42" itemprop="dateModified" datetime="2022-01-05T01:53:42-05:00">2022-01-05</time>
+                <time title="Modified: 2022-01-15 18:19:10" itemprop="dateModified" datetime="2022-01-15T18:19:10-05:00">2022-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,7 +238,7 @@
 <hr>
 <h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Although numerous techiques such as decomposition, abstraction and various reductions have been proposed to tackle the memory explosion problem of BDD-based model checking, full verification of many designs is still beyond the capacity of BDD-based symbolic model checkers.</p>
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The authors survey a technique called Bounded Model Checking (BMC), which uses a propositional SAT solver rather than BDD manipulation techniques. Experiments have shown that BMC can solve many cases that cannot be solved by BDD-based techniques. The converse is also true: there are also some problems that BMC can’t solve. Therefore, BMC is regraded as a complementary techqiue to BDD-based symbolic model checking.</p>
-<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>A great comprehensive review for <strong>bounded model checking</strong> technique.</p>
+<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>A great comprehensive review for <strong>bounded model checking</strong> (BMC) technique.</p>
 <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>In model checking, the design to be verified is modeled as a finite state machine, and the specification is formalized by writing <em>temporal logic</em> properties.</p>
 <p>In general, properties are classified to ‘<strong>safety</strong>‘ and ‘<strong>liveness</strong>‘ properties.</p>
 <ul>
@@ -267,8 +267,23 @@
 <li>The <em>Globally</em> operator $G$ is used for <strong>safety property</strong></li>
 <li>The <em>Finally</em> operator $F$ is used for <strong>liveness property</strong></li>
 </ul>
-<p>A temporal formula $f$ holds for a Kripke structure $M$, written $M$ |= $f$, iff $\phi$ |= $f$ for all initialized paths $\phi$ of $M$.</p>
-<h2 id="Bounded-Model-Checking"><a href="#Bounded-Model-Checking" class="headerlink" title="Bounded Model Checking"></a>Bounded Model Checking</h2>
+<p>A temporal formula $f$ holds for a Kripke structure $M$, written $M$ |= $f$, iff $\pi$ |= $f$ for all initialized paths $\pi$ of $M$.</p>
+<h2 id="Bounded-Model-Checking"><a href="#Bounded-Model-Checking" class="headerlink" title="Bounded Model Checking"></a>Bounded Model Checking</h2><p>The original motivation of BMC was to leverage the success of SAT in solving Boolean formulas to model checking.</p>
+<p>In BMC, the search for a plan is restricted to paths with some predetermined bound, which means the search is deterministic.</p>
+<p>In <em>bounded sematics</em>, only a prefix with a back loop can represent a witness for <strong>G</strong>$p$. Even if $p$ holds along all the states from $s_0$ to $s_k$, since $p$ might not hold at $s_{k+1}$.</p>
+<h2 id="Reducing-BMC-to-SAT"><a href="#Reducing-BMC-to-SAT" class="headerlink" title="Reducing BMC to SAT"></a>Reducing BMC to SAT</h2><p>Unroll transition relation $T$ upto some bound $k$.</p>
+<p>The formula ${[ M, f ]}_k$ encodes constraints on $s_0,\ …\ s_k$ such that ${[ M, f ]}_k$ is satisfiable iff $\pi$ is a witness for $f$. The definition of formula ${[ M, f ]}_k$ has three seperate components:</p>
+<ol>
+<li>A propositional formula ${[M]}_k$ that constrains $s_0,\ …\ s_k$ to be a valid path starting from an initial state.</li>
+<li><em>loop condition</em>, which is a propositional formula that is evaluated to true only if the path $\pi$ contains a loop.</li>
+<li>A propositional formula tha constrains $\pi$ to satisfy $f$.</li>
+</ol>
+<h2 id="Techniques-for-Completeness"><a href="#Techniques-for-Completeness" class="headerlink" title="Techniques for Completeness"></a>Techniques for Completeness</h2><ol>
+<li>Use <strong>Completeness Threshold</strong> as upper bound to guarantee the property holds</li>
+<li>Liveness property: a semi-decision procedure for <strong>AF</strong>$p$ combined with a semi decision procedure for <strong>EG</strong>$p$.</li>
+<li>Safety property: induction based on strengthening <strong>inductive invariants</strong>.</li>
+</ol>
+
     </div>
 
     
@@ -283,12 +298,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/12/30/R0/" rel="prev" title="001 "Learning from Mistakes — A Comprehensive Study on Real World Concurrency Bug Characteristics"">
-      <i class="fa fa-chevron-left"></i> 001 "Learning from Mistakes — A Comprehensive Study on Real World Concurrency Bug Characteristics"
+    <a href="/2021/12/30/R0/" rel="prev" title="000 "Learning from Mistakes — A Comprehensive Study on Real World Concurrency Bug Characteristics"">
+      <i class="fa fa-chevron-left"></i> 000 "Learning from Mistakes — A Comprehensive Study on Real World Concurrency Bug Characteristics"
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/01/01/R2/" rel="next" title="003 "Near-memory computing:Past, present, and future"">
-      003 "Near-memory computing:Past, present, and future" <i class="fa fa-chevron-right"></i>
+    <a href="/2022/01/01/R2/" rel="next" title="002 "Near-memory computing:Past, present, and future"">
+      002 "Near-memory computing:Past, present, and future" <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -348,7 +363,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-the-Problem"><span class="nav-number">1.</span> <span class="nav-text">What is the Problem?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">2.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Contribution-Key-Results"><span class="nav-number">3.</span> <span class="nav-text">Contribution &#x2F; Key Results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Background"><span class="nav-number">4.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Checking-and-LTL"><span class="nav-number">5.</span> <span class="nav-text">Model Checking and LTL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bounded-Model-Checking"><span class="nav-number">6.</span> <span class="nav-text">Bounded Model Checking</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-the-Problem"><span class="nav-number">1.</span> <span class="nav-text">What is the Problem?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">2.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Contribution-Key-Results"><span class="nav-number">3.</span> <span class="nav-text">Contribution &#x2F; Key Results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Background"><span class="nav-number">4.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Checking-and-LTL"><span class="nav-number">5.</span> <span class="nav-text">Model Checking and LTL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bounded-Model-Checking"><span class="nav-number">6.</span> <span class="nav-text">Bounded Model Checking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reducing-BMC-to-SAT"><span class="nav-number">7.</span> <span class="nav-text">Reducing BMC to SAT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Techniques-for-Completeness"><span class="nav-number">8.</span> <span class="nav-text">Techniques for Completeness</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -364,7 +379,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

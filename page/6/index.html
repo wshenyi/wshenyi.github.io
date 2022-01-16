@@ -164,6 +164,311 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/05/14/Network4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/14/Network4/" class="post-title-link" itemprop="url">计算机网络——第四章：网络层(数据平面)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-14 19:43:37" itemprop="dateCreated datePublished" datetime="2019-05-14T19:43:37-04:00">2019-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-06-17 07:51:36" itemprop="dateModified" datetime="2019-06-17T07:51:36-04:00">2019-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><em>参考书目《计算机网络：自顶向下方法（第七版）》</em></p>
+</blockquote>
+<h2 id="网络层概述"><a href="#网络层概述" class="headerlink" title="网络层概述"></a>网络层概述</h2><h3 id="转发和路由选择：数据平面和控制平面"><a href="#转发和路由选择：数据平面和控制平面" class="headerlink" title="转发和路由选择：数据平面和控制平面"></a>转发和路由选择：数据平面和控制平面</h3><ul>
+<li><p>网络层能够分解为两个相互作用的部分：<strong>数据平面</strong>和<strong>控制平面</strong></p>
+</li>
+<li><p><strong>转发</strong>：当一个分组到达某路由器的一条输入链路时，该路由器必须将该分组移动到适当的输出链路</p>
+<ul>
+<li>转发是在数据平面中实现的唯一功能</li>
+<li><strong>转发</strong>（forwarding）是指将分组从一个输入链路接口转移到适当的输出链路接口的路由器本地动作</li>
+<li>转发发生的时间尺度很短（通常为几纳秒），因此常用硬件来实现</li>
+</ul>
+</li>
+<li><p><strong>路由选择</strong>：当分组从发送方流向接收方时，网络层必须决定这些分组所采用的路由或路径</p>
+<ul>
+<li>计算这些路径的算法被称为<strong>路由选择算法</strong></li>
+<li><strong>路由选择</strong>（routing）是指确定分组从源到目的地所采取的端到端路径的网络范围处理过程</li>
+<li>路由选择发生的时间尺度很长（通常为几秒），因此常用软件来实现</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络服务模型"><a href="#网络服务模型" class="headerlink" title="网络服务模型"></a>网络服务模型</h3><ul>
+<li>因特网的网络层提供了单一的服务模型，称为<strong>尽力而为服务</strong>（best-effort service）</li>
+<li>ATM网络体系结构是面向连接的网络层协议，它提供了确保按序时延、有界时延和确保最小带宽</li>
+</ul>
+<hr>
+<h2 id="路由器工作原理"><a href="#路由器工作原理" class="headerlink" title="路由器工作原理"></a>路由器工作原理</h2><ul>
+<li>路由器四个组件：<strong>输入端口</strong>（input port）、<strong>交换结构</strong>（switch fabric）、<strong>输出端口</strong>（output port）、<strong>路由选择处理器</strong>（routing processor）<img src="/2019/05/14/Network4/1.png" class=""></li>
+</ul>
+<h3 id="输入端口"><a href="#输入端口" class="headerlink" title="输入端口"></a>输入端口</h3><img src="/2019/05/14/Network4/2.png" class="">
+
+<ul>
+<li>输入端口在路由器中执行终结<em>入物理链路</em>的物理层功能</li>
+<li>输入端口还要与位于<em>入链路</em>远端的数据链路层交互来执行数据链路层功能</li>
+<li>更为重要的是，它还在输入端口值行<strong>查找</strong>功能，正是在这里路由器通过<strong>查询转发表</strong>决定路由器的输出端口</li>
+<li>在转发表中匹配时使用<strong>最长前缀匹配规则</strong></li>
+</ul>
+<h3 id="交换结构"><a href="#交换结构" class="headerlink" title="交换结构"></a>交换结构</h3><ul>
+<li>交换结构将路由器的输入端口连接到它的输出端口</li>
+<li>交换结构可以有多种形式<ul>
+<li><strong>经内存交换</strong>：当报文到达时中断路由选择处理器，之后被依次复制到<strong>处理器内存</strong>和输出端口，完成交换<img src="/2019/05/14/Network4/4.png" class=""></li>
+<li><strong>经总线交换</strong>：输入端口经一根<strong>共享总线</strong>将分组直接传送到输出端口<img src="/2019/05/14/Network4/5.png" class=""></li>
+<li><strong>经互联网络交换（纵横式）</strong>：纵横式交换机是<strong>非阻塞的</strong>，并且可以<strong>并行</strong>处理到不同输出端口的分组<img src="/2019/05/14/Network4/6.png" class=""></li>
+</ul>
+</li>
+</ul>
+<h3 id="输出端口"><a href="#输出端口" class="headerlink" title="输出端口"></a>输出端口</h3><img src="/2019/05/14/Network4/3.png" class="">
+
+<p>输出端口存储从交换结构接受的分组，并通过执行必要的链路层和物理层功能在输出链路上传送这些分组</p>
+<h3 id="路由选择处理器"><a href="#路由选择处理器" class="headerlink" title="路由选择处理器"></a>路由选择处理器</h3><p>路由选择处理器执行控制平面功能：</p>
+<ul>
+<li>在传统的路由器中，它执行<strong>路由选择协议</strong></li>
+<li>在SDN路由器中，它负责与远程控制器通信</li>
+</ul>
+<h3 id="分组调度"><a href="#分组调度" class="headerlink" title="分组调度"></a>分组调度</h3><ul>
+<li>先进先出（FIFO）</li>
+<li>优先队列</li>
+<li>循环排队</li>
+<li><strong>加权公平排队（WFQ）</strong></li>
+</ul>
+<hr>
+<h2 id="IPv4"><a href="#IPv4" class="headerlink" title="IPv4"></a>IPv4</h2><h3 id="IPv4数据报格式"><a href="#IPv4数据报格式" class="headerlink" title="IPv4数据报格式"></a>IPv4数据报格式</h3><img src="/2019/05/14/Network4/7.png" class="">  
+
+<ul>
+<li>版本号（4 bit）；规定了数据报的IP协议版本</li>
+<li>首部长度（4 bit）；由于可变选项，首部长度用来确定数据报中载荷实际开始的位置，一般IP数据报具有20字节首部</li>
+<li>服务类型TOS（8 bit）；使不同类型的IP数据报能相互区别开</li>
+<li>数据报长度（16 bit）；表示IP数据报的总长度（首部加上数据），以字节计</li>
+<li>标识（16 bit）、标志（1 bit)、片偏移（15 bit）：用于IP分片</li>
+<li>TTL（8 bit）；每经过一个路由器TTL减1，当TTL为0时，路由器丢弃该数据报。用于防止路由回路</li>
+<li><strong>上层协议</strong>（8 bit）；当数据报到达目的地时才起到作用，该字段用于指明IP数据报的数据部分用于交给哪个特定的运输层协议（值为6表示给TCP，为17给UDP），协议号是将网络层与运输层绑定到一起的粘合剂，类似于端口号粘合运输层和应用层</li>
+<li>首部检验和（16 bit）；帮助路由器监测收到的IP数据报中的比特错误。<ul>
+<li><strong>为什么TCP？IP在运输层和网络层都执行差错检测？</strong></li>
+<li>（1）IP层只对IP首部计算了检验和，而TCP/UDP检验和是对整个TCP/UDP报文段进行</li>
+<li>（2）TCP/UDP与IP不一定必须属于同一个协议栈。例如TCP可以运行在ATM上，IP也不一定要携带传给TCP/UDP的数据（ICMP报文）</li>
+</ul>
+</li>
+<li>源和目的IP地址（32 bit）；发送端和接收端的IP地址</li>
+</ul>
+<h3 id="IPv4分片"><a href="#IPv4分片" class="headerlink" title="IPv4分片"></a>IPv4分片</h3><ul>
+<li>一个<strong>链路层帧</strong>能够承载的最大数据量叫**最大传输单元(MTU)**，MTU严格的限制着IP数据报的长度</li>
+<li>源和目的地之间的路径上可能存在不同的MTU，有时需要将过大IP数据报分成小的<strong>片</strong>来通过链路，并且片的重新组装是端系统的任务</li>
+<li>形成的所有片的<strong>标识号</strong>都与原数据报一致</li>
+<li>为使目的主机确定初始数据报的最后一片已到达，最后一个片的<strong>标志比特</strong>被设为0，其余的<strong>标志比特</strong>都为1</li>
+<li>为了重组原数据报，使用<strong>片偏移</strong>指定当前片在初始IP数据报中的偏移位置（以字节为单位做偏移）</li>
+</ul>
+<hr>
+<h2 id="IPv4编址"><a href="#IPv4编址" class="headerlink" title="IPv4编址"></a>IPv4编址</h2><p>IP地址分为两个部分：网络号和主机号</p>
+<img src="/2019/05/14/Network4/9.png" class="">  
+<p>IP地址的种类：</p>
+<ul>
+<li>A类：0 + 网络号（7位）+ 主机号（24位）</li>
+<li>B类：10 + 网络号（6+8位）+ 主机号（16位）</li>
+<li>C类：110+ 网络号（5+8+8位）+ 主机号（8位）  </li>
+<li>D类：1110 + 组播地址（28位）</li>
+<li>E类：11110保留为今后用</li>
+</ul>
+<img src="/2019/05/14/Network4/8.png" class="">  
+<p>私有网络地址（RFC 1918）：</p>
+<ul>
+<li>A类:10.0.0.0至10.255.255.255</li>
+<li>B类:172.16.0.0至172.31.255.255</li>
+<li>C类:192.168.0.0至192.168.255.255</li>
+</ul>
+<p>子网划分方法：</p>
+<ul>
+<li>典型的子网划分（RFC 950）</li>
+<li>一般子网划分（可变长子网掩码，VLSM）</li>
+<li>无类别域间路由（CIDR）</li>
+</ul>
+<p>CIDR的形式：a.b.c.d/x，x指示了地址中网络号的比特数。一个地址的剩余32 - x比特可认为是用于区分该组织内部设备的，其中所有的设备具有相同的网络前缀，当组织内部的路由器转发分组时，才会考虑这些比特<br>使用单个网络前缀通告多个网咯的能力通常称为<strong>地址聚合</strong>，或称为<strong>路由聚合</strong>、<strong>路由摘要</strong><br>在寻址中使用<strong>最长前缀匹配</strong></p>
+<hr>
+<h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>IPv6报文格式</p>
+<img src="/2019/05/14/Network4/10.jpeg" class="">  
+
+<ul>
+<li>版本；标识IP版本号，IPv6将该字段设置为6</li>
+<li>流量类型；和IPv4的TOS字段含义相似</li>
+<li>流标签；用于标识一条数据报的流，能够对一条流中的某些数据报给出优先权</li>
+<li>有效载荷长度；给出有效载荷的字节数量</li>
+<li>下一个首部；与IPv4首部中协议字段相同，用于标识数据应该交付给哪个协议</li>
+<li>跳限制；IPv4中的TTL</li>
+</ul>
+<p>IPv6引入的重要的变化有：</p>
+<ul>
+<li><strong>扩大的地址容量</strong>；IPv6将地址长度扩充到128比特。IPv6还引入了一种称为<strong>任播地址</strong>的新型地址，这种地址可以使数据报交付给一组主机中的任意一个</li>
+<li><strong>简化高效的40字节首部</strong>（定长）；允许路由器更快的处理IP数据报</li>
+<li><strong>流标签</strong>；用于区分不同的流</li>
+</ul>
+<p>IPv6相对于IPv4删除的字段：</p>
+<ul>
+<li><strong>分片/重新组装</strong>；IPv6不允许在中间路由器上进行分片与重新组装。分片与重新组装是一个耗时的操作，将该功能从路由器中删除可以<strong>加快IP转发速度</strong></li>
+<li><strong>首部检验和</strong>；因特网的运输层和数据链路层都执行了检验操作，设计者可能觉得在网络层实现该功能实属多余，所以将其删除。再次强调，<strong>快速处理</strong>IP分组是关注的重点，由于IPv4中的TTL字段，所以在每台路由器上都需要重新计算IPv4首部检验和，这也是一项耗时的操作</li>
+<li><strong>选项</strong>；不再是标准IP首部的一部分，但并没有消失，而是可能出现在“下一个首部”字段中。删除它使得IP首部成为<strong>定长的40字节</strong></li>
+</ul>
+<hr>
+<h2 id="动态主机配置协议DHCP（Dynamic-Host-Configuration）"><a href="#动态主机配置协议DHCP（Dynamic-Host-Configuration）" class="headerlink" title="动态主机配置协议DHCP（Dynamic Host Configuration）"></a>动态主机配置协议DHCP（Dynamic Host Configuration）</h2><ul>
+<li>DHCP允许主机自动获取（被分配）一个IP地址（或临时的IP地址）</li>
+<li>DHCP还允许主机得知其他信息，如它的<strong>子网掩码</strong>、它的第一跳路由器地址（通常称为<strong>默认网关</strong>）与它的<strong>本地DNS服务器地址</strong></li>
+</ul>
+<p>DHCP分为4个步骤</p>
+<ol>
+<li><strong>DHCP服务器发现</strong>；新到达的主机广播<strong>DHCP发现报文</strong>（使用UDP分组向67端口发送该报文）来与DHCP服务器交互，广播IP地址为255.255.255.255，源IP地址为0.0.0.0</li>
+<li><strong>DHCP服务器提供</strong>；DHCP服务器广播<strong>DHCP提供报文</strong>（包含<strong>IP地址租用期</strong>）回复发送主机，仍使用IP广播地址255.255.255.255</li>
+<li><strong>DHCP请求</strong>；新到达的主机从一个或多个服务器提供中选择一个DHCP服务器，并向选中的DHCP服务器回复<strong>DHCP请求报文</strong>进行响应</li>
+<li><strong>DHCP ACK</strong>；DHCP服务器用<strong>DHCP ACK报文</strong>对DHCP请求报文进行响应</li>
+</ol>
+<hr>
+<h2 id="网络地址转换NAT（Network-Address-Translation）"><a href="#网络地址转换NAT（Network-Address-Translation）" class="headerlink" title="网络地址转换NAT（Network Address Translation）"></a>网络地址转换NAT（Network Address Translation）</h2><p>NAT路由器对外界的行为就如同一个具有单一IP地址的单一设备，本质上讲，NAT使能路由器对外界隐藏了私有网络的内部细节<br>NAT路由器通过维护<strong>NAT转换表</strong>，<strong>重写</strong>经过它的数据报<strong>的目的IP地址</strong>与<strong>端口号</strong>，从而完成内网到外网的IP地址和端口转换（因为端口号字段长度为16比特，从而NAT协议可支持超过60000个并行使用路由器广域网一侧单个IP地址的连接）  </p>
+<img src="/2019/05/14/Network4/11.jpg" class="">  
+<p>NAT违反了主机应当直接彼此对话这个原则，并且变相利用端口号用于主机寻址  </p>
+<hr>
+<h2 id="因特网控制报文协议ICMP（Internet-Control-Message-Protocol）"><a href="#因特网控制报文协议ICMP（Internet-Control-Message-Protocol）" class="headerlink" title="因特网控制报文协议ICMP（Internet Control Message Protocol）"></a>因特网控制报文协议ICMP（Internet Control Message Protocol）</h2><ul>
+<li>ICMP定义于RFC 792，被主机和路由器用来彼此沟通网络层的信息</li>
+<li>ICMP最典型的用途是<strong>差错报告</strong></li>
+<li>ICMP从体系结构上讲位于IP之上，因为ICMP报文是承载在IP分组中的，从而可以看成是一个<strong>运输层协议</strong></li>
+<li>ICMP报文有一个类型字段和一个编码字段，并且包含引起该ICMP报文首次生成的IP数据报的首部和前8个字节</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">ICMP类型</th>
+<th align="center">编码</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">回显回答（对ping的回答）</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">0</td>
+<td align="center">目的网络不可达</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">目的主机不可达</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">目的协议不可达</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">3</td>
+<td align="center">目的端口不可达</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">6</td>
+<td align="center">目的网络未知</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">7</td>
+<td align="center">目的主机未知</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">0</td>
+<td align="center">源抑制（拥塞控制）</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">0</td>
+<td align="center">回显请求</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">0</td>
+<td align="center">路由器通告</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">0</td>
+<td align="center">路由器发现</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">0</td>
+<td align="center">TTL过期</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">0</td>
+<td align="center">IP首部损坏</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/05/09/Network3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1550,119 +1855,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/05/03/Others3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/03/Others3/" class="post-title-link" itemprop="url">Mac本地用Eclipse配置NS3开发环境(完整教程)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-05-03 21:48:29" itemprop="dateCreated datePublished" datetime="2019-05-03T21:48:29-04:00">2019-05-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-02 22:43:17" itemprop="dateModified" datetime="2019-07-02T22:43:17-04:00">2019-07-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  这段时间接触了NS3，发现这个框架在计算机网络领域用的还是蛮多的，在本地搭建开发环境的过程中也遇到了不少坑，这里记录一下整个过程。</p>
-<h2 id="在终端下编译和运行NS3程序"><a href="#在终端下编译和运行NS3程序" class="headerlink" title="在终端下编译和运行NS3程序"></a>在终端下编译和运行NS3程序</h2><p>  NS3的下载和编译NS3官网上给的过程已经很详细了，这里简要概述一下。官放一共提供了三种方法:<code>build.py</code>,<code>bake</code>,<code>waf</code>。个人推荐使用waf编译整个项目（官方文件中自带waf编译器），因为前两种涉及到好多python环境的依赖，我觉得容易出问题。<br>  在我的Mac上由于使用clang++，一定要加上<code>--disable-werror</code>，如果需要搭建python3的开发环境，需要指明python3具体位置。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> (本地存放位置)/ns-allinone-3.29/ns-3.29/</span><br><span class="line">./waf --enable-test --build-profile=debug --python=/usr/<span class="built_in">local</span>/bin/python3 --with-python=python3 --disable-werror configure</span><br><span class="line">./waf build</span><br></pre></td></tr></table></figure>
-
-<p>经过一段时间的编译之后，在当前目录下运行一个官方例程<code>scratch-simulator</code>，如果一切顺利可以看到程序输出一行<code>Scratch Simulator</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./waf --run scratch/scratch-simulator</span><br></pre></td></tr></table></figure>
-
-<h2 id="在Eclipse上配置NS3开发环境"><a href="#在Eclipse上配置NS3开发环境" class="headerlink" title="在Eclipse上配置NS3开发环境"></a>在Eclipse上配置NS3开发环境</h2><p>  作为一个新手，如果没有一个友好的开发环境，很容易就进入从入门到放弃的阶段。NS3最让我不能接受的是必须用官方给的waf编译代码，我一开始尝试在Xcode搭建环境，然而Xcode好像对于使用外部编译器的支持不是很好，最终我还是转到在Eclipse上搭建开发环境。</p>
-<h3 id="在Eclipse上新建项目"><a href="#在Eclipse上新建项目" class="headerlink" title="在Eclipse上新建项目"></a>在Eclipse上新建项目</h3><p>按如下顺序<em>File -&gt; New -&gt; C/C++ Project</em>，创建C++项目  </p>
-<img src="/2019/05/03/Others3/pic1.png" class="" title="Mac英文环境">  
-<p><strong>着重强调！！！NS3的代码必须放到*(本地存放位置)/ns-allinone-3.29/ns-3.29/scratch/*文件夹下才能被正确编译执行</strong>所以工程位置放在<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/</code>,这里工程名字自己定，我这里取名为<code>NS3</code>，右侧的编译器随便选一个，之后点<code>finish</code>完成。</p>
-<img src="/2019/05/03/Others3/pic2.png" class="" title="Mac英文环境">  
-
-<h3 id="编译NS3项目"><a href="#编译NS3项目" class="headerlink" title="编译NS3项目"></a>编译NS3项目</h3><p>如果前一步没遇到问题，现在左侧的工程目录应该基本长这样子，以后就直接在scratch目录下新创xxx.cc文件就好了。</p>
-<img src="/2019/05/03/Others3/pic3.png" class="" title="Mac英文环境">  
-<p>之后这里右键NS3文件夹，进入工程属性面板。右侧点击<strong>C/C++ Build</strong>然后照我的样子配置两处。<br><strong>编译器类型记得选为外部编译器</strong>，编译器选为当前目录下的waf编译器，编译结果放在当前目录下的build文件夹中  </p>
-<img src="/2019/05/03/Others3/pic4.png" class="" title="Mac英文环境">  
-<img src="/2019/05/03/Others3/pic5.png" class="" title="Mac英文环境">  
-<p>之后进入到<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/</code>进行<code>configure</code>操作，如果之前已经<code>configure</code>过了可以跳过该步骤。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> (本地存放位置)/ns-allinone-3.29/ns-3.29/</span><br><span class="line">./waf --enable-test --build-profile=debug --python=/usr/<span class="built_in">local</span>/bin/python3 --with-python=python3 --disable-werror configure</span><br></pre></td></tr></table></figure>
-
-<p><code>configure</code>过了之后点击<em>Eclipse</em>左上角的<strong>Build</strong>按钮就可以编译整个NS3工程了</p>
-<h3 id="配置Eclipse使用外部编译器waf"><a href="#配置Eclipse使用外部编译器waf" class="headerlink" title="配置Eclipse使用外部编译器waf"></a>配置Eclipse使用外部编译器waf</h3><p>构建完了整个NS3工程之后，我们后续怎么运行我们自己写的代码呢？这时候需要配置使用外部编译器waf。<br>在<em>Eclipse</em>顶部按如下顺序<em>Run -&gt; Extern Tools -&gt; Extern Tools Configurations</em>  </p>
-<img src="/2019/05/03/Others3/pic6.png" class="" title="Mac英文环境">  
-<p>左侧右键点击新建一个编译器。<br>我这里将这个外部编译器取名为<code>ns3-waf</code>，其余两个和之前一样，参数这里填写<code>--run &quot;$&#123;string_prompt&#125;&quot;</code></p>
-<img src="/2019/05/03/Others3/pic7.png" class="" title="Mac英文环境">  
-<p>这里点掉这个<code>Build before launch</code>选项  </p>
-<img src="/2019/05/03/Others3/pic8.png" class="" title="Mac英文环境">  
-<p>之后点击<em>Eclipse</em>上方红色方框内的按钮  </p>
-<img src="/2019/05/03/Others3/pic9.png" class="" title="Mac英文环境">  
-<p>然后会弹出一个选项框让填写<strong>你要编译的文件的名称</strong>，<strong>注意这里不用加.cc后缀</strong>,比如我要编译运行<code>scratch</code>文件夹下的<code>scratch-simulator.cc</code>，就直接填写<code>scratch-simulator</code>或<code>scratch/scratch-simulator</code>。如果你的自己写的文件之前已经build过了，就不需要再加文件目录<code>scratch/</code>，直接填写文件名就好。</p>
-<img src="/2019/05/03/Others3/pic10.png" class="" title="Mac英文环境">  
-<p>下方显示运行结果  </p>
-<img src="/2019/05/03/Others3/pic11.png" class="" title="Mac英文环境">  
-
-<h3 id="配置NS工程路径"><a href="#配置NS工程路径" class="headerlink" title="配置NS工程路径"></a>配置NS工程路径</h3><p>此时虽然能够运行自己写的NS3代码了，但是代码中却还有一堆烦人的下波浪线〰️，并且头文件的引用等都是查询不到的，这里就需要配置一下NS3工程路径和环境。<br>和之前一样，首先进入属性面板。然后找到图中所示的配置目录<br>这一步将<code>(本地存放位置)/ns-allinone-3.29/ns-3.29/build/ns3/</code>下所有工程头文件包含了进来。</p>
-<img src="/2019/05/03/Others3/pic12.png" class="" title="Mac英文环境">  
-<p>然后构建会花费一小会时间，之后可以在左侧<code>NS3/includes/</code>下看到新生成了一个<code>NS3/build/ns3</code>文件，然后代码中的波浪线就全部消失了  </p>
-<img src="/2019/05/03/Others3/pic13.png" class="" title="Mac英文环境">  
-
-<h3 id="配置完成"><a href="#配置完成" class="headerlink" title="配置完成"></a>配置完成</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1734,7 +1926,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

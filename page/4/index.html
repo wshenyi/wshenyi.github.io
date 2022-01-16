@@ -164,6 +164,146 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/11/25/GPU1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/25/GPU1/" class="post-title-link" itemprop="url">Nvidia GPU 基本概念</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-25 08:46:56" itemprop="dateCreated datePublished" datetime="2019-11-25T08:46:56-05:00">2019-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-24 21:36:25" itemprop="dateModified" datetime="2019-11-24T21:36:25-05:00">2019-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GPU/" itemprop="url" rel="index"><span itemprop="name">GPU</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Physical-Architecture-of-GPU"><a href="#Physical-Architecture-of-GPU" class="headerlink" title="Physical Architecture of GPU"></a>Physical Architecture of GPU</h2><p>下图为Nvidia官网上找的一个GPU主板的概念图，对应Device</p>
+<ul>
+<li>Device：与host做区分，可以理解为是指整个显卡</li>
+</ul>
+<img src="/2019/11/25/GPU1/pic2.png" class="">
+<p>如下图所示（Nvidia Tesla P100），共包含60个SM（6GPC x 10SM）</p>
+<ul>
+<li>SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一些硬件资源组成<ul>
+<li>其他硬件资源如：warp scheduler，register，shared memory等</li>
+<li>同一个block中的warp一定分配给同一个SM</li>
+<li>每个SM有自己独立的local L1 cache，但所有SM会共用Device的L2 cache</li>
+</ul>
+</li>
+</ul>
+<img src="/2019/11/25/GPU1/pic3.png" class="">
+
+<p>每个SM有自己的内部结构，如下图所示GP100（Nvidia Tesla P100）中的SM内部结构，在GP100里，每一个SM有左右两个SM Processing Block（SMP）</p>
+<img src="/2019/11/25/GPU1/pic4.png" class="">
+
+<ul>
+<li>SP(Streaming Processor)：最基本的处理单元，也称为CUDA core，表示在上图中为绿色的小格子<ul>
+<li>相当于一个简易的CPU</li>
+<li>内部包括控制单元Dispatch Port、Operand Collector，以及浮点计算单元FP Unit、整数计算单元Int Unit，另外还包括计算结果队列。当然还有Compare、Logic、Branch等</li>
+</ul>
+</li>
+</ul>
+<p>下图为SP（CUDA core）的内部结构</p>
+<img src="/2019/11/25/GPU1/pic6.png" class="">
+
+<h2 id="Software-Concept-in-CUDA"><a href="#Software-Concept-in-CUDA" class="headerlink" title="Software Concept in CUDA"></a>Software Concept in CUDA</h2><ul>
+<li>Thread：一个CUDA的并行程序会被分配到多个threads来执行<ul>
+<li>一个SP对应执行一个thread</li>
+<li>threadId在cuda中为三维的概念，在一个block中由(x, y, z)来唯一定位</li>
+</ul>
+</li>
+<li>Block：多个thread群组成一个block<ul>
+<li>同一个block中的threads可以同步，也可以通过shared memory通信</li>
+<li>blockId在cuda中为二维的概念，在一个grid中由(x, y)来唯一定位</li>
+</ul>
+</li>
+<li>Grid：多个block构成grid<ul>
+<li>一个grid对应一个执行一个kernel函数</li>
+</ul>
+</li>
+</ul>
+<p>空间对应如下图所示  </p>
+<img src="/2019/11/25/GPU1/pic1.png" class="">
+
+<ul>
+<li>warp：执行任务的调度单元，同一时间一个SM只能运行一个warp<ul>
+<li>类比于CPU中的进程，当一个warp阻塞时，SM将切换执行另一个warp</li>
+<li>当前CUDA的warp大小为32个线程。这里表明Nvidia的GPU执行粒度小，执行线程粒度越小，并行度越高，掩盖延迟的能力越强</li>
+<li>同在一个warp中的线程，以不同数据资源执行相同的指令，即所谓的SIMT（Single Instruction Multiple Thread）</li>
+</ul>
+</li>
+</ul>
+<h2 id="CPU和GPU的结构对比"><a href="#CPU和GPU的结构对比" class="headerlink" title="CPU和GPU的结构对比"></a>CPU和GPU的结构对比</h2><img src="/2019/11/25/GPU1/pic5.png" class="">
+
+<ul>
+<li>CPU是靠更大的缓存和复杂的逻辑控制（如流水线、乱序执行、指令预测和预处理等等）来掩饰延迟的</li>
+<li>GPU是靠更高的并行度来掩饰延迟的</li>
+</ul>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
+<li>GPU在并发的warp之间切换是没什么消耗的，因为硬件资源早就被分配到所有thread和block，所以新调度的warp的状态已经存储在SM中了。不同于CPU，CPU切换线程需要保存/读取线程上下文（register内容），这是非常耗时的，而GPU为每个threads提供物理register，无需保存/读取上下文。</li>
+<li>register和shared memory是SM的稀缺资源。CUDA将这些资源在程序执行前就分配给所有驻留在SM中的warp，并且整个程序执行周期都不再变动。因此这些有限的资源就会限制每个SM中active warp的数量，实验结果显示一个SM至少要存在6个active warp才能有效掩饰延迟</li>
+</ul>
+<h2 id="Reference-Material"><a href="#Reference-Material" class="headerlink" title="Reference Material"></a>Reference Material</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/junparadox/article/details/50540602">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/fpgatom/article/details/82081422">GPU高性能编程CUDA实战</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/asasasaababab/article/details/80447254">Nvidia GPU架构 - Cuda Core，SM，SP</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/junparadox/article/details/50540602">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41598072/article/details/82877655">CUDA中grid、block、thread、warp与SM、SP的关系</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/07/03/Others2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -722,165 +862,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/06/16/Network7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/16/Network7/" class="post-title-link" itemprop="url">计算机网络——第七章：无线网络和移动网络</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-06-16 11:53:59" itemprop="dateCreated datePublished" datetime="2019-06-16T11:53:59-04:00">2019-06-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-13 21:39:30" itemprop="dateModified" datetime="2019-07-13T21:39:30-04:00">2019-07-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><em>参考书目《计算机网络：自顶向下方法（第七版）》</em></p>
-</blockquote>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>无线网络分类：</p>
-<ul>
-<li>单跳，基于基础设施。如802.11网络和4G LTE</li>
-<li>单跳，无基础设施。如蓝牙网络和自组织模式的802.11网络</li>
-<li>多跳，基于基础设施。如耨鞋无线传感网络和<em>无线网状网络</em></li>
-<li>多跳，无基础设施。如<strong>移动自组织网络</strong>（mobile ad hoc network, MANET）和<strong>车载自组织网络</strong>（vehicular ad hoc network, VANET）</li>
-</ul>
-<hr>
-<h2 id="无线链路和网络特征"><a href="#无线链路和网络特征" class="headerlink" title="无线链路和网络特征"></a>无线链路和网络特征</h2><p>有线链路和无线链路的区别：</p>
-<ul>
-<li><strong>递减的信号强度</strong>。如电磁波在穿过物体时强度将衰减</li>
-<li><strong>来自其它源的干扰</strong>。来自环境和其他发送源的干扰</li>
-<li><strong>多径传播</strong>。电磁波的一部分受物体和地面的反射，到达接收方时走了不同长度的路径，则会出现<strong>多径传播</strong>，会导致接收方收到的信号变得模糊</li>
-</ul>
-<p>较大的<strong>信噪比</strong>（SNR）使接收方更容易从背景噪声中提取传输信号；<strong>比特差错率</strong>（BER）表示接收方收到的有错传输比特的概率<br><strong>物理层</strong>的特征：</p>
-<ul>
-<li>对于给定的调制方案，SNR越高，BER越低</li>
-<li>对于给定的eSNR，具有较高比特传输率的调制技术（无论差错与否）将具有较高的BER</li>
-<li>物理层调制技术的动态选择能用于适配对信道条件的调制技术</li>
-</ul>
-<h3 id="CDMA"><a href="#CDMA" class="headerlink" title="CDMA"></a>CDMA</h3><p>在CDMA协议中，要发送的每个比特都通过乘以一个信号（编码）的比特来进行编码，这个信号的变化速率（通常称为<strong>码片速率</strong>）比初始数据比特序列的变化速率要快得多<br>选择CDMA编码的关键是：<strong>使所有节点的CDMA编码所表示的代数向量彼此之间相互垂直</strong></p>
-<hr>
-<h2 id="WiFi：802-11-无线LAN"><a href="#WiFi：802-11-无线LAN" class="headerlink" title="WiFi：802.11 无线LAN"></a>WiFi：802.11 无线LAN</h2><h3 id="802-11-体系结构"><a href="#802-11-体系结构" class="headerlink" title="802.11 体系结构"></a>802.11 体系结构</h3><p>802.11 体系结构的基本构件模块是<strong>基本服务集</strong>（Basic Service Set, BSS），一个BSS包括一个或多个无线站点和一个<strong>接入点</strong>（Access Point, AP）的<strong>中央基站</strong><br>802.11规定：</p>
-<ul>
-<li>每个无线站点若要发送或接收数据，必须先与一个AP相关联；在环境中有多个AP时，仅有关联的AP才会向你的无线站点发送数据</li>
-<li>每个AP会被分配到一个<strong>服务集标识</strong>（Service Set Identifier, SSID）</li>
-<li>802.11定义了11个部分重叠的信道，特别是1、6和11是唯一的3个非重叠信道</li>
-<li>每个AP必须周期性地发送<strong>信标帧</strong>，每个信标帧包含该AP的SSID和MAC地址</li>
-</ul>
-<p>扫描信道和监听信标帧的过程被称为<strong>被动扫描</strong>；无线主机也能够通过广播探测帧执行<strong>主动扫描</strong>，但对于主动扫描需要二次请求/响应握手</p>
-<h3 id="802-11-MAC协议"><a href="#802-11-MAC协议" class="headerlink" title="802.11 MAC协议"></a>802.11 MAC协议</h3><p>802.11 MAC协议使用<strong>带碰撞避免的CSMA</strong>（CSMA/CA），并且由于无线信道相对较高的比特粗误码率，使用<strong>链路层确认/重传（ARQ）方案</strong><br>802.11 MAC协议未实现碰撞检测的原因？</p>
-<ul>
-<li>检测碰撞的能力要求站点具有同时发送和接收的能力，由于接收信号的强度通常远远小于发送强度，制造这种硬件的代价较大。</li>
-<li>即使能做到，也会因为信号衰减和终端隐藏问题，而无法检测到所有碰撞</li>
-</ul>
-<p><strong>链路层确认</strong>方案的过程：</p>
-<ol>
-<li>目的站点收到一个<strong>通过CRC校验</strong>的帧后，他等待一个被称为<strong>短帧间间隔</strong>（Short Inter-Frame Spacing, SIFS）的一小段时间，然后发挥一个确认帧</li>
-<li>若发送站点在给定时间内未收到确认帧，则使用CSMA/CA协议重传该帧</li>
-<li>若在固定次重传之后仍未收到确认，则发送站点放弃发送并丢弃该帧</li>
-</ol>
-<p>CSMA/CA协议过程：</p>
-<ol>
-<li>如果某站点最初监听到信道空闲，它将在一个被称作<strong>分布式帧间间隔</strong>（Distributed Inter-Frame Spacing, DIFS）的短时间段后发送该帧</li>
-<li>否则该站点选取一个随机回退值（像CSMA/CD那样）并且在侦听信道空闲时递减该值。当侦听到信道忙时，计数值保持不变</li>
-<li>当计数值减为0时（注意到这只可能发生在信道被侦听为空闲时），该站点发送整个数据帧并等待确认</li>
-<li>如果收到确认，发送站点知道它的帧已经被目的站点正确接收。如果该站点要发送另一帧，它将从第2步开始CSMA/CA协议。如果未收到确认，发送站点将重新进入第2步中的回退阶段</li>
-</ol>
-<p>802.11的目标是<strong>无论如何尽可能避免碰撞</strong></p>
-<h3 id="处理隐藏终端：RTS和CTS"><a href="#处理隐藏终端：RTS和CTS" class="headerlink" title="处理隐藏终端：RTS和CTS"></a>处理隐藏终端：RTS和CTS</h3><p>站点使用短<strong>请求发送</strong>（Request to Send, RTS）控制帧和短<strong>允许发送</strong>（Clear to Send, CTS）控制帧来<strong>预约</strong>对信道的访问。过程如下：  </p>
-<ol>
-<li>当发送方要发送一个DATA帧时，他首先等待一个DIFS，然后向AP发送一个RTS帧，指示传输DATA帧和确认（ACK）帧需要的总时间</li>
-<li>当AP收到RTS帧后，等待一个SIFS，之后它广播一个CTS帧作为响应。该CTS有两个目的：给发送方明确发送许可，也指示其他站点在预约期内不要发送</li>
-<li>发送方收到CTS后，在等待一个SIFS之后发送DATA</li>
-<li>接收方在完全接收DATA数据之后，等待一个SIFS后，广播一个ACK帧，传递预约结束的消息</li>
-</ol>
-<p>使用RTS和CTS能够在两个重要方面提高性能：</p>
-<ul>
-<li>终端隐藏问题被缓解了，因为长的DATA帧只有在预约过后才会发送</li>
-<li>因为RTS和CTS帧较短，涉及RTS和CTS帧的碰撞将仅持续短RTS和CTS帧的持续时间</li>
-</ul>
-<h3 id="IEEE-802-11-帧结构"><a href="#IEEE-802-11-帧结构" class="headerlink" title="IEEE 802.11 帧结构"></a>IEEE 802.11 帧结构</h3><p>892.11帧中最引人注的的是他有4个MAC地址字段</p>
-<ul>
-<li>地址1是接收该帧的无线站点的MAC地址</li>
-<li>地址2是传输该帧的站点的MAC地址</li>
-<li>地址3是当前BSS中的AP的第一跳路由器接口的MAC地址（地址3允许AP在构建以太网帧时能够<strong>确定目的MAC地址</strong>），所以其在BSS和在有线局域网互联中起着关键的作用</li>
-<li>地址4当AP在自组织模式中互相转发时使用</li>
-</ul>
-<hr>
-<h2 id="移动管理"><a href="#移动管理" class="headerlink" title="移动管理"></a>移动管理</h2><p>间接路由  </p>
-<img src="/2019/06/16/Network7/1.png" class="">  
-<p>直接路由  </p>
-<img src="/2019/06/16/Network7/2.png" class="">
-
-<ul>
-<li>间接路由存在三角路由选择问题。直接路由克服了这个低效的问题，但却是以增加复杂性为代价。</li>
-</ul>
-<h2 id="移动IP"><a href="#移动IP" class="headerlink" title="移动IP"></a>移动IP</h2><img src="/2019/06/16/Network7/3.png" class="">
-
-<hr>
-<h2 id="问题与思考"><a href="#问题与思考" class="headerlink" title="问题与思考"></a>问题与思考</h2><p>无线网络中高出错率是怎样影响效率的？</p>
-<p>拥塞控制的问题主要集中在效率和公平性</p>
-<p>改进 TCP 的两个重要原则就是:<br>(1) 让发送端清楚网络的真实状态<br>(2) 采用跨层设计的思想，让 IP 层、逻辑链路层和 MAC 层都恰当地参与问题发现和问题解决过程，缩短控制周期</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -952,7 +933,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

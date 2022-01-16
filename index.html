@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/01/R2/">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/02/R3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.ico">
@@ -178,7 +178,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/01/R2/" class="post-title-link" itemprop="url">003 "Near-memory computing:Past, present, and future"</a>
+            <a href="/2022/01/02/R3/" class="post-title-link" itemprop="url">003 "Viewpoint Accelerator-Level Parallelism"</a>
         </h2>
 
         <div class="post-meta">
@@ -188,14 +188,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-01-01 21:04:13" itemprop="dateCreated datePublished" datetime="2022-01-01T21:04:13-05:00">2022-01-01</time>
+              <time title="Created: 2022-01-02 20:04:12" itemprop="dateCreated datePublished" datetime="2022-01-02T20:04:12-05:00">2022-01-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-04 11:50:17" itemprop="dateModified" datetime="2022-01-04T11:50:17-05:00">2022-01-04</time>
+                <time title="Modified: 2022-01-15 18:18:55" itemprop="dateModified" datetime="2022-01-15T18:18:55-05:00">2022-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,36 +218,138 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><em><strong>Keywards</strong></em> bounded model checking</p>
+          <p><em><strong>Keywards</strong></em> review, accelerator-level parallelism</p>
+<blockquote>
+<p>Author: Mark D. Hill and Vijay Janapa Reddi</p>
+</blockquote>
+<hr>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Recent work on accelerators has focused on CPUs using a single accelerator in a specific application domains. The authors point out that many future computing systems will obtain greater efficiency by employing multiple different task-specific accelerators.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p><strong>Accelerator</strong>: <em>hardware components that execute a targeted computation class faster and usually with much less energy</em>.</p>
+<p>An accelerator’s flexibility can vary from high (GP-GPU) to low (fixed-function block).</p>
+<p>Below is a snapshot of parallelism over the years:</p>
+<img src="/2022/01/02/R3/1.png" class="">
+
+<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
+<li>Definition of a Accelerator Level Parallelism (ALP): <em>the parallelism of workload components concurrently executing on multiple accelerators</em>.</li>
+<li>ALP opens up many degrees of freedom for novel hardware and software design and optimization.</li>
+<li>Mobile SoCs as harbingers of multiple accelerators using ALP.</li>
+</ul>
+<h2 id="Challenges-and-Future"><a href="#Challenges-and-Future" class="headerlink" title="Challenges and Future"></a>Challenges and Future</h2><p>A key challenge is developing abstractions and implementations to enable programmers to target the whole SoC and implementers to holistically design its software and hardware. (like SIMT model)</p>
+<ul>
+<li>Today’s SoCs only exploit ALP in limited niches with each accelerator acting seperately with its own programming model, and often its own (domian-specific) language, runtime, software development kit (SDK), and dtiver interface.</li>
+<li>ALP exploitation will likely require software-hardware co-design due to the heterogeneous nature of accelerators and ALP. A collection of locally optimal accelerators is unlikely to be globally optimal.</li>
+</ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Employing mutiple accelerators with ALP has much promise for enhanting future computing efficiency. The authors have identified <em>what</em> the opportunity is, but leave to readers <em>how</em> best to solve it.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/01/R2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/01/R2/" class="post-title-link" itemprop="url">002 "Near-memory computing:Past, present, and future"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-01 21:04:13" itemprop="dateCreated datePublished" datetime="2022-01-01T21:04:13-05:00">2022-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-15 18:19:04" itemprop="dateModified" datetime="2022-01-15T18:19:04-05:00">2022-01-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> Near-memory computing, Data-centric computing, Modeling, Computer architecture, Application characterization,Survey</p>
 <blockquote>
 <p>Author: Gagandeep Singh, Lorenzo Chelini, Stefano Corda, Ahsan Javed Awan, Sander Stuijk, Roel Jordans, Henk Corporaal, Albert-Jan Boonstra</p>
 </blockquote>
 <hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Although numerous techiques such as decomposition, abstraction and various reductions have been proposed to tackle the memory explosion problem of BDD-based model checking, full verification of many designs is still beyond the capacity of BDD-based symbolic model checkers.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The authors survey a technique called Bounded Model Checking (BMC), which uses a propositional SAT solver rather than BDD manipulation techniques. Experiments have shown that BMC can solve many cases that cannot be solved by BDD-based techniques. However, BMC also has its drawback compared with BDD-based method. Therefore, BMC joins the arseanal of automatic verification tools but not replace any of them.</p>
-<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>A great comprehensive review for <strong>model checking</strong> technique.</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>In model checking, the design to be verified is modeled as a finite state machine, and the specification is formalized by writing <em>temporal logic</em> properties.</p>
-<p>In general, properties are classified to ‘<strong>safety</strong>‘ and ‘<strong>liveness</strong>‘ properties.</p>
-<ul>
-<li>Safety: what should not happen (or what should always happen).</li>
-<li>Liveness: what should happen.</li>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Today’s memory hierarchy usually consists of multiple levels of cache. However, in data-intensive applications,<br> frequent data movement between the memory subsystem and the processor can be expensive, leading to a severe impact on performance and energy efficiency. <strong>Near-memory computing</strong> (NMC) aims at processing close to where the data resides.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The convential approach of moving data to the CPU for computation has become a significant performance bottleneck for emerging scale-out data-intensive applications due to their limited data reuse. At the same time, the advancement in 3D integration technologies has made <strong>near-memory computing</strong> (NMC) more viable. This paper aims to analyze and organize the extensive body of literature related to the novel area of near-memory computing.</p>
+<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><ul>
+<li>They analyze and organize the body of literature on near-memory computing under various dimensions.</li>
+<li>They provide guidelines for design space exploration.</li>
+<li>They present our near-memory system outlining application characterization and compiler framework. Also, we include an analytic model to illustrate the potential of near-memory computing for memory intensive application with a comparison to the current CPU-centric approach.</li>
+<li>They outline the directions for future research and highlight current challenges.</li>
 </ul>
-<p>In case the property fails, a comterexample is generated in the form of a sequence of states.</p>
-<ul>
-<li>A counterexample of safety properties is a trace of states, where the last state contradict the property.</li>
-<li>A counterexample to liveness properties, in its simplest form, is a path to a loop that does not contain the desired state.</li>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Classification of computing systems based on working set location. NMC bring processing core to the place where data resides. Computation-in-memory further reduces data movement by using memories with compute capability (e.g. memristors, phase change memory).</p>
+<img src="/2022/01/01/R2/1.png" class="">
+
+<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><p>The resurgence of NMC is largely attributed to following three reasons:</p>
+<ol>
+<li>technological advancement in 3D and 2.5D stacking that blends logic and memory in the same package.</li>
+<li>NMC can sidestep the performance and energy bottlenecks due to data movement by circumventing memory-package pin-count limitations.</li>
+<li>Data-intensive applications call for newer architectures.</li>
+</ol>
+<h2 id="Challenges-of-NMC"><a href="#Challenges-of-NMC" class="headerlink" title="Challenges of NMC"></a>Challenges of NMC</h2><ol>
+<li>Virtual memory support</li>
+<li>Cache coherence</li>
+<li>Programming model</li>
+<li>Data mapping</li>
+</ol>
+<h2 id="Open-Issues-and-Future-Directions"><a href="#Open-Issues-and-Future-Directions" class="headerlink" title="Open Issues and Future Directions"></a>Open Issues and Future Directions</h2><ul>
+<li>It is unclear which emerging memory technology best supports near-memory architectures.</li>
+<li>3D stacking also needs unique power and thermal solutions, as traditional heat sink technology would not suffice if we want to add more computation close to the memory. Most of the proposed architectures do not take into account the strict power budget of 3D stacked memories, which limits the architecture’s practicality.</li>
+<li>DRAM and NVM have different memory attributes.</li>
+<li>Most of the evaluated architectures focus on the compute aspect. Lack of coherency and virtual support makes programming difficult and obstructs the adoption of this paradigm.</li>
+<li>More quantitative exploration is required for interconnect networks between the near-memory compute units and also between the host and near-memory compute system.</li>
+<li>At the application level, algorithms need to provide code and data co-location for energy efficient processing.</li>
+<li>The field requires a generic set of open-source tools and techniques for these novel systems, as often researchers have to spend a significant amount of time and effort in building the needed simulation environment.</li>
 </ul>
-<p>There is no such thing as a ‘correct system’; it is only possible to check whether a system satisfies its specification or not.</p>
-<h2 id="Key-Insights-Up-to-2-insights-gt-key-ideas-that-make-their-paper-works"><a href="#Key-Insights-Up-to-2-insights-gt-key-ideas-that-make-their-paper-works" class="headerlink" title="Key Insights [Up to 2 insights] -&gt;key ideas that make their paper works"></a>Key Insights [Up to 2 insights] -&gt;key ideas that make their paper works</h2><ul>
-<li></li>
-</ul>
-<h2 id="Notable-Design-Details-Strengths-Up-to-2-details-strengths"><a href="#Notable-Design-Details-Strengths-Up-to-2-details-strengths" class="headerlink" title="Notable Design Details/Strengths [Up to 2 details/strengths]"></a>Notable Design Details/Strengths [Up to 2 details/strengths]</h2><ul>
-<li></li>
-</ul>
-<h2 id="Limitations-Weaknesses-up-to-2-weaknesses"><a href="#Limitations-Weaknesses-up-to-2-weaknesses" class="headerlink" title="Limitations/Weaknesses [up to 2 weaknesses]"></a>Limitations/Weaknesses [up to 2 weaknesses]</h2><ul>
-<li></li>
-</ul>
-<h2 id="Open-Questions-Where-to-go-from-here"><a href="#Open-Questions-Where-to-go-from-here" class="headerlink" title="Open Questions [Where to go from here?]"></a>Open Questions [Where to go from here?]</h2><p>- </p>
 
       
     </div>
@@ -281,7 +383,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/12/31/R1/" class="post-title-link" itemprop="url">002 "Bounded Model Checking"</a>
+            <a href="/2021/12/31/R1/" class="post-title-link" itemprop="url">001 "Bounded Model Checking"</a>
         </h2>
 
         <div class="post-meta">
@@ -298,7 +400,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-05 01:53:42" itemprop="dateModified" datetime="2022-01-05T01:53:42-05:00">2022-01-05</time>
+                <time title="Modified: 2022-01-15 18:19:10" itemprop="dateModified" datetime="2022-01-15T18:19:10-05:00">2022-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -328,7 +430,7 @@
 <hr>
 <h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Although numerous techiques such as decomposition, abstraction and various reductions have been proposed to tackle the memory explosion problem of BDD-based model checking, full verification of many designs is still beyond the capacity of BDD-based symbolic model checkers.</p>
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The authors survey a technique called Bounded Model Checking (BMC), which uses a propositional SAT solver rather than BDD manipulation techniques. Experiments have shown that BMC can solve many cases that cannot be solved by BDD-based techniques. The converse is also true: there are also some problems that BMC can’t solve. Therefore, BMC is regraded as a complementary techqiue to BDD-based symbolic model checking.</p>
-<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>A great comprehensive review for <strong>bounded model checking</strong> technique.</p>
+<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>A great comprehensive review for <strong>bounded model checking</strong> (BMC) technique.</p>
 <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>In model checking, the design to be verified is modeled as a finite state machine, and the specification is formalized by writing <em>temporal logic</em> properties.</p>
 <p>In general, properties are classified to ‘<strong>safety</strong>‘ and ‘<strong>liveness</strong>‘ properties.</p>
 <ul>
@@ -357,8 +459,23 @@
 <li>The <em>Globally</em> operator $G$ is used for <strong>safety property</strong></li>
 <li>The <em>Finally</em> operator $F$ is used for <strong>liveness property</strong></li>
 </ul>
-<p>A temporal formula $f$ holds for a Kripke structure $M$, written $M$ |= $f$, iff $\phi$ |= $f$ for all initialized paths $\phi$ of $M$.</p>
-<h2 id="Bounded-Model-Checking"><a href="#Bounded-Model-Checking" class="headerlink" title="Bounded Model Checking"></a>Bounded Model Checking</h2>
+<p>A temporal formula $f$ holds for a Kripke structure $M$, written $M$ |= $f$, iff $\pi$ |= $f$ for all initialized paths $\pi$ of $M$.</p>
+<h2 id="Bounded-Model-Checking"><a href="#Bounded-Model-Checking" class="headerlink" title="Bounded Model Checking"></a>Bounded Model Checking</h2><p>The original motivation of BMC was to leverage the success of SAT in solving Boolean formulas to model checking.</p>
+<p>In BMC, the search for a plan is restricted to paths with some predetermined bound, which means the search is deterministic.</p>
+<p>In <em>bounded sematics</em>, only a prefix with a back loop can represent a witness for <strong>G</strong>$p$. Even if $p$ holds along all the states from $s_0$ to $s_k$, since $p$ might not hold at $s_{k+1}$.</p>
+<h2 id="Reducing-BMC-to-SAT"><a href="#Reducing-BMC-to-SAT" class="headerlink" title="Reducing BMC to SAT"></a>Reducing BMC to SAT</h2><p>Unroll transition relation $T$ upto some bound $k$.</p>
+<p>The formula ${[ M, f ]}_k$ encodes constraints on $s_0,\ …\ s_k$ such that ${[ M, f ]}_k$ is satisfiable iff $\pi$ is a witness for $f$. The definition of formula ${[ M, f ]}_k$ has three seperate components:</p>
+<ol>
+<li>A propositional formula ${[M]}_k$ that constrains $s_0,\ …\ s_k$ to be a valid path starting from an initial state.</li>
+<li><em>loop condition</em>, which is a propositional formula that is evaluated to true only if the path $\pi$ contains a loop.</li>
+<li>A propositional formula tha constrains $\pi$ to satisfy $f$.</li>
+</ol>
+<h2 id="Techniques-for-Completeness"><a href="#Techniques-for-Completeness" class="headerlink" title="Techniques for Completeness"></a>Techniques for Completeness</h2><ol>
+<li>Use <strong>Completeness Threshold</strong> as upper bound to guarantee the property holds</li>
+<li>Liveness property: a semi-decision procedure for <strong>AF</strong>$p$ combined with a semi decision procedure for <strong>EG</strong>$p$.</li>
+<li>Safety property: induction based on strengthening <strong>inductive invariants</strong>.</li>
+</ol>
+
       
     </div>
 
@@ -391,7 +508,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/12/30/R0/" class="post-title-link" itemprop="url">001 "Learning from Mistakes — A Comprehensive Study on Real World Concurrency Bug Characteristics"</a>
+            <a href="/2021/12/30/R0/" class="post-title-link" itemprop="url">000 "Learning from Mistakes — A Comprehensive Study on Real World Concurrency Bug Characteristics"</a>
         </h2>
 
         <div class="post-meta">
@@ -408,7 +525,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-31 10:14:08" itemprop="dateModified" datetime="2021-12-31T10:14:08-05:00">2021-12-31</time>
+                <time title="Modified: 2022-01-15 18:19:15" itemprop="dateModified" datetime="2022-01-15T18:19:15-05:00">2022-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -757,1755 +874,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/05/Others6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/05/Others6/" class="post-title-link" itemprop="url">Introductions to Pandas</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-05 18:09:23" itemprop="dateCreated datePublished" datetime="2020-03-05T18:09:23-05:00">2020-03-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-10 04:38:37" itemprop="dateModified" datetime="2020-04-10T04:38:37-04:00">2020-04-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Science/" itemprop="url" rel="index"><span itemprop="name">Data Science</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
-
-<h2 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Yes&#x27;</span>: [<span class="number">50</span>, <span class="number">21</span>], <span class="string">&#x27;No&#x27;</span>: [<span class="number">131</span>, <span class="number">2</span>]&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Yes</th>
-      <th>No</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>50</td>
-      <td>131</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>21</td>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>DataFrame is actually a dictionary whose keys are the column names (<code>String</code>), and whose values are a list of entries(<code>List</code>)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Bob&#x27;</span>: [<span class="string">&#x27;I liked it.&#x27;</span>, <span class="string">&#x27;It was awful.&#x27;</span>], </span><br><span class="line">              <span class="string">&#x27;Sue&#x27;</span>: [<span class="string">&#x27;Pretty good.&#x27;</span>, <span class="string">&#x27;Bland.&#x27;</span>]&#125;,</span><br><span class="line">             index=[<span class="string">&#x27;Product A&#x27;</span>, <span class="string">&#x27;Product B&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Bob</th>
-      <th>Sue</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Product A</th>
-      <td>I liked it.</td>
-      <td>Pretty good.</td>
-    </tr>
-    <tr>
-      <th>Product B</th>
-      <td>It was awful.</td>
-      <td>Bland.</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Sometimes we can manually assign <code>index</code> of row instead of defaut index which starts from 0</p>
-<h2 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h2><p>A Series, by contrast, is a sequence of data values. If a DataFrame is a table, a Series is a list. And in fact you can create one with nothing more than a <code>list</code>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.Series([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    1
-1    2
-2    3
-3    4
-4    5
-dtype: int64
-</code></pre>
-<p>A Series is, in essence, a single column of a DataFrame. So you can assign column values to the Series the same way as before, using an index parameter. However, a Series does not have a column name, it only has one overall name:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pd.Series([<span class="number">30</span>, <span class="number">35</span>, <span class="number">40</span>], index=[<span class="string">&#x27;2015 Sales&#x27;</span>, <span class="string">&#x27;2016 Sales&#x27;</span>,</span><br><span class="line">                               <span class="string">&#x27;2017 Sales&#x27;</span>], name=<span class="string">&#x27;Product A&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>2015 Sales    30
-2016 Sales    35
-2017 Sales    40
-Name: Product A, dtype: int64
-</code></pre>
-<h2 id="Reading-data-files"><a href="#Reading-data-files" class="headerlink" title="Reading data files"></a>Reading data files</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&quot;test.csv&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>Use function <code>pd.read_csv()</code> to load a csv file.</p>
-<p>We can use the <code>shape</code> attribute to check how large the resulting DataFrame is:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(6, 4)
-</code></pre>
-<p>We can examine the contents of the resultant DataFrame using the <code>head()</code> command, which grabs the first five rows:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Unnamed: 0</th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>The <code>pd.read_csv()</code> function is well-endowed, with over 30 optional parameters you can specify. For example, you can see in this dataset that the CSV file has a built-in index, which pandas did not pick up on automatically. To make pandas use that column for the index (instead of creating a new one from scratch), we can specify an index_col.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&quot;test.csv&quot;</span>, index_col=<span class="number">0</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>2</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="Naive-accessors"><a href="#Naive-accessors" class="headerlink" title="Naive accessors"></a>Naive accessors</h2><p><code>DataFrame</code> in pandas is very similar to a <code>dictionary</code>. You can access it by using key-value format or calling title built in <code>DataFrame</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c1 = data[<span class="string">&#x27;col1&#x27;</span>] <span class="comment"># key-value </span></span><br><span class="line">c2 = data.col1    <span class="comment"># dic.column_name</span></span><br><span class="line"><span class="built_in">print</span>(c1 == c2)</span><br></pre></td></tr></table></figure>
-
-<pre><code>0    True
-1    True
-2    True
-3    True
-4    True
-5    True
-Name: col1, dtype: bool
-</code></pre>
-<p>Because of the value,or the column, in <code>DataFrame</code> is organized in <code>List</code>, we can access row value using index operator <code>[]</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1[<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3
-</code></pre>
-<h2 id="Indexing-in-pandas"><a href="#Indexing-in-pandas" class="headerlink" title="Indexing in pandas"></a>Indexing in pandas</h2><p>pandas has its own accessor operators, <code>loc</code> and <code>iloc</code>. The second paramter distinct them: index for <code>iloc</code> and string for ‘loc’.</p>
-<p><code>iloc</code> is conceptually simpler than loc because it ignores the dataset’s indices. When we use <code>iloc</code> we treat the dataset like a big matrix.</p>
-<p><code>loc</code>, by contrast, uses the information in the indices to do its work. When we use <code>loc</code> we want to make our code more meaningful and humanable (easier to read)</p>
-<h3 id="Index-based-selection"><a href="#Index-based-selection" class="headerlink" title="Index-based selection"></a>Index-based selection</h3><p>selecting data based on its numerical position in the data</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.iloc[<span class="number">3</span>, <span class="number">0</span>] <span class="comment"># second parameter is a numerical index</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3
-</code></pre>
-<h3 id="Label-based-selection"><a href="#Label-based-selection" class="headerlink" title="Label-based selection"></a>Label-based selection</h3><p>selecting data based on its row index and column name</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[<span class="number">3</span>, <span class="string">&#x27;col1&#x27;</span>] <span class="comment"># second parameter is a list of column names in string</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3
-</code></pre>
-<h2 id="Conditional-selection"><a href="#Conditional-selection" class="headerlink" title="Conditional selection"></a>Conditional selection</h2><p>Select specified value using condition operation and its return is a matrix of <code>bool</code> value.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1 == <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    False
-1    False
-2    False
-3     True
-4    False
-5    False
-Name: col1, dtype: bool
-</code></pre>
-<p>By converging conditional selection, we can use some colums’ value to locate other rows or columns. You can also include the <strong>set operation</strong>: <code>&amp;</code>and <code>|</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1 == <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>pandas has some built-in conditional selectors, two of which we will highlight here.</p>
-<h3 id="isin"><a href="#isin" class="headerlink" title="isin()"></a>isin()</h3><p>The first is <code>isin</code>. <code>isin</code> is lets you select data whose value “is in” a <code>list</code> of values. For example, you can use it to select rows whose value are 2 or 5 in <code>col1</code>.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1.isin([<span class="number">2</span>, <span class="number">5</span>])]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h3 id="isnull-amp-notnull"><a href="#isnull-amp-notnull" class="headerlink" title="isnull() &amp; notnull()"></a>isnull() &amp; notnull()</h3><p>The second is <code>isnull</code> (and its companion <code>notnull</code>). These methods let you highlight values which are (or are not) empty (NaN).</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1.isnull()]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1.notnull()]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>2</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="Summary-functions"><a href="#Summary-functions" class="headerlink" title="Summary functions"></a>Summary functions</h2><p>pandas provides some useful fuctions that can help us get some statistic information</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1.describe() <span class="comment"># for numerical values</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>count    6.000000
-mean     3.333333
-std      2.732520
-min      1.000000
-25%      1.250000
-50%      2.500000
-75%      4.500000
-max      8.000000
-Name: col1, dtype: float64
-</code></pre>
-<p>list statistic information of that row</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1.mean()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3.3333333333333335
-</code></pre>
-<p>access single attribute</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col3.describe() <span class="comment"># for string values</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>count     6
-unique    3
-top       c
-freq      2
-Name: col3, dtype: object
-</code></pre>
-<p>list statistic information of string frequence. <code>top</code> means the string with the max frequence</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(data.col1.unique())</span><br><span class="line"><span class="built_in">print</span>(data.col3.unique())</span><br></pre></td></tr></table></figure>
-
-<pre><code>[1 2 3 5 8]
-[&#39;a&#39; &#39;b&#39; &#39;c&#39;]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col3.value_counts()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>c    2
-a    2
-b    2
-Name: col3, dtype: int64
-</code></pre>
-<h2 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h2><p>it just as <code>map</code> function in python</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col2.<span class="built_in">map</span>(<span class="keyword">lambda</span> p: p / <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    1.0
-1    1.0
-2    2.0
-3    3.0
-4    5.0
-5    8.0
-Name: col2, dtype: float64
-</code></pre>
-<p>Note: this operation does <strong>not change</strong> the original data.</p>
-<p><code>apply</code> function is equivalent to <code>map</code> function, although they operate value sightly different.<br><strong>this function may change the original data</strong>!!!</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun1</span>(<span class="params">data</span>):</span></span><br><span class="line">    data.col2 = data.col2 - <span class="number">2</span> * data.col1</span><br><span class="line">    <span class="keyword">return</span> data <span class="comment"># must return the modified data</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">data.apply(fun1, axis=<span class="string">&#x27;columns&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>0</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>0</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>0</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>0</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>0</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>0</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun2</span>(<span class="params">data</span>):</span></span><br><span class="line">    data.iloc[<span class="number">1</span>] = data.iloc[<span class="number">5</span>]</span><br><span class="line">    <span class="keyword">return</span> data <span class="comment"># must return the modified data</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">data.apply(fun2, axis=<span class="string">&#x27;rows&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<pre><code>/usr/local/lib/python3.7/site-packages/pandas/core/indexing.py:670: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  self._setitem_with_indexer(indexer, value)
-</code></pre>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>This function <code>apply</code> is used for the situation when you do some complex data transforamtions. Any it also does <strong>not change</strong> the original data.</p>
-<h2 id="Groupwise-analysis"><a href="#Groupwise-analysis" class="headerlink" title="Groupwise analysis"></a>Groupwise analysis</h2><p><code>groupby()</code> function groups the same value from a given column into the same group. For instance, <code>col3&#39;</code> only has 3 distinct characters: a,b,c. It generates 3 groups (3 rows): <code>data.groupby(&#39;col3&#39;).col1/col2/col3</code>. We can manipulate these groups seperately. More specify, <code>data.groupby(&#39;col3&#39;)</code> is a new <code>DataFrame</code> and we operate data in each group seperately.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(data.groupby(<span class="string">&#x27;col3&#x27;</span>).col1.describe())</span><br><span class="line"><span class="built_in">print</span>(data.groupby(<span class="string">&#x27;col3&#x27;</span>).col2.describe())</span><br><span class="line"><span class="built_in">print</span>(data.groupby(<span class="string">&#x27;col3&#x27;</span>).col3.describe())</span><br></pre></td></tr></table></figure>
-
-<pre><code>      count  mean       std  min  25%  50%  75%  max
-col3                                                
-a       2.0   2.0  1.414214  1.0  1.5  2.0  2.5  3.0
-b       1.0   5.0       NaN  5.0  5.0  5.0  5.0  5.0
-c       3.0   6.0  3.464102  2.0  5.0  8.0  8.0  8.0
-      count  mean       std   min   25%   50%   75%   max
-col3                                                     
-a       2.0   4.0  2.828427   2.0   3.0   4.0   5.0   6.0
-b       1.0  10.0       NaN  10.0  10.0  10.0  10.0  10.0
-c       3.0  12.0  6.928203   4.0  10.0  16.0  16.0  16.0
-     count unique top freq
-col3                      
-a        2      1   a    2
-b        1      1   b    1
-c        3      1   c    3
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby([<span class="string">&#x27;col3&#x27;</span>, <span class="string">&#x27;col1&#x27;</span>]).col2.describe()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>col3</th>
-      <th>col1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">a</th>
-      <th>1</th>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1.0</td>
-      <td>6.0</td>
-      <td>NaN</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <th>5</th>
-      <td>1.0</td>
-      <td>10.0</td>
-      <td>NaN</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">c</th>
-      <th>2</th>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>NaN</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2.0</td>
-      <td>16.0</td>
-      <td>0.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p><code>groupby()</code> function can group multiple columns. And the index here is called <strong>multi-index</strong>. We can call <code>reset_index()</code> to restore it back to a normal index.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dt = data.groupby([<span class="string">&#x27;col3&#x27;</span>, <span class="string">&#x27;col1&#x27;</span>]).col2.describe()</span><br><span class="line">dt.reset_index()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col3</th>
-      <th>col1</th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>a</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>a</td>
-      <td>3</td>
-      <td>1.0</td>
-      <td>6.0</td>
-      <td>NaN</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>b</td>
-      <td>5</td>
-      <td>1.0</td>
-      <td>10.0</td>
-      <td>NaN</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>c</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>NaN</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>c</td>
-      <td>8</td>
-      <td>2.0</td>
-      <td>16.0</td>
-      <td>0.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Another <code>groupby()</code> method worth mentioning is <code>agg()</code>, which lets you run a bunch of different functions on your DataFrame simultaneously. For example, we can generate a simple statistical summary of the dataset as follows:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;col3&#x27;</span>).col1.agg([<span class="built_in">len</span>, <span class="built_in">min</span>, <span class="built_in">max</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>len</th>
-      <th>min</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>col3</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>2</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>1</td>
-      <td>5</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>3</td>
-      <td>2</td>
-      <td>8</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Effective use of groupby() will allow you to do lots of really powerful things with your dataset.</p>
-<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><h3 id="sort-values"><a href="#sort-values" class="headerlink" title="sort_values()"></a>sort_values()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.sort_values(by=[<span class="string">&quot;col1&quot;</span>], ascending=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h3 id="sort-index"><a href="#sort-index" class="headerlink" title="sort_index()"></a>sort_index()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.sort_index(by=[<span class="string">&quot;col1&quot;</span>], ascending=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h2 id="Missing-data-amp-Replace"><a href="#Missing-data-amp-Replace" class="headerlink" title="Missing data &amp; Replace"></a>Missing data &amp; Replace</h2><p>Entries missing values are given the value NaN, short for “Not a Number”. For technical reasons these NaN values are always of the float64 dtype.</p>
-<p>Pandas provides some methods specific to missing data. To select <code>NaN</code> entries you can use <code>pd.isnull()</code> (or its companion <code>pd.notnull()</code>). This is meant to be used thusly:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.loc[pd.isnull(data.col1)]</span><br><span class="line"><span class="comment"># data.col1.isnull() is equivalent to pd.isnull(data.col1)</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Replacing missing values is a common operation. Pandas provides a really handy method for this problem: <code>fillna()</code>. <code>fillna()</code> provides a few different strategies for mitigating such data. For example, we can simply replace each <code>NaN</code> with an “Unknown”:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1.fillna(<span class="string">&quot;Unknown&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    1
-1    8
-2    2
-3    3
-4    5
-5    8
-Name: col1, dtype: int64
-</code></pre>
-<p>Alternatively, <code>replace()</code> function is used widely. We now replace all ‘a’ to ‘b’ in col3.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col3.replace(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    b
-1    c
-2    c
-3    b
-4    b
-5    c
-Name: col3, dtype: object
-</code></pre>
-<h2 id="Renaming"><a href="#Renaming" class="headerlink" title="Renaming"></a>Renaming</h2><p><code>rename()</code> function lets you change index names and/or column names</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.rename(columns=&#123;<span class="string">&#x27;col1&#x27;</span>: <span class="string">&#x27;column1&#x27;</span>, <span class="string">&#x27;col2&#x27;</span>: <span class="string">&#x27;column2&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>column1</th>
-      <th>column2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.rename(index=&#123;<span class="number">1</span>: <span class="string">&#x27;row1&#x27;</span>, <span class="number">4</span>: <span class="string">&#x27;row4&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>row1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>row4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p><code>rename_axis()</code> function can give name to data’s Title and Index</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.rename_axis(<span class="string">&#x27;index&#x27;</span>, axis=<span class="string">&#x27;rows&#x27;</span>).rename_axis(<span class="string">&#x27;fields&#x27;</span>, axis=<span class="string">&#x27;columns&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>fields</th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-    <tr>
-      <th>index</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="Combining"><a href="#Combining" class="headerlink" title="Combining"></a>Combining</h2><h3 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([data, data])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.join(data, lsuffix=<span class="string">&#x27;lll&#x27;</span>, rsuffix=<span class="string">&#x27;rrr&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1lll</th>
-      <th>col2lll</th>
-      <th>col3lll</th>
-      <th>col1rrr</th>
-      <th>col2rrr</th>
-      <th>col3rrr</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2577,7 +945,7 @@ Name: col3, dtype: object
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -2739,59 +1107,6 @@ Name: col3, dtype: object
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
