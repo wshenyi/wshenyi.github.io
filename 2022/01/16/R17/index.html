@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Keywards GPGPU, SIMD, Divergence, Warp Scheduling  Author:   What is the Problem?Altough GPUs achieve Thread Level Parallelism (TLP) through warp execution and concurrently executing manny warps on si">
+  <meta name="description" content="Keywards GPGPU, SIMD, Divergence, Warp Scheduling  Author: Veynu Narasiman, Michael Shebanow, Chang Joo Lee, Rustam Miftakhutdinov, Onur Mutlu, Yale N. Patt   What is the Problem?Altough GPUs achieve">
 <meta property="og:type" content="article">
 <meta property="og:title" content="017 &quot;Improving GPU Performance via Large Warps and Two-Level Warp Scheduling&quot;">
 <meta property="og:url" content="https://wshenyi.github.io/2022/01/16/R17/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="Keywards GPGPU, SIMD, Divergence, Warp Scheduling  Author:   What is the Problem?Altough GPUs achieve Thread Level Parallelism (TLP) through warp execution and concurrently executing manny warps on si">
+<meta property="og:description" content="Keywards GPGPU, SIMD, Divergence, Warp Scheduling  Author: Veynu Narasiman, Michael Shebanow, Chang Joo Lee, Rustam Miftakhutdinov, Onur Mutlu, Yale N. Patt   What is the Problem?Altough GPUs achieve">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-01-16T13:13:14.000Z">
-<meta property="article:modified_time" content="2022-01-17T05:46:24.976Z">
+<meta property="article:modified_time" content="2022-01-17T05:48:25.397Z">
 <meta property="article:author" content="Godway">
 <meta name="twitter:card" content="summary">
 
@@ -199,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-17 00:46:24" itemprop="dateModified" datetime="2022-01-17T00:46:24-05:00">2022-01-17</time>
+                <time title="Modified: 2022-01-17 00:48:25" itemprop="dateModified" datetime="2022-01-17T00:48:25-05:00">2022-01-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -231,7 +231,7 @@
       
         <p><em><strong>Keywards</strong></em> GPGPU, SIMD, Divergence, Warp Scheduling</p>
 <blockquote>
-<p>Author:</p>
+<p>Author: Veynu Narasiman, Michael Shebanow, Chang Joo Lee, Rustam Miftakhutdinov, Onur Mutlu, Yale N. Patt</p>
 </blockquote>
 <hr>
 <h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Altough GPUs achieve Thread Level Parallelism (TLP) through warp execution and concurrently executing manny warps on single GPU core (SM), the computational resources on GPU are still underutilized.</p>
