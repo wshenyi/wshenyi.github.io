@@ -164,6 +164,278 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/08/Others7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/08/Others7/" class="post-title-link" itemprop="url">Introduction to Visualization</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-08 01:38:23" itemprop="dateCreated datePublished" datetime="2020-03-08T01:38:23-05:00">2020-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-30 00:12:34" itemprop="dateModified" datetime="2021-12-30T00:12:34-05:00">2021-12-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Data-Science/" itemprop="url" rel="index"><span itemprop="name">Data Science</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">%matplotlib inline</span><br><span class="line">pd.plotting.register_matplotlib_converters()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Setup Complete&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Setup Complete
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;vtest.csv&#x27;</span>, index_col=<span class="number">0</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pp1</th>
+      <th>pp2</th>
+      <th>pp3</th>
+      <th>pp4</th>
+      <th>pp5</th>
+      <th>pp6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-94</td>
+      <td>70</td>
+      <td>-53</td>
+      <td>38</td>
+      <td>-66</td>
+      <td>-56</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-75</td>
+      <td>18</td>
+      <td>-38</td>
+      <td>88</td>
+      <td>35</td>
+      <td>-5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-21</td>
+      <td>-91</td>
+      <td>14</td>
+      <td>46</td>
+      <td>43</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-22</td>
+      <td>65</td>
+      <td>3</td>
+      <td>-15</td>
+      <td>57</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>95</td>
+      <td>-42</td>
+      <td>-18</td>
+      <td>67</td>
+      <td>81</td>
+      <td>60</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(12, 6)
+</code></pre>
+<h2 id="Line-Chart"><a href="#Line-Chart" class="headerlink" title="Line Chart"></a>Line Chart</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add titile</span></span><br><span class="line">plt.title(<span class="string">&quot;Line Chart&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot line chart</span></span><br><span class="line">sns.lineplot(data=data)</span><br></pre></td></tr></table></figure>
+
+
+<img src="/2020/03/08/Others7/output_6_1.png" class="">  
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if you not explictly designate the label parameter, it will use column&#x27;s title as default</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.lineplot(data=data.pp1, label=<span class="string">&quot;pp1&quot;</span>)</span><br><span class="line">sns.lineplot(data=data.pp2, label=<span class="string">&quot;pp2&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<img src="/2020/03/08/Others7/output_7_1.png" class="">  
+
+
+<h2 id="Bar-Chart"><a href="#Bar-Chart" class="headerlink" title="Bar Chart"></a>Bar Chart</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add title</span></span><br><span class="line">plt.title(<span class="string">&quot;Bar Chart&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Bar chart</span></span><br><span class="line">sns.barplot(x=data.index, y=data.pp3)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add label for vertical axis</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<img src="/2020/03/08/Others7/output_9_1.png" class="">  
+
+
+<h2 id="Heatmap"><a href="#Heatmap" class="headerlink" title="Heatmap"></a>Heatmap</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add title</span></span><br><span class="line">plt.title(<span class="string">&quot;Heatmap&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot heatmap</span></span><br><span class="line">sns.heatmap(data=data, annot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add label for horizontal axis</span></span><br><span class="line">plt.ylabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<img src="/2020/03/08/Others7/output_11_1.png" class="">  
+
+
+<h2 id="Scatter-Plots"><a href="#Scatter-Plots" class="headerlink" title="Scatter Plots"></a>Scatter Plots</h2><h3 id="Normal-scatter-chart"><a href="#Normal-scatter-chart" class="headerlink" title="Normal scatter chart"></a>Normal scatter chart</h3><p>Use scatter plots to display the relationships between two data</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.scatterplot(x=data.pp3, y=data.pp4)</span><br><span class="line">plt.xlabel(<span class="string">&quot;pp3-value-range&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;pp4-value-range&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<img src="/2020/03/08/Others7/output_14_1.png" class="">  
+
+
+<h3 id="Color-coded-scatter-plots"><a href="#Color-coded-scatter-plots" class="headerlink" title="Color-coded scatter plots"></a>Color-coded scatter plots</h3><p>We can use scatter plots to display the relationships between (not two, but…) three variables! One way of doing this is by color-coding the points.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.scatterplot(x=data.pp3, y=data.pp4, hue=np.random.randint(<span class="number">0</span>, <span class="number">2</span>, size=data.shape[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+
+
+
+<img src="/2020/03/08/Others7/output_16_1.png" class="">  
+
+
+<h3 id="Regression-line"><a href="#Regression-line" class="headerlink" title="Regression line"></a>Regression line</h3><p>Plot the line that best fits the data</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.regplot(x=data.index, y=data.pp3)</span><br><span class="line">sns.regplot(x=data.index, y=data.pp4)</span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/08/Others7/output_18_1.png" class="">  
+
+
+<h3 id="Compare-two-regression-line"><a href="#Compare-two-regression-line" class="headerlink" title="Compare two regression line"></a>Compare two regression line</h3><p>we can use the <code>sns.lmplot</code> command to add two regression lines, comparing two lines’ relation strength  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">data[<span class="string">&#x27;YN&#x27;</span>] = np.random.randint(<span class="number">0</span>, <span class="number">2</span>, size=data.shape[<span class="number">0</span>])</span><br><span class="line">sns.lmplot(x=<span class="string">&#x27;pp3&#x27;</span>, y=<span class="string">&#x27;pp4&#x27;</span>, hue=<span class="string">&#x27;YN&#x27;</span>, data=data)</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/08/Others7/output_20_2.png" class="">  
+
+
+<h3 id="Categorical-scatter-plot"><a href="#Categorical-scatter-plot" class="headerlink" title="Categorical scatter plot"></a>Categorical scatter plot</h3><p>We can adapt the design of the scatter plot to feature a categorical variable (like labels) on one of the main axes. We’ll refer to this plot type as a <strong>categorical scatter plot</strong>, and we build it with the <code>sns.swarmplot</code> command.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">category = np.random.randint(<span class="number">0</span>, <span class="number">3</span>, size=<span class="number">1000</span>)</span><br><span class="line">value = np.random.randint(<span class="number">0</span>, <span class="number">100</span>, size=<span class="number">1000</span>)</span><br><span class="line">sns.swarmplot(x=category, y=value)</span><br></pre></td></tr></table></figure>
+
+
+<img src="/2020/03/08/Others7/output_22_1.png" class="">  
+
+
+<h2 id="Distributions"><a href="#Distributions" class="headerlink" title="Distributions"></a>Distributions</h2><h3 id="Histograms"><a href="#Histograms" class="headerlink" title="Histograms"></a>Histograms</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">value = np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">100</span>)</span><br><span class="line">sns.distplot(a=value, kde=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/08/Others7/output_25_1.png" class="">  
+
+
+<p><code>kde=False</code> is something we’ll always provide when creating a histogram, as leaving it out will create a slightly different plot. With<code>kde=True</code>, kernel density estimate (KDE) curve would generate at the same time</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.distplot(a=value, kde=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+<img src="/2020/03/08/Others7/output_27_1.png" class="">  
+
+
+<h3 id="Density-plots"><a href="#Density-plots" class="headerlink" title="Density plots"></a>Density plots</h3><p>The next type of plot is a <strong>kernel density estimate</strong> (KDE) plot. In case you’re not familiar with KDE plots, you can think of it as a smoothed histogram.</p>
+<p>Setting <code>shade=True</code> colors the area below the curve</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.kdeplot(data=value, shade=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/08/Others7/output_29_1.png" class="">  
+
+
+<h3 id="2D-KDE-plots"><a href="#2D-KDE-plots" class="headerlink" title="2D KDE plots"></a>2D KDE plots</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">x_value = np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">100</span>)</span><br><span class="line">y_value = np.random.randint(<span class="number">10</span>, <span class="number">20</span>, size=<span class="number">100</span>)</span><br><span class="line">sns.jointplot(x=x_value, y=y_value, kind=<span class="string">&quot;kde&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/08/Others7/output_31_2.png" class="">  
+
+
+<h3 id="Color-coded-plots"><a href="#Color-coded-plots" class="headerlink" title="Color-coded plots"></a>Color-coded plots</h3><p>We create a different histogram for each species by using the <code>sns.distplot</code> command three times. We use <code>label=</code> to set how each histogram will appear in the legend.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data1&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">5</span>, <span class="number">15</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data2&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">15</span>, <span class="number">25</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data3&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/08/Others7/output_33_1.png" class="">  
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data1&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">5</span>, <span class="number">15</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data2&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">15</span>, <span class="number">25</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data3&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/08/Others7/output_34_1.png" class="">  
+
+
+<h2 id="Changing-styles-with-seaborn"><a href="#Changing-styles-with-seaborn" class="headerlink" title="Changing styles with seaborn"></a>Changing styles with seaborn</h2><p>Seaborn has five different themes: (1)”darkgrid”, (2)”whitegrid”, (3)”dark”, (4)”white”, and (5)”ticks”</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">style = [<span class="string">&quot;darkgrid&quot;</span>, <span class="string">&quot;whitegrid&quot;</span>, <span class="string">&quot;dark&quot;</span>, <span class="string">&quot;white&quot;</span>, <span class="string">&quot;ticks&quot;</span>]</span><br><span class="line">plt.figure(figsize=(<span class="number">30</span>, <span class="number">5</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">    plt.subplot(<span class="number">1</span>, <span class="number">5</span>, i + <span class="number">1</span>)</span><br><span class="line">    sns.set_style(style[i])</span><br><span class="line">    sns.lineplot(data=np.random.randint(<span class="number">10</span>, size=<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
+
+
+<img src="/2020/03/08/Others7/output_36_0.png" class="">  
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/05/Others6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2276,147 +2548,6 @@ Name: col3, dtype: object
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/28/RL2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/28/RL2/" class="post-title-link" itemprop="url">RL2：Markov Decision Processes</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-28 17:21:31" itemprop="dateCreated datePublished" datetime="2020-02-28T17:21:31-05:00">2020-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-03 03:34:00" itemprop="dateModified" datetime="2020-04-03T03:34:00-04:00">2020-04-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reinforcement-Learning/" itemprop="url" rel="index"><span itemprop="name">Reinforcement Learning</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<blockquote>
-<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
-</blockquote>
-<h2 id="Introduction-to-Markov-Decision-Processes"><a href="#Introduction-to-Markov-Decision-Processes" class="headerlink" title="Introduction to Markov Decision Processes"></a>Introduction to Markov Decision Processes</h2><h3 id="Definition-of-MDP"><a href="#Definition-of-MDP" class="headerlink" title="Definition of MDP"></a>Definition of MDP</h3><p>MDPs are meant to be a straightforward framing of the problem of learning from interaction to achieve a goal. Here are the key element in discribing a MDP</p>
-<ul>
-<li><strong>agent</strong>: the learner and the decision maker</li>
-<li><strong>environment</strong>: the thing a agent interacts with, comprising everything outside the agent</li>
-<li><strong>action</strong>: selected by the agent to interact with the environment</li>
-<li><strong>reward</strong>: special numerical values that the agent seeks to maximize over time through its choice of actions.</li>
-</ul>
-<p>the whole interacting process is precisely simplified as follow  </p>
-<img src="/2020/02/28/RL2/1.png" class="">  
-<p>More specifically, the agent and the environment interact at each of a sequence of discrete time steps, $t=0,1,2,3,…$ At each time step $t$, the agent recives some representation of the environment’s <strong>state</strong>, $S_t \in \mathbf{S}$, and on that basis selects an <strong>action</strong>, $A_t \in \mathbf{A}(s)$.</p>
-<p>One time step later, in part as a consequence of its action, the agent receives a numerical reward, $R_{t+1} \in \mathbf{R}\subset \mathbb{R}$, and finds itself in a new state, $S_{t+1}$. The MDP and agent together thereby give rise to a sequence or trajectory that begins like this:  </p>
-<img src="/2020/02/28/RL2/2.png" class="">  
-<p>In a finite MDP, the sets of states, actions, and rewards ($\mathbf{S}$, $\mathbf{A}$, and $\mathbf{R}$) all have a finite number of elements. In this case, the random variables $R_t$ and $S_t$ have well defined discrete probability distributions dependent only on the preceding state and action. That is, for particular values of these random variables, $s’ \in \mathbf{S}$ and $r \in \mathbf{R}$, there is a probability of those values occurring at time t, given particular values of the preceding state and action:<br>$$p(s’,r|s,a)\doteq P(S_t=s’, R_t=r\ | \ S_{t-1}=s, A_{t-1}=a)\tag{2.1}$$<br>for all $s’,s \in \mathbf{S}$, $r \in \mathbf{R}$, and $a \in \mathbf{A}(s)$. The function $p$ defines the <strong>dynamics of the MDP</strong>.<br>$$p:\ \mathbf{S}\times \mathbf{R}\times \mathbf{S}\times \mathbf{A}\rightarrow [0,1]$$<br>With $p(s’,r|s,a)$, note that <strong>future state and reward only depends on the current state and action</strong>. This is called the <strong>Markov property</strong>. It means that the present state is sufficient and remembering earlier states would not improve predictions about the future.</p>
-<p>The <strong>MDP framework</strong> is a considerable <strong>abstraction</strong> of the problem of goal-directed learning from interaction. It can be used to formalize a wide variety of <strong>sequential decision-making</strong> problem. This also means that any problem of learning goal-directed behavior can be reduced to three signals passing back and forth between an agent and its environment: actions, states, rewards.</p>
-<h3 id="An-Example-of-MDP"><a href="#An-Example-of-MDP" class="headerlink" title="An Example of MDP"></a>An Example of MDP</h3><p>Here is an example of finite MDP, <strong>Recycling Robot</strong>. We can write down the transition probabilities and the expected rewards, with dynamics as indicated below.  </p>
-<img src="/2020/02/28/RL2/3.png" class="">  
-<p>We can show it in another useful way called <strong>trasition graph</strong>  </p>
-<img src="/2020/02/28/RL2/4.png" class="">  
-<p>There are two kinds of nodes: state nodes and action nodes. The key point here is that the agent fisrtly chooses an action and then transits to a state with corresponding probability.</p>
-<hr>
-<h2 id="Goal-of-Reinforcement-Learning"><a href="#Goal-of-Reinforcement-Learning" class="headerlink" title="Goal of Reinforcement Learning"></a>Goal of Reinforcement Learning</h2><h3 id="The-Goal-of-RL"><a href="#The-Goal-of-RL" class="headerlink" title="The Goal of RL"></a>The Goal of RL</h3><p>In reinforcement learning, reward captures the notion of short-term gain. The objective however, is to learn a policy that achieves the most reward in the long run. With this premise, we denote the <strong>return</strong> at time step $t$ as $G_t$</p>
-<p>$$G_t\doteq R_{t+1}+R_{t+2}+R_{t+3}+…\tag{2.2}$$</p>
-<p>We intuitively want to maxmize $G_t$ at each time step. However, $G_t$ is a random variable because <strong>the dynamics of the MDP can be stochastic</strong>. That’s why we define the goal of an agent is to <strong>maxmize the expected return</strong></p>
-<p>$$\mathbb{E}[G_t] = \mathbb{E}[R_{t+1}+R_{t+2}+R_{t+3}+…]\tag{2.3}$$</p>
-<h3 id="The-Reward-Hypothesis"><a href="#The-Reward-Hypothesis" class="headerlink" title="The Reward Hypothesis"></a>The Reward Hypothesis</h3><p>The <strong>Reinforcement Learning Hypothesis</strong> can be expressed as this:</p>
-<blockquote>
-<p>That all of what we mean by goals and purposes can be well thought of as maximization of the expected value of the cumulative sum of a received scalar signal (reward).</p>
-</blockquote>
-<p>There are two research programs:</p>
-<ul>
-<li>Identify where reward signals come from. (what reward the agent should optimize)</li>
-<li>Develop algorithms that search the space of action to maximize reward signals.</li>
-</ul>
-<p>Informally, the agent’s goal is to <strong>maximize the total amount of reward it receives</strong>. This means maximizing not immediate reward, but cumulative reward in the long run. We can clearly state this informal idea as the <strong>reward hypothesis</strong>:</p>
-<blockquote>
-<p>That all of what we mean by goals and purposes can be well thought of as the maximization of the expected value of the cumulative sum of a received scalar signal (called reward).</p>
-</blockquote>
-<p>But how can we define reward? This is a trick problem. To use goals as rewards, we have some representations:</p>
-<ul>
-<li>goal-reward representation: 1 for achieving goal, 0 otherwise</li>
-<li>action-penalty representation: -1 for not achieving goal, 0 once goal reached</li>
-</ul>
-<p>Both of representations have its own limitation. They lack of some middel information to tell the agent how to achieve the goal as our expectation.</p>
-<hr>
-<h2 id="Episodic-Tasks-And-Continuing-Tasks"><a href="#Episodic-Tasks-And-Continuing-Tasks" class="headerlink" title="Episodic Tasks And Continuing Tasks"></a>Episodic Tasks And Continuing Tasks</h2><h3 id="Episodic-Tasks"><a href="#Episodic-Tasks" class="headerlink" title="Episodic Tasks"></a>Episodic Tasks</h3><p>In an <strong>episodic task</strong>, the agent-environment interaction breaks up into <strong>episodes</strong>. Episodes are indepedent and each episode ends in a <strong>terminal state</strong> at time step $T$. In this situation, time step is finite and we change <a href="#the-goal-of-rl">(2.2)</a> as</p>
-<p>$$G_t \doteq R_{t+1}+R_{t+2}+R_{t+1}+…+R_T\tag{2.4}$$</p>
-<h3 id="Continuing-Tasks"><a href="#Continuing-Tasks" class="headerlink" title="Continuing Tasks"></a>Continuing Tasks</h3><p>The interaction between agent-environment goes on <strong>continually</strong> and there is no <strong>terminal state</strong>. In this situation, time step is infinite and $G_t$ is the same in $(2.2)$</p>
-<p>$$G_t \doteq R_{t+1}+R_{t+2}+R_{t+3}+…$$</p>
-<p>But here comes to one problem: $G_t$ could be $\infty$ and impossible to calculate. Therefore, we should make $G_t$ finite, which by using <strong>discounting</strong> method.</p>
-<h3 id="Discounting-Return"><a href="#Discounting-Return" class="headerlink" title="Discounting Return"></a>Discounting Return</h3><p>Discount the rewards in the future by $\gamma$ called <strong>discount rate</strong>, where $\gamma \in [0,1]$</p>
-<p>$$<br>\begin{eqnarray*}<br>G_t<br>&amp;\doteq&amp; R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+…+\gamma^{k-1}R_{t+k}+…\<br>&amp;=&amp;\sum_{k=0}^\infty \gamma^kR_{t+k+1}\tag{2.5}<br>\end{eqnarray*}<br>$$</p>
-<p>We can also re-write $G_t$ in the recursive version</p>
-<p>$$G_t = R_{t+1}+\gamma G_{t+1}\tag{2.6}$$</p>
-<p>To prove $G_t$ is finite, let’s assume $R_{max}$ is the maximum reward the agent can receive</p>
-<p>$$<br>\begin{eqnarray*}<br>G_t=\sum_{k=0}^\infty \gamma^kR_{t+k+1}&amp;\le&amp; \sum_{k=0}^\infty \gamma^kR_{max}\<br>&amp;=&amp;R_{max}\sum_{k=0}^\infty \gamma^k\<br>&amp;=&amp;R_{max}\times \frac{1}{1-\gamma}<br>\end{eqnarray*}<br>$$</p>
-<p>It proves that $G_t$ now is finite. To Specify, let’s talk about $\gamma=0$ and $\gamma=1$.</p>
-<ul>
-<li>$\gamma=0\Rightarrow G_t=R_t$ : agent only cares about immediate reward. (<strong>short-sighted agent</strong>)</li>
-<li>$\gamma\rightarrow1$ : agent takes future rewards into account more strongly. (<strong>far-sighted agent</strong>)</li>
-</ul>
-<h3 id="Unified-Episodic-and-Continuing-Tasks"><a href="#Unified-Episodic-and-Continuing-Tasks" class="headerlink" title="Unified Episodic and Continuing Tasks"></a>Unified Episodic and Continuing Tasks</h3><p>we can consider episode termination to be the entering of a special <strong>absorbing state</strong> that transitions only to itself and that generates only rewards of zero. For example, consider the state transition diagram:  </p>
-<img src="/2020/02/28/RL2/5.png" class="">  
-<p>Thus, we can informally regard epsoidic tasks as continuing task.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2488,7 +2619,7 @@ Name: col3, dtype: object
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

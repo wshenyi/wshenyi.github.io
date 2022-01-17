@@ -164,6 +164,137 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/15/R16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/15/R16/" class="post-title-link" itemprop="url">016 "General-Purpose Graphics Processor Architectures"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-15 08:11:53" itemprop="dateCreated datePublished" datetime="2022-01-15T08:11:53-05:00">2022-01-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-16 22:33:58" itemprop="dateModified" datetime="2022-01-16T22:33:58-05:00">2022-01-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> GPGPU, computer architecture</p>
+<blockquote>
+<p>Author: Tor M. Aamodt, Wilson Wai Lun Fung, Timothy G. Rogers</p>
+</blockquote>
+<hr>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Over succeeding generations of products, GPU manufacturer’s have refined the GPU architecture and programming model to <strong>increase flexibility</strong> while simultaneously <strong>improving energy efficiency</strong>.</p>
+<p>A typical system containing GPU is divided into two forms: 1. discrete CPU and GPU; 2. integrated CPU and GPU</p>
+<img src="/2022/01/15/R16/1.png" class="">
+
+<p>For distrete GPU, the DRAM technology used for CPU and GPU is different(<strong>DDR</strong> for CPU vs. <strong>GDDR</strong> for GPU). DDR for <em>Double Data Rate</em> and GDDR for Graphics DDR. The CPU DRAM is typically optimized for <strong>low latency access</strong> whereas the GPU DRAM is optimized for <strong>high throughput</strong>. For integrated GPU, as they are often found on low-powper mobile device, the shared DRAM memory it uses is often optimized for <strong>low power</strong> such as <strong>LPDDR</strong>.</p>
+<p>A generic model GPU architecture, <strong>SIMT</strong></p>
+<img src="/2022/01/15/R16/2.png" class="">
+
+<p>GPUs can obtain improved performance per unit area vs. superscalar out-of-order CPUs on highly parallel workloads by dedicating a larger fraction of their die area to arithmetic logic units and correspondingly less area to control logic. Below is an analytical model-based analysis of the performance tradeoff between multicore (MC) CPU architectures and multithreaded (MT) architectures such as GPU.</p>
+<img src="/2022/01/15/R16/3.png" class="">
+
+<p>As the number of threads increases from the middle point, performance increases with the ability of multithreading to hide long off-chip latency. GPUs are designed to tolerate frequent cache misses by employing multithreading.</p>
+<h2 id="Programming-Model"><a href="#Programming-Model" class="headerlink" title="Programming Model"></a>Programming Model</h2><p>A well-known operation <strong>SAXPY</strong> represent for <em>single-precision scalar value <strong>A</strong> times vector value <strong>X</strong> plus vector value <strong>Y</strong></em></p>
+<p>Currently, NVIDIA warps consists of 32 threads while AMD wavefronts consist of 64 threads.</p>
+<p>NVIDIA has introduced <strong>Unified Memory</strong>, which transparently updates GPU memory from CPU memory and CPU memory from GPU memory.</p>
+<p>NVIDIA’s PTX(Parallel Thread Execution ISA) is many ways similar to a standard reduced instruction set computer (RISC) instruction set architecture. It also shares a similarity to the intermediate representations (IR) used within optimizing compilers.</p>
+<p>Before running PTX code on the GPU it is necessary to compile PTX down to the actual instruction set architecture supported by the hardware. NVIDIA calls this level <strong>SASS</strong> which is short for “Streaming ASSembler”. The process ofconverting from PTX to SASS can be accomplished either by the GPU driver or a stand-alone program called <em>ptxas</em> provided with NVIDIA’s CUDA Toolkit.</p>
+<h2 id="The-SIMT-core-Instruction-and-Register-Data-Flow"><a href="#The-SIMT-core-Instruction-and-Register-Data-Flow" class="headerlink" title="The SIMT core: Instruction and Register Data Flow"></a>The SIMT core: Instruction and Register Data Flow</h2><p>An <strong>approximating</strong> microarchitecture of a generic GPGPU core.</p>
+<img src="/2022/01/15/R16/4.png" class="">
+
+<p>The pipeline can be divided into a <strong>SIMT front-end</strong> and a <strong>SIMD back-end</strong>. The pipeline consists of three scheduling “loops” acting together in a single pipeline: 1. an <strong>instruction fetch</strong> loop, 2. an <strong>instruction issue</strong> loop, and 3. a <strong>register access</strong> scheduling loop.</p>
+<h3 id="1-Instruction-Fetch-Loop"><a href="#1-Instruction-Fetch-Loop" class="headerlink" title="1. Instruction Fetch Loop"></a>1. Instruction Fetch Loop</h3><p>To increase efficiency, threads are organized into groups called “warps” by NVIDIA and “wavefronts” by AMD. Thus, <strong>the unit of scheduling is a warp</strong>.</p>
+<p>After fetching an instruction, the instruction is decoded and source operand registers are fetched from the register file. In parallel with fetching source operands from the register file, the SIMT execution mask values are determined.</p>
+<p>As in modern CPU designs, the <strong>function units</strong> are typically heterogeneous meaning a given function unit supports only a subset ofinstructions. For example, NVIDIA GPUs contain a <em>specialfunction unit</em> (SFU), <em>load/store unit, floating-point function unit, integer function unit</em>, and, as of Volta, a <em>Tensor Core</em>.</p>
+<p>SIMT execution model presents the programmer with the abstraction that individual threads execute completely independently. However, in current GPUs it is achieved via a combination of traditional <em>predication</em> along with a stack of predicate masks that we shall refer to as the <strong>SIMT stack</strong>.</p>
+<p>The SIMT stack helps efficiently handle two key issues: nested control flow and skipped computation.</p>
+<p>A <strong>reconvergence point</strong> is a location in the program where threads that diverge can be forced to continue executing in lock-step.</p>
+<p>The stack-based implementation of SIMT can lead to a deadlock condition called “<strong>SIMT deadlock</strong>”.</p>
+<p>NVIDIA ‘s new thread divergence management approach is called <em>Independent Thread Scheduling</em> and it can fix SIMT deadlock by introducing a new structure <em>covergence barrier</em>. In contrast to a stack-based SIMT implementation, with convergence barrier implementation the scheduler is free to switch between groups of diverged threads.</p>
+<img src="/2022/01/15/R16/5.png" class="">
+
+<p>Each core in a GPU hosts contains many warps. To enable a different warp to issue an instruction <strong>each cycle</strong>, it is necessary that each thread have its own registers (avioding <em>context switch</em> occured in traditional CPU). The tradeoff is: <strong>increasing the number of warps per core increases the fraction of chip area devoted to register file storage relative to the fraction dedicated to execution units</strong>. (For a fixed chip area increasing warps per core will decrease the total nymber of cores per chip.)</p>
+<h3 id="2-Instruction-Issue-Loop"><a href="#2-Instruction-Issue-Loop" class="headerlink" title="2. Instruction Issue Loop"></a>2. Instruction Issue Loop</h3><p>To help reduce the number of warps that each core must support to hide long execution latencies, it is helpful to be able to <strong>issue a subsequent instruction from a warp while earlier instructions have not yet completed</strong>. Thus, supporting many warps per core can help hide long execution latencies.</p>
+<p>GPUs implement an instruction buffer were instructions are placed after cache access. A separate scheduler is used to decide which of several instructions in the instruction buffer should be issued next to the rest of the pipeline.</p>
+<p>There are two traditional approaches to detecting <strong>dependencies</strong> between instructions found in traditional CPU architecture: <em>scoreboard</em> and <em>reservation stations</em>. (bty, scoreboards support out-of-order execution.)</p>
+<p>Given it is the simplest design and therefore will consume the least amount of area and energy, GPUs implement <strong>in-order scoreboards</strong>.</p>
+<h3 id="3-Register-Access-Scheduling-Loop"><a href="#3-Register-Access-Scheduling-Loop" class="headerlink" title="3. Register Access Scheduling Loop"></a>3. Register Access Scheduling Loop</h3><p>To hide long memory latencies it is necessary to support many warps per core and to support cycle by cycle switching between warps it is necessary to have a large register file that contains separate physical registers for every warp that is executing. One way to reduce the area of the register file is to simulate the large number of ports using multiple <strong>banks</strong> of single-ported memories. In some GPUs, this kind of structure is known as the <strong>operand collector</strong>.</p>
+<p>Operand collector microarchitecture</p>
+<img src="/2022/01/15/R16/6.png" class="">
+
+<p>Each collector unit contains buffering space for all source operands required to execute an instruction. The operand collector uses scheduling to tolerate <strong>bank conflicts</strong> when they occur.</p>
+<p>Some CPUs speculative wake up instructions depending upon a load so as to improve single threaded performance. In contrast, GPUs avoid <strong>speculation</strong> as it tends to waste energy and reduce throughput. Instead, <strong>instruction replay</strong> is used in GPUs to avoid clogging the pipeline and the circuit area and/or timing overheads resulting from stalling.</p>
+<h2 id="Memory-System"><a href="#Memory-System" class="headerlink" title="Memory System"></a>Memory System</h2><p><strong>Pipeline hazards can be handled by replaying instructions</strong>.</p>
+<p><strong>Shared memory</strong> in CUDA (or local memory in OpenCL) and <strong>L1 cache</strong> is a same thing except shared memory is controlled by programmer whereas L1 cache is controlled by hardware. They are implemented as a static random access memory (SRAM).</p>
+<p>Below is an <em>unified L1 data cache and shared memory</em> architecture. #5 is an SRAM data array which can be configured partly for <strong>direct mapped access</strong> for shared memory and partly as a set associative cache.</p>
+<img src="/2022/01/15/R16/7.png" class="">
+
+<p>There are three kinds of opertions to this architecture: shared memory access operations, cache read operations, cache write operations.</p>
+<p>The SIMT cores connect to the memory partition units via an on-chip interconnection network. For NVIDIA it’s called <strong>crossbar</strong>, and for AMD it’s called <strong>ring network</strong>.</p>
+<p>Refer to the abstraction architecture shown above in section 1, <strong>Memory Partition Unit</strong> is under interconnect network. Each memory partition unit contains a portion of the <strong>second-level (L2) cache</strong> along with a one or more memory access schedulers also called a “frame buffer,” or <strong>FB</strong>, and a raster operation (<strong>ROP</strong>) unit. The L2 cache contains both graphics and compute data.</p>
+<img src="/2022/01/15/R16/8.png" class="">
+
+<p>The ROP unit includes function units for executing atomic and reduction operations.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/02/R3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -602,278 +733,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/08/Others7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/08/Others7/" class="post-title-link" itemprop="url">Introduction to Visualization</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-08 01:38:23" itemprop="dateCreated datePublished" datetime="2020-03-08T01:38:23-05:00">2020-03-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-30 00:12:34" itemprop="dateModified" datetime="2021-12-30T00:12:34-05:00">2021-12-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Science/" itemprop="url" rel="index"><span itemprop="name">Data Science</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">%matplotlib inline</span><br><span class="line">pd.plotting.register_matplotlib_converters()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Setup Complete&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<pre><code>Setup Complete
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;vtest.csv&#x27;</span>, index_col=<span class="number">0</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>pp1</th>
-      <th>pp2</th>
-      <th>pp3</th>
-      <th>pp4</th>
-      <th>pp5</th>
-      <th>pp6</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-94</td>
-      <td>70</td>
-      <td>-53</td>
-      <td>38</td>
-      <td>-66</td>
-      <td>-56</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-75</td>
-      <td>18</td>
-      <td>-38</td>
-      <td>88</td>
-      <td>35</td>
-      <td>-5</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>-21</td>
-      <td>-91</td>
-      <td>14</td>
-      <td>46</td>
-      <td>43</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-22</td>
-      <td>65</td>
-      <td>3</td>
-      <td>-15</td>
-      <td>57</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>95</td>
-      <td>-42</td>
-      <td>-18</td>
-      <td>67</td>
-      <td>81</td>
-      <td>60</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(12, 6)
-</code></pre>
-<h2 id="Line-Chart"><a href="#Line-Chart" class="headerlink" title="Line Chart"></a>Line Chart</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add titile</span></span><br><span class="line">plt.title(<span class="string">&quot;Line Chart&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot line chart</span></span><br><span class="line">sns.lineplot(data=data)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_6_1.png" class="">  
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if you not explictly designate the label parameter, it will use column&#x27;s title as default</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.lineplot(data=data.pp1, label=<span class="string">&quot;pp1&quot;</span>)</span><br><span class="line">sns.lineplot(data=data.pp2, label=<span class="string">&quot;pp2&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_7_1.png" class="">  
-
-
-<h2 id="Bar-Chart"><a href="#Bar-Chart" class="headerlink" title="Bar Chart"></a>Bar Chart</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add title</span></span><br><span class="line">plt.title(<span class="string">&quot;Bar Chart&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Bar chart</span></span><br><span class="line">sns.barplot(x=data.index, y=data.pp3)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add label for vertical axis</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_9_1.png" class="">  
-
-
-<h2 id="Heatmap"><a href="#Heatmap" class="headerlink" title="Heatmap"></a>Heatmap</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add title</span></span><br><span class="line">plt.title(<span class="string">&quot;Heatmap&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot heatmap</span></span><br><span class="line">sns.heatmap(data=data, annot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add label for horizontal axis</span></span><br><span class="line">plt.ylabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<img src="/2020/03/08/Others7/output_11_1.png" class="">  
-
-
-<h2 id="Scatter-Plots"><a href="#Scatter-Plots" class="headerlink" title="Scatter Plots"></a>Scatter Plots</h2><h3 id="Normal-scatter-chart"><a href="#Normal-scatter-chart" class="headerlink" title="Normal scatter chart"></a>Normal scatter chart</h3><p>Use scatter plots to display the relationships between two data</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.scatterplot(x=data.pp3, y=data.pp4)</span><br><span class="line">plt.xlabel(<span class="string">&quot;pp3-value-range&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;pp4-value-range&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_14_1.png" class="">  
-
-
-<h3 id="Color-coded-scatter-plots"><a href="#Color-coded-scatter-plots" class="headerlink" title="Color-coded scatter plots"></a>Color-coded scatter plots</h3><p>We can use scatter plots to display the relationships between (not two, but…) three variables! One way of doing this is by color-coding the points.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.scatterplot(x=data.pp3, y=data.pp4, hue=np.random.randint(<span class="number">0</span>, <span class="number">2</span>, size=data.shape[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
-
-
-
-<img src="/2020/03/08/Others7/output_16_1.png" class="">  
-
-
-<h3 id="Regression-line"><a href="#Regression-line" class="headerlink" title="Regression line"></a>Regression line</h3><p>Plot the line that best fits the data</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.regplot(x=data.index, y=data.pp3)</span><br><span class="line">sns.regplot(x=data.index, y=data.pp4)</span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_18_1.png" class="">  
-
-
-<h3 id="Compare-two-regression-line"><a href="#Compare-two-regression-line" class="headerlink" title="Compare two regression line"></a>Compare two regression line</h3><p>we can use the <code>sns.lmplot</code> command to add two regression lines, comparing two lines’ relation strength  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">data[<span class="string">&#x27;YN&#x27;</span>] = np.random.randint(<span class="number">0</span>, <span class="number">2</span>, size=data.shape[<span class="number">0</span>])</span><br><span class="line">sns.lmplot(x=<span class="string">&#x27;pp3&#x27;</span>, y=<span class="string">&#x27;pp4&#x27;</span>, hue=<span class="string">&#x27;YN&#x27;</span>, data=data)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_20_2.png" class="">  
-
-
-<h3 id="Categorical-scatter-plot"><a href="#Categorical-scatter-plot" class="headerlink" title="Categorical scatter plot"></a>Categorical scatter plot</h3><p>We can adapt the design of the scatter plot to feature a categorical variable (like labels) on one of the main axes. We’ll refer to this plot type as a <strong>categorical scatter plot</strong>, and we build it with the <code>sns.swarmplot</code> command.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">category = np.random.randint(<span class="number">0</span>, <span class="number">3</span>, size=<span class="number">1000</span>)</span><br><span class="line">value = np.random.randint(<span class="number">0</span>, <span class="number">100</span>, size=<span class="number">1000</span>)</span><br><span class="line">sns.swarmplot(x=category, y=value)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_22_1.png" class="">  
-
-
-<h2 id="Distributions"><a href="#Distributions" class="headerlink" title="Distributions"></a>Distributions</h2><h3 id="Histograms"><a href="#Histograms" class="headerlink" title="Histograms"></a>Histograms</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">value = np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">100</span>)</span><br><span class="line">sns.distplot(a=value, kde=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_25_1.png" class="">  
-
-
-<p><code>kde=False</code> is something we’ll always provide when creating a histogram, as leaving it out will create a slightly different plot. With<code>kde=True</code>, kernel density estimate (KDE) curve would generate at the same time</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.distplot(a=value, kde=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_27_1.png" class="">  
-
-
-<h3 id="Density-plots"><a href="#Density-plots" class="headerlink" title="Density plots"></a>Density plots</h3><p>The next type of plot is a <strong>kernel density estimate</strong> (KDE) plot. In case you’re not familiar with KDE plots, you can think of it as a smoothed histogram.</p>
-<p>Setting <code>shade=True</code> colors the area below the curve</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.kdeplot(data=value, shade=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_29_1.png" class="">  
-
-
-<h3 id="2D-KDE-plots"><a href="#2D-KDE-plots" class="headerlink" title="2D KDE plots"></a>2D KDE plots</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">x_value = np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">100</span>)</span><br><span class="line">y_value = np.random.randint(<span class="number">10</span>, <span class="number">20</span>, size=<span class="number">100</span>)</span><br><span class="line">sns.jointplot(x=x_value, y=y_value, kind=<span class="string">&quot;kde&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_31_2.png" class="">  
-
-
-<h3 id="Color-coded-plots"><a href="#Color-coded-plots" class="headerlink" title="Color-coded plots"></a>Color-coded plots</h3><p>We create a different histogram for each species by using the <code>sns.distplot</code> command three times. We use <code>label=</code> to set how each histogram will appear in the legend.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data1&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">5</span>, <span class="number">15</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data2&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">15</span>, <span class="number">25</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data3&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_33_1.png" class="">  
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data1&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">5</span>, <span class="number">15</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data2&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">15</span>, <span class="number">25</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data3&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_34_1.png" class="">  
-
-
-<h2 id="Changing-styles-with-seaborn"><a href="#Changing-styles-with-seaborn" class="headerlink" title="Changing styles with seaborn"></a>Changing styles with seaborn</h2><p>Seaborn has five different themes: (1)”darkgrid”, (2)”whitegrid”, (3)”dark”, (4)”white”, and (5)”ticks”</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">style = [<span class="string">&quot;darkgrid&quot;</span>, <span class="string">&quot;whitegrid&quot;</span>, <span class="string">&quot;dark&quot;</span>, <span class="string">&quot;white&quot;</span>, <span class="string">&quot;ticks&quot;</span>]</span><br><span class="line">plt.figure(figsize=(<span class="number">30</span>, <span class="number">5</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">    plt.subplot(<span class="number">1</span>, <span class="number">5</span>, i + <span class="number">1</span>)</span><br><span class="line">    sns.set_style(style[i])</span><br><span class="line">    sns.lineplot(data=np.random.randint(<span class="number">10</span>, size=<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_36_0.png" class="">  
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -945,7 +804,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1107,6 +966,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
