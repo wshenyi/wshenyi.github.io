@@ -164,6 +164,110 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/16/R17/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/16/R17/" class="post-title-link" itemprop="url">017 "Improving GPU Performance via Large Warps and Two-Level Warp Scheduling"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-16 08:13:14" itemprop="dateCreated datePublished" datetime="2022-01-16T08:13:14-05:00">2022-01-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-17 00:46:24" itemprop="dateModified" datetime="2022-01-17T00:46:24-05:00">2022-01-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> GPGPU, SIMD, Divergence, Warp Scheduling</p>
+<blockquote>
+<p>Author:</p>
+</blockquote>
+<hr>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Altough GPUs achieve Thread Level Parallelism (TLP) through warp execution and concurrently executing manny warps on single GPU core (SM), the computational resources on GPU are still underutilized.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Threads on GPU are grouped into fixed-size SIMD batched known as warps and many warps are concurrently executed on a single GPU core. Despite this, computationaly resources on GPU cores are still underutillized. To further improve GPU performance, the authors propose two independent ideas: the large warp microarchitecture and two-level warp scheduling.</p>
+<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>Their mechanisms signifi-cantly improve computational resource utilization, resulting in 19.1% performance improvement over traditional GPU cores on a set of general purpose parallel applications.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>GPUs expliot TLP in two major way:</p>
+<ol>
+<li>threads executing in fixed-size batches known as warps.</li>
+<li>concurrently execute many warps on a singe core to hide execution latency.</li>
+</ol>
+<p>Two resouce for underutilization of computational resource:</p>
+<ol>
+<li>branch divergence due to conditional branch in the code.</li>
+<li>unable to effectively hide latency of long latency operations.</li>
+</ol>
+<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
+<li>Large warp microarchitecture</li>
+<li>Two-level warp scheduling</li>
+</ul>
+<h2 id="Limitations-Weaknesses"><a href="#Limitations-Weaknesses" class="headerlink" title="Limitations/Weaknesses"></a>Limitations/Weaknesses</h2><ul>
+<li>The assumptions about default warp scheduling on GPU is round-robin may not be correct.</li>
+<li>For data intensive application, the two level round-robin scheduling may not bring much performance improvement.</li>
+<li>The hardware cost for implmentation their methods may not worth it because small improvemence is only improved on specific applications.</li>
+</ul>
+<h2 id="Open-Questions-Where-to-go-from-here"><a href="#Open-Questions-Where-to-go-from-here" class="headerlink" title="Open Questions [Where to go from here?]"></a>Open Questions [Where to go from here?]</h2><ul>
+<li>How their methods apply to three dimentional grid?</li>
+<li>In practice, the active mask may not be as sparse as they shown in the paper.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/15/R16/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -621,118 +725,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2021/12/30/R0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/30/R0/" class="post-title-link" itemprop="url">000 "Learning from Mistakes — A Comprehensive Study on Real World Concurrency Bug Characteristics"</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-12-30 00:33:29" itemprop="dateCreated datePublished" datetime="2021-12-30T00:33:29-05:00">2021-12-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-15 18:19:15" itemprop="dateModified" datetime="2022-01-15T18:19:15-05:00">2022-01-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em><strong>Keywards</strong></em> concurrent program, concurrency bug, bug characteristics</p>
-<blockquote>
-<p>Author: Shan Lu, Soyeon Park, Eunsoo Seo and Yuanyuan Zhou</p>
-</blockquote>
-<hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Writting correct concurrent programs is difficult and it faces many challenge. Although some progress have made over the past years, there are still many open, unsolved issues:</p>
-<ol>
-<li>Concurrency bug detection.<ul>
-<li>Can existing bug detection tool <em>detect all</em> real world concurrency bugs?</li>
-<li>How helpful are existing tools in <em>diagnosing and fixing</em> the real world concurrency bugs detected by them?</li>
-</ul>
-</li>
-<li>Concurrent program testing and model checking.<ul>
-<li>Existing testing techniques mainly focus on the <em>sequential</em> aspect of programs, while the major challenge of concurrency testing is the exponential <em>interleaving</em> space of concurrent programs.</li>
-<li>An open question: can we selectively test a small number of representative interleaving and still expose most of the concurrency bugs?</li>
-<li>Better understanding of the manifestation of real world concurrency bugs can help model checking prioritize the program states and alleviate its state explosion problem.</li>
-</ul>
-</li>
-<li>Concurrent programming language design.<ul>
-<li>Transactional memory (TM) is a promising trend.</li>
-<li>A real-world concurrency bug characteristic study is needed.</li>
-</ul>
-</li>
-</ol>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This paper provides a comprehensive real world concurrency bug characteristic study. It specifically focus on <strong>concurrency bug patterns</strong>, <strong>manifestation</strong>, and <strong>fix strategies</strong>. The study reveals several interesting findings and provide useful guildance for concurrency bug detection, testing, and concurrent programming language design.</p>
-<p>Some of findings:</p>
-<ol>
-<li>Around one third of examined non-deadlock concurrency bugs are caused by violation to <strong>programmers’ order intentions</strong>, which may not be easily expressed via synchronization primitives.</li>
-<li>Around one third of examined non-deadlock concurrency bugs involve multiple variables, which are not well addressed by existing bug detection tools.</li>
-<li>Testing concurrency bugs can target at exploring possible orders among every small groups of memory accesses, instead of among all memory accesses.</li>
-<li>Fixing concurrency bugs are not easy and many of the fixes were not correct at the first time, indicating the difficulty of reasoning concurrent execution by programmers.</li>
-</ol>
-<h2 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h2><img src="/2021/12/30/R0/1.png" class="">
-
-<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
-<li>Bug pattern study</li>
-<li>Bug manifestation study</li>
-<li>Bug fix study</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -804,7 +796,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

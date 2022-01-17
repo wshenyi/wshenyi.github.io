@@ -164,6 +164,118 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2021/12/30/R0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/30/R0/" class="post-title-link" itemprop="url">000 "Learning from Mistakes — A Comprehensive Study on Real World Concurrency Bug Characteristics"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-30 00:33:29" itemprop="dateCreated datePublished" datetime="2021-12-30T00:33:29-05:00">2021-12-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-15 18:19:15" itemprop="dateModified" datetime="2022-01-15T18:19:15-05:00">2022-01-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> concurrent program, concurrency bug, bug characteristics</p>
+<blockquote>
+<p>Author: Shan Lu, Soyeon Park, Eunsoo Seo and Yuanyuan Zhou</p>
+</blockquote>
+<hr>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Writting correct concurrent programs is difficult and it faces many challenge. Although some progress have made over the past years, there are still many open, unsolved issues:</p>
+<ol>
+<li>Concurrency bug detection.<ul>
+<li>Can existing bug detection tool <em>detect all</em> real world concurrency bugs?</li>
+<li>How helpful are existing tools in <em>diagnosing and fixing</em> the real world concurrency bugs detected by them?</li>
+</ul>
+</li>
+<li>Concurrent program testing and model checking.<ul>
+<li>Existing testing techniques mainly focus on the <em>sequential</em> aspect of programs, while the major challenge of concurrency testing is the exponential <em>interleaving</em> space of concurrent programs.</li>
+<li>An open question: can we selectively test a small number of representative interleaving and still expose most of the concurrency bugs?</li>
+<li>Better understanding of the manifestation of real world concurrency bugs can help model checking prioritize the program states and alleviate its state explosion problem.</li>
+</ul>
+</li>
+<li>Concurrent programming language design.<ul>
+<li>Transactional memory (TM) is a promising trend.</li>
+<li>A real-world concurrency bug characteristic study is needed.</li>
+</ul>
+</li>
+</ol>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This paper provides a comprehensive real world concurrency bug characteristic study. It specifically focus on <strong>concurrency bug patterns</strong>, <strong>manifestation</strong>, and <strong>fix strategies</strong>. The study reveals several interesting findings and provide useful guildance for concurrency bug detection, testing, and concurrent programming language design.</p>
+<p>Some of findings:</p>
+<ol>
+<li>Around one third of examined non-deadlock concurrency bugs are caused by violation to <strong>programmers’ order intentions</strong>, which may not be easily expressed via synchronization primitives.</li>
+<li>Around one third of examined non-deadlock concurrency bugs involve multiple variables, which are not well addressed by existing bug detection tools.</li>
+<li>Testing concurrency bugs can target at exploring possible orders among every small groups of memory accesses, instead of among all memory accesses.</li>
+<li>Fixing concurrency bugs are not easy and many of the fixes were not correct at the first time, indicating the difficulty of reasoning concurrent execution by programmers.</li>
+</ol>
+<h2 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h2><img src="/2021/12/30/R0/1.png" class="">
+
+<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
+<li>Bug pattern study</li>
+<li>Bug manifestation study</li>
+<li>Bug fix study</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/08/Others7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2402,152 +2514,6 @@ Name: col3, dtype: object
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/29/RL3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/29/RL3/" class="post-title-link" itemprop="url">RL3：Value Functions & Bellman Equations</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-29 11:14:01" itemprop="dateCreated datePublished" datetime="2020-02-29T11:14:01-05:00">2020-02-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-17 11:19:49" itemprop="dateModified" datetime="2020-03-17T11:19:49-04:00">2020-03-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reinforcement-Learning/" itemprop="url" rel="index"><span itemprop="name">Reinforcement Learning</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<blockquote>
-<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
-</blockquote>
-<h2 id="Policies-and-Value-Functions"><a href="#Policies-and-Value-Functions" class="headerlink" title="Policies and Value Functions"></a>Policies and Value Functions</h2><h3 id="Policy"><a href="#Policy" class="headerlink" title="Policy"></a>Policy</h3><p>Formally, a <strong>policy</strong> is a mapping from <strong>states</strong> to probabilities of selecting each possible <strong>action</strong>.</p>
-<ul>
-<li><strong>deterministic policy</strong>, denote $\pi(s)=a$: one state correspond to one action</li>
-<li><strong>stochastic policy</strong>, $\pi(a|s)$: a probability distribution over all visable actions</li>
-</ul>
-<img src="/2020/02/29/RL3/1.png" class="">
-<img src="/2020/02/29/RL3/2.png" class="">
-
-<p>It’s important that <strong>policies depend only on the current state</strong>, not on other things like time or previous states.</p>
-<h3 id="State-value-Function"><a href="#State-value-Function" class="headerlink" title="State-value Function"></a>State-value Function</h3><p>Almost all reinforcement learning algorithms involve <strong>estimating value functions</strong> – functions of states (or of state–action pairs) that estimate <strong>how good</strong> it is for the agent to be in a given state (or <strong>how good</strong> it is to perform a given action in a given state), which means value function predicts reward into future.</p>
-<p>The value function of a state $s$ under a policy $\pi$, denoted $v_\pi(s)$, is <strong>the expected return when starting in $s$ and following $\pi$ thereafter</strong>. For MDPs, we can define $v_\pi$ formally by</p>
-<p>$$v_\pi(s)\doteq \mathbb{E}<em>\pi[G_t|S_t=s]=\mathbb{E}<em>\pi[\sum</em>{k=0}^\infty \gamma^kR</em>{t+k+1}|S_t=s],\ for\ all\ s\in \mathbf{S}$$</p>
-<p>We call the function $v_\pi$ the <strong>state-value function for policy $\pi$</strong></p>
-<h3 id="Action-value-Function"><a href="#Action-value-Function" class="headerlink" title="Action-value Function"></a>Action-value Function</h3><p>Similarly, we define the value of taking action $a$ in state $s$ under a policy $\pi$, denoted $q_\pi(s,a)$, as <strong>the expected return starting from $s$, taking the action $a$, and thereafter following policy $\pi$</strong>:</p>
-<p>$$q_\pi(s,a)\doteq \mathbb{E}<em>\pi[G_t|S_t=s,A_t=a]=\mathbb{E}<em>\pi[\sum</em>{k=0}^\infty \gamma^kR</em>{t+k+1}|S_t=s,A_t=a]$$</p>
-<p>We call the function $q_\pi$ the <strong>action-value function for policy \pi</strong>,</p>
-<hr>
-<h2 id="Bellman-Equations"><a href="#Bellman-Equations" class="headerlink" title="Bellman Equations"></a>Bellman Equations</h2><h3 id="Transform-Between-v-pi-And-q-pi"><a href="#Transform-Between-v-pi-And-q-pi" class="headerlink" title="Transform Between $v_\pi$ And $q_\pi$"></a>Transform Between $v_\pi$ And $q_\pi$</h3><p>Through the given diagram, we can derivate an equation for $v_\pi$ in terms of $q_\pi$ and $\pi$.</p>
-<img src="/2020/02/29/RL3/6.png" class="">
-
-<p>$$<br>\begin{eqnarray*}<br>v_\pi(s)<br>&amp;=&amp;\mathbb{E}<em>\pi[G_t|S_t=s]\<br>&amp;=&amp;\sum_a\pi(a|s)\mathbb{E}[G_t|S_t=s,A_t=a]\<br>&amp;=&amp;\sum_a\pi(a|s)q(s,a)\tag{3.1}<br>\end{eqnarray*}<br>$$<br>Recall that $G_t=R</em>{t+1}+\gamma G_{t+1}$. With given diagram below, we can derivate an equation for $q_\pi$ in terms of $v_\pi$ and $p(s’,r|s,a)$. (use markov property to simplify original equation)</p>
-<img src="/2020/02/29/RL3/7.png" class="">
-
-<p>$$<br>\begin{eqnarray*}<br>q_\pi(s,a)<br>&amp;=&amp;\mathbb{E}<em>\pi[G_t|S_t=s,A_t=a]\<br>&amp;=&amp;\mathbb{E}<em>\pi[R</em>{t+1}+\gamma G</em>{t+1}]\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma \mathbb{E}<em>\pi[G</em>{t+1}|S_{t+1}=s’])\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{3.2}<br>\end{eqnarray*}<br>$$</p>
-<h3 id="Bellman-Equations-for-v-pi"><a href="#Bellman-Equations-for-v-pi" class="headerlink" title="Bellman Equations for $v_\pi$"></a>Bellman Equations for $v_\pi$</h3><p><strong>Bellamn equation allows us to relate the value of the current state to the value of future states without waiting to observe all the future rewards.</strong><br>With $(3.1),(3.2)$, we can easiy get bellamn equation for $v_\pi$</p>
-<p>$$<br>\begin{eqnarray*}<br>v_\pi(s)<br>&amp;=&amp;\sum_a\pi(a|s)q(s,a)\<br>&amp;=&amp;\sum_a\pi(a|s)\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{3.3}<br>\end{eqnarray*}<br>$$</p>
-<p>$s’$ here stands for next state. <strong>Bellamn equation expresses a relationship between the value of a state and the values of its successor states (next state).</strong>  You can get a more intiutive understanding about how this equation forms though its backup diagram below: <strong>we first choose actions through policy and then transites to a successor state with corresponding reward under environment dynamics</strong>. The open circles represent state nodes and solid circles represent action nodes.</p>
-<img src="/2020/02/29/RL3/4.png" class="">
-
-<h3 id="Bellman-Equations-For-q-pi"><a href="#Bellman-Equations-For-q-pi" class="headerlink" title="Bellman Equations For $q_\pi$"></a>Bellman Equations For $q_\pi$</h3><p>With $(3.1),(3.2)$, we can easiy get bellamn equation for $q_\pi$</p>
-<p>$$<br>\begin{eqnarray*}<br>q_\pi(s,a)<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma\sum_{a’} q_\pi(s’,a’))\tag{3.4}<br>\end{eqnarray*}<br>$$</p>
-<p>$a’$ here stands for actions under possible state $s’$. Similarly, <strong>this equation express a relationship betweeen the value of an action and the values of actions under possible successor state $s’$</strong></p>
-<img src="/2020/02/29/RL3/5.png" class="">
-
-<h3 id="An-Example-of-Value-Function-Grideworld"><a href="#An-Example-of-Value-Function-Grideworld" class="headerlink" title="An Example of Value Function: Grideworld"></a>An Example of Value Function: Grideworld</h3><ul>
-<li><strong>State</strong>: each grid (totally 25 states)</li>
-<li><strong>Action</strong>: north, south, east, and west</li>
-<li><strong>Reward</strong>: actions that would take the agent off the grid leave its location unchanged, but also result in a reward of -1. Other actions results in a reward 0. Every time the agent moves any directions at position A would be transited to A’ with reward +10. This is the same to B and B’ except for reward +5.</li>
-<li><strong>Policy</strong>: random policy, each direction has equal probability, 25%.</li>
-</ul>
-<p>$\gamma=0.9$</p>
-<img src="/2020/02/29/RL3/3.png" class="">
-
-<p>Now, just for curious, we can verify the $v_\pi(s)$ bellman equation in this example. Let’s say we choose center state.</p>
-<p>$$(0.7\times0.9+0)\times0.25+(2.3\times0.9+0)\times0.25+(0.4\times0.9+0)\times0.25\+(-0.4\times0.9+0)\times0.25=0.69\approx0.7$$</p>
-<h3 id="Why-Bellman-Equations"><a href="#Why-Bellman-Equations" class="headerlink" title="Why Bellman Equations?"></a>Why Bellman Equations?</h3><p>We use bellman equations to calculate $v_\pi(s)$ for all $s\in \mathbf{S}$ by solving the system of linear equations.</p>
-<p>Still the previous example, gride world. It has 25 states and we get 25 unknown parameters. For each state we can get a bellman equation, therefore we get 25 equations. Through 25 equations, we sovle them to obtain 25 state values.</p>
-<p>But bellman equation is not pragmatic for many reasons. One of them is that sometimes the number of states is too large and it’s impossible to calculate results in a short time. It can <strong>only solve small MDPs</strong>.</p>
-<hr>
-<h2 id="Optimality-Optimal-Policies-amp-Value-Functions"><a href="#Optimality-Optimal-Policies-amp-Value-Functions" class="headerlink" title="Optimality (Optimal Policies &amp; Value Functions)"></a>Optimality (Optimal Policies &amp; Value Functions)</h2><h3 id="Optimal-Policy"><a href="#Optimal-Policy" class="headerlink" title="Optimal Policy"></a>Optimal Policy</h3><p>A policy $\pi$ is defined to be better than or equal to a policy $\pi’$ if its expected return is greater than or equal to that of $\pi’$ for all states. In other words,</p>
-<p>$$\pi&gt;\pi’ \ \ iff\ v_\pi(s)\ge v_{\pi’}(s)\ for\ all\ s \in \mathbf{S}$$</p>
-<img src="/2020/02/29/RL3/8.png" class="">
-
-<p><strong>There is always at least one deterministic policy that is better than or equal to all other policies. This is an optimal policy.</strong> Although <strong>there may be more than one</strong>, we denote all the optimal policies by $\pi_*$. They share the same state-value function, called the <strong>optimal state-value function</strong>, denoted $v_*$, and the same <strong>optimal action-value function</strong>, denoted $q_*$</p>
-<p>$$v_*(s)\doteq \mathop{max}<em>\pi\ v_\pi(s)\<br>q</em>*(s,a)\doteq \mathop{max}_\pi\ q_\pi(s,a)\<br>for\ all\ s\in \mathbf{S},a\in \mathbf{A}$$</p>
-<h3 id="Optimal-Value-Functions"><a href="#Optimal-Value-Functions" class="headerlink" title="Optimal Value Functions"></a>Optimal Value Functions</h3><p>Because the optimal policy $\pi_*$ is a <strong>deterministic policy</strong>, the optimal action $a_*$ with $\pi(a_*|s)$ equals to 1 and all other actions’ probability equal to 0. We can re-write $v_*$ with bellman equation as below, called <strong>bellman optimality equation for $v_*$</strong>.</p>
-<p>$$<br>\begin{eqnarray*}<br>v_*(s)<br>&amp;=&amp;\mathop{max}<em>\pi\ v_\pi(s)\<br>&amp;=&amp;\mathop{max}<em>a \mathbb{E}[R</em>{t+1}+\gamma v</em><em>(S_{t+1})|S_t=s,A_t=a]\<br>&amp;=&amp;\mathop{max}<em>a\ \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_</em>(s’))\tag{3.5}<br>\end{eqnarray*}<br>$$</p>
-<p>Similarly, <strong>bellman optimality equation for $q_*$</strong> is</p>
-<p>$$<br>\begin{eqnarray*}<br>q_*(s,a)<br>&amp;=&amp;\mathop{max}<em>\pi\ q_\pi(s,a)\<br>&amp;=&amp;\mathbb{E}[R</em>{t+1}+\gamma \mathop{max}<em>{a’}\ q</em><em>(S_{t+1},a’)|S_t=s,A_t=a]\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma \mathop{max}<em>{a’}\ q</em></em>(s’,a’))\tag{3.6}<br>\end{eqnarray*}<br>$$</p>
-<img src="/2020/02/29/RL3/9.png" class="">
-
-<p>The <strong>bellman optimality equations</strong> relate the value of a state or state-action pair, to it’s possible successors under <strong>any optimal policy</strong>.</p>
-<p>Unfortunately, the $max$ funtion here is <strong>not linear</strong>, we <strong>cannot through linear system solver</strong> to directly solve bellman optimality equation to obtain all $v_*$ in MDPs. Although, in principle, one can use a variety of methods for solving systems of nonlinear equations, it is not recommended due to its extreme computational cost.</p>
-<h3 id="Get-Optimal-Policy"><a href="#Get-Optimal-Policy" class="headerlink" title="Get Optimal Policy"></a>Get Optimal Policy</h3><p>Once one has $v_*$, it is relatively easy to determine an optimal policy. Because, for each state $s$, there will be one or more actions at which the maximum is obtained in the Bellman optimality equation. That is to say <strong>any policy that is greedy with respect to the optimal evaluation function $v_*$ is an optimal policy</strong>.</p>
-<img src="/2020/02/29/RL3/10.png" class="">
-
-<p>Having $q_*$ makes choosing optimal actions even easier. The action-value function effectively caches the results of all one-step-ahead searches.</p>
-<img src="/2020/02/29/RL3/11.png" class="">
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2619,7 +2585,7 @@ Name: col3, dtype: object
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

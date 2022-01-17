@@ -164,6 +164,121 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/01/20/Game1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/20/Game1/" class="post-title-link" itemprop="url">博弈论1：为什么囚徒困境是一个困境?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-20 19:48:16" itemprop="dateCreated datePublished" datetime="2020-01-20T19:48:16-05:00">2020-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-06 20:56:51" itemprop="dateModified" datetime="2020-03-06T20:56:51-05:00">2020-03-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Game-Theory/" itemprop="url" rel="index"><span itemprop="name">Game Theory</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>All materials come from <em>Coursera</em>《Game Theory》by Stanford University &amp; The University of British Columbia</p>
+</blockquote>
+<h2 id="囚徒困境"><a href="#囚徒困境" class="headerlink" title="囚徒困境"></a>囚徒困境</h2><p>两个囚犯现在被捕，警察将他们两个分别关在了不同的房间（囚犯之间互相无法交谈），警察为了让他们招供，对两个人分别说了这样一番话：</p>
+<ol>
+<li>若你和他都选择不招供，则在我们目前已有证据的基础上，我们有信心将你们<strong>两个都判1年</strong></li>
+<li>若你选择招供告发他，而他不招供，那么我们将<strong>直接无罪释放你并且他会被判3年</strong></li>
+<li>若你和他都选择了招供，那问题就很简单了，你们将<strong>都被判2年</strong></li>
+</ol>
+<p>现在我们将上述规则以更简练的矩阵形式表示出来  </p>
+<img src="/2020/01/20/Game1/pic1.png" class="">  
+<p>其中C表示囚犯选择与对方合作（Cooperate）即<strong>不招供</strong>，D表示囚犯选择欺骗对方（Defect）即选择<strong>招供</strong>，左边的C和D代表囚犯1可以做的两个选择，同理上方的C和D代表囚犯2可以做的两个选择。举个例子，对于<strong>右上角</strong>的方格，表示<strong>囚犯1选择不招供(C)而囚犯2选择招供(D)<strong>，结果</strong>囚犯1被判了3年而囚犯2无罪释放</strong></p>
+<p>为了进一步说明这个问题，我们先引入一些博弈论的基本概念</p>
+<hr>
+<h2 id="博弈的基本定义"><a href="#博弈的基本定义" class="headerlink" title="博弈的基本定义"></a>博弈的基本定义</h2><p>博弈的基本元素有以下几个：</p>
+<ul>
+<li>玩家（Players）：做出决定的个体</li>
+<li>行动（Actions）：每个玩家可以做出怎样的行动</li>
+<li>奖励/代价（Payoff）：玩家做出每个行动之后会有怎样反馈（例如商人在股票最高点抛售这一行动可以获得最高的收益）</li>
+<li>时序（Timing）：事件发生的顺序（例如大家下棋时轮流交替移动棋子）</li>
+<li>信息（information）：当玩家做出行动时他们都知道什么信息（参与者对其他参与者的了解程度）</li>
+</ul>
+<p>所以<strong>有限n人标准</strong>博弈的数学定义表示为$&lt;N, \mathbf{A}, u&gt;$其中元素分别表示如下含义：</p>
+<ul>
+<li>(1) 玩家的集合$N = {1, 2, …, n}$ 是一个大小为n的有限集合，用$i$标识</li>
+<li>(2) 行动组合的全集$\mathbf{A} = A_1 \times A_2 \times … \times A_n$，其中$A_i$表示玩家$i$的行动集合，若用$a$表示一个行动组合（action profile），则有$a = (a_1, a_2, …, a_n) \in \mathbf{A}$</li>
+<li>(3) 效用(代价)函数组$u = (u_1, u_2, …, u_n)$，其中对于玩家$i$，$u_i: \mathbf{A} \rightarrow \mathbb{R}$，特别注意 ，此处的$u_i$表示一个从行动组合集合$a \in A$到实数$\mathbf{R}$的映射</li>
+</ul>
+<hr>
+<h2 id="支配策略"><a href="#支配策略" class="headerlink" title="支配策略"></a>支配策略</h2><p>我们在参与游戏的时会有一个要实现的<strong>目标</strong>（goal），通常情况下的目标为最大化自己的收益（payoff），但是也可以有别的目标（比如以让对方获得最小收益为目标）</p>
+<p>为实现这个目标我们会有一个对应的<strong>策略</strong>（strategy），<strong>策略</strong>指导玩家该做出什么行动（或选择什么行动）。比如在囚徒困境中，囚犯的策略就是：<strong>做出怎样的选择(招供或不招供)，以使自己被判的时间最短</strong>。这里每个囚犯有两个选择：与另一个囚犯合作（Cooperate）和欺骗另一个囚犯（Deceive），选择合作意味着<strong>不招供</strong>而欺骗意味着<strong>招供</strong>，所以每个囚犯都会思考，如果对方招供的话我该怎么选，如果对方不招供的话我又该怎么选？从而我们这里引入一个概念<strong>支配策略</strong>（dominant strategy）</p>
+<p>支配策略：A dominant strategy for a player is one that produces the highest payoff of any strategy available for every possible action by the other players。通俗点讲就是：不管别人做出怎样的行动，我所做的选择都可以让我得到最大收益。还以囚徒困境举例  </p>
+<p>情况一：当<strong>囚犯2选择C不招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判1年，而D招供那么自己可以无罪释放（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong></p>
+<img src="/2020/01/20/Game1/pic2.png" class="">  
+
+<p>情况二：当<strong>囚犯2选择D招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判3年，而D招供那么自己会被判2年（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong></p>
+<img src="/2020/01/20/Game1/pic3.png" class="">  
+
+<p>综合上述两种情况，我们可以得出结论：<strong>不论囚犯2如何选择，囚犯1的最佳选择都是D招供</strong>（也就是囚犯1的支配策略）。同样的道理，由于囚犯1和囚犯2的地位是<strong>对称的</strong>，所以<strong>囚犯2的支配策略也是D招供</strong></p>
+<h2 id="关于囚徒困境的结论"><a href="#关于囚徒困境的结论" class="headerlink" title="关于囚徒困境的结论"></a>关于囚徒困境的结论</h2><p>根据之前的支配策略的分析，两个囚犯的支配策略都是D招供，从而两个人<strong>都被判2年</strong>。而囚徒困境的令人诧异的地方也就出现于此，我们如果从一个上帝视角来看，很明显，两个囚犯的最佳选择明明是选择都不招供，这样两个人加起来判的时间是最少的，是全局最优解，但是如果从个人角度来分析，就会发现，无论如何他们两个都不会去选择一起合作不招供。这恰恰就是囚徒困境的背景————两个人无法交流即非合作博弈，<strong>其所谓的上帝视角其实是不存在的</strong>，因为将其推广到繁杂的现实，就会发现没有“上帝”可以看到整个全局，没有人的信息是全局的，从而从这个思想出发，反驳了亚当斯密的一个基本观点:所有人的最优选择会形成整个群体的最优选择，因为当所有人做到自己的最优时，对于整个社会来说可能是最坏的（两个囚犯加起来一共判了4年）</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>囚徒困境的标准通式满足：<br>$$c &gt; a &gt; d &gt; b$$</p>
+<img src="/2020/01/20/Game1/pic4.png" class="">
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/01/17/ML13/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -676,192 +791,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/06/17/Database10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/17/Database10/" class="post-title-link" itemprop="url">数据库原理——第十章：数据库恢复技术</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-06-17 19:21:01" itemprop="dateCreated datePublished" datetime="2019-06-17T19:21:01-04:00">2019-06-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-06-18 23:22:56" itemprop="dateModified" datetime="2019-06-18T23:22:56-04:00">2019-06-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><em>参考书目《数据库系统概论（第5版）》</em></p>
-</blockquote>
-<h2 id="事务的基本概念"><a href="#事务的基本概念" class="headerlink" title="事务的基本概念"></a>事务的基本概念</h2><p><strong>事务</strong>是用户定义的一个数据库<strong>操作序列</strong>，这些操作要么全做，要么全不做，是一个不可分割的工作单位<br><strong>COMMIT</strong>操作，即提交，是将事务中所有对数据库的更新写回到磁盘上的物理数据库中<br><strong>ROLLBACK</strong>操作，即回滚，事务运行过程中发生了错误，系统将事务对数据库所有已完成的操作全部撤销，回滚到事务开始时的状态<br>事务的<strong>ACID</strong>特性：</p>
-<ul>
-<li><strong>原子性</strong>（<strong>A</strong>tomicity）：事务是数据库的逻辑工作单位，事务中包括的诸操作要么都做，要么都不做</li>
-<li><strong>一致性</strong>（<strong>C</strong>onsistency）：事务执行的结果必须是使数据库从一个一致状态变到另一个一致状态；一致性与原子性是密切相关的</li>
-<li><strong>隔离性</strong>（<strong>I</strong>solation）：一个事务的执行不能被其他事务干扰</li>
-<li><strong>持续性</strong>（<strong>D</strong>urability）：也称为<strong>永久性</strong>，一个事务一旦提交，他对数据库中的数据改变就应该是永久性的</li>
-</ul>
-<p>ACID可能遭到破坏的因素有：</p>
-<ol>
-<li>多个事务并发运行时，不同事务的操作交叉执行</li>
-<li>事务在运行过程中被强行停止</li>
-</ol>
-<p><strong>数据库恢复</strong>：数据库管理系统把数据库错误状态恢复到某一已知的正确状态（亦称为一致状态）</p>
-<hr>
-<h2 id="故障的种类"><a href="#故障的种类" class="headerlink" title="故障的种类"></a>故障的种类</h2><ol>
-<li><strong>事务内部的故障</strong><br>事务内部的故障指事务执行到某一位置主动选择回滚。例如银行执行扣款时，若余额小于0，则主动执行回滚，回到未扣款前的状态</li>
-<li><strong>系统故障</strong><br>系统故障指造成系统停止运转的任何事件，使得系统要重新启动<br>回复子系统在系统重启后，需要撤销所有未完成的事务，重做所有已提交的事务，以将数据库恢复到一致状态</li>
-<li><strong>介质故障</strong><br>指外存故障，如磁盘损坏、瞬时强磁场干扰、火灾等，破坏性最大</li>
-<li><strong>计算机病毒</strong>  </li>
-</ol>
-<p>各类故障对数据库的影响有两种结果：</p>
-<ol>
-<li>数据库本身被破坏</li>
-<li>数据库未被破坏，但数据可能不正确，这是由于事务的运行被非正常终止造成的</li>
-</ol>
-<hr>
-<h2 id="恢复的实现技术"><a href="#恢复的实现技术" class="headerlink" title="恢复的实现技术"></a>恢复的实现技术</h2><p>恢复的基本原理——<strong>冗余</strong>，常用技术有<strong>数据转储</strong>和<strong>登记日志文件</strong></p>
-<h3 id="数据转储（backup）"><a href="#数据转储（backup）" class="headerlink" title="数据转储（backup）"></a>数据转储（backup）</h3><p><strong>转储</strong>：即数据库管理员定期地将整个数据库复制到其他存储介质上保存起来地过程，备用数据称为<strong>后备副本</strong><br>转储操作十分耗费时间和资源，不能频繁进行<br>转储可分为两种状态：<strong>静态转储</strong>和<strong>动态转储</strong></p>
-<ul>
-<li><strong>静态转储</strong>：在系统中无运行事务时进行的转储操作，转储期间不允许对数据库执行任何存取和修改<ul>
-<li>得到的是一个一致性副本</li>
-<li>降低数据库的可用性</li>
-</ul>
-</li>
-<li><strong>动态转储</strong>：转储期间允许对数据库进行存取和修改，即转储和用户事务可以并发执行<ul>
-<li>必须把转储期间各事务对数据库的修改活动记录下来，建立<strong>日志文件</strong></li>
-</ul>
-</li>
-</ul>
-<p>转储还可分为两种方式：<strong>海量转储</strong>和<strong>增量转储</strong></p>
-<ul>
-<li><strong>海量转储</strong>：每次转储全部数据库</li>
-<li><strong>增量转储</strong>：每次只转储上一次转储后更新过的数据</li>
-</ul>
-<p>转储方法：<strong>动态海量转储</strong>、<strong>动态增量转储</strong>、<strong>静态海量转储</strong>、<strong>静态增量转储</strong></p>
-<h3 id="登记日志文件（logging）"><a href="#登记日志文件（logging）" class="headerlink" title="登记日志文件（logging）"></a>登记日志文件（logging）</h3><p>日志文件是用来记录事务对<strong>数据库地更新操作</strong>的文件<br>日志文件有两种格式：以<strong>记录</strong>为单位的日志文件和以<strong>数据块</strong>为单位的日志文件<br>对于以记录为单位的日志文件，其需要登记的内容包括：</p>
-<ul>
-<li>各个事务的开始标记</li>
-<li>各个事务的结束标记</li>
-<li>各个事务的所有更新操作</li>
-</ul>
-<p>日志文件的作用：</p>
-<ul>
-<li>事务故障恢复和系统故障恢复必须用日志文件</li>
-<li>在动态转储方式中必须建立日志文件，后备副本和日志文件结合起来才能有效的恢复数据库</li>
-<li>在静态转储中也可以建立日志文件，用于加速数据库恢复过程</li>
-</ul>
-<p>为保证数据库是可恢复的，登记日志文件的两条原则：</p>
-<ul>
-<li><strong>登记的次序严格按并发事务执行的时间次序</strong></li>
-<li><strong>必须先写日志文件，后写数据库</strong></li>
-</ul>
-<hr>
-<h2 id="恢复策略"><a href="#恢复策略" class="headerlink" title="恢复策略"></a>恢复策略</h2><h3 id="事务故障的恢复"><a href="#事务故障的恢复" class="headerlink" title="事务故障的恢复"></a>事务故障的恢复</h3><p>事务故障是指在运行至正常终止点前被终止，此时恢复子系统利用日志文件撤销（UNDO）此事务已对数据库进行的修改<br>事务故障的恢复由系统自动完成，对用户是透明的<br>恢复步骤为：</p>
-<ol>
-<li>反向扫描日志文件，查找该事务的更新操作</li>
-<li>对该事务的更新操作执行逆操作</li>
-<li>继续反向扫描日志文件，查找该事务的其他更新操作，并做同样处理</li>
-<li>如此处理下去，直到读到此事务的开始标记，事务故障恢复完成</li>
-</ol>
-<h3 id="系统故障的恢复"><a href="#系统故障的恢复" class="headerlink" title="系统故障的恢复"></a>系统故障的恢复</h3><p>系统故障导致不一致的原因有两个：</p>
-<ul>
-<li>未完成事务对数据库的更新已写入数据库</li>
-<li>已提交事务对数据库的更新可能还停留在缓冲区没来得及写入数据库</li>
-</ul>
-<p>恢复操作就是<strong>撤销故障发生时未完成的事务</strong>和<strong>重做已完成的事务</strong><br>系统故障的恢复由系统在重新启动时自动完成，不需要用户的干预<br>恢复步骤为：</p>
-<ol>
-<li>正向扫描日志文件，找出在故障发生前已经提交的事务，将其事务标识记入重做队列（REDO-LIST）。同时找出故障发生时尚未完成的事务，将其事务标识记入撤销队列（UNDO-LIST）</li>
-<li>对撤销队列中的各个事务进行撤销（UNDO）处理</li>
-<li>对重做队列中的各个事务进行重做（REDO）处理</li>
-</ol>
-<h3 id="介质故障的恢复"><a href="#介质故障的恢复" class="headerlink" title="介质故障的恢复"></a>介质故障的恢复</h3><p>发生介质故障后，磁盘上的物理数据和日志文件被破坏，这是最严重的故障，恢复方法是<strong>重装数据库，然后重做已完成的事务</strong><br>介质故障的恢复需要数据库管理员介入<br>恢复步骤为：</p>
-<ol>
-<li>装入最新的数据库副本</li>
-<li>装入相应的日志文件副本，重做已完成的事务</li>
-</ol>
-<hr>
-<h2 id="具有检查点的恢复技术"><a href="#具有检查点的恢复技术" class="headerlink" title="具有检查点的恢复技术"></a>具有检查点的恢复技术</h2><p>检查点记录的内容包括：</p>
-<ul>
-<li>建立检查点时刻所有正在执行的事务清单</li>
-<li>这些事务最近一个日志记录的地址</li>
-</ul>
-<p>重新开始文件用来记录各个检查点记录在日志文件中的地址<br><strong>动态维护日志文件的方法是，周期性地执行建立检查点、保存数据库状态的操作</strong>，具体步骤为：  </p>
-<ol>
-<li>将当前日志缓冲区中的所有日志记录写入磁盘的日志文件上</li>
-<li>在日志文件中写入一个检查点记录</li>
-<li>将当前数据缓冲区的所有数据记录写入磁盘的数据库中</li>
-<li>把检查点记录在日志文件中的地址写入一个重新开始文件</li>
-</ol>
-<p><strong>简化为：保存日志 -&gt; 生成检查点 -&gt; 保存数据提交到数据库 -&gt; 将检查点写入重新开始文件</strong><br><strong>使用检查点方法可以改善恢复效率</strong><br>系统使用检查点方法进行恢复的步骤：</p>
-<ol>
-<li>从重新开始文件中找到最后一个检查点记录在日志文件中的地址，利用该地址找到日志文件中最后一个检查点记录</li>
-<li>由该检查点记录得到检查点建立时刻所有正在执行的事务清单，并将其做为UNDO-LIST。另外新建一个空的REDO-LIST</li>
-<li>从检查点开始正向扫描日志文件<ul>
-<li>如有新开始的事务T，将T加入UNDO-LIST</li>
-<li>如有提交的事务J，<strong>将J从UNDO-LIST移入REDO-LIST</strong></li>
-</ul>
-</li>
-<li>对UNDO-LIST中的每个事务执行<strong>撤销</strong>操作；对REDO-LIST中的每个事务执行<strong>重做</strong>操作</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -933,7 +862,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

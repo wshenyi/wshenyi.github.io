@@ -164,6 +164,224 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/05/07/Network1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/07/Network1/" class="post-title-link" itemprop="url">计算机网络——第一章：计算机网络和因特网</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-07 20:41:31" itemprop="dateCreated datePublished" datetime="2019-05-07T20:41:31-04:00">2019-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-06-17 07:49:42" itemprop="dateModified" datetime="2019-06-17T07:49:42-04:00">2019-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><em>参考书目《计算机网络：自顶向下方法（第七版）》</em></p>
+</blockquote>
+<h2 id="什么是因特网"><a href="#什么是因特网" class="headerlink" title="什么是因特网"></a>什么是因特网</h2><ul>
+<li><p>通常把与因特网相连的计算机和其他设备称为<strong>端系统</strong></p>
+</li>
+<li><p>端系统通过<strong>通信链路</strong>和<strong>分组交换机</strong>连接在一起</p>
+</li>
+<li><p>分组交换机：路由器和链路层交换机</p>
+</li>
+<li><p>链路层交换机通常用于接入网，而路由器通常用于网络核心中</p>
+</li>
+<li><p>端系统通过<strong>因特网服务提供商(Internet Service Provider, ISP)接入因特网</strong></p>
+</li>
+<li><p>因特网标准(Internet Standard)由<strong>因特网工程任务组(Internet Engineering Task, Force, IETF)<strong>研发，</strong>IETF</strong>的标准文档称为<strong>请求评论(Request For Comment, RFC)</strong></p>
+</li>
+</ul>
+<hr>
+<h2 id="网络边缘"><a href="#网络边缘" class="headerlink" title="网络边缘"></a>网络边缘</h2><ul>
+<li><p><strong>接入网</strong>是指将端系统物理连接到其<strong>边缘路由器</strong>的网络</p>
+<ol>
+<li>家庭接入：数字用户线(Digital Subscriber Line, DSL)、电缆、光纤到户(Fiber To The Home, FTTH)、拨号和卫星</li>
+<li>企业(和家庭接入)：以太网、WiFi</li>
+<li>广域无线接入：4G和LTE</li>
+</ol>
+</li>
+<li><p>因特网传输的<strong>物理媒介</strong>：</p>
+<ul>
+<li>导引型媒介：双绞铜线、同轴电缆、光纤</li>
+<li>非导引型媒介：陆地无线电信道、卫星无线电信道</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="网络核心"><a href="#网络核心" class="headerlink" title="网络核心"></a>网络核心</h2><p>通过网络链路和交换机移动数据有两种基本方法：<strong>电路交换</strong>和<strong>分组交换</strong></p>
+<h3 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h3><ul>
+<li>源将长报文划分为较小的数据块，称之为<strong>分组</strong></li>
+<li>多数分组交换机在链路的输入端使用<strong>存储转发</strong>机制，<strong>存储转发</strong>传输是指在交换机能够开始向链路传输该分组的第一个比特之前，必须接收到整个分组</li>
+<li>分组交换网路采用**统计复用(Statistical Multiplexing)**原则，意味着在一个处理节点，数据包分组的到达的分布是符合统计学分布(泊松分布)；基于统计复用的系统，就叫做排队系统</li>
+<li>对于每条相连的链路，该分组交换机具有一个<strong>输出缓存</strong>(也称为<strong>输出队列</strong>)，它用于存储路由器准备发往那条链路的分组。</li>
+<li>分组可能需要承担<strong>存储转发时延</strong>、<strong>排队时延</strong>甚至<strong>分组丢失</strong></li>
+<li>每台路由器具有一个<strong>转发表</strong>，用于目的地址（或目的地址的一部分）映射成为输出链路。<strong>路由选择协议</strong>用于自动的设置这些转发表</li>
+</ul>
+<h3 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h3><ul>
+<li>在电路交换网络中，在端系统间通信会话期间，<strong>预留</strong>了端系统间沿路径通信所需要的资源（缓存，链路传输速率）；在分组交换网络中是不预留的</li>
+<li>链路中的电路是通过**频分复用(FDM)<strong>或</strong>时分复用(TDM)**来实现的，如下图所示<img src="/2019/05/07/Network1/1.png" class=""></li>
+<li>对于FDM<ul>
+<li>在连接期间链路为每条连接分配一个专用频段，该频段的宽度称为<strong>带宽</strong></li>
+<li>个人理解：将总带宽根据用户人数划分给每个用户，每个用户只分得总带宽的一部分，但所有用户同一时间互不干扰</li>
+</ul>
+</li>
+<li>对于TDM<ul>
+<li>时间被划分为固定期间的<strong>帧</strong>，并且每个<strong>帧</strong>又被划分为固定数量的<strong>时隙</strong>，网络在每个帧中为每个连接指定一个时隙，该时隙专门由该连接单独使用</li>
+<li>个人理解：类似于操作系统中CPU轮转调度，每个连接轮着使用，并在使用期间内独享物理最大带宽</li>
+<li>从而对于TDM，一条电路的传输速率等于帧速率乘以一个时隙中的比特数量</li>
+</ul>
+</li>
+</ul>
+<h3 id="分组交换与电路交换的对比"><a href="#分组交换与电路交换的对比" class="headerlink" title="分组交换与电路交换的对比"></a>分组交换与电路交换的对比</h3><ol>
+<li>电路交换在<em>静默期</em>中电路资源被浪费了；创建端到端电路和预留端到端带宽是复杂的</li>
+<li>分组交换不适合实时服务，因为它的端到端时延是可变的和不可预测的</li>
+<li>分组交换提供了比电路交换更好的<strong>带宽共享</strong>,允许更多的用户使用网络；它比电路交换更简单、更有效、实现成本更低</li>
+</ol>
+<hr>
+<h2 id="分组交换网络中的时延、丢包和吞吐量"><a href="#分组交换网络中的时延、丢包和吞吐量" class="headerlink" title="分组交换网络中的时延、丢包和吞吐量"></a>分组交换网络中的时延、丢包和吞吐量</h2><h3 id="时延概述"><a href="#时延概述" class="headerlink" title="时延概述"></a>时延概述</h3><ul>
+<li><p>时延类型：</p>
+<ul>
+<li>处理时延($d_{proc}$)：检查分组首部、确定分组去向、检查差错等</li>
+<li>排队时延($d_{queue}$)：分组在队列中等待被传输的时间</li>
+<li>传输时延($d_{trans}$)：接收到整个分组的时间<br>用$L$比特表示分组的长度，用$R$bps表示从路由器A到路由器B的链路传输速率，则传输时延为$\frac{L}{R}$</li>
+<li>传播时延($d_{prop}$)：一个比特从链路的起点到到终点在媒介中传播所需的时间</li>
+</ul>
+</li>
+<li><p>节点总时延<br>  $$d_{nodal} = d_{proc} + d_{queue} + d_{trans} + d_{prop}$$</p>
+</li>
+</ul>
+<h3 id="排队时延和丢包"><a href="#排队时延和丢包" class="headerlink" title="排队时延和丢包"></a>排队时延和丢包</h3><ul>
+<li>排队时延对于不同的分组可能是不同的</li>
+<li>令$a$表示分组到达队列的平均速率(a的单位为分组/秒，即pkt/s)，传输速率$R$bps，假定所有分组长度为$L$比特，则比特到达队列的<strong>平均速率</strong>是$La$bps；再假设队列容量为无穷，则<strong>流量强度</strong>定义为$\frac{La}{R}$</li>
+<li>平均排队时延与流量强度的关系如下  <img src="/2019/05/07/Network1/2.png" class="">
+<ul>
+<li>$\frac{La}{R} \rightarrow 0$平均排队时延很小</li>
+<li>$\frac{La}{R} \rightarrow 1$排队时延趋进于无穷</li>
+</ul>
+</li>
+<li>实际中队列容量是有限的，因而当队列容量满时，路由器将<strong>丢弃</strong>新到达的分组，也就是<strong>丢包</strong></li>
+</ul>
+<h3 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h3><ul>
+<li><strong>瞬间吞吐量</strong>指主机在某一时刻接受文件的速率</li>
+<li><strong>平均吞吐量</strong>$\frac{F}{T}$bps表示接收到所有$F$比特用了$T$秒</li>
+<li>吞吐量取决于数据流过的链路的传输速率。也就是说，其近似为沿着源和目的地之间路径的最小传输速率</li>
+</ul>
+<hr>
+<h2 id="协议层次及其服务模型"><a href="#协议层次及其服务模型" class="headerlink" title="协议层次及其服务模型"></a>协议层次及其服务模型</h2><ul>
+<li><p>分层的优点<br>改变服务的实现而不影响该系统其他组件(利于维护更新)<br>简化网络系统  </p>
+</li>
+<li><p>分层的缺点<br>高层可能冗余较低层的功能(例如许多协议在基于每段链路和基于端到端两种情况下，都提供了差错恢复)<br>某层的功能可能需要仅在其他某层才出现的信息(如时间戳值)，这违反了层次分离的目标  </p>
+</li>
+<li><p>TCP/IP的5层协议栈，在每一层，一个分组具有两种两种类型的字段：<strong>首部字段</strong>和<strong>有效载荷字段</strong>。<strong>有效载荷</strong>通常是来自上一层的分组</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">自上而下</th>
+<th align="center">载体</th>
+<th align="center">协议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">应用层</td>
+<td align="center">message</td>
+<td align="center">FTP,SMTP,HTTP</td>
+</tr>
+<tr>
+<td align="center">运输层</td>
+<td align="center">segment</td>
+<td align="center">TCP,UDP</td>
+</tr>
+<tr>
+<td align="center">网络层</td>
+<td align="center">datagram/packet</td>
+<td align="center">IP,路由协议</td>
+</tr>
+<tr>
+<td align="center">链路层</td>
+<td align="center">frame</td>
+<td align="center">PPP,以太网</td>
+</tr>
+<tr>
+<td align="center">物理层</td>
+<td align="center">bit/Byte</td>
+<td align="center">-</td>
+</tr>
+</tbody></table>
+<p>OSI将计算机网络体系结构(architecture）划分为以下七层：</p>
+<ul>
+<li>应用层: 提供应用程序间通信</li>
+<li>表示层: 处理数据格式、数据加密等（表示层的目的是表示出用户看得懂的数据格式，实现与数据表示有关的功能。<br>主要完成数据字符集的转换，数据格式化和文本压缩，数据加密、解密等工作）</li>
+<li>会话层: 建立、维护和管理会话</li>
+<li>传输层: 建立主机端到端连接</li>
+<li>网络层: 寻址和路由选择</li>
+<li>数据链路层: 提供介质访问、链路管理等</li>
+<li>物理层: 比特流传输</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/05/04/Others1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1143,156 +1361,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/04/26/Database5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/26/Database5/" class="post-title-link" itemprop="url">数据库原理——第五章：数据库完整性</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-26 19:42:51" itemprop="dateCreated datePublished" datetime="2019-04-26T19:42:51-04:00">2019-04-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-06-18 09:10:38" itemprop="dateModified" datetime="2019-06-18T09:10:38-04:00">2019-06-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><em>参考书目《数据库系统概论（第5版）》</em></p>
-</blockquote>
-<p>数据库的<strong>完整性</strong>是指数据的<strong>正确性</strong>和<strong>相容性</strong></p>
-<ul>
-<li>数据的<strong>正确性</strong>是指数据是符合现实世界语义、反映当前实际状况的（实体完整性和用户定义的完整性）</li>
-<li>数据的<strong>相容性</strong>是指数据库同一对象在不同关系表中的数据是符合逻辑的（参照完整性）</li>
-</ul>
-<h2 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h2><p>关系模式的实体完整性在<code>CREATE TABLE</code>中用<code>PRIMARY KEY</code>定义<br>单属性构成的码有两种说明方式：列级约束条件、表级约束条件<br>多属性构成的码只有一种说明方式：表级约束<br>实体完整性检查和违约处理：</p>
-<ul>
-<li>检验主码值是否唯一，如果不唯一则拒绝插入或修改</li>
-<li>检查主码的各个属性是否为空，只要有一个为空就拒绝插入或修改</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE XXX(</span><br><span class="line">  Sno CHAR(20) PRIMARY KEY,  /*单属性可以在列级定义主码*/</span><br><span class="line">  PRIMARY KEY(Sno,Cno,...),  /*多属性只能在表级定义主码*/</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="参照完整性"><a href="#参照完整性" class="headerlink" title="参照完整性"></a>参照完整性</h2><p>关系模式的参照完整性在<code>CREATE TABLE</code>中用<code>FORIEGN KEY</code>短语定义哪些属性为<em>外码</em>,用<code>REFERENCES</code>指明这些外码参照哪些表的主码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE XXX(</span><br><span class="line">  Cno CHAR(20),</span><br><span class="line">  FOREIGN KEY(Cno) REFERENCES Course(Cno), /*在表级定义参照完整性*/</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>可能破坏参照完整性的情况及违约处理：</p>
-<table>
-<thead>
-<tr>
-<th align="center">被参照表&lt;=&gt;参照表</th>
-<th align="center">违约处理</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">可能破坏参照完整性&lt;-插入元组</td>
-<td align="center">拒绝</td>
-</tr>
-<tr>
-<td align="center">可能破坏参照完整性&lt;-修改外码值</td>
-<td align="center">拒绝</td>
-</tr>
-<tr>
-<td align="center">删除元组-&gt;可能破坏参照完整性</td>
-<td align="center">拒绝/级联删除/设为空值</td>
-</tr>
-<tr>
-<td align="center">修改主码值-&gt;可能破坏参照完整性</td>
-<td align="center">拒绝/级联删除/设为空值</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="用户定义的完整性"><a href="#用户定义的完整性" class="headerlink" title="用户定义的完整性"></a>用户定义的完整性</h2><p>用户定义的完整性就是针对某一具体应用的数据必须满足的语义要求<br>在<code>CREATE TABLE</code>中定义属性的同时，可以根据应用的要求定义<em>属性上</em>的约束条件，即<strong>属性值的限制</strong>，包括：</p>
-<ul>
-<li>列值非空（<code>NOT NULL</code>）</li>
-<li>值唯一（<code>UNIQUE</code>）</li>
-<li>检查列值是否满足一个条件表达式（<code>CHECK</code>短语）</li>
-</ul>
-<p>与属性上约束条件的定义类似，在<code>CREATE TABLE</code>语句中可以用<code>CHECK</code>短语定义<em>元组上</em>的约束条件，即<strong>元组级的限制</strong>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE Student(</span><br><span class="line">  Sno CHAR(9) UNIQUE NOT NULL, /*要求Sno值唯一且不能为空*/</span><br><span class="line">  Sname CHAR(8) NOT NULL,</span><br><span class="line">  Sage int CHECK(Sage &gt;= 15 AND Sage &lt;= 50) /*列级CHECK短语*/</span><br><span class="line">  Ssex CHAR(2),</span><br><span class="line">  CHECK(Ssex=&#x27;女&#x27; OR Sname NOT LIKE&#x27;Ms.%&#x27;)  /*定义了元组中两个属性值之间的约束*/</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="完整性约束命名子句"><a href="#完整性约束命名子句" class="headerlink" title="完整性约束命名子句"></a>完整性约束命名子句</h2><p>用完整性约束命名子句<code>CONSTRAINT</code>，用来对完整性约束条件命名，从而便于管理完整性约束条件  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONSTRAINT &lt;完整性约束条件名&gt; &lt;完整性约束条件&gt;</span><br></pre></td></tr></table></figure>
-
-<p>其中&lt;完整性约束条件&gt;包括<code>NOT NULL</code>、<code>UNIQUE</code>、<code>PRIMARY KEY</code>、<code>FOREIGN KEY</code>、<code>CHECK</code>等</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">CREATE TABLE Student(</span><br><span class="line">  Sno NUMERIC(6),</span><br><span class="line">  Sname CHAR(20),</span><br><span class="line">  Sage NUMERIC(3) NOT NULL,</span><br><span class="line">  CONSTRAINT StudentKey PRIMARY KEY(Sno),</span><br><span class="line">  CONSTRAINT SnameKey FOREIGN KEY(Sname) REFERENCES Course(Sname),</span><br><span class="line">  CONSTRAINT C1 CHECK(Sno BETWEEN 90000 AND 99999),</span><br><span class="line">  CONSTRAINT C2 UNIQUE(Sname)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>修改表中的完整性限制，可以先删除原来的约束条件，再增加新的约束条件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;表名&gt; DROP CONSTRAINT &lt;完整性约束条件名&gt;</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD  CONSTRAINT &lt;完整性约束条件名&gt; &lt;完整性约束条件&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><p><strong>触发器</strong>(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程<br>触发器类似于约束，但是比约束更加灵活，可以实施更为复杂的检查和操作，具有更精细和更强大的数据控制能力</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/*触发器一般格式*/</span><br><span class="line">CREATE TRIGGER &lt;触发器名&gt;</span><br><span class="line">[BEFORE|AFTER] [INSERT|DELETE|UPDATE] ON &lt;表名&gt;</span><br><span class="line">FOR EACH [ROW|STATEMENT]</span><br><span class="line">BEGIN</span><br><span class="line">  &lt;执行语句列表&gt;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
-
-<p>例如：建立触发器t1，当插入学生的年龄小于18岁时进行报错提示</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $   /*告诉mysql语句的结尾符号换成以$结束*/</span><br><span class="line">CREATE TRIGGER t1</span><br><span class="line">BEFORE INSERT ON Student</span><br><span class="line">FOR EACH ROW</span><br><span class="line">BEGIN</span><br><span class="line">    DECLARE msg VARCHAR(200);</span><br><span class="line">    IF NEW.Sage &lt; 18 THEN</span><br><span class="line">        SET msg = CONCAT(&#x27;输入的年龄值: &#x27;,NEW.Sage,&#x27; 为无效的年龄，请确保学生年龄大于18岁&#x27;);</span><br><span class="line">        SIGNAL SQLSTATE &#x27;HY000&#x27; SET MESSAGE_TEXT = msg;</span><br><span class="line">    END IF;</span><br><span class="line">END$</span><br><span class="line">DELIMITER ;    /*将结尾符号换回以;结束*/</span><br></pre></td></tr></table></figure>
-
-<p>MySQL 中定义了<code>NEW</code>和<code>OLD</code>，用来表示触发器的所在表中，触发了触发器的那一行数据，来引用触发器中发生变化的记录内容，具体地：</p>
-<ol>
-<li>在<code>INSERT</code>型触发器中，<code>NEW</code>用来表示将要（<code>BEFORE</code>）或已经（<code>AFTER</code>）插入的新数据</li>
-<li>在<code>UPDATE</code>型触发器中，<code>OLD</code>用来表示将要或已经被修改的原数据，<code>NEW</code>用来表示将要或已经修改为的新数据</li>
-<li>在<code>DELETE</code>型触发器中，<code>OLD</code>用来表示将要或已经被删除的原数据</li>
-<li>另外<code>OLD</code>是只读的，而<code>NEW</code>则可以在触发器中赋值，这样不会再次触发触发器，导致递归循环调用</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1364,7 +1432,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

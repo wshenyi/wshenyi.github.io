@@ -164,6 +164,152 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/29/RL3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/29/RL3/" class="post-title-link" itemprop="url">RL3：Value Functions & Bellman Equations</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-29 11:14:01" itemprop="dateCreated datePublished" datetime="2020-02-29T11:14:01-05:00">2020-02-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-17 11:19:49" itemprop="dateModified" datetime="2020-03-17T11:19:49-04:00">2020-03-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reinforcement-Learning/" itemprop="url" rel="index"><span itemprop="name">Reinforcement Learning</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<blockquote>
+<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
+</blockquote>
+<h2 id="Policies-and-Value-Functions"><a href="#Policies-and-Value-Functions" class="headerlink" title="Policies and Value Functions"></a>Policies and Value Functions</h2><h3 id="Policy"><a href="#Policy" class="headerlink" title="Policy"></a>Policy</h3><p>Formally, a <strong>policy</strong> is a mapping from <strong>states</strong> to probabilities of selecting each possible <strong>action</strong>.</p>
+<ul>
+<li><strong>deterministic policy</strong>, denote $\pi(s)=a$: one state correspond to one action</li>
+<li><strong>stochastic policy</strong>, $\pi(a|s)$: a probability distribution over all visable actions</li>
+</ul>
+<img src="/2020/02/29/RL3/1.png" class="">
+<img src="/2020/02/29/RL3/2.png" class="">
+
+<p>It’s important that <strong>policies depend only on the current state</strong>, not on other things like time or previous states.</p>
+<h3 id="State-value-Function"><a href="#State-value-Function" class="headerlink" title="State-value Function"></a>State-value Function</h3><p>Almost all reinforcement learning algorithms involve <strong>estimating value functions</strong> – functions of states (or of state–action pairs) that estimate <strong>how good</strong> it is for the agent to be in a given state (or <strong>how good</strong> it is to perform a given action in a given state), which means value function predicts reward into future.</p>
+<p>The value function of a state $s$ under a policy $\pi$, denoted $v_\pi(s)$, is <strong>the expected return when starting in $s$ and following $\pi$ thereafter</strong>. For MDPs, we can define $v_\pi$ formally by</p>
+<p>$$v_\pi(s)\doteq \mathbb{E}<em>\pi[G_t|S_t=s]=\mathbb{E}<em>\pi[\sum</em>{k=0}^\infty \gamma^kR</em>{t+k+1}|S_t=s],\ for\ all\ s\in \mathbf{S}$$</p>
+<p>We call the function $v_\pi$ the <strong>state-value function for policy $\pi$</strong></p>
+<h3 id="Action-value-Function"><a href="#Action-value-Function" class="headerlink" title="Action-value Function"></a>Action-value Function</h3><p>Similarly, we define the value of taking action $a$ in state $s$ under a policy $\pi$, denoted $q_\pi(s,a)$, as <strong>the expected return starting from $s$, taking the action $a$, and thereafter following policy $\pi$</strong>:</p>
+<p>$$q_\pi(s,a)\doteq \mathbb{E}<em>\pi[G_t|S_t=s,A_t=a]=\mathbb{E}<em>\pi[\sum</em>{k=0}^\infty \gamma^kR</em>{t+k+1}|S_t=s,A_t=a]$$</p>
+<p>We call the function $q_\pi$ the <strong>action-value function for policy \pi</strong>,</p>
+<hr>
+<h2 id="Bellman-Equations"><a href="#Bellman-Equations" class="headerlink" title="Bellman Equations"></a>Bellman Equations</h2><h3 id="Transform-Between-v-pi-And-q-pi"><a href="#Transform-Between-v-pi-And-q-pi" class="headerlink" title="Transform Between $v_\pi$ And $q_\pi$"></a>Transform Between $v_\pi$ And $q_\pi$</h3><p>Through the given diagram, we can derivate an equation for $v_\pi$ in terms of $q_\pi$ and $\pi$.</p>
+<img src="/2020/02/29/RL3/6.png" class="">
+
+<p>$$<br>\begin{eqnarray*}<br>v_\pi(s)<br>&amp;=&amp;\mathbb{E}<em>\pi[G_t|S_t=s]\<br>&amp;=&amp;\sum_a\pi(a|s)\mathbb{E}[G_t|S_t=s,A_t=a]\<br>&amp;=&amp;\sum_a\pi(a|s)q(s,a)\tag{3.1}<br>\end{eqnarray*}<br>$$<br>Recall that $G_t=R</em>{t+1}+\gamma G_{t+1}$. With given diagram below, we can derivate an equation for $q_\pi$ in terms of $v_\pi$ and $p(s’,r|s,a)$. (use markov property to simplify original equation)</p>
+<img src="/2020/02/29/RL3/7.png" class="">
+
+<p>$$<br>\begin{eqnarray*}<br>q_\pi(s,a)<br>&amp;=&amp;\mathbb{E}<em>\pi[G_t|S_t=s,A_t=a]\<br>&amp;=&amp;\mathbb{E}<em>\pi[R</em>{t+1}+\gamma G</em>{t+1}]\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma \mathbb{E}<em>\pi[G</em>{t+1}|S_{t+1}=s’])\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{3.2}<br>\end{eqnarray*}<br>$$</p>
+<h3 id="Bellman-Equations-for-v-pi"><a href="#Bellman-Equations-for-v-pi" class="headerlink" title="Bellman Equations for $v_\pi$"></a>Bellman Equations for $v_\pi$</h3><p><strong>Bellamn equation allows us to relate the value of the current state to the value of future states without waiting to observe all the future rewards.</strong><br>With $(3.1),(3.2)$, we can easiy get bellamn equation for $v_\pi$</p>
+<p>$$<br>\begin{eqnarray*}<br>v_\pi(s)<br>&amp;=&amp;\sum_a\pi(a|s)q(s,a)\<br>&amp;=&amp;\sum_a\pi(a|s)\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{3.3}<br>\end{eqnarray*}<br>$$</p>
+<p>$s’$ here stands for next state. <strong>Bellamn equation expresses a relationship between the value of a state and the values of its successor states (next state).</strong>  You can get a more intiutive understanding about how this equation forms though its backup diagram below: <strong>we first choose actions through policy and then transites to a successor state with corresponding reward under environment dynamics</strong>. The open circles represent state nodes and solid circles represent action nodes.</p>
+<img src="/2020/02/29/RL3/4.png" class="">
+
+<h3 id="Bellman-Equations-For-q-pi"><a href="#Bellman-Equations-For-q-pi" class="headerlink" title="Bellman Equations For $q_\pi$"></a>Bellman Equations For $q_\pi$</h3><p>With $(3.1),(3.2)$, we can easiy get bellamn equation for $q_\pi$</p>
+<p>$$<br>\begin{eqnarray*}<br>q_\pi(s,a)<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma\sum_{a’} q_\pi(s’,a’))\tag{3.4}<br>\end{eqnarray*}<br>$$</p>
+<p>$a’$ here stands for actions under possible state $s’$. Similarly, <strong>this equation express a relationship betweeen the value of an action and the values of actions under possible successor state $s’$</strong></p>
+<img src="/2020/02/29/RL3/5.png" class="">
+
+<h3 id="An-Example-of-Value-Function-Grideworld"><a href="#An-Example-of-Value-Function-Grideworld" class="headerlink" title="An Example of Value Function: Grideworld"></a>An Example of Value Function: Grideworld</h3><ul>
+<li><strong>State</strong>: each grid (totally 25 states)</li>
+<li><strong>Action</strong>: north, south, east, and west</li>
+<li><strong>Reward</strong>: actions that would take the agent off the grid leave its location unchanged, but also result in a reward of -1. Other actions results in a reward 0. Every time the agent moves any directions at position A would be transited to A’ with reward +10. This is the same to B and B’ except for reward +5.</li>
+<li><strong>Policy</strong>: random policy, each direction has equal probability, 25%.</li>
+</ul>
+<p>$\gamma=0.9$</p>
+<img src="/2020/02/29/RL3/3.png" class="">
+
+<p>Now, just for curious, we can verify the $v_\pi(s)$ bellman equation in this example. Let’s say we choose center state.</p>
+<p>$$(0.7\times0.9+0)\times0.25+(2.3\times0.9+0)\times0.25+(0.4\times0.9+0)\times0.25\+(-0.4\times0.9+0)\times0.25=0.69\approx0.7$$</p>
+<h3 id="Why-Bellman-Equations"><a href="#Why-Bellman-Equations" class="headerlink" title="Why Bellman Equations?"></a>Why Bellman Equations?</h3><p>We use bellman equations to calculate $v_\pi(s)$ for all $s\in \mathbf{S}$ by solving the system of linear equations.</p>
+<p>Still the previous example, gride world. It has 25 states and we get 25 unknown parameters. For each state we can get a bellman equation, therefore we get 25 equations. Through 25 equations, we sovle them to obtain 25 state values.</p>
+<p>But bellman equation is not pragmatic for many reasons. One of them is that sometimes the number of states is too large and it’s impossible to calculate results in a short time. It can <strong>only solve small MDPs</strong>.</p>
+<hr>
+<h2 id="Optimality-Optimal-Policies-amp-Value-Functions"><a href="#Optimality-Optimal-Policies-amp-Value-Functions" class="headerlink" title="Optimality (Optimal Policies &amp; Value Functions)"></a>Optimality (Optimal Policies &amp; Value Functions)</h2><h3 id="Optimal-Policy"><a href="#Optimal-Policy" class="headerlink" title="Optimal Policy"></a>Optimal Policy</h3><p>A policy $\pi$ is defined to be better than or equal to a policy $\pi’$ if its expected return is greater than or equal to that of $\pi’$ for all states. In other words,</p>
+<p>$$\pi&gt;\pi’ \ \ iff\ v_\pi(s)\ge v_{\pi’}(s)\ for\ all\ s \in \mathbf{S}$$</p>
+<img src="/2020/02/29/RL3/8.png" class="">
+
+<p><strong>There is always at least one deterministic policy that is better than or equal to all other policies. This is an optimal policy.</strong> Although <strong>there may be more than one</strong>, we denote all the optimal policies by $\pi_*$. They share the same state-value function, called the <strong>optimal state-value function</strong>, denoted $v_*$, and the same <strong>optimal action-value function</strong>, denoted $q_*$</p>
+<p>$$v_*(s)\doteq \mathop{max}<em>\pi\ v_\pi(s)\<br>q</em>*(s,a)\doteq \mathop{max}_\pi\ q_\pi(s,a)\<br>for\ all\ s\in \mathbf{S},a\in \mathbf{A}$$</p>
+<h3 id="Optimal-Value-Functions"><a href="#Optimal-Value-Functions" class="headerlink" title="Optimal Value Functions"></a>Optimal Value Functions</h3><p>Because the optimal policy $\pi_*$ is a <strong>deterministic policy</strong>, the optimal action $a_*$ with $\pi(a_*|s)$ equals to 1 and all other actions’ probability equal to 0. We can re-write $v_*$ with bellman equation as below, called <strong>bellman optimality equation for $v_*$</strong>.</p>
+<p>$$<br>\begin{eqnarray*}<br>v_*(s)<br>&amp;=&amp;\mathop{max}<em>\pi\ v_\pi(s)\<br>&amp;=&amp;\mathop{max}<em>a \mathbb{E}[R</em>{t+1}+\gamma v</em><em>(S_{t+1})|S_t=s,A_t=a]\<br>&amp;=&amp;\mathop{max}<em>a\ \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_</em>(s’))\tag{3.5}<br>\end{eqnarray*}<br>$$</p>
+<p>Similarly, <strong>bellman optimality equation for $q_*$</strong> is</p>
+<p>$$<br>\begin{eqnarray*}<br>q_*(s,a)<br>&amp;=&amp;\mathop{max}<em>\pi\ q_\pi(s,a)\<br>&amp;=&amp;\mathbb{E}[R</em>{t+1}+\gamma \mathop{max}<em>{a’}\ q</em><em>(S_{t+1},a’)|S_t=s,A_t=a]\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma \mathop{max}<em>{a’}\ q</em></em>(s’,a’))\tag{3.6}<br>\end{eqnarray*}<br>$$</p>
+<img src="/2020/02/29/RL3/9.png" class="">
+
+<p>The <strong>bellman optimality equations</strong> relate the value of a state or state-action pair, to it’s possible successors under <strong>any optimal policy</strong>.</p>
+<p>Unfortunately, the $max$ funtion here is <strong>not linear</strong>, we <strong>cannot through linear system solver</strong> to directly solve bellman optimality equation to obtain all $v_*$ in MDPs. Although, in principle, one can use a variety of methods for solving systems of nonlinear equations, it is not recommended due to its extreme computational cost.</p>
+<h3 id="Get-Optimal-Policy"><a href="#Get-Optimal-Policy" class="headerlink" title="Get Optimal Policy"></a>Get Optimal Policy</h3><p>Once one has $v_*$, it is relatively easy to determine an optimal policy. Because, for each state $s$, there will be one or more actions at which the maximum is obtained in the Bellman optimality equation. That is to say <strong>any policy that is greedy with respect to the optimal evaluation function $v_*$ is an optimal policy</strong>.</p>
+<img src="/2020/02/29/RL3/10.png" class="">
+
+<p>Having $q_*$ makes choosing optimal actions even easier. The action-value function effectively caches the results of all one-step-ahead searches.</p>
+<img src="/2020/02/29/RL3/11.png" class="">
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/28/RL2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -662,121 +808,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/01/20/Game1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/20/Game1/" class="post-title-link" itemprop="url">博弈论1：为什么囚徒困境是一个困境?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-20 19:48:16" itemprop="dateCreated datePublished" datetime="2020-01-20T19:48:16-05:00">2020-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-06 20:56:51" itemprop="dateModified" datetime="2020-03-06T20:56:51-05:00">2020-03-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Game-Theory/" itemprop="url" rel="index"><span itemprop="name">Game Theory</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>All materials come from <em>Coursera</em>《Game Theory》by Stanford University &amp; The University of British Columbia</p>
-</blockquote>
-<h2 id="囚徒困境"><a href="#囚徒困境" class="headerlink" title="囚徒困境"></a>囚徒困境</h2><p>两个囚犯现在被捕，警察将他们两个分别关在了不同的房间（囚犯之间互相无法交谈），警察为了让他们招供，对两个人分别说了这样一番话：</p>
-<ol>
-<li>若你和他都选择不招供，则在我们目前已有证据的基础上，我们有信心将你们<strong>两个都判1年</strong></li>
-<li>若你选择招供告发他，而他不招供，那么我们将<strong>直接无罪释放你并且他会被判3年</strong></li>
-<li>若你和他都选择了招供，那问题就很简单了，你们将<strong>都被判2年</strong></li>
-</ol>
-<p>现在我们将上述规则以更简练的矩阵形式表示出来  </p>
-<img src="/2020/01/20/Game1/pic1.png" class="">  
-<p>其中C表示囚犯选择与对方合作（Cooperate）即<strong>不招供</strong>，D表示囚犯选择欺骗对方（Defect）即选择<strong>招供</strong>，左边的C和D代表囚犯1可以做的两个选择，同理上方的C和D代表囚犯2可以做的两个选择。举个例子，对于<strong>右上角</strong>的方格，表示<strong>囚犯1选择不招供(C)而囚犯2选择招供(D)<strong>，结果</strong>囚犯1被判了3年而囚犯2无罪释放</strong></p>
-<p>为了进一步说明这个问题，我们先引入一些博弈论的基本概念</p>
-<hr>
-<h2 id="博弈的基本定义"><a href="#博弈的基本定义" class="headerlink" title="博弈的基本定义"></a>博弈的基本定义</h2><p>博弈的基本元素有以下几个：</p>
-<ul>
-<li>玩家（Players）：做出决定的个体</li>
-<li>行动（Actions）：每个玩家可以做出怎样的行动</li>
-<li>奖励/代价（Payoff）：玩家做出每个行动之后会有怎样反馈（例如商人在股票最高点抛售这一行动可以获得最高的收益）</li>
-<li>时序（Timing）：事件发生的顺序（例如大家下棋时轮流交替移动棋子）</li>
-<li>信息（information）：当玩家做出行动时他们都知道什么信息（参与者对其他参与者的了解程度）</li>
-</ul>
-<p>所以<strong>有限n人标准</strong>博弈的数学定义表示为$&lt;N, \mathbf{A}, u&gt;$其中元素分别表示如下含义：</p>
-<ul>
-<li>(1) 玩家的集合$N = {1, 2, …, n}$ 是一个大小为n的有限集合，用$i$标识</li>
-<li>(2) 行动组合的全集$\mathbf{A} = A_1 \times A_2 \times … \times A_n$，其中$A_i$表示玩家$i$的行动集合，若用$a$表示一个行动组合（action profile），则有$a = (a_1, a_2, …, a_n) \in \mathbf{A}$</li>
-<li>(3) 效用(代价)函数组$u = (u_1, u_2, …, u_n)$，其中对于玩家$i$，$u_i: \mathbf{A} \rightarrow \mathbb{R}$，特别注意 ，此处的$u_i$表示一个从行动组合集合$a \in A$到实数$\mathbf{R}$的映射</li>
-</ul>
-<hr>
-<h2 id="支配策略"><a href="#支配策略" class="headerlink" title="支配策略"></a>支配策略</h2><p>我们在参与游戏的时会有一个要实现的<strong>目标</strong>（goal），通常情况下的目标为最大化自己的收益（payoff），但是也可以有别的目标（比如以让对方获得最小收益为目标）</p>
-<p>为实现这个目标我们会有一个对应的<strong>策略</strong>（strategy），<strong>策略</strong>指导玩家该做出什么行动（或选择什么行动）。比如在囚徒困境中，囚犯的策略就是：<strong>做出怎样的选择(招供或不招供)，以使自己被判的时间最短</strong>。这里每个囚犯有两个选择：与另一个囚犯合作（Cooperate）和欺骗另一个囚犯（Deceive），选择合作意味着<strong>不招供</strong>而欺骗意味着<strong>招供</strong>，所以每个囚犯都会思考，如果对方招供的话我该怎么选，如果对方不招供的话我又该怎么选？从而我们这里引入一个概念<strong>支配策略</strong>（dominant strategy）</p>
-<p>支配策略：A dominant strategy for a player is one that produces the highest payoff of any strategy available for every possible action by the other players。通俗点讲就是：不管别人做出怎样的行动，我所做的选择都可以让我得到最大收益。还以囚徒困境举例  </p>
-<p>情况一：当<strong>囚犯2选择C不招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判1年，而D招供那么自己可以无罪释放（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong></p>
-<img src="/2020/01/20/Game1/pic2.png" class="">  
-
-<p>情况二：当<strong>囚犯2选择D招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判3年，而D招供那么自己会被判2年（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong></p>
-<img src="/2020/01/20/Game1/pic3.png" class="">  
-
-<p>综合上述两种情况，我们可以得出结论：<strong>不论囚犯2如何选择，囚犯1的最佳选择都是D招供</strong>（也就是囚犯1的支配策略）。同样的道理，由于囚犯1和囚犯2的地位是<strong>对称的</strong>，所以<strong>囚犯2的支配策略也是D招供</strong></p>
-<h2 id="关于囚徒困境的结论"><a href="#关于囚徒困境的结论" class="headerlink" title="关于囚徒困境的结论"></a>关于囚徒困境的结论</h2><p>根据之前的支配策略的分析，两个囚犯的支配策略都是D招供，从而两个人<strong>都被判2年</strong>。而囚徒困境的令人诧异的地方也就出现于此，我们如果从一个上帝视角来看，很明显，两个囚犯的最佳选择明明是选择都不招供，这样两个人加起来判的时间是最少的，是全局最优解，但是如果从个人角度来分析，就会发现，无论如何他们两个都不会去选择一起合作不招供。这恰恰就是囚徒困境的背景————两个人无法交流即非合作博弈，<strong>其所谓的上帝视角其实是不存在的</strong>，因为将其推广到繁杂的现实，就会发现没有“上帝”可以看到整个全局，没有人的信息是全局的，从而从这个思想出发，反驳了亚当斯密的一个基本观点:所有人的最优选择会形成整个群体的最优选择，因为当所有人做到自己的最优时，对于整个社会来说可能是最坏的（两个囚犯加起来一共判了4年）</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>囚徒困境的标准通式满足：<br>$$c &gt; a &gt; d &gt; b$$</p>
-<img src="/2020/01/20/Game1/pic4.png" class="">
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -848,7 +879,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

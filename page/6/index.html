@@ -164,6 +164,323 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/05/22/Database8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/22/Database8/" class="post-title-link" itemprop="url">数据库原理——第八章：数据库编程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-22 09:19:29" itemprop="dateCreated datePublished" datetime="2019-05-22T09:19:29-04:00">2019-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-06-18 01:29:16" itemprop="dateModified" datetime="2019-06-18T01:29:16-04:00">2019-06-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数据库原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><em>参考书目《数据库系统概论（第5版）》</em></p>
+</blockquote>
+<h2 id="嵌入式SQL"><a href="#嵌入式SQL" class="headerlink" title="嵌入式SQL"></a>嵌入式SQL</h2><p>嵌入式SQL是将SQL语句嵌入程序设计语言中，被嵌入的语言如C、C++、Java等称为<strong>宿主语言</strong>，简称<strong>主语言</strong><br>SQL语言负责<strong>操纵数据库</strong>，高级程序语言负责<strong>控制逻辑流程</strong><br>数据库工作单元和源程序工作单元之间的通信主要包括：</p>
+<ul>
+<li>向主语言传递SQL语句的执行信息，使主语言能够据此信息控制程序流程，主要用<strong>SQL通信区</strong>实现</li>
+<li>主语言向SQL语句提供参数，主要用<strong>主变量实现</strong>（SQL语句中使用的主语言程序变量简称<strong>主变量</strong>）</li>
+<li>将SQL语句查询数据库的结果交主语言处理，主要用<em><strong>主变量</strong>和</em>*游标**实现</li>
+</ul>
+<p>游标：<strong>游标</strong>是系统为用户开设的一个数据缓冲区，存放SQL语句的执行结果。游标类似于数据缓冲区内的指针，用户可以通过游标逐一获取缓冲区内的数据</p>
+<hr>
+<h2 id="过程化SQL"><a href="#过程化SQL" class="headerlink" title="过程化SQL"></a>过程化SQL</h2><p>过程化SQL（Procedural Language/SQL, <strong>PL/SQL</strong>），其基本结构是块  </p>
+<h3 id="定义方式"><a href="#定义方式" class="headerlink" title="定义方式"></a>定义方式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DECLARE 变量、常量、游标、异常等</span><br><span class="line">BEGIN</span><br><span class="line">    SQL语句、过程化SQL的流程控制语句</span><br><span class="line">EXCEPTION</span><br><span class="line">    异常处理部分</span><br><span class="line">END;</span><br></pre></td></tr></table></figure>
+
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><ul>
+<li>IF语句</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IF condition THEN</span><br><span class="line">    Sequence_of_statements;</span><br><span class="line">END IF;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>IF-THEN语句</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IF condition THEN</span><br><span class="line">    Sequence_of_statements1;</span><br><span class="line">ELSE</span><br><span class="line">    Sequence_of_statements2;</span><br><span class="line">END IF;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>LOOP语句</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LOOP</span><br><span class="line">    Sequence_of_statements;</span><br><span class="line">END LOOP;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>WHILE-LOOP语句</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WHILE condition LOOP</span><br><span class="line">    Sequence_of_statements;</span><br><span class="line">END LOOP;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>FOR-LOOP语句</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FOR count IN [REVERSE] bound1 .. bound2 LOOP</span><br><span class="line">    Sequence_of_statements;</span><br><span class="line">END LOOP;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="存储过程和函数"><a href="#存储过程和函数" class="headerlink" title="存储过程和函数"></a>存储过程和函数</h2><p>过程化SQL块分为两种：<strong>命名块</strong>和<strong>匿名块</strong></p>
+<ul>
+<li>匿名块：每次执行时都要进行编译，它不能被存储到数据库中，也不能在其他过程化SQL块中调用</li>
+<li>命名块：<em>过程和函数</em>是命名块，它们被编译后保存在数据库中，称为<strong>持久性存储模块</strong>（Persistent Stored Module, PSM），可以被反复调用，运行速度较快</li>
+</ul>
+<p><em><strong>——后续语句实现基于MySQL——</strong></em></p>
+<h3 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h3><p>使用SQL语句书写，经过编译和优化后存储在数据库中，因此称为<strong>存储过程</strong>，使用时直接调用即可<br>存储过程的优点：</p>
+<ul>
+<li>语句已经经过优化，所其以<strong>运行效率高</strong></li>
+<li>降低了客户机和服务器之间的通信量，只有最终的处理结果才会返回客户端</li>
+<li>方便实施企业规则</li>
+</ul>
+<ol>
+<li><p>存储过程定义<br> 存储过程的通用格式如下</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE PROCEDURE &lt;存储过程名&gt; ([[参数模式 参数名 参数类型],...])</span><br><span class="line">[characteristics...]</span><br><span class="line">BEGIN</span><br><span class="line">    &lt;存储过程体&gt;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<p> 其中characteristics指定存储过程特性，取值如下：</p>
+<ul>
+<li>LANGUAGE SQL：说明body部分由SQL语句组成，LANGUAGE可选值只有SQL</li>
+<li>[NOT] DETERMINISTIC：指明存储过程执行结果是否确定。默认值：NOT DETERMINISTIC  <ul>
+<li>DETERMINISTIC：结果确定，每次执行存储过程时，相同的输入会得到相同的输出  </li>
+<li>NOT DETERMINISTIC：结果不确定，相同输入可能得到不同输出。</li>
+</ul>
+</li>
+<li>{CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA}：指定子程序使用存储过程的限制。默认值：CONTAINS SQL<ul>
+<li>CONTAINS SQL：说明子程序包含SQL语句，但是不包含写数据语句</li>
+<li>NO SQL：说明子程序不包含SQL语句</li>
+<li>READS SQL DATA：说明子程序包含读数据读数据语句</li>
+<li>MODIFIES SQL DATA：说明子程序包含写数据语句</li>
+</ul>
+</li>
+<li>SQL SECURITY {DEFINER | INVOKER}：指明谁有权限执行，默认值：DEFINER<ul>
+<li>DEFINER：只有定义者才能执行</li>
+<li>INVOKER：拥有权限的调用者才可以执行</li>
+</ul>
+</li>
+<li>COMMNET：注释信息</li>
+</ul>
+<p> 如下定义了一个名叫exp6_1的存储过程，它的功能为如果没有名叫test的表，则创建一个test表</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $  /*告诉mysql语句的结尾符号换成以$结束*/</span><br><span class="line">CREATE PROCEDURE exp6_1 ()</span><br><span class="line">BEGIN</span><br><span class="line">    DROP TABLE IF EXISTS test;</span><br><span class="line">    CREATE TABLE test(Num INT);</span><br><span class="line">END $</span><br><span class="line">DELIMITER ;  /*将结尾符号换回以;结束*/</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/1.png" class=""></li>
+<li><p>存储过程运行<br> 存储过程的运行的通用格式如下</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*存储过程的调用只能用CALL*/</span><br><span class="line">CALL &lt;存储过程名&gt;([参数,...]);</span><br></pre></td></tr></table></figure>
+
+<p> 调用存储过程exp6_1</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/*调用exp6_1*/</span><br><span class="line">CALL exp6_1();</span><br><span class="line">SHOW TABLES;</span><br></pre></td></tr></table></figure>
+
+<p> 可以看到存储过程exp6_1创建了test表，如下图所示</p>
+ <img src="/2019/05/22/Database8/3.png" class=""></li>
+<li><p>存储过程更名<br> 由于MySQL并不支持存储过程更名，只能删掉并重新建立存储过程，这里简单介绍一下修改存储过程内容的过程<br> 修改存储过程的通用格式如下</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/*使用ALTER存储过程*/</span><br><span class="line">ALTER PROCEDURE &lt;存储过程名&gt;</span><br><span class="line">    [characterustic...];</span><br></pre></td></tr></table></figure>
+
+<p> 其中characteristics指定存储过程特性，取值如下：</p>
+<ul>
+<li>{CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA}：指定子程序使用存储过程的限制。<ul>
+<li>CONTAINS SQL：说明子程序包含SQL语句，但是不包含写数据语句</li>
+<li>NO SQL：说明子程序不包含SQL语句</li>
+<li>READS SQL DATA：说明子程序包含读数据读数据语句</li>
+<li>MODIFIES SQL DATA：说明子程序包含写数据语句</li>
+</ul>
+</li>
+<li>SQL SECURITY {DEFINER | INVOKER}：指明谁有权限执行，默认值：DEFINER<ul>
+<li>DEFINER：只有定义者才能执行</li>
+<li>INVOKER：拥有权限的调用者才可以执行</li>
+</ul>
+</li>
+<li>COMMNET：注释信息</li>
+</ul>
+</li>
+<li><p>存储过程删除<br> 存储过程删除的通用格式如下</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*存储过程的删除使用DROP*/</span><br><span class="line">DROP PROCEDURE &lt;存储过程名&gt;;</span><br></pre></td></tr></table></figure>
+
+<p> 如下展示了如何删除我们之前定义的存储过程exp6_1  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*删除存储过程exp6_1*/</span><br><span class="line">DROP PROCEDURE exp6_1;</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/8.png" class=""></li>
+<li><p>存储过程的参数传递<br> 我们假定这样一个场景，设计一个LowerBound的存储过程，它的功能是统计之前定义的test表中比输入的参数的值大的数据的个数，并将统计结果和该参数以及插入时间存入到counts表中<br> （1）首先我们创建counts表  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*创建counts表*/</span><br><span class="line">CREATE TABLE counts(Total INT, Boud INT, TimeInsert DATETIME);</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/10.png" class="">  
+<p> （2）然后我们创建LowerBound存储过程，它的输入参数只有一个bound参数，模式为<code>IN</code>，类型为<code>INT</code></p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/*创建LowerBound存储过程*/</span><br><span class="line">DELIMITER $</span><br><span class="line">CREATE PROCEDURE LowerBound(IN bound INT)</span><br><span class="line">BEGIN</span><br><span class="line">    INSERT INTO counts VALUES (</span><br><span class="line">        (SELECT COUNT(*) FROM test WHERE Num&gt;bound),</span><br><span class="line">        bound,</span><br><span class="line">        CURRENT_TIME()</span><br><span class="line">    );</span><br><span class="line">END $</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/11.png" class="">  
+<p> （3）之后我们调用LowerBound存储过程，bound值传入为150</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*调用LowerBound存储过程*/</span><br><span class="line">CALL LowerBound(150);</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/12.png" class="">  
+<p> （3）最后我们查看一下调用LowerBound的结果，如果没有出错，统计结果应该为49</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*查看LowerBound的调用结果*/</span><br><span class="line">SELECT * FROM counts;</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/13.png" class="">  
+<p> 可以看到统计结果为49，边界值Bound为150，插入时间如图所示</p>
+</li>
+</ol>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ol>
+<li><p>自定义函数定义<br> 定义函数的通用格式如下</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE FUNCTION &lt;函数名&gt; ([[参数名 参数类型],...]) RETURNS &lt;返回值类型&gt;</span><br><span class="line">[characteristics...]</span><br><span class="line">BEGIN</span><br><span class="line">    &lt;函数体&gt;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<p> <strong>注意</strong>自定义函数与存储过程的区别之一在于函数需要函数体内写<code>RETURN</code>值。区别之二在于，存储过程的参数可有<code>IN</code>、<code>OUT</code>、<code>INOUT</code>模式，而函数的参数没有<br> 其中characteristics指定函数特性，取值如下：</p>
+<ul>
+<li>LANGUAGE SQL：说明body部分由SQL语句组成，LANGUAGE可选值只有SQL</li>
+<li>[NOT] DETERMINISTIC：指明函数执行结果是否确定。默认值：NOT DETERMINISTIC  <ul>
+<li>DETERMINISTIC：结果确定，每次执行函数时，相同的输入会得到相同的输出  </li>
+<li>NOT DETERMINISTIC：结果不确定，相同输入可能得到不同输出。</li>
+</ul>
+</li>
+<li>{CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA}：指定子程序使用函数的限制。默认值：CONTAINS SQL<ul>
+<li>CONTAINS SQL：说明子程序包含SQL语句，但是不包含写数据语句</li>
+<li>NO SQL：说明子程序不包含SQL语句</li>
+<li>READS SQL DATA：说明子程序包含读数据读数据语句</li>
+<li>MODIFIES SQL DATA：说明子程序包含写数据语句</li>
+</ul>
+</li>
+<li>SQL SECURITY {DEFINER | INVOKER}：指明谁有权限执行，默认值：DEFINER<ul>
+<li>DEFINER：只有定义者才能执行</li>
+<li>INVOKER：拥有权限的调用者才可以执行</li>
+</ul>
+</li>
+<li>COMMNET：注释信息</li>
+</ul>
+<p> 如下定义了一个名叫exp6_2的函数，它的功能为向test表中插入给定参数n往后的100个整数，并返回最终停止累加时的数字</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $  /*告诉mysql语句的结尾符号换成以$结束*/</span><br><span class="line">CREATE FUNCTION exp6_2 (P1 INT) RETURNS INT</span><br><span class="line">BEGIN</span><br><span class="line">    DECLARE tmp INT DEFAULT P1+100;</span><br><span class="line">    WHILE P1 &lt; tmp DO</span><br><span class="line">        INSERT INTO test VALUES (P1);</span><br><span class="line">        SET P1 = P1 + 1;</span><br><span class="line">    END WHILE;</span><br><span class="line">    RETURN tmp;</span><br><span class="line">END $</span><br><span class="line">DELIMITER ;  /*将结尾符号换回以;结束*/</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/1.png" class=""></li>
+<li><p>自定义函数运行<br> 自定义函数运行的通用格式如下</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*自定义函数的调用只能用SELECT*/</span><br><span class="line">SELECT &lt;自定义函数名&gt;([参数,...]);</span><br></pre></td></tr></table></figure>
+
+<p> 如下展示了如何调用我们之前定义的函数exp6_2<br> 接着调用自定义函数exp6_2</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/*调用exp6_2*/</span><br><span class="line">SELECT exp6_2(100);</span><br><span class="line">SELECT * FROM test;</span><br></pre></td></tr></table></figure>
+
+<p> 可以看到调用自定义函数exp6_2的返回值为200，因为是从100开始往后的100个数  </p>
+ <img src="/2019/05/22/Database8/6.png" class="">  
+<p> 最后累加到199停止，共100行，累加停止时的数为200  </p>
+ <img src="/2019/05/22/Database8/7.png" class="">  </li>
+<li><p>自定义函数更名<br> 由于MySQL并不支持函数更名，只能删掉并建立新的函数，这里简单介绍一下修改函数内容的过程<br> 修改函数的通用格式如下  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/*使用ALTER修改函数*/</span><br><span class="line">ALTER FUNCTION &lt;函数名&gt;</span><br><span class="line">    [characterustic...];</span><br></pre></td></tr></table></figure>
+
+<p> 其中characteristics指定函数特性，取值如下：</p>
+<ul>
+<li>{CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA}：指定子程序使用函数的限制。<ul>
+<li>CONTAINS SQL：说明子程序包含SQL语句，但是不包含写数据语句</li>
+<li>NO SQL：说明子程序不包含SQL语句</li>
+<li>READS SQL DATA：说明子程序包含读数据读数据语句</li>
+<li>MODIFIES SQL DATA：说明子程序包含写数据语句</li>
+</ul>
+</li>
+<li>SQL SECURITY {DEFINER | INVOKER}：指明谁有权限执行，默认值：DEFINER<ul>
+<li>DEFINER：只有定义者才能执行</li>
+<li>INVOKER：拥有权限的调用者才可以执行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>自定义函数删除<br> 自定义函数删除的通用格式如下</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*自定义函数的删除使用DROP*/</span><br><span class="line">DROP PROCEDURE &lt;函数名&gt;;</span><br></pre></td></tr></table></figure>
+
+<p> 如下展示了如何删除我们之前定义的自定义函数exp6_2  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*删除自定义函数exp6_2*/</span><br><span class="line">DROP FUNCTION exp6_2;</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/9.png" class=""></li>
+<li><p>自定义函数的参数传递<br> 我们设计一个A+B函数，功能是输入两个INT类型的值，返回值为这两个输入参数的和<br> （1）首先创建自定义函数A+B，函数名为AplusB，输入参数为两个<code>INT</code>类型的参数P1和P2，返回值也为<code>INT</code>类型</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/*创建自定义函数AplusB*/</span><br><span class="line">DELIMITER $</span><br><span class="line">CREATE FUNCTION AplusB (P1 INT, P2 INT) RETURNS INT</span><br><span class="line">BEGIN</span><br><span class="line">    DECLARE result INT;</span><br><span class="line">    SET result = P1 + P2;</span><br><span class="line">    RETURN result;</span><br><span class="line">END $</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/14.png" class="">  
+<p> （2）调用AplusB并查看结果</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*调用AplusB函数*/</span><br><span class="line">SELECT AplusB(10, 20);</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/15.png" class="">  
+<p> 可以看到相加结果为10+20=30，结果正确</p>
+</li>
+</ol>
+<h3 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h3><ol>
+<li><p>游标定义<br> 游标简介：</p>
+<ul>
+<li>游标实际上是一种能从包括多条数据记录的结果集中每次提取一条记录的机制。</li>
+<li>游标充当指针的作用。</li>
+<li>尽管游标能遍历结果中的所有行，但它一次只指向一行。</li>
+<li>游标的作用就是用于对查询数据库所返回的记录进行遍历，以便进行相应的操作。  </li>
+<li>游标必须声明在处理程序之前，并且声明在变量和条件之后</li>
+</ul>
+<p> MySQL中使用<code>DECLARE</code>来声明游标，通用格式如下  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DECLARE &lt;游标名字&gt; CURSOR FOR &lt;SELECT语句&gt;;</span><br></pre></td></tr></table></figure>
+
+<p> 我们如下创建一个名为exp6_3的游标，它的功能是选出那些在test表中Num值比170大的元组</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DECLARE exp6_3 CURSOR FOR</span><br><span class="line">    SELECT 数量 FROM test WHERE Num&gt;170;</span><br></pre></td></tr></table></figure></li>
+<li><p>游标使用<br> 由于游标需要配合存储过程或自定义函数来使用，这里我们创建一个存储过程Transform，设计一个游标，将test表中Num比bound参数大的元组插入到另一个表test2中<br> 详细的运行过程已经以注释的形式写在代码中</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $</span><br><span class="line">CREATE PROCEDURE Transform(IN bound INT)</span><br><span class="line">BEGIN</span><br><span class="line">    DECLARE tmp INT;</span><br><span class="line">    DECLARE done int;</span><br><span class="line">    /*声明游标exp6_3*/</span><br><span class="line">    DECLARE exp6_3 CURSOR FOR SELECT Num FROM test WHERE Num&gt;bound;</span><br><span class="line">    /*游标中的内容执行完后将done设置为1*/</span><br><span class="line">    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=1;</span><br><span class="line"></span><br><span class="line">    /*打开游标*/</span><br><span class="line">    OPEN exp6_3;</span><br><span class="line">    /*使用REPEAT循环从游标中读取数据*/</span><br><span class="line">    REPEAT</span><br><span class="line">        FETCH exp6_3 INTO tmp;</span><br><span class="line">        INSERT INTO test2 VALUES (tmp);</span><br><span class="line">    UNTIL done END REPEAT;</span><br><span class="line">    /*关闭游标*/</span><br><span class="line">    CLOSE exp6_3;</span><br><span class="line">END $</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/16.png" class="">  
+<p> 之后我们调用存储过程Transform  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CALL Transform(190);</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/17.png" class="">  
+<p> 最后我们检查运行结果，查看表test2中的内容</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM test2;</span><br></pre></td></tr></table></figure>
+
+ <img src="/2019/05/22/Database8/18.png" class="">  
+<p> 可以看到该运行结果符合我们的预设的功能</p>
+</li>
+</ol>
+<hr>
+<h2 id="ODBC编程"><a href="#ODBC编程" class="headerlink" title="ODBC编程"></a>ODBC编程</h2><p>开放数据库连接（Open Database Connectivity，ODBC）是为解决异构数据库间的数据共享而产生的，它建立了一组规范，并提供了一组访问数据库的<strong>应用程序编程接口（API）</strong><br><strong>ODBC具有两重约束力：一方面规范应用开发，另一方面规范关系数据库管理系统应用接口</strong><br>ODBC有4部分：用户驱动程序管理器、数据库驱动程序管理器、数据库驱动程序、数据源</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/05/16/Algorithm1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1097,224 +1414,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/05/07/Network1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/07/Network1/" class="post-title-link" itemprop="url">计算机网络——第一章：计算机网络和因特网</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-05-07 20:41:31" itemprop="dateCreated datePublished" datetime="2019-05-07T20:41:31-04:00">2019-05-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-06-17 07:49:42" itemprop="dateModified" datetime="2019-06-17T07:49:42-04:00">2019-06-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><em>参考书目《计算机网络：自顶向下方法（第七版）》</em></p>
-</blockquote>
-<h2 id="什么是因特网"><a href="#什么是因特网" class="headerlink" title="什么是因特网"></a>什么是因特网</h2><ul>
-<li><p>通常把与因特网相连的计算机和其他设备称为<strong>端系统</strong></p>
-</li>
-<li><p>端系统通过<strong>通信链路</strong>和<strong>分组交换机</strong>连接在一起</p>
-</li>
-<li><p>分组交换机：路由器和链路层交换机</p>
-</li>
-<li><p>链路层交换机通常用于接入网，而路由器通常用于网络核心中</p>
-</li>
-<li><p>端系统通过<strong>因特网服务提供商(Internet Service Provider, ISP)接入因特网</strong></p>
-</li>
-<li><p>因特网标准(Internet Standard)由<strong>因特网工程任务组(Internet Engineering Task, Force, IETF)<strong>研发，</strong>IETF</strong>的标准文档称为<strong>请求评论(Request For Comment, RFC)</strong></p>
-</li>
-</ul>
-<hr>
-<h2 id="网络边缘"><a href="#网络边缘" class="headerlink" title="网络边缘"></a>网络边缘</h2><ul>
-<li><p><strong>接入网</strong>是指将端系统物理连接到其<strong>边缘路由器</strong>的网络</p>
-<ol>
-<li>家庭接入：数字用户线(Digital Subscriber Line, DSL)、电缆、光纤到户(Fiber To The Home, FTTH)、拨号和卫星</li>
-<li>企业(和家庭接入)：以太网、WiFi</li>
-<li>广域无线接入：4G和LTE</li>
-</ol>
-</li>
-<li><p>因特网传输的<strong>物理媒介</strong>：</p>
-<ul>
-<li>导引型媒介：双绞铜线、同轴电缆、光纤</li>
-<li>非导引型媒介：陆地无线电信道、卫星无线电信道</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="网络核心"><a href="#网络核心" class="headerlink" title="网络核心"></a>网络核心</h2><p>通过网络链路和交换机移动数据有两种基本方法：<strong>电路交换</strong>和<strong>分组交换</strong></p>
-<h3 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h3><ul>
-<li>源将长报文划分为较小的数据块，称之为<strong>分组</strong></li>
-<li>多数分组交换机在链路的输入端使用<strong>存储转发</strong>机制，<strong>存储转发</strong>传输是指在交换机能够开始向链路传输该分组的第一个比特之前，必须接收到整个分组</li>
-<li>分组交换网路采用**统计复用(Statistical Multiplexing)**原则，意味着在一个处理节点，数据包分组的到达的分布是符合统计学分布(泊松分布)；基于统计复用的系统，就叫做排队系统</li>
-<li>对于每条相连的链路，该分组交换机具有一个<strong>输出缓存</strong>(也称为<strong>输出队列</strong>)，它用于存储路由器准备发往那条链路的分组。</li>
-<li>分组可能需要承担<strong>存储转发时延</strong>、<strong>排队时延</strong>甚至<strong>分组丢失</strong></li>
-<li>每台路由器具有一个<strong>转发表</strong>，用于目的地址（或目的地址的一部分）映射成为输出链路。<strong>路由选择协议</strong>用于自动的设置这些转发表</li>
-</ul>
-<h3 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h3><ul>
-<li>在电路交换网络中，在端系统间通信会话期间，<strong>预留</strong>了端系统间沿路径通信所需要的资源（缓存，链路传输速率）；在分组交换网络中是不预留的</li>
-<li>链路中的电路是通过**频分复用(FDM)<strong>或</strong>时分复用(TDM)**来实现的，如下图所示<img src="/2019/05/07/Network1/1.png" class=""></li>
-<li>对于FDM<ul>
-<li>在连接期间链路为每条连接分配一个专用频段，该频段的宽度称为<strong>带宽</strong></li>
-<li>个人理解：将总带宽根据用户人数划分给每个用户，每个用户只分得总带宽的一部分，但所有用户同一时间互不干扰</li>
-</ul>
-</li>
-<li>对于TDM<ul>
-<li>时间被划分为固定期间的<strong>帧</strong>，并且每个<strong>帧</strong>又被划分为固定数量的<strong>时隙</strong>，网络在每个帧中为每个连接指定一个时隙，该时隙专门由该连接单独使用</li>
-<li>个人理解：类似于操作系统中CPU轮转调度，每个连接轮着使用，并在使用期间内独享物理最大带宽</li>
-<li>从而对于TDM，一条电路的传输速率等于帧速率乘以一个时隙中的比特数量</li>
-</ul>
-</li>
-</ul>
-<h3 id="分组交换与电路交换的对比"><a href="#分组交换与电路交换的对比" class="headerlink" title="分组交换与电路交换的对比"></a>分组交换与电路交换的对比</h3><ol>
-<li>电路交换在<em>静默期</em>中电路资源被浪费了；创建端到端电路和预留端到端带宽是复杂的</li>
-<li>分组交换不适合实时服务，因为它的端到端时延是可变的和不可预测的</li>
-<li>分组交换提供了比电路交换更好的<strong>带宽共享</strong>,允许更多的用户使用网络；它比电路交换更简单、更有效、实现成本更低</li>
-</ol>
-<hr>
-<h2 id="分组交换网络中的时延、丢包和吞吐量"><a href="#分组交换网络中的时延、丢包和吞吐量" class="headerlink" title="分组交换网络中的时延、丢包和吞吐量"></a>分组交换网络中的时延、丢包和吞吐量</h2><h3 id="时延概述"><a href="#时延概述" class="headerlink" title="时延概述"></a>时延概述</h3><ul>
-<li><p>时延类型：</p>
-<ul>
-<li>处理时延($d_{proc}$)：检查分组首部、确定分组去向、检查差错等</li>
-<li>排队时延($d_{queue}$)：分组在队列中等待被传输的时间</li>
-<li>传输时延($d_{trans}$)：接收到整个分组的时间<br>用$L$比特表示分组的长度，用$R$bps表示从路由器A到路由器B的链路传输速率，则传输时延为$\frac{L}{R}$</li>
-<li>传播时延($d_{prop}$)：一个比特从链路的起点到到终点在媒介中传播所需的时间</li>
-</ul>
-</li>
-<li><p>节点总时延<br>  $$d_{nodal} = d_{proc} + d_{queue} + d_{trans} + d_{prop}$$</p>
-</li>
-</ul>
-<h3 id="排队时延和丢包"><a href="#排队时延和丢包" class="headerlink" title="排队时延和丢包"></a>排队时延和丢包</h3><ul>
-<li>排队时延对于不同的分组可能是不同的</li>
-<li>令$a$表示分组到达队列的平均速率(a的单位为分组/秒，即pkt/s)，传输速率$R$bps，假定所有分组长度为$L$比特，则比特到达队列的<strong>平均速率</strong>是$La$bps；再假设队列容量为无穷，则<strong>流量强度</strong>定义为$\frac{La}{R}$</li>
-<li>平均排队时延与流量强度的关系如下  <img src="/2019/05/07/Network1/2.png" class="">
-<ul>
-<li>$\frac{La}{R} \rightarrow 0$平均排队时延很小</li>
-<li>$\frac{La}{R} \rightarrow 1$排队时延趋进于无穷</li>
-</ul>
-</li>
-<li>实际中队列容量是有限的，因而当队列容量满时，路由器将<strong>丢弃</strong>新到达的分组，也就是<strong>丢包</strong></li>
-</ul>
-<h3 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h3><ul>
-<li><strong>瞬间吞吐量</strong>指主机在某一时刻接受文件的速率</li>
-<li><strong>平均吞吐量</strong>$\frac{F}{T}$bps表示接收到所有$F$比特用了$T$秒</li>
-<li>吞吐量取决于数据流过的链路的传输速率。也就是说，其近似为沿着源和目的地之间路径的最小传输速率</li>
-</ul>
-<hr>
-<h2 id="协议层次及其服务模型"><a href="#协议层次及其服务模型" class="headerlink" title="协议层次及其服务模型"></a>协议层次及其服务模型</h2><ul>
-<li><p>分层的优点<br>改变服务的实现而不影响该系统其他组件(利于维护更新)<br>简化网络系统  </p>
-</li>
-<li><p>分层的缺点<br>高层可能冗余较低层的功能(例如许多协议在基于每段链路和基于端到端两种情况下，都提供了差错恢复)<br>某层的功能可能需要仅在其他某层才出现的信息(如时间戳值)，这违反了层次分离的目标  </p>
-</li>
-<li><p>TCP/IP的5层协议栈，在每一层，一个分组具有两种两种类型的字段：<strong>首部字段</strong>和<strong>有效载荷字段</strong>。<strong>有效载荷</strong>通常是来自上一层的分组</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">自上而下</th>
-<th align="center">载体</th>
-<th align="center">协议</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">应用层</td>
-<td align="center">message</td>
-<td align="center">FTP,SMTP,HTTP</td>
-</tr>
-<tr>
-<td align="center">运输层</td>
-<td align="center">segment</td>
-<td align="center">TCP,UDP</td>
-</tr>
-<tr>
-<td align="center">网络层</td>
-<td align="center">datagram/packet</td>
-<td align="center">IP,路由协议</td>
-</tr>
-<tr>
-<td align="center">链路层</td>
-<td align="center">frame</td>
-<td align="center">PPP,以太网</td>
-</tr>
-<tr>
-<td align="center">物理层</td>
-<td align="center">bit/Byte</td>
-<td align="center">-</td>
-</tr>
-</tbody></table>
-<p>OSI将计算机网络体系结构(architecture）划分为以下七层：</p>
-<ul>
-<li>应用层: 提供应用程序间通信</li>
-<li>表示层: 处理数据格式、数据加密等（表示层的目的是表示出用户看得懂的数据格式，实现与数据表示有关的功能。<br>主要完成数据字符集的转换，数据格式化和文本压缩，数据加密、解密等工作）</li>
-<li>会话层: 建立、维护和管理会话</li>
-<li>传输层: 建立主机端到端连接</li>
-<li>网络层: 寻址和路由选择</li>
-<li>数据链路层: 提供介质访问、链路管理等</li>
-<li>物理层: 比特流传输</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1386,7 +1485,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
