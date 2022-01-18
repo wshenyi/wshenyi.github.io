@@ -164,2288 +164,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2021/12/30/R0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/30/R0/" class="post-title-link" itemprop="url">000 "Learning from Mistakes — A Comprehensive Study on Real World Concurrency Bug Characteristics"</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-12-30 00:33:29" itemprop="dateCreated datePublished" datetime="2021-12-30T00:33:29-05:00">2021-12-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-15 18:19:15" itemprop="dateModified" datetime="2022-01-15T18:19:15-05:00">2022-01-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em><strong>Keywards</strong></em> concurrent program, concurrency bug, bug characteristics</p>
-<blockquote>
-<p>Author: Shan Lu, Soyeon Park, Eunsoo Seo and Yuanyuan Zhou</p>
-</blockquote>
-<hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Writting correct concurrent programs is difficult and it faces many challenge. Although some progress have made over the past years, there are still many open, unsolved issues:</p>
-<ol>
-<li>Concurrency bug detection.<ul>
-<li>Can existing bug detection tool <em>detect all</em> real world concurrency bugs?</li>
-<li>How helpful are existing tools in <em>diagnosing and fixing</em> the real world concurrency bugs detected by them?</li>
-</ul>
-</li>
-<li>Concurrent program testing and model checking.<ul>
-<li>Existing testing techniques mainly focus on the <em>sequential</em> aspect of programs, while the major challenge of concurrency testing is the exponential <em>interleaving</em> space of concurrent programs.</li>
-<li>An open question: can we selectively test a small number of representative interleaving and still expose most of the concurrency bugs?</li>
-<li>Better understanding of the manifestation of real world concurrency bugs can help model checking prioritize the program states and alleviate its state explosion problem.</li>
-</ul>
-</li>
-<li>Concurrent programming language design.<ul>
-<li>Transactional memory (TM) is a promising trend.</li>
-<li>A real-world concurrency bug characteristic study is needed.</li>
-</ul>
-</li>
-</ol>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This paper provides a comprehensive real world concurrency bug characteristic study. It specifically focus on <strong>concurrency bug patterns</strong>, <strong>manifestation</strong>, and <strong>fix strategies</strong>. The study reveals several interesting findings and provide useful guildance for concurrency bug detection, testing, and concurrent programming language design.</p>
-<p>Some of findings:</p>
-<ol>
-<li>Around one third of examined non-deadlock concurrency bugs are caused by violation to <strong>programmers’ order intentions</strong>, which may not be easily expressed via synchronization primitives.</li>
-<li>Around one third of examined non-deadlock concurrency bugs involve multiple variables, which are not well addressed by existing bug detection tools.</li>
-<li>Testing concurrency bugs can target at exploring possible orders among every small groups of memory accesses, instead of among all memory accesses.</li>
-<li>Fixing concurrency bugs are not easy and many of the fixes were not correct at the first time, indicating the difficulty of reasoning concurrent execution by programmers.</li>
-</ol>
-<h2 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h2><img src="/2021/12/30/R0/1.png" class="">
-
-<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
-<li>Bug pattern study</li>
-<li>Bug manifestation study</li>
-<li>Bug fix study</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/08/Others7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/08/Others7/" class="post-title-link" itemprop="url">Introduction to Visualization</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-08 01:38:23" itemprop="dateCreated datePublished" datetime="2020-03-08T01:38:23-05:00">2020-03-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-30 00:12:34" itemprop="dateModified" datetime="2021-12-30T00:12:34-05:00">2021-12-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Science/" itemprop="url" rel="index"><span itemprop="name">Data Science</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">%matplotlib inline</span><br><span class="line">pd.plotting.register_matplotlib_converters()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Setup Complete&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<pre><code>Setup Complete
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;vtest.csv&#x27;</span>, index_col=<span class="number">0</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>pp1</th>
-      <th>pp2</th>
-      <th>pp3</th>
-      <th>pp4</th>
-      <th>pp5</th>
-      <th>pp6</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-94</td>
-      <td>70</td>
-      <td>-53</td>
-      <td>38</td>
-      <td>-66</td>
-      <td>-56</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-75</td>
-      <td>18</td>
-      <td>-38</td>
-      <td>88</td>
-      <td>35</td>
-      <td>-5</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>-21</td>
-      <td>-91</td>
-      <td>14</td>
-      <td>46</td>
-      <td>43</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-22</td>
-      <td>65</td>
-      <td>3</td>
-      <td>-15</td>
-      <td>57</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>95</td>
-      <td>-42</td>
-      <td>-18</td>
-      <td>67</td>
-      <td>81</td>
-      <td>60</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(12, 6)
-</code></pre>
-<h2 id="Line-Chart"><a href="#Line-Chart" class="headerlink" title="Line Chart"></a>Line Chart</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add titile</span></span><br><span class="line">plt.title(<span class="string">&quot;Line Chart&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot line chart</span></span><br><span class="line">sns.lineplot(data=data)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_6_1.png" class="">  
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if you not explictly designate the label parameter, it will use column&#x27;s title as default</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.lineplot(data=data.pp1, label=<span class="string">&quot;pp1&quot;</span>)</span><br><span class="line">sns.lineplot(data=data.pp2, label=<span class="string">&quot;pp2&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_7_1.png" class="">  
-
-
-<h2 id="Bar-Chart"><a href="#Bar-Chart" class="headerlink" title="Bar Chart"></a>Bar Chart</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add title</span></span><br><span class="line">plt.title(<span class="string">&quot;Bar Chart&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Bar chart</span></span><br><span class="line">sns.barplot(x=data.index, y=data.pp3)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add label for vertical axis</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_9_1.png" class="">  
-
-
-<h2 id="Heatmap"><a href="#Heatmap" class="headerlink" title="Heatmap"></a>Heatmap</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add title</span></span><br><span class="line">plt.title(<span class="string">&quot;Heatmap&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot heatmap</span></span><br><span class="line">sns.heatmap(data=data, annot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add label for horizontal axis</span></span><br><span class="line">plt.ylabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<img src="/2020/03/08/Others7/output_11_1.png" class="">  
-
-
-<h2 id="Scatter-Plots"><a href="#Scatter-Plots" class="headerlink" title="Scatter Plots"></a>Scatter Plots</h2><h3 id="Normal-scatter-chart"><a href="#Normal-scatter-chart" class="headerlink" title="Normal scatter chart"></a>Normal scatter chart</h3><p>Use scatter plots to display the relationships between two data</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.scatterplot(x=data.pp3, y=data.pp4)</span><br><span class="line">plt.xlabel(<span class="string">&quot;pp3-value-range&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;pp4-value-range&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_14_1.png" class="">  
-
-
-<h3 id="Color-coded-scatter-plots"><a href="#Color-coded-scatter-plots" class="headerlink" title="Color-coded scatter plots"></a>Color-coded scatter plots</h3><p>We can use scatter plots to display the relationships between (not two, but…) three variables! One way of doing this is by color-coding the points.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.scatterplot(x=data.pp3, y=data.pp4, hue=np.random.randint(<span class="number">0</span>, <span class="number">2</span>, size=data.shape[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
-
-
-
-<img src="/2020/03/08/Others7/output_16_1.png" class="">  
-
-
-<h3 id="Regression-line"><a href="#Regression-line" class="headerlink" title="Regression line"></a>Regression line</h3><p>Plot the line that best fits the data</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.regplot(x=data.index, y=data.pp3)</span><br><span class="line">sns.regplot(x=data.index, y=data.pp4)</span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_18_1.png" class="">  
-
-
-<h3 id="Compare-two-regression-line"><a href="#Compare-two-regression-line" class="headerlink" title="Compare two regression line"></a>Compare two regression line</h3><p>we can use the <code>sns.lmplot</code> command to add two regression lines, comparing two lines’ relation strength  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">data[<span class="string">&#x27;YN&#x27;</span>] = np.random.randint(<span class="number">0</span>, <span class="number">2</span>, size=data.shape[<span class="number">0</span>])</span><br><span class="line">sns.lmplot(x=<span class="string">&#x27;pp3&#x27;</span>, y=<span class="string">&#x27;pp4&#x27;</span>, hue=<span class="string">&#x27;YN&#x27;</span>, data=data)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_20_2.png" class="">  
-
-
-<h3 id="Categorical-scatter-plot"><a href="#Categorical-scatter-plot" class="headerlink" title="Categorical scatter plot"></a>Categorical scatter plot</h3><p>We can adapt the design of the scatter plot to feature a categorical variable (like labels) on one of the main axes. We’ll refer to this plot type as a <strong>categorical scatter plot</strong>, and we build it with the <code>sns.swarmplot</code> command.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">category = np.random.randint(<span class="number">0</span>, <span class="number">3</span>, size=<span class="number">1000</span>)</span><br><span class="line">value = np.random.randint(<span class="number">0</span>, <span class="number">100</span>, size=<span class="number">1000</span>)</span><br><span class="line">sns.swarmplot(x=category, y=value)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_22_1.png" class="">  
-
-
-<h2 id="Distributions"><a href="#Distributions" class="headerlink" title="Distributions"></a>Distributions</h2><h3 id="Histograms"><a href="#Histograms" class="headerlink" title="Histograms"></a>Histograms</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">value = np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">100</span>)</span><br><span class="line">sns.distplot(a=value, kde=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_25_1.png" class="">  
-
-
-<p><code>kde=False</code> is something we’ll always provide when creating a histogram, as leaving it out will create a slightly different plot. With<code>kde=True</code>, kernel density estimate (KDE) curve would generate at the same time</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.distplot(a=value, kde=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_27_1.png" class="">  
-
-
-<h3 id="Density-plots"><a href="#Density-plots" class="headerlink" title="Density plots"></a>Density plots</h3><p>The next type of plot is a <strong>kernel density estimate</strong> (KDE) plot. In case you’re not familiar with KDE plots, you can think of it as a smoothed histogram.</p>
-<p>Setting <code>shade=True</code> colors the area below the curve</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.kdeplot(data=value, shade=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_29_1.png" class="">  
-
-
-<h3 id="2D-KDE-plots"><a href="#2D-KDE-plots" class="headerlink" title="2D KDE plots"></a>2D KDE plots</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">x_value = np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">100</span>)</span><br><span class="line">y_value = np.random.randint(<span class="number">10</span>, <span class="number">20</span>, size=<span class="number">100</span>)</span><br><span class="line">sns.jointplot(x=x_value, y=y_value, kind=<span class="string">&quot;kde&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_31_2.png" class="">  
-
-
-<h3 id="Color-coded-plots"><a href="#Color-coded-plots" class="headerlink" title="Color-coded plots"></a>Color-coded plots</h3><p>We create a different histogram for each species by using the <code>sns.distplot</code> command three times. We use <code>label=</code> to set how each histogram will appear in the legend.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data1&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">5</span>, <span class="number">15</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data2&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">15</span>, <span class="number">25</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data3&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_33_1.png" class="">  
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data1&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">5</span>, <span class="number">15</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data2&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">15</span>, <span class="number">25</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data3&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_34_1.png" class="">  
-
-
-<h2 id="Changing-styles-with-seaborn"><a href="#Changing-styles-with-seaborn" class="headerlink" title="Changing styles with seaborn"></a>Changing styles with seaborn</h2><p>Seaborn has five different themes: (1)”darkgrid”, (2)”whitegrid”, (3)”dark”, (4)”white”, and (5)”ticks”</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">style = [<span class="string">&quot;darkgrid&quot;</span>, <span class="string">&quot;whitegrid&quot;</span>, <span class="string">&quot;dark&quot;</span>, <span class="string">&quot;white&quot;</span>, <span class="string">&quot;ticks&quot;</span>]</span><br><span class="line">plt.figure(figsize=(<span class="number">30</span>, <span class="number">5</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">    plt.subplot(<span class="number">1</span>, <span class="number">5</span>, i + <span class="number">1</span>)</span><br><span class="line">    sns.set_style(style[i])</span><br><span class="line">    sns.lineplot(data=np.random.randint(<span class="number">10</span>, size=<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_36_0.png" class="">  
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/05/Others6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/05/Others6/" class="post-title-link" itemprop="url">Introductions to Pandas</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-05 18:09:23" itemprop="dateCreated datePublished" datetime="2020-03-05T18:09:23-05:00">2020-03-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-10 04:38:37" itemprop="dateModified" datetime="2020-04-10T04:38:37-04:00">2020-04-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Science/" itemprop="url" rel="index"><span itemprop="name">Data Science</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
-
-<h2 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Yes&#x27;</span>: [<span class="number">50</span>, <span class="number">21</span>], <span class="string">&#x27;No&#x27;</span>: [<span class="number">131</span>, <span class="number">2</span>]&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Yes</th>
-      <th>No</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>50</td>
-      <td>131</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>21</td>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>DataFrame is actually a dictionary whose keys are the column names (<code>String</code>), and whose values are a list of entries(<code>List</code>)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Bob&#x27;</span>: [<span class="string">&#x27;I liked it.&#x27;</span>, <span class="string">&#x27;It was awful.&#x27;</span>], </span><br><span class="line">              <span class="string">&#x27;Sue&#x27;</span>: [<span class="string">&#x27;Pretty good.&#x27;</span>, <span class="string">&#x27;Bland.&#x27;</span>]&#125;,</span><br><span class="line">             index=[<span class="string">&#x27;Product A&#x27;</span>, <span class="string">&#x27;Product B&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Bob</th>
-      <th>Sue</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Product A</th>
-      <td>I liked it.</td>
-      <td>Pretty good.</td>
-    </tr>
-    <tr>
-      <th>Product B</th>
-      <td>It was awful.</td>
-      <td>Bland.</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Sometimes we can manually assign <code>index</code> of row instead of defaut index which starts from 0</p>
-<h2 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h2><p>A Series, by contrast, is a sequence of data values. If a DataFrame is a table, a Series is a list. And in fact you can create one with nothing more than a <code>list</code>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.Series([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    1
-1    2
-2    3
-3    4
-4    5
-dtype: int64
-</code></pre>
-<p>A Series is, in essence, a single column of a DataFrame. So you can assign column values to the Series the same way as before, using an index parameter. However, a Series does not have a column name, it only has one overall name:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pd.Series([<span class="number">30</span>, <span class="number">35</span>, <span class="number">40</span>], index=[<span class="string">&#x27;2015 Sales&#x27;</span>, <span class="string">&#x27;2016 Sales&#x27;</span>,</span><br><span class="line">                               <span class="string">&#x27;2017 Sales&#x27;</span>], name=<span class="string">&#x27;Product A&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>2015 Sales    30
-2016 Sales    35
-2017 Sales    40
-Name: Product A, dtype: int64
-</code></pre>
-<h2 id="Reading-data-files"><a href="#Reading-data-files" class="headerlink" title="Reading data files"></a>Reading data files</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&quot;test.csv&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>Use function <code>pd.read_csv()</code> to load a csv file.</p>
-<p>We can use the <code>shape</code> attribute to check how large the resulting DataFrame is:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(6, 4)
-</code></pre>
-<p>We can examine the contents of the resultant DataFrame using the <code>head()</code> command, which grabs the first five rows:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Unnamed: 0</th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>The <code>pd.read_csv()</code> function is well-endowed, with over 30 optional parameters you can specify. For example, you can see in this dataset that the CSV file has a built-in index, which pandas did not pick up on automatically. To make pandas use that column for the index (instead of creating a new one from scratch), we can specify an index_col.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&quot;test.csv&quot;</span>, index_col=<span class="number">0</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>2</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="Naive-accessors"><a href="#Naive-accessors" class="headerlink" title="Naive accessors"></a>Naive accessors</h2><p><code>DataFrame</code> in pandas is very similar to a <code>dictionary</code>. You can access it by using key-value format or calling title built in <code>DataFrame</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c1 = data[<span class="string">&#x27;col1&#x27;</span>] <span class="comment"># key-value </span></span><br><span class="line">c2 = data.col1    <span class="comment"># dic.column_name</span></span><br><span class="line"><span class="built_in">print</span>(c1 == c2)</span><br></pre></td></tr></table></figure>
-
-<pre><code>0    True
-1    True
-2    True
-3    True
-4    True
-5    True
-Name: col1, dtype: bool
-</code></pre>
-<p>Because of the value,or the column, in <code>DataFrame</code> is organized in <code>List</code>, we can access row value using index operator <code>[]</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1[<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3
-</code></pre>
-<h2 id="Indexing-in-pandas"><a href="#Indexing-in-pandas" class="headerlink" title="Indexing in pandas"></a>Indexing in pandas</h2><p>pandas has its own accessor operators, <code>loc</code> and <code>iloc</code>. The second paramter distinct them: index for <code>iloc</code> and string for ‘loc’.</p>
-<p><code>iloc</code> is conceptually simpler than loc because it ignores the dataset’s indices. When we use <code>iloc</code> we treat the dataset like a big matrix.</p>
-<p><code>loc</code>, by contrast, uses the information in the indices to do its work. When we use <code>loc</code> we want to make our code more meaningful and humanable (easier to read)</p>
-<h3 id="Index-based-selection"><a href="#Index-based-selection" class="headerlink" title="Index-based selection"></a>Index-based selection</h3><p>selecting data based on its numerical position in the data</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.iloc[<span class="number">3</span>, <span class="number">0</span>] <span class="comment"># second parameter is a numerical index</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3
-</code></pre>
-<h3 id="Label-based-selection"><a href="#Label-based-selection" class="headerlink" title="Label-based selection"></a>Label-based selection</h3><p>selecting data based on its row index and column name</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[<span class="number">3</span>, <span class="string">&#x27;col1&#x27;</span>] <span class="comment"># second parameter is a list of column names in string</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3
-</code></pre>
-<h2 id="Conditional-selection"><a href="#Conditional-selection" class="headerlink" title="Conditional selection"></a>Conditional selection</h2><p>Select specified value using condition operation and its return is a matrix of <code>bool</code> value.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1 == <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    False
-1    False
-2    False
-3     True
-4    False
-5    False
-Name: col1, dtype: bool
-</code></pre>
-<p>By converging conditional selection, we can use some colums’ value to locate other rows or columns. You can also include the <strong>set operation</strong>: <code>&amp;</code>and <code>|</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1 == <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>pandas has some built-in conditional selectors, two of which we will highlight here.</p>
-<h3 id="isin"><a href="#isin" class="headerlink" title="isin()"></a>isin()</h3><p>The first is <code>isin</code>. <code>isin</code> is lets you select data whose value “is in” a <code>list</code> of values. For example, you can use it to select rows whose value are 2 or 5 in <code>col1</code>.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1.isin([<span class="number">2</span>, <span class="number">5</span>])]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h3 id="isnull-amp-notnull"><a href="#isnull-amp-notnull" class="headerlink" title="isnull() &amp; notnull()"></a>isnull() &amp; notnull()</h3><p>The second is <code>isnull</code> (and its companion <code>notnull</code>). These methods let you highlight values which are (or are not) empty (NaN).</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1.isnull()]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1.notnull()]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>2</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="Summary-functions"><a href="#Summary-functions" class="headerlink" title="Summary functions"></a>Summary functions</h2><p>pandas provides some useful fuctions that can help us get some statistic information</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1.describe() <span class="comment"># for numerical values</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>count    6.000000
-mean     3.333333
-std      2.732520
-min      1.000000
-25%      1.250000
-50%      2.500000
-75%      4.500000
-max      8.000000
-Name: col1, dtype: float64
-</code></pre>
-<p>list statistic information of that row</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1.mean()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3.3333333333333335
-</code></pre>
-<p>access single attribute</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col3.describe() <span class="comment"># for string values</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>count     6
-unique    3
-top       c
-freq      2
-Name: col3, dtype: object
-</code></pre>
-<p>list statistic information of string frequence. <code>top</code> means the string with the max frequence</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(data.col1.unique())</span><br><span class="line"><span class="built_in">print</span>(data.col3.unique())</span><br></pre></td></tr></table></figure>
-
-<pre><code>[1 2 3 5 8]
-[&#39;a&#39; &#39;b&#39; &#39;c&#39;]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col3.value_counts()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>c    2
-a    2
-b    2
-Name: col3, dtype: int64
-</code></pre>
-<h2 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h2><p>it just as <code>map</code> function in python</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col2.<span class="built_in">map</span>(<span class="keyword">lambda</span> p: p / <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    1.0
-1    1.0
-2    2.0
-3    3.0
-4    5.0
-5    8.0
-Name: col2, dtype: float64
-</code></pre>
-<p>Note: this operation does <strong>not change</strong> the original data.</p>
-<p><code>apply</code> function is equivalent to <code>map</code> function, although they operate value sightly different.<br><strong>this function may change the original data</strong>!!!</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun1</span>(<span class="params">data</span>):</span></span><br><span class="line">    data.col2 = data.col2 - <span class="number">2</span> * data.col1</span><br><span class="line">    <span class="keyword">return</span> data <span class="comment"># must return the modified data</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">data.apply(fun1, axis=<span class="string">&#x27;columns&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>0</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>0</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>0</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>0</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>0</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>0</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun2</span>(<span class="params">data</span>):</span></span><br><span class="line">    data.iloc[<span class="number">1</span>] = data.iloc[<span class="number">5</span>]</span><br><span class="line">    <span class="keyword">return</span> data <span class="comment"># must return the modified data</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">data.apply(fun2, axis=<span class="string">&#x27;rows&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<pre><code>/usr/local/lib/python3.7/site-packages/pandas/core/indexing.py:670: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  self._setitem_with_indexer(indexer, value)
-</code></pre>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>This function <code>apply</code> is used for the situation when you do some complex data transforamtions. Any it also does <strong>not change</strong> the original data.</p>
-<h2 id="Groupwise-analysis"><a href="#Groupwise-analysis" class="headerlink" title="Groupwise analysis"></a>Groupwise analysis</h2><p><code>groupby()</code> function groups the same value from a given column into the same group. For instance, <code>col3&#39;</code> only has 3 distinct characters: a,b,c. It generates 3 groups (3 rows): <code>data.groupby(&#39;col3&#39;).col1/col2/col3</code>. We can manipulate these groups seperately. More specify, <code>data.groupby(&#39;col3&#39;)</code> is a new <code>DataFrame</code> and we operate data in each group seperately.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(data.groupby(<span class="string">&#x27;col3&#x27;</span>).col1.describe())</span><br><span class="line"><span class="built_in">print</span>(data.groupby(<span class="string">&#x27;col3&#x27;</span>).col2.describe())</span><br><span class="line"><span class="built_in">print</span>(data.groupby(<span class="string">&#x27;col3&#x27;</span>).col3.describe())</span><br></pre></td></tr></table></figure>
-
-<pre><code>      count  mean       std  min  25%  50%  75%  max
-col3                                                
-a       2.0   2.0  1.414214  1.0  1.5  2.0  2.5  3.0
-b       1.0   5.0       NaN  5.0  5.0  5.0  5.0  5.0
-c       3.0   6.0  3.464102  2.0  5.0  8.0  8.0  8.0
-      count  mean       std   min   25%   50%   75%   max
-col3                                                     
-a       2.0   4.0  2.828427   2.0   3.0   4.0   5.0   6.0
-b       1.0  10.0       NaN  10.0  10.0  10.0  10.0  10.0
-c       3.0  12.0  6.928203   4.0  10.0  16.0  16.0  16.0
-     count unique top freq
-col3                      
-a        2      1   a    2
-b        1      1   b    1
-c        3      1   c    3
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby([<span class="string">&#x27;col3&#x27;</span>, <span class="string">&#x27;col1&#x27;</span>]).col2.describe()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>col3</th>
-      <th>col1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">a</th>
-      <th>1</th>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1.0</td>
-      <td>6.0</td>
-      <td>NaN</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <th>5</th>
-      <td>1.0</td>
-      <td>10.0</td>
-      <td>NaN</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">c</th>
-      <th>2</th>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>NaN</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2.0</td>
-      <td>16.0</td>
-      <td>0.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p><code>groupby()</code> function can group multiple columns. And the index here is called <strong>multi-index</strong>. We can call <code>reset_index()</code> to restore it back to a normal index.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dt = data.groupby([<span class="string">&#x27;col3&#x27;</span>, <span class="string">&#x27;col1&#x27;</span>]).col2.describe()</span><br><span class="line">dt.reset_index()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col3</th>
-      <th>col1</th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>a</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>a</td>
-      <td>3</td>
-      <td>1.0</td>
-      <td>6.0</td>
-      <td>NaN</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>b</td>
-      <td>5</td>
-      <td>1.0</td>
-      <td>10.0</td>
-      <td>NaN</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>c</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>NaN</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>c</td>
-      <td>8</td>
-      <td>2.0</td>
-      <td>16.0</td>
-      <td>0.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Another <code>groupby()</code> method worth mentioning is <code>agg()</code>, which lets you run a bunch of different functions on your DataFrame simultaneously. For example, we can generate a simple statistical summary of the dataset as follows:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;col3&#x27;</span>).col1.agg([<span class="built_in">len</span>, <span class="built_in">min</span>, <span class="built_in">max</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>len</th>
-      <th>min</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>col3</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>2</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>1</td>
-      <td>5</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>3</td>
-      <td>2</td>
-      <td>8</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Effective use of groupby() will allow you to do lots of really powerful things with your dataset.</p>
-<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><h3 id="sort-values"><a href="#sort-values" class="headerlink" title="sort_values()"></a>sort_values()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.sort_values(by=[<span class="string">&quot;col1&quot;</span>], ascending=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h3 id="sort-index"><a href="#sort-index" class="headerlink" title="sort_index()"></a>sort_index()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.sort_index(by=[<span class="string">&quot;col1&quot;</span>], ascending=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h2 id="Missing-data-amp-Replace"><a href="#Missing-data-amp-Replace" class="headerlink" title="Missing data &amp; Replace"></a>Missing data &amp; Replace</h2><p>Entries missing values are given the value NaN, short for “Not a Number”. For technical reasons these NaN values are always of the float64 dtype.</p>
-<p>Pandas provides some methods specific to missing data. To select <code>NaN</code> entries you can use <code>pd.isnull()</code> (or its companion <code>pd.notnull()</code>). This is meant to be used thusly:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.loc[pd.isnull(data.col1)]</span><br><span class="line"><span class="comment"># data.col1.isnull() is equivalent to pd.isnull(data.col1)</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Replacing missing values is a common operation. Pandas provides a really handy method for this problem: <code>fillna()</code>. <code>fillna()</code> provides a few different strategies for mitigating such data. For example, we can simply replace each <code>NaN</code> with an “Unknown”:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1.fillna(<span class="string">&quot;Unknown&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    1
-1    8
-2    2
-3    3
-4    5
-5    8
-Name: col1, dtype: int64
-</code></pre>
-<p>Alternatively, <code>replace()</code> function is used widely. We now replace all ‘a’ to ‘b’ in col3.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col3.replace(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    b
-1    c
-2    c
-3    b
-4    b
-5    c
-Name: col3, dtype: object
-</code></pre>
-<h2 id="Renaming"><a href="#Renaming" class="headerlink" title="Renaming"></a>Renaming</h2><p><code>rename()</code> function lets you change index names and/or column names</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.rename(columns=&#123;<span class="string">&#x27;col1&#x27;</span>: <span class="string">&#x27;column1&#x27;</span>, <span class="string">&#x27;col2&#x27;</span>: <span class="string">&#x27;column2&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>column1</th>
-      <th>column2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.rename(index=&#123;<span class="number">1</span>: <span class="string">&#x27;row1&#x27;</span>, <span class="number">4</span>: <span class="string">&#x27;row4&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>row1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>row4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p><code>rename_axis()</code> function can give name to data’s Title and Index</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.rename_axis(<span class="string">&#x27;index&#x27;</span>, axis=<span class="string">&#x27;rows&#x27;</span>).rename_axis(<span class="string">&#x27;fields&#x27;</span>, axis=<span class="string">&#x27;columns&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>fields</th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-    <tr>
-      <th>index</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="Combining"><a href="#Combining" class="headerlink" title="Combining"></a>Combining</h2><h3 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([data, data])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.join(data, lsuffix=<span class="string">&#x27;lll&#x27;</span>, rsuffix=<span class="string">&#x27;rrr&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1lll</th>
-      <th>col2lll</th>
-      <th>col3lll</th>
-      <th>col1rrr</th>
-      <th>col2rrr</th>
-      <th>col3rrr</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/02/RL4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/02/RL4/" class="post-title-link" itemprop="url">RL4：Dynamic Programming</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-02 14:05:03" itemprop="dateCreated datePublished" datetime="2020-03-02T14:05:03-05:00">2020-03-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-18 03:24:41" itemprop="dateModified" datetime="2020-03-18T03:24:41-04:00">2020-03-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reinforcement-Learning/" itemprop="url" rel="index"><span itemprop="name">Reinforcement Learning</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<blockquote>
-<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
-</blockquote>
-<p>The key idea of DP, and reinforcement learning generally, is <strong>the use of value functions to orgnize and structure the search for good policy</strong>. The limitation of DP is that <strong>it requires a complete and accurate model of the environment</strong>, which is impossible to know in most of the time.</p>
-<ul>
-<li><strong>Policy Evaluation</strong> is the tasks of determining the state-value function $v_\pi$ for a particular policy $\pi$</li>
-<li><strong>Policy Improvement</strong> is the task of improving an existed policy on given state values.</li>
-<li><strong>Policy Control</strong> is the iteration of combining evaluation and improvement to get the optimal policy.</li>
-</ul>
-<h2 id="Policy-Evaluation-Prediction"><a href="#Policy-Evaluation-Prediction" class="headerlink" title="Policy Evaluation(Prediction)"></a>Policy Evaluation(Prediction)</h2><p>The aim of the <strong>policy evaluation</strong> is to calculate value functions. Its idea is to change the bellman equation into an <strong>update rule</strong>.</p>
-<p>$$<br>\begin{eqnarray*}<br>v_{k+1}(s)<br>&amp;\doteq&amp;\sum_a\pi(a|s) q_k(s,a)\<br>&amp;=&amp;\sum_a\pi(a|s) \sum_{s’,r}p(s’,r|s,a)(r+\gamma v_k(s’))\tag{4.1}<br>\end{eqnarray*}<br>$$</p>
-<p>We arbitrarily choose inital value for each state and the terminal state, if any, must be given value 0 and never be updated. Indeed, the sequence ${vk}$ can be shown in general to converge to $v_\pi$ as $k\rightarrow\infty$ under the same conditions that guarantee the existence of $v_\pi$. This algorithm is called <strong>iterative policy evaluation</strong>.</p>
-<img src="/2020/03/02/RL4/1.png" class="">
-
-<p>We call this kind of operation an <strong>expected update</strong>. All the updates done in DP algorithms are called expected updates because they are based on an expectation over all possible next states rather than on a sample next state.</p>
-<p>Let’s consider the $4\times4$ gride world below.</p>
-<img src="/2020/03/02/RL4/2.png" class="">
-
-<ul>
-<li>Action: up, left, down, right.</li>
-<li>State: shadow blocks for terminal states and white blocks with numbers for non-terminal states.</li>
-<li>Reward: all transitions for a reward -1.</li>
-<li>Policy: <strong>random move policy</strong>(four actions have equal probabilities to choose at each state)</li>
-</ul>
-<p>With $\theta = 0.001$, we finally get this.</p>
-<img src="/2020/03/02/RL4/3.png" class="">
-
-<hr>
-<h2 id="Policy-Improvement"><a href="#Policy-Improvement" class="headerlink" title="Policy Improvement"></a>Policy Improvement</h2><p>It is obvious that after we calculate state-value functions, the aim of the <strong>policy improvement</strong> is to improve the current policy $\pi$. Its idea is to change $\pi$ towards the optimal policy a little step. We call this <strong>policy improvement theorem</strong>$(4.2)$. $\pi’$ is the next new policy and both $\pi$ and $\pi’$ are <strong>deterministic</strong> policy.</p>
-<p>$$<br>q_\pi(s, \pi’(s)) \ge v_\pi(s),\ \forall s\in \mathbf{S}\tag{4.2}\<br>\Rightarrow v_\pi’(s)) \ge v_\pi(s)<br>$$</p>
-<p>The premise of improvement is</p>
-<p>$$<br>q_\pi(s, \pi’(s)) &gt; q_\pi(s, \pi(s)), \ \exists s\in\mathbf{S}<br>$$</p>
-<p>AS well as this condition is avaliable, the new policy can always be a <strong>strictly improvement</strong> over $\pi$ unless $\pi$ is already optimal. Obviously we can get $\pi’$ by <strong>greedy selection of action values at each state</strong>.</p>
-<p>$$<br>\begin{eqnarray*}<br>\pi’(s)<br>&amp;=&amp;\mathop{argmax}_a q_\pi(s,a)\<br>&amp;=&amp;\mathop{argmax}<em>a \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{4.3}<br>\end{eqnarray*}<br>$$</p>
-<p>The process of making a new policy that improves on an original policy, by making it greedy with respect to the value function of the original policy, is called <strong>policy improvement</strong>.</p>
-<p>Notice that from $(4.3)$ we actually get an “optimal policy” based on current state values (formal  optimal policy establish on $v_*$). We can imagine if all our value function can hold for <strong>optimal  bellman equation</strong>, then the current policy must be the optimal policy $\pi_*$.</p>
-<p>The gride world example is so simple that we just get the optimal policy after once improvement.</p>
-<img src="/2020/03/02/RL4/5.png" class="">
-
-<p>we can notice <strong>even though we already get optimal policy but state values can still change (not converge)</strong>.</p>
-<img src="/2020/03/02/RL4/4.png" class="">
-
-<hr>
-<h2 id="Policy-Iteration-Control"><a href="#Policy-Iteration-Control" class="headerlink" title="Policy Iteration(Control)"></a>Policy Iteration(Control)</h2><p>Once a policy, $\pi$, has been improved using $v_\pi$ to yield a better policy, $\pi’$, we can then compute $v_\pi’$ and improve it again to yield an even better $\pi’’$. Through alternating <strong>evaluation</strong> and <strong>improvement</strong>, we can thus obtain a sequence of monotonically improving policies and value functions</p>
-<p>$$<br>\pi_1 \mathop{\rightarrow}^E v_{\pi_1} \mathop{\rightarrow}^I<br>\pi_2 \mathop{\rightarrow}^E v_{\pi_2} \mathop{\rightarrow}^I<br>\pi_3 \mathop{\rightarrow}^E … \mathop{\rightarrow}^I<br>\pi_* \mathop{\rightarrow}^E v_{\pi_*} \mathop{\rightarrow}^I \pi_*<br>$$</p>
-<p>This way of finding an optimal policy is called <strong>policy iteration</strong>. It follows a sequcence of better and better policies and value functions until it reaches the optimal policy and accosiated optimal value function.</p>
-<img src="/2020/03/02/RL4/6.png" class="">
-
-<p>Here is a simple algorithnm for policy iteration with iterative policy evaluation</p>
-<img src="/2020/03/02/RL4/7.png" class="">
-
-<hr>
-<h2 id="Generalized-Policy-Iteration"><a href="#Generalized-Policy-Iteration" class="headerlink" title="Generalized Policy Iteration"></a>Generalized Policy Iteration</h2><p>One big problem of above policy iteration algorithnm is that we first have to wait for the convergence  of policy evaluation and then improve policy. This waste so much time and its efficience is low.</p>
-<p>The <strong>generalized policy iteration</strong>(GPI) flex the process and still gaurantee convergence of policy iteration. In each step, we don’t have to reach the boundary but just incomplete steps towards each boundary.</p>
-<img src="/2020/03/02/RL4/8.png" class="">
-
-<h3 id="Value-Iteration"><a href="#Value-Iteration" class="headerlink" title="Value Iteration"></a>Value Iteration</h3><p>Value iteration is a special case of GPI as well as the policy iteration. In this case, we don’t have to wait for completely finishing of policy evaluation. We stop after <strong>update evaluation one sweep</strong> (only one update of each state). It combines policy evaluation and improvement by changing <strong>bellman optimality equation</strong> into an update rule.</p>
-<p>$$<br>\begin{eqnarray*}<br>v_{k+1}(s)<br>&amp;\doteq&amp;\mathop{max}_a q_k(s,a)\<br>&amp;=&amp;\mathop{max}<em>a \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_k(s’))\tag{4.4}<br>\end{eqnarray*}<br>$$</p>
-<img src="/2020/03/02/RL4/9.png" class="">
-
-<p>Value iteration effectively combines, in each of its sweeps, one sweep of policy evaluation and one sweep of policy improvement. Faster convergence is often achieved by <strong>interposing multiple policy evaluation sweeps between each policy improvement sweep</strong>.</p>
-<h3 id="Asynchronous-DP"><a href="#Asynchronous-DP" class="headerlink" title="Asynchronous DP"></a>Asynchronous DP</h3><ul>
-<li>synchronous DP: in each iteration, sweep all states and update them all.</li>
-<li>asynchronous DP: in each iteration, just update some of states and update in any order</li>
-</ul>
-<p>When state space is too large, sometimes it’s impossible to use synchronous method to update all states.</p>
-<hr>
-<h2 id="Efficiency-of-Dynamic-Programming"><a href="#Efficiency-of-Dynamic-Programming" class="headerlink" title="Efficiency of Dynamic Programming"></a>Efficiency of Dynamic Programming</h2><p>DP may not be practical for very large problems, but compared with other methods for solving MDPs (like linear programing or brute search), DP methods are actually quite efficient.</p>
-<p>If $n$ and $k$ denote the number of states and actions, this means that a DP method takes a number of computational operations that is less than some polynomial function of $n$ and $k$. A DP method is guaranteed to find an optimal policy in polynomial time even though the total number of (deterministic) policies is $k^n$.</p>
-<p>Here comes to the <strong>curse of demensionality</strong>:</p>
-<ul>
-<li>The size of state space grows <strong>exponentially</strong> as the number of relevant features increase.</li>
-<li>This is not an issue with DP, but an inherent complexity of the problem.</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/29/Others5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2514,10 +232,1173 @@ Name: col3, dtype: object
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/29/RL3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/29/RL3/" class="post-title-link" itemprop="url">RL3：Value Functions & Bellman Equations</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-29 11:14:01" itemprop="dateCreated datePublished" datetime="2020-02-29T11:14:01-05:00">2020-02-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-17 11:19:49" itemprop="dateModified" datetime="2020-03-17T11:19:49-04:00">2020-03-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reinforcement-Learning/" itemprop="url" rel="index"><span itemprop="name">Reinforcement Learning</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<blockquote>
+<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
+</blockquote>
+<h2 id="Policies-and-Value-Functions"><a href="#Policies-and-Value-Functions" class="headerlink" title="Policies and Value Functions"></a>Policies and Value Functions</h2><h3 id="Policy"><a href="#Policy" class="headerlink" title="Policy"></a>Policy</h3><p>Formally, a <strong>policy</strong> is a mapping from <strong>states</strong> to probabilities of selecting each possible <strong>action</strong>.</p>
+<ul>
+<li><strong>deterministic policy</strong>, denote $\pi(s)=a$: one state correspond to one action</li>
+<li><strong>stochastic policy</strong>, $\pi(a|s)$: a probability distribution over all visable actions</li>
+</ul>
+<img src="/2020/02/29/RL3/1.png" class="">
+<img src="/2020/02/29/RL3/2.png" class="">
+
+<p>It’s important that <strong>policies depend only on the current state</strong>, not on other things like time or previous states.</p>
+<h3 id="State-value-Function"><a href="#State-value-Function" class="headerlink" title="State-value Function"></a>State-value Function</h3><p>Almost all reinforcement learning algorithms involve <strong>estimating value functions</strong> – functions of states (or of state–action pairs) that estimate <strong>how good</strong> it is for the agent to be in a given state (or <strong>how good</strong> it is to perform a given action in a given state), which means value function predicts reward into future.</p>
+<p>The value function of a state $s$ under a policy $\pi$, denoted $v_\pi(s)$, is <strong>the expected return when starting in $s$ and following $\pi$ thereafter</strong>. For MDPs, we can define $v_\pi$ formally by</p>
+<p>$$v_\pi(s)\doteq \mathbb{E}<em>\pi[G_t|S_t=s]=\mathbb{E}<em>\pi[\sum</em>{k=0}^\infty \gamma^kR</em>{t+k+1}|S_t=s],\ for\ all\ s\in \mathbf{S}$$</p>
+<p>We call the function $v_\pi$ the <strong>state-value function for policy $\pi$</strong></p>
+<h3 id="Action-value-Function"><a href="#Action-value-Function" class="headerlink" title="Action-value Function"></a>Action-value Function</h3><p>Similarly, we define the value of taking action $a$ in state $s$ under a policy $\pi$, denoted $q_\pi(s,a)$, as <strong>the expected return starting from $s$, taking the action $a$, and thereafter following policy $\pi$</strong>:</p>
+<p>$$q_\pi(s,a)\doteq \mathbb{E}<em>\pi[G_t|S_t=s,A_t=a]=\mathbb{E}<em>\pi[\sum</em>{k=0}^\infty \gamma^kR</em>{t+k+1}|S_t=s,A_t=a]$$</p>
+<p>We call the function $q_\pi$ the <strong>action-value function for policy \pi</strong>,</p>
+<hr>
+<h2 id="Bellman-Equations"><a href="#Bellman-Equations" class="headerlink" title="Bellman Equations"></a>Bellman Equations</h2><h3 id="Transform-Between-v-pi-And-q-pi"><a href="#Transform-Between-v-pi-And-q-pi" class="headerlink" title="Transform Between $v_\pi$ And $q_\pi$"></a>Transform Between $v_\pi$ And $q_\pi$</h3><p>Through the given diagram, we can derivate an equation for $v_\pi$ in terms of $q_\pi$ and $\pi$.</p>
+<img src="/2020/02/29/RL3/6.png" class="">
+
+<p>$$<br>\begin{eqnarray*}<br>v_\pi(s)<br>&amp;=&amp;\mathbb{E}<em>\pi[G_t|S_t=s]\<br>&amp;=&amp;\sum_a\pi(a|s)\mathbb{E}[G_t|S_t=s,A_t=a]\<br>&amp;=&amp;\sum_a\pi(a|s)q(s,a)\tag{3.1}<br>\end{eqnarray*}<br>$$<br>Recall that $G_t=R</em>{t+1}+\gamma G_{t+1}$. With given diagram below, we can derivate an equation for $q_\pi$ in terms of $v_\pi$ and $p(s’,r|s,a)$. (use markov property to simplify original equation)</p>
+<img src="/2020/02/29/RL3/7.png" class="">
+
+<p>$$<br>\begin{eqnarray*}<br>q_\pi(s,a)<br>&amp;=&amp;\mathbb{E}<em>\pi[G_t|S_t=s,A_t=a]\<br>&amp;=&amp;\mathbb{E}<em>\pi[R</em>{t+1}+\gamma G</em>{t+1}]\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma \mathbb{E}<em>\pi[G</em>{t+1}|S_{t+1}=s’])\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{3.2}<br>\end{eqnarray*}<br>$$</p>
+<h3 id="Bellman-Equations-for-v-pi"><a href="#Bellman-Equations-for-v-pi" class="headerlink" title="Bellman Equations for $v_\pi$"></a>Bellman Equations for $v_\pi$</h3><p><strong>Bellamn equation allows us to relate the value of the current state to the value of future states without waiting to observe all the future rewards.</strong><br>With $(3.1),(3.2)$, we can easiy get bellamn equation for $v_\pi$</p>
+<p>$$<br>\begin{eqnarray*}<br>v_\pi(s)<br>&amp;=&amp;\sum_a\pi(a|s)q(s,a)\<br>&amp;=&amp;\sum_a\pi(a|s)\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{3.3}<br>\end{eqnarray*}<br>$$</p>
+<p>$s’$ here stands for next state. <strong>Bellamn equation expresses a relationship between the value of a state and the values of its successor states (next state).</strong>  You can get a more intiutive understanding about how this equation forms though its backup diagram below: <strong>we first choose actions through policy and then transites to a successor state with corresponding reward under environment dynamics</strong>. The open circles represent state nodes and solid circles represent action nodes.</p>
+<img src="/2020/02/29/RL3/4.png" class="">
+
+<h3 id="Bellman-Equations-For-q-pi"><a href="#Bellman-Equations-For-q-pi" class="headerlink" title="Bellman Equations For $q_\pi$"></a>Bellman Equations For $q_\pi$</h3><p>With $(3.1),(3.2)$, we can easiy get bellamn equation for $q_\pi$</p>
+<p>$$<br>\begin{eqnarray*}<br>q_\pi(s,a)<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma\sum_{a’} q_\pi(s’,a’))\tag{3.4}<br>\end{eqnarray*}<br>$$</p>
+<p>$a’$ here stands for actions under possible state $s’$. Similarly, <strong>this equation express a relationship betweeen the value of an action and the values of actions under possible successor state $s’$</strong></p>
+<img src="/2020/02/29/RL3/5.png" class="">
+
+<h3 id="An-Example-of-Value-Function-Grideworld"><a href="#An-Example-of-Value-Function-Grideworld" class="headerlink" title="An Example of Value Function: Grideworld"></a>An Example of Value Function: Grideworld</h3><ul>
+<li><strong>State</strong>: each grid (totally 25 states)</li>
+<li><strong>Action</strong>: north, south, east, and west</li>
+<li><strong>Reward</strong>: actions that would take the agent off the grid leave its location unchanged, but also result in a reward of -1. Other actions results in a reward 0. Every time the agent moves any directions at position A would be transited to A’ with reward +10. This is the same to B and B’ except for reward +5.</li>
+<li><strong>Policy</strong>: random policy, each direction has equal probability, 25%.</li>
+</ul>
+<p>$\gamma=0.9$</p>
+<img src="/2020/02/29/RL3/3.png" class="">
+
+<p>Now, just for curious, we can verify the $v_\pi(s)$ bellman equation in this example. Let’s say we choose center state.</p>
+<p>$$(0.7\times0.9+0)\times0.25+(2.3\times0.9+0)\times0.25+(0.4\times0.9+0)\times0.25\+(-0.4\times0.9+0)\times0.25=0.69\approx0.7$$</p>
+<h3 id="Why-Bellman-Equations"><a href="#Why-Bellman-Equations" class="headerlink" title="Why Bellman Equations?"></a>Why Bellman Equations?</h3><p>We use bellman equations to calculate $v_\pi(s)$ for all $s\in \mathbf{S}$ by solving the system of linear equations.</p>
+<p>Still the previous example, gride world. It has 25 states and we get 25 unknown parameters. For each state we can get a bellman equation, therefore we get 25 equations. Through 25 equations, we sovle them to obtain 25 state values.</p>
+<p>But bellman equation is not pragmatic for many reasons. One of them is that sometimes the number of states is too large and it’s impossible to calculate results in a short time. It can <strong>only solve small MDPs</strong>.</p>
+<hr>
+<h2 id="Optimality-Optimal-Policies-amp-Value-Functions"><a href="#Optimality-Optimal-Policies-amp-Value-Functions" class="headerlink" title="Optimality (Optimal Policies &amp; Value Functions)"></a>Optimality (Optimal Policies &amp; Value Functions)</h2><h3 id="Optimal-Policy"><a href="#Optimal-Policy" class="headerlink" title="Optimal Policy"></a>Optimal Policy</h3><p>A policy $\pi$ is defined to be better than or equal to a policy $\pi’$ if its expected return is greater than or equal to that of $\pi’$ for all states. In other words,</p>
+<p>$$\pi&gt;\pi’ \ \ iff\ v_\pi(s)\ge v_{\pi’}(s)\ for\ all\ s \in \mathbf{S}$$</p>
+<img src="/2020/02/29/RL3/8.png" class="">
+
+<p><strong>There is always at least one deterministic policy that is better than or equal to all other policies. This is an optimal policy.</strong> Although <strong>there may be more than one</strong>, we denote all the optimal policies by $\pi_*$. They share the same state-value function, called the <strong>optimal state-value function</strong>, denoted $v_*$, and the same <strong>optimal action-value function</strong>, denoted $q_*$</p>
+<p>$$v_*(s)\doteq \mathop{max}<em>\pi\ v_\pi(s)\<br>q</em>*(s,a)\doteq \mathop{max}_\pi\ q_\pi(s,a)\<br>for\ all\ s\in \mathbf{S},a\in \mathbf{A}$$</p>
+<h3 id="Optimal-Value-Functions"><a href="#Optimal-Value-Functions" class="headerlink" title="Optimal Value Functions"></a>Optimal Value Functions</h3><p>Because the optimal policy $\pi_*$ is a <strong>deterministic policy</strong>, the optimal action $a_*$ with $\pi(a_*|s)$ equals to 1 and all other actions’ probability equal to 0. We can re-write $v_*$ with bellman equation as below, called <strong>bellman optimality equation for $v_*$</strong>.</p>
+<p>$$<br>\begin{eqnarray*}<br>v_*(s)<br>&amp;=&amp;\mathop{max}<em>\pi\ v_\pi(s)\<br>&amp;=&amp;\mathop{max}<em>a \mathbb{E}[R</em>{t+1}+\gamma v</em><em>(S_{t+1})|S_t=s,A_t=a]\<br>&amp;=&amp;\mathop{max}<em>a\ \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_</em>(s’))\tag{3.5}<br>\end{eqnarray*}<br>$$</p>
+<p>Similarly, <strong>bellman optimality equation for $q_*$</strong> is</p>
+<p>$$<br>\begin{eqnarray*}<br>q_*(s,a)<br>&amp;=&amp;\mathop{max}<em>\pi\ q_\pi(s,a)\<br>&amp;=&amp;\mathbb{E}[R</em>{t+1}+\gamma \mathop{max}<em>{a’}\ q</em><em>(S_{t+1},a’)|S_t=s,A_t=a]\<br>&amp;=&amp;\sum_{s’,r}p(s’,r|s,a)(r+\gamma \mathop{max}<em>{a’}\ q</em></em>(s’,a’))\tag{3.6}<br>\end{eqnarray*}<br>$$</p>
+<img src="/2020/02/29/RL3/9.png" class="">
+
+<p>The <strong>bellman optimality equations</strong> relate the value of a state or state-action pair, to it’s possible successors under <strong>any optimal policy</strong>.</p>
+<p>Unfortunately, the $max$ funtion here is <strong>not linear</strong>, we <strong>cannot through linear system solver</strong> to directly solve bellman optimality equation to obtain all $v_*$ in MDPs. Although, in principle, one can use a variety of methods for solving systems of nonlinear equations, it is not recommended due to its extreme computational cost.</p>
+<h3 id="Get-Optimal-Policy"><a href="#Get-Optimal-Policy" class="headerlink" title="Get Optimal Policy"></a>Get Optimal Policy</h3><p>Once one has $v_*$, it is relatively easy to determine an optimal policy. Because, for each state $s$, there will be one or more actions at which the maximum is obtained in the Bellman optimality equation. That is to say <strong>any policy that is greedy with respect to the optimal evaluation function $v_*$ is an optimal policy</strong>.</p>
+<img src="/2020/02/29/RL3/10.png" class="">
+
+<p>Having $q_*$ makes choosing optimal actions even easier. The action-value function effectively caches the results of all one-step-ahead searches.</p>
+<img src="/2020/02/29/RL3/11.png" class="">
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/28/RL2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/28/RL2/" class="post-title-link" itemprop="url">RL2：Markov Decision Processes</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-28 17:21:31" itemprop="dateCreated datePublished" datetime="2020-02-28T17:21:31-05:00">2020-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-03 03:34:00" itemprop="dateModified" datetime="2020-04-03T03:34:00-04:00">2020-04-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reinforcement-Learning/" itemprop="url" rel="index"><span itemprop="name">Reinforcement Learning</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<blockquote>
+<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
+</blockquote>
+<h2 id="Introduction-to-Markov-Decision-Processes"><a href="#Introduction-to-Markov-Decision-Processes" class="headerlink" title="Introduction to Markov Decision Processes"></a>Introduction to Markov Decision Processes</h2><h3 id="Definition-of-MDP"><a href="#Definition-of-MDP" class="headerlink" title="Definition of MDP"></a>Definition of MDP</h3><p>MDPs are meant to be a straightforward framing of the problem of learning from interaction to achieve a goal. Here are the key element in discribing a MDP</p>
+<ul>
+<li><strong>agent</strong>: the learner and the decision maker</li>
+<li><strong>environment</strong>: the thing a agent interacts with, comprising everything outside the agent</li>
+<li><strong>action</strong>: selected by the agent to interact with the environment</li>
+<li><strong>reward</strong>: special numerical values that the agent seeks to maximize over time through its choice of actions.</li>
+</ul>
+<p>the whole interacting process is precisely simplified as follow  </p>
+<img src="/2020/02/28/RL2/1.png" class="">  
+<p>More specifically, the agent and the environment interact at each of a sequence of discrete time steps, $t=0,1,2,3,…$ At each time step $t$, the agent recives some representation of the environment’s <strong>state</strong>, $S_t \in \mathbf{S}$, and on that basis selects an <strong>action</strong>, $A_t \in \mathbf{A}(s)$.</p>
+<p>One time step later, in part as a consequence of its action, the agent receives a numerical reward, $R_{t+1} \in \mathbf{R}\subset \mathbb{R}$, and finds itself in a new state, $S_{t+1}$. The MDP and agent together thereby give rise to a sequence or trajectory that begins like this:  </p>
+<img src="/2020/02/28/RL2/2.png" class="">  
+<p>In a finite MDP, the sets of states, actions, and rewards ($\mathbf{S}$, $\mathbf{A}$, and $\mathbf{R}$) all have a finite number of elements. In this case, the random variables $R_t$ and $S_t$ have well defined discrete probability distributions dependent only on the preceding state and action. That is, for particular values of these random variables, $s’ \in \mathbf{S}$ and $r \in \mathbf{R}$, there is a probability of those values occurring at time t, given particular values of the preceding state and action:<br>$$p(s’,r|s,a)\doteq P(S_t=s’, R_t=r\ | \ S_{t-1}=s, A_{t-1}=a)\tag{2.1}$$<br>for all $s’,s \in \mathbf{S}$, $r \in \mathbf{R}$, and $a \in \mathbf{A}(s)$. The function $p$ defines the <strong>dynamics of the MDP</strong>.<br>$$p:\ \mathbf{S}\times \mathbf{R}\times \mathbf{S}\times \mathbf{A}\rightarrow [0,1]$$<br>With $p(s’,r|s,a)$, note that <strong>future state and reward only depends on the current state and action</strong>. This is called the <strong>Markov property</strong>. It means that the present state is sufficient and remembering earlier states would not improve predictions about the future.</p>
+<p>The <strong>MDP framework</strong> is a considerable <strong>abstraction</strong> of the problem of goal-directed learning from interaction. It can be used to formalize a wide variety of <strong>sequential decision-making</strong> problem. This also means that any problem of learning goal-directed behavior can be reduced to three signals passing back and forth between an agent and its environment: actions, states, rewards.</p>
+<h3 id="An-Example-of-MDP"><a href="#An-Example-of-MDP" class="headerlink" title="An Example of MDP"></a>An Example of MDP</h3><p>Here is an example of finite MDP, <strong>Recycling Robot</strong>. We can write down the transition probabilities and the expected rewards, with dynamics as indicated below.  </p>
+<img src="/2020/02/28/RL2/3.png" class="">  
+<p>We can show it in another useful way called <strong>trasition graph</strong>  </p>
+<img src="/2020/02/28/RL2/4.png" class="">  
+<p>There are two kinds of nodes: state nodes and action nodes. The key point here is that the agent fisrtly chooses an action and then transits to a state with corresponding probability.</p>
+<hr>
+<h2 id="Goal-of-Reinforcement-Learning"><a href="#Goal-of-Reinforcement-Learning" class="headerlink" title="Goal of Reinforcement Learning"></a>Goal of Reinforcement Learning</h2><h3 id="The-Goal-of-RL"><a href="#The-Goal-of-RL" class="headerlink" title="The Goal of RL"></a>The Goal of RL</h3><p>In reinforcement learning, reward captures the notion of short-term gain. The objective however, is to learn a policy that achieves the most reward in the long run. With this premise, we denote the <strong>return</strong> at time step $t$ as $G_t$</p>
+<p>$$G_t\doteq R_{t+1}+R_{t+2}+R_{t+3}+…\tag{2.2}$$</p>
+<p>We intuitively want to maxmize $G_t$ at each time step. However, $G_t$ is a random variable because <strong>the dynamics of the MDP can be stochastic</strong>. That’s why we define the goal of an agent is to <strong>maxmize the expected return</strong></p>
+<p>$$\mathbb{E}[G_t] = \mathbb{E}[R_{t+1}+R_{t+2}+R_{t+3}+…]\tag{2.3}$$</p>
+<h3 id="The-Reward-Hypothesis"><a href="#The-Reward-Hypothesis" class="headerlink" title="The Reward Hypothesis"></a>The Reward Hypothesis</h3><p>The <strong>Reinforcement Learning Hypothesis</strong> can be expressed as this:</p>
+<blockquote>
+<p>That all of what we mean by goals and purposes can be well thought of as maximization of the expected value of the cumulative sum of a received scalar signal (reward).</p>
+</blockquote>
+<p>There are two research programs:</p>
+<ul>
+<li>Identify where reward signals come from. (what reward the agent should optimize)</li>
+<li>Develop algorithms that search the space of action to maximize reward signals.</li>
+</ul>
+<p>Informally, the agent’s goal is to <strong>maximize the total amount of reward it receives</strong>. This means maximizing not immediate reward, but cumulative reward in the long run. We can clearly state this informal idea as the <strong>reward hypothesis</strong>:</p>
+<blockquote>
+<p>That all of what we mean by goals and purposes can be well thought of as the maximization of the expected value of the cumulative sum of a received scalar signal (called reward).</p>
+</blockquote>
+<p>But how can we define reward? This is a trick problem. To use goals as rewards, we have some representations:</p>
+<ul>
+<li>goal-reward representation: 1 for achieving goal, 0 otherwise</li>
+<li>action-penalty representation: -1 for not achieving goal, 0 once goal reached</li>
+</ul>
+<p>Both of representations have its own limitation. They lack of some middel information to tell the agent how to achieve the goal as our expectation.</p>
+<hr>
+<h2 id="Episodic-Tasks-And-Continuing-Tasks"><a href="#Episodic-Tasks-And-Continuing-Tasks" class="headerlink" title="Episodic Tasks And Continuing Tasks"></a>Episodic Tasks And Continuing Tasks</h2><h3 id="Episodic-Tasks"><a href="#Episodic-Tasks" class="headerlink" title="Episodic Tasks"></a>Episodic Tasks</h3><p>In an <strong>episodic task</strong>, the agent-environment interaction breaks up into <strong>episodes</strong>. Episodes are indepedent and each episode ends in a <strong>terminal state</strong> at time step $T$. In this situation, time step is finite and we change <a href="#the-goal-of-rl">(2.2)</a> as</p>
+<p>$$G_t \doteq R_{t+1}+R_{t+2}+R_{t+1}+…+R_T\tag{2.4}$$</p>
+<h3 id="Continuing-Tasks"><a href="#Continuing-Tasks" class="headerlink" title="Continuing Tasks"></a>Continuing Tasks</h3><p>The interaction between agent-environment goes on <strong>continually</strong> and there is no <strong>terminal state</strong>. In this situation, time step is infinite and $G_t$ is the same in $(2.2)$</p>
+<p>$$G_t \doteq R_{t+1}+R_{t+2}+R_{t+3}+…$$</p>
+<p>But here comes to one problem: $G_t$ could be $\infty$ and impossible to calculate. Therefore, we should make $G_t$ finite, which by using <strong>discounting</strong> method.</p>
+<h3 id="Discounting-Return"><a href="#Discounting-Return" class="headerlink" title="Discounting Return"></a>Discounting Return</h3><p>Discount the rewards in the future by $\gamma$ called <strong>discount rate</strong>, where $\gamma \in [0,1]$</p>
+<p>$$<br>\begin{eqnarray*}<br>G_t<br>&amp;\doteq&amp; R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+…+\gamma^{k-1}R_{t+k}+…\<br>&amp;=&amp;\sum_{k=0}^\infty \gamma^kR_{t+k+1}\tag{2.5}<br>\end{eqnarray*}<br>$$</p>
+<p>We can also re-write $G_t$ in the recursive version</p>
+<p>$$G_t = R_{t+1}+\gamma G_{t+1}\tag{2.6}$$</p>
+<p>To prove $G_t$ is finite, let’s assume $R_{max}$ is the maximum reward the agent can receive</p>
+<p>$$<br>\begin{eqnarray*}<br>G_t=\sum_{k=0}^\infty \gamma^kR_{t+k+1}&amp;\le&amp; \sum_{k=0}^\infty \gamma^kR_{max}\<br>&amp;=&amp;R_{max}\sum_{k=0}^\infty \gamma^k\<br>&amp;=&amp;R_{max}\times \frac{1}{1-\gamma}<br>\end{eqnarray*}<br>$$</p>
+<p>It proves that $G_t$ now is finite. To Specify, let’s talk about $\gamma=0$ and $\gamma=1$.</p>
+<ul>
+<li>$\gamma=0\Rightarrow G_t=R_t$ : agent only cares about immediate reward. (<strong>short-sighted agent</strong>)</li>
+<li>$\gamma\rightarrow1$ : agent takes future rewards into account more strongly. (<strong>far-sighted agent</strong>)</li>
+</ul>
+<h3 id="Unified-Episodic-and-Continuing-Tasks"><a href="#Unified-Episodic-and-Continuing-Tasks" class="headerlink" title="Unified Episodic and Continuing Tasks"></a>Unified Episodic and Continuing Tasks</h3><p>we can consider episode termination to be the entering of a special <strong>absorbing state</strong> that transitions only to itself and that generates only rewards of zero. For example, consider the state transition diagram:  </p>
+<img src="/2020/02/28/RL2/5.png" class="">  
+<p>Thus, we can informally regard epsoidic tasks as continuing task.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/27/RL1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/27/RL1/" class="post-title-link" itemprop="url">RL1：K-armed Bandits Problem</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-27 12:35:49" itemprop="dateCreated datePublished" datetime="2020-02-27T12:35:49-05:00">2020-02-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-17 11:19:28" itemprop="dateModified" datetime="2020-03-17T11:19:28-04:00">2020-03-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reinforcement-Learning/" itemprop="url" rel="index"><span itemprop="name">Reinforcement Learning</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<blockquote>
+<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
+</blockquote>
+<h2 id="The-K-Armed-Bandit-Problem"><a href="#The-K-Armed-Bandit-Problem" class="headerlink" title="The K-Armed Bandit Problem"></a>The K-Armed Bandit Problem</h2><p>In the k-armed bandit problem, we have an <strong>agent</strong> who choooses between “k” <strong>action</strong> and recieves a <strong>reward</strong> based on the action it chooses. The <strong>goal</strong> of the agent is to maximize the expected total reward over some time period, or <strong>time steps</strong>.</p>
+<p>In a word, <strong>decision making under uncertainty</strong> can be formalized by the <strong>k-armed bandit problem</strong></p>
+<h3 id="Action-Values"><a href="#Action-Values" class="headerlink" title="Action Values"></a>Action Values</h3><p>the value of an action is the <strong>expected reward</strong> when that action is taken<br>$$<br>\begin{eqnarray*}<br>q_*(a) &amp;\doteq&amp; \mathbb{E}[R_t\ | \ A_t = a],\ \forall a \in \mathbf{A}\<br>&amp;=&amp;\sum_rp(r|a)r\tag{1.1}<br>\end{eqnarray*}<br>$$<br>To clearly explain this, the reward of an action may not be fixed so the reward may comfirm to a uniform distribution or normal distribution. Here is an example to illustrate this process</p>
+<img src="/2020/02/27/RL1/1.png" class="">  
+
+<h3 id="Action-Selection"><a href="#Action-Selection" class="headerlink" title="Action Selection"></a>Action Selection</h3><p>Remember that the agent’s <strong>goal</strong> is to <strong>maximize the expected total amount of reward it recieves</strong>. We can call this procedure the <em>argmax</em> (the argument “a” which maximizes function $q_*$)<br>$$\mathop{argmax}<em>a \ q</em>*(a)$$<br>It is clear that if you know the value of each action, then it would be trivial to solve the k-armed bandit problem: you would always select the <strong>action with highest value</strong>.</p>
+<p>Thus, the problem here is that the agent do not know the action values with certainty. It only have to estimate the action values. But how to estimate action-values?</p>
+<hr>
+<h2 id="What-to-Learn-Estimating-Action-Values"><a href="#What-to-Learn-Estimating-Action-Values" class="headerlink" title="What to Learn? Estimating Action Values"></a>What to Learn? Estimating Action Values</h2><h3 id="Sample-Average"><a href="#Sample-Average" class="headerlink" title="Sample-Average"></a>Sample-Average</h3><p>One way to estimate $q_*$ is to compute a <strong>sample-average</strong>. Here we denote the estimated value of action $a$ at time step $t$ as $Q_t(a)$. We would like $Q_t(a)$ to be close to $q_*(a)$.</p>
+<p>$$Q_t(a) \doteq \frac{\sum_{i=1}^{t-1}R_i}{t-1}\tag{1.2}$$</p>
+<p>Notice that we use $t-1$ because we are calculating $Q_t(a)$ with history prior to $t$. And to be clear, $t$ has <strong>separate corresponding value for each action</strong>.<br>Here is an example of medical trail.</p>
+<img src="/2020/02/27/RL1/2.png" class="">  
+<p>And we can simplify $Q_t$ by extending it in <strong>incremental update rule</strong></p>
+<p>$$<br>\begin{eqnarray*}<br>Q_{t+1}<br>&amp;=&amp;\frac{1}{t}\sum_{i=1}^tR_i\<br>&amp;=&amp;\frac{1}{t}(R_t+(t-1)\frac{1}{t-1}\sum_{i=1}^{t-1}R_i)\<br>&amp;=&amp;\frac{1}{t}(R_t+(t-1)Q_t)\<br>&amp;=&amp;Q_t+\frac{1}{t}(R_t-Q_t)\tag{1.3}<br>\end{eqnarray*}<br>$$</p>
+<p>To generalize it, we replace $\frac{1}{t}$ with $\alpha_t$ to represent stepsize and it’s easy to know $\alpha_t \in [0,1]$</p>
+<p>$$Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)\tag{1.4}$$</p>
+<p>And it can also express as below</p>
+<p>$$NewEstimate \leftarrow OldEstimate\ +\  StepSize(Target\ -\ OldEstimate)$$</p>
+<p>The expression $(Target-OldEstimate)$ is an <strong>error</strong> in the estimate. It is reduced by taking a step toward the “Target.” <strong>The target is presumed to indicate a desirable direction in which to move, though it may be noisy.</strong> In the case above, for example, the target is the nth reward.</p>
+<h3 id="Nonstationary-Problem"><a href="#Nonstationary-Problem" class="headerlink" title="Nonstationary Problem"></a>Nonstationary Problem</h3><p>What if the reward distribution of each action is <strong>changing over time</strong>? In this situation, what we learn form history may not correctly represent current state due to changing of reward distribution. In such cases it makes sense to give more weight to recent rewards than to long-past rewards because recent information reflect changing more accurate. To do so, we can use a <strong>fixed stepsize</strong>,like 0.5, instead of $\frac{1}{t}$. This can lead to decaying exponently past reward.</p>
+<p>$$Q_{t+1}=Q_t+\alpha_t(R_t-Q_t)=\alpha_tR_t+(1-\alpha_t)Q_t\tag{1.5}$$</p>
+<p>As $\alpha_t$ increases, the more $R_t$ contributes to $Q_{t+1}$ and the less for $Q_t$.</p>
+<h3 id="Greedy-Action"><a href="#Greedy-Action" class="headerlink" title="Greedy Action"></a>Greedy Action</h3><p>At each time step, the agent could alway choose the action with the highest action value estimated by history. And this is called <strong>greedy action</strong>.</p>
+<p>$$a_g = \mathop{argmax}_a\ \ Q(a)$$</p>
+<p>Seemingly we can through greedy action to archieve our goal, maxmizing expected total reward. But there is still a problem exists: how does the agent know its estimation about each action is correctly approximating to the real distribution? Greedy action is greatly impact by initial action value. Why does the agent know other actions are worse than greedy action even trying them only a few times?</p>
+<p>I think the agent should spend some time trying other actions instead of greedy action. And this come to the <strong>exploration and exploitation tradeoff</strong></p>
+<hr>
+<h2 id="Exploration-vs-Exploitation-Tradeoff"><a href="#Exploration-vs-Exploitation-Tradeoff" class="headerlink" title="Exploration vs. Exploitation Tradeoff"></a>Exploration vs. Exploitation Tradeoff</h2><h3 id="Exploration-and-Exploitation-Dilemma"><a href="#Exploration-and-Exploitation-Dilemma" class="headerlink" title="Exploration and Exploitation Dilemma"></a>Exploration and Exploitation Dilemma</h3><ul>
+<li>Exploration: <strong>improve</strong> knowledge for <strong>long-term</strong> benefit</li>
+<li>Exploitation: <strong>exploit</strong> knowledge for <strong>short-term</strong> benefit</li>
+</ul>
+<p>The dilemma means: How do we choose when to exploit and when to explore? When we <strong>explore</strong>, we get more accurate estimates of our values. When we <strong>exploit</strong>, we might get more reward. We cannot however choose to do both simultaneously.</p>
+<h3 id="Epsilon-Greedy-Action-Selection"><a href="#Epsilon-Greedy-Action-Selection" class="headerlink" title="Epsilon-Greedy Action Selection"></a>Epsilon-Greedy Action Selection</h3><p>One very simple method for choosing between exploration and exploitation is to <strong>choose randomly</strong>. We could choose to exploit most of the time with a small chance of exploring. For instance, we could roll a dice.  </p>
+<p>This is called <strong>$\epsilon$-greedy action selection</strong>. We formulize it as below, where $\epsilon \in [0,1]$</p>
+<p>$$<br>A_t\leftarrow<br>\begin{cases}<br>\mathop{argmax}_a Q_t(a)\ \ \ \ \ \ \ \ 1-\epsilon\ \<br>a\sim Uniform(\mathbf{A})\ \ \ \ \ \ \epsilon<br>\end{cases}<br>$$</p>
+<img src="/2020/02/27/RL1/3.png" class="">  
+
+<p>Let’s evaluate on 10-armed testbed  </p>
+<img src="/2020/02/27/RL1/5.png" class="">  
+<p>We run each agent with different $\epsilon$ for 2000 independent runs, each run for 1000 time steps. Then we average 2000 runs to get the learning algorithm’s average behavior.  </p>
+<img src="/2020/02/27/RL1/4.png" class="">  
+
+<p>The advantage of $\epsilon$-greedy over greedy methods depends on the task. If the reward variance is large, like 10, then more explorations to detect best action is important. More detections give the agent more confidence to pick up optimal action.</p>
+<p>On the other hand, if the reward variance is zero, then greedy method would know the true value of each action after trying it once. Seemingly, in this case, greedy method would soon find the greedy action and it might perform best. But, this can not be guaranteed under nonstationary situations. Nonstation means the true values of the actions changed over time. In this case, exploration is needed to ensure that one of the nongreedy actions has not changed to become better than the greedy one.</p>
+<h3 id="Optimistic-Initial-Values"><a href="#Optimistic-Initial-Values" class="headerlink" title="Optimistic Initial Values"></a>Optimistic Initial Values</h3><p><strong>Optimistic initial values</strong> encourage <strong>early exploration</strong>. In real programing, don’t intialize all acion values defaut to 0. Here is an example to show algorithm’s performance by using this method.  </p>
+<img src="/2020/02/27/RL1/6.png" class="">  
+<p>Limitation of optimistic inital values:</p>
+<ul>
+<li>Optimistic intial values <strong>only drive early exploration</strong></li>
+<li>They are not will suited for <strong>nonstationary problems</strong></li>
+<li>We may not know what the <strong>optimistic values</strong> should be</li>
+</ul>
+<h3 id="Upper-Confidence-Bound-UCB-Action-Selection"><a href="#Upper-Confidence-Bound-UCB-Action-Selection" class="headerlink" title="Upper-Confidence Bound (UCB) Action Selection"></a>Upper-Confidence Bound (UCB) Action Selection</h3><p>$\epsilon$-greedy action selection forces the non-greedy actions to be tried, but indiscriminately and <strong>uniformly</strong>, with no preference for those that are nearly greedy or particularly uncertain. It would be better to select among the non-greedy actions according to their <strong>potential for actually being optimal</strong>, taking into account both how close their estimates are to being maximal and the uncertainties in those estimates.</p>
+<p>In <strong>upper-confidence bound</strong>(UCB) action selection, we follow the principle of optimism in the face of uncertainty. This simply means that if we are uncertain about something, we should optimistically assume that it is good.</p>
+<p>For instance, say we have these three actions with associated uncertainties. The larger confidence interval means bigger uncertainies. So the agent optimistically picks the action that has the highest upper bound, action 1.</p>
+<img src="/2020/02/27/RL1/7.png" class="">  
+<p>After that, this time, we should select action 2.  </p>
+<img src="/2020/02/27/RL1/8.png" class="">  
+<p>The key idea in UCB is that it uses <strong>uncertainty</strong> or <strong>variance</strong> (sqrt root) in the value estimation for balancing exploration and exploitation.</p>
+<p>$$A_t \doteq \mathop{argmax}_a [Q_t(a)+c\sqrt{\frac{\ln{t}}{N_t(a)}}\ ]$$</p>
+<p>We can clearly see here how UCB combines exploration and exploitation. The first term in the sum represents the exploitation part, and the second term represents the exploration part. The constant parameter $c$ is used to scale the extent of exploration. $N_t(a)$ denotes the number of times that action $a$ has been selected prior to time $t$.  </p>
+<img src="/2020/02/27/RL1/9.png" class="">  
+<p>The limitation of UCB is <strong>not practical for very huge state spaces</strong>.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The gap between k-armed bandit problem and the full reinforcement learning problem:</p>
+<ol>
+<li>there is <strong>no association</strong> between actions and situations(or <strong>states</strong>). Each selection of actions is <strong>non-contextual</strong> or independent.</li>
+<li>thers is <strong>no policy</strong>, which designate actions at each situation(or <strong>state</strong>).</li>
+</ol>
+<p>we summarize a complete learning curve by its average value over the 1000 steps; this value is proportional to the area under the learning curve. This kind of graph is called a <strong>parameter study</strong>. </p>
+<img src="/2020/02/27/RL1/10.png" class="">
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/25/Game2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/25/Game2/" class="post-title-link" itemprop="url">博弈论2：纯策略纳什均衡</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-25 11:23:24" itemprop="dateCreated datePublished" datetime="2020-02-25T11:23:24-05:00">2020-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-21 21:43:02" itemprop="dateModified" datetime="2020-03-21T21:43:02-04:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Game-Theory/" itemprop="url" rel="index"><span itemprop="name">Game Theory</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<blockquote>
+<p>All materials come from <em>Coursera</em>《Game Theory》by Stanford University &amp; The University of British Columbia</p>
+</blockquote>
+<h2 id="Intro-to-nash-equilibrium"><a href="#Intro-to-nash-equilibrium" class="headerlink" title="Intro to nash equilibrium"></a>Intro to nash equilibrium</h2><p>Attributes of nash equilibrium</p>
+<ul>
+<li><strong>nobody has an incentive to <strong>deviate</strong> from their actions if a nash equilibrium is achieved</strong></li>
+<li>each player’s action <strong>maximizes his/her payoff</strong> given the actions of others</li>
+<li>a self-consistent or <strong>stable</strong> profile</li>
+</ul>
+<h2 id="Pure-Strategy-Nash-Equilibrium"><a href="#Pure-Strategy-Nash-Equilibrium" class="headerlink" title="Pure Strategy Nash Equilibrium"></a>Pure Strategy Nash Equilibrium</h2><h3 id="Pure-Strategy-And-Mixed-Strategy"><a href="#Pure-Strategy-And-Mixed-Strategy" class="headerlink" title="Pure Strategy And Mixed Strategy"></a>Pure Strategy And Mixed Strategy</h3><p>the informal definitions of <strong>pure strategy</strong> and <strong>mixed strategy</strong> are</p>
+<ul>
+<li>pure strategy: <strong>only one</strong> action is played with positive probability</li>
+<li>mixed strategy: <strong>more than one</strong> action is played with positive probability</li>
+</ul>
+<p>With a pure strategy, a player choose one action with 100% ensurance. While with a mixed strategy, a player can have a probability of 50% choosing action A and a probability of 50% choosing action B. In another word, player $i$ chooses action $a_i$ randomly from $A$ with corresponding probability.</p>
+<h3 id="Best-Response"><a href="#Best-Response" class="headerlink" title="Best Response"></a>Best Response</h3><p>The idea of <strong>Best Response</strong>: if you know what everyone else was going to do, it would be easy to pick your own action.</p>
+<p>Based on the previous lecture, $a$ represents <strong>action profile</strong>, which organized by $n$ players’ action</p>
+<p>$$a = (a_1, a_2,…, a_n)$$</p>
+<p>Now we denote $a_{-i}$, which means a sub action profile of other players act</p>
+<p>$$a_{-i} = (a_1, a_2,…, a_{i-1}, a_{i+1},…, a_n)$$</p>
+<p>Then we can re-define $a$ as</p>
+<p>$$a = (a_i, a_{-i})$$</p>
+<p>Therefore, the definition of <strong>Best Response</strong> is showen below</p>
+<p>$$a_i^* \in BR(a_{-i}) \ \ iff \ \ \forall a_i \in A_i, u_i(a_i^*, a_{-i}) \ge u_i(a_i, a_{-i})$$  </p>
+<p>That is to say, given $a_{-i}$, $a_i^*$ is the best response for player $i$ to play.</p>
+<p>But in practice, no agent knows what the others will do, so we can’t say about what actions will actually occur. The idea here is to look for <strong>stable action profiles</strong>, leading to equilibrium point. $a = (a_1, a_2,…, a_n)$ is a (pure strategy) <strong>nash equilibrium</strong> iff $\forall i,\ a_i \in BR(a_{-i})$</p>
+<h3 id="Dominant-Strategy"><a href="#Dominant-Strategy" class="headerlink" title="Dominant Strategy"></a>Dominant Strategy</h3><p>generalize from actions to strategies</p>
+<h2 id="Mixed-Strategy-Nash-Equilibrium"><a href="#Mixed-Strategy-Nash-Equilibrium" class="headerlink" title="Mixed Strategy Nash Equilibrium"></a>Mixed Strategy Nash Equilibrium</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/02/05/Others4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/05/Others4/" class="post-title-link" itemprop="url">Linux下常用指令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-05 14:46:11" itemprop="dateCreated datePublished" datetime="2020-02-05T14:46:11-05:00">2020-02-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-29 04:03:22" itemprop="dateModified" datetime="2020-02-29T04:03:22-05:00">2020-02-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="top"><a href="#top" class="headerlink" title="top"></a>top</h2><p>查看系统进程</p>
+<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen -S [TaskName] 创建一个名为TaskName的screen</span><br><span class="line">screen -r(-x) [TaskName] 恢复（进入）名为TaskName的screen</span><br></pre></td></tr></table></figure>
+
+<p>快捷指令：</p>
+<ul>
+<li>上下分屏：ctrl + a  再按shift + s</li>
+<li>切换屏幕：ctrl + a  再按tab键</li>
+<li>新建一个终端：ctrl + a  再按c</li>
+</ul>
+<h2 id="du、df"><a href="#du、df" class="headerlink" title="du、df"></a>du、df</h2><p>du = disk used 硬盘使用情况<br>df = disk free 硬盘剩余空间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">du -h [FileName] 查看指定文件大小</span><br><span class="line"></span><br><span class="line">df -hl 查看磁盘剩余空间</span><br><span class="line"></span><br><span class="line">df -h 查看每个根路径的分区大小</span><br><span class="line"></span><br><span class="line">du -sh [目录名] 返回该目录的大小</span><br><span class="line"></span><br><span class="line">du -sm [文件夹] 返回该文件夹总M数</span><br></pre></td></tr></table></figure>
+
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find [location] -name [FileName] 在location下查找名字为FileName的文件</span><br></pre></td></tr></table></figure>
+
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [字符串] [File] 在File中按行匹配字符串</span><br></pre></td></tr></table></figure>
+
+<h2 id="which、whereis"><a href="#which、whereis" class="headerlink" title="which、whereis"></a>which、whereis</h2><p>which 查看可执行文件的位置 ，只有设置了环境变量的程序才可以用<br>whereis 寻找特定文件，只能用于查找二进制文件、源代码文件和man手册页</p>
+<h2 id="more-less"><a href="#more-less" class="headerlink" title="more/less"></a>more/less</h2><p>查看文件内容，当文件内容很大时比cat命令要好用</p>
+<h2 id="head、tail"><a href="#head、tail" class="headerlink" title="head、tail"></a>head、tail</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head(tail) -n 1000 [FileName] 显示FileName文件的前1000行(后1000行)</span><br><span class="line">tail -n +1000 [FileName] 显示FileName文件从1000行往后的内容</span><br><span class="line">tail -f [FileName] 追踪（follow）文件FileName</span><br></pre></td></tr></table></figure>
+
+<h2 id="free、swapoff、mkswap、swapon"><a href="#free、swapoff、mkswap、swapon" class="headerlink" title="free、swapoff、mkswap、swapon"></a>free、swapoff、mkswap、swapon</h2><p>查看内存状态命令，可以显示memory、swap、buffer/cache等的大小及使用状况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">free -h 查看内存状态</span><br><span class="line"></span><br><span class="line">swapoff -a 取消所有挂载的swap空间</span><br><span class="line"></span><br><span class="line">dd if=/dev/zero of=/var/swapfile bs=1M count=1024 在/var目录下创建大小为1G的文件用做swap空间</span><br><span class="line"></span><br><span class="line">mkswap /var/swapfile 格式化swap文件</span><br><span class="line"></span><br><span class="line">swapon /var/swapfile 挂载swap空间</span><br></pre></td></tr></table></figure>
+
+<h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><p>查看网络状态（地址和端口号）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunlp 其中t（tcp）、u（udp），nlp分别是三个flag参数</span><br></pre></td></tr></table></figure>
+
+<h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h2><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/10/tmux.html">详细内容参考</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s [NewSessionName] 创建标签为NewSessionName的新会话，默认数字index从0开始</span><br><span class="line">tmux attach -t [index/name] 恢复到index/name的会话连接</span><br><span class="line">tmux ls 查看所有会话</span><br><span class="line">tmux switch -t [index/name] 切换到index/name会话</span><br></pre></td></tr></table></figure>
+
+<p>快捷指令  ：</p>
+<ul>
+<li>ctrl + b %： 左右分屏</li>
+<li>ctrl + b “： 上下分屏</li>
+<li>ctrl + b 空格： 左右分屏</li>
+<li>ctrl + b 上下左右： 切换分屏</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/01/20/Game1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/20/Game1/" class="post-title-link" itemprop="url">博弈论1：为什么囚徒困境是一个困境?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-20 19:48:16" itemprop="dateCreated datePublished" datetime="2020-01-20T19:48:16-05:00">2020-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-06 20:56:51" itemprop="dateModified" datetime="2020-03-06T20:56:51-05:00">2020-03-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Game-Theory/" itemprop="url" rel="index"><span itemprop="name">Game Theory</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>All materials come from <em>Coursera</em>《Game Theory》by Stanford University &amp; The University of British Columbia</p>
+</blockquote>
+<h2 id="囚徒困境"><a href="#囚徒困境" class="headerlink" title="囚徒困境"></a>囚徒困境</h2><p>两个囚犯现在被捕，警察将他们两个分别关在了不同的房间（囚犯之间互相无法交谈），警察为了让他们招供，对两个人分别说了这样一番话：</p>
+<ol>
+<li>若你和他都选择不招供，则在我们目前已有证据的基础上，我们有信心将你们<strong>两个都判1年</strong></li>
+<li>若你选择招供告发他，而他不招供，那么我们将<strong>直接无罪释放你并且他会被判3年</strong></li>
+<li>若你和他都选择了招供，那问题就很简单了，你们将<strong>都被判2年</strong></li>
+</ol>
+<p>现在我们将上述规则以更简练的矩阵形式表示出来  </p>
+<img src="/2020/01/20/Game1/pic1.png" class="">  
+<p>其中C表示囚犯选择与对方合作（Cooperate）即<strong>不招供</strong>，D表示囚犯选择欺骗对方（Defect）即选择<strong>招供</strong>，左边的C和D代表囚犯1可以做的两个选择，同理上方的C和D代表囚犯2可以做的两个选择。举个例子，对于<strong>右上角</strong>的方格，表示<strong>囚犯1选择不招供(C)而囚犯2选择招供(D)<strong>，结果</strong>囚犯1被判了3年而囚犯2无罪释放</strong></p>
+<p>为了进一步说明这个问题，我们先引入一些博弈论的基本概念</p>
+<hr>
+<h2 id="博弈的基本定义"><a href="#博弈的基本定义" class="headerlink" title="博弈的基本定义"></a>博弈的基本定义</h2><p>博弈的基本元素有以下几个：</p>
+<ul>
+<li>玩家（Players）：做出决定的个体</li>
+<li>行动（Actions）：每个玩家可以做出怎样的行动</li>
+<li>奖励/代价（Payoff）：玩家做出每个行动之后会有怎样反馈（例如商人在股票最高点抛售这一行动可以获得最高的收益）</li>
+<li>时序（Timing）：事件发生的顺序（例如大家下棋时轮流交替移动棋子）</li>
+<li>信息（information）：当玩家做出行动时他们都知道什么信息（参与者对其他参与者的了解程度）</li>
+</ul>
+<p>所以<strong>有限n人标准</strong>博弈的数学定义表示为$&lt;N, \mathbf{A}, u&gt;$其中元素分别表示如下含义：</p>
+<ul>
+<li>(1) 玩家的集合$N = {1, 2, …, n}$ 是一个大小为n的有限集合，用$i$标识</li>
+<li>(2) 行动组合的全集$\mathbf{A} = A_1 \times A_2 \times … \times A_n$，其中$A_i$表示玩家$i$的行动集合，若用$a$表示一个行动组合（action profile），则有$a = (a_1, a_2, …, a_n) \in \mathbf{A}$</li>
+<li>(3) 效用(代价)函数组$u = (u_1, u_2, …, u_n)$，其中对于玩家$i$，$u_i: \mathbf{A} \rightarrow \mathbb{R}$，特别注意 ，此处的$u_i$表示一个从行动组合集合$a \in A$到实数$\mathbf{R}$的映射</li>
+</ul>
+<hr>
+<h2 id="支配策略"><a href="#支配策略" class="headerlink" title="支配策略"></a>支配策略</h2><p>我们在参与游戏的时会有一个要实现的<strong>目标</strong>（goal），通常情况下的目标为最大化自己的收益（payoff），但是也可以有别的目标（比如以让对方获得最小收益为目标）</p>
+<p>为实现这个目标我们会有一个对应的<strong>策略</strong>（strategy），<strong>策略</strong>指导玩家该做出什么行动（或选择什么行动）。比如在囚徒困境中，囚犯的策略就是：<strong>做出怎样的选择(招供或不招供)，以使自己被判的时间最短</strong>。这里每个囚犯有两个选择：与另一个囚犯合作（Cooperate）和欺骗另一个囚犯（Deceive），选择合作意味着<strong>不招供</strong>而欺骗意味着<strong>招供</strong>，所以每个囚犯都会思考，如果对方招供的话我该怎么选，如果对方不招供的话我又该怎么选？从而我们这里引入一个概念<strong>支配策略</strong>（dominant strategy）</p>
+<p>支配策略：A dominant strategy for a player is one that produces the highest payoff of any strategy available for every possible action by the other players。通俗点讲就是：不管别人做出怎样的行动，我所做的选择都可以让我得到最大收益。还以囚徒困境举例  </p>
+<p>情况一：当<strong>囚犯2选择C不招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判1年，而D招供那么自己可以无罪释放（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong></p>
+<img src="/2020/01/20/Game1/pic2.png" class="">  
+
+<p>情况二：当<strong>囚犯2选择D招供</strong>（下图红框），那么对于囚犯1来说：选C不招供那么自己会被判3年，而D招供那么自己会被判2年（下图绿框）。所以很显然，<strong>此时选D招供是最好的选择</strong></p>
+<img src="/2020/01/20/Game1/pic3.png" class="">  
+
+<p>综合上述两种情况，我们可以得出结论：<strong>不论囚犯2如何选择，囚犯1的最佳选择都是D招供</strong>（也就是囚犯1的支配策略）。同样的道理，由于囚犯1和囚犯2的地位是<strong>对称的</strong>，所以<strong>囚犯2的支配策略也是D招供</strong></p>
+<h2 id="关于囚徒困境的结论"><a href="#关于囚徒困境的结论" class="headerlink" title="关于囚徒困境的结论"></a>关于囚徒困境的结论</h2><p>根据之前的支配策略的分析，两个囚犯的支配策略都是D招供，从而两个人<strong>都被判2年</strong>。而囚徒困境的令人诧异的地方也就出现于此，我们如果从一个上帝视角来看，很明显，两个囚犯的最佳选择明明是选择都不招供，这样两个人加起来判的时间是最少的，是全局最优解，但是如果从个人角度来分析，就会发现，无论如何他们两个都不会去选择一起合作不招供。这恰恰就是囚徒困境的背景————两个人无法交流即非合作博弈，<strong>其所谓的上帝视角其实是不存在的</strong>，因为将其推广到繁杂的现实，就会发现没有“上帝”可以看到整个全局，没有人的信息是全局的，从而从这个思想出发，反驳了亚当斯密的一个基本观点:所有人的最优选择会形成整个群体的最优选择，因为当所有人做到自己的最优时，对于整个社会来说可能是最坏的（两个囚犯加起来一共判了4年）</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>囚徒困境的标准通式满足：<br>$$c &gt; a &gt; d &gt; b$$</p>
+<img src="/2020/01/20/Game1/pic4.png" class="">
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/01/17/ML13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/17/ML13/" class="post-title-link" itemprop="url">统计学习方法——第十三章：无监督学习概论</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-17 21:55:39" itemprop="dateCreated datePublished" datetime="2020-01-17T21:55:39-05:00">2020-01-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-20 08:44:53" itemprop="dateModified" datetime="2020-01-20T08:44:53-05:00">2020-01-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><em>参考书目《统计学习方法（第2版）》 李航 著</em></p>
+</blockquote>
+<h2 id="无监督学习基本原理"><a href="#无监督学习基本原理" class="headerlink" title="无监督学习基本原理"></a>无监督学习基本原理</h2><ul>
+<li>无监督学习是从无标注的数据中学习数据的统计规律或者说内在结构的机器学习，主要包括<strong>聚类、降维、概率估计</strong></li>
+<li>无监督学习的基本想法是对给定数据（矩阵数据）进行某种“压缩”，从而找到数据的潜在结构。<strong>假定损失最小的压缩得到的结果就是最本质的结构</strong></li>
+</ul>
+<p>发掘数据的<em>纵向结构</em>，把相似的样本聚到同类，即对数据进行<strong>聚类</strong>  </p>
+<img src="/2020/01/17/ML13/pic1.png" class="">  
+<p>发掘数据的<em>横向结构</em>，把高维空间的向量转换为低维空间的向量，即对数据进行<strong>降维</strong>聚类  </p>
+<img src="/2020/01/17/ML13/pic2.png" class="">  
+<p>同时发掘数据的纵向和横向结构，假设数据由含有隐式结构的概率模型生成得到，从数据中<strong>学习该概率模型</strong>  </p>
+<img src="/2020/01/17/ML13/pic3.png" class="">  
+
+<hr>
+<h2 id="三个基本问题"><a href="#三个基本问题" class="headerlink" title="三个基本问题"></a>三个基本问题</h2><h3 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h3><ul>
+<li>聚类（clustering）是将样本集合中相似的样本（实例）分配到相同的类，不相似的样本分配到不同的类。</li>
+<li>聚类时，样本通常是欧氏空间中的向量，类别不是预先给定，而是从数据中自动发现，但类别的个数通常是预先给定的。样本之间的相似度或距离由 应用决定。</li>
+<li>如果一个样本只能属于一个类，则称为硬聚类（硬聚类）<br>  $$z_i = g_\theta(x_i), i = 1,2,…,N$$</li>
+<li>如果一个样本可以属于多个类，则称为软聚类（软聚类）<br>  $$P_\theta(z_i|x_i), i = 1,2,…,N$$</li>
+</ul>
+<h3 id="降维"><a href="#降维" class="headerlink" title="降维"></a>降维</h3><ul>
+<li>降维（dimensionality reduction）是将训练数据中的样本（实例）从高维空间转换到低维空间</li>
+<li>假设样本原本存在于低维空间，或者近似地存在于低维空间，通过降维则可以更好地表示样本数据的结构，即更好地表示样本之间的关系</li>
+<li>高维空间通常是高维的欧氏空间，而低维空间是低维的欧氏空间或者流形（manifold)</li>
+<li>从高维到低维的降维中，要保证样本中的信息损失最小</li>
+</ul>
+<img src="/2020/01/17/ML13/pic4.png" class="">
+
+<p>降维的模型是函数<br>$$z_i = g_\theta(x_i), i = 1,2,…,N$$<br>其中$x_i \in X$是样本的高维向量，$z_i \in Z$是样本的低维向量，$\theta$是参数，函数可以是线性函数也可以是非线性函数，降维的过程就是学习降维模型的过程</p>
+<h3 id="概率模型估计"><a href="#概率模型估计" class="headerlink" title="概率模型估计"></a>概率模型估计</h3><ul>
+<li>概率模型估计（probility model estimation），简称概率估计，假设训练数据由一个概率模型生成，由训练数据学习概率模型的结构和参数。</li>
+<li>概率模型的<strong>结构类型</strong>（或者说概率模型的集合事先给定），而模型的<strong>具体结构与参数从数据中自动学习</strong>。学习的目标是找到最有可能生成数据的结构和参数。</li>
+</ul>
+<img src="/2020/01/17/ML13/pic5.png" class="">
+
+<p>概率模型表示为条件概率分布<br>$$P_\theta(x|z)$$<br>随机变量$x$表示观测数据，可以是连续变量也可以是离散变量，随机变量$z$表示隐式结构，是离散变量，随机变量$\theta$表示参数。概率模型的一种特殊情况是隐式结构不存在，即满足<br>$$P_\theta(x|z) = P_\theta(x)$$<br>这时条件 概率分布估计变成概率分布估计，只要估计分布$P_\theta(x)$的参数即可</p>
+<hr>
+<h2 id="无监督学习三要素"><a href="#无监督学习三要素" class="headerlink" title="无监督学习三要素"></a>无监督学习三要素</h2><ul>
+<li>(1)模型:<br>  函数$$z = g_\theta(x)$$，条件概率分布$$P_\theta(z|x)$$，或条件概率分布$$P_\theta(x|z)$$</li>
+<li>(2)策略:<br>  目标函数的优化</li>
+<li>(3)算法:<br>  迭代算法，通过迭代达到对目标函数的最优化</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/11/25/GPU1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/25/GPU1/" class="post-title-link" itemprop="url">Nvidia GPU 基本概念</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-25 08:46:56" itemprop="dateCreated datePublished" datetime="2019-11-25T08:46:56-05:00">2019-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-24 21:36:25" itemprop="dateModified" datetime="2019-11-24T21:36:25-05:00">2019-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GPU/" itemprop="url" rel="index"><span itemprop="name">GPU</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Physical-Architecture-of-GPU"><a href="#Physical-Architecture-of-GPU" class="headerlink" title="Physical Architecture of GPU"></a>Physical Architecture of GPU</h2><p>下图为Nvidia官网上找的一个GPU主板的概念图，对应Device</p>
+<ul>
+<li>Device：与host做区分，可以理解为是指整个显卡</li>
+</ul>
+<img src="/2019/11/25/GPU1/pic2.png" class="">
+<p>如下图所示（Nvidia Tesla P100），共包含60个SM（6GPC x 10SM）</p>
+<ul>
+<li>SM(Streaming Multiprocessor)：等价于NUMA中的core的概念，由多个SP加上其他的一些硬件资源组成<ul>
+<li>其他硬件资源如：warp scheduler，register，shared memory等</li>
+<li>同一个block中的warp一定分配给同一个SM</li>
+<li>每个SM有自己独立的local L1 cache，但所有SM会共用Device的L2 cache</li>
+</ul>
+</li>
+</ul>
+<img src="/2019/11/25/GPU1/pic3.png" class="">
+
+<p>每个SM有自己的内部结构，如下图所示GP100（Nvidia Tesla P100）中的SM内部结构，在GP100里，每一个SM有左右两个SM Processing Block（SMP）</p>
+<img src="/2019/11/25/GPU1/pic4.png" class="">
+
+<ul>
+<li>SP(Streaming Processor)：最基本的处理单元，也称为CUDA core，表示在上图中为绿色的小格子<ul>
+<li>相当于一个简易的CPU</li>
+<li>内部包括控制单元Dispatch Port、Operand Collector，以及浮点计算单元FP Unit、整数计算单元Int Unit，另外还包括计算结果队列。当然还有Compare、Logic、Branch等</li>
+</ul>
+</li>
+</ul>
+<p>下图为SP（CUDA core）的内部结构</p>
+<img src="/2019/11/25/GPU1/pic6.png" class="">
+
+<h2 id="Software-Concept-in-CUDA"><a href="#Software-Concept-in-CUDA" class="headerlink" title="Software Concept in CUDA"></a>Software Concept in CUDA</h2><ul>
+<li>Thread：一个CUDA的并行程序会被分配到多个threads来执行<ul>
+<li>一个SP对应执行一个thread</li>
+<li>threadId在cuda中为三维的概念，在一个block中由(x, y, z)来唯一定位</li>
+</ul>
+</li>
+<li>Block：多个thread群组成一个block<ul>
+<li>同一个block中的threads可以同步，也可以通过shared memory通信</li>
+<li>blockId在cuda中为二维的概念，在一个grid中由(x, y)来唯一定位</li>
+</ul>
+</li>
+<li>Grid：多个block构成grid<ul>
+<li>一个grid对应一个执行一个kernel函数</li>
+</ul>
+</li>
+</ul>
+<p>空间对应如下图所示  </p>
+<img src="/2019/11/25/GPU1/pic1.png" class="">
+
+<ul>
+<li>warp：执行任务的调度单元，同一时间一个SM只能运行一个warp<ul>
+<li>类比于CPU中的进程，当一个warp阻塞时，SM将切换执行另一个warp</li>
+<li>当前CUDA的warp大小为32个线程。这里表明Nvidia的GPU执行粒度小，执行线程粒度越小，并行度越高，掩盖延迟的能力越强</li>
+<li>同在一个warp中的线程，以不同数据资源执行相同的指令，即所谓的SIMT（Single Instruction Multiple Thread）</li>
+</ul>
+</li>
+</ul>
+<h2 id="CPU和GPU的结构对比"><a href="#CPU和GPU的结构对比" class="headerlink" title="CPU和GPU的结构对比"></a>CPU和GPU的结构对比</h2><img src="/2019/11/25/GPU1/pic5.png" class="">
+
+<ul>
+<li>CPU是靠更大的缓存和复杂的逻辑控制（如流水线、乱序执行、指令预测和预处理等等）来掩饰延迟的</li>
+<li>GPU是靠更高的并行度来掩饰延迟的</li>
+</ul>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
+<li>GPU在并发的warp之间切换是没什么消耗的，因为硬件资源早就被分配到所有thread和block，所以新调度的warp的状态已经存储在SM中了。不同于CPU，CPU切换线程需要保存/读取线程上下文（register内容），这是非常耗时的，而GPU为每个threads提供物理register，无需保存/读取上下文。</li>
+<li>register和shared memory是SM的稀缺资源。CUDA将这些资源在程序执行前就分配给所有驻留在SM中的warp，并且整个程序执行周期都不再变动。因此这些有限的资源就会限制每个SM中active warp的数量，实验结果显示一个SM至少要存在6个active warp才能有效掩饰延迟</li>
+</ul>
+<h2 id="Reference-Material"><a href="#Reference-Material" class="headerlink" title="Reference Material"></a>Reference Material</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/junparadox/article/details/50540602">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/fpgatom/article/details/82081422">GPU高性能编程CUDA实战</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/asasasaababab/article/details/80447254">Nvidia GPU架构 - Cuda Core，SM，SP</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/junparadox/article/details/50540602">CUDA编程——GPU架构，由sp，sm，thread，block，grid，warp说起</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41598072/article/details/82877655">CUDA中grid、block、thread、warp与SM、SP的关系</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2019/07/03/Others2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/03/Others2/" class="post-title-link" itemprop="url">Shell中的常用通配符，字符类</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-07-03 10:42:24" itemprop="dateCreated datePublished" datetime="2019-07-03T10:42:24-04:00">2019-07-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-02 22:49:35" itemprop="dateModified" datetime="2019-07-02T22:49:35-04:00">2019-07-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hxphp/p/6707718.html">转载出处</a><br>因为 shell 频繁 地使用文件名，shell 提供了特殊字符来帮助你快速指定一组文件名。这些特殊字符叫做通配符。</p>
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>匹配任意多个字符（包括零个或一个）</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配任意一个字符（不包括零个）</td>
+</tr>
+<tr>
+<td>[characters]</td>
+<td>匹配任意一个属于字符集中的字符</td>
+</tr>
+<tr>
+<td>[!characters]</td>
+<td>匹配任意一个不是字符集中的字符</td>
+</tr>
+<tr>
+<td>[[:class:]]</td>
+<td>匹配任意一个属于指定字符类中的字符</td>
+</tr>
+</tbody></table>
+<p>&emsp;</p>
+<table>
+<thead>
+<tr>
+<th>字符类</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[:alnum:]</td>
+<td>匹配任意一个字母或数字</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td>匹配任意一个字母</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>匹配任意一个数字</td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td>匹配任意一个小写字母</td>
+</tr>
+<tr>
+<td>[:upper]</td>
+<td>匹配任意一个大写字母</td>
+</tr>
+</tbody></table>
+<p>一些常用的匹配：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>匹配对象</th>
+</tr>
+</thead>
+</table>
+<ul>
+<li>| 所有文件<br>g* | 文件名以“g”开头的文件<br>b*.txt 以”b” | 开头，中间有零个或任意多个字符，并以”.txt” 结尾的文件<br>Data??? | 以“Data”开头，其后紧接着 3 个字符的文件<br>[abc]* | 文件名以”a”,”b”, 或”c” 开头的文件<br>BACKUP.[0-9][0-9][0-9] | 以”BACKUP.” 开头，并紧接着 3 个数字的文件<br>[[:upper:]]* | 以大写字母开头的文件<br>[![:digit:]]* | 不以数字开头的文件</li>
+<li>[[:lower:]123] | 文件名以小写字母结尾，或以“1”，“2”，或“3”结尾的文件</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2585,7 +1466,7 @@ Name: col3, dtype: object
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -2598,7 +1479,7 @@ Name: col3, dtype: object
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
