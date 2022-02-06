@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/17/R18/">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/04/R30/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.ico">
@@ -178,7 +178,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/17/R18/" class="post-title-link" itemprop="url">018 "Understanding the Energy Consumption of Dynamic Random Access Memories"</a>
+            <a href="/2022/02/04/R30/" class="post-title-link" itemprop="url">030 "A Primer on Memory Consistency and Cache Coherence, 2nd" Ch.1 - Ch.2</a>
         </h2>
 
         <div class="post-meta">
@@ -188,14 +188,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-01-17 11:44:00" itemprop="dateCreated datePublished" datetime="2022-01-17T11:44:00-05:00">2022-01-17</time>
+              <time title="Created: 2022-02-04 18:35:35" itemprop="dateCreated datePublished" datetime="2022-02-04T18:35:35-05:00">2022-02-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-18 00:59:35" itemprop="dateModified" datetime="2022-01-18T00:59:35-05:00">2022-01-18</time>
+                <time title="Modified: 2022-02-06 13:13:28" itemprop="dateModified" datetime="2022-02-06T13:13:28-05:00">2022-02-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -203,7 +203,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
                 </span>
             </span>
 
@@ -218,22 +218,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><em><strong>Keywards</strong></em> DRAM; Power</p>
+          <p><em><strong>Keywards</strong></em> computer architecture, memory consistency, cache coherence, shared memory, memory systems, multicore processor, heterogeneous architecture, GPU, accelera- tors, semantics, verificatio</p>
 <blockquote>
-<p>Author: Thomas Vogelsang</p>
+<p>Author: Vijay Nagarajan, Daniel J. Sorin, Mark D. Hill, David A. Wood</p>
 </blockquote>
 <hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>We still miss a model of DRAM power consumption that is both detailed to direct optimization work, but also general enough not to be restricted to an existing DRAM technology or DRAM standard.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This paper proposse a flexible DRAM power model which uses a description of DRAM architecture, technology and opearation to calculate power useage and verifies it against datasheet values. Using this model, the author evaluates some of the proposed DRAM power reduction schemes.</p>
-<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>Proposed a model of DRAM power consumption.</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Three most important factors for DRAM cost are:</p>
-<ol>
-<li>cost of a wafer: cost of a wafer can be kept low if a simple transistor process and few metal levels are used.</li>
-<li>yield: it can be optimized by process optimization and by optimization the amount of redundancy.</li>
-<li>die area: its optimization is achieved by keeping the array efficiency (ratio of cell area to total die area) as high as possible.</li>
+<h2 id="Chapter-1-Introduction-to-Consistency-and-Coherence"><a href="#Chapter-1-Introduction-to-Consistency-and-Coherence" class="headerlink" title="Chapter 1: Introduction to Consistency and Coherence"></a>Chapter 1: Introduction to Consistency and Coherence</h2><p>Consistency = memory consistency / memroy consistency model / memory model<br>Coherence = cache coherence</p>
+<p>We need to define <strong>shared memory correctness</strong> —- that is, which shared memory behaviors are allowed -— so that programmers know what to expect and implementors know the limits to what they can provide.</p>
+<p>Shared memory correctness is specified by a <strong>memory consistency model</strong> (MCM).</p>
+<h2 id="Chapter-2-Coherence-Basics"><a href="#Chapter-2-Coherence-Basics" class="headerlink" title="Chapter 2: Coherence Basics"></a>Chapter 2: Coherence Basics</h2><h3 id="Baseline-System-Model"><a href="#Baseline-System-Model" class="headerlink" title="Baseline System Model"></a>Baseline System Model</h3><img src="/2022/02/04/R30/1.png" class="">
+
+<p>The <strong>last-level cache</strong> (LLC), depite being on the processor chip, is logically a “memory-side cache” and thus does not introduce another level of coherence issue. The LLC is logically just infront of the memory and serves to <em>reduce the average latency of memory accesses</em> and <em>increase the memory’s effective bandwidth</em>. The LLC also serve as <em>an on-chip memory controller</em>.</p>
+<h3 id="Cache-Coherence-Interface"><a href="#Cache-Coherence-Interface" class="headerlink" title="Cache Coherence Interface"></a>Cache Coherence Interface</h3><p>Informally, a <strong>coherence protocol</strong> ensure that writes are made visible to all processors.</p>
+<p>The processor cores interact with the <strong>coherence protocol</strong> throught a <strong>coherence interface</strong> that provides two methods: (1) a <em>read-request</em> method, and (2) a <em>write-request</em> method.</p>
+<p>A pipeline-coherence interface.</p>
+<img src="/2022/02/04/R30/2.png" class="">
+
+<p>Cache coherence protocols are classified into two categories based on the nature of their coherence interface:</p>
+<ul>
+<li><strong>Consistency-agnostic coherence</strong>: Writes are propagated <strong>synchronously</strong>. This category presents an interface that is identical to that of an atomic memroy system (with no cache) beacuse .</li>
+<li><strong>Consistency-directed coherence</strong>: Writes are propagated <strong>asynchronously</strong>. This category emerged to support throughput-based GPGPU. In order to correctly enforce consistency, coherence protocols in this class must ensure that the order in which writes are eventually made visible adheres to the ordering rules mandated by the consistency model.</li>
+</ul>
+<h3 id="Invariants-of-consistency-agnostic-Coherence"><a href="#Invariants-of-consistency-agnostic-Coherence" class="headerlink" title="Invariants of (consistency-agnostic) Coherence"></a>Invariants of (consistency-agnostic) Coherence</h3><ol>
+<li><strong>Single-Writer, Multiple-Read (SWMR) Invariant</strong>. For any memory location A, at any given time, there exists only a single core that may write to A (and can also read it) or some number of cores that may only read A.</li>
+<li><strong>Data-Value Invariant</strong>. Any read from a memory location must be the same value written by the last write to the that memory location.</li>
 </ol>
-<p>High performance DRAMs are optimized for maximum total data rate.</p>
-<p>Mobile DRAMs are optimized for low standby current with data rates similiar to commodity DRAM.</p>
+<p>The vast majority of coherence protocols, called “invalidate protocols,” are designed explicitly to maintain these invariants.</p>
+<p>In practice, coherence is usually maintained at the granularity of <strong>cache blocks</strong>. And one should be aware that there have been protocols that have maintained coherence at finer and coarser granularities.</p>
+<p>Definitions of Coherence v.s. Consistency: coherence is specified on a <strong>per-memory location</strong> basis, whereas consistency is specified with respect to <strong>all memory locations</strong>.</p>
+<p>Two key ideas when talk about coherence:</p>
+<ul>
+<li><strong>Coherence pertains to <em>all</em> storage structures that hold blocks from the shared address space.</strong></li>
+<li><strong>Coherence is not <em>directly</em> visible to the programmer</strong>. On the other hand, the processor pipeline and coherence protocol jointly enforce the consistency model, and it is only the consistency model that is visible to the programmer.</li>
+</ul>
 
       
     </div>
@@ -253,7 +270,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/16/R17/">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/03/Arch6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.ico">
@@ -267,7 +284,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/16/R17/" class="post-title-link" itemprop="url">017 "Improving GPU Performance via Large Warps and Two-Level Warp Scheduling"</a>
+            <a href="/2022/02/03/Arch6/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [3.6 - 3.10]</a>
         </h2>
 
         <div class="post-meta">
@@ -277,14 +294,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-01-16 08:13:14" itemprop="dateCreated datePublished" datetime="2022-01-16T08:13:14-05:00">2022-01-16</time>
+              <time title="Created: 2022-02-03 18:34:19" itemprop="dateCreated datePublished" datetime="2022-02-03T18:34:19-05:00">2022-02-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-17 00:48:25" itemprop="dateModified" datetime="2022-01-17T00:48:25-05:00">2022-01-17</time>
+                <time title="Modified: 2022-02-05 18:35:13" itemprop="dateModified" datetime="2022-02-05T18:35:13-05:00">2022-02-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -292,7 +309,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
                 </span>
             </span>
 
@@ -307,36 +324,182 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><em><strong>Keywards</strong></em> GPGPU, SIMD, Divergence, Warp Scheduling</p>
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/02/Arch5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/02/Arch5/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [3.1 - 3.5]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-02 18:26:45" itemprop="dateCreated datePublished" datetime="2022-02-02T18:26:45-05:00">2022-02-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-05 18:30:04" itemprop="dateModified" datetime="2022-02-05T18:30:04-05:00">2022-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/31/R28/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/31/R28/" class="post-title-link" itemprop="url">028 "Speculative Lock Elision - Enabling Highly Concurrent Multithreaded Execution"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-31 09:50:19" itemprop="dateCreated datePublished" datetime="2022-01-31T09:50:19-05:00">2022-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-02 02:00:25" itemprop="dateModified" datetime="2022-02-02T02:00:25-05:00">2022-02-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> transactional memory， parallel computing</p>
 <blockquote>
-<p>Author: Veynu Narasiman, Michael Shebanow, Chang Joo Lee, Rustam Miftakhutdinov, Onur Mutlu, Yale N. Patt</p>
+<p>Author:</p>
 </blockquote>
 <hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Altough GPUs achieve Thread Level Parallelism (TLP) through warp execution and concurrently executing manny warps on single GPU core (SM), the computational resources on GPU are still underutilized.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Threads on GPU are grouped into fixed-size SIMD batched known as warps and many warps are concurrently executed on a single GPU core. Despite this, computationaly resources on GPU cores are still underutillized. To further improve GPU performance, the authors propose two independent ideas: the large warp microarchitecture and two-level warp scheduling.</p>
-<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>Their mechanisms signifi-cantly improve computational resource utilization, resulting in 19.1% performance improvement over traditional GPU cores on a set of general purpose parallel applications.</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>GPUs expliot TLP in two major way:</p>
-<ol>
-<li>threads executing in fixed-size batches known as warps.</li>
-<li>concurrently execute many warps on a singe core to hide execution latency.</li>
-</ol>
-<p>Two resouce for underutilization of computational resource:</p>
-<ol>
-<li>branch divergence due to conditional branch in the code.</li>
-<li>unable to effectively hide latency of long latency operations.</li>
-</ol>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Serialization of threads due to critical sections is a fundamental bottleneck to achieving high performance in multithreaded programs. Dynamically, such serialization may be unnecessary because these critical sections could have safely executed concurrently without locks. Current processors cannot fully exploit such parallelism because they do not have mechanisms to dynamically detect such false inter-thread dependences.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Locks do not always have to be acquired for a correct execution and in such situations concurrency can further improve by removing unnecessary locks.  The authors proposed Speculative Lock Elision (SLE) which can remove dynamically unnecessary lock-induced serilization and enable highly concurrent multithreaded execution.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Trade-off in multithread programming:</p>
+<ul>
+<li>Conservtive locking: To ensure correctness at the expense of performance.</li>
+<li>Locking granularity: Finer granularity locking can improve performance but introduces programming complexity and makes program management difficult.</li>
+<li>Thread-unsafe legacy libraries: if a library not equipped to deal with threads, a global locking is introduced and thus degrade performance.</li>
+</ul>
 <h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
-<li>Large warp microarchitecture</li>
-<li>Two-level warp scheduling</li>
+<li>Use <strong>speculation</strong>* to dynamically remove unnecessary lock to improve concurrency.</li>
+<li>Misspeculation due to inter-thread data conflicts is detected using existing cache mechanisms and rollback is used for recovery. Successful speculative elision is validated and committed without acquring the lock.</li>
+<li>SLE can be implemented entirely in microarchitecture without instruction set support and without system-level modifications (transparent to programmers) and only requires trivial additional hardware support.</li>
+<li>For situations where synchronization is required for correctness, they can be detected using cache coherence protocols already implemented in most modern processor.</li>
+</ul>
+<h2 id="Notable-Design-Details-Strengths"><a href="#Notable-Design-Details-Strengths" class="headerlink" title="Notable Design Details/Strengths"></a>Notable Design Details/Strengths</h2><ul>
+<li>Providing <em>appearence of atomicity</em> for each thread in the critical section is done by keep updates are not observed by other threads.</li>
+<li>After try times beyond <em>restart threshold</em>, the lock is explicitly acquired.</li>
+<li>SLE involves two predictons:<ul>
+<li>On a store, predict that another store will shortly follow and undo the changes by this store. If the prediction is validated, the two store are elided.</li>
+<li>Predict that all memory operations within the window bounded by the two elided stores occur atomically.</li>
+</ul>
+</li>
 </ul>
 <h2 id="Limitations-Weaknesses"><a href="#Limitations-Weaknesses" class="headerlink" title="Limitations/Weaknesses"></a>Limitations/Weaknesses</h2><ul>
-<li>The assumptions about default warp scheduling on GPU is round-robin may not be correct.</li>
-<li>For data intensive application, the two level round-robin scheduling may not bring much performance improvement.</li>
-<li>The hardware cost for implmentation their methods may not worth it because small improvemence is only improved on specific applications.</li>
-</ul>
-<h2 id="Open-Questions-Where-to-go-from-here"><a href="#Open-Questions-Where-to-go-from-here" class="headerlink" title="Open Questions [Where to go from here?]"></a>Open Questions [Where to go from here?]</h2><ul>
-<li>How their methods apply to three dimentional grid?</li>
-<li>In practice, the active mask may not be as sparse as they shown in the paper.</li>
+<li>How the use cache coherence to guanrantee the order of updates?</li>
 </ul>
 
       
@@ -357,7 +520,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/15/R16/">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/27/Arch4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.ico">
@@ -371,7 +534,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/15/R16/" class="post-title-link" itemprop="url">016 "General-Purpose Graphics Processor Architectures"</a>
+            <a href="/2022/01/27/Arch4/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [C.6 - C.10]</a>
         </h2>
 
         <div class="post-meta">
@@ -381,14 +544,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-01-15 08:11:53" itemprop="dateCreated datePublished" datetime="2022-01-15T08:11:53-05:00">2022-01-15</time>
+              <time title="Created: 2022-01-27 10:17:16" itemprop="dateCreated datePublished" datetime="2022-01-27T10:17:16-05:00">2022-01-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-16 22:33:58" itemprop="dateModified" datetime="2022-01-16T22:33:58-05:00">2022-01-16</time>
+                <time title="Modified: 2022-02-05 18:33:18" itemprop="dateModified" datetime="2022-02-05T18:33:18-05:00">2022-02-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -396,7 +559,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
                 </span>
             </span>
 
@@ -411,65 +574,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><em><strong>Keywards</strong></em> GPGPU, computer architecture</p>
-<blockquote>
-<p>Author: Tor M. Aamodt, Wilson Wai Lun Fung, Timothy G. Rogers</p>
-</blockquote>
-<hr>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Over succeeding generations of products, GPU manufacturer’s have refined the GPU architecture and programming model to <strong>increase flexibility</strong> while simultaneously <strong>improving energy efficiency</strong>.</p>
-<p>A typical system containing GPU is divided into two forms: 1. discrete CPU and GPU; 2. integrated CPU and GPU</p>
-<img src="/2022/01/15/R16/1.png" class="">
-
-<p>For distrete GPU, the DRAM technology used for CPU and GPU is different(<strong>DDR</strong> for CPU vs. <strong>GDDR</strong> for GPU). DDR for <em>Double Data Rate</em> and GDDR for Graphics DDR. The CPU DRAM is typically optimized for <strong>low latency access</strong> whereas the GPU DRAM is optimized for <strong>high throughput</strong>. For integrated GPU, as they are often found on low-powper mobile device, the shared DRAM memory it uses is often optimized for <strong>low power</strong> such as <strong>LPDDR</strong>.</p>
-<p>A generic model GPU architecture, <strong>SIMT</strong></p>
-<img src="/2022/01/15/R16/2.png" class="">
-
-<p>GPUs can obtain improved performance per unit area vs. superscalar out-of-order CPUs on highly parallel workloads by dedicating a larger fraction of their die area to arithmetic logic units and correspondingly less area to control logic. Below is an analytical model-based analysis of the performance tradeoff between multicore (MC) CPU architectures and multithreaded (MT) architectures such as GPU.</p>
-<img src="/2022/01/15/R16/3.png" class="">
-
-<p>As the number of threads increases from the middle point, performance increases with the ability of multithreading to hide long off-chip latency. GPUs are designed to tolerate frequent cache misses by employing multithreading.</p>
-<h2 id="Programming-Model"><a href="#Programming-Model" class="headerlink" title="Programming Model"></a>Programming Model</h2><p>A well-known operation <strong>SAXPY</strong> represent for <em>single-precision scalar value <strong>A</strong> times vector value <strong>X</strong> plus vector value <strong>Y</strong></em></p>
-<p>Currently, NVIDIA warps consists of 32 threads while AMD wavefronts consist of 64 threads.</p>
-<p>NVIDIA has introduced <strong>Unified Memory</strong>, which transparently updates GPU memory from CPU memory and CPU memory from GPU memory.</p>
-<p>NVIDIA’s PTX(Parallel Thread Execution ISA) is many ways similar to a standard reduced instruction set computer (RISC) instruction set architecture. It also shares a similarity to the intermediate representations (IR) used within optimizing compilers.</p>
-<p>Before running PTX code on the GPU it is necessary to compile PTX down to the actual instruction set architecture supported by the hardware. NVIDIA calls this level <strong>SASS</strong> which is short for “Streaming ASSembler”. The process ofconverting from PTX to SASS can be accomplished either by the GPU driver or a stand-alone program called <em>ptxas</em> provided with NVIDIA’s CUDA Toolkit.</p>
-<h2 id="The-SIMT-core-Instruction-and-Register-Data-Flow"><a href="#The-SIMT-core-Instruction-and-Register-Data-Flow" class="headerlink" title="The SIMT core: Instruction and Register Data Flow"></a>The SIMT core: Instruction and Register Data Flow</h2><p>An <strong>approximating</strong> microarchitecture of a generic GPGPU core.</p>
-<img src="/2022/01/15/R16/4.png" class="">
-
-<p>The pipeline can be divided into a <strong>SIMT front-end</strong> and a <strong>SIMD back-end</strong>. The pipeline consists of three scheduling “loops” acting together in a single pipeline: 1. an <strong>instruction fetch</strong> loop, 2. an <strong>instruction issue</strong> loop, and 3. a <strong>register access</strong> scheduling loop.</p>
-<h3 id="1-Instruction-Fetch-Loop"><a href="#1-Instruction-Fetch-Loop" class="headerlink" title="1. Instruction Fetch Loop"></a>1. Instruction Fetch Loop</h3><p>To increase efficiency, threads are organized into groups called “warps” by NVIDIA and “wavefronts” by AMD. Thus, <strong>the unit of scheduling is a warp</strong>.</p>
-<p>After fetching an instruction, the instruction is decoded and source operand registers are fetched from the register file. In parallel with fetching source operands from the register file, the SIMT execution mask values are determined.</p>
-<p>As in modern CPU designs, the <strong>function units</strong> are typically heterogeneous meaning a given function unit supports only a subset ofinstructions. For example, NVIDIA GPUs contain a <em>specialfunction unit</em> (SFU), <em>load/store unit, floating-point function unit, integer function unit</em>, and, as of Volta, a <em>Tensor Core</em>.</p>
-<p>SIMT execution model presents the programmer with the abstraction that individual threads execute completely independently. However, in current GPUs it is achieved via a combination of traditional <em>predication</em> along with a stack of predicate masks that we shall refer to as the <strong>SIMT stack</strong>.</p>
-<p>The SIMT stack helps efficiently handle two key issues: nested control flow and skipped computation.</p>
-<p>A <strong>reconvergence point</strong> is a location in the program where threads that diverge can be forced to continue executing in lock-step.</p>
-<p>The stack-based implementation of SIMT can lead to a deadlock condition called “<strong>SIMT deadlock</strong>”.</p>
-<p>NVIDIA ‘s new thread divergence management approach is called <em>Independent Thread Scheduling</em> and it can fix SIMT deadlock by introducing a new structure <em>covergence barrier</em>. In contrast to a stack-based SIMT implementation, with convergence barrier implementation the scheduler is free to switch between groups of diverged threads.</p>
-<img src="/2022/01/15/R16/5.png" class="">
-
-<p>Each core in a GPU hosts contains many warps. To enable a different warp to issue an instruction <strong>each cycle</strong>, it is necessary that each thread have its own registers (avioding <em>context switch</em> occured in traditional CPU). The tradeoff is: <strong>increasing the number of warps per core increases the fraction of chip area devoted to register file storage relative to the fraction dedicated to execution units</strong>. (For a fixed chip area increasing warps per core will decrease the total nymber of cores per chip.)</p>
-<h3 id="2-Instruction-Issue-Loop"><a href="#2-Instruction-Issue-Loop" class="headerlink" title="2. Instruction Issue Loop"></a>2. Instruction Issue Loop</h3><p>To help reduce the number of warps that each core must support to hide long execution latencies, it is helpful to be able to <strong>issue a subsequent instruction from a warp while earlier instructions have not yet completed</strong>. Thus, supporting many warps per core can help hide long execution latencies.</p>
-<p>GPUs implement an instruction buffer were instructions are placed after cache access. A separate scheduler is used to decide which of several instructions in the instruction buffer should be issued next to the rest of the pipeline.</p>
-<p>There are two traditional approaches to detecting <strong>dependencies</strong> between instructions found in traditional CPU architecture: <em>scoreboard</em> and <em>reservation stations</em>. (bty, scoreboards support out-of-order execution.)</p>
-<p>Given it is the simplest design and therefore will consume the least amount of area and energy, GPUs implement <strong>in-order scoreboards</strong>.</p>
-<h3 id="3-Register-Access-Scheduling-Loop"><a href="#3-Register-Access-Scheduling-Loop" class="headerlink" title="3. Register Access Scheduling Loop"></a>3. Register Access Scheduling Loop</h3><p>To hide long memory latencies it is necessary to support many warps per core and to support cycle by cycle switching between warps it is necessary to have a large register file that contains separate physical registers for every warp that is executing. One way to reduce the area of the register file is to simulate the large number of ports using multiple <strong>banks</strong> of single-ported memories. In some GPUs, this kind of structure is known as the <strong>operand collector</strong>.</p>
-<p>Operand collector microarchitecture</p>
-<img src="/2022/01/15/R16/6.png" class="">
-
-<p>Each collector unit contains buffering space for all source operands required to execute an instruction. The operand collector uses scheduling to tolerate <strong>bank conflicts</strong> when they occur.</p>
-<p>Some CPUs speculative wake up instructions depending upon a load so as to improve single threaded performance. In contrast, GPUs avoid <strong>speculation</strong> as it tends to waste energy and reduce throughput. Instead, <strong>instruction replay</strong> is used in GPUs to avoid clogging the pipeline and the circuit area and/or timing overheads resulting from stalling.</p>
-<h2 id="Memory-System"><a href="#Memory-System" class="headerlink" title="Memory System"></a>Memory System</h2><p><strong>Pipeline hazards can be handled by replaying instructions</strong>.</p>
-<p><strong>Shared memory</strong> in CUDA (or local memory in OpenCL) and <strong>L1 cache</strong> is a same thing except shared memory is controlled by programmer whereas L1 cache is controlled by hardware. They are implemented as a static random access memory (SRAM).</p>
-<p>Below is an <em>unified L1 data cache and shared memory</em> architecture. #5 is an SRAM data array which can be configured partly for <strong>direct mapped access</strong> for shared memory and partly as a set associative cache.</p>
-<img src="/2022/01/15/R16/7.png" class="">
-
-<p>There are three kinds of opertions to this architecture: shared memory access operations, cache read operations, cache write operations.</p>
-<p>The SIMT cores connect to the memory partition units via an on-chip interconnection network. For NVIDIA it’s called <strong>crossbar</strong>, and for AMD it’s called <strong>ring network</strong>.</p>
-<p>Refer to the abstraction architecture shown above in section 1, <strong>Memory Partition Unit</strong> is under interconnect network. Each memory partition unit contains a portion of the <strong>second-level (L2) cache</strong> along with a one or more memory access schedulers also called a “frame buffer,” or <strong>FB</strong>, and a raster operation (<strong>ROP</strong>) unit. The L2 cache contains both graphics and compute data.</p>
-<img src="/2022/01/15/R16/8.png" class="">
-
-<p>The ROP unit includes function units for executing atomic and reduction operations.</p>
-
+          
       
     </div>
 
@@ -488,7 +593,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/02/R3/">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/26/R24/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.ico">
@@ -502,7 +607,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/02/R3/" class="post-title-link" itemprop="url">003 "Viewpoint Accelerator-Level Parallelism"</a>
+            <a href="/2022/01/26/R24/" class="post-title-link" itemprop="url">024 "TriCheck - Memory Model Verification at the Trisection of Software, Hardware, and ISA"</a>
         </h2>
 
         <div class="post-meta">
@@ -512,14 +617,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-01-02 20:04:12" itemprop="dateCreated datePublished" datetime="2022-01-02T20:04:12-05:00">2022-01-02</time>
+              <time title="Created: 2022-01-26 11:17:14" itemprop="dateCreated datePublished" datetime="2022-01-26T11:17:14-05:00">2022-01-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-15 18:18:55" itemprop="dateModified" datetime="2022-01-15T18:18:55-05:00">2022-01-15</time>
+                <time title="Modified: 2022-01-27 01:52:57" itemprop="dateModified" datetime="2022-01-27T01:52:57-05:00">2022-01-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -527,7 +632,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
                 </span>
             </span>
 
@@ -542,375 +647,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><em><strong>Keywards</strong></em> review, accelerator-level parallelism</p>
+          <p><em><strong>Keywards</strong></em> </p>
 <blockquote>
-<p>Author: Mark D. Hill and Vijay Janapa Reddi</p>
+<p>Author:</p>
 </blockquote>
 <hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Recent work on accelerators has focused on CPUs using a single accelerator in a specific application domains. The authors point out that many future computing systems will obtain greater efficiency by employing multiple different task-specific accelerators.</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p><strong>Accelerator</strong>: <em>hardware components that execute a targeted computation class faster and usually with much less energy</em>.</p>
-<p>An accelerator’s flexibility can vary from high (GP-GPU) to low (fixed-function block).</p>
-<p>Below is a snapshot of parallelism over the years:</p>
-<img src="/2022/01/02/R3/1.png" class="">
-
-<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
-<li>Definition of a Accelerator Level Parallelism (ALP): <em>the parallelism of workload components concurrently executing on multiple accelerators</em>.</li>
-<li>ALP opens up many degrees of freedom for novel hardware and software design and optimization.</li>
-<li>Mobile SoCs as harbingers of multiple accelerators using ALP.</li>
-</ul>
-<h2 id="Challenges-and-Future"><a href="#Challenges-and-Future" class="headerlink" title="Challenges and Future"></a>Challenges and Future</h2><p>A key challenge is developing abstractions and implementations to enable programmers to target the whole SoC and implementers to holistically design its software and hardware. (like SIMT model)</p>
-<ul>
-<li>Today’s SoCs only exploit ALP in limited niches with each accelerator acting seperately with its own programming model, and often its own (domian-specific) language, runtime, software development kit (SDK), and dtiver interface.</li>
-<li>ALP exploitation will likely require software-hardware co-design due to the heterogeneous nature of accelerators and ALP. A collection of locally optimal accelerators is unlikely to be globally optimal.</li>
-</ul>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Employing mutiple accelerators with ALP has much promise for enhanting future computing efficiency. The authors have identified <em>what</em> the opportunity is, but leave to readers <em>how</em> best to solve it.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/01/R2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/01/R2/" class="post-title-link" itemprop="url">002 "Near-memory computing:Past, present, and future"</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-01 21:04:13" itemprop="dateCreated datePublished" datetime="2022-01-01T21:04:13-05:00">2022-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-15 18:19:04" itemprop="dateModified" datetime="2022-01-15T18:19:04-05:00">2022-01-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em><strong>Keywards</strong></em> Near-memory computing, Data-centric computing, Modeling, Computer architecture, Application characterization,Survey</p>
-<blockquote>
-<p>Author: Gagandeep Singh, Lorenzo Chelini, Stefano Corda, Ahsan Javed Awan, Sander Stuijk, Roel Jordans, Henk Corporaal, Albert-Jan Boonstra</p>
-</blockquote>
-<hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Today’s memory hierarchy usually consists of multiple levels of cache. However, in data-intensive applications,<br> frequent data movement between the memory subsystem and the processor can be expensive, leading to a severe impact on performance and energy efficiency. <strong>Near-memory computing</strong> (NMC) aims at processing close to where the data resides.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The convential approach of moving data to the CPU for computation has become a significant performance bottleneck for emerging scale-out data-intensive applications due to their limited data reuse. At the same time, the advancement in 3D integration technologies has made <strong>near-memory computing</strong> (NMC) more viable. This paper aims to analyze and organize the extensive body of literature related to the novel area of near-memory computing.</p>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Many problems can arise when translate a program from a high-level language (HLL) into correct, portable and efficient assembly code.  </p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Current verification techniques evaluate segments of the system stack in isolation. This paper makes a case for full-stack MCM verification and provides a toolflow, TriCheck, capable of verifying that the HLL, compiler, ISA, and implementation collectively uphold MCM requirements. This paper demonstrates the necessity of full-stack verification for detecting MCM-related bugs in the hardware-software stack.</p>
 <h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><ul>
-<li>They analyze and organize the body of literature on near-memory computing under various dimensions.</li>
-<li>They provide guidelines for design space exploration.</li>
-<li>They present our near-memory system outlining application characterization and compiler framework. Also, we include an analytic model to illustrate the potential of near-memory computing for memory intensive application with a comparison to the current CPU-centric approach.</li>
-<li>They outline the directions for future research and highlight current challenges.</li>
+<li>Present TriCheck, a framework for full-stack MCM verification</li>
+<li>Apply TriCheck to the open-source RISC-V ISA to validate TriCheck’s applicability to modern ISA design.</li>
+<li>Use TriCheck to find two conterexamples in the supposedly proven-correct trailing-sync compiler mappings from C11 to the Power and ARMv7 architectures.</li>
 </ul>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Classification of computing systems based on working set location. NMC bring processing core to the place where data resides. Computation-in-memory further reduces data movement by using memories with compute capability (e.g. memristors, phase change memory).</p>
-<img src="/2022/01/01/R2/1.png" class="">
+<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><p>TriCheck toolflow:</p>
+<img src="/2022/01/26/R24/1.png" class="">
 
-<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><p>The resurgence of NMC is largely attributed to following three reasons:</p>
 <ol>
-<li>technological advancement in 3D and 2.5D stacking that blends logic and memory in the same package.</li>
-<li>NMC can sidestep the performance and energy bottlenecks due to data movement by circumventing memory-package pin-count limitations.</li>
-<li>Data-intensive applications call for newer architectures.</li>
-</ol>
-<h2 id="Challenges-of-NMC"><a href="#Challenges-of-NMC" class="headerlink" title="Challenges of NMC"></a>Challenges of NMC</h2><ol>
-<li>Virtual memory support</li>
-<li>Cache coherence</li>
-<li>Programming model</li>
-<li>Data mapping</li>
-</ol>
-<h2 id="Open-Issues-and-Future-Directions"><a href="#Open-Issues-and-Future-Directions" class="headerlink" title="Open Issues and Future Directions"></a>Open Issues and Future Directions</h2><ul>
-<li>It is unclear which emerging memory technology best supports near-memory architectures.</li>
-<li>3D stacking also needs unique power and thermal solutions, as traditional heat sink technology would not suffice if we want to add more computation close to the memory. Most of the proposed architectures do not take into account the strict power budget of 3D stacked memories, which limits the architecture’s practicality.</li>
-<li>DRAM and NVM have different memory attributes.</li>
-<li>Most of the evaluated architectures focus on the compute aspect. Lack of coherency and virtual support makes programming difficult and obstructs the adoption of this paradigm.</li>
-<li>More quantitative exploration is required for interconnect networks between the near-memory compute units and also between the host and near-memory compute system.</li>
-<li>At the application level, algorithms need to provide code and data co-location for energy efficient processing.</li>
-<li>The field requires a generic set of open-source tools and techniques for these novel systems, as often researchers have to spend a significant amount of time and effort in building the needed simulation environment.</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2021/12/31/R1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/31/R1/" class="post-title-link" itemprop="url">001 "Bounded Model Checking"</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-12-31 10:12:43" itemprop="dateCreated datePublished" datetime="2021-12-31T10:12:43-05:00">2021-12-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-15 18:19:10" itemprop="dateModified" datetime="2022-01-15T18:19:10-05:00">2022-01-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em><strong>Keywards</strong></em> bounded model checking</p>
-<blockquote>
-<p>Author: Armin Biere, Alessandro Cimatti, Edmund M. Clarke, Ofer Strichman, Yunshan Zhu</p>
-</blockquote>
-<hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Although numerous techiques such as decomposition, abstraction and various reductions have been proposed to tackle the memory explosion problem of BDD-based model checking, full verification of many designs is still beyond the capacity of BDD-based symbolic model checkers.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The authors survey a technique called Bounded Model Checking (BMC), which uses a propositional SAT solver rather than BDD manipulation techniques. Experiments have shown that BMC can solve many cases that cannot be solved by BDD-based techniques. The converse is also true: there are also some problems that BMC can’t solve. Therefore, BMC is regraded as a complementary techqiue to BDD-based symbolic model checking.</p>
-<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>A great comprehensive review for <strong>bounded model checking</strong> (BMC) technique.</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>In model checking, the design to be verified is modeled as a finite state machine, and the specification is formalized by writing <em>temporal logic</em> properties.</p>
-<p>In general, properties are classified to ‘<strong>safety</strong>‘ and ‘<strong>liveness</strong>‘ properties.</p>
-<ul>
-<li>Safety: what should not happen (or what should always happen). =&gt; decribe <strong>invariants</strong> of a system</li>
-<li>Liveness: what should happen.</li>
-</ul>
-<p>In case the property fails, a comterexample is generated in the form of a sequence of states.</p>
-<ul>
-<li>A counterexample of safety properties is a trace of states, where the last state contradict the property.</li>
-<li>A counterexample to liveness properties, in its simplest form, is a path to a loop that does not contain the desired state.</li>
-</ul>
-<p>There is no such thing as a ‘correct system’; it is only possible to check whether a system satisfies its specification or not.</p>
-<p>Users of model checking tools typically consider it as <strong>complimentary</strong> to the more traditional methods of <strong>testing and simulation</strong>, and not as an <strong>alternative</strong>.</p>
-<p>Model Checking (MC) uses <em>explicit state representation</em> when it is first proposed. However, explicit representation restrict the capacity of model checkers to systems with a few million states. This makes MC impossible to sacle to examples with inductrial complexity. The introduction of <em>symbolic model checking</em> made the first breakthrough towards wide usage of MC techiques. In symbolic model checking, sets of states are represented implicitly using <em>Boolean functions</em>. Manipulating boolean formulas can be done efficiently with Reduced Ordered Binary Decision Diagrams (ROBDD). The combination of symbolic model checking with BDDs, pushed the barrier to systems with $10^{20}$ states and more.</p>
-<p>The bottleneck of these methods is the amount of memory that is required for storing and manipulating BDDs.</p>
-<h2 id="Model-Checking-and-LTL"><a href="#Model-Checking-and-LTL" class="headerlink" title="Model Checking and LTL"></a>Model Checking and LTL</h2><p>Model checking has three fundamental features:</p>
-<ol>
-<li>it is automatic</li>
-<li>the system are assumed to be finite (though using abstration techniques can process infinite space.)</li>
-<li>temporal logic (LTL, CTL, CTL*) is used for specifying the system properties.</li>
-</ol>
-<p><strong>Model checking can be summarized as an algorithm technique for checking temporal properties of finite systems</strong>.</p>
-<img src="/2021/12/31/R1/1.png" class="">
-
-<ul>
-<li>The <em>Globally</em> operator $G$ is used for <strong>safety property</strong></li>
-<li>The <em>Finally</em> operator $F$ is used for <strong>liveness property</strong></li>
-</ul>
-<p>A temporal formula $f$ holds for a Kripke structure $M$, written $M$ |= $f$, iff $\pi$ |= $f$ for all initialized paths $\pi$ of $M$.</p>
-<h2 id="Bounded-Model-Checking"><a href="#Bounded-Model-Checking" class="headerlink" title="Bounded Model Checking"></a>Bounded Model Checking</h2><p>The original motivation of BMC was to leverage the success of SAT in solving Boolean formulas to model checking.</p>
-<p>In BMC, the search for a plan is restricted to paths with some predetermined bound, which means the search is deterministic.</p>
-<p>In <em>bounded sematics</em>, only a prefix with a back loop can represent a witness for <strong>G</strong>$p$. Even if $p$ holds along all the states from $s_0$ to $s_k$, since $p$ might not hold at $s_{k+1}$.</p>
-<h2 id="Reducing-BMC-to-SAT"><a href="#Reducing-BMC-to-SAT" class="headerlink" title="Reducing BMC to SAT"></a>Reducing BMC to SAT</h2><p>Unroll transition relation $T$ upto some bound $k$.</p>
-<p>The formula ${[ M, f ]}_k$ encodes constraints on $s_0,\ …\ s_k$ such that ${[ M, f ]}_k$ is satisfiable iff $\pi$ is a witness for $f$. The definition of formula ${[ M, f ]}_k$ has three seperate components:</p>
-<ol>
-<li>A propositional formula ${[M]}_k$ that constrains $s_0,\ …\ s_k$ to be a valid path starting from an initial state.</li>
-<li><em>loop condition</em>, which is a propositional formula that is evaluated to true only if the path $\pi$ contains a loop.</li>
-<li>A propositional formula tha constrains $\pi$ to satisfy $f$.</li>
-</ol>
-<h2 id="Techniques-for-Completeness"><a href="#Techniques-for-Completeness" class="headerlink" title="Techniques for Completeness"></a>Techniques for Completeness</h2><ol>
-<li>Use <strong>Completeness Threshold</strong> as upper bound to guarantee the property holds</li>
-<li>Liveness property: a semi-decision procedure for <strong>AF</strong>$p$ combined with a semi decision procedure for <strong>EG</strong>$p$.</li>
-<li>Safety property: induction based on strengthening <strong>inductive invariants</strong>.</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2021/12/30/R0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/30/R0/" class="post-title-link" itemprop="url">000 "Learning from Mistakes — A Comprehensive Study on Real World Concurrency Bug Characteristics"</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-12-30 00:33:29" itemprop="dateCreated datePublished" datetime="2021-12-30T00:33:29-05:00">2021-12-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-15 18:19:15" itemprop="dateModified" datetime="2022-01-15T18:19:15-05:00">2022-01-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em><strong>Keywards</strong></em> concurrent program, concurrency bug, bug characteristics</p>
-<blockquote>
-<p>Author: Shan Lu, Soyeon Park, Eunsoo Seo and Yuanyuan Zhou</p>
-</blockquote>
-<hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Writting correct concurrent programs is difficult and it faces many challenge. Although some progress have made over the past years, there are still many open, unsolved issues:</p>
-<ol>
-<li>Concurrency bug detection.<ul>
-<li>Can existing bug detection tool <em>detect all</em> real world concurrency bugs?</li>
-<li>How helpful are existing tools in <em>diagnosing and fixing</em> the real world concurrency bugs detected by them?</li>
-</ul>
-</li>
-<li>Concurrent program testing and model checking.<ul>
-<li>Existing testing techniques mainly focus on the <em>sequential</em> aspect of programs, while the major challenge of concurrency testing is the exponential <em>interleaving</em> space of concurrent programs.</li>
-<li>An open question: can we selectively test a small number of representative interleaving and still expose most of the concurrency bugs?</li>
-<li>Better understanding of the manifestation of real world concurrency bugs can help model checking prioritize the program states and alleviate its state explosion problem.</li>
-</ul>
-</li>
-<li>Concurrent programming language design.<ul>
-<li>Transactional memory (TM) is a promising trend.</li>
-<li>A real-world concurrency bug characteristic study is needed.</li>
+<li><strong>HLL AXIOMATIC EVALUATION</strong>: The suite ofHLL litmus tests is run on a HLL Herd model (e.g., the C11 Herd model) to determine the outcomes that the HLL MCM <em>permits</em> or <em>forbids</em> for each at the program level.</li>
+<li><strong>HLL-&gt;ISA COMPILATION</strong>: Using the HLL-&gt;ISA compiler mappings, TriCheck translates HLL litmus tests to their assembly language equivalents.</li>
+<li><strong>ISA $\mu$SPEC EVALUATION</strong>: The suite of assembly litmus tests is run on the Check model of the ISA to determine the outcomes that are <em>observable</em> or <em>unobservable</em> on the microarchitecture.</li>
+<li><strong>HLL-MICROARCHITECTURE EQUIVALENCE CHECK</strong>:<ul>
+<li>The results of Step 1 and Step 3 are compared for each test to determine if the microarchitecturally realizable out- comes are stronger than, weaker than, or equivalent to the outcomes required by the HLL model. A stronger than (resp. weaker than) outcome corresponds to a HLL pro- gram that is permitted (resp. forbidden) by the HLL MCM, yet unobservable (resp. observable) on the microarchitec- tural implementation of the ISA. If Step 4 concludes that the microarchitecturally realizable outcomes are more re- strictive than what the HLL requires, the designer may wish to relax the ISA or microarchitecture for performance reasons. On the other hand, some correction is mandatory when outcomes forbidden by the HLL are observable on the microarchitecture.</li>
 </ul>
 </li>
 </ol>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This paper provides a comprehensive real world concurrency bug characteristic study. It specifically focus on <strong>concurrency bug patterns</strong>, <strong>manifestation</strong>, and <strong>fix strategies</strong>. The study reveals several interesting findings and provide useful guildance for concurrency bug detection, testing, and concurrent programming language design.</p>
-<p>Some of findings:</p>
-<ol>
-<li>Around one third of examined non-deadlock concurrency bugs are caused by violation to <strong>programmers’ order intentions</strong>, which may not be easily expressed via synchronization primitives.</li>
-<li>Around one third of examined non-deadlock concurrency bugs involve multiple variables, which are not well addressed by existing bug detection tools.</li>
-<li>Testing concurrency bugs can target at exploring possible orders among every small groups of memory accesses, instead of among all memory accesses.</li>
-<li>Fixing concurrency bugs are not easy and many of the fixes were not correct at the first time, indicating the difficulty of reasoning concurrent execution by programmers.</li>
-</ol>
-<h2 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h2><img src="/2021/12/30/R0/1.png" class="">
-
-<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
-<li>Bug pattern study</li>
-<li>Bug manifestation study</li>
-<li>Bug fix study</li>
-</ul>
 
       
     </div>
@@ -930,7 +690,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/08/Others7/">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/24/R22/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.ico">
@@ -944,7 +704,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/08/Others7/" class="post-title-link" itemprop="url">Introduction to Visualization</a>
+            <a href="/2022/01/24/R22/" class="post-title-link" itemprop="url">022 "Wait-Free Synchronization"</a>
         </h2>
 
         <div class="post-meta">
@@ -954,14 +714,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-03-08 01:38:23" itemprop="dateCreated datePublished" datetime="2020-03-08T01:38:23-05:00">2020-03-08</time>
+              <time title="Created: 2022-01-24 11:04:40" itemprop="dateCreated datePublished" datetime="2022-01-24T11:04:40-05:00">2022-01-24</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-30 00:12:34" itemprop="dateModified" datetime="2021-12-30T00:12:34-05:00">2021-12-30</time>
+                <time title="Modified: 2022-01-30 14:36:29" itemprop="dateModified" datetime="2022-01-30T14:36:29-05:00">2022-01-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -969,7 +729,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Science/" itemprop="url" rel="index"><span itemprop="name">Data Science</span></a>
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
                 </span>
             </span>
 
@@ -984,2104 +744,286 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">%matplotlib inline</span><br><span class="line">pd.plotting.register_matplotlib_converters()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Setup Complete&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<pre><code>Setup Complete
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;vtest.csv&#x27;</span>, index_col=<span class="number">0</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>pp1</th>
-      <th>pp2</th>
-      <th>pp3</th>
-      <th>pp4</th>
-      <th>pp5</th>
-      <th>pp6</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-94</td>
-      <td>70</td>
-      <td>-53</td>
-      <td>38</td>
-      <td>-66</td>
-      <td>-56</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-75</td>
-      <td>18</td>
-      <td>-38</td>
-      <td>88</td>
-      <td>35</td>
-      <td>-5</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>-21</td>
-      <td>-91</td>
-      <td>14</td>
-      <td>46</td>
-      <td>43</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-22</td>
-      <td>65</td>
-      <td>3</td>
-      <td>-15</td>
-      <td>57</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>95</td>
-      <td>-42</td>
-      <td>-18</td>
-      <td>67</td>
-      <td>81</td>
-      <td>60</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(12, 6)
-</code></pre>
-<h2 id="Line-Chart"><a href="#Line-Chart" class="headerlink" title="Line Chart"></a>Line Chart</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add titile</span></span><br><span class="line">plt.title(<span class="string">&quot;Line Chart&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot line chart</span></span><br><span class="line">sns.lineplot(data=data)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_6_1.png" class="">  
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if you not explictly designate the label parameter, it will use column&#x27;s title as default</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.lineplot(data=data.pp1, label=<span class="string">&quot;pp1&quot;</span>)</span><br><span class="line">sns.lineplot(data=data.pp2, label=<span class="string">&quot;pp2&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_7_1.png" class="">  
-
-
-<h2 id="Bar-Chart"><a href="#Bar-Chart" class="headerlink" title="Bar Chart"></a>Bar Chart</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add title</span></span><br><span class="line">plt.title(<span class="string">&quot;Bar Chart&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Bar chart</span></span><br><span class="line">sns.barplot(x=data.index, y=data.pp3)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add label for vertical axis</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_9_1.png" class="">  
-
-
-<h2 id="Heatmap"><a href="#Heatmap" class="headerlink" title="Heatmap"></a>Heatmap</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the width and height of the figure</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add title</span></span><br><span class="line">plt.title(<span class="string">&quot;Heatmap&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot heatmap</span></span><br><span class="line">sns.heatmap(data=data, annot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add label for horizontal axis</span></span><br><span class="line">plt.ylabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<img src="/2020/03/08/Others7/output_11_1.png" class="">  
-
-
-<h2 id="Scatter-Plots"><a href="#Scatter-Plots" class="headerlink" title="Scatter Plots"></a>Scatter Plots</h2><h3 id="Normal-scatter-chart"><a href="#Normal-scatter-chart" class="headerlink" title="Normal scatter chart"></a>Normal scatter chart</h3><p>Use scatter plots to display the relationships between two data</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.scatterplot(x=data.pp3, y=data.pp4)</span><br><span class="line">plt.xlabel(<span class="string">&quot;pp3-value-range&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;pp4-value-range&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_14_1.png" class="">  
-
-
-<h3 id="Color-coded-scatter-plots"><a href="#Color-coded-scatter-plots" class="headerlink" title="Color-coded scatter plots"></a>Color-coded scatter plots</h3><p>We can use scatter plots to display the relationships between (not two, but…) three variables! One way of doing this is by color-coding the points.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.scatterplot(x=data.pp3, y=data.pp4, hue=np.random.randint(<span class="number">0</span>, <span class="number">2</span>, size=data.shape[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
-
-
-
-<img src="/2020/03/08/Others7/output_16_1.png" class="">  
-
-
-<h3 id="Regression-line"><a href="#Regression-line" class="headerlink" title="Regression line"></a>Regression line</h3><p>Plot the line that best fits the data</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.regplot(x=data.index, y=data.pp3)</span><br><span class="line">sns.regplot(x=data.index, y=data.pp4)</span><br><span class="line">plt.xlabel(<span class="string">&quot;Month&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_18_1.png" class="">  
-
-
-<h3 id="Compare-two-regression-line"><a href="#Compare-two-regression-line" class="headerlink" title="Compare two regression line"></a>Compare two regression line</h3><p>we can use the <code>sns.lmplot</code> command to add two regression lines, comparing two lines’ relation strength  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">data[<span class="string">&#x27;YN&#x27;</span>] = np.random.randint(<span class="number">0</span>, <span class="number">2</span>, size=data.shape[<span class="number">0</span>])</span><br><span class="line">sns.lmplot(x=<span class="string">&#x27;pp3&#x27;</span>, y=<span class="string">&#x27;pp4&#x27;</span>, hue=<span class="string">&#x27;YN&#x27;</span>, data=data)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_20_2.png" class="">  
-
-
-<h3 id="Categorical-scatter-plot"><a href="#Categorical-scatter-plot" class="headerlink" title="Categorical scatter plot"></a>Categorical scatter plot</h3><p>We can adapt the design of the scatter plot to feature a categorical variable (like labels) on one of the main axes. We’ll refer to this plot type as a <strong>categorical scatter plot</strong>, and we build it with the <code>sns.swarmplot</code> command.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">category = np.random.randint(<span class="number">0</span>, <span class="number">3</span>, size=<span class="number">1000</span>)</span><br><span class="line">value = np.random.randint(<span class="number">0</span>, <span class="number">100</span>, size=<span class="number">1000</span>)</span><br><span class="line">sns.swarmplot(x=category, y=value)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_22_1.png" class="">  
-
-
-<h2 id="Distributions"><a href="#Distributions" class="headerlink" title="Distributions"></a>Distributions</h2><h3 id="Histograms"><a href="#Histograms" class="headerlink" title="Histograms"></a>Histograms</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">value = np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">100</span>)</span><br><span class="line">sns.distplot(a=value, kde=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_25_1.png" class="">  
-
-
-<p><code>kde=False</code> is something we’ll always provide when creating a histogram, as leaving it out will create a slightly different plot. With<code>kde=True</code>, kernel density estimate (KDE) curve would generate at the same time</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.distplot(a=value, kde=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_27_1.png" class="">  
-
-
-<h3 id="Density-plots"><a href="#Density-plots" class="headerlink" title="Density plots"></a>Density plots</h3><p>The next type of plot is a <strong>kernel density estimate</strong> (KDE) plot. In case you’re not familiar with KDE plots, you can think of it as a smoothed histogram.</p>
-<p>Setting <code>shade=True</code> colors the area below the curve</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.kdeplot(data=value, shade=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_29_1.png" class="">  
-
-
-<h3 id="2D-KDE-plots"><a href="#2D-KDE-plots" class="headerlink" title="2D KDE plots"></a>2D KDE plots</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">x_value = np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">100</span>)</span><br><span class="line">y_value = np.random.randint(<span class="number">10</span>, <span class="number">20</span>, size=<span class="number">100</span>)</span><br><span class="line">sns.jointplot(x=x_value, y=y_value, kind=<span class="string">&quot;kde&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_31_2.png" class="">  
-
-
-<h3 id="Color-coded-plots"><a href="#Color-coded-plots" class="headerlink" title="Color-coded plots"></a>Color-coded plots</h3><p>We create a different histogram for each species by using the <code>sns.distplot</code> command three times. We use <code>label=</code> to set how each histogram will appear in the legend.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data1&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">5</span>, <span class="number">15</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data2&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(a=np.random.randint(<span class="number">15</span>, <span class="number">25</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data3&quot;</span>, kde=<span class="literal">False</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_33_1.png" class="">  
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">0</span>, <span class="number">10</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data1&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">5</span>, <span class="number">15</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data2&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(data=np.random.randint(<span class="number">15</span>, <span class="number">25</span>, size=<span class="number">50</span>), label=<span class="string">&quot;data3&quot;</span>, shade=<span class="literal">True</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/03/08/Others7/output_34_1.png" class="">  
-
-
-<h2 id="Changing-styles-with-seaborn"><a href="#Changing-styles-with-seaborn" class="headerlink" title="Changing styles with seaborn"></a>Changing styles with seaborn</h2><p>Seaborn has five different themes: (1)”darkgrid”, (2)”whitegrid”, (3)”dark”, (4)”white”, and (5)”ticks”</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">style = [<span class="string">&quot;darkgrid&quot;</span>, <span class="string">&quot;whitegrid&quot;</span>, <span class="string">&quot;dark&quot;</span>, <span class="string">&quot;white&quot;</span>, <span class="string">&quot;ticks&quot;</span>]</span><br><span class="line">plt.figure(figsize=(<span class="number">30</span>, <span class="number">5</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">    plt.subplot(<span class="number">1</span>, <span class="number">5</span>, i + <span class="number">1</span>)</span><br><span class="line">    sns.set_style(style[i])</span><br><span class="line">    sns.lineplot(data=np.random.randint(<span class="number">10</span>, size=<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
-
-
-<img src="/2020/03/08/Others7/output_36_0.png" class="">  
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/05/Others6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/05/Others6/" class="post-title-link" itemprop="url">Introductions to Pandas</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-05 18:09:23" itemprop="dateCreated datePublished" datetime="2020-03-05T18:09:23-05:00">2020-03-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-10 04:38:37" itemprop="dateModified" datetime="2020-04-10T04:38:37-04:00">2020-04-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Science/" itemprop="url" rel="index"><span itemprop="name">Data Science</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
-
-<h2 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Yes&#x27;</span>: [<span class="number">50</span>, <span class="number">21</span>], <span class="string">&#x27;No&#x27;</span>: [<span class="number">131</span>, <span class="number">2</span>]&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Yes</th>
-      <th>No</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>50</td>
-      <td>131</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>21</td>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>DataFrame is actually a dictionary whose keys are the column names (<code>String</code>), and whose values are a list of entries(<code>List</code>)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Bob&#x27;</span>: [<span class="string">&#x27;I liked it.&#x27;</span>, <span class="string">&#x27;It was awful.&#x27;</span>], </span><br><span class="line">              <span class="string">&#x27;Sue&#x27;</span>: [<span class="string">&#x27;Pretty good.&#x27;</span>, <span class="string">&#x27;Bland.&#x27;</span>]&#125;,</span><br><span class="line">             index=[<span class="string">&#x27;Product A&#x27;</span>, <span class="string">&#x27;Product B&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Bob</th>
-      <th>Sue</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Product A</th>
-      <td>I liked it.</td>
-      <td>Pretty good.</td>
-    </tr>
-    <tr>
-      <th>Product B</th>
-      <td>It was awful.</td>
-      <td>Bland.</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Sometimes we can manually assign <code>index</code> of row instead of defaut index which starts from 0</p>
-<h2 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h2><p>A Series, by contrast, is a sequence of data values. If a DataFrame is a table, a Series is a list. And in fact you can create one with nothing more than a <code>list</code>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.Series([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    1
-1    2
-2    3
-3    4
-4    5
-dtype: int64
-</code></pre>
-<p>A Series is, in essence, a single column of a DataFrame. So you can assign column values to the Series the same way as before, using an index parameter. However, a Series does not have a column name, it only has one overall name:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pd.Series([<span class="number">30</span>, <span class="number">35</span>, <span class="number">40</span>], index=[<span class="string">&#x27;2015 Sales&#x27;</span>, <span class="string">&#x27;2016 Sales&#x27;</span>,</span><br><span class="line">                               <span class="string">&#x27;2017 Sales&#x27;</span>], name=<span class="string">&#x27;Product A&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>2015 Sales    30
-2016 Sales    35
-2017 Sales    40
-Name: Product A, dtype: int64
-</code></pre>
-<h2 id="Reading-data-files"><a href="#Reading-data-files" class="headerlink" title="Reading data files"></a>Reading data files</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&quot;test.csv&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>Use function <code>pd.read_csv()</code> to load a csv file.</p>
-<p>We can use the <code>shape</code> attribute to check how large the resulting DataFrame is:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(6, 4)
-</code></pre>
-<p>We can examine the contents of the resultant DataFrame using the <code>head()</code> command, which grabs the first five rows:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Unnamed: 0</th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>The <code>pd.read_csv()</code> function is well-endowed, with over 30 optional parameters you can specify. For example, you can see in this dataset that the CSV file has a built-in index, which pandas did not pick up on automatically. To make pandas use that column for the index (instead of creating a new one from scratch), we can specify an index_col.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&quot;test.csv&quot;</span>, index_col=<span class="number">0</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>2</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="Naive-accessors"><a href="#Naive-accessors" class="headerlink" title="Naive accessors"></a>Naive accessors</h2><p><code>DataFrame</code> in pandas is very similar to a <code>dictionary</code>. You can access it by using key-value format or calling title built in <code>DataFrame</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c1 = data[<span class="string">&#x27;col1&#x27;</span>] <span class="comment"># key-value </span></span><br><span class="line">c2 = data.col1    <span class="comment"># dic.column_name</span></span><br><span class="line"><span class="built_in">print</span>(c1 == c2)</span><br></pre></td></tr></table></figure>
-
-<pre><code>0    True
-1    True
-2    True
-3    True
-4    True
-5    True
-Name: col1, dtype: bool
-</code></pre>
-<p>Because of the value,or the column, in <code>DataFrame</code> is organized in <code>List</code>, we can access row value using index operator <code>[]</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1[<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3
-</code></pre>
-<h2 id="Indexing-in-pandas"><a href="#Indexing-in-pandas" class="headerlink" title="Indexing in pandas"></a>Indexing in pandas</h2><p>pandas has its own accessor operators, <code>loc</code> and <code>iloc</code>. The second paramter distinct them: index for <code>iloc</code> and string for ‘loc’.</p>
-<p><code>iloc</code> is conceptually simpler than loc because it ignores the dataset’s indices. When we use <code>iloc</code> we treat the dataset like a big matrix.</p>
-<p><code>loc</code>, by contrast, uses the information in the indices to do its work. When we use <code>loc</code> we want to make our code more meaningful and humanable (easier to read)</p>
-<h3 id="Index-based-selection"><a href="#Index-based-selection" class="headerlink" title="Index-based selection"></a>Index-based selection</h3><p>selecting data based on its numerical position in the data</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.iloc[<span class="number">3</span>, <span class="number">0</span>] <span class="comment"># second parameter is a numerical index</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3
-</code></pre>
-<h3 id="Label-based-selection"><a href="#Label-based-selection" class="headerlink" title="Label-based selection"></a>Label-based selection</h3><p>selecting data based on its row index and column name</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[<span class="number">3</span>, <span class="string">&#x27;col1&#x27;</span>] <span class="comment"># second parameter is a list of column names in string</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3
-</code></pre>
-<h2 id="Conditional-selection"><a href="#Conditional-selection" class="headerlink" title="Conditional selection"></a>Conditional selection</h2><p>Select specified value using condition operation and its return is a matrix of <code>bool</code> value.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1 == <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    False
-1    False
-2    False
-3     True
-4    False
-5    False
-Name: col1, dtype: bool
-</code></pre>
-<p>By converging conditional selection, we can use some colums’ value to locate other rows or columns. You can also include the <strong>set operation</strong>: <code>&amp;</code>and <code>|</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1 == <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>pandas has some built-in conditional selectors, two of which we will highlight here.</p>
-<h3 id="isin"><a href="#isin" class="headerlink" title="isin()"></a>isin()</h3><p>The first is <code>isin</code>. <code>isin</code> is lets you select data whose value “is in” a <code>list</code> of values. For example, you can use it to select rows whose value are 2 or 5 in <code>col1</code>.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1.isin([<span class="number">2</span>, <span class="number">5</span>])]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h3 id="isnull-amp-notnull"><a href="#isnull-amp-notnull" class="headerlink" title="isnull() &amp; notnull()"></a>isnull() &amp; notnull()</h3><p>The second is <code>isnull</code> (and its companion <code>notnull</code>). These methods let you highlight values which are (or are not) empty (NaN).</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1.isnull()]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[data.col1.notnull()]</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>2</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="Summary-functions"><a href="#Summary-functions" class="headerlink" title="Summary functions"></a>Summary functions</h2><p>pandas provides some useful fuctions that can help us get some statistic information</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1.describe() <span class="comment"># for numerical values</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>count    6.000000
-mean     3.333333
-std      2.732520
-min      1.000000
-25%      1.250000
-50%      2.500000
-75%      4.500000
-max      8.000000
-Name: col1, dtype: float64
-</code></pre>
-<p>list statistic information of that row</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1.mean()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>3.3333333333333335
-</code></pre>
-<p>access single attribute</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col3.describe() <span class="comment"># for string values</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>count     6
-unique    3
-top       c
-freq      2
-Name: col3, dtype: object
-</code></pre>
-<p>list statistic information of string frequence. <code>top</code> means the string with the max frequence</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(data.col1.unique())</span><br><span class="line"><span class="built_in">print</span>(data.col3.unique())</span><br></pre></td></tr></table></figure>
-
-<pre><code>[1 2 3 5 8]
-[&#39;a&#39; &#39;b&#39; &#39;c&#39;]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col3.value_counts()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>c    2
-a    2
-b    2
-Name: col3, dtype: int64
-</code></pre>
-<h2 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h2><p>it just as <code>map</code> function in python</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col2.<span class="built_in">map</span>(<span class="keyword">lambda</span> p: p / <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    1.0
-1    1.0
-2    2.0
-3    3.0
-4    5.0
-5    8.0
-Name: col2, dtype: float64
-</code></pre>
-<p>Note: this operation does <strong>not change</strong> the original data.</p>
-<p><code>apply</code> function is equivalent to <code>map</code> function, although they operate value sightly different.<br><strong>this function may change the original data</strong>!!!</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun1</span>(<span class="params">data</span>):</span></span><br><span class="line">    data.col2 = data.col2 - <span class="number">2</span> * data.col1</span><br><span class="line">    <span class="keyword">return</span> data <span class="comment"># must return the modified data</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">data.apply(fun1, axis=<span class="string">&#x27;columns&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>0</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>0</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>0</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>0</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>0</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>0</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun2</span>(<span class="params">data</span>):</span></span><br><span class="line">    data.iloc[<span class="number">1</span>] = data.iloc[<span class="number">5</span>]</span><br><span class="line">    <span class="keyword">return</span> data <span class="comment"># must return the modified data</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">data.apply(fun2, axis=<span class="string">&#x27;rows&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<pre><code>/usr/local/lib/python3.7/site-packages/pandas/core/indexing.py:670: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  self._setitem_with_indexer(indexer, value)
-</code></pre>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>This function <code>apply</code> is used for the situation when you do some complex data transforamtions. Any it also does <strong>not change</strong> the original data.</p>
-<h2 id="Groupwise-analysis"><a href="#Groupwise-analysis" class="headerlink" title="Groupwise analysis"></a>Groupwise analysis</h2><p><code>groupby()</code> function groups the same value from a given column into the same group. For instance, <code>col3&#39;</code> only has 3 distinct characters: a,b,c. It generates 3 groups (3 rows): <code>data.groupby(&#39;col3&#39;).col1/col2/col3</code>. We can manipulate these groups seperately. More specify, <code>data.groupby(&#39;col3&#39;)</code> is a new <code>DataFrame</code> and we operate data in each group seperately.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(data.groupby(<span class="string">&#x27;col3&#x27;</span>).col1.describe())</span><br><span class="line"><span class="built_in">print</span>(data.groupby(<span class="string">&#x27;col3&#x27;</span>).col2.describe())</span><br><span class="line"><span class="built_in">print</span>(data.groupby(<span class="string">&#x27;col3&#x27;</span>).col3.describe())</span><br></pre></td></tr></table></figure>
-
-<pre><code>      count  mean       std  min  25%  50%  75%  max
-col3                                                
-a       2.0   2.0  1.414214  1.0  1.5  2.0  2.5  3.0
-b       1.0   5.0       NaN  5.0  5.0  5.0  5.0  5.0
-c       3.0   6.0  3.464102  2.0  5.0  8.0  8.0  8.0
-      count  mean       std   min   25%   50%   75%   max
-col3                                                     
-a       2.0   4.0  2.828427   2.0   3.0   4.0   5.0   6.0
-b       1.0  10.0       NaN  10.0  10.0  10.0  10.0  10.0
-c       3.0  12.0  6.928203   4.0  10.0  16.0  16.0  16.0
-     count unique top freq
-col3                      
-a        2      1   a    2
-b        1      1   b    1
-c        3      1   c    3
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby([<span class="string">&#x27;col3&#x27;</span>, <span class="string">&#x27;col1&#x27;</span>]).col2.describe()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>col3</th>
-      <th>col1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">a</th>
-      <th>1</th>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1.0</td>
-      <td>6.0</td>
-      <td>NaN</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <th>5</th>
-      <td>1.0</td>
-      <td>10.0</td>
-      <td>NaN</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">c</th>
-      <th>2</th>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>NaN</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2.0</td>
-      <td>16.0</td>
-      <td>0.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p><code>groupby()</code> function can group multiple columns. And the index here is called <strong>multi-index</strong>. We can call <code>reset_index()</code> to restore it back to a normal index.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dt = data.groupby([<span class="string">&#x27;col3&#x27;</span>, <span class="string">&#x27;col1&#x27;</span>]).col2.describe()</span><br><span class="line">dt.reset_index()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col3</th>
-      <th>col1</th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>a</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>a</td>
-      <td>3</td>
-      <td>1.0</td>
-      <td>6.0</td>
-      <td>NaN</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>b</td>
-      <td>5</td>
-      <td>1.0</td>
-      <td>10.0</td>
-      <td>NaN</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>c</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>NaN</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>c</td>
-      <td>8</td>
-      <td>2.0</td>
-      <td>16.0</td>
-      <td>0.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-      <td>16.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Another <code>groupby()</code> method worth mentioning is <code>agg()</code>, which lets you run a bunch of different functions on your DataFrame simultaneously. For example, we can generate a simple statistical summary of the dataset as follows:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;col3&#x27;</span>).col1.agg([<span class="built_in">len</span>, <span class="built_in">min</span>, <span class="built_in">max</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>len</th>
-      <th>min</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>col3</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>2</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>1</td>
-      <td>5</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>3</td>
-      <td>2</td>
-      <td>8</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Effective use of groupby() will allow you to do lots of really powerful things with your dataset.</p>
-<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><h3 id="sort-values"><a href="#sort-values" class="headerlink" title="sort_values()"></a>sort_values()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.sort_values(by=[<span class="string">&quot;col1&quot;</span>], ascending=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h3 id="sort-index"><a href="#sort-index" class="headerlink" title="sort_index()"></a>sort_index()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.sort_index(by=[<span class="string">&quot;col1&quot;</span>], ascending=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h2 id="Missing-data-amp-Replace"><a href="#Missing-data-amp-Replace" class="headerlink" title="Missing data &amp; Replace"></a>Missing data &amp; Replace</h2><p>Entries missing values are given the value NaN, short for “Not a Number”. For technical reasons these NaN values are always of the float64 dtype.</p>
-<p>Pandas provides some methods specific to missing data. To select <code>NaN</code> entries you can use <code>pd.isnull()</code> (or its companion <code>pd.notnull()</code>). This is meant to be used thusly:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.loc[pd.isnull(data.col1)]</span><br><span class="line"><span class="comment"># data.col1.isnull() is equivalent to pd.isnull(data.col1)</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</div>
-
-
-
-<p>Replacing missing values is a common operation. Pandas provides a really handy method for this problem: <code>fillna()</code>. <code>fillna()</code> provides a few different strategies for mitigating such data. For example, we can simply replace each <code>NaN</code> with an “Unknown”:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col1.fillna(<span class="string">&quot;Unknown&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    1
-1    8
-2    2
-3    3
-4    5
-5    8
-Name: col1, dtype: int64
-</code></pre>
-<p>Alternatively, <code>replace()</code> function is used widely. We now replace all ‘a’ to ‘b’ in col3.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.col3.replace(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0    b
-1    c
-2    c
-3    b
-4    b
-5    c
-Name: col3, dtype: object
-</code></pre>
-<h2 id="Renaming"><a href="#Renaming" class="headerlink" title="Renaming"></a>Renaming</h2><p><code>rename()</code> function lets you change index names and/or column names</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.rename(columns=&#123;<span class="string">&#x27;col1&#x27;</span>: <span class="string">&#x27;column1&#x27;</span>, <span class="string">&#x27;col2&#x27;</span>: <span class="string">&#x27;column2&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>column1</th>
-      <th>column2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.rename(index=&#123;<span class="number">1</span>: <span class="string">&#x27;row1&#x27;</span>, <span class="number">4</span>: <span class="string">&#x27;row4&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>row1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>row4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<p><code>rename_axis()</code> function can give name to data’s Title and Index</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.rename_axis(<span class="string">&#x27;index&#x27;</span>, axis=<span class="string">&#x27;rows&#x27;</span>).rename_axis(<span class="string">&#x27;fields&#x27;</span>, axis=<span class="string">&#x27;columns&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>fields</th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-    <tr>
-      <th>index</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="Combining"><a href="#Combining" class="headerlink" title="Combining"></a>Combining</h2><h3 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([data, data])</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1</th>
-      <th>col2</th>
-      <th>col3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.join(data, lsuffix=<span class="string">&#x27;lll&#x27;</span>, rsuffix=<span class="string">&#x27;rrr&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>col1lll</th>
-      <th>col2lll</th>
-      <th>col3lll</th>
-      <th>col1rrr</th>
-      <th>col2rrr</th>
-      <th>col3rrr</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-      <td>1</td>
-      <td>2</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-      <td>2</td>
-      <td>4</td>
-      <td>c</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-      <td>3</td>
-      <td>6</td>
-      <td>a</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-      <td>5</td>
-      <td>10</td>
-      <td>b</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-      <td>8</td>
-      <td>16</td>
-      <td>c</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2020/03/02/RL4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/02/RL4/" class="post-title-link" itemprop="url">RL4：Dynamic Programming</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-02 14:05:03" itemprop="dateCreated datePublished" datetime="2020-03-02T14:05:03-05:00">2020-03-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-18 03:24:41" itemprop="dateModified" datetime="2020-03-18T03:24:41-04:00">2020-03-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reinforcement-Learning/" itemprop="url" rel="index"><span itemprop="name">Reinforcement Learning</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
+          <p><em><strong>Keywards</strong></em> linearizability, wait-free synchronization</p>
 <blockquote>
-<p>Refer from <em>Reinforcement Learning An Introduction (2nd)</em> and <em>Reinforcement Learning specialization on Coursera by University of Alberta &amp; Alberta Machine Intelligence Institute</em></p>
+<p>Author: Maurice Herlihy</p>
 </blockquote>
-<p>The key idea of DP, and reinforcement learning generally, is <strong>the use of value functions to orgnize and structure the search for good policy</strong>. The limitation of DP is that <strong>it requires a complete and accurate model of the environment</strong>, which is impossible to know in most of the time.</p>
+<hr>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>The problem of constructing a wait-free implementation of one data object from another lies at the heart of much recent work in concurrent algorithms, concurrent data structures, and multiprocessor architectures.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>A wait-free implementation of a concurrent data object is one tha guarantees that any process can complete any operation in a finite number of steps, regardless of the execution speeds of the other processes. The author proposal many principles and theorems in implementations of a wait-free concurrent data object</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Critical section is a traditional approach to implement <em>concurrent object</em>. However, critical sections are poorly suited for asynchronous, fault-tolerant systems: if a faulty process is halted or delayed in a critical section, nonfaulty process will also be unable to process.</p>
+<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><p>First part:</p>
 <ul>
-<li><strong>Policy Evaluation</strong> is the tasks of determining the state-value function $v_\pi$ for a particular policy $\pi$</li>
-<li><strong>Policy Improvement</strong> is the task of improving an existed policy on given state values.</li>
-<li><strong>Policy Control</strong> is the iteration of combining evaluation and improvement to get the optimal policy.</li>
+<li><strong>consensus number</strong>: the maximum number of processes for which the object can solve a simple consensus problem.</li>
+<li>It is impossible to construct a wait-free implementation of an object with consensus number $n$ <strong>from</strong> an object with a lower consensus number (&lt; n).</li>
+<li>Atomic read/write registers are at the bottom of the hierarchy: they can not be used to construct wait-free implementation at higher level.</li>
 </ul>
-<h2 id="Policy-Evaluation-Prediction"><a href="#Policy-Evaluation-Prediction" class="headerlink" title="Policy Evaluation(Prediction)"></a>Policy Evaluation(Prediction)</h2><p>The aim of the <strong>policy evaluation</strong> is to calculate value functions. Its idea is to change the bellman equation into an <strong>update rule</strong>.</p>
-<p>$$<br>\begin{eqnarray*}<br>v_{k+1}(s)<br>&amp;\doteq&amp;\sum_a\pi(a|s) q_k(s,a)\<br>&amp;=&amp;\sum_a\pi(a|s) \sum_{s’,r}p(s’,r|s,a)(r+\gamma v_k(s’))\tag{4.1}<br>\end{eqnarray*}<br>$$</p>
-<p>We arbitrarily choose inital value for each state and the terminal state, if any, must be given value 0 and never be updated. Indeed, the sequence ${vk}$ can be shown in general to converge to $v_\pi$ as $k\rightarrow\infty$ under the same conditions that guarantee the existence of $v_\pi$. This algorithm is called <strong>iterative policy evaluation</strong>.</p>
-<img src="/2020/03/02/RL4/1.png" class="">
+<img src="/2022/01/24/R22/1.png" class="">
 
-<p>We call this kind of operation an <strong>expected update</strong>. All the updates done in DP algorithms are called expected updates because they are based on an expectation over all possible next states rather than on a sample next state.</p>
-<p>Let’s consider the $4\times4$ gride world below.</p>
-<img src="/2020/03/02/RL4/2.png" class="">
-
+<p>Second part:</p>
 <ul>
-<li>Action: up, left, down, right.</li>
-<li>State: shadow blocks for terminal states and white blocks with numbers for non-terminal states.</li>
-<li>Reward: all transitions for a reward -1.</li>
-<li>Policy: <strong>random move policy</strong>(four actions have equal probabilities to choose at each state)</li>
+<li>There exist <strong>univeral</strong> objects from which one can construct a wait-free implementation of any other object.</li>
+<li>An object is universal in a system of $n$ process if and only if it has a consensus number greater than or equal to $n$.</li>
 </ul>
-<p>With $\theta = 0.001$, we finally get this.</p>
-<img src="/2020/03/02/RL4/3.png" class="">
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/22/R20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/22/R20/" class="post-title-link" itemprop="url">020 "Efficient Synchronization - Let Them Eat QOLB"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-22 15:33:21" itemprop="dateCreated datePublished" datetime="2022-01-22T15:33:21-05:00">2022-01-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-23 14:52:27" itemprop="dateModified" datetime="2022-01-23T14:52:27-05:00">2022-01-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> shared-memory synchronization</p>
+<blockquote>
+<p>Author: Alain Kägi, Doug Burger, and James R. Goodman</p>
+</blockquote>
 <hr>
-<h2 id="Policy-Improvement"><a href="#Policy-Improvement" class="headerlink" title="Policy Improvement"></a>Policy Improvement</h2><p>It is obvious that after we calculate state-value functions, the aim of the <strong>policy improvement</strong> is to improve the current policy $\pi$. Its idea is to change $\pi$ towards the optimal policy a little step. We call this <strong>policy improvement theorem</strong>$(4.2)$. $\pi’$ is the next new policy and both $\pi$ and $\pi’$ are <strong>deterministic</strong> policy.</p>
-<p>$$<br>q_\pi(s, \pi’(s)) \ge v_\pi(s),\ \forall s\in \mathbf{S}\tag{4.2}\<br>\Rightarrow v_\pi’(s)) \ge v_\pi(s)<br>$$</p>
-<p>The premise of improvement is</p>
-<p>$$<br>q_\pi(s, \pi’(s)) &gt; q_\pi(s, \pi(s)), \ \exists s\in\mathbf{S}<br>$$</p>
-<p>AS well as this condition is avaliable, the new policy can always be a <strong>strictly improvement</strong> over $\pi$ unless $\pi$ is already optimal. Obviously we can get $\pi’$ by <strong>greedy selection of action values at each state</strong>.</p>
-<p>$$<br>\begin{eqnarray*}<br>\pi’(s)<br>&amp;=&amp;\mathop{argmax}_a q_\pi(s,a)\<br>&amp;=&amp;\mathop{argmax}<em>a \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_\pi(s’))\tag{4.3}<br>\end{eqnarray*}<br>$$</p>
-<p>The process of making a new policy that improves on an original policy, by making it greedy with respect to the value function of the original policy, is called <strong>policy improvement</strong>.</p>
-<p>Notice that from $(4.3)$ we actually get an “optimal policy” based on current state values (formal  optimal policy establish on $v_*$). We can imagine if all our value function can hold for <strong>optimal  bellman equation</strong>, then the current policy must be the optimal policy $\pi_*$.</p>
-<p>The gride world example is so simple that we just get the optimal policy after once improvement.</p>
-<img src="/2020/03/02/RL4/5.png" class="">
-
-<p>we can notice <strong>even though we already get optimal policy but state values can still change (not converge)</strong>.</p>
-<img src="/2020/03/02/RL4/4.png" class="">
-
-<hr>
-<h2 id="Policy-Iteration-Control"><a href="#Policy-Iteration-Control" class="headerlink" title="Policy Iteration(Control)"></a>Policy Iteration(Control)</h2><p>Once a policy, $\pi$, has been improved using $v_\pi$ to yield a better policy, $\pi’$, we can then compute $v_\pi’$ and improve it again to yield an even better $\pi’’$. Through alternating <strong>evaluation</strong> and <strong>improvement</strong>, we can thus obtain a sequence of monotonically improving policies and value functions</p>
-<p>$$<br>\pi_1 \mathop{\rightarrow}^E v_{\pi_1} \mathop{\rightarrow}^I<br>\pi_2 \mathop{\rightarrow}^E v_{\pi_2} \mathop{\rightarrow}^I<br>\pi_3 \mathop{\rightarrow}^E … \mathop{\rightarrow}^I<br>\pi_* \mathop{\rightarrow}^E v_{\pi_*} \mathop{\rightarrow}^I \pi_*<br>$$</p>
-<p>This way of finding an optimal policy is called <strong>policy iteration</strong>. It follows a sequcence of better and better policies and value functions until it reaches the optimal policy and accosiated optimal value function.</p>
-<img src="/2020/03/02/RL4/6.png" class="">
-
-<p>Here is a simple algorithnm for policy iteration with iterative policy evaluation</p>
-<img src="/2020/03/02/RL4/7.png" class="">
-
-<hr>
-<h2 id="Generalized-Policy-Iteration"><a href="#Generalized-Policy-Iteration" class="headerlink" title="Generalized Policy Iteration"></a>Generalized Policy Iteration</h2><p>One big problem of above policy iteration algorithnm is that we first have to wait for the convergence  of policy evaluation and then improve policy. This waste so much time and its efficience is low.</p>
-<p>The <strong>generalized policy iteration</strong>(GPI) flex the process and still gaurantee convergence of policy iteration. In each step, we don’t have to reach the boundary but just incomplete steps towards each boundary.</p>
-<img src="/2020/03/02/RL4/8.png" class="">
-
-<h3 id="Value-Iteration"><a href="#Value-Iteration" class="headerlink" title="Value Iteration"></a>Value Iteration</h3><p>Value iteration is a special case of GPI as well as the policy iteration. In this case, we don’t have to wait for completely finishing of policy evaluation. We stop after <strong>update evaluation one sweep</strong> (only one update of each state). It combines policy evaluation and improvement by changing <strong>bellman optimality equation</strong> into an update rule.</p>
-<p>$$<br>\begin{eqnarray*}<br>v_{k+1}(s)<br>&amp;\doteq&amp;\mathop{max}_a q_k(s,a)\<br>&amp;=&amp;\mathop{max}<em>a \sum</em>{s’,r}p(s’,r|s,a)(r+\gamma v_k(s’))\tag{4.4}<br>\end{eqnarray*}<br>$$</p>
-<img src="/2020/03/02/RL4/9.png" class="">
-
-<p>Value iteration effectively combines, in each of its sweeps, one sweep of policy evaluation and one sweep of policy improvement. Faster convergence is often achieved by <strong>interposing multiple policy evaluation sweeps between each policy improvement sweep</strong>.</p>
-<h3 id="Asynchronous-DP"><a href="#Asynchronous-DP" class="headerlink" title="Asynchronous DP"></a>Asynchronous DP</h3><ul>
-<li>synchronous DP: in each iteration, sweep all states and update them all.</li>
-<li>asynchronous DP: in each iteration, just update some of states and update in any order</li>
-</ul>
-<p>When state space is too large, sometimes it’s impossible to use synchronous method to update all states.</p>
-<hr>
-<h2 id="Efficiency-of-Dynamic-Programming"><a href="#Efficiency-of-Dynamic-Programming" class="headerlink" title="Efficiency of Dynamic Programming"></a>Efficiency of Dynamic Programming</h2><p>DP may not be practical for very large problems, but compared with other methods for solving MDPs (like linear programing or brute search), DP methods are actually quite efficient.</p>
-<p>If $n$ and $k$ denote the number of states and actions, this means that a DP method takes a number of computational operations that is less than some polynomial function of $n$ and $k$. A DP method is guaranteed to find an optimal policy in polynomial time even though the total number of (deterministic) policies is $k^n$.</p>
-<p>Here comes to the <strong>curse of demensionality</strong>:</p>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>The act of transferring control of a critical section in a shared-memory system is a trade-off. A complex protocol cause unnecessary delays when accessing a free lock, whereas a simple protocol that can access a free lock quickly may perform poorly in the presence of contention.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Efficient synchronizatin primitives are essential for achieving high performance in find-gran, shared-memory parallel programs. This paper presents a detailed and thorough evaluation of a range of locking primitives and try to find an optimal combinational locking primitive. The results show that QOLB outperforms all other primitives in all cases.</p>
+<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ol>
+<li>They enumerate the five sources of overhead that locking synchronization primitives can incur.</li>
+<li>They describe <strong>four mechanisms</strong> (local spinning, queue-based locking, collocation, and synchronized prefetch) that reduce synchronization overheads.</li>
+<li>With detailed simulations, they show the extent to which these four mechanisms can improve the performance of shared-memory programs.</li>
+</ol>
+<h2 id="Synrohnizaiont-Overhead"><a href="#Synrohnizaiont-Overhead" class="headerlink" title="Synrohnizaiont Overhead"></a>Synrohnizaiont Overhead</h2><p>A complete <em>synchronization period</em> contains three phases.</p>
 <ul>
-<li>The size of state space grows <strong>exponentially</strong> as the number of relevant features increase.</li>
-<li>This is not an issue with DP, but an inherent complexity of the problem.</li>
+<li><strong>Transfer</strong>: the time at which processor A completes its <em>release</em> of the lock to the time processor B completes its <em>acquire</em>.</li>
+<li><strong>Load/Compute</strong>: the time at which processor B completes its lock <em>acquire</em> to the time processor B issues its lock <em>release</em>.</li>
+<li><strong>release</strong>: the time from processor B issuing the lock <em>release</em> to the completion of the lock <em>release</em>.</li>
 </ul>
+<img src="/2022/01/22/R20/1.png" class="">
 
+<h2 id="Synchronization-Mechanisms"><a href="#Synchronization-Mechanisms" class="headerlink" title="Synchronization Mechanisms"></a>Synchronization Mechanisms</h2><p>Four mechanisms that locks may incorperate to reduce the time spent in a synchronization period.</p>
+<ul>
+<li><strong>local spinning</strong>: greatly reduce the load on the network, particularly for longer crit- ical sections.</li>
+<li><strong>queue-based locking</strong>: eliminates arbitration overhead and reduces lock transfer time, both in the <em>Transfer</em> phase.</li>
+<li><strong>collocation</strong>: eliminates read and write overheads in the Load/Store phase. (lets protected data be transferred with the transfer of the lock itself.)</li>
+<li><strong>synthronious prefetch</strong>: reduce lock transfer latency when the lock holder release the lock early than requester request that lock.</li>
+</ul>
+<img src="/2022/01/22/R20/2.png" class="">
+
+<h2 id="Synchronization-primitives"><a href="#Synchronization-primitives" class="headerlink" title="Synchronization primitives"></a>Synchronization primitives</h2><p>Six primitives:</p>
+<ul>
+<li><strong>TEST&amp;SET</strong> (TS)</li>
+<li><strong>TEST&amp;TEST&amp;SET</strong> (TTS)</li>
+<li><strong>LH locks</strong></li>
+<li><strong>M locks</strong></li>
+<li><strong>MCS locks</strong></li>
+<li><strong>QOLB</strong></li>
+</ul>
+<img src="/2022/01/22/R20/3.png" class="">
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/21/Arch3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/21/Arch3/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [A.6 - A.10]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-21 10:05:01" itemprop="dateCreated datePublished" datetime="2022-01-21T10:05:01-05:00">2022-01-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-05 18:32:52" itemprop="dateModified" datetime="2022-02-05T18:32:52-05:00">2022-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/20/Arch2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/20/Arch2/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [A.1 - A.5]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-20 11:34:35" itemprop="dateCreated datePublished" datetime="2022-01-20T11:34:35-05:00">2022-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-05 18:52:28" itemprop="dateModified" datetime="2022-02-05T18:52:28-05:00">2022-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id=""><a href="#" class="headerlink" title=""></a></h2>
       
     </div>
 
@@ -3099,7 +1041,7 @@ Name: col3, dtype: object
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -3167,20 +1109,20 @@ Name: col3, dtype: object
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -3329,59 +1271,6 @@ Name: col3, dtype: object
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
