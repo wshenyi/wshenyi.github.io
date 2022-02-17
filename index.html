@@ -164,6 +164,536 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/16/Arch7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/16/Arch7/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [3.6 - 3.10]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-16 16:51:19" itemprop="dateCreated datePublished" datetime="2022-02-16T16:51:19-05:00">2022-02-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-15 16:51:56" itemprop="dateModified" datetime="2022-02-15T16:51:56-05:00">2022-02-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/15/R41/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/15/R41/" class="post-title-link" itemprop="url">041 "Cache-Only Memory Architectures"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-15 19:53:17" itemprop="dateCreated datePublished" datetime="2022-02-15T19:53:17-05:00">2022-02-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-16 23:58:25" itemprop="dateModified" datetime="2022-02-16T23:58:25-05:00">2022-02-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> cache-only memory architecture, COMA</p>
+<blockquote>
+<p>Author: Fredrik Dahlgren, Josep Torrellas</p>
+</blockquote>
+<hr>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Reducing the impact of frequent long-latency memory accesses stll requires substantial effort.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The Cache-Only Memory Architecture (COMA) increases the chances of data being available locally by regarding each memory module as a huge cache memory in which each block has a tag with the address and the state. In this article, the authors explain the functionality, architecture, performance, and complexity of COMA systems. They also outline different COMA designs, and compare COMA with traditional NUMA systems.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>In traditional NUMA multiprocessors, each node contains one or more processors with private caches and a <strong>memory module</strong> that is part of the global shared memory.</p>
+<h2 id="COMA-ORGANIZATION"><a href="#COMA-ORGANIZATION" class="headerlink" title="COMA ORGANIZATION"></a>COMA ORGANIZATION</h2><p>COMA regards/tunes memory modules into large DRAM caches called <strong>attraction memory</strong> (AM). Because a large AM is more capable of containing the node’s current working set than a cache is, more of the cache misses are satisfied locally within the node.</p>
+<p>COMA provides such illusion by addressing three issues:</p>
+<ul>
+<li><strong>Block localization</strong>: When the memory modules act as caches, a block’s address is a global identifier, not an indicator of its physical memory location. Localization can achieve with extra structures like directory.</li>
+<li><strong>Block replacement</strong>: Memoey blocks migrate in COMA so the system must keep track of the last copy of a block. As a result, when a modified or otherwise unique block is displaced from an AM, it must be relocated into another AM.</li>
+<li><strong>Memory overhead</strong>: A NUMA machine typically allocates all memory to application or operating system pages. COMA, however, leaves a portion of the memory unallocated to facilitate automatic data replication and migration. This unallocated space supports the replication of shared blocks across AMs.</li>
+</ul>
+<h2 id="Alternative-COMA-Designs"><a href="#Alternative-COMA-Designs" class="headerlink" title="Alternative COMA Designs"></a>Alternative COMA Designs</h2><ul>
+<li>Flat-COMA</li>
+<li>Simple-COMA</li>
+<li>Multiplexed Simple-COMA</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/14/R40/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/14/R40/" class="post-title-link" itemprop="url">040 "Reducing Memory and Traffic Requirements for Scalable Directory-Based Cache Coherence Schemes"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-14 19:53:00" itemprop="dateCreated datePublished" datetime="2022-02-14T19:53:00-05:00">2022-02-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-16 17:18:14" itemprop="dateModified" datetime="2022-02-16T17:18:14-05:00">2022-02-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> directory-based cache coherence</p>
+<blockquote>
+<p>Author: Anoop Gupta, Wolf-Dietrich Weber, and Todd Mowry</p>
+</blockquote>
+<hr>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Full bit vector scheme of cache coherence protocol is not scalable when the number of processors increase. On the other hand, use the scheme of limited pointers per direcory entry often cause excessive invalidation traffic.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In this paper, the author propose two simple techniques that significant reduce invalidation traffic and directory memory requirements: <em>coarse vector</em> and <em>sparse directories</em>. The results indicate that combining these two techniques can save one to two orders of magnitude in storage, with only a slight degradation in performance.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Earlier studies suggest that most memory blocks are shared by only a few processors at any given time, and that the number of blocks shared by a large number of processors is very small.</p>
+<p>Directory Schemes for Cache Coherence:</p>
+<ul>
+<li>Full Bit Vector Scheme ($Dir_P$)</li>
+<li>Limited Pointer Schemes<ul>
+<li>Limited Pointers with Broadcast Scheme ($Dir_iB$)</li>
+<li>Limited Pointers without Broadcast Scheme ($Dir_iNB$)</li>
+<li>Superset Scheme ($Dir_iX$)</li>
+</ul>
+</li>
+<li>Cache-Based Linked List Schemes</li>
+</ul>
+<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
+<li><strong>coarse vector</strong> ($Dir_iCV_r$):<ul>
+<li>$i$ is the number of pointers and $r$ is the size of the region that each bit in the coarse vector represents.</li>
+<li>$Dir_iCV_r$ is identical to the other limited pointer schemes when there are no more than $i$ processors sharing a block. When the number of processors sharing a block exceeds the number of pointers available (pointer overflow), the directory switches to a different representation. The same memory that was used to store the pointers is now treated as a coarse bit vector, where each bit of the state indicates a group of processors.</li>
+</ul>
+</li>
+<li><strong>sparse directories</strong>: Organize the directory as a cache, instead of having one directory entry per memory block. Since at any given time most memory blocks are not cached by any processors, therefore there is less need to track their state (invalid) in the directory.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/13/R39/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/13/R39/" class="post-title-link" itemprop="url">039 "Directory-Based Cache Coherence Protocols for Large-Scale Multiprocessors"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-13 18:26:54" itemprop="dateCreated datePublished" datetime="2022-02-13T18:26:54-05:00">2022-02-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-16 17:19:24" itemprop="dateModified" datetime="2022-02-16T17:19:24-05:00">2022-02-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> Directory-Based Cache Coherence Protocols</p>
+<blockquote>
+<p>Author: David Chaiken, Craig Fields, Kiyoshi Kurihara, and Anant Agarwal</p>
+</blockquote>
+<hr>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>snoopy cache coherence protocls cann’t not scale to a large number of processors. Bus cycle times are restricted by signal transmission times in multidrop environments and must be long enough to allow the bus to “ring out”.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Dircetory-based cache coherence protocols can solve the problem of scalability in cache systems. This article reviews and analyzes this class of cache coherence protocols. The authors use a hybrid of trace-driven simulation and analytical methods to evaluate the performance of these schemes for several parallel application.</p>
+<h2 id="Classification-of-directory-schemes"><a href="#Classification-of-directory-schemes" class="headerlink" title="Classification of directory schemes"></a>Classification of directory schemes</h2><p>The different flavors of directory protocols fall under three primary categories:</p>
+<ul>
+<li>Full-map directories: directory maintain pointer for each processor and each cache blocks. The memory overhead O($n^2$) is too large to be acceptable.</li>
+<li>Limited directories: directory maintain fixed number of entries (rather than all processor) of pointer for each cache blocks.</li>
+<li>Chained directories: emulate the full-map schemes by distributing the directory among the caches. Use singly-linked chain or doubly-linked chain.</li>
+</ul>
+<img src="/2022/02/13/R39/1.png" class="">
+
+<h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><p>In general, <strong>chained directory schemes yield higher utilization</strong> than limited directory protocols. However, chained directory protocols are more complex and have higher write latency than limited directory protocols.</p>
+<h2 id="Limitations-Weaknesses"><a href="#Limitations-Weaknesses" class="headerlink" title="Limitations/Weaknesses"></a>Limitations/Weaknesses</h2><ul>
+<li>This paper only test three parralel applications which I thought is not enough to obtain a comprehensive analysis of performance.</li>
+<li>The results show that “no coherence” obtain the best performance, which kind of indicating that their simulation is not good enough to capture the real applications.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/12/R38/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/12/R38/" class="post-title-link" itemprop="url">038 "A Primer on Memory Consistency and Cache Coherence, 2nd" Ch.10 - Ch.11</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-12 19:54:52" itemprop="dateCreated datePublished" datetime="2022-02-12T19:54:52-05:00">2022-02-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-14 20:31:10" itemprop="dateModified" datetime="2022-02-14T20:31:10-05:00">2022-02-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> computer architecture, memory consistency, cache coherence, shared memory, memory systems, multicore processor, heterogeneous architecture, GPU, accelerators, semantics, verificatio</p>
+<blockquote>
+<p>Author: Vijay Nagarajan, Daniel J. Sorin, Mark D. Hill, David A. Wood</p>
+</blockquote>
+<hr>
+<h2 id="Chapter-10"><a href="#Chapter-10" class="headerlink" title="Chapter 10:"></a>Chapter 10:</h2><h2 id="Chapter-11"><a href="#Chapter-11" class="headerlink" title="Chapter 11:"></a>Chapter 11:</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/08/R34/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/08/R34/" class="post-title-link" itemprop="url">034 "Reactive NUCA - Near-Optimal Block Placement and Replication in Distributed Caches"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-08 10:59:48" itemprop="dateCreated datePublished" datetime="2022-02-08T10:59:48-05:00">2022-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-13 17:20:22" itemprop="dateModified" datetime="2022-02-13T17:20:22-05:00">2022-02-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> cache memory, interleaved memory, shared memory</p>
+<blockquote>
+<p>Author: Nikos Hardavellas, Michael Ferdman, Babak Falsafi and Anastasia Ailamaki</p>
+</blockquote>
+<hr>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Recent hybrid LLC architecture require complex, area-intensive, and high-latency loopup and coherence mechanisms, wast cache capacity, do not sacle to hige core counts, or optimize only for a subset of the cache accessed.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Due to different drawbacks in recent hybrid proposal of LLC architecture, the authors propose Reactive NUCA (R-NUCA), a distributed cache design which reacts to the class of each cache access and places blocks at the appropriate location in the cache. R-NUCA cooperates with the operating system to support intelligent placement, migration, and replication without the overhead of an explicit coherence mechanism for the on-chip last-level cache.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Non-Uniform-Cache-Architectures"><a href="#Non-Uniform-Cache-Architectures" class="headerlink" title="Non-Uniform Cache Architectures"></a>Non-Uniform Cache Architectures</h3><p>To mitigate the rising access latency, recent research advocates decomposing the cache into slices and all slices are physically distributed on the die. Thus, cores realize fast accesses to nearby slices and slower accesses to physically distant ones.</p>
+<p>Just as cache slices are distributed across the entire die, processor cores are similarly distributed. Then <strong>tiled architecture</strong> came out.</p>
+<img src="/2022/02/08/R34/1.png" class="">
+
+<h3 id="Tiled-Architecture"><a href="#Tiled-Architecture" class="headerlink" title="Tiled Architecture"></a>Tiled Architecture</h3><p>Each L1 cache miss probes an on-chip L2 cache slice via an on-chip network that interconnects the tiles. Depending on the L2 organization, the L2 slice can be either a private L2 cache or a portion of a larger distributed shared L2 cache.</p>
+<h3 id="Intelligent-Blcok-Placement"><a href="#Intelligent-Blcok-Placement" class="headerlink" title="Intelligent Blcok Placement"></a>Intelligent Blcok Placement</h3><p>Intelligent cache block placement can improve performance by placing blocks close to the requesting cores, allowing fast access.</p>
+<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
+<li>Through execution trace analysis, the authors find that cache access patterns of a range of server and scientific workloads can be classified into distinct classes, where each class is amenable to different block placement policies.</li>
+<li>R-NUCA utilizes <strong>Rotational Interleaving</strong>, a novel lookup mechanism that matches the fast speed of address-interleaved lookup, without pinning blocks to a single location in the cache. Rotational interleaving allows read-only blocks to be shared by neighboring cores and replicated at distant ones, ensuring low access latency while balancing capacity constraints.</li>
+</ul>
+<h2 id="Limitations-Weaknesses-up-to-2-weaknesses"><a href="#Limitations-Weaknesses-up-to-2-weaknesses" class="headerlink" title="Limitations/Weaknesses [up to 2 weaknesses]"></a>Limitations/Weaknesses [up to 2 weaknesses]</h2><ul>
+<li>The diverse cache access patterns of server workload they discovered are also based on imperical design, which may also introduce human errors.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/04/R30/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -195,7 +725,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-06 13:13:28" itemprop="dateModified" datetime="2022-02-06T13:13:28-05:00">2022-02-06</time>
+                <time title="Modified: 2022-02-14 19:57:13" itemprop="dateModified" datetime="2022-02-14T19:57:13-05:00">2022-02-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -203,7 +733,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
                 </span>
             </span>
 
@@ -218,7 +748,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><em><strong>Keywards</strong></em> computer architecture, memory consistency, cache coherence, shared memory, memory systems, multicore processor, heterogeneous architecture, GPU, accelera- tors, semantics, verificatio</p>
+          <p><em><strong>Keywards</strong></em> computer architecture, memory consistency, cache coherence, shared memory, memory systems, multicore processor, heterogeneous architecture, GPU, accelerators, semantics, verificatio</p>
 <blockquote>
 <p>Author: Vijay Nagarajan, Daniel J. Sorin, Mark D. Hill, David A. Wood</p>
 </blockquote>
@@ -284,7 +814,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/02/03/Arch6/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [3.6 - 3.10]</a>
+            <a href="/2022/02/03/Arch6/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [3.1 - 3.5]</a>
         </h2>
 
         <div class="post-meta">
@@ -301,7 +831,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-05 18:35:13" itemprop="dateModified" datetime="2022-02-05T18:35:13-05:00">2022-02-05</time>
+                <time title="Modified: 2022-02-15 16:52:13" itemprop="dateModified" datetime="2022-02-15T16:52:13-05:00">2022-02-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -357,7 +887,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/02/02/Arch5/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [3.1 - 3.5]</a>
+            <a href="/2022/02/02/Arch5/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [C.6 - C.10]</a>
         </h2>
 
         <div class="post-meta">
@@ -374,7 +904,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-05 18:30:04" itemprop="dateModified" datetime="2022-02-05T18:30:04-05:00">2022-02-05</time>
+                <time title="Modified: 2022-02-15 16:52:11" itemprop="dateModified" datetime="2022-02-15T16:52:11-05:00">2022-02-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -447,7 +977,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-02 02:00:25" itemprop="dateModified" datetime="2022-02-02T02:00:25-05:00">2022-02-02</time>
+                <time title="Modified: 2022-02-13 17:20:11" itemprop="dateModified" datetime="2022-02-13T17:20:11-05:00">2022-02-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -455,7 +985,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
                 </span>
             </span>
 
@@ -516,532 +1046,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/27/Arch4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/27/Arch4/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [C.6 - C.10]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-27 10:17:16" itemprop="dateCreated datePublished" datetime="2022-01-27T10:17:16-05:00">2022-01-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-05 18:33:18" itemprop="dateModified" datetime="2022-02-05T18:33:18-05:00">2022-02-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/26/R24/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/26/R24/" class="post-title-link" itemprop="url">024 "TriCheck - Memory Model Verification at the Trisection of Software, Hardware, and ISA"</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-26 11:17:14" itemprop="dateCreated datePublished" datetime="2022-01-26T11:17:14-05:00">2022-01-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-27 01:52:57" itemprop="dateModified" datetime="2022-01-27T01:52:57-05:00">2022-01-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em><strong>Keywards</strong></em> </p>
-<blockquote>
-<p>Author:</p>
-</blockquote>
-<hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Many problems can arise when translate a program from a high-level language (HLL) into correct, portable and efficient assembly code.  </p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Current verification techniques evaluate segments of the system stack in isolation. This paper makes a case for full-stack MCM verification and provides a toolflow, TriCheck, capable of verifying that the HLL, compiler, ISA, and implementation collectively uphold MCM requirements. This paper demonstrates the necessity of full-stack verification for detecting MCM-related bugs in the hardware-software stack.</p>
-<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><ul>
-<li>Present TriCheck, a framework for full-stack MCM verification</li>
-<li>Apply TriCheck to the open-source RISC-V ISA to validate TriCheck’s applicability to modern ISA design.</li>
-<li>Use TriCheck to find two conterexamples in the supposedly proven-correct trailing-sync compiler mappings from C11 to the Power and ARMv7 architectures.</li>
-</ul>
-<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><p>TriCheck toolflow:</p>
-<img src="/2022/01/26/R24/1.png" class="">
-
-<ol>
-<li><strong>HLL AXIOMATIC EVALUATION</strong>: The suite ofHLL litmus tests is run on a HLL Herd model (e.g., the C11 Herd model) to determine the outcomes that the HLL MCM <em>permits</em> or <em>forbids</em> for each at the program level.</li>
-<li><strong>HLL-&gt;ISA COMPILATION</strong>: Using the HLL-&gt;ISA compiler mappings, TriCheck translates HLL litmus tests to their assembly language equivalents.</li>
-<li><strong>ISA $\mu$SPEC EVALUATION</strong>: The suite of assembly litmus tests is run on the Check model of the ISA to determine the outcomes that are <em>observable</em> or <em>unobservable</em> on the microarchitecture.</li>
-<li><strong>HLL-MICROARCHITECTURE EQUIVALENCE CHECK</strong>:<ul>
-<li>The results of Step 1 and Step 3 are compared for each test to determine if the microarchitecturally realizable out- comes are stronger than, weaker than, or equivalent to the outcomes required by the HLL model. A stronger than (resp. weaker than) outcome corresponds to a HLL pro- gram that is permitted (resp. forbidden) by the HLL MCM, yet unobservable (resp. observable) on the microarchitec- tural implementation of the ISA. If Step 4 concludes that the microarchitecturally realizable outcomes are more re- strictive than what the HLL requires, the designer may wish to relax the ISA or microarchitecture for performance reasons. On the other hand, some correction is mandatory when outcomes forbidden by the HLL are observable on the microarchitecture.</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/24/R22/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/24/R22/" class="post-title-link" itemprop="url">022 "Wait-Free Synchronization"</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-24 11:04:40" itemprop="dateCreated datePublished" datetime="2022-01-24T11:04:40-05:00">2022-01-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-30 14:36:29" itemprop="dateModified" datetime="2022-01-30T14:36:29-05:00">2022-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em><strong>Keywards</strong></em> linearizability, wait-free synchronization</p>
-<blockquote>
-<p>Author: Maurice Herlihy</p>
-</blockquote>
-<hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>The problem of constructing a wait-free implementation of one data object from another lies at the heart of much recent work in concurrent algorithms, concurrent data structures, and multiprocessor architectures.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>A wait-free implementation of a concurrent data object is one tha guarantees that any process can complete any operation in a finite number of steps, regardless of the execution speeds of the other processes. The author proposal many principles and theorems in implementations of a wait-free concurrent data object</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Critical section is a traditional approach to implement <em>concurrent object</em>. However, critical sections are poorly suited for asynchronous, fault-tolerant systems: if a faulty process is halted or delayed in a critical section, nonfaulty process will also be unable to process.</p>
-<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><p>First part:</p>
-<ul>
-<li><strong>consensus number</strong>: the maximum number of processes for which the object can solve a simple consensus problem.</li>
-<li>It is impossible to construct a wait-free implementation of an object with consensus number $n$ <strong>from</strong> an object with a lower consensus number (&lt; n).</li>
-<li>Atomic read/write registers are at the bottom of the hierarchy: they can not be used to construct wait-free implementation at higher level.</li>
-</ul>
-<img src="/2022/01/24/R22/1.png" class="">
-
-<p>Second part:</p>
-<ul>
-<li>There exist <strong>univeral</strong> objects from which one can construct a wait-free implementation of any other object.</li>
-<li>An object is universal in a system of $n$ process if and only if it has a consensus number greater than or equal to $n$.</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/22/R20/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/22/R20/" class="post-title-link" itemprop="url">020 "Efficient Synchronization - Let Them Eat QOLB"</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-22 15:33:21" itemprop="dateCreated datePublished" datetime="2022-01-22T15:33:21-05:00">2022-01-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-23 14:52:27" itemprop="dateModified" datetime="2022-01-23T14:52:27-05:00">2022-01-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em><strong>Keywards</strong></em> shared-memory synchronization</p>
-<blockquote>
-<p>Author: Alain Kägi, Doug Burger, and James R. Goodman</p>
-</blockquote>
-<hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>The act of transferring control of a critical section in a shared-memory system is a trade-off. A complex protocol cause unnecessary delays when accessing a free lock, whereas a simple protocol that can access a free lock quickly may perform poorly in the presence of contention.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Efficient synchronizatin primitives are essential for achieving high performance in find-gran, shared-memory parallel programs. This paper presents a detailed and thorough evaluation of a range of locking primitives and try to find an optimal combinational locking primitive. The results show that QOLB outperforms all other primitives in all cases.</p>
-<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ol>
-<li>They enumerate the five sources of overhead that locking synchronization primitives can incur.</li>
-<li>They describe <strong>four mechanisms</strong> (local spinning, queue-based locking, collocation, and synchronized prefetch) that reduce synchronization overheads.</li>
-<li>With detailed simulations, they show the extent to which these four mechanisms can improve the performance of shared-memory programs.</li>
-</ol>
-<h2 id="Synrohnizaiont-Overhead"><a href="#Synrohnizaiont-Overhead" class="headerlink" title="Synrohnizaiont Overhead"></a>Synrohnizaiont Overhead</h2><p>A complete <em>synchronization period</em> contains three phases.</p>
-<ul>
-<li><strong>Transfer</strong>: the time at which processor A completes its <em>release</em> of the lock to the time processor B completes its <em>acquire</em>.</li>
-<li><strong>Load/Compute</strong>: the time at which processor B completes its lock <em>acquire</em> to the time processor B issues its lock <em>release</em>.</li>
-<li><strong>release</strong>: the time from processor B issuing the lock <em>release</em> to the completion of the lock <em>release</em>.</li>
-</ul>
-<img src="/2022/01/22/R20/1.png" class="">
-
-<h2 id="Synchronization-Mechanisms"><a href="#Synchronization-Mechanisms" class="headerlink" title="Synchronization Mechanisms"></a>Synchronization Mechanisms</h2><p>Four mechanisms that locks may incorperate to reduce the time spent in a synchronization period.</p>
-<ul>
-<li><strong>local spinning</strong>: greatly reduce the load on the network, particularly for longer crit- ical sections.</li>
-<li><strong>queue-based locking</strong>: eliminates arbitration overhead and reduces lock transfer time, both in the <em>Transfer</em> phase.</li>
-<li><strong>collocation</strong>: eliminates read and write overheads in the Load/Store phase. (lets protected data be transferred with the transfer of the lock itself.)</li>
-<li><strong>synthronious prefetch</strong>: reduce lock transfer latency when the lock holder release the lock early than requester request that lock.</li>
-</ul>
-<img src="/2022/01/22/R20/2.png" class="">
-
-<h2 id="Synchronization-primitives"><a href="#Synchronization-primitives" class="headerlink" title="Synchronization primitives"></a>Synchronization primitives</h2><p>Six primitives:</p>
-<ul>
-<li><strong>TEST&amp;SET</strong> (TS)</li>
-<li><strong>TEST&amp;TEST&amp;SET</strong> (TTS)</li>
-<li><strong>LH locks</strong></li>
-<li><strong>M locks</strong></li>
-<li><strong>MCS locks</strong></li>
-<li><strong>QOLB</strong></li>
-</ul>
-<img src="/2022/01/22/R20/3.png" class="">
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/21/Arch3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/21/Arch3/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [A.6 - A.10]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-21 10:05:01" itemprop="dateCreated datePublished" datetime="2022-01-21T10:05:01-05:00">2022-01-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-05 18:32:52" itemprop="dateModified" datetime="2022-02-05T18:32:52-05:00">2022-02-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/20/Arch2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/20/Arch2/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [A.1 - A.5]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-20 11:34:35" itemprop="dateCreated datePublished" datetime="2022-01-20T11:34:35-05:00">2022-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-05 18:52:28" itemprop="dateModified" datetime="2022-02-05T18:52:28-05:00">2022-02-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id=""><a href="#" class="headerlink" title=""></a></h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1109,7 +1117,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1271,6 +1279,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

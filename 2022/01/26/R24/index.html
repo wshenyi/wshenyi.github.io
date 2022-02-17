@@ -20,16 +20,16 @@
     var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Keywards   Author:   What is the Problem?Many problems can arise when translate a program from a high-level language (HLL) into correct, portable and efficient assembly code.   SummaryCurrent verifica">
+  <meta name="description" content="Keywards memory model, verification  Author: Caroline Trippel Yatin A. Manerkar Daniel Lustig Michael,Pellauer Margaret Martonosi   What is the Problem?Many problems can arise when translate a program">
 <meta property="og:type" content="article">
 <meta property="og:title" content="024 &quot;TriCheck - Memory Model Verification at the Trisection of Software, Hardware, and ISA&quot;">
 <meta property="og:url" content="https://wshenyi.github.io/2022/01/26/R24/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="Keywards   Author:   What is the Problem?Many problems can arise when translate a program from a high-level language (HLL) into correct, portable and efficient assembly code.   SummaryCurrent verifica">
+<meta property="og:description" content="Keywards memory model, verification  Author: Caroline Trippel Yatin A. Manerkar Daniel Lustig Michael,Pellauer Margaret Martonosi   What is the Problem?Many problems can arise when translate a program">
 <meta property="og:locale">
 <meta property="og:image" content="https://wshenyi.github.io/2022/01/26/R24/1.png">
 <meta property="article:published_time" content="2022-01-26T16:17:14.000Z">
-<meta property="article:modified_time" content="2022-01-27T06:52:57.455Z">
+<meta property="article:modified_time" content="2022-02-16T22:16:48.610Z">
 <meta property="article:author" content="Godway">
 <meta property="article:tag" content="Everyday">
 <meta name="twitter:card" content="summary">
@@ -202,7 +202,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-27 01:52:57" itemprop="dateModified" datetime="2022-01-27T01:52:57-05:00">2022-01-27</time>
+                <time title="Modified: 2022-02-16 17:16:48" itemprop="dateModified" datetime="2022-02-16T17:16:48-05:00">2022-02-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -210,7 +210,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
                 </span>
             </span>
 
@@ -232,9 +232,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><em><strong>Keywards</strong></em> </p>
+        <p><em><strong>Keywards</strong></em> memory model, verification</p>
 <blockquote>
-<p>Author:</p>
+<p>Author: Caroline Trippel Yatin A. Manerkar Daniel Lustig Michael,Pellauer Margaret Martonosi</p>
 </blockquote>
 <hr>
 <h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Many problems can arise when translate a program from a high-level language (HLL) into correct, portable and efficient assembly code.  </p>
@@ -278,8 +278,8 @@
       <i class="fa fa-chevron-left"></i> 022 "Wait-Free Synchronization"
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/01/27/Arch4/" rel="next" title="Computer Architecture - A Quantitative Approach, 6th [C.6 - C.10]">
-      Computer Architecture - A Quantitative Approach, 6th [C.6 - C.10] <i class="fa fa-chevron-right"></i>
+    <a href="/2022/01/27/Arch4/" rel="next" title="Computer Architecture - A Quantitative Approach, 6th [C.1 - C.5]">
+      Computer Architecture - A Quantitative Approach, 6th [C.1 - C.5] <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -355,7 +355,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -517,6 +517,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

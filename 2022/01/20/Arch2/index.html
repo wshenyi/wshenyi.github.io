@@ -20,16 +20,23 @@
     var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="Author: John L. Hennessy, David A. Patterson  Chapter A: Instruction Set Principles  IntroductionInstruction set architecture (ISA) —- the portion of the computer visible to the programmer or compile">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Computer Architecture - A Quantitative Approach, 6th [A.1 - A.5]">
 <meta property="og:url" content="https://wshenyi.github.io/2022/01/20/Arch2/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
+<meta property="og:description" content="Author: John L. Hennessy, David A. Patterson  Chapter A: Instruction Set Principles  IntroductionInstruction set architecture (ISA) —- the portion of the computer visible to the programmer or compile">
 <meta property="og:locale">
+<meta property="og:image" content="https://wshenyi.github.io/2022/01/20/Arch2/1.png">
+<meta property="og:image" content="https://wshenyi.github.io/2022/01/20/Arch2/2.png">
+<meta property="og:image" content="https://wshenyi.github.io/2022/01/20/Arch2/3.png">
+<meta property="og:image" content="https://wshenyi.github.io/2022/01/20/Arch2/4.png">
 <meta property="article:published_time" content="2022-01-20T16:34:35.000Z">
-<meta property="article:modified_time" content="2022-02-05T23:52:28.975Z">
+<meta property="article:modified_time" content="2022-02-08T09:24:45.199Z">
 <meta property="article:author" content="Godway">
 <meta property="article:tag" content="Everyday">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wshenyi.github.io/2022/01/20/Arch2/1.png">
 
 <link rel="canonical" href="https://wshenyi.github.io/2022/01/20/Arch2/">
 
@@ -198,7 +205,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-05 18:52:28" itemprop="dateModified" datetime="2022-02-05T18:52:28-05:00">2022-02-05</time>
+                <time title="Modified: 2022-02-08 04:24:45" itemprop="dateModified" datetime="2022-02-08T04:24:45-05:00">2022-02-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,7 +235,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+        <blockquote>
+<p>Author: John L. Hennessy, David A. Patterson</p>
+</blockquote>
+<p>Chapter A: Instruction Set Principles</p>
+<hr>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Instruction set architecture (ISA) —- the portion of the computer visible to the programmer or compiler writer.</p>
+<p>Recent 80x86 microprocessors, including all the Intel Core microprocessors build in the past decades, use hardware to translate from 80x86 instructions to RISC-like instructions and then execute the translated operations inside the chip. They maintain the illusion of 80x86 architecture to the programmer while allowing the computer designer to implement a RISC-style processor for performance.</p>
+<h2 id="Classifying-Instruction-Set-Architectures"><a href="#Classifying-Instruction-Set-Architectures" class="headerlink" title="Classifying Instruction Set Architectures"></a>Classifying Instruction Set Architectures</h2><p>The type of internal storage in a processor is the most basic differentiation. They major choices are a <strong>stack</strong>, an <strong>accumulator</strong>, or <strong>a set of registers</strong>.</p>
+<p>Operands may be named <strong>explicitly</strong> or <strong>implicitly</strong>: The operands in a <em>stack</em> architecture are implicitly on the top of the stack, and in an <em>accumulator</em> architecture one operand is implicitly the accumulator, and the <em>general-purpose register</em> (GPR)architectures have only explicit operands – either registers or memory locations.</p>
+<img src="/2022/01/20/Arch2/1.png" class="">
+
+<p>There are two classes of register computers. One class can access memory as part of any instruction, called <strong>register-memory architecture</strong>, and the other can access memory only with load and store instructions, called <strong>load-store architecture</strong>. A third class, not found in computers shipping today, keeps all operands in memory and is called a <strong>memory-memory architecture</strong>.</p>
+<img src="/2022/01/20/Arch2/2.png" class="">
+
+<p>These advantages and disadvantages are qualitative and their actual impac depneds on the compiler and implementation strategy. (e.g. A GPR computer with memory operations could easily be ignored by the compiler and used as a load-store computer.)</p>
+<h2 id="Memory-Addressing"><a href="#Memory-Addressing" class="headerlink" title="Memory Addressing"></a>Memory Addressing</h2><h3 id="Interpreting-Memory-Addresses"><a href="#Interpreting-Memory-Addresses" class="headerlink" title="Interpreting Memory Addresses"></a>Interpreting Memory Addresses</h3><p>There are two different convention for <strong>ordering the bytes</strong> within a larger object. <strong>Little Endian</strong> byte order puts least-significant bit at right position in a byte. <strong>Big Endian</strong> byte order puts most-significant bit at left position in a byte.</p>
+<p>In many computers, accesses to objects larger than a byte must <strong>aligned</strong>. Misalignent causes hardware complications, because the memroy is typically aligned on a multiple of a word or double-word boundary.</p>
+<h3 id="Addressing-Modes"><a href="#Addressing-Modes" class="headerlink" title="Addressing Modes"></a>Addressing Modes</h3><p>Addressing modes specify constants and registers in addition to locations in memroy. The actual memory address specified by the addressing mode is called the <strong>effective addrss</strong>.</p>
+<img src="/2022/01/20/Arch2/3.png" class="">
+
+<p>Addressing mode that depend on the program counter, called <em>PC-relative addressing</em>.</p>
+<p>Addressing modes have the ability to significantly reduce instrcution counts; they also add to the complexity of building a computer and may increase the average clock cycles per instruction (CPI) of computers that implement those modes. Thus, the usage of various addressing modes is quite important in helping the architect chosse what to include.</p>
+<h2 id="Type-and-Size-of-Operands"><a href="#Type-and-Size-of-Operands" class="headerlink" title="Type and Size of Operands"></a>Type and Size of Operands</h2><p>Usually, the type of an operand is encoding in the <strong>opcode</strong> designates the type of an operand – this is the method used most often. Alternatively, the data can be annoted with <strong>tags</strong> that are interpreted by the hardware.</p>
+<p>Usually, the type of an operand – integer, single-precision floating point, character, and so on – effectively gives its size.</p>
+<h2 id="Operations-in-the-Instruction-Set"><a href="#Operations-in-the-Instruction-Set" class="headerlink" title="Operations in the Instruction Set"></a>Operations in the Instruction Set</h2><p>One rule of thumb across all architectures is that the most widely executed instructions are the simple operations of an instruction set.</p>
+<img src="/2022/01/20/Arch2/4.png" class="">
+
     </div>
 
     
@@ -311,7 +344,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Classifying-Instruction-Set-Architectures"><span class="nav-number">2.</span> <span class="nav-text">Classifying Instruction Set Architectures</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Addressing"><span class="nav-number">3.</span> <span class="nav-text">Memory Addressing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Interpreting-Memory-Addresses"><span class="nav-number">3.1.</span> <span class="nav-text">Interpreting Memory Addresses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Addressing-Modes"><span class="nav-number">3.2.</span> <span class="nav-text">Addressing Modes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type-and-Size-of-Operands"><span class="nav-number">4.</span> <span class="nav-text">Type and Size of Operands</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operations-in-the-Instruction-Set"><span class="nav-number">5.</span> <span class="nav-text">Operations in the Instruction Set</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -327,7 +360,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
