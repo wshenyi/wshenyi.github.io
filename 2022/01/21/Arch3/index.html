@@ -20,18 +20,20 @@
     var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Author: John L. Hennessy, David A. Patterson  Chapter A: Instruction Set Principles  Instuctions for Control Flow">
+  <meta name="description" content="Author: John L. Hennessy, David A. Patterson  Chapter A: Instruction Set Principles  A.6 Instuctions for Control FlowThroughout this book we will use jump when the change in control is unconditional">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Computer Architecture - A Quantitative Approach, 6th [A.6 - A.10]">
+<meta property="og:title" content="Computer Architecture - A Quantitative Approach, 6th [A.6 - A.9]">
 <meta property="og:url" content="https://wshenyi.github.io/2022/01/21/Arch3/index.html">
 <meta property="og:site_name" content="Godway&#39;s Notebook">
-<meta property="og:description" content="Author: John L. Hennessy, David A. Patterson  Chapter A: Instruction Set Principles  Instuctions for Control Flow">
+<meta property="og:description" content="Author: John L. Hennessy, David A. Patterson  Chapter A: Instruction Set Principles  A.6 Instuctions for Control FlowThroughout this book we will use jump when the change in control is unconditional">
 <meta property="og:locale">
+<meta property="og:image" content="https://wshenyi.github.io/2022/01/21/Arch3/1.png">
 <meta property="article:published_time" content="2022-01-21T15:05:01.000Z">
-<meta property="article:modified_time" content="2022-02-13T02:54:59.772Z">
+<meta property="article:modified_time" content="2022-02-18T21:42:37.710Z">
 <meta property="article:author" content="Godway">
 <meta property="article:tag" content="Everyday">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wshenyi.github.io/2022/01/21/Arch3/1.png">
 
 <link rel="canonical" href="https://wshenyi.github.io/2022/01/21/Arch3/">
 
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title>Computer Architecture - A Quantitative Approach, 6th [A.6 - A.10] | Godway's Notebook</title>
+  <title>Computer Architecture - A Quantitative Approach, 6th [A.6 - A.9] | Godway's Notebook</title>
   
 
 
@@ -183,7 +185,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Computer Architecture - A Quantitative Approach, 6th [A.6 - A.10]
+          Computer Architecture - A Quantitative Approach, 6th [A.6 - A.9]
         </h1>
 
         <div class="post-meta">
@@ -200,7 +202,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-12 21:54:59" itemprop="dateModified" datetime="2022-02-12T21:54:59-05:00">2022-02-12</time>
+                <time title="Modified: 2022-02-18 16:42:37" itemprop="dateModified" datetime="2022-02-18T16:42:37-05:00">2022-02-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,7 +237,46 @@
 </blockquote>
 <p>Chapter A: Instruction Set Principles</p>
 <hr>
-<h2 id="Instuctions-for-Control-Flow"><a href="#Instuctions-for-Control-Flow" class="headerlink" title="Instuctions for Control Flow"></a>Instuctions for Control Flow</h2>
+<h2 id="A-6-Instuctions-for-Control-Flow"><a href="#A-6-Instuctions-for-Control-Flow" class="headerlink" title="A.6 Instuctions for Control Flow"></a>A.6 Instuctions for Control Flow</h2><p>Throughout this book we will use <strong>jump</strong> when the change in control is unconditional and <strong>branch</strong> when the change is conditional.</p>
+<p>Four types of control flow change:</p>
+<ul>
+<li>Conditional branches</li>
+<li>Jumps</li>
+<li>Procedure calls</li>
+<li>Procedure returns</li>
+</ul>
+<h3 id="Addressing-Modes-for-Control-Flow-Instructions"><a href="#Addressing-Modes-for-Control-Flow-Instructions" class="headerlink" title="Addressing Modes for Control Flow Instructions"></a>Addressing Modes for Control Flow Instructions</h3><p>The destination address of a control flow instruction must always be specified. This destination is specified explicitly in the instruction in the vast majority of cases -— procedure return being the major exception, because for return the target is not known at compile time.</p>
+<ul>
+<li><strong>PC-relative addressing</strong>: the target address is already know at compile time<ul>
+<li>Specify the destination by suppling a displacement that is added to the <em>program counter</em> (PC).</li>
+<li>PC-relative branches or jumps are advantageous because the target is often near the current instruction, and specifying the position relative to the current PC requires fewer bits.</li>
+<li>Using PC-relative addressing also permits the code to run independently of where it is loaded. This property, called position independence, can eliminate some work when the program is linked and is also useful in programs linked dynamically during execution.</li>
+</ul>
+</li>
+<li><strong>Dynamic addressing</strong>: the target address is unknown at compile time<ul>
+<li>Specify the destination by naming a register that contains the target address. (store the address in memory and load it to a register when needed)</li>
+<li>Procedure returns are the major cases.</li>
+</ul>
+</li>
+</ul>
+<p>These register indirect jumps also useful for:</p>
+<ul>
+<li>Case or switch statements</li>
+<li>Virtual functions or methods in object-oriented languages</li>
+<li>High-order functions or function pointers</li>
+<li>Dynamically shared libraries</li>
+</ul>
+<h3 id="Conditional-Branch-Options"><a href="#Conditional-Branch-Options" class="headerlink" title="Conditional Branch Options"></a>Conditional Branch Options</h3><p>Because most changes in control flow are branches, deciding how to specify the branch condition is important.</p>
+<img src="/2022/01/21/Arch3/1.png" class="">
+
+<h3 id="Procedure-Invocation-Options"><a href="#Procedure-Invocation-Options" class="headerlink" title="Procedure Invocation Options"></a>Procedure Invocation Options</h3><p>Procedure calls and returns include control transfer and possibly some state saving; at a minimum the return address must be saved somewhere, sometimes in a special link register or just a GPR.</p>
+<p>There are two basic conventions in use to save registers: </p>
+<ul>
+<li>Caller saving: the calling procedure must save the registers it wants preserved.</li>
+<li>Callee saving: the called procedure must save the registers it wants to use.</li>
+</ul>
+<p>Most real systems today use a combination of the two mechanisms. This convention is specified in an application binary interface (<strong>ABI</strong>).</p>
+<h2 id="A-7-Encoding-an-Instruction-Set"><a href="#A-7-Encoding-an-Instruction-Set" class="headerlink" title="A.7 Encoding an Instruction Set"></a>A.7 Encoding an Instruction Set</h2><h2 id="A-8-The-Role-of-Compilers"><a href="#A-8-The-Role-of-Compilers" class="headerlink" title="A.8 The Role of Compilers"></a>A.8 The Role of Compilers</h2><h2 id=""><a href="#" class="headerlink" title=""></a></h2>
     </div>
 
     
@@ -318,7 +359,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Instuctions-for-Control-Flow"><span class="nav-number">1.</span> <span class="nav-text">Instuctions for Control Flow</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-6-Instuctions-for-Control-Flow"><span class="nav-number">1.</span> <span class="nav-text">A.6 Instuctions for Control Flow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Addressing-Modes-for-Control-Flow-Instructions"><span class="nav-number">1.1.</span> <span class="nav-text">Addressing Modes for Control Flow Instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-Branch-Options"><span class="nav-number">1.2.</span> <span class="nav-text">Conditional Branch Options</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Procedure-Invocation-Options"><span class="nav-number">1.3.</span> <span class="nav-text">Procedure Invocation Options</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-7-Encoding-an-Instruction-Set"><span class="nav-number">2.</span> <span class="nav-text">A.7 Encoding an Instruction Set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-8-The-Role-of-Compilers"><span class="nav-number">3.</span> <span class="nav-text">A.8 The Role of Compilers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text"></span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -334,14 +375,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">

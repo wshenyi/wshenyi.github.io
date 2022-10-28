@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wshenyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Keywards computer architecture, memory consistency, cache coherence, shared memory, memory systems, multicore processor, heterogeneous architecture, GPU, accelerators, semantics, verification  Author:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Primer on Memory Consistency and Cache Coherence, 2nd [Ch.3 - Ch.5]">
+<meta property="og:url" content="https://wshenyi.github.io/2022/02/05/MC2/index.html">
+<meta property="og:site_name" content="Godway&#39;s Notebook">
+<meta property="og:description" content="Keywards computer architecture, memory consistency, cache coherence, shared memory, memory systems, multicore processor, heterogeneous architecture, GPU, accelerators, semantics, verification  Author:">
+<meta property="og:locale">
+<meta property="og:image" content="https://wshenyi.github.io/2022/02/05/MC2/1.png">
+<meta property="og:image" content="https://wshenyi.github.io/2022/02/05/MC2/3.png">
+<meta property="og:image" content="https://wshenyi.github.io/2022/02/05/MC2/2.png">
+<meta property="og:image" content="https://wshenyi.github.io/2022/02/05/MC2/4.png">
+<meta property="og:image" content="https://wshenyi.github.io/2022/02/05/MC2/6.png">
+<meta property="og:image" content="https://wshenyi.github.io/2022/02/05/MC2/5.png">
+<meta property="og:image" content="https://wshenyi.github.io/2022/02/05/MC2/7.png">
+<meta property="og:image" content="https://wshenyi.github.io/2022/02/05/MC2/8.png">
+<meta property="article:published_time" content="2022-02-05T23:14:52.000Z">
+<meta property="article:modified_time" content="2022-04-24T14:39:36.000Z">
+<meta property="article:author" content="Godway">
+<meta property="article:tag" content="Everyday">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wshenyi.github.io/2022/02/05/MC2/1.png">
+
+<link rel="canonical" href="https://wshenyi.github.io/2022/02/05/MC2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>A Primer on Memory Consistency and Cache Coherence, 2nd [Ch.3 - Ch.5] | Godway's Notebook</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Godway's Notebook</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">wsy</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/WSHENYI/WSHENYI.github.io" class="github-corner" title="Star me on GitHub" aria-label="Star me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/05/MC2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          A Primer on Memory Consistency and Cache Coherence, 2nd [Ch.3 - Ch.5]
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-05 18:14:52" itemprop="dateCreated datePublished" datetime="2022-02-05T18:14:52-05:00">2022-02-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-24 10:39:36" itemprop="dateModified" datetime="2022-04-24T10:39:36-04:00">2022-04-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Memory-Consistency/" itemprop="url" rel="index"><span itemprop="name">Memory Consistency</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><em><strong>Keywards</strong></em> computer architecture, memory consistency, cache coherence, shared memory, memory systems, multicore processor, heterogeneous architecture, GPU, accelerators, semantics, verification</p>
+<blockquote>
+<p>Author: Vijay Nagarajan, Daniel J. Sorin, Mark D. Hill, David A. Wood</p>
+</blockquote>
+<hr>
+<h2 id="Chapter-3-Memory-Consistency-Motivation-and-Sequential-Consistency"><a href="#Chapter-3-Memory-Consistency-Motivation-and-Sequential-Consistency" class="headerlink" title="Chapter 3: Memory Consistency - Motivation and Sequential Consistency"></a>Chapter 3: Memory Consistency - Motivation and Sequential Consistency</h2><h3 id="Memory-Consistency-Model"><a href="#Memory-Consistency-Model" class="headerlink" title="Memory Consistency Model"></a>Memory Consistency Model</h3><p>store-load reordering arise due to out-of-order execution or due to local bypassing in the commonly implemented FIFO write buffer, even with a core that executes all instructions in program order.</p>
+<p>A <strong>memory consistency model</strong>, (or <strong>memory model</strong>) is a specification of the allowed behavior of multithreaded programs executing with shared memory. For a specific input data, it specifies what values dynamic loads may return. Unlike single-theaded execution, multiple correct behaviors are usually allowed.</p>
+<h3 id="Consistency-vs-Coherence"><a href="#Consistency-vs-Coherence" class="headerlink" title="Consistency vs. Coherence"></a>Consistency vs. Coherence</h3><p>Cache coherence protocol simply provides the processor core pipeline an <em>abstration</em> of a memory system. Coherence alone cannot determine shared memory behavior; the pipeline matters too.</p>
+<p>In summary:</p>
+<ol>
+<li>Cache coherence does not equal memory consistency.</li>
+<li>A memory consistency implementation can use cache coherence as a useful “black box”.</li>
+</ol>
+<img src="/2022/02/05/MC2/1.png" class="">
+
+<h3 id="SC-Formalism"><a href="#SC-Formalism" class="headerlink" title="SC Formalism"></a>SC Formalism</h3><p>An <strong>SC execution</strong> requires:</p>
+<ol>
+<li>All cores insert their loads and stores into the memory order respecting their program order, regardless of whether they are to the same or different addresses<ul>
+<li>$Load \rightarrow Load$</li>
+<li>$Load \rightarrow Store$</li>
+<li>$Store \rightarrow Load$</li>
+<li>$Store \rightarrow Store$</li>
+</ul>
+</li>
+<li>Every loads gets its value <em>from</em> the last store before it (in global memory order) <em>to</em> the same address.</li>
+</ol>
+<img src="/2022/02/05/MC2/3.png" class="">
+
+<p>(from Wiki) A device that executes instructions described by that ISA, such as a CPU, is called an <strong>implementation</strong>.</p>
+<p>An <strong>SC implementation</strong> permits only SC executions. Strictly speaking, this is the <em>safety</em> property for SC implementations (do no harm). SC implementations should also have some <em>liveness</em> properties (do some good). Specifically, a store must become eventually visible to a load that is repeatedly attempting to load that location. This property, referred to as eventual write- propagation, is typically ensured by the coherence protocol.</p>
+<h3 id="Navie-SC-Implimentations"><a href="#Navie-SC-Implimentations" class="headerlink" title="Navie SC Implimentations"></a>Navie SC Implimentations</h3><p>Operational models</p>
+<ul>
+<li>The Multitasking Uniprocessor</li>
+<li>The Switch</li>
+</ul>
+<h3 id="A-Basic-SC-Implementation-with-Cache-Coherence"><a href="#A-Basic-SC-Implementation-with-Cache-Coherence" class="headerlink" title="A Basic SC Implementation with Cache Coherence"></a>A Basic SC Implementation with Cache Coherence</h3><img src="/2022/02/05/MC2/2.png" class="">
+
+<h3 id="Optimized-SC-Implimentations-with-Cache-Coherence"><a href="#Optimized-SC-Implimentations-with-Cache-Coherence" class="headerlink" title="Optimized SC Implimentations with Cache Coherence"></a>Optimized SC Implimentations with Cache Coherence</h3><h4 id="Non-Binding-Prefetching"><a href="#Non-Binding-Prefetching" class="headerlink" title="Non-Binding Prefetching"></a>Non-Binding Prefetching</h4><p>Prefetching has two types:</p>
+<ul>
+<li><strong>binding prefetching</strong>: Prefetch into a register (using a regular load)</li>
+<li><strong>non-binding prefetching</strong>: Prefetch into cache. (non-binding prefetches do not affect the memory consistency model)</li>
+</ul>
+<h4 id="Speculative-Cores"><a href="#Speculative-Cores" class="headerlink" title="Speculative Cores"></a>Speculative Cores</h4><p>For speculative cores, the squashed loads and stores due to branch mis-prediction can be made to look like non-binding prefetches, enabling this speculation to be correct because it has no effect on SC. But the cache does not undo non-binding prefetches, as doing so is not necessary and prefetching the block can help performance if the load gets re-executed.</p>
+<h4 id="Dynamically-Scheduled-Cores"><a href="#Dynamically-Scheduled-Cores" class="headerlink" title="Dynamically Scheduled Cores"></a>Dynamically Scheduled Cores</h4><p>Speculating on SC requires that the core verify that the prediction is correct. Here are two techniques for performing this check. First, after the core speculatively executes a load event, but before it commits it, the core could check that the speculatively accessed block has not left the cache. The second checking technique is to replay each speculative load when the core is ready to commit the load</p>
+<h4 id="Non-Binding-Prefetching-in-Dynamically-Scheduled-Cores"><a href="#Non-Binding-Prefetching-in-Dynamically-Scheduled-Cores" class="headerlink" title="Non-Binding Prefetching in Dynamically Scheduled Cores"></a>Non-Binding Prefetching in Dynamically Scheduled Cores</h4><p>In summary, SC is not affected by the order of non-binding prefetches.</p>
+<ul>
+<li>SC requires only that a core’s loads and stores (appear to) access its L1 cache in program order.</li>
+<li>Coherence requires the L1 cache blocks to be in the appropriate states to receive loads and stores.</li>
+</ul>
+<p><strong>SC dictates the order in which loads and stores (appear to) get applied to coherent memory but does NOT dictate the order of coherence activity</strong>.</p>
+<h3 id="Atomic-Operations-with-SC"><a href="#Atomic-Operations-with-SC" class="headerlink" title="Atomic Operations with SC"></a>Atomic Operations with SC</h3><p>Implementing atomic instructions in the microarchitecture is conceptually straightforward, but naive designs can lead to poor performance for atomic instructions.</p>
+<p>More aggressive implementations of RMWs leverage the insight that SC requires only the appearance of a total order of all requests. The core needs to only load and store the block in its cache — without any coherence messages or bus locking — as long as it waits to service any incoming coherence request for the block until after the store.</p>
+<h2 id="Chapter-4-Total-Store-Order-and-the-x86-Memory-Model"><a href="#Chapter-4-Total-Store-Order-and-the-x86-Memory-Model" class="headerlink" title="Chapter 4: Total Store Order and the x86 Memory Model"></a>Chapter 4: Total Store Order and the x86 Memory Model</h2><h3 id="Motivation-For-TSO-x86"><a href="#Motivation-For-TSO-x86" class="headerlink" title="Motivation For TSO/x86"></a>Motivation For TSO/x86</h3><p>Processor cores have long used <em>write (store) buffers</em> to hold committed (retired) stores until the rest of the memory system could process the stores. </p>
+<p>Significantly, a store can enter the write buffer before the cache has obtained read-write coherence permissions for the block to bewritten; the write buffer thus hides the latency ofservicing a store miss.</p>
+<h3 id="Basic-Idea-of-TSO-x86"><a href="#Basic-Idea-of-TSO-x86" class="headerlink" title="Basic Idea of TSO/x86"></a>Basic Idea of TSO/x86</h3><p>Omitting $Store \rightarrow Load$ constraint allows each core to use a write buffer. Note that the constraint $Store \rightarrow Store$ means that the write buffer must be FIFO (and not, for example, coalescing) to preserve store-store order.</p>
+<h3 id="TSO-x86-Formalism"><a href="#TSO-x86-Formalism" class="headerlink" title="TSO/x86 Formalism"></a>TSO/x86 Formalism</h3><p>A <strong>TSO</strong> execution requires the following.</p>
+<ol>
+<li>All cores insert their loads and stores into the memory order respecting their program order, regardless of whether they are to the same or different addresses.<ul>
+<li>$Load \rightarrow Load$</li>
+<li>$Load \rightarrow Store$</li>
+<li>$Store \rightarrow Store$</li>
+</ul>
+</li>
+<li>Every loads gets its value <em>from</em> the last store before it (in global memory order) <em>to</em> the same address.</li>
+<li>Fences order everything<ul>
+<li>$Store \rightarrow Fence$</li>
+<li>$Fence \rightarrow Load$</li>
+</ul>
+</li>
+</ol>
+<img src="/2022/02/05/MC2/4.png" class="">  
+
+<h3 id="Implementing-TSO-x86"><a href="#Implementing-TSO-x86" class="headerlink" title="Implementing TSO/x86"></a>Implementing TSO/x86</h3><img src="/2022/02/05/MC2/6.png" class="">
+
+<h3 id="Implementing-Atomic-Instructions"><a href="#Implementing-Atomic-Instructions" class="headerlink" title="Implementing Atomic Instructions"></a>Implementing Atomic Instructions</h3><p>The key difference for RMW instructions is that TSO allows loads to pass earlier stores that have been written to a write buffer. The impact on RMW is that the store may be written to the write buffer.</p>
+<p>A simple implementation:</p>
+<ul>
+<li>The load part of the RMW cannot pass an earlier store because (1) RMW is an atomic pair and (2) if the load part pass then the store part also have to pass, which is forbidden by $Store \rightarrow Store$ constraint.</li>
+<li>Since the load part of the RMW cannot be performed until earlier stores have been exited the write buffer, the atomic RMW effectively <strong>drain</strong> the write buffer before it can perform the load part of the RMW.</li>
+<li>Furthermore, to ensure that the store part can be ordered immediately after the load part, the load part requires read-write permissions (state of <strong>Modified</strong> in cache coherence). \</li>
+<li>Lastly, to guarantee atomicity for the RMW, the cache controller may not relinquish this read-write coherence permission to the block between the load and the store.</li>
+</ul>
+<p>A more optimized implementation (the write buffer does not need to be drained):</p>
+<ul>
+<li>Every entry already in the write buffer has read-write permission in the cache and maintains the read-write permission in the cache until the RMW commits.</li>
+<li>The core performs MIPS R10000-style checking of load speculation.</li>
+</ul>
+<h3 id="Implementing-Fences"><a href="#Implementing-Fences" class="headerlink" title="Implementing Fences"></a>Implementing Fences</h3><p>The semantics ofthe FENCE specify that all instructions before the FENCE in program order must be ordered before any instructions after the FENCE in program order.</p>
+<p>A simple implementation -— such as draining the write buffer when a FENCE is executed and not permitting subsequent loads to execute until an earlier FENCE has committed—may provide acceptable performance.</p>
+<h2 id="Chapter-5-Relaxed-Memory-Consistency"><a href="#Chapter-5-Relaxed-Memory-Consistency" class="headerlink" title="Chapter 5: Relaxed Memory Consistency"></a>Chapter 5: Relaxed Memory Consistency</h2><h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>If proper operation does not depend on ordering among many loads and stores, perhaps one could obtain higher performance by relaxing the order among them, since loads and stores are typically much more frequent than lock acquires and releases. This is what relaxed or weak models do.</p>
+<p>A few common and important optimizations to exploit reordering:</p>
+<ul>
+<li>Non-FIFO, Coalescing Write Buffer</li>
+<li>Simpler Support for Core Speculation</li>
+<li>Coupling COnsistency and Coherence</li>
+</ul>
+<h3 id="XC-Formalism"><a href="#XC-Formalism" class="headerlink" title="XC Formalism"></a>XC Formalism</h3><p>For teaching purposes, this section introduces an <em>eXample relaxed Consistency model</em> (<strong>XC</strong>) that captures the basic idea and some implementation potential ofrelaxed memory consistency models.</p>
+<p>A FENCE instruction does not specify an address. Two FENCEs by the same core also stay ordered. However, a FENCE does not affect the order of memory operations at other cores (which is why “fence” may be a better name than “barrier” which is often used as a software-level concept).</p>
+<p>An XC execution requires the following:</p>
+<ol>
+<li>All cores insert their loads, stores, and FENCEs into the memory order respecting:<ul>
+<li>$Store \rightarrow Fence$</li>
+<li>$Load \rightarrow Fence$</li>
+<li>$Fence \rightarrow Fence$</li>
+<li>$Fence \rightarrow Load$</li>
+<li>$Fence \rightarrow Store$</li>
+</ul>
+</li>
+<li>All cores insert their loads and stores to the <em>same</em> address into the memory order respecting:<ul>
+<li>$Load \rightarrow Load$ to the same address</li>
+<li>$Load \rightarrow Store$ to the same address</li>
+<li>$Store \rightarrow Load$ to the same address</li>
+</ul>
+</li>
+<li>Every load gets its value from the last store before it to the same address</li>
+</ol>
+<img src="/2022/02/05/MC2/5.png" class="">
+
+<h3 id="Implementing-XC"><a href="#Implementing-XC" class="headerlink" title="Implementing XC"></a>Implementing XC</h3><img src="/2022/02/05/MC2/7.png" class="">
+
+<p>As before, cache coherence implements the global memory order. What is new is that memory order can more often disrespect program order due to reorder unit reorderings.</p>
+<h3 id="Atomic-Instructions-with-XC"><a href="#Atomic-Instructions-with-XC" class="headerlink" title="Atomic Instructions with XC"></a>Atomic Instructions with XC</h3><p>Notably, not like RMW in TSO, XC allows both the load part and the store part of the RMW to pass earlier stores. Thus, it is sufficient to simply obtain read-write coherence permissions (M state) to the block and then perform the load part and the store part without relinquishing the block between those two operations.</p>
+<p>One important difference between XC and TSO is how atomic RMWs are used to achieve synchronization. For the acquire, XC does not, by default, constrain the RMW from being reordered with respect to the operations in the critical section. To avoid this situation, a lock acquire must be followed by a FENCE. Similarly, the lock release is not, by default, constrained from being reordered with respect to the operations before it in the critical section. To avoid this situation, a lock release must be preceded by a FENCE.</p>
+<img src="/2022/02/05/MC2/8.png" class="">
+
+<h3 id="Fences-with-XC"><a href="#Fences-with-XC" class="headerlink" title="Fences with XC"></a>Fences with XC</h3><p>Three basic approaches:</p>
+<ul>
+<li>An implementation can implement SC and treat all FENCEs as no-ops. This is not done (yet) in a commercial product, but there have been academic proposals, e.g., via implicit transactional memory.</li>
+<li>An implementation can wait for all memory operations Xi to perform, consider the FENCE done, and then begin memory operations Yi. This “FENCE as drain” method is common, but it makes FENCEs costly.</li>
+<li>An implementation can aggressively push toward what is necessary, enforcing Xi $\rightarrow$ FENCE $\rightarrow$ Yi, without draining.</li>
+</ul>
+<p>In all cases, a FENCE implementation must know when each operation Xi is done (or at least ordered). Knowing when an operation is done can be especially tricky for a store that bypasses the usual cache coherence.</p>
+<h3 id="SC-For-Data-Race-Free-DRF"><a href="#SC-For-Data-Race-Free-DRF" class="headerlink" title="SC For Data-Race-Free (DRF)"></a>SC For Data-Race-Free (DRF)</h3><p>SC for DRF programming</p>
+<ul>
+<li>asks program- mers to ensure programs are DRF under SC by writing correctly synchronized programs and labeling the synchronization operations.</li>
+<li>it then asks implementors to ensure that all executions of DRF programs on the relaxed model are also SC executions by mapping the labeled synchronization operations to FENCEs and RMWs supported by the relaxed memory model.</li>
+</ul>
+<p>With FENCEs around synchronization operations (all synchronization operations are preceded and succeeded by FENCEs), XC supports SC for DRF programs.</p>
+<p>In summary, a programmer using a relaxed memory system can reason about their program with two options:</p>
+<ul>
+<li>they can reason directly using the rules for what the model does and does not order.</li>
+<li>they can insert sufficient synchronization to ensure no data races—synchronization races are still allowed—and reason about their program using the relatively simple model of sequential consistency that never appears to perform memory operations out of program order.</li>
+</ul>
+<h3 id="Some-Relaxed-Model-Concepts"><a href="#Some-Relaxed-Model-Concepts" class="headerlink" title="Some Relaxed Model Concepts"></a>Some Relaxed Model Concepts</h3><p><strong>Release Consistency</strong> (RC) thinks surrounding all synchronization operations with FENCEs is overkill. It claims that a synchronization acquire needs only a succeeding FENCE, while a synchronization release needs only a preceding FENCE.</p>
+<p>Property <strong>causality</strong> requires that “If I see it and tell you about it, then you will see it too.”</p>
+<p>Property <strong>write atomicity</strong> (also called <strong>store atomicity</strong> or <strong>multi-copy atomicity</strong>), requires that a core’s store is logically seen by all other cores at once. Write atomicity allows a core to see the value of its own store before it is seen by other cores.</p>
+<p>Relations between causality and write atomicity:</p>
+<ul>
+<li>Write atomicity implies causality.</li>
+<li>Causality does not imply write atomicity.</li>
+</ul>
+<p>Finally, the XC memory model is both store atomic and maintains causality.</p>
+<h3 id="High-Level-Language-Models-HLL"><a href="#High-Level-Language-Models-HLL" class="headerlink" title="High-Level Language Models (HLL)"></a>High-Level Language Models (HLL)</h3><p>HLLs, such as Java and C++, adopt the relaxed memory model approach of “SC for DRF”. When these HLLs run on hardware, should the hardware’s memory model also be relaxed?</p>
+<p>On one hand, (a) relaxed hardware can give the most performance, and (b) compilers and runtime software need only translate the HLL’s synchronizations operations into the particular hardware’s low-level synchronization operations and FENCEs to provide the necessary ordering.</p>
+<p>On the other hand, (a) SC and TSO can give good performance, and (b) compilers and runtime software can generate more portable code without FENCEs from incomparable memory models. </p>
+<p>Although the debate is not settled, it is clear that <strong>relaxed HLL models do not require relaxed hardware</strong>.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Everyday/" rel="tag"># Everyday</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/04/MC1/" rel="prev" title="A Primer on Memory Consistency and Cache Coherence, 2nd [Ch.1 - Ch.2]">
+      <i class="fa fa-chevron-left"></i> A Primer on Memory Consistency and Cache Coherence, 2nd [Ch.1 - Ch.2]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/06/MC3/" rel="next" title="A Primer on Memory Consistency and Cache Coherence, 2nd [Ch.6 - Ch.8]">
+      A Primer on Memory Consistency and Cache Coherence, 2nd [Ch.6 - Ch.8] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-3-Memory-Consistency-Motivation-and-Sequential-Consistency"><span class="nav-number">1.</span> <span class="nav-text">Chapter 3: Memory Consistency - Motivation and Sequential Consistency</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-Consistency-Model"><span class="nav-number">1.1.</span> <span class="nav-text">Memory Consistency Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consistency-vs-Coherence"><span class="nav-number">1.2.</span> <span class="nav-text">Consistency vs. Coherence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SC-Formalism"><span class="nav-number">1.3.</span> <span class="nav-text">SC Formalism</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navie-SC-Implimentations"><span class="nav-number">1.4.</span> <span class="nav-text">Navie SC Implimentations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Basic-SC-Implementation-with-Cache-Coherence"><span class="nav-number">1.5.</span> <span class="nav-text">A Basic SC Implementation with Cache Coherence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimized-SC-Implimentations-with-Cache-Coherence"><span class="nav-number">1.6.</span> <span class="nav-text">Optimized SC Implimentations with Cache Coherence</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Non-Binding-Prefetching"><span class="nav-number">1.6.1.</span> <span class="nav-text">Non-Binding Prefetching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Speculative-Cores"><span class="nav-number">1.6.2.</span> <span class="nav-text">Speculative Cores</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamically-Scheduled-Cores"><span class="nav-number">1.6.3.</span> <span class="nav-text">Dynamically Scheduled Cores</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Non-Binding-Prefetching-in-Dynamically-Scheduled-Cores"><span class="nav-number">1.6.4.</span> <span class="nav-text">Non-Binding Prefetching in Dynamically Scheduled Cores</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Atomic-Operations-with-SC"><span class="nav-number">1.7.</span> <span class="nav-text">Atomic Operations with SC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-4-Total-Store-Order-and-the-x86-Memory-Model"><span class="nav-number">2.</span> <span class="nav-text">Chapter 4: Total Store Order and the x86 Memory Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation-For-TSO-x86"><span class="nav-number">2.1.</span> <span class="nav-text">Motivation For TSO&#x2F;x86</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Idea-of-TSO-x86"><span class="nav-number">2.2.</span> <span class="nav-text">Basic Idea of TSO&#x2F;x86</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TSO-x86-Formalism"><span class="nav-number">2.3.</span> <span class="nav-text">TSO&#x2F;x86 Formalism</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-TSO-x86"><span class="nav-number">2.4.</span> <span class="nav-text">Implementing TSO&#x2F;x86</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-Atomic-Instructions"><span class="nav-number">2.5.</span> <span class="nav-text">Implementing Atomic Instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-Fences"><span class="nav-number">2.6.</span> <span class="nav-text">Implementing Fences</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-5-Relaxed-Memory-Consistency"><span class="nav-number">3.</span> <span class="nav-text">Chapter 5: Relaxed Memory Consistency</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">3.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XC-Formalism"><span class="nav-number">3.2.</span> <span class="nav-text">XC Formalism</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-XC"><span class="nav-number">3.3.</span> <span class="nav-text">Implementing XC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Atomic-Instructions-with-XC"><span class="nav-number">3.4.</span> <span class="nav-text">Atomic Instructions with XC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fences-with-XC"><span class="nav-number">3.5.</span> <span class="nav-text">Fences with XC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SC-For-Data-Race-Free-DRF"><span class="nav-number">3.6.</span> <span class="nav-text">SC For Data-Race-Free (DRF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Some-Relaxed-Model-Concepts"><span class="nav-number">3.7.</span> <span class="nav-text">Some Relaxed Model Concepts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#High-Level-Language-Models-HLL"><span class="nav-number">3.8.</span> <span class="nav-text">High-Level Language Models (HLL)</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Godway"
+      src="/images/avatar.ico">
+  <p class="site-author-name" itemprop="name">Godway</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/475865836@qq.com" title="E-Mail → 475865836@qq.com"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://randool.cn/" title="https:&#x2F;&#x2F;randool.cn" rel="noopener" target="_blank">Randool</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://me.csdn.net/Smile_coderrr" title="https:&#x2F;&#x2F;me.csdn.net&#x2F;Smile_coderrr" rel="noopener" target="_blank">Smile_coderrr</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Godway</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/27/Arch4/">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/05/MC2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.ico">
@@ -178,7 +178,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/27/Arch4/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [C.1 - C.5]</a>
+            <a href="/2022/02/05/MC2/" class="post-title-link" itemprop="url">A Primer on Memory Consistency and Cache Coherence, 2nd [Ch.3 - Ch.5]</a>
         </h2>
 
         <div class="post-meta">
@@ -188,14 +188,349 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-01-27 10:17:16" itemprop="dateCreated datePublished" datetime="2022-01-27T10:17:16-05:00">2022-01-27</time>
+              <time title="Created: 2022-02-05 18:14:52" itemprop="dateCreated datePublished" datetime="2022-02-05T18:14:52-05:00">2022-02-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-15 16:52:09" itemprop="dateModified" datetime="2022-02-15T16:52:09-05:00">2022-02-15</time>
+                <time title="Modified: 2022-04-24 10:39:36" itemprop="dateModified" datetime="2022-04-24T10:39:36-04:00">2022-04-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Memory-Consistency/" itemprop="url" rel="index"><span itemprop="name">Memory Consistency</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> computer architecture, memory consistency, cache coherence, shared memory, memory systems, multicore processor, heterogeneous architecture, GPU, accelerators, semantics, verification</p>
+<blockquote>
+<p>Author: Vijay Nagarajan, Daniel J. Sorin, Mark D. Hill, David A. Wood</p>
+</blockquote>
+<hr>
+<h2 id="Chapter-3-Memory-Consistency-Motivation-and-Sequential-Consistency"><a href="#Chapter-3-Memory-Consistency-Motivation-and-Sequential-Consistency" class="headerlink" title="Chapter 3: Memory Consistency - Motivation and Sequential Consistency"></a>Chapter 3: Memory Consistency - Motivation and Sequential Consistency</h2><h3 id="Memory-Consistency-Model"><a href="#Memory-Consistency-Model" class="headerlink" title="Memory Consistency Model"></a>Memory Consistency Model</h3><p>store-load reordering arise due to out-of-order execution or due to local bypassing in the commonly implemented FIFO write buffer, even with a core that executes all instructions in program order.</p>
+<p>A <strong>memory consistency model</strong>, (or <strong>memory model</strong>) is a specification of the allowed behavior of multithreaded programs executing with shared memory. For a specific input data, it specifies what values dynamic loads may return. Unlike single-theaded execution, multiple correct behaviors are usually allowed.</p>
+<h3 id="Consistency-vs-Coherence"><a href="#Consistency-vs-Coherence" class="headerlink" title="Consistency vs. Coherence"></a>Consistency vs. Coherence</h3><p>Cache coherence protocol simply provides the processor core pipeline an <em>abstration</em> of a memory system. Coherence alone cannot determine shared memory behavior; the pipeline matters too.</p>
+<p>In summary:</p>
+<ol>
+<li>Cache coherence does not equal memory consistency.</li>
+<li>A memory consistency implementation can use cache coherence as a useful “black box”.</li>
+</ol>
+<img src="/2022/02/05/MC2/1.png" class="">
+
+<h3 id="SC-Formalism"><a href="#SC-Formalism" class="headerlink" title="SC Formalism"></a>SC Formalism</h3><p>An <strong>SC execution</strong> requires:</p>
+<ol>
+<li>All cores insert their loads and stores into the memory order respecting their program order, regardless of whether they are to the same or different addresses<ul>
+<li>$Load \rightarrow Load$</li>
+<li>$Load \rightarrow Store$</li>
+<li>$Store \rightarrow Load$</li>
+<li>$Store \rightarrow Store$</li>
+</ul>
+</li>
+<li>Every loads gets its value <em>from</em> the last store before it (in global memory order) <em>to</em> the same address.</li>
+</ol>
+<img src="/2022/02/05/MC2/3.png" class="">
+
+<p>(from Wiki) A device that executes instructions described by that ISA, such as a CPU, is called an <strong>implementation</strong>.</p>
+<p>An <strong>SC implementation</strong> permits only SC executions. Strictly speaking, this is the <em>safety</em> property for SC implementations (do no harm). SC implementations should also have some <em>liveness</em> properties (do some good). Specifically, a store must become eventually visible to a load that is repeatedly attempting to load that location. This property, referred to as eventual write- propagation, is typically ensured by the coherence protocol.</p>
+<h3 id="Navie-SC-Implimentations"><a href="#Navie-SC-Implimentations" class="headerlink" title="Navie SC Implimentations"></a>Navie SC Implimentations</h3><p>Operational models</p>
+<ul>
+<li>The Multitasking Uniprocessor</li>
+<li>The Switch</li>
+</ul>
+<h3 id="A-Basic-SC-Implementation-with-Cache-Coherence"><a href="#A-Basic-SC-Implementation-with-Cache-Coherence" class="headerlink" title="A Basic SC Implementation with Cache Coherence"></a>A Basic SC Implementation with Cache Coherence</h3><img src="/2022/02/05/MC2/2.png" class="">
+
+<h3 id="Optimized-SC-Implimentations-with-Cache-Coherence"><a href="#Optimized-SC-Implimentations-with-Cache-Coherence" class="headerlink" title="Optimized SC Implimentations with Cache Coherence"></a>Optimized SC Implimentations with Cache Coherence</h3><h4 id="Non-Binding-Prefetching"><a href="#Non-Binding-Prefetching" class="headerlink" title="Non-Binding Prefetching"></a>Non-Binding Prefetching</h4><p>Prefetching has two types:</p>
+<ul>
+<li><strong>binding prefetching</strong>: Prefetch into a register (using a regular load)</li>
+<li><strong>non-binding prefetching</strong>: Prefetch into cache. (non-binding prefetches do not affect the memory consistency model)</li>
+</ul>
+<h4 id="Speculative-Cores"><a href="#Speculative-Cores" class="headerlink" title="Speculative Cores"></a>Speculative Cores</h4><p>For speculative cores, the squashed loads and stores due to branch mis-prediction can be made to look like non-binding prefetches, enabling this speculation to be correct because it has no effect on SC. But the cache does not undo non-binding prefetches, as doing so is not necessary and prefetching the block can help performance if the load gets re-executed.</p>
+<h4 id="Dynamically-Scheduled-Cores"><a href="#Dynamically-Scheduled-Cores" class="headerlink" title="Dynamically Scheduled Cores"></a>Dynamically Scheduled Cores</h4><p>Speculating on SC requires that the core verify that the prediction is correct. Here are two techniques for performing this check. First, after the core speculatively executes a load event, but before it commits it, the core could check that the speculatively accessed block has not left the cache. The second checking technique is to replay each speculative load when the core is ready to commit the load</p>
+<h4 id="Non-Binding-Prefetching-in-Dynamically-Scheduled-Cores"><a href="#Non-Binding-Prefetching-in-Dynamically-Scheduled-Cores" class="headerlink" title="Non-Binding Prefetching in Dynamically Scheduled Cores"></a>Non-Binding Prefetching in Dynamically Scheduled Cores</h4><p>In summary, SC is not affected by the order of non-binding prefetches.</p>
+<ul>
+<li>SC requires only that a core’s loads and stores (appear to) access its L1 cache in program order.</li>
+<li>Coherence requires the L1 cache blocks to be in the appropriate states to receive loads and stores.</li>
+</ul>
+<p><strong>SC dictates the order in which loads and stores (appear to) get applied to coherent memory but does NOT dictate the order of coherence activity</strong>.</p>
+<h3 id="Atomic-Operations-with-SC"><a href="#Atomic-Operations-with-SC" class="headerlink" title="Atomic Operations with SC"></a>Atomic Operations with SC</h3><p>Implementing atomic instructions in the microarchitecture is conceptually straightforward, but naive designs can lead to poor performance for atomic instructions.</p>
+<p>More aggressive implementations of RMWs leverage the insight that SC requires only the appearance of a total order of all requests. The core needs to only load and store the block in its cache — without any coherence messages or bus locking — as long as it waits to service any incoming coherence request for the block until after the store.</p>
+<h2 id="Chapter-4-Total-Store-Order-and-the-x86-Memory-Model"><a href="#Chapter-4-Total-Store-Order-and-the-x86-Memory-Model" class="headerlink" title="Chapter 4: Total Store Order and the x86 Memory Model"></a>Chapter 4: Total Store Order and the x86 Memory Model</h2><h3 id="Motivation-For-TSO-x86"><a href="#Motivation-For-TSO-x86" class="headerlink" title="Motivation For TSO/x86"></a>Motivation For TSO/x86</h3><p>Processor cores have long used <em>write (store) buffers</em> to hold committed (retired) stores until the rest of the memory system could process the stores. </p>
+<p>Significantly, a store can enter the write buffer before the cache has obtained read-write coherence permissions for the block to bewritten; the write buffer thus hides the latency ofservicing a store miss.</p>
+<h3 id="Basic-Idea-of-TSO-x86"><a href="#Basic-Idea-of-TSO-x86" class="headerlink" title="Basic Idea of TSO/x86"></a>Basic Idea of TSO/x86</h3><p>Omitting $Store \rightarrow Load$ constraint allows each core to use a write buffer. Note that the constraint $Store \rightarrow Store$ means that the write buffer must be FIFO (and not, for example, coalescing) to preserve store-store order.</p>
+<h3 id="TSO-x86-Formalism"><a href="#TSO-x86-Formalism" class="headerlink" title="TSO/x86 Formalism"></a>TSO/x86 Formalism</h3><p>A <strong>TSO</strong> execution requires the following.</p>
+<ol>
+<li>All cores insert their loads and stores into the memory order respecting their program order, regardless of whether they are to the same or different addresses.<ul>
+<li>$Load \rightarrow Load$</li>
+<li>$Load \rightarrow Store$</li>
+<li>$Store \rightarrow Store$</li>
+</ul>
+</li>
+<li>Every loads gets its value <em>from</em> the last store before it (in global memory order) <em>to</em> the same address.</li>
+<li>Fences order everything<ul>
+<li>$Store \rightarrow Fence$</li>
+<li>$Fence \rightarrow Load$</li>
+</ul>
+</li>
+</ol>
+<img src="/2022/02/05/MC2/4.png" class="">  
+
+<h3 id="Implementing-TSO-x86"><a href="#Implementing-TSO-x86" class="headerlink" title="Implementing TSO/x86"></a>Implementing TSO/x86</h3><img src="/2022/02/05/MC2/6.png" class="">
+
+<h3 id="Implementing-Atomic-Instructions"><a href="#Implementing-Atomic-Instructions" class="headerlink" title="Implementing Atomic Instructions"></a>Implementing Atomic Instructions</h3><p>The key difference for RMW instructions is that TSO allows loads to pass earlier stores that have been written to a write buffer. The impact on RMW is that the store may be written to the write buffer.</p>
+<p>A simple implementation:</p>
+<ul>
+<li>The load part of the RMW cannot pass an earlier store because (1) RMW is an atomic pair and (2) if the load part pass then the store part also have to pass, which is forbidden by $Store \rightarrow Store$ constraint.</li>
+<li>Since the load part of the RMW cannot be performed until earlier stores have been exited the write buffer, the atomic RMW effectively <strong>drain</strong> the write buffer before it can perform the load part of the RMW.</li>
+<li>Furthermore, to ensure that the store part can be ordered immediately after the load part, the load part requires read-write permissions (state of <strong>Modified</strong> in cache coherence). \</li>
+<li>Lastly, to guarantee atomicity for the RMW, the cache controller may not relinquish this read-write coherence permission to the block between the load and the store.</li>
+</ul>
+<p>A more optimized implementation (the write buffer does not need to be drained):</p>
+<ul>
+<li>Every entry already in the write buffer has read-write permission in the cache and maintains the read-write permission in the cache until the RMW commits.</li>
+<li>The core performs MIPS R10000-style checking of load speculation.</li>
+</ul>
+<h3 id="Implementing-Fences"><a href="#Implementing-Fences" class="headerlink" title="Implementing Fences"></a>Implementing Fences</h3><p>The semantics ofthe FENCE specify that all instructions before the FENCE in program order must be ordered before any instructions after the FENCE in program order.</p>
+<p>A simple implementation -— such as draining the write buffer when a FENCE is executed and not permitting subsequent loads to execute until an earlier FENCE has committed—may provide acceptable performance.</p>
+<h2 id="Chapter-5-Relaxed-Memory-Consistency"><a href="#Chapter-5-Relaxed-Memory-Consistency" class="headerlink" title="Chapter 5: Relaxed Memory Consistency"></a>Chapter 5: Relaxed Memory Consistency</h2><h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>If proper operation does not depend on ordering among many loads and stores, perhaps one could obtain higher performance by relaxing the order among them, since loads and stores are typically much more frequent than lock acquires and releases. This is what relaxed or weak models do.</p>
+<p>A few common and important optimizations to exploit reordering:</p>
+<ul>
+<li>Non-FIFO, Coalescing Write Buffer</li>
+<li>Simpler Support for Core Speculation</li>
+<li>Coupling COnsistency and Coherence</li>
+</ul>
+<h3 id="XC-Formalism"><a href="#XC-Formalism" class="headerlink" title="XC Formalism"></a>XC Formalism</h3><p>For teaching purposes, this section introduces an <em>eXample relaxed Consistency model</em> (<strong>XC</strong>) that captures the basic idea and some implementation potential ofrelaxed memory consistency models.</p>
+<p>A FENCE instruction does not specify an address. Two FENCEs by the same core also stay ordered. However, a FENCE does not affect the order of memory operations at other cores (which is why “fence” may be a better name than “barrier” which is often used as a software-level concept).</p>
+<p>An XC execution requires the following:</p>
+<ol>
+<li>All cores insert their loads, stores, and FENCEs into the memory order respecting:<ul>
+<li>$Store \rightarrow Fence$</li>
+<li>$Load \rightarrow Fence$</li>
+<li>$Fence \rightarrow Fence$</li>
+<li>$Fence \rightarrow Load$</li>
+<li>$Fence \rightarrow Store$</li>
+</ul>
+</li>
+<li>All cores insert their loads and stores to the <em>same</em> address into the memory order respecting:<ul>
+<li>$Load \rightarrow Load$ to the same address</li>
+<li>$Load \rightarrow Store$ to the same address</li>
+<li>$Store \rightarrow Load$ to the same address</li>
+</ul>
+</li>
+<li>Every load gets its value from the last store before it to the same address</li>
+</ol>
+<img src="/2022/02/05/MC2/5.png" class="">
+
+<h3 id="Implementing-XC"><a href="#Implementing-XC" class="headerlink" title="Implementing XC"></a>Implementing XC</h3><img src="/2022/02/05/MC2/7.png" class="">
+
+<p>As before, cache coherence implements the global memory order. What is new is that memory order can more often disrespect program order due to reorder unit reorderings.</p>
+<h3 id="Atomic-Instructions-with-XC"><a href="#Atomic-Instructions-with-XC" class="headerlink" title="Atomic Instructions with XC"></a>Atomic Instructions with XC</h3><p>Notably, not like RMW in TSO, XC allows both the load part and the store part of the RMW to pass earlier stores. Thus, it is sufficient to simply obtain read-write coherence permissions (M state) to the block and then perform the load part and the store part without relinquishing the block between those two operations.</p>
+<p>One important difference between XC and TSO is how atomic RMWs are used to achieve synchronization. For the acquire, XC does not, by default, constrain the RMW from being reordered with respect to the operations in the critical section. To avoid this situation, a lock acquire must be followed by a FENCE. Similarly, the lock release is not, by default, constrained from being reordered with respect to the operations before it in the critical section. To avoid this situation, a lock release must be preceded by a FENCE.</p>
+<img src="/2022/02/05/MC2/8.png" class="">
+
+<h3 id="Fences-with-XC"><a href="#Fences-with-XC" class="headerlink" title="Fences with XC"></a>Fences with XC</h3><p>Three basic approaches:</p>
+<ul>
+<li>An implementation can implement SC and treat all FENCEs as no-ops. This is not done (yet) in a commercial product, but there have been academic proposals, e.g., via implicit transactional memory.</li>
+<li>An implementation can wait for all memory operations Xi to perform, consider the FENCE done, and then begin memory operations Yi. This “FENCE as drain” method is common, but it makes FENCEs costly.</li>
+<li>An implementation can aggressively push toward what is necessary, enforcing Xi $\rightarrow$ FENCE $\rightarrow$ Yi, without draining.</li>
+</ul>
+<p>In all cases, a FENCE implementation must know when each operation Xi is done (or at least ordered). Knowing when an operation is done can be especially tricky for a store that bypasses the usual cache coherence.</p>
+<h3 id="SC-For-Data-Race-Free-DRF"><a href="#SC-For-Data-Race-Free-DRF" class="headerlink" title="SC For Data-Race-Free (DRF)"></a>SC For Data-Race-Free (DRF)</h3><p>SC for DRF programming</p>
+<ul>
+<li>asks program- mers to ensure programs are DRF under SC by writing correctly synchronized programs and labeling the synchronization operations.</li>
+<li>it then asks implementors to ensure that all executions of DRF programs on the relaxed model are also SC executions by mapping the labeled synchronization operations to FENCEs and RMWs supported by the relaxed memory model.</li>
+</ul>
+<p>With FENCEs around synchronization operations (all synchronization operations are preceded and succeeded by FENCEs), XC supports SC for DRF programs.</p>
+<p>In summary, a programmer using a relaxed memory system can reason about their program with two options:</p>
+<ul>
+<li>they can reason directly using the rules for what the model does and does not order.</li>
+<li>they can insert sufficient synchronization to ensure no data races—synchronization races are still allowed—and reason about their program using the relatively simple model of sequential consistency that never appears to perform memory operations out of program order.</li>
+</ul>
+<h3 id="Some-Relaxed-Model-Concepts"><a href="#Some-Relaxed-Model-Concepts" class="headerlink" title="Some Relaxed Model Concepts"></a>Some Relaxed Model Concepts</h3><p><strong>Release Consistency</strong> (RC) thinks surrounding all synchronization operations with FENCEs is overkill. It claims that a synchronization acquire needs only a succeeding FENCE, while a synchronization release needs only a preceding FENCE.</p>
+<p>Property <strong>causality</strong> requires that “If I see it and tell you about it, then you will see it too.”</p>
+<p>Property <strong>write atomicity</strong> (also called <strong>store atomicity</strong> or <strong>multi-copy atomicity</strong>), requires that a core’s store is logically seen by all other cores at once. Write atomicity allows a core to see the value of its own store before it is seen by other cores.</p>
+<p>Relations between causality and write atomicity:</p>
+<ul>
+<li>Write atomicity implies causality.</li>
+<li>Causality does not imply write atomicity.</li>
+</ul>
+<p>Finally, the XC memory model is both store atomic and maintains causality.</p>
+<h3 id="High-Level-Language-Models-HLL"><a href="#High-Level-Language-Models-HLL" class="headerlink" title="High-Level Language Models (HLL)"></a>High-Level Language Models (HLL)</h3><p>HLLs, such as Java and C++, adopt the relaxed memory model approach of “SC for DRF”. When these HLLs run on hardware, should the hardware’s memory model also be relaxed?</p>
+<p>On one hand, (a) relaxed hardware can give the most performance, and (b) compilers and runtime software need only translate the HLL’s synchronizations operations into the particular hardware’s low-level synchronization operations and FENCEs to provide the necessary ordering.</p>
+<p>On the other hand, (a) SC and TSO can give good performance, and (b) compilers and runtime software can generate more portable code without FENCEs from incomparable memory models. </p>
+<p>Although the debate is not settled, it is clear that <strong>relaxed HLL models do not require relaxed hardware</strong>.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/04/MC1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/04/MC1/" class="post-title-link" itemprop="url">A Primer on Memory Consistency and Cache Coherence, 2nd [Ch.1 - Ch.2]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-04 18:35:35" itemprop="dateCreated datePublished" datetime="2022-02-04T18:35:35-05:00">2022-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-22 17:29:04" itemprop="dateModified" datetime="2022-04-22T17:29:04-04:00">2022-04-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Memory-Consistency/" itemprop="url" rel="index"><span itemprop="name">Memory Consistency</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> computer architecture, memory consistency, cache coherence, shared memory, memory systems, multicore processor, heterogeneous architecture, GPU, accelerators, semantics, verification</p>
+<blockquote>
+<p>Author: Vijay Nagarajan, Daniel J. Sorin, Mark D. Hill, David A. Wood</p>
+</blockquote>
+<hr>
+<h2 id="Chapter-1-Introduction-to-Consistency-and-Coherence"><a href="#Chapter-1-Introduction-to-Consistency-and-Coherence" class="headerlink" title="Chapter 1: Introduction to Consistency and Coherence"></a>Chapter 1: Introduction to Consistency and Coherence</h2><p>Consistency = memory consistency / memroy consistency model / memory model<br>Coherence = cache coherence</p>
+<p>We need to define <strong>shared memory correctness</strong> —- that is, which shared memory behaviors are allowed -— so that programmers know what to expect and implementors know the limits to what they can provide.</p>
+<p>Shared memory correctness is specified by a <strong>memory consistency model</strong> (MCM).</p>
+<h2 id="Chapter-2-Coherence-Basics"><a href="#Chapter-2-Coherence-Basics" class="headerlink" title="Chapter 2: Coherence Basics"></a>Chapter 2: Coherence Basics</h2><h3 id="Baseline-System-Model"><a href="#Baseline-System-Model" class="headerlink" title="Baseline System Model"></a>Baseline System Model</h3><img src="/2022/02/04/MC1/1.png" class="">
+
+<p>The <strong>last-level cache</strong> (LLC), depite being on the processor chip, is logically a “memory-side cache” and thus does not introduce another level of coherence issue. The LLC is logically just infront of the memory and serves to <em>reduce the average latency of memory accesses</em> and <em>increase the memory’s effective bandwidth</em>. The LLC also serve as <em>an on-chip memory controller</em>.</p>
+<h3 id="Cache-Coherence-Interface"><a href="#Cache-Coherence-Interface" class="headerlink" title="Cache Coherence Interface"></a>Cache Coherence Interface</h3><p>Informally, a <strong>coherence protocol</strong> ensure that writes are made visible to all processors.</p>
+<p>The processor cores interact with the <strong>coherence protocol</strong> throught a <strong>coherence interface</strong> that provides two methods: (1) a <em>read-request</em> method, and (2) a <em>write-request</em> method.</p>
+<p>A pipeline-coherence interface.</p>
+<img src="/2022/02/04/MC1/2.png" class="">
+
+<p>Cache coherence protocols are classified into two categories based on the nature of their coherence interface:</p>
+<ul>
+<li><strong>Consistency-agnostic coherence</strong>: Writes are propagated <strong>synchronously</strong>. This category presents an interface that is identical to that of an atomic memroy system (with no cache).</li>
+<li><strong>Consistency-directed coherence</strong>: Writes are propagated <strong>asynchronously</strong>. This category emerged to support throughput-based GPGPU. In order to correctly enforce consistency, coherence protocols in this class must ensure that the order in which writes are eventually made visible adheres to the ordering rules mandated by the consistency model.</li>
+</ul>
+<h3 id="Invariants-of-consistency-agnostic-Coherence"><a href="#Invariants-of-consistency-agnostic-Coherence" class="headerlink" title="Invariants of (consistency-agnostic) Coherence"></a>Invariants of (consistency-agnostic) Coherence</h3><ol>
+<li><strong>Single-Writer, Multiple-Read (SWMR) Invariant</strong>. For any memory location A, at any given time, there exists only a single core that may write to A (and can also read it) or some number of cores that may only read A.</li>
+<li><strong>Data-Value Invariant</strong>. Any read from a memory location must be the same value written by the last write to the that memory location.</li>
+</ol>
+<p>The vast majority of coherence protocols, called “invalidate protocols,” are designed explicitly to maintain these invariants.</p>
+<p>In practice, coherence is usually maintained at the granularity of <strong>cache blocks</strong>. And one should be aware that there have been protocols that have maintained coherence at finer and coarser granularities.</p>
+<p>Definitions of Coherence v.s. Consistency: coherence is specified on a <strong>per-memory location</strong> basis, whereas consistency is specified with respect to <strong>all memory locations</strong>.</p>
+<p>Two key ideas when talk about coherence:</p>
+<ul>
+<li><strong>Coherence pertains to <em>all</em> storage structures that hold blocks from the shared address space.</strong></li>
+<li><strong>Coherence is not <em>directly</em> visible to the programmer</strong>. On the other hand, the processor pipeline and coherence protocol jointly enforce the consistency model, and it is only the consistency model that is visible to the programmer.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/03/Arch6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/03/Arch6/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [3.1 - 3.5]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-03 18:34:19" itemprop="dateCreated datePublished" datetime="2022-02-03T18:34:19-05:00">2022-02-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-15 16:52:13" itemprop="dateModified" datetime="2022-02-15T16:52:13-05:00">2022-02-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,6 +554,256 @@
 
       
           
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/02/02/Arch5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/02/Arch5/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [C.4 - C.7]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-02 18:26:45" itemprop="dateCreated datePublished" datetime="2022-02-02T18:26:45-05:00">2022-02-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-18 15:02:17" itemprop="dateModified" datetime="2022-02-18T15:02:17-05:00">2022-02-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/31/R28/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/31/R28/" class="post-title-link" itemprop="url">028 "Speculative Lock Elision - Enabling Highly Concurrent Multithreaded Execution"</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-31 09:50:19" itemprop="dateCreated datePublished" datetime="2022-01-31T09:50:19-05:00">2022-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-13 17:20:11" itemprop="dateModified" datetime="2022-02-13T17:20:11-05:00">2022-02-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><em><strong>Keywards</strong></em> transactional memory， parallel computing</p>
+<blockquote>
+<p>Author:</p>
+</blockquote>
+<hr>
+<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Serialization of threads due to critical sections is a fundamental bottleneck to achieving high performance in multithreaded programs. Dynamically, such serialization may be unnecessary because these critical sections could have safely executed concurrently without locks. Current processors cannot fully exploit such parallelism because they do not have mechanisms to dynamically detect such false inter-thread dependences.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Locks do not always have to be acquired for a correct execution and in such situations concurrency can further improve by removing unnecessary locks.  The authors proposed Speculative Lock Elision (SLE) which can remove dynamically unnecessary lock-induced serilization and enable highly concurrent multithreaded execution.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Trade-off in multithread programming:</p>
+<ul>
+<li>Conservtive locking: To ensure correctness at the expense of performance.</li>
+<li>Locking granularity: Finer granularity locking can improve performance but introduces programming complexity and makes program management difficult.</li>
+<li>Thread-unsafe legacy libraries: if a library not equipped to deal with threads, a global locking is introduced and thus degrade performance.</li>
+</ul>
+<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
+<li>Use <strong>speculation</strong>* to dynamically remove unnecessary lock to improve concurrency.</li>
+<li>Misspeculation due to inter-thread data conflicts is detected using existing cache mechanisms and rollback is used for recovery. Successful speculative elision is validated and committed without acquring the lock.</li>
+<li>SLE can be implemented entirely in microarchitecture without instruction set support and without system-level modifications (transparent to programmers) and only requires trivial additional hardware support.</li>
+<li>For situations where synchronization is required for correctness, they can be detected using cache coherence protocols already implemented in most modern processor.</li>
+</ul>
+<h2 id="Notable-Design-Details-Strengths"><a href="#Notable-Design-Details-Strengths" class="headerlink" title="Notable Design Details/Strengths"></a>Notable Design Details/Strengths</h2><ul>
+<li>Providing <em>appearence of atomicity</em> for each thread in the critical section is done by keep updates are not observed by other threads.</li>
+<li>After try times beyond <em>restart threshold</em>, the lock is explicitly acquired.</li>
+<li>SLE involves two predictons:<ul>
+<li>On a store, predict that another store will shortly follow and undo the changes by this store. If the prediction is validated, the two store are elided.</li>
+<li>Predict that all memory operations within the window bounded by the two elided stores occur atomically.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Limitations-Weaknesses"><a href="#Limitations-Weaknesses" class="headerlink" title="Limitations/Weaknesses"></a>Limitations/Weaknesses</h2><ul>
+<li>How the use cache coherence to guanrantee the order of updates?</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/27/Arch4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.ico">
+      <meta itemprop="name" content="Godway">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godway's Notebook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/27/Arch4/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [C.1 - C.3]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-27 10:17:16" itemprop="dateCreated datePublished" datetime="2022-01-27T10:17:16-05:00">2022-01-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-18 16:42:55" itemprop="dateModified" datetime="2022-02-18T16:42:55-05:00">2022-02-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="C-1-Introduction"><a href="#C-1-Introduction" class="headerlink" title="C.1 Introduction"></a>C.1 Introduction</h2><h2 id=""><a href="#" class="headerlink" title=""></a></h2>
       
     </div>
 
@@ -554,7 +1139,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/21/Arch3/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [A.6 - A.10]</a>
+            <a href="/2022/01/21/Arch3/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [A.6 - A.9]</a>
         </h2>
 
         <div class="post-meta">
@@ -571,7 +1156,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-12 21:54:59" itemprop="dateModified" datetime="2022-02-12T21:54:59-05:00">2022-02-12</time>
+                <time title="Modified: 2022-02-18 16:42:37" itemprop="dateModified" datetime="2022-02-18T16:42:37-05:00">2022-02-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -599,470 +1184,46 @@
 </blockquote>
 <p>Chapter A: Instruction Set Principles</p>
 <hr>
-<h2 id="Instuctions-for-Control-Flow"><a href="#Instuctions-for-Control-Flow" class="headerlink" title="Instuctions for Control Flow"></a>Instuctions for Control Flow</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/20/Arch2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/20/Arch2/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [A.1 - A.5]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-20 11:34:35" itemprop="dateCreated datePublished" datetime="2022-01-20T11:34:35-05:00">2022-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-08 04:24:45" itemprop="dateModified" datetime="2022-02-08T04:24:45-05:00">2022-02-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>Author: John L. Hennessy, David A. Patterson</p>
-</blockquote>
-<p>Chapter A: Instruction Set Principles</p>
-<hr>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Instruction set architecture (ISA) —- the portion of the computer visible to the programmer or compiler writer.</p>
-<p>Recent 80x86 microprocessors, including all the Intel Core microprocessors build in the past decades, use hardware to translate from 80x86 instructions to RISC-like instructions and then execute the translated operations inside the chip. They maintain the illusion of 80x86 architecture to the programmer while allowing the computer designer to implement a RISC-style processor for performance.</p>
-<h2 id="Classifying-Instruction-Set-Architectures"><a href="#Classifying-Instruction-Set-Architectures" class="headerlink" title="Classifying Instruction Set Architectures"></a>Classifying Instruction Set Architectures</h2><p>The type of internal storage in a processor is the most basic differentiation. They major choices are a <strong>stack</strong>, an <strong>accumulator</strong>, or <strong>a set of registers</strong>.</p>
-<p>Operands may be named <strong>explicitly</strong> or <strong>implicitly</strong>: The operands in a <em>stack</em> architecture are implicitly on the top of the stack, and in an <em>accumulator</em> architecture one operand is implicitly the accumulator, and the <em>general-purpose register</em> (GPR)architectures have only explicit operands – either registers or memory locations.</p>
-<img src="/2022/01/20/Arch2/1.png" class="">
-
-<p>There are two classes of register computers. One class can access memory as part of any instruction, called <strong>register-memory architecture</strong>, and the other can access memory only with load and store instructions, called <strong>load-store architecture</strong>. A third class, not found in computers shipping today, keeps all operands in memory and is called a <strong>memory-memory architecture</strong>.</p>
-<img src="/2022/01/20/Arch2/2.png" class="">
-
-<p>These advantages and disadvantages are qualitative and their actual impac depneds on the compiler and implementation strategy. (e.g. A GPR computer with memory operations could easily be ignored by the compiler and used as a load-store computer.)</p>
-<h2 id="Memory-Addressing"><a href="#Memory-Addressing" class="headerlink" title="Memory Addressing"></a>Memory Addressing</h2><h3 id="Interpreting-Memory-Addresses"><a href="#Interpreting-Memory-Addresses" class="headerlink" title="Interpreting Memory Addresses"></a>Interpreting Memory Addresses</h3><p>There are two different convention for <strong>ordering the bytes</strong> within a larger object. <strong>Little Endian</strong> byte order puts least-significant bit at right position in a byte. <strong>Big Endian</strong> byte order puts most-significant bit at left position in a byte.</p>
-<p>In many computers, accesses to objects larger than a byte must <strong>aligned</strong>. Misalignent causes hardware complications, because the memroy is typically aligned on a multiple of a word or double-word boundary.</p>
-<h3 id="Addressing-Modes"><a href="#Addressing-Modes" class="headerlink" title="Addressing Modes"></a>Addressing Modes</h3><p>Addressing modes specify constants and registers in addition to locations in memroy. The actual memory address specified by the addressing mode is called the <strong>effective addrss</strong>.</p>
-<img src="/2022/01/20/Arch2/3.png" class="">
-
-<p>Addressing mode that depend on the program counter, called <em>PC-relative addressing</em>.</p>
-<p>Addressing modes have the ability to significantly reduce instrcution counts; they also add to the complexity of building a computer and may increase the average clock cycles per instruction (CPI) of computers that implement those modes. Thus, the usage of various addressing modes is quite important in helping the architect chosse what to include.</p>
-<h2 id="Type-and-Size-of-Operands"><a href="#Type-and-Size-of-Operands" class="headerlink" title="Type and Size of Operands"></a>Type and Size of Operands</h2><p>Usually, the type of an operand is encoding in the <strong>opcode</strong> designates the type of an operand – this is the method used most often. Alternatively, the data can be annoted with <strong>tags</strong> that are interpreted by the hardware.</p>
-<p>Usually, the type of an operand – integer, single-precision floating point, character, and so on – effectively gives its size.</p>
-<h2 id="Operations-in-the-Instruction-Set"><a href="#Operations-in-the-Instruction-Set" class="headerlink" title="Operations in the Instruction Set"></a>Operations in the Instruction Set</h2><p>One rule of thumb across all architectures is that the most widely executed instructions are the simple operations of an instruction set.</p>
-<img src="/2022/01/20/Arch2/4.png" class="">
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/19/R19/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/19/R19/" class="post-title-link" itemprop="url">019 "IGC - The Open Source Intel Graphics Compiler"</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-19 15:31:40" itemprop="dateCreated datePublished" datetime="2022-01-19T15:31:40-05:00">2022-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-13 17:20:40" itemprop="dateModified" datetime="2022-02-13T17:20:40-05:00">2022-02-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em><strong>Keywards</strong></em> Compiler, GPU</p>
-<blockquote>
-<p>Author: Anupama Chandrasekhar, Gang Chen, Po-Yu Chen, Wei-Yu Chen, Junjie Gu, Peng Guo, Shruthi Hebbur Prasanna Kumar, Guei-Yuan Lueh, Pankaj Mistry, Wei Pan, Thomas Raoux, and Konrad Trifunovic</p>
-</blockquote>
-<hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>NVIDIA amd the CUDA programming model have dominated the GPU computing space. Intel GPUs have been getting more powerful and are stronger contenders in the graphics and GPGPU space.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>GPUs have become the mainstay for a wide variety of compute intensive and Intel wants to make more real-world impact in general computing. Therefore, the Intel team presents the Intel Graphics Compiler (IGC), a LLVM-based production compiler for Intel HD and Iris graphics. This paper mainly focuss on how they design IR optimization for GPU with LLVM generic IR optimization.</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><ul>
-<li>Intel GPUs are also very attractive for heterogeneous computing thanks to their tight integration with the CPU and their ubiquity on nearly every Intel desktop and mobile processor.</li>
-<li>A kernel written in <strong>OpenCL C</strong> is first compiled using the Clang compiler into <strong>SPIR-V</strong> (Standard Portable Intermediate Representation) bitcode, which is then converted by IGC’s front-end into <strong>LLVM IR</strong> by <em>unification passes</em>.</li>
+<h2 id="A-6-Instuctions-for-Control-Flow"><a href="#A-6-Instuctions-for-Control-Flow" class="headerlink" title="A.6 Instuctions for Control Flow"></a>A.6 Instuctions for Control Flow</h2><p>Throughout this book we will use <strong>jump</strong> when the change in control is unconditional and <strong>branch</strong> when the change is conditional.</p>
+<p>Four types of control flow change:</p>
+<ul>
+<li>Conditional branches</li>
+<li>Jumps</li>
+<li>Procedure calls</li>
+<li>Procedure returns</li>
 </ul>
-<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
-<li>IGC is based on LLVM compiler infrastructure and uses a proprietary backend called the <em>virtual-ISA finalizer</em> for code generation.</li>
-<li>IGC provides additional custom optimization passes on IR leverage with LLVM’s generic optimization. (LLVM’s IR optimization passes are mainly designed for CPU)</li>
-</ul>
-<h2 id="Notable-Design-Details-Strengths"><a href="#Notable-Design-Details-Strengths" class="headerlink" title="Notable Design Details/Strengths"></a>Notable Design Details/Strengths</h2><p>Intel Graphics Compiler consists of three layers:</p>
-<ol>
-<li>Front-end: supported API =&gt; IGC’s LLVM-based IR</li>
-<li>Mid-end: IGC’s LLVM-based IR =&gt; (generic LLVM optimizations, IGC custom optimizations, and code generation) =&gt; virtual-ISA<ul>
-<li>Divergence Analysis, Pre-RA Scheduling, Private Memory Promotion, Addressing Mode Selection, Copy Coalescing, SIMD Width Selection</li>
+<h3 id="Addressing-Modes-for-Control-Flow-Instructions"><a href="#Addressing-Modes-for-Control-Flow-Instructions" class="headerlink" title="Addressing Modes for Control Flow Instructions"></a>Addressing Modes for Control Flow Instructions</h3><p>The destination address of a control flow instruction must always be specified. This destination is specified explicitly in the instruction in the vast majority of cases -— procedure return being the major exception, because for return the target is not known at compile time.</p>
+<ul>
+<li><strong>PC-relative addressing</strong>: the target address is already know at compile time<ul>
+<li>Specify the destination by suppling a displacement that is added to the <em>program counter</em> (PC).</li>
+<li>PC-relative branches or jumps are advantageous because the target is often near the current instruction, and specifying the position relative to the current PC requires fewer bits.</li>
+<li>Using PC-relative addressing also permits the code to run independently of where it is loaded. This property, called position independence, can eliminate some work when the program is linked and is also useful in programs linked dynamically during execution.</li>
 </ul>
 </li>
-<li>Finalizer: virtual-ISA =&gt; Gen ISA</li>
-</ol>
-<img src="/2022/01/19/R19/1.png" class="">
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/18/Arch1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/18/Arch1/" class="post-title-link" itemprop="url">Computer Architecture - A Quantitative Approach, 6th [Chapter 1]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-18 10:52:44" itemprop="dateCreated datePublished" datetime="2022-01-18T10:52:44-05:00">2022-01-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-15 16:48:24" itemprop="dateModified" datetime="2022-02-15T16:48:24-05:00">2022-02-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id=""><a href="#" class="headerlink" title=""></a></h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/17/R18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/17/R18/" class="post-title-link" itemprop="url">018 "Understanding the Energy Consumption of Dynamic Random Access Memories"</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-17 11:44:00" itemprop="dateCreated datePublished" datetime="2022-01-17T11:44:00-05:00">2022-01-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-18 00:59:35" itemprop="dateModified" datetime="2022-01-18T00:59:35-05:00">2022-01-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em><strong>Keywards</strong></em> DRAM; Power</p>
-<blockquote>
-<p>Author: Thomas Vogelsang</p>
-</blockquote>
-<hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>We still miss a model of DRAM power consumption that is both detailed to direct optimization work, but also general enough not to be restricted to an existing DRAM technology or DRAM standard.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This paper proposse a flexible DRAM power model which uses a description of DRAM architecture, technology and opearation to calculate power useage and verifies it against datasheet values. Using this model, the author evaluates some of the proposed DRAM power reduction schemes.</p>
-<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>Proposed a model of DRAM power consumption.</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Three most important factors for DRAM cost are:</p>
-<ol>
-<li>cost of a wafer: cost of a wafer can be kept low if a simple transistor process and few metal levels are used.</li>
-<li>yield: it can be optimized by process optimization and by optimization the amount of redundancy.</li>
-<li>die area: its optimization is achieved by keeping the array efficiency (ratio of cell area to total die area) as high as possible.</li>
-</ol>
-<p>High performance DRAMs are optimized for maximum total data rate.</p>
-<p>Mobile DRAMs are optimized for low standby current with data rates similiar to commodity DRAM.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wshenyi.github.io/2022/01/16/R17/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.ico">
-      <meta itemprop="name" content="Godway">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Godway's Notebook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/16/R17/" class="post-title-link" itemprop="url">017 "Improving GPU Performance via Large Warps and Two-Level Warp Scheduling"</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-16 08:13:14" itemprop="dateCreated datePublished" datetime="2022-01-16T08:13:14-05:00">2022-01-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-16 17:15:58" itemprop="dateModified" datetime="2022-02-16T17:15:58-05:00">2022-02-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reviews/" itemprop="url" rel="index"><span itemprop="name">Reviews</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em><strong>Keywards</strong></em> GPGPU, SIMD, Divergence, Warp Scheduling</p>
-<blockquote>
-<p>Author: Veynu Narasiman, Michael Shebanow, Chang Joo Lee, Rustam Miftakhutdinov, Onur Mutlu, Yale N. Patt</p>
-</blockquote>
-<hr>
-<h2 id="What-is-the-Problem"><a href="#What-is-the-Problem" class="headerlink" title="What is the Problem?"></a>What is the Problem?</h2><p>Altough GPUs achieve Thread Level Parallelism (TLP) through warp execution and concurrently executing manny warps on single GPU core (SM), the computational resources on GPU are still underutilized.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Threads on GPU are grouped into fixed-size SIMD batched known as warps and many warps are concurrently executed on a single GPU core. Despite this, computationaly resources on GPU cores are still underutillized. To further improve GPU performance, the authors propose two independent ideas: the large warp microarchitecture and two-level warp scheduling.</p>
-<h2 id="Contribution-Key-Results"><a href="#Contribution-Key-Results" class="headerlink" title="Contribution / Key Results"></a>Contribution / Key Results</h2><p>Their mechanisms signifi-cantly improve computational resource utilization, resulting in 19.1% performance improvement over traditional GPU cores on a set of general purpose parallel applications.</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>GPUs expliot TLP in two major way:</p>
-<ol>
-<li>threads executing in fixed-size batches known as warps.</li>
-<li>concurrently execute many warps on a singe core to hide execution latency.</li>
-</ol>
-<p>Two resouce for underutilization of computational resource:</p>
-<ol>
-<li>branch divergence due to conditional branch in the code.</li>
-<li>unable to effectively hide latency of long latency operations.</li>
-</ol>
-<h2 id="Key-Insights"><a href="#Key-Insights" class="headerlink" title="Key Insights"></a>Key Insights</h2><ul>
-<li>Large warp microarchitecture</li>
-<li>Two-level warp scheduling</li>
+<li><strong>Dynamic addressing</strong>: the target address is unknown at compile time<ul>
+<li>Specify the destination by naming a register that contains the target address. (store the address in memory and load it to a register when needed)</li>
+<li>Procedure returns are the major cases.</li>
 </ul>
-<h2 id="Limitations-Weaknesses"><a href="#Limitations-Weaknesses" class="headerlink" title="Limitations/Weaknesses"></a>Limitations/Weaknesses</h2><ul>
-<li>The assumptions about default warp scheduling on GPU is round-robin may not be correct.</li>
-<li>For data intensive application, the two level round-robin scheduling may not bring much performance improvement.</li>
-<li>The hardware cost for implmentation their methods may not worth it because small improvemence is only improved on specific applications.</li>
+</li>
 </ul>
-<h2 id="Open-Questions-Where-to-go-from-here"><a href="#Open-Questions-Where-to-go-from-here" class="headerlink" title="Open Questions [Where to go from here?]"></a>Open Questions [Where to go from here?]</h2><ul>
-<li>How their methods apply to three dimentional grid?</li>
-<li>In practice, the active mask may not be as sparse as they shown in the paper.</li>
+<p>These register indirect jumps also useful for:</p>
+<ul>
+<li>Case or switch statements</li>
+<li>Virtual functions or methods in object-oriented languages</li>
+<li>High-order functions or function pointers</li>
+<li>Dynamically shared libraries</li>
 </ul>
+<h3 id="Conditional-Branch-Options"><a href="#Conditional-Branch-Options" class="headerlink" title="Conditional Branch Options"></a>Conditional Branch Options</h3><p>Because most changes in control flow are branches, deciding how to specify the branch condition is important.</p>
+<img src="/2022/01/21/Arch3/1.png" class="">
 
+<h3 id="Procedure-Invocation-Options"><a href="#Procedure-Invocation-Options" class="headerlink" title="Procedure Invocation Options"></a>Procedure Invocation Options</h3><p>Procedure calls and returns include control transfer and possibly some state saving; at a minimum the return address must be saved somewhere, sometimes in a special link register or just a GPR.</p>
+<p>There are two basic conventions in use to save registers: </p>
+<ul>
+<li>Caller saving: the calling procedure must save the registers it wants preserved.</li>
+<li>Callee saving: the called procedure must save the registers it wants to use.</li>
+</ul>
+<p>Most real systems today use a combination of the two mechanisms. This convention is specified in an application binary interface (<strong>ABI</strong>).</p>
+<h2 id="A-7-Encoding-an-Instruction-Set"><a href="#A-7-Encoding-an-Instruction-Set" class="headerlink" title="A.7 Encoding an Instruction Set"></a>A.7 Encoding an Instruction Set</h2><h2 id="A-8-The-Role-of-Compilers"><a href="#A-8-The-Role-of-Compilers" class="headerlink" title="A.8 The Role of Compilers"></a>A.8 The Role of Compilers</h2><h2 id=""><a href="#" class="headerlink" title=""></a></h2>
       
     </div>
 
@@ -1148,14 +1309,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
